@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.1</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.3</xmin>
+			<xmax>0.3</xmax>
+			<ymin>-0.5</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>0.3</xgrid>
+			<ygrid>0.5</ygrid>
+		</window>
+		<description>
+			<text>The animation shows a spherical object  falling through a fluid with 
+acceleration a = (k/m)v-g.  The positive direction is up.  The object has an intial position of 0 and is released from rest.  The given inputs are for an iron ball of half a milimeter radius falling in  glycerol at a temperature of 22 °C.  The distance from the initial position of the ball to the bottom of the cylinder is 0.50 m.</text>
+		</description>
+		<input>
+			<name>g</name>
+			<text>Gravitational field</text>
+			<initialValue>9.8</initialValue>
+			<units>N/kg</units>
+		</input>
+		<input>
+			<name>r</name>
+			<text>Radius of object</text>
+			<initialValue>0.0021</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>do</name>
+			<text>Density of object</text>
+			<initialValue>10000.0</initialValue>
+			<units>kg/m^3</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>df</name>
+			<text>Density of fluid</text>
+			<initialValue>1260.0</initialValue>
+			<units>kg/m^3</units>
+		</input>
+		<input>
+			<name>n</name>
+			<text>Viscosity of fluid</text>
+			<initialValue>2.14</initialValue>
+			<units>kg/ms</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass of object</text>
+			<initialValue>2.62E-4</initialValue>
+			<units>kg</units>
+		</input>
+		<output>
+			<name>y</name>
+			<text>Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>bppb.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>go</name>
+			<text>go</text>
+			<units>N/kg</units>
+			<calculator type="parametric">
+				<value>-g.value*(1-df.value/do.value)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>k</name>
+			<text>k</text>
+			<units>kg/s</units>
+			<calculator type="parametric">
+				<value>6*PI.value*n.value*r.value</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vt</name>
+			<text>V-terminal</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>m.value*go.value/k.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>km</name>
+			<text>k/m</text>
+			<units>1/s</units>
+			<calculator type="parametric">
+				<value>k.value/m.value</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>Background</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-.25</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Cylinder</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.52</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-.25</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>bppb</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>vt.value*(t+(1/km.value)*(exp(-km.value*t)-1))</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

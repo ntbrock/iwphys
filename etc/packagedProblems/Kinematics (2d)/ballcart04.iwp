@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.05</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>0.0</ymin>
+			<ymax>20.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>0.0</ymin>
+			<ymax>20.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A ball is projected vertically from a moving cart.  Select parameters such that the ball will land in the cart.  Velocity vectors are shown on the cart and the ball.</text>
+		</description>
+		<input>
+			<name>slope</name>
+			<text>Slope</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>vc</name>
+			<text>Initial Vx of cart</text>
+			<initialValue>5.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>vb</name>
+			<text>Initial Vy of ball</text>
+			<initialValue>10.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>x</name>
+			<text>Initial position of cart</text>
+			<initialValue>-8.0</initialValue>
+			<units>m</units>
+		</input>
+		<solid>
+			<name>ball</name>
+			<shape type="circle" drawTrails="false" drawVectors="true">
+				<vectors yAccel="false" Vel="true" xAccel="false" yVel="true" xVel="true" Accel="true"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x+vc*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(1+vb*t+.5*ag*t^2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>cart</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="true">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="true" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x+vc*t+0.5*ac*t^2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>tf</name>
+			<text>Time in air</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>-2*vb/ag</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<input>
+			<name>ag</name>
+			<text>Acceleration due to gravity</text>
+			<initialValue>-9.8</initialValue>
+			<units>m/s²</units>
+		</input>
+		<input>
+			<name>ac</name>
+			<text>Acceleration of cart</text>
+			<initialValue>1.0</initialValue>
+			<units>m/s²</units>
+		</input>
+	</objects>
+</problem>

@@ -1,0 +1,54 @@
+
+problemserver todo
+brockman 06/04/02
+
+= Clean up the DataStore library: especially the autentication calls. 
+  need to throw exceptions instead of nulls.
+
+= Flushed out the user authentication process: now and authkey-style system.
+
+- Add more JSP's / servlets
+  = added very basic command / conditional support to the microservlet jsp 
+    engine: includes, and if's.
+  = added directory browsing
+  + user file management page
+    - user upload Page
+    - user 'designer' page
+    + file eiditng page
+      - delete
+      - rename
+      - design ( update )
+
+  - Problem description / viewing page
+    = Display the Animator applet
+    - Display the designer applet (?)
+  - XML Directory browsing + authentication. XMLRPC?
+    = XML problem service
+
+    
+= spawn a background thread that will sync the various databases down to 
+  disc every so often. 
+  = not needed: the databases are now syncronously writing themselves to
+	disk. the only in-memory data is the authkey bank
+    = NOTE: There may be speed issues browsing the directory b/c all files
+      have to be parsed to get out user information. A meta index would
+      help this greatly if it ever becomes too slow.
+
+= convert the database storage format into XML
+
+= get the userinfo.username jsp call working
+
+= add the problem browsing servlet - both for HTML + applet communication
+  = add the get toplevelDirectories to problemDB
+    = need to do some database work now. the users need to save. need to
+      load problems from disk, etc.
+      = the DUserXML(Handler|Parser|Creator) classes are written
+        = Fill out the content of : DSingleFileUserDB.java
+        = Test it
+      = the DProblemXML classes are written
+  = need an 'iterate' directive in microservlet.
+
+------------------------------------------------------------------------------
+microservlet needs:
+
+- pull in the com.oreilly.servlet library for handing multipart data?

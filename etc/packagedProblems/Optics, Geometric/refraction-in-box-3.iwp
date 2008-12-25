@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>Local</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>40.0</stop>
+			<change>1.0</change>
+			<fps>30.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>50.0</xmax>
+			<ymin>-90.0</ymin>
+			<ymax>90.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>5.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A ray of light (red) is incident from air on a box filled with water (blue). The ray enters from the bottom of the screen.  Play the applet.  Explain why the light ray takes the path that it does.  What path will the ray take if the angle of incidence of the ray entering the box is greater than 61.3 degrees?</text>
+		</description>
+		<input>
+			<name>s</name>
+			<text>Angle increment</text>
+			<initialValue>0.5</initialValue>
+			<units>°</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>n</name>
+			<text>Index of refraction</text>
+			<initialValue>1.33</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>i</name>
+			<text>Angle of incidence</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>ac+s*t+.0001</value>
+			</calculator>
+		</output>
+		<output>
+			<name>r</name>
+			<text>Angle of refraction 1</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>toDegrees(asin(sin(toRadians(i))/n))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>i2</name>
+			<text>Angle of incidence 2</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>90-r</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>r2</name>
+			<text>Angle of refraction 2</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>toDegrees(asin(sin(toRadians(i2))*n))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ac</name>
+			<text>Critical angle</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>toDegrees(asin((n^2-1)^0.5))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>incidentray</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-6*tan(toRadians(i))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-6</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>3</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>box_clone</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>12</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>8</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>box</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>11.8</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>7.8</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refractedray</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>3/tan(toRadians(r))</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>3</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refractedray2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>4</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>4*tan(toRadians(r2))</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>6</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>3/tan(toRadians(r))-4</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

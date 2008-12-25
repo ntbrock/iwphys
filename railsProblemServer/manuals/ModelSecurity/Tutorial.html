@@ -1,0 +1,669 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Linux/x86 (vers 12 April 2005), see www.w3.org" />
+
+  <title>Securing your Rails models with ModelSecurity</title>
+</head>
+
+<body>
+  <h1>Securing your Rails models with ModelSecurity.</h1><i>Bruce
+  Perens<br />
+  <a href="mailto:bruce@perens.com">bruce@perens.com</a><br />
+  Vice President, Sourcelabs.</i><br />
+  Last modified: Wed Oct 5 14:26:14 PDT 2005<br />
+
+  <p><b>ModelSecurity</b> helps Ruby on Rails developers implement
+  a security <i>defense in depth</i> by implementing access control
+  within the data model.</p>
+
+  <p>If you are like most developers, you think about security when
+  you program controllers and views. But a bug in your controller
+  or view can compromise the security of your application, unless
+  your data model has <i>also</i> been secured.</p>
+
+  <p>The economical, flexible, and extremely readable means of
+  specifying access controls provided by ModelSecurity makes it
+  easier for the developer to <i>think</i> about security, and
+  makes security assumptions that might otherwise live in one
+  developers head <i>concrete</i> and <i>communicable to
+  others.</i></p>
+
+  <p><i>Defense in depth</i> is a common military strategy to
+  prevent an attack from succeeding. If the attacker gets through
+  the first level of defense, there's another level there to meet
+  him. Defense in depth is useful to programmers because it will
+  reveal a flaw for repair in the first level while simultaneously
+  stopping the attack at the second level. Most developers
+  implement some security features in their controllers and views:
+  for example, a controller will generally not allow access to
+  administrative features unless the user is logged in as an
+  administrator, and your views should not display data that is
+  inappropriate for a particular user. This is the "first layer of
+  defense". At that point, we come to the data model access
+  permissions: your second layer of defense. If you've specified
+  them, ActiveRecord will not allow the data to be revealed or
+  modified in an inappropriate manner. Views will in general
+  quietly fail to present non-permitted material in a way that can
+  be exploited: it will be blank if it's not readable, and will be
+  presented as static data rather than in an edit field if it's not
+  writable. This behavior facilitates scaffolding, which would
+  display and allow modification of everything if not told
+  otherwise. A non-permitted controller access to the data model
+  will result in a <code>SecurityViolation</code> exception being
+  raised, which causes the action to terminate and logs diagnostic
+  information that will assist the developer to locate the
+  controller bug.</p>
+
+  <p>ModelSecurity adds these facilities to Rails:</p>
+
+  <ul>
+    <li><code>let_read,</code> <code>let_write</code>, and
+    <code>let_access</code> are added to model declarations. They
+    allow fine-grained security permissions to be specified for
+    each model attribute, or for all of them at once.</li>
+
+    <li>Security conditions are specified as blocks or the names of
+    functions. Each returns a boolean, and <code>true</code>
+    indicates that the access should proceed while
+    <code>false</code> causes it to be denied. This mechanism
+    allows any user authorization system to be wired into
+    ModelSecurity with only a few statements.</li>
+
+    <li>The facilities that are most commonly used to write Rails
+    views, forms, and scaffolds heed the data model security
+    settings. They will not present or allow the modification of an
+    ActiveRecord attribute if that action is prohibited by the
+    access controls on the data model.</li>
+
+    <li>ModelSecurity provides a <code>let_display</code> facility
+    that works similarly to the security specifications, and tells
+    Rails scaffolds and views what fields of a data model are
+    "interesting" and what fields need not be shown to a particular
+    user.</li>
+
+    <li>A simple <b>User</b> model with a login facility, already
+    configured to work with ModelSecurity, is part of the
+    package.</li>
+
+    <li>The <b>UserSupport</b> controller mixin provides a login
+    facility with HTTP authentication to the entire application:
+
+      <ul>
+        <li><code>User_setup</code> is a before-filter for the
+        entire application. It handles login control and session
+        management without additional attention from the
+        programmer.</li>
+
+        <li>The before-filters <code>require_login</code> and
+        <code>require_admin</code> ensure that a user logs in with
+        proper privilege and then will complete the requested
+        action.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Modal</b>, a means to handle two common interactions in
+      web design:
+
+      <ul>
+        <li>Modal web forms such as login dialogues that
+        "interrupt" an action and then allow it to complete after
+        the form has been submitted.</li>
+
+        <li>Modal forms that are called from a page to which they
+        will later return the user, such as comment forms within a
+        weblog.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>Getting Started</h2>
+
+  <p>Before we go through the features of ModelSecuity, it's useful
+  to get working code on your system. To go through this demo,
+  you'll need to have Rails, RubyGems, and MySQL installed.</p>
+
+  <p>Generate a rails program called <i>test</i>, and change to its
+  directory:</p>
+
+  <blockquote>
+    <pre>
+rails test
+cd test
+</pre>
+  </blockquote>
+
+  <p>Install the model_security gem:</p>
+
+  <blockquote>
+    <pre>
+gem install model_security_generator
+  
+</pre>
+  </blockquote>
+
+  <p>Generate model_security for your application</p>
+
+  <blockquote>
+    <pre>
+script/generate model_security -
+  
+</pre>
+  </blockquote>
+
+  <p>Have MySQL execute the script to create the database and a
+  MySQL user ID for the rails program:</p>
+
+  <blockquote>
+    <pre>
+cd db/
+mysql -u <i>MYSQL-ADMIN-NAME</i> -p &lt; demo.sql
+</pre>
+  </blockquote>
+
+  <p>Examine demo.sql and users.sql . users.sql defines the table
+  of users. An accessory table defined by user_configurations.sql
+  is used to hold configuration choices for the user system. When
+  you include ModelSecurity in another Rails program, you'll skip
+  demo.sql and use users.sql and user_configurations.sql to create
+  their tables.</p>
+
+  <p>Edit the database configuration in db/database.yml to look
+  like this:</p>
+
+  <blockquote>
+    <pre>
+development:
+  adapter: mysql
+  database: model_security_demo
+  host: localhost
+  username: m_s_demo
+  password: 
+</pre>
+  </blockquote>
+
+  <p>Add some necessary facilities to your brand new application
+  controller:</p>
+
+  <blockquote>
+    <pre>
+cd ../app/controllers
+cp ADD_TO_APPLICATION_CONTROLLER.ModelSecurity application.rb
+cd ../..
+</pre>
+  </blockquote>
+
+  <p>If this wasn't a new controller, you would edit application.rb
+  to add the facilities requested, rather than copying over the
+  file.</p>
+
+  <p>Start the rails server:</p>
+
+  <blockquote>
+    <pre>
+script/server &amp;
+</pre>
+  </blockquote>
+
+  <p>Open a web browser to http://localhost:3000/user/new Use the
+  form to create a new user. That user will automatically be
+  granted the administrator role, and will be activated
+  immediately.</p>
+
+  <p>Subsequent users will <i>not</i> automatically get the
+  administrator role, although an administrator can grant it to
+  them by editing their record with /user/edit/<i>user-name</i> .
+  Subsequent users will not have their login activated immediately
+  when they create it. Instead, they will be sent an email
+  containing a URL that they must use to activate their login.</p>
+
+  <p>Now, you can play with the demo. The user controller responds
+  to:</p>
+
+  <dl>
+    <dt>
+    <code>/user/activate/<i>id</i>?token=<i>security-token</i></code></dt>
+
+    <dd>Activate a user, after the user's login has been
+    created.</dd>
+
+    <dt><code>/user/configure/<i>id</i></code></dt>
+
+    <dd>
+      Configure the User system. Currently allows you to choose:
+
+      <ul>
+        <li>Whether new users must go through email confirmation
+        before they can log in.</li>
+
+        <li>What the sender address is for emails generated by this
+        software.</li>
+      </ul>The configure function requires the administrator role.
+    </dd>
+
+    <dt><code>/user/destroy/<i>id</i></code></dt>
+
+    <dd>Destroy a user. Requires the administrator role.</dd>
+
+    <dt><code>/user/edit/<i>id</i></code></dt>
+
+    <dd>Edit the attributes of a user. Administrators are allowed
+    to edit more fields than normal users, and normal are allowed
+    to edit their own record, not anyone else's.</dd>
+
+    <dt><code>/user/forgot_password</code></dt>
+
+    <dd>Send an email to the user that facilitates password
+    recovery.</dd>
+
+    <dt><code>/user/list</code></dt>
+
+    <dd>List the users. Administrators can see more information
+    than normal users. Normal users can see some information on
+    their own record that they will not see in the records of other
+    users.</dd>
+
+    <dt><code>/user/login</code></dt>
+
+    <dd>Perform HTTP authentication to log in a user. If that
+    doesn't work, fall back on a login form.</dd>
+
+    <dt><code>/user/logout</code></dt>
+
+    <dd>Log a user out. Actually loops back to the login action,
+    because the only way to get the browser to stop sending HTTP
+    authentication data with every request is to ask it to get new
+    authentication data from the user.</dd>
+
+    <dt><code>/user/new</code></dt>
+
+    <dd>Create a new user.</dd>
+
+    <dt><code>/user/show</code></dt>
+
+    <dd>Display information about a user. Administrators can see
+    more information than normal users. Normal users can see some
+    information on their own record that they will not see in the
+    records of other users.</dd>
+  </dl>
+
+  <p>Now that you have the software running, create a user using
+  <code>/user/new</code> The first user that you create will
+  automatically be granted the administrative privilege, sort of
+  like "super-user" status on a Unix or Linux system, and will be
+  logged in immediately.</p>
+
+  <p>You <i>should</i> be able to grant administrative status to
+  subsequent users by editing their record and setting the
+  <i>admin</i> field to 1, due to a Rails bug (at this writing,
+  October 2005), the scaffold views aren't capable of editing
+  boolean database fields. We won't need that facility to go
+  through our demo.</p>
+
+  <p>Log out of the application via the /user/logout action. Your
+  browser will present a login panel using HTTP authentication. Use
+  the <i>cancel</i> button or whatever mechanism your browser
+  provides to get rid of that panel. You should now see a login
+  form in an HTML page. Don't log in.</p>
+
+  <p>Run the <code>/user/list</code> action. This action requies a
+  login before it will complete. The browser will present the login
+  panel again. Log in to the application as your administrative
+  user. You'll now see the list of users.</p>
+
+  <h2>Learning About Login Management And The User Object</h2>
+
+  <p>Let's look at the code that made that login panel happen. In
+  app/controllers/user_controller.rb, you will find this code:</p>
+
+  <blockquote>
+    <pre>
+# Require_login will require a login before the action can be completed.
+# It uses Modal, so it will continue to the action if the login is
+# successful.
+before_filter :require_login, :only =&gt; [ :list, :show ]
+  
+</pre>
+  </blockquote>
+
+  <p>That code causes require_login to be called before the
+  <code>list</code> or <code>show</code> actions. Require_login
+  will keep trying to get a user logged in until the login succeeds
+  or the user bails out of the process using the back button. If
+  you don't yet understand how <i>before-filters</i> work, you'll
+  need to peruse the Rails documentation. If a user is already
+  logged in, require_login returns <code>true</code> and execution
+  proceeds. If no user is logged in, <code>require_login</code>
+  will save the current action and then redirect the browser to the
+  <code>/usr/login</code> action. Once the user is logged in
+  successfully, the browser will be redirected to the previous
+  action.</p>
+
+  <p>Although you might believe that all of this is taking place
+  sequentially in your Rails application, that's not the case. It's
+  achieved by sending a redirect to the browser as each step
+  completes. At each step the browser requests the URL it's been
+  redirected to, and Rails carries out an individual action.
+  Execution proceeds this way if the user asks for
+  <code>/user/list</code> while not logged in:</p>
+
+  <ol>
+    <li>The user asks for <code>/user/list</code></li>
+
+    <li>Rails redirects the browser to
+    <code>/user/login</code></li>
+
+    <li>The browser asks for <code>/user/login</code></li>
+
+    <li>Rails sets the HTTP header to request HTTP authentication
+    and sends a login form.</li>
+
+    <li>The browser sends login information.</li>
+
+    <li>Rails redirects the browser to <code>/user/list</code></li>
+
+    <li>The browser requests <code>/user/list</code></li>
+
+    <li>Rails finally sends the list of users.</li>
+  </ol>Fortunately, all of this complication is handled for you.
+  All you need to know is that you should set
+  <code>require_login</code> as a before-filter for any action that
+  should only be executed for logged-in users.
+
+  <p>There's also a <code>require_admin</code> filter. This one is
+  used with the <code>destroy</code> action of the user controller,
+  as shown by this code:</p>
+
+  <blockquote>
+    <pre>
+# Require_admin will require an administrative login before the action
+# can be called. It uses Modal, so it will continue to the action if the 
+# login is successful.
+before_filter :require_admin, :only =&gt; [ :destroy ]
+  
+</pre>
+  </blockquote>
+
+  <p>That will prevent the <code>destroy</code> action from being
+  executed unless the user successfully logs in as an
+  administrator.</p>
+
+  <p><code>require_admin</code> and <code>require_login</code> are
+  part of your controller-based security setup. As the first line
+  of defense, they will be where potential security violations
+  <i>should</i> stop.</p>
+
+  <p>There's only a little more to learn about logging in and
+  users. Take a look at the file
+  <code>app/controllers/application.rb</code> . You'll see these
+  lines:</p>
+
+  <blockquote>
+    <code>require 'user_support'<br />
+    <br />
+    class ApplicationController &lt;
+    ActionController::Base<br /></code>
+
+    <blockquote>
+      <code>helper :ModelSecurity</code><br />
+      <b><code>include UserSupport</code></b><br />
+      <b><code>before_filter :user_setup</code></b>
+    </blockquote><code>end</code>
+  </blockquote>
+
+  <p>Requiring the file <code>user_support</code> and including the
+  module <code>UserSupport</code> mix the login and user-management
+  capabilities into the application controller's class. The
+  before-filter <code>user_setup</code> handles session control and
+  login management for the entire application. Once
+  <code>user_setup</code> has run, the <code>User</code> object for
+  the currently-logged-in user can be accessed through
+  <code>User.current</code> .</p>
+
+  <h2>Introducing ModelSecurity</h2>
+
+  <p>That's all you need to know to use the <code>User</code>
+  system to manage logins. But we'll keep looking at the
+  <code>User</code> code to see how it secures its own data using
+  <code>ModelSecurity</code>.</p>
+
+  <p>Create a second user with <code>/user/new</code> . This user
+  won't be privileged. The system will send you an email with
+  instructions on how to confirm that user's login. Just in case
+  email delivery isn't working on your server, you can get the
+  email text out of the log file <code>logs/development.log</code>
+  . Confirm the user's login.</p>
+
+  <p>Logged in as your administrative user, visit
+  <code>/user/list</code> . That will display a list of the users
+  you've created so far. Because you are the administrator, their
+  emails will be visible to you. Now, log out using
+  <code>/user/logout</code> and log back in as the non-privileged
+  user you created. Visit <code>/user/list</code> again. Now,
+  you'll be able to see your own email, but not that of other
+  users.</p>
+
+  <p>Let's look at the code that makes that happen. Edit
+  <code>app/models/user.rb</code> and find these lines:</p>
+
+  <blockquote>
+    <pre>
+# If this is a new (never saved) record, or if this record corresponds to
+# the currently-logged-in user, allow reading of the email address.
+let_read :email, :if =&gt; :new_or_me_or_logging_in?
+  
+</pre>
+  </blockquote>
+
+  <p>This code, in the declaration of the User class, says that the
+  <code>email</code> attribute of the model can be read if the
+  function <code>new_or_me_or_logging_in?</code> returns true.
+  Let's look at that function:</p>
+
+  <blockquote>
+    <pre>
+# Return true if the user record is new (never been saved) or if it
+# corresponds to the currently-logged-in user, or if the current user
+# is the special "login" user. This security test is a common pattern
+# applied to a number of user record attributes.
+def new_or_me_or_logging_in?
+  new_record? or User.current == self or logging_in?
+end
+  
+</pre>
+  </blockquote>
+
+  <p>The first condition is the Rails function
+  <code>new_record?</code> which would return true if the record
+  has never been saved. The second condition would return true if
+  the record refers to the currently-logged-in user, and this is
+  what allows the user to see his own email address. The third
+  condition returns true if there is currently no logged-in user
+  (it contains the expression <code>User.current == nil</code>).
+  These are all of the cases in which the application should allow
+  reading of the <code>email</code> attribute of a
+  <code>User</code> record, <i>except one.</i></p>
+
+  <p>NOTE: at this time, there is a app/views/user/list.rhtml
+  template installed by the generator that overrides the scaffold.
+  The difference between this file and the scaffold template is
+  that ActiveRecord#readable? is used to determine if a datum
+  should be displayed or not. This file will move to
+  app/views/scaffolds/list.rhtml once I figure out how to override
+  the scaffold template location. - Bruce</p>
+
+  <p>What tells the software that the administrator can read
+  everyone's email address? That's another line in the
+  <code>User</code> model declaration:</p>
+
+  <blockquote>
+    <pre>
+# Let the administrator access all data. This implements a Unix-like
+# super-user. Note that the coarse-grained override of the super-user
+# is not a _necessary_ pattern for the ModelSecurity module, you can
+# implement controls as fine-grained as you like.
+let_access :all, :if =&gt; :admin?
+
+</pre>
+  </blockquote>
+
+  <p><code>let_access</code> calls <code>let_read</code> and
+  <code>let_write</code> with the same arguments, and thus sets
+  both read and write permissions. <code>:all</code> is a special
+  name that means the permission applies to all of the attributes
+  of the data model, not just one database field. And
+  <code>admin?</code> is a function that returns true if the
+  currently-logged-in user has the administrative privilege. It
+  just tests the value of a model attribute called
+  <code>admin</code>. The effect of all of this is that the
+  administrative user can read or write any datum.</p>
+
+  <p>You must start by setting the permissions for
+  <code>:all</code> in your model if you are using ModelSecurity,
+  as the default is to permit all accesses. If you won't be setting
+  up an administrative user, as above, it would be a good idea to
+  make the default "no access". You can do that with the following
+  code:</p>
+
+  <blockquote>
+    <pre>
+# Set the default to "no access".
+let_access :all, :if =&gt; :never?
+
+</pre>
+  </blockquote>
+
+  <p>The <code>never?</code> test is provided with ModelSecurity,
+  and always returns <code>false</code>. A companion test
+  <code>always?</code> reliably returns <code>true</code>.</p>
+
+  <p>ModelSecurity has two mechanisms for protecting data. One
+  protects the actual data model and will throw a exception upon an
+  unpermitted access. But that's not what we've been seeing: our
+  views have quietly refused to display some unpermitted data,
+  without any exceptions. A second mechanism prevents the common
+  view functions, including those used by templates, from
+  displaying or editing data inappropriately. You activate that
+  mechanism by declaring <code>ModelSecurityHelper</code> in your
+  application, as below in
+  <code>app/controllers/application.rb</code>:</p>
+
+  <blockquote>
+    <code>require 'user_support'<br />
+    <br />
+    class ApplicationController &lt;
+    ActionController::Base<br /></code>
+
+    <blockquote>
+      <b><code>helper :ModelSecurity</code></b><br />
+      <code>include UserSupport</code><br />
+      <br />
+      <code>before_filter :user_setup</code>
+    </blockquote><code>end</code>
+  </blockquote>
+
+  <p>This makes the code in <code>ModelSecurityHelper</code>
+  available to all views in the application. ModelSecurityHelper
+  redefines these common view functions to respect the data model
+  permissions:</p>
+
+  <ul style="list-style-type: none">
+    <li>check_box</li>
+
+    <li>file_field</li>
+
+    <li>hidden_field</li>
+
+    <li>password_field</li>
+
+    <li>radio_button</li>
+
+    <li>text_area</li>
+
+    <li>text_field</li>
+  </ul>Views that use those functions exclusively to display and
+  edit database fields will always refrain from making
+  inappropriate read or write accesses.
+
+  <p>One complication of the view protection is that instance
+  variables of your model that are not related to database fields
+  are effected in the same way as model attributes. So, when you
+  declare the accessors for those instance variables with code like
+  this:</p>
+
+  <blockquote>
+    <pre>
+attr_accessible :password, :password_confirmation, :old_password
+</pre>
+  </blockquote>
+
+  <p>You should also declare security permissions on those same
+  variables:</p>
+
+  <blockquote>
+    <pre>
+# NOTE: :password, :password_confirmation, and :old_password
+# are not attributes of the record, they are instance variables of the
+# class and aren't written to disk under those names. But I declare them
+# here because otherwise ModelSecurityHelper (which doesn't know that)
+# isn't going to allow me to enter them into a form field.
+#
+# I like how fine-grained I can get.
+let_write :password, :if =&gt; :new_or_me_or_logging_in?
+let_write :password_confirmation, :if =&gt; :new_or_me?
+let_write :old_password, :if =&gt; :me?
+</pre>
+  </blockquote>
+
+  <h2>Display Control</h2>
+
+  <p>You may also have noticed that there are more fields in the
+  database, and more attributes in the User object, than the view
+  displays when you visit <code>/user/list</code> . But a quick
+  perusal of the code will show that it's a scaffold view. You
+  would have expected a scaffold to display all fields. But
+  ModelSecurity allows us to override that with the
+  <code>let_display</code> declaration. Take a look at its use in
+  the <code>User</code> model declaration:</p>
+
+  <blockquote>
+    <pre>
+# These just control display.
+let_display :all, :if =&gt; :never? # Set default to don't display, override below.
+let_display :admin, :activated, :if =&gt; :admin?
+let_display :login, :name, :email
+</pre>
+  </blockquote>
+
+  <p>This declaration will cause the scaffold view to present
+  information about three fields, <code>login</code>,
+  <code>name</code> and <code>email</code> to all users (although a
+  <code>let_read</code> declaration further restricts whose email
+  address a non-privileged user can see, as above). Administrative
+  users will also see the fields <code>admin</code> and
+  <code>activated</code>. Nobody will see the fields
+  <code>cypher</code> and <code>salt</code>, they are long strings
+  of encrypted or random cybercrud that nobody wants to read. Note
+  that the scaffold view will format the display as a table with
+  columns only for the data that it will display. All of this is
+  achieved by overloading the <code>content_columns</code> method
+  of <code>ActiveRecord</code> to filter the columns it reports
+  using the data in the <code>let_display</code> declaration.</p>
+
+  <p>While the tests used with <code>let_read</code>,
+  <code>let_write</code>, and <code>let_access</code> are instance
+  methods of your <code>ActiveRecord</code> class, tests used with
+  <code>let_display</code> must be class methods. This is because
+  the decision of what columns to display is made before the first
+  row's instance is accessed. Rails makes it easy enough to declare
+  a method to work with both an instance and its class.</p>
+
+  <p>You've now completed the ModelSecurity tutorial. For more
+  information, see the <a href=
+  "http://perens.com/FreeSoftware/ModelSecurity/Reference/">reference</a>.</p>
+</body>
+</html>

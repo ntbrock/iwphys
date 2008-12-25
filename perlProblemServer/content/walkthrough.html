@@ -1,0 +1,197 @@
+
+<b><font size="+2">IWP ProblemServer Walkthrough and Tutorial</font></b><br>
+<b>Taylor Brockman - September 25, 2004</b>
+<br>
+
+<!-- ========================================================================= -->
+<hr>
+
+
+<p>
+<b>0. Definitions</b><br>
+<br>
+
+<u>Animator</u>: The half of the IWP software program that will playback saved .iwp files
+from the ProblemServer, the web, or the local Hard Drive.<br><br>
+<u>Designer</u>: The half of the IWP software program that allows teachers to design problems and create and edit .iwp files.<br><br>
+<u>ProblemServer</u>: A web interface and a web service that is a centrally located repository for storing, loading, editing and sharing .iwp animations.<br><br>
+</p>
+
+<!-- ========================================================================= -->
+<hr>
+
+<p>
+<b>1. Download the latest JRE w/ the Java Plug-in</b><br>
+<br>
+
+<a href="http://java.sun.com/j2se/1.4.2/download.html">http://java.sun.com/j2se/1.4.2/download.html</a><br>
+Recommended: J2SE v1.4.2_05 JRE<br><Br>
+
+The applet has been tested to run under both Windows and RedHat Linux. 
+<br>
+
+<br>
+<u>A warning about security:</u><br>
+To enable the network problemServer communication, we had to use a 3rd Party XML-RPC 
+library that needs access to some protected environment variables. This means that the
+applet is signed by us, an untrusted signer. The first time that you load the applet,
+you will see the following screen:
+
+<center>
+<img src="/pps/gfx/walkthrough/appletSecurity.png" border="1"><br>
+<b>Figure: Example Applet Security Warning</b><br>
+</center>
+<br>
+
+You will need to click "YES" on this screen to grant the applet the correct access rights
+to be able to use the problemServer communication.
+
+</p>
+<br>
+
+<!-- ========================================================================= -->
+<hr>
+
+<p>
+<b>2. Use the Animator: Browse User Problems (Students)</b><br>
+<br>
+
+Load the <a href="/pps/webInterface.cgi/Example%20Problems/">Example User Problems directory</a>. Here you will see sample files that you can animate.<br>
+
+<center>
+<img src="/pps/gfx/walkthrough/browseProblems.png" border="1"><br>
+<b>Figure: Browsing Example Problems</b><br>
+</center><br>
+
+Clicking on the filename (Example Target Problem.iwp) of a file will bring up an Animator Applet webpage. There is a 
+java applet tag in this page that should cause the Animator applet to appear as a 
+new desktop window and load the desired problem from the problemServer.<br>
+<br>
+
+<center>
+<img src="/pps/gfx/walkthrough/viewProblemHTMLPage.png" border="1"><br>
+<b>Figure: Animating a problem: HTML Page - Applet will popup</b><br>
+</center><br>
+
+<center>
+<img src="/pps/gfx/walkthrough/viewProblemAnimator.png" border="1"><br>
+<b>Figure: Animating a problem: Animator Applet View - Popup Window</b><br>
+</center><br>
+
+At this point, you can interact with the Animator to play the problem back and 
+forth, edit input values, and interact with the physics problem.<br>
+
+<i>TODO: Explain more about the animator controls.</i><br>
+
+<br><br>
+<u>Webmaster Tip</u>: You can deep-link to the animator page from other websites to 
+integrate IWP content within your own website. To link to the example problem above
+create an A HREF link to: <a href="http://iwp2.ncssm.edu/pps/webInterface.cgi/Example%20Problems/Example%20Target%20Problem.iwp">http://iwp2.ncssm.edu/pps/webInterface.cgi/Example%20Problems/Example%20Target%20Problem.iwp</a> (use %20 for spaces). This will work for files out of any public iwp problemServer directory, even your own user directory.
+
+</p>
+
+
+<!-- ========================================================================= -->
+<hr>
+
+<b>3. Create a User Account and begin designing problems (Teachers)</b><br>
+<br>
+
+<u>3.1. Create a user account</u> on the <a href="http://iwp2.ncssm.edu/pps/webInterface.cgi?action=newUser">New User Registration</a> page. Your login is the same as your
+email address to make remembering login information easy.<br>
+<br>
+
+<center>
+<img src="/pps/gfx/walkthrough/newUser.png" border="1"><br>
+<b>Figure: New User Registration Screen</b><br>
+</center><br>
+
+<br>
+<u>3.2. View My Problems</u> once you are logged in. From this screen, you can 
+create new problems, edit existing problems, rename files, and delete problems.<br>
+<Br>
+
+<center>
+<img src="/pps/gfx/walkthrough/myProblems.png" border="1"><br>
+<b>Figure: My Problems File List</b><br>
+</center><br>
+
+Clicking on the problem name will show a page that will launch the Designer applet
+with the problem preloaded. The rest of the buttons on this page should be
+self-explanatory. <br>
+<br>
+<center>
+<img src="/pps/gfx/walkthrough/viewProblemDesigner.png" border="1"><br>
+<b>Figure: The Problem Designer</b><br>
+</center><br>
+
+<br>
+<u>3.3. Using the Designer to communicate with the ProblemServer</u><br>
+Once you are editing a file with the designer (either a new problem or an existing
+problem), you can save your files to the problemServer or load existing files
+from the problemServer.<br>
+<br>
+
+To save a file to the problemServer, in the Designer click 'File' (in the menubar),
+'Save As', 'ProblemServer'. A dialogue window will pop up that allows you to 
+browse the remote server filesystem, delete files, and save your file to the server
+with any filename you want. Some names with spaces and underscores and other 
+special characters are disallowed.<br>
+You should save your problems to the problemServer in your /Users/username@hostname.com/ user directory. This is a directory that you have write access to and is designed for
+you to keep your personal files in. <br>
+
+<br>
+<center>
+<img src="/pps/gfx/walkthrough/pserverSave.png" border="1"><br>
+<b>Figure: ProblemServer Save Screen</b><br>
+</center><br>
+
+To load a file from the problemServer, in the Designer click 'File', 'Open',
+'ProblemServer'. This will spawn the open file dialogue, where you can browse around
+until you find a file that you like, and then open it.<br>
+
+<br>
+<center>
+<img src="/pps/gfx/walkthrough/pserverLoad.png" border="1"><br>
+<b>Figure: ProblemServer Load Screen</b><br>
+</center><br>
+
+
+The setup screen should already have your connection information entered into it.
+If you are ever disconnected, the username + password are the same email address + 
+password that you use on the problemServer website to login.<br>
+
+<br>
+<center>
+<img src="/pps/gfx/walkthrough/pserverSetup.png" border="1"><br>
+<b>Figure: ProblemServer Setup Screen</b><br>
+</center><br>
+
+<br>
+<u>3.4 Local Files</u> are usable because the applet is signed. You can use the 
+'Local File' option under the 'Open', 'Save', and 'Save As' to work locally on 
+.iwp files.<br>
+
+<br>
+
+<u>Tip:</u> To make a copy of a file, Load it from the problemServer with the designer
+and then 'Save As' to save it under a new filename in your /Users/ directory.<br>
+<br>
+
+<u>Tip:</u> Every IWP Problem file must have a .iwp extension on it to be properly
+recognized by the client and the server<br><br>
+
+<!-- ========================================================================= -->
+<hr>
+
+
+<b>4. Download the iwp.jar locally and Create a User Account and begin designing problems</b><br>
+<br>
+<i>TODO: Write Documentation on this</i><br>
+
+<pre># build release;</pre>  creates a developer.jar that is manifested.
+
+
+
+
+

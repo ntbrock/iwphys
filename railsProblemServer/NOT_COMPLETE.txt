@@ -1,0 +1,4 @@
+Note that this rails problems erver is incomplete.
+The xmlrpc api responds, but none of the directory operations are in place.
+
+Also, the template is mostly done.

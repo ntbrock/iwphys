@@ -1,0 +1,62 @@
+{tmplImport('header.tmpl');}
+
+<br>
+
+<form action="{$self}" method="POST">
+
+<table bgcolor="#cccccc" align="center" width="550" border="0" cellspacing="0" cellpadding="8">
+
+<input type="hidden" name="action" value="newUserSubmit">
+
+<tr bgcolor="#999999">
+  <td colspan="2" align="center"><b>New User Registration</b></td>
+</tr>
+
+<tr>
+ <td>Email Address:</td>
+ <td><input name="username" type="text" size="35" value="{$username}">&nbsp;&nbsp;<font size="-1"><i>(login username)</i></font></td>
+</tr>
+
+<tr>
+ <td>Real Name:</td>
+ <td><input name="realName" type="text" size="35" value="{$realName}">&nbsp;&nbsp;<font size="-1"><i>(optional)</i></font></td>
+</tr>
+
+
+<tr>
+ <td>Organization:</td>
+ <td><input name="organization" type="text" size="35" value="{$organization}">&nbsp;&nbsp;<font size="-1"><i>(optional)</i></font></td>
+</tr>
+
+
+<tr>
+ <td>Password:</td>
+ <td><input name="password" type="password" size="25"></td>
+</tr>
+
+<tr>
+ <td>Password Confirm:</td>
+ <td><input name="passwordConfirm" type="password" size="25"></td>
+</tr>
+
+
+<tr>
+<td align="right" colspan="2">
+
+<input type="submit" value="OK"> &nbsp; &nbsp;
+<input type="reset" value="Reset"> &nbsp; &nbsp;
+<input type="submit" value="Cancel"> &nbsp; &nbsp;
+
+</td>
+</tr>
+
+</table>
+
+</form>
+
+<br>
+<br>
+
+
+{tmplImport('footer.tmpl')}
+

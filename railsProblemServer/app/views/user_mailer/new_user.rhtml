@@ -1,0 +1,13 @@
+Dear <%= @params['name'] %>,
+
+Your login
+'<%= @params['login'] %>'
+has been created, but you must now activate it.
+To do so, please access the following URL before
+<%= @token_expiry %>:
+
+<%= @url %>
+
+  Many Thanks
+
+  The Management

@@ -1,0 +1,559 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>9.0</stop>
+			<change>1.0</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>8.0</xmax>
+			<ymin>0.0</ymin>
+			<ymax>5.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-5.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-1.0</ymin>
+			<ymax>9.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Two sources of monochromatic waves are situated on either side of the origin.  The sources oscillate in phase.  The pattern of interference fringes is projected on a screen near the top of the display.  Playing the animation will decrease the source separation and show the resulting change in the interference pattern.
+
+Actual fringes would have intensity variations that can't be displayed in the animation.</text>
+		</description>
+		<input>
+			<name>w</name>
+			<text>Wavelength</text>
+			<initialValue>0.01</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>do</name>
+			<text>Initial source separation</text>
+			<initialValue>0.5</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>s</name>
+			<text>Distance to screen</text>
+			<initialValue>8.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>f</name>
+			<text>Scale factor</text>
+			<initialValue>0.8</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>d</name>
+			<text>Source separation</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>do-0.1*do*t</value>
+			</calculator>
+		</output>
+		<output>
+			<name>r</name>
+			<text>Wavelength/Separation</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>w/d</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>source1</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-w/(2*r)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>source2</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>w/(2*r)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>screen</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fringe0</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2*s*tan(asin(f*.5*w/d))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>s*tan(asin(0*w/d))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fringe1r</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*(tan(asin(1.5*f*w/d))-tan(asin(.5*f*w/d)))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>s*tan(asin(1*w/d))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fringe1l</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*(tan(asin(1.5*f*w/d))-tan(asin(.5*f*w/d)))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-s*tan(asin(1*w/d))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fringe2r</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*(tan(asin(2.5*f*w/d))-tan(asin(1.5*f*w/d)))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>s*tan(asin(2*w/d))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fringe2l</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*(tan(asin(2.5*f*w/d))-tan(asin(1.5*f*w/d)))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-s*tan(asin(2*w/d))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fringe3r</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*(tan(asin(3.5*f*w/d))-tan(asin(2.5*f*w/d)))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>s*tan(asin(3*w/d))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fringe3l</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*(tan(asin(3.5*f*w/d))-tan(asin(2.5*f*w/d)))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-s*tan(asin(3*w/d))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fringe4r</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*(tan(asin(4.5*f*w/d))-tan(asin(3.5*f*w/d)))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>s*tan(asin(4*w/d))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fringe4l</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*(tan(asin(4.5*f*w/d))-tan(asin(3.5*f*w/d)))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-s*tan(asin(4*w/d))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fringe5r</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*(tan(asin(5.5*f*w/d))-tan(asin(4.5*f*w/d)))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>s*tan(asin(5*w/d))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fringe5l</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*(tan(asin(5.5*f*w/d))-tan(asin(4.5*f*w/d)))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-s*tan(asin(5*w/d))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

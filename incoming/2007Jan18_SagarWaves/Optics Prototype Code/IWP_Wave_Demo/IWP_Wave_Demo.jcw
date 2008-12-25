@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workspace>
+	<settings>
+		<label>IWP_Wave_Demo</label>
+	</settings>
+	<users>
+		<user>
+			<path>IWP_Wave_Demo.jcu</path>
+		</user>
+	</users>
+	<projects>
+		<project>
+			<path>IWP_Wave_Demo.jcp</path>
+		</project>
+	</projects>
+</workspace>

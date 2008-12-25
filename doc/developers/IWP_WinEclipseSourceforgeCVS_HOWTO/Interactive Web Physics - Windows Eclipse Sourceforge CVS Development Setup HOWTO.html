@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type">
+  <title>Interactive Web Physics - Windows Eclipse Sourceforge CVS
+Development Setup HOWTO</title>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<b>Interactive Web Physics - Windows Eclipse Sourceforge CVS
+Development Setup HOWTO</b><br>
+<br>
+<i>Taylor Brockman &lt;brockman at jonx.org&gt; - 2007-Jan-18, Revision 1</i><br>
+
+<p>Welcome to Interactive Web Physics. IWP is Java software that facilitates the
+animation, design, and distribution of interactive Physics Animations,
+all without requiring programming.By expressing interest in developing this software,
+you are continuing a project that started in 1998 at the North Carolina School of
+Science and Mathematics under the guidance of Dr. Loren Winters.</p>
+
+<p>This document walks a new developer through how to check out the source code from
+SourceForge and get the latest development version building under Eclipse for Windows.
+This is quite a feat, as IWP has been developed primarily under RedHat Linux 
+for the past 8 years!</p>
+
+
+<p>I tagged the CVS Tree with "tag_2007-Jan-17_EclipseWindowsHOWTO" during
+the writing of this document. I had to make some CVS acsii / binary tweaks and check in my
+eclipse .project file to get things to work out of the box from CVS. I have walked through 
+each of these steps twice and captured screenshots along the way.</p>
+
+
+<h3>Table of Contents</h3>
+<ul>
+<li>Part 1: Tools Installation
+<li>Part 2: Check out CVS Source Tree
+<li>Part 3: Compile IWP + Eliminate Warnings
+<li>Part 4: Run and Debug the IWP Animator
+<li>Part 5: Edit Files and Commit changes to CVS
+</ul>
+
+<hr>
+
+<h3>Part 1 : Tools Installation</h3>
+
+<p style="background-color: #eee">
+1.1) To get started, download:
+<br>
+JDK 6: 
+<a href="http://java.sun.com/javase/downloads/index.jsp">http://java.sun.com/javase/downloads/index.jsp</a>
+<br>
+<br>
+Eclipse SDK 3.2.1: <a href="http://www.eclipse.org/downloads/">http://www.eclipse.org/downloads/</a><br>
+(Just get the base free version, not any of the fancy packages)<br>
+<br>
+And for command line builds: (not covered here, but not required.)<br>
+Apache Ant: <a href="http://ant.apache.org/bindownload.cgi">http://ant.apache.org/bindownload.cgi</a>, get the .zip<br>
+</p>
+
+1.2) Install JDK 6 in C:\Program Files\Java\jdk1.6.0\<br>
+
+<p style="background-color: #eee">
+1.3) Unzip eclipse into C:\Program Files\eclipse\<br>
+</p>
+
+1.4) Unzip apache-ant into C:\Program Files\java\apache-ant-1.7.0\<br>
+
+<p style="background-color: #eee">
+1.5) I made a start menu shortcut to C:\Program
+Files\eclipse\eclipse.exe<br>
+</p>
+
+1.6) In the Start Menu -&gt; Control Panel -&gt; System -&gt; Advanced,
+Set some environment variables.<br>
+<a href="Part1/Part1_06.png"><img src="Part1/TN_Part1_06.png"></a>
+<br>
+<p style="background-color: #eee">
+1.7) I set these environment variables.<br>
+JAVA_HOME=C:\Program Files\Java\jdk1.6.0<br>
+ANT_HOME=C:\Program Files\Java\apache-ant-1.7.0<br>
+PATH=....;C:\Program Files\Java\jdk1.6.0\bin;C:\Program
+Files\Java\apache-ant-1.7.0\bin<br>
+&nbsp;&nbsp;&nbsp; Where ... is what PATH's previous value was set to.
+Adding two new paths onto the end.<br>
+<a href="Part1/Part1_07.png"><img src="Part1/TN_Part1_07.png"></a>
+</p>
+1.8) Start up Eclipse via C:\Program Files\eclipse\eclipse.exe. Check
+version = 3.2.1. You may have to close the 'Welcome' or 'Tutorial' an<br>
+<a href="Part1/Part1_08.png"><img src="Part1/TN_Part1_08.png"></a>
+<br>
+
+<p style="background-color: #eee">
+1.9) You can check the version of Eclipse by Menubar -&gt; Help -&gt;
+About Eclipse SDK<br>
+<a href="Part1/Part1_09.png"><img src="Part1/TN_Part1_09.png"></a>
+</p>
+
+1.10) Start up Eclipse via C:\Program Files\eclipse\eclipse.exe. Check
+version = 3.2.1. You'll be asked to choose a workspace, I recommend the
+default setting which puts it in your Documents + Settings directory
+(aka Home). After that, you'll have to close the 'Welcome' panel.<br>
+<a href="Part1/Part1_10.png"><img src="Part1/TN_Part1_10.png"></a>
+<br>
+<p style="background-color: #eee">
+1.11) Open MenuBar -&gt; Window -&gt; Preferences. Navigate Java -&gt; Installed
+JREs and make sure that the jdk1.6.0 is the selected VM.<br>
+<a href="Part1/Part1_11.png"><img src="Part1/TN_Part1_11.png"></a>
+</p>
+
+<hr>
+
+<h3>Part 2: Check out CVS Source Tree</h3>
+<p style="background-color: #eee">
+
+2.1) Make sure that you have a Sourceforge account and are a member of
+the Interactive Web Physics development project in Sourceforge.<br>
+
+Sourceforge: <a href="http://www.sourceforge.net/">http://www.sourceforge.net</a><br>
+Sourceforge IWP Project Page: <a href="http://sourceforge.net/projects/iwp">http://sourceforge.net/projects/iwp</a><br>
+
+<a href="Part2/Part2_01.png"><img src="Part2/TN_Part2_01.png"></a>
+</p>
+
+2.2) In Eclipse: MenuBar -&gt; File -&gt; New -&gt; Project. Choose
+Projects from CVS.<br>
+<a href="Part2/Part2_02.png"><img src="Part2/TN_Part2_02.png"></a><br>
+
+<p style="background-color: #eee">
+2.3) Enter the Information to check out a copy of the project from CVS:<br>
+&nbsp;&nbsp;&nbsp; Host: iwp.cvs.sourceforge.net<br>
+&nbsp;&nbsp;&nbsp; Repository Path: /cvsroot/iwp<br>
+&nbsp;&nbsp;&nbsp; User: brockman<br>
+&nbsp;&nbsp;&nbsp; Password: ********<br>
+&nbsp;&nbsp;&nbsp; Connection type: extssh<br>
+&nbsp;&nbsp;&nbsp; Yes: Use Default Port<br>
+&nbsp;&nbsp;&nbsp; Yes: Save Password<br>
+&nbsp;&nbsp;&nbsp; [Next]<br>
+<a href="Part2/Part2_03.png"><img src="Part2/TN_Part2_03.png"></a>
+</p>
+
+2.4) For the module name, enter . (Period, which means all modules. I don't really use modules properly)<br>
+<a href="Part2/Part2_04.png"><img src="Part2/TN_Part2_04.png"></a>
+
+<p style="background-color: #eee">
+2.5) Check out the project into the workspace. I called it iwp-cvs for
+clarity.<br>
+<a href="Part2/Part2_05.png"><img src="Part2/TN_Part2_05.png"></a>
+</p>
+
+2.6) I use default workspace location<br>
+<a href="Part2/Part2_06.png"><img src="Part2/TN_Part2_06.png"></a>
+
+<p style="background-color: #eee">
+2.7) Select Tag = HEAD. This is the latest and greatest experimental
+version of code where new features go. Tagging + Branching is a
+different topic. Version 2 of IWP has it's own tag. This is how I timetravel to fix
+bugs in the past - and thus make them vanish in the present!<br>
+<a href="Part2/Part2_07.png"><img src="Part2/TN_Part2_07.png"></a>
+</p>
+
+2.8) When you hit Finish, it checks everything out via SSH (Port 22).<br>
+
+<p style="background-color: #eee">
+2.9) You should see the new 'iwp-cvs' project all checked out in your
+Package Explorer.<br>
+<a href="Part2/Part2_08.png"><img src="Part2/TN_Part2_08.png"></a>
+</p>
+
+<hr>
+
+<h3>Part 3: Compile IWP + Eliminate Warnings</h3>
+<p style="background-color: #eee">
+3.1) Because the source doesn't live off of the top of the checkout,
+you'll need to link the source in. The way the project is configured in
+Eclipse, there is a default linking, but it's set to a path on my
+Windows system. You'll need to customize it.<br>
+Right click the project name, and open properties.<br>
+<a href="Part3/Part3_01.png"><img src="Part3/TN_Part3_01.png"></a>
+</p>
+
+3.2) Choose Java Build Path, Choose Source Tab. Click [Edit]<br>
+<a href="Part3/Part3_02.png"><img src="Part3/TN_Part3_02.png"></a>
+
+<p style="background-color: #eee">
+3.3) Change the "Linked Folder Location" to the /src/ directory in your
+workspace that you set when you initially started Eclipse. Usually,
+C:\Documents + Settings\Username\workspace\. This may cause the code to
+build clean, which is good.<br>
+<a href="Part3/Part3_03.png"><img src="Part3/TN_Part3_03.png"></a>
+</p>
+
+3.4) Navigate the srclinked folder in the Package Explorer and find the
+IWP_Animator.java file. Double click to open it in the code editor.
+Take note of the 285 errors in the Problems tab. <br>
+<a href="Part3/Part3_04.png"><img src="Part3/TN_Part3_04.png"></a>
+
+<p style="background-color: #eee">
+
+3.5) Let's get rid of the Errors. Right click the project again and go
+to Properties. Chose Java Compiler -&gt; Errors and Warnings on the
+left. Turn on Enable Project Settings, and Roll down the Potential
+Programming Problems section. Change the Serializable class without
+serialVersionUID to 'Ignore'.<br>
+<a href="Part3/Part3_05.png"><img src="Part3/TN_Part3_05.png"></a>
+</p>
+
+3.6) Pressing Apply or OK will cause the code to build clean again,
+which is good.<br>
+<a href="Part3/Part3_06.png"><img src="Part3/TN_Part3_06.png"></a>
+
+<p style="background-color: #eee">
+3.7) Back to the Project Properties dialog, this time choose Java
+Compiler on the left. Enable project settings and change the Compiler
+Compliance Level to 1.4. Pressing Apply or OK causes another build
+clean, which is good.<br>
+<a href="Part3/Part3_07.png"><img src="Part3/TN_Part3_07.png"></a>
+</p>
+
+3.8) You shoudl see an Eclipse iwp-cvs display with No Errors and No Warnings.<br>
+<a href="Part3/Part3_08.png"><img src="Part3/TN_Part3_08.png"></a>
+
+<br>
+<hr>
+<h3>Part 4: Run and Debug the IWP Animator</h3>
+<p style="background-color: #eee">
+4.1) Find the srclinked -&gt; edu.ncssm.iwp.bin.IWP_Animator class in
+the Package Explorer. This has the main() that is called in the
+iwpStudent.jar manifest, and is the starting point of Animator
+Application Execution. Right click on this application and choose 'Run
+as Application'.<br>
+<a href="Part4/Part4_01.png"><img src="Part4/TN_Part4_01.png"></a>
+</p>
+
+4.2) The Animator Starts up on your screen. Try playing with time
+controls and closing the window.<br>
+<a href="Part4/Part4_02.png"><img src="Part4/TN_Part4_02.png"></a>
+
+<p style="background-color: #eee">
+4.3) You can alter the command line arguments, runtime directory, and
+all sorts of other neat things by MenuBar -&gt; Run -&gt; Run.... Also,
+a neat trick to re-run the last command is to use the Green Play button
+on the toolbar in the Main Java Perspective. Run lives two buttons to
+the right of the Print icon.<br>
+<a href="Part4/Part4_03.png"><img src="Part4/TN_Part4_03.png"></a>
+</p>
+
+4.4) To run your application in Eclipse debug mode, right click on the
+blue + gray bar to the left side of the code and choose Toggle
+Breakpoint, just at the start of the main function. When a breakpoint
+is set a blue dot appears in that side bar.<br>
+<a href="Part4/Part4_04.png"><img src="Part4/TN_Part4_04.png"></a>
+
+<p style="background-color: #eee">
+4.5) Now, Package Explorer -&gt;
+srclinked/edu.ncssm.iwp.bin.IWP_Animator -&gt; Right Click -&gt; Debug
+As -&gt; Java Application. You'll be asked about switching to the Debug
+Perspective. This is good. You should now be in debug perspective, with
+execution paused at your first breakpoint.<br>
+<a href="Part4/Part4_05.png"><img src="Part4/TN_Part4_05.png"></a>
+</p>
+
+4.6) I am not going to go into how to debug in this document. You are
+just going to have to play with it and have fun. To return to source
+code editing Perspective: MenuBar -&gt; Open Window -&gt; Open
+Perspective -&gt; Java.<br>
+
+<br>
+<hr>
+<h3>Part 5: Edit Files and Commit changes to CVS</h3>
+
+<p style="background-color: #eee">
+5.1) For demonstrations, I like to edit BUILD.txt to make the changes
+really subtle and not affect functionality. Open BUILD.txt in the
+package explorer, add some text, and then Right Click iwp-cvs project
+-&gt; Team -&gt; Synchronize with Repository.<br>
+<a href="Part5/Part5_01.png"><img src="Part5/TN_Part5_01.png"></a>
+</p>
+
+5.2) The frist time you enter the Synchronize Perpsective, this popups
+shows up. I remember and press [Yes].<br>
+<a href="Part5/Part5_02.png"><img src="Part5/TN_Part5_02.png"></a>
+
+<p style="background-color: #eee">
+5.3) The Synchronize Tab shows all the files you will be committing to
+the tree. I have 3 here - my expected BUILD.txt text change, which I
+2-Pane diffed on the Right hand side. Also, I have two config
+adjustments, which is cool - these were my error changes. Hopefully
+these will have persisted for you and you will not have had to perform
+steps 3.5 - 3.7.<br>
+<br>
+I am a big fan of code reviews before committing to the tree. Please
+take a moment to review your changes before committing to the tree. Oh,
+and never break the build - the HEAD version of CVS should always
+compile cleanly without any warnings!<br>
+<a href="Part5/Part5_03.png"><img src="Part5/TN_Part5_03.png"></a>
+</p>
+
+5.4) Once you have code reviewed your changes (or even better, had a
+fellow developer code review them), Press the commit button at the Top
+Right of the Synchronize Tab. The Commit window opens. This is where
+you enter a commit comment.<br>
+<br>
+It is always a good idea to list Bug Numbers, and as much detail as you
+can in CVS comments. Often times years go by and it's useful to go back
+and review in detail what has changed in a file.<br>
+<a href="Part5/Part5_04.png"><img src="Part5/TN_Part5_04.png"></a>
+
+<p style="background-color: #eee">
+
+5.5) Once you commit, the Synchronization menu will be empty. To change
+back to the Java perspective, use the Perspective control at the Top
+Right, or Menu Bar -&gt; Window -&gt; Open Perspective -&gt; Java.<br>
+<a href="Part5/Part5_05.png"><img src="Part5/TN_Part5_05.png"></a>
+</p>
+<hr>
+
+Now it's time to get back into the code and fix some more bugs! Thanks to the Eclipse, Java, and Sourceforge Teams for access to such great, free tools.<br>
+<br>
+Taylor<br>
+<br>
+<br>
+</body>
+</html>

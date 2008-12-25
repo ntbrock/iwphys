@@ -1,0 +1,545 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>15.0</stop>
+			<change>0.1</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>15.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>10.0</xgrid>
+			<ygrid>10.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Plane waves of constant frequency move up the screen, crossing from one medium (blue) into another (gray).  The wave speed in each medium is different.</text>
+		</description>
+		<input>
+			<name>f</name>
+			<text>Frequency</text>
+			<initialValue>0.5</initialValue>
+			<units>Hz</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>w</name>
+			<text>Wavelength</text>
+			<initialValue>2.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>n</name>
+			<text>Index of refraction</text>
+			<initialValue>1.4</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>v</name>
+			<text>Incident wave velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>f*w</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>bg1</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>bg2</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>10</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-w+v*t)*step(w/v-t)+(v*(t-w/v)/n)*step(t-w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-2*w+v*t)*step(2*w/v-t)+(v*(t-2*w/v)/n)*step(t-2*w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front3</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-3*w+v*t)*step(3*w/v-t)+(v*(t-3*w/v)/n)*step(t-3*w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front4</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-4*w+v*t)*step(4*w/v-t)+(v*(t-4*w/v)/n)*step(t-4*w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front5</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-5*w+v*t)*step(5*w/v-t)+(v*(t-5*w/v)/n)*step(t-5*w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front6</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-6*w+v*t)*step(6*w/v-t)+(v*(t-6*w/v)/n)*step(t-6*w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front7</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-7*w+v*t)*step(7*w/v-t)+(v*(t-7*w/v)/n)*step(t-7*w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front8</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-8*w+v*t)*step(8*w/v-t)+(v*(t-8*w/v)/n)*step(t-8*w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front9</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-9*w+v*t)*step(9*w/v-t)+(v*(t-9*w/v)/n)*step(t-9*w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front10</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-10*w+v*t)*step(10*w/v-t)+(v*(t-10*w/v)/n)*step(t-10*w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front11</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-11*w+v*t)*step(11*w/v-t)+(v*(t-11*w/v)/n)*step(t-11*w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>front12</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(-12*w+v*t)*step(12*w/v-t)+(v*(t-12*w/v)/n)*step(t-12*w/v)</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

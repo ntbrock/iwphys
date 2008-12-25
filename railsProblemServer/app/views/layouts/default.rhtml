@@ -1,0 +1,76 @@
+<html>
+<head>
+  <title>Interactive Web Physics <%= @title ? @title : '' %></title>
+
+<%= stylesheet_link_tag "global.css" %>
+
+</style>
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#333333" vlink="#333333">
+
+<table border="0" width="100%" cellpadding="4" cellspacing="0">
+<tr class="header_tr">
+
+<td valign="center" align="left"><%= link_to image_tag("IWP_Banner.png", :border=>0, :alt => "Interactive Web Physics: A physics simulation tool for teachers and students"), :controller => 'welcome', :action => 'index' %></td>
+<td align="center"><nobr><b><%= @title ? @title : '' %></b></nobr></td>
+<td align="right">
+
+	<font size="-1">
+	<nobr>
+
+<% if User.current then %>
+<b><%= link_to User.current.name, :controller => 'problem	', :action => 'my' %></b>&nbsp;&nbsp;&nbsp;
+[<%= link_to "My Problems", :controller => 'problem', :action => 'my' %>]&nbsp;&nbsp;
+[<%= link_to "Logout", :controller => 'user', :action => 'logout' %>]&nbsp;&nbsp;
+
+<% else %>
+
+[<%= link_to "User Login", :controller => 'user', :action => 'login' %>]&nbsp;&nbsp;
+[<%= link_to "New User Registration", :controller => 'user', :action => 'new' %>]&nbsp;&nbsp;
+
+<% end %>
+
+	<b><%= link_to "HELP", :controller => 'welcome', :action => 'help' %></b> &nbsp;
+
+	</nobr>
+	</font>
+
+</td>
+
+</tr>
+
+<!--
+<tr bgcolor="#ffffff">
+  <td colspan="3" align="left"><font size="-1"><i>Interactive Web Physics: Problem Server - 06.12.04 Release</i></font> &nbsp;</td>
+</tr>
+-->
+
+<tr>
+<td colspan="3">
+
+<% if @error then %>
+	<center><font color="red" size="+1"><b>ERROR: <%= @error %></b></font></center><br>
+<% end %>
+
+<%= yield %>
+
+
+
+
+<!-- start footer.tmpl -->
+</td>
+</tr>
+
+
+
+<tr class="header_tr">
+  <td colspan="3" align="right"><font size="-1"><i>Interactive Web Physics: Problem Server - 01.12.08 Release</i></font> &nbsp;</td>
+</tr>
+
+</table>
+
+
+</body>
+</html>
+

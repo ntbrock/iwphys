@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>1.0E-9</change>
+			<fps>19.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0E-7</xmax>
+			<ymin>-0.5</ymin>
+			<ymax>2.0</ymax>
+			<xgrid>5.0E-8</xgrid>
+			<ygrid>0.2</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.5</xmin>
+			<xmax>1.5</xmax>
+			<ymin>-0.1</ymin>
+			<ymax>1.9</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>0.1</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>An electron is accelerated to the right in an electron gun under the influence of a uniform electric field.  When the electron exits the gun, it enters a region of uniform magnetic field pointing from the origin to the box target.  (The electric field outside of the gun is 0.) Note that the path of the electron on the screen is a 2D slice of a 3D path.
+
+Determine 3 values of the magnetic field required for the electron to 
+get within 0.01 m of the target.</text>
+		</description>
+		<input>
+			<name>c</name>
+			<text>Speed of Light</text>
+			<initialValue>3.0E8</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>qmr</name>
+			<text>Charge to mass</text>
+			<initialValue>-1.76E11</initialValue>
+			<units>C/kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Initial speed</text>
+			<initialValue>0.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>ang</name>
+			<text>Angle to target</text>
+			<initialValue>60.0</initialValue>
+			<units>deg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>mf</name>
+			<text>Magnetic field</text>
+			<initialValue>1.0E-4</initialValue>
+			<units>T</units>
+		</input>
+		<input>
+			<name>V</name>
+			<text>Potential</text>
+			<initialValue>1000.0</initialValue>
+			<units>V</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>d</name>
+			<text>Length of barrel</text>
+			<initialValue>0.5</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>L</name>
+			<text>Distance to target</text>
+			<initialValue>1.5</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>gun</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>d.value</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.05</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.5*d.value+.005</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Q</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.05</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.05</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>step(tg.value-t)*(-d.value+a.value*t^2/2)+step(t-tg.value)*(vec.value*(t-tg.value)*(cos(ar.value))^2+r.value*sin(ar.value)*sin(vec.value*sin(ar.value)*(t-tg.value)/r.value))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(t-tg.value)*(vec.value*(t-tg.value)*cos(ar.value)*sin(ar.value)-r.value*cos(ar.value)*sin(vec.value*sin(ar.value)*(t-tg.value)/r.value))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>target</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.05</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.05</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>L.value*cos(toradians(ang.value))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>L.value*sin(toradians(ang.value))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>x</name>
+			<text>X of electron</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Q.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y of electron</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Q.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vx</name>
+			<text>Vx</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Q.xvel</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vy</name>
+			<text>Vy</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Q.yvel</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ve</name>
+			<text>Exit velocity / c</text>
+			<units>c</units>
+			<calculator type="parametric">
+				<value>(2*(abs(qmr.value))*V.value)^0.5/c.value</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vec</name>
+			<text>Exit velocity abs</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>ve.value*c.value</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>r</name>
+			<text>Radius of path</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>vec.value*sin(ar.value)/(abs(qmr.value)*mf.value)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tg</name>
+			<text>Time in gun</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>2*d.value/vec.value</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a</name>
+			<text>Acceleration in gun</text>
+			<units>m/s^2</units>
+			<calculator type="parametric">
+				<value>abs(qmr.value)*V.value/d.value</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ar</name>
+			<text>Angle in Radians</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toradians(ang.value)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>s</name>
+			<text>Separation</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>abs(((Q.xpos)^2+(Q.ypos)^2)^0.5-L)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

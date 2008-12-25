@@ -1,0 +1,203 @@
+
+<project name="Interactive Web Physics" default="dist" basedir=".">
+
+	<description>Interactive Web Physics Animator and Designer</description>
+
+	<property file="build.properties" />
+	<property file="build.properties.default" />
+
+	<property name="src"        value="src" />
+	<property name="etc"        value="etc" />
+	<property name="build"      value="build" />
+	<property name="lib"        value="lib" />
+	<property name="dist"       value="dist" />
+	<property name="contentdir" value="${build}/content" />
+	<property name="classdir"   value="${build}/classes" />
+	<property name="javadocdir" value="${build}/javadoc" />
+
+	<property name="designerMani" value="${build}/META-INF/designer.MF" />
+	<property name="studentMani"  value="${build}/META-INF/student.MF" />
+    <property name="keystore"     value="${etc}/jarsign.keystore" />
+
+	<property name="jarfile"  value="iwp.jar" />
+	<property name="jarfileStudent"  value="iwpStudent.jar" />
+
+
+	<path id="build.classpath">
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	
+	<target name="init" unless="init.isuptodate">
+		<tstamp/>
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+		<uptodate property="javadoc.isuptodate" targetfile="${build}/javadoc-generated">
+			<srcfiles dir="${src}" includes="**/*.java" />
+			<srcfiles dir="${src}" includes="**/*.html" />
+			<srcfiles dir="." includes="build.xml" />
+			<srcfiles dir="." includes="build.properties*" />
+		</uptodate>
+		<property name="init.isuptodate" value="true" />
+	</target>
+
+
+
+	<target name="dist" depends="jar,jarStudent,javadoc" description="create the final distribution">
+
+ 		<copy todir="${dist}/javadoc">
+			<fileset dir="${javadocdir}" />
+		</copy>
+
+	</target>
+
+
+	<target name="compile" depends="init" description="compile the project">
+		<mkdir dir="${classdir}" />
+		<javac srcdir="${src}" destdir="${classdir}" debug="true" optimize="true">
+			<classpath refid="build.classpath" />
+		</javac>
+
+        <!-- also copy the jaxb.properties file -->
+        <copy todir="${classdir}">
+			<fileset dir="${src}">
+				<include name="**/*.properties" />
+				<include name="**/*.xml" />
+			</fileset>
+        </copy>
+	</target>
+
+
+    <target name="copyContent" depends="init" description="copy in Content like Icons">
+        <copy todir="${contentdir}/images">
+            <fileset dir="${etc}/images"/>
+        </copy>
+
+        <copy todir="${contentdir}/doc">
+            <fileset dir="${etc}/doc"/>
+        </copy>
+
+        <copy todir="${contentdir}/packagedProblems">
+            <fileset dir="${etc}/packagedProblems"/>
+        </copy>
+
+    </target>
+
+
+
+
+    <target name="explodeLib" depends="init" description="Explode the jars in lib/ so that the applet can use their parts">
+        <unjar dest="${classdir}">
+            <fileset dir="${lib}">
+                <include name="*.jar"/>
+            </fileset>
+        </unjar>
+
+        <!-- clean out any META-INF that may have come out of the .jars -->
+        <delete dir="${classdir}/META-INF"/>
+    </target>
+
+
+
+    <target name="jarCommon" depends="explodeLib,compile,copyContent,manifest"
+            description="This is a common jar target that pulls it all together. This is the single dependency for 'jar' and 'jarStudent'">
+    </target>
+
+
+	<target name="jar" depends="jarCommon">
+		<delete>
+			<fileset dir="${build}">
+				<include name="${jarfile}" />
+			</fileset>
+		</delete>
+
+		<mkdir dir="${dist}" />
+
+		<jar destfile="${dist}/${jarfile}" manifest="${designerMani}">
+			<fileset dir="${classdir}">
+				<include name="**/*" />
+			</fileset>
+			<fileset dir="${contentdir}">
+				<include name="**/*" />
+			</fileset>
+		</jar>
+
+        <signjar jar="${dist}/${jarfile}" alias="key" storepass="iwpkey" keystore="${keystore}" />
+
+ 		<copy todir="${dist}">
+			<fileset file="${build}/${jarfile}" />
+		</copy>
+
+	</target>
+
+
+
+	<target name="jarStudent" depends="jarCommon">
+		<delete>
+			<fileset dir="${build}">
+				<include name="${jarfileStudent}" />
+			</fileset>
+		</delete>
+
+		<jar destfile="${build}/${jarfileStudent}" manifest="${studentMani}">
+			<fileset dir="${classdir}">
+				<include name="**/*" />
+			</fileset>
+			<fileset dir="${contentdir}">
+				<include name="**/*" />
+			</fileset>
+		</jar>
+
+        <signjar jar="${build}/${jarfileStudent}" alias="key" storepass="iwpkey" keystore="${keystore}" />
+
+ 		<copy todir="${dist}">
+			<fileset file="${build}/${jarfileStudent}" />
+		</copy>
+
+	</target>
+
+
+
+	<target name="javadoc" depends="init" description="generate javadoc" unless="javadoc.isuptodate">
+		<javadoc destdir="${javadocdir}" classpathref="build.classpath">
+			<group title="IWP" packages="edu.ncssm.*" />
+			<fileset dir="${src}" />
+			<link href="http://java.sun.com/j2se/1.4.2/docs/api/" />
+		</javadoc>
+		<touch file="${build}/javadoc-generated" />
+		<property name="javadoc.isuptodate" value="true" />
+	</target>
+
+
+	<target name="clean" depends="init" description="clean up temporary files">
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
+
+
+
+
+    <!-- ==== Some special routines to create the manifests ==== -->
+
+    <target name="manifest" description="Build the manifest" depends="compile">
+
+        <tstamp/>
+
+        <mkdir dir="${build}/META-INF/"/>
+        <manifest file="${studentMani}" mode="update">
+            <attribute name="Built-By" value="${user.name}"/>
+            <attribute name="Build-Date" value="${DSTAMP}"/>
+            <attribute name="Main-Class" value="edu.ncssm.iwp.bin.IWP_Animator"/>
+        </manifest>
+
+        <manifest file="${designerMani}" mode="update">
+            <attribute name="Built-By" value="${user.name}"/>
+            <attribute name="Build-Date" value="${DSTAMP}"/>
+            <attribute name="Main-Class" value="edu.ncssm.iwp.bin.IWP_Designer"/>
+        </manifest>
+    </target>
+
+</project>
+

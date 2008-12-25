@@ -1,0 +1,19 @@
+How to roll a new iwpStudent jar out to the iwp2 problem server.
+
+The instructions: (Also checked into CVS)
+
+1. Checkout CVS from sourceforge on a unix build machine
+2. Build the code: $ ant clean && ant dist
+3. Copy the student jar to iwp2, your home directory: $ scp dest/iwpStudent.jar iwp2.ncssm.edu
+4. $ ssh iwp2.ncssm.edu
+5. $ cd /var/www/iwp2.ncssm.edu/pps/content
+6. Become super user: $ su
+7. Backup the old iwp.jar:   $ cp iwp.jar iwp.jar_YYYY_MM_DD
+8. Install the new jar:   $ cp ~user/iwpStudent.jar ./iwp.jar
+9. Be sure to test on the web!     
+    http://iwp2.ncssm.edu/pps/webInterface.cgi/Example%20Problems/Example%20Target%20Problem.iwp
+You can see what version you are using in the About Help dialog.
+
+
+Taylor
+2007-Aug-18

@@ -1,0 +1,483 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>50.0</stop>
+			<change>1.0</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>50.0</xmax>
+			<ymin>-1.0</ymin>
+			<ymax>1.0</ymax>
+			<xgrid>5.0</xgrid>
+			<ygrid>0.1</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-50.0</xmin>
+			<xmax>1050.0</xmax>
+			<ymin>-100.0</ymin>
+			<ymax>1000.0</ymax>
+			<xgrid>100.0</xgrid>
+			<ygrid>100.0</ygrid>
+			<xunit>µm</xunit>
+			<yunit>µm</yunit>
+		</window>
+		<description>
+			<text>Monochromatic light is incident on an air wedge.  Play the animation to advance the position of the incident ray by the given increment.  The phase difference is given as an output in units of wavelengths. All distance units are in micrometers (10^-6 m).  
+
+1.  Change the height of the post to 0.  Play the animation while watching the phase difference.  Explain why the phase difference is always half a wavelength.
+
+2.  Now change the height of the post back to 50 µm. Determine the wavelength of the incident light to the nearest nanometer (0.001 µm). In order to precisely position the incident ray, change the angle of incidence to 0°.  Then select an initial position near the one you're looking for and change the position increment to a small value.</text>
+		</description>
+		<input>
+			<name>a</name>
+			<text>Angle of incidence</text>
+			<initialValue>10.0</initialValue>
+			<units>°</units>
+		</input>
+		<input>
+			<name>xo</name>
+			<text>Initial X-pos of incident ray</text>
+			<initialValue>400.0</initialValue>
+			<units>µm</units>
+		</input>
+		<input>
+			<name>xi</name>
+			<text>Position increment</text>
+			<initialValue>20.0</initialValue>
+			<units>µm</units>
+		</input>
+		<input>
+			<name>h</name>
+			<text>Height of post</text>
+			<initialValue>50.0</initialValue>
+			<units>µm</units>
+		</input>
+		<input>
+			<name>w</name>
+			<text>Thickness of plate</text>
+			<initialValue>100.0</initialValue>
+			<units>µm</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>wl</name>
+			<text>Wavelength</text>
+			<initialValue>575.0</initialValue>
+			<units>nm</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>background</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2000</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>500</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>500</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>lower_plate</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1050</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>w</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>525</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-w/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>shim</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>975</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>1000</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>h</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>1025</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>i</name>
+			<text>Inclination</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>atan(h/1000)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>arad</name>
+			<text>Angle of incidence</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(a)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>x</name>
+			<text>X-pos of incident ray</text>
+			<units>µm</units>
+			<calculator type="parametric">
+				<value>xo+xi*t</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>upper_plate</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>-w*sin(i)</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>w*cos(i)</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>1200*cos(i)-w*sin(i)</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>1200*sin(i)+w*cos(i)</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>1200*cos(i)</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>1200*sin(i)</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>incident_ray</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-1000*sin(arad+i)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1000*cos(arad+i)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>x*tan(i)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>reflected_ray_1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1000*sin(arad-i)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1000*cos(arad-i)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>x*tan(i)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>incident_ray_ext</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>x*tan(i)*tan(i+arad)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-x*tan(i)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>x*tan(i)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>reflected_ray_2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1000*sin(arad-i)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1000*cos(arad-i)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x+x*tan(i)*tan(i+arad)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>d</name>
+			<text>Plate separation</text>
+			<units>µm</units>
+			<calculator type="parametric">
+				<value>x*tan(i)/cos(i)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>pd</name>
+			<text>Phase difference</text>
+			<units>w</units>
+			<calculator type="parametric">
+				<value>2000*d/wl+.5</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

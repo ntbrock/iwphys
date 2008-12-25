@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>2.0E-6</stop>
+			<change>5.0E-9</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>2.0E-6</xmax>
+			<ymin>-500000.0</ymin>
+			<ymax>500000.0</ymax>
+			<xgrid>2.0E-7</xgrid>
+			<ygrid>100000.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.1</xmin>
+			<xmax>0.1</xmax>
+			<ymin>-0.1</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>0.01</xgrid>
+			<ygrid>0.01</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A charged particle moves under the influence of an electric field oriented along the y-axis and a magnetic field oriented along the z-axis.  Sign conventions:
+positive E is +y (toward top of screen)
+positive B is +z (outward from screen)
+Vectors:  red = velocity     blue = acceleration
+</text>
+		</description>
+		<input>
+			<name>q</name>
+			<text>Charge</text>
+			<initialValue>1.6E-19</initialValue>
+			<units>C</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass</text>
+			<initialValue>1.67E-27</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Mag. of initial velocity</text>
+			<initialValue>250000.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Angle of initial velocity</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>Ef</name>
+			<text>Electric Field</text>
+			<initialValue>5000.0</initialValue>
+			<units>N/C</units>
+		</input>
+		<input>
+			<name>B</name>
+			<text>Magnetic field</text>
+			<initialValue>0.08</initialValue>
+			<units>T</units>
+		</input>
+		<input>
+			<name>vscale</name>
+			<text>Scale Factor for V</text>
+			<initialValue>1.0E-7</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>ascale</name>
+			<text>Scale Factor for A</text>
+			<initialValue>1.0E-14</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>fscale</name>
+			<text>Scale factor for force</text>
+			<initialValue>1.0E13</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>R</name>
+			<text>Charge/Mass</text>
+			<units>C/kg</units>
+			<calculator type="parametric">
+				<value>q/m</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>arad</name>
+			<text>Angle</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(a)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>P</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.005</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.005</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="true" xAccel="false" xVel="true" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*cos(arad)</velocity>
+					<acceleration>R*B*P.yvel</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*sin(arad)</velocity>
+					<acceleration>R*(Ef-B*P.xvel)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>vvector</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>vscale*P.xvel</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>vscale*P.yvel</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>P.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>P.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fnforce</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>q*B*P.yvel*fscale</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>q*(-B*P.xvel+E)*fscale</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>P.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>P.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

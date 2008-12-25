@@ -1,0 +1,86 @@
+09.09.03 IN wilmington: I have added the problemServer client GUI stuff to
+         the designer. It hangs on a refresh. Plus, there is lots of UI
+		 flow tweaking to do.
+
+
+
+
+
+
+
+ProblemServer XMLRPC
+
+
+XML-RPC return strucutre: 
+hash { return_code => 1, error_message => '' }
+
+authenticate ( username, password )
+
+listDirectories ( authKey, directory )
+
+listFiles ( authKey, directory )
+
+putFile ( authKey, directory, mime-data? )
+
+getFile ( authKey, directory )
+
+** removeFile ( authKey, file );  //only allowed to remove files in user dir
+** renameFile ( authKey, oldFile, newFile );
+   //only allowed to remove files in user dir
+
+
+//----- methods needed for advanced / Adminable access --------
+
+** createDirectory ( authKey, directory ) // not needed
+
+
+01:53 07.16.03
+I have put in place the client / server framework for the IWP applet / problem
+server communication channel. AppletXMLRPCClient/Servlet are the files. 
+I've got a rude command line client + am filling out a lcient library. It
+would be good to create a widget client + a test case / harness.
+
+* problem 1: the authkeys keep timing out. It looks like we need a method
+in the userDB called 'refresh authkey' that takes an autheky + gives out
+a new one. why is this not a problem on the web? (maybe it is...)
+
+
+02:46 07.18.03
+Things are looking good now. All I have left to do is bind the XML-RPC
+server-side interface to the actual data calls for storing / loading files.
+I might have to just do that tonite, so i can show a console version of
+the xml-rpc client @ lunch tommorrow.
+
+The authkey problem is fixed. Audited the library. good progress.
+
+03:42 07.18.03
+I have gotten the upload functionality completed. 
+I have a demonstration ready for Dr. Winters tommorrow:
+
+---------------------------------------------------------------------------
+ DEMO
+---------------------------------------------------------------------------
+ - Start problemserver on laptop
+ - log in
+ - upload a file
+ - animate the file
+ - design the file
+ - browse the file from the directory
+ - remove the file
+ - fake-design a file from the admin screen
+
+ - upload another file. (upload2.iwp)
+ - move the file to another directory (mkdir DVAT)
+ - animate the file
+
+ - Connect with console xmlrpc client
+    ./bin/ConsoleXmlRpcClient.sh http://localhost:8000/RPC2 brockman avatar14
+   - show login ability (bad username, pass)
+   - run listFiles command
+
+
+
+00:54 07/24/03 The getFile + setFile client / server communication framework
+      is now in place. The setFile seeems to only work once per connection.
+	  weird.
+

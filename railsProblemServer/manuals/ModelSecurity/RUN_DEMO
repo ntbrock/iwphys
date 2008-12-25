@@ -1,0 +1,95 @@
+= Running the Model Security Demo =
+
+Here's how to run the model security demo. Once you've gone through this
+process, you should be able
+
+Generate a rails program called <i>test</i>, and change to its directory:
+
+  rails test
+  cd test
+
+Install the model_security gem:
+
+  gem install model_security -
+
+Have MySQL execute the script to create the database and a MySQL user ID for the rails program:
+
+  cd db/
+  mysql -u <i>MYSQL-ADMIN-NAME</i> -p < demo.sql
+
+Examine demo.sql and users.sql . Note that demo.sql runs users.sql to define
+the users table. When you include ModelSecurity in another Rails program,
+you'll skip demo.sql and use users.sql to create the users table.
+
+Edit the database configuration in db/database.yml to look like this:
+
+  development:
+    adapter: mysql
+    database: model_security_demo
+    host: localhost
+    username: m_s_demo
+    password: 
+
+Add some necessary facilities to your brand new application controller:
+
+  cd ../app/controllers
+  cp ADD_TO_APPLICATION_CONTROLLER.ModelSecurity application.rb
+  cd ../..
+
+If this wasn't a new controller, you would edit application.rb to add the
+facilities requested, rather than copying over the file.
+
+Start the rails server:
+
+  script/server &
+
+Open a web browser to http://localhost:3000/user/new
+Use the form to create a new user. That user will automatically be
+granted the administrator role, and will be activated immediately.
+
+Subsequent users will <i>not</i> automatically get the administrator role,
+although an administrator can grant it to them by editing their record
+with /user/edit/<i>user-name</i> . Subsequent users will
+not have their login activated immediately when they create it. Instead,
+they will be sent an email containing a URL that they must use to activate
+their login.
+
+Now, you can play with the demo. The user controller responds to:
+
+  * /user/activate/<i>user-name</i>?token=<i>security-token</i>
+    Activate a user, after the user's login has been created.
+
+  * /user/destroy/<i>user-name</i>
+    Destroy a user. Requires the administrator role.
+
+  * /user/edit
+    Edit the attributes of a user. Administrators are allowed to edit more
+    fields than normal users, and normal are allowed to edit their own
+    record, not anyone else's.
+
+  * /user/forgot_password
+    Send an email to the user that facilitates password recovery. 
+
+  * /user/list
+    List the users. Administrators can see more information than normal
+    users. Normal users can see some information on their own record
+    that they will not see in the records of other users.
+
+  * /user/login
+    Perform HTTP authentication to log in a user. If that doesn't work,
+    fall back on a login form.
+
+  * /user/logout
+    Log a user out. Actually loops back to the login action, because the only
+    way to get the browser to stop sending HTTP authentication data with
+    every request is to ask it to get new authentication data from the
+    user.
+
+  * /user/new
+    Create a new user.
+
+  * /user/show
+    Display information about a user. Administrators can see more information
+    than normal users.
+    Normal users can see some information on their own record
+    that they will not see in the records of other users.

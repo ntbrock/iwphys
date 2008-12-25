@@ -1,0 +1,194 @@
+
+Perl Problem Server
+Interactive Web Physics
+
+brockman 03.19.04
+
+
+Requirements:
+
+- use xmlrpc_cgi.inc for xml-rpc
+- clone the xml-rpc call signature from the existing problemserver Java
+  Swing
+- create a stand-alone test driver program to flex every command in the
+  rpc interface
+
+- create a stub server that does nothing except respond,
+  then fill it in with code that acutally scans files, etc.
+
+- use xml-rpc exceptions to transmit errors from the server to the
+  client
+
+
+
+- needs to use Tribble::Session for both XML-RPC sessions and web 
+  browsing sessions
+
+- needs to support file uploads
+
+- + user database
+
+- file management?
+
+- How do I support ACL's easily? Is there a perl module that will do it for 
+  me?
+
+
+
+23:37 current thinking: write the server copmletely first?
+     it's simple enough to test w/ a test driver.
+
+- what about using regular httpd authorization to authorize users?
+
+- we could use Tie::Persistent to store user data to disk
+
+- going to need a file-loader for problem content 
+  probably even a rudimentary parser to get information from them.
+
+
+It should live in /usr/local/iwp/perlProblemServer/
+  ./users/
+  ./problems/
+  ./etc/
+  ./templates/
+
+
+- The web interface should be sure to use PATH_INFO to browse the file
+  directory
+
+00:29 getting apache running on my box again + putting the web script to work
+
+
+01:18 I have a stub xmlrpc server running now. I';m going to jump over to 
+      java land to create a swing gui into it.
+
+
+- should the website access thru xmlrpc? or just access thru the
+  native interfaces? native = faster.
+
+
+- in the java widget, if the user tries to hit load or save and the
+  client is not connected, or in an error state, show them only the
+  'setup' screen, and grey out the other tab panes. disallow access to
+  those when client is not connected.
+  - The options are greyed out when you hit disconnect, they're just
+    still available when you connect initially and there are problems.
+  
+
+- if the swingXmlRpcClient is not initialized correctly, it seems to 
+  throw or show nulls.
+
+- Put an applet-size dropdown into the user-facing website.
+
+- compare my problemserver against Brian's php one
+
+
+02:14 the xml-rpc client seems to be talking well to my server already 
+      w/o much modification at all.
+
+
+-(Future) Nice dialogues would be cool to help show when files can't
+  be loaded, etc.
+
+- The file browsing could return more information about each file
+  than just the filename.
+
+
+02:18 ready to actually implement the logic behind a real server.
+
+02:52 the authentication + user database works.
+
+03:09 I have integrated Apache::Session in with the UserSession.pm
+
+
+- need to fill up the default problemserver installation public 
+  directory w/ all the files that brian sweeney has in his dir.
+
+- also, need to test the problemServer w/ application designer on desktop
+
+- windows test
+
+- 'create directory' functionality in PServer client + web client.
+
+- clean up the visual gui components on the problemserver file selection
+  dialogue.
+
+04:22 Sweet. Just got the TEST harness to load a problem correctly from
+      the perl problemserver.
+
+- on new connetions to host in the gui, it would be good to refresh
+  the directories
+
+F add a 'home' button in teh file browser
+
+- Clicking [..] in directory takes you to the top-level of the file system.
+
+- Add a 'my problems' style 'my documents' thing into the file selector.
+
+
+04:40 calling it a night.
+
+    I just opened up webInteface.cgi. I'm going to bed to draw out the 
+ page flow, and I'm going to wake up kinda early to implement it.
+
+ Problems load using the designerApplet.
+
+ 
+--------------------------------------------------------------------------
+03/20/04
+10:13 in the AM
+
+
+starting on the web interface real fast.
+
+11:37: got user login to work + sessions. TODO: problem loading + saving.
+
+11:56: the applet needs to be signed before I can use the xml-rpc client
+ libraries from w/in it. It's going a property read.
+
+- there seems to be some screweyness with the user auth stuff in IE
+
+
+
+15:23 meeting.
+
+= Got the putFile->pps working
+
+- Me replace brian's iwp2 website
+- web file upload
+
+- certifty/sign applet
+
+low prior - trim the applet size
+
+brian/paul- cosmetic issues
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

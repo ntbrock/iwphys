@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<user>
+	<username>brockman</username>
+	<password>avatar14</password>
+
+	<realName>Taylor Brockman</realName>
+	<email>brockman@pinpoint.com</email>
+	
+	<adminFlag>true</adminFlag>
+
+</user>

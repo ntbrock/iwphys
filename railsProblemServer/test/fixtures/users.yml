@@ -1,0 +1,28 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+neo: 
+  id: 100001
+  login: neo
+  admin: 0
+  name: 'Mr. Anderson'
+  #The decrypted password is 'redpill'
+  cypher: e18c3073d77089dc0e4a2bb884d1f8e99f9153a071614e757c5fbf8e9988946aa585cd18b2d7356e4dc0e1c417e3219bb2c2346f985f28625cb2d118548978a9
+  salt: nPKN4YrUyKPFwNI84oVHwxJYBmx78bIUJS9k4.jf
+  email: neo@thematrix.com
+  activated: 1
+
+morpheus:
+  id: 100002
+  login: morpheus
+  admin: 1
+  name: 'Morpheus'
+  #The decrypted password is 'nebekenezzer'
+  cypher: 06d8472f508f905ada2c9cddb0c891e819bce1849fdaadc5c06df3ec2eb01b07010cdc4b964335783488877a2a3a17299a0adc6e8e65f4b442540c81ee09c6f1
+  salt: e/SRvTGTz1mwHK8oP9FlrzyHopNfbTARl6tvG/ky
+  email: morpheus@thematrix.com
+  activated: 1
+
+
+
+
+

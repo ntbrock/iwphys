@@ -1,0 +1,21 @@
+<h1>
+  <% if flash[:login_header] %>
+    <%= flash[:login_header] + '. ' %>
+  <% end %>
+  Please log in.
+</h1>
+
+<% if flash[:login_message] %>
+  <p>
+  <%= flash[:login_message] %>
+  </p>
+<% end %>
+<%= form_tag :action => 'login' %>
+  <p><label for="user_login">User ID</label><br/>
+  <%= text_field 'user', 'login'  %></p>
+  
+  <p><label for="user_password">Password</label><br/>
+  <%= password_field 'user', 'password'  %></p>
+
+  <%= submit_tag 'Login' %>
+<%= end_form_tag %>

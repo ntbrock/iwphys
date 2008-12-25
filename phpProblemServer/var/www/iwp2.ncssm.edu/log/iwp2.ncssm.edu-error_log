@@ -1,0 +1,5 @@
+[Fri Jan 25 15:42:57 2008] [error] [client 127.0.0.1] Directory index forbidden by Options directive: /var/www/iwp2.ncssm.edu/docroot/
+[Fri Jan 25 15:42:57 2008] [error] [client 127.0.0.1] Directory index forbidden by Options directive: /var/www/iwp2.ncssm.edu/docroot/
+[Fri Jan 25 15:42:57 2008] [error] [client 127.0.0.1] Directory index forbidden by Options directive: /var/www/iwp2.ncssm.edu/docroot/
+[Fri Jan 25 15:43:46 2008] [error] [client 66.194.17.94] Directory index forbidden by Options directive: /var/www/iwp2.ncssm.edu/docroot/
+[Fri Jan 25 15:43:46 2008] [error] [client 66.194.17.94] File does not exist: /var/www/icons/powered_by_rh.png, referer: http://iwp2.ncssm.edu/

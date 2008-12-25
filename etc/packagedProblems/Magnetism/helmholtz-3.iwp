@@ -1,0 +1,327 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>-0.05</start>
+			<stop>0.05</stop>
+			<change>0.0020</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>-0.05</xmin>
+			<xmax>0.05</xmax>
+			<ymin>-0.1</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>0.0050</xgrid>
+			<ygrid>0.01</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.05</xmin>
+			<xmax>0.05</xmax>
+			<ymin>-5.0E-4</ymin>
+			<ymax>0.0045</ymax>
+			<xgrid>0.01</xgrid>
+			<ygrid>5.0E-4</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Play the applet in order to plot the magnetic field along the axis of a pair of Helmholtz coils as a function of the distance from the axis midpoint.  The red and blue lines are the fields of the individual coils.  The green line is the net field.  (Note that the value of Time is the same as x in meters.
+Click Show graph to see first and second derivatives of the net field.  (The y-axis units are arbitrary.)
+B'(x)--orange line
+B''(x)--magenta line</text>
+		</description>
+		<input>
+			<name>N</name>
+			<text>Turns per coil</text>
+			<initialValue>320.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>R</name>
+			<text>Radius</text>
+			<initialValue>0.07</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>s</name>
+			<text>Separation</text>
+			<initialValue>0.07</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>i</name>
+			<text>Current</text>
+			<initialValue>0.75</initialValue>
+			<units>A</units>
+		</input>
+		<input>
+			<name>mu</name>
+			<text>Permeability</text>
+			<initialValue>1.256E-6</initialValue>
+			<units>Tm/A</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Aspect ratio (y/x)</text>
+			<initialValue>0.05</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>b</name>
+			<text>Reduction factor for B''</text>
+			<initialValue>0.05</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>k</name>
+			<text>Constant</text>
+			<units>Tm^3</units>
+			<calculator type="parametric">
+				<value>mu*i*N*R^2/2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>F</name>
+			<text></text>
+			<units></units>
+			<calculator type="parametric">
+				<value>R^2+(s/2+t)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>G</name>
+			<text></text>
+			<units></units>
+			<calculator type="parametric">
+				<value>R^2+(s/2-t)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>Bleft</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.0005</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.0005*a</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>k*F^(-1.5)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Bright</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.0005</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.0005*a</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>k*G^(-1.5)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Bsum</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.0005</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.0005*a</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>k*(F^(-1.5)+G^(-1.5))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>leftb</name>
+			<text>B-left</text>
+			<units>T</units>
+			<calculator type="parametric">
+				<value>Bleft.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>rightb</name>
+			<text>B-right</text>
+			<units>T</units>
+			<calculator type="parametric">
+				<value>Bright.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>sumb</name>
+			<text>B-net</text>
+			<units>T</units>
+			<calculator type="parametric">
+				<value>Bsum.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>dBfirst</name>
+			<text></text>
+			<units></units>
+			<calculator type="parametric">
+				<value>k*(R^2+(s/2-t+delta_t/2)^2)^(-1.5)+k*(R^2+(s/2+t-delta_t/2)^2)^(-1.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dBsecond</name>
+			<text></text>
+			<units></units>
+			<calculator type="parametric">
+				<value>3*k*(R^2+(s/2-t-delta_t/2)^2)^(-1.5)+k*(R^2+(s/2+t+delta_t/2)^2)^(-1.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>New_Solid</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.0005</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.0005*a</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>3*k*((s/2-t)/G^2.5-(s/2+t)/F^2.5)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>New_Solid</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.0005</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.0005*a</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>b*3*k*((4*(s/2-t)^2-R^2)/G^3.5+(4*(s/2+t)^2-R^2)/F^3.5)</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

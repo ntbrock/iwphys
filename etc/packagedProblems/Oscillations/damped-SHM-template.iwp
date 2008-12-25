@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>5.0</stop>
+			<change>0.01</change>
+			<fps>30.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>0.0</xmin>
+			<xmax>2.0</xmax>
+			<ymin>-1.0</ymin>
+			<ymax>1.0</ymax>
+			<xgrid>0.2</xgrid>
+			<ygrid>0.2</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>This plots position (vertical) as a function of time (horizontal) for an object subject to a Hooke's Law restoring force.
+
+Suppose that the object is also subject to a force that always acts opposite the velocity, v, and is proportional to the magnitude of v.  If the constant of proportionality is denoted R, then this damping force is -Rv.  Modify the applet to display the motion of the object by doing the following:
+
+1.  Create a new input for R.  Give R an initial value of 0.
+2.  Modify the equation for the object's y-acceleration to include a term that accounts for the damping.
+3.  Run the applet.  Make sure it still runs correctly for the undamped case, R = 0.
+4.  Investigate the motion for different values of R (say 1, 5, 10, 20).</text>
+		</description>
+		<input>
+			<name>A</name>
+			<text>Initial position</text>
+			<initialValue>1.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass of object</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>k</name>
+			<text>Spring constant</text>
+			<initialValue>100.0</initialValue>
+			<units>N/m</units>
+		</input>
+		<solid>
+			<name>Object</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>A</displacement>
+					<velocity>0</velocity>
+					<acceleration>-k*Object.ypos/m</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

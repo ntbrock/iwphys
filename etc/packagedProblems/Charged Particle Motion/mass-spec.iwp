@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>2.0E-6</stop>
+			<change>1.0E-8</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>2.0E-6</xmax>
+			<ymin>-0.05</ymin>
+			<ymax>0.05</ymax>
+			<xgrid>2.0E-7</xgrid>
+			<ygrid>0.01</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>0.0</xmin>
+			<xmax>0.05</xmax>
+			<ymin>-0.01</ymin>
+			<ymax>0.04</ymax>
+			<xgrid>0.0050</xgrid>
+			<ygrid>0.0050</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Two singly-ionized isotopes of the same element are injected at the same velocity into a region of uniform magnetic field pointing out of the screen.  (There is no field below the x-axis).  Determine the ratio of the masses of the isotopes.</text>
+		</description>
+		<input>
+			<name>q</name>
+			<text>Charge</text>
+			<initialValue>1.6E-19</initialValue>
+			<units>C</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m1</name>
+			<text>Mass of isotope 1</text>
+			<initialValue>12.0</initialValue>
+			<units>u</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m2</name>
+			<text>Mass of isotope 2</text>
+			<initialValue>14.0</initialValue>
+			<units>u</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Mag. of initial velocity</text>
+			<initialValue>100000.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>B</name>
+			<text>Magnetic field</text>
+			<initialValue>0.6</initialValue>
+			<units>T</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>u</name>
+			<text>atomic mass unit</text>
+			<initialValue>1.66E-27</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>f1</name>
+			<text>q/m of isotope 1</text>
+			<units>C/kg</units>
+			<calculator type="parametric">
+				<value>q/(u*m1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>f2</name>
+			<text>q/m of isotope 2</text>
+			<units>C/kg</units>
+			<calculator type="parametric">
+				<value>q/(u*m2)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>r1</name>
+			<text>Radius of isotope 1</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>vo/(f1*B)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>r2</name>
+			<text>Radius of isotope 2</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>vo/(f2*B)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ts</name>
+			<text>Time for one-half cycle</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>3.14159/(f1*B)+.813*delta_t</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tt</name>
+			<text>Time for one-half cycle</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>3.14159/(f2*B)+.948*delta_t</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>S</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.001</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.001</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>0</velocity>
+					<acceleration>f1*B*S.yvel*step(ts-t)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo</velocity>
+					<acceleration>f1*(-B*S.xvel)*step(ts-t)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>T</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.001</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.001</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>0</velocity>
+					<acceleration>f2*B*T.yvel*step(tt-t)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo</velocity>
+					<acceleration>f2*(-B*T.xvel)*step(tt-t)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xs</name>
+			<text>X of Isotope 1</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>S.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>xt</name>
+			<text>X of Isotope 2</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>T.xpos</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

@@ -1,0 +1,135 @@
+
+Interactive Web Physics
+
+03/06/02
+developer todo
+brockman
+sweeney
+
+
+legend: - TODO  = DONE
+
+
+
+Phase 1: Convert the build structure to ANT
+03/06/02
+	= create build.xml file
+	= clean up all build problems
+
+	= create build.sh file
+	= build successfully under linux
+
+	= create build.bat file
+	= build successfully under win32
+	- run successfully under win32
+		note: there is a NoClassDefFoundError (wrong name: edu/ncssm/iwp/bin/IWP) everything seems to be in order, though
+
+
+Phase 2: Convert tree to modern object / directory naming structure
+	= Move src/iwp/* to src/edu/ncssm/iwp
+	= Eliminate all Upper-case 1st letters of directory names
+
+
+
+
+- need to create a file-saving thread. 
+
+
+Versions
+------------------------------------------------------------
+
+Java SE API : j2sdk1.3.1
+Jakarta Ant: 1.4.1          http://jakarta.apache.org/ant/
+Xerces XML Parser: 1.4.3    http://xml.apache.org/
+
+
+
+
+
+
+-----------------------------------------------------------------------------
+
+feature design / requirements documentation
+03/19/02
+
+Misc Bugs
+
+= icons don't work in the designer
+   = had to chance a local filesystem load to a ClassLoad.getSystemResource call.
+
+= Animator Input objects don't seem to do anything
+   = make comply to MRD3.4.1
+   - make sure mods in the animator don't save down to the xml streams.
+     = intialValue work.
+       = changed the XML element name from value to initialValue
+
+
+- Loren's feedback
+
+- Get problemserver working 
+   = serve applets
+   = serve problem files
+   = serve a test applet
+   = serve user interface 
+       = create new account
+       - create new problem
+       - delete problems 
+       - make problems public / private  (problem folders?)
+           - have a public folder url?
+       - edit problems
+       - copy problems
+   = user database / authentication 
+   - accept / store problem files (Http post / put)
+   - delete files
+
+
+- Designer needs a button to 'animate current problem'.
+
+- Variables audit
+   - HOWTO use documentation (explanation of object.property + math syntax)
+   -
+
+- UI Cleanup
+   - need a snazzy, easy to use UI for the designer
+   - animator should be catchy
+   - When changing the name of an object, need to refresh the list on the left
+     (11.11.02 - bug#609369)
+   
+- File Saving / Opening dialogs
+   - ProblemServer intergration / XMLRPC
+ 
+- General Documentation
+  - Installation instructions for problemserver
+  - Generic installation instructions
+  - End-user help / tooltips
+  - Tip of the day?
+
+
+
+Requirements
+------------------------------------------------------------------------------
+
+1. General
+
+2. Designer User Interface
+    3. Object List
+       1. Objects names in the list should have colourful icons beside them
+
+3. Animator User Interface
+	1. General
+    - 
+    3. Output Pane
+    4. Input Pane
+       1. When you update a value, pressing reset will reload them problem
+          with the new value set.
+    5. Description Pane
+
+4. Problem Files
+
+
+5. Problem Server
+
+
+6. EndUser Experience
+
+

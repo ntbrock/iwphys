@@ -1,0 +1,30 @@
+<h1>New user</h1>
+
+<%= error_messages_for 'user' %>
+<%= start_form_tag :action => 'new' %>
+  <table>
+    <tr>
+      <th><label for="user_login">Login</label></th>
+      <td><%= text_field 'user', 'login' %></td>
+    </tr>
+    <tr>
+      <th><label for="user_name">Name</label></th>
+      <td><%= text_field 'user', 'name' %></td>
+    </tr>
+    <tr>
+      <th><label for="user_email">Email</label></th>
+      <td><%= text_field 'user', 'email' %></td>
+    </tr>
+    <tr>
+      <th><label for="user_password">Password</label></th>
+      <td><%= password_field 'user', 'password' %></td>
+    </tr>
+    <tr>
+      <th><label for="user_password_confirmation">Password again</label></th>
+      <td><%= password_field 'user', 'password_confirmation' %></td>
+    </tr>
+  </table>
+  <%= submit_tag "Create" %>
+<%= end_form_tag %>
+
+<%= link_to 'Back', :action => 'list' %>

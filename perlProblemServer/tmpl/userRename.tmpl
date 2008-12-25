@@ -1,0 +1,35 @@
+
+{tmplImport('header.tmpl')}
+
+<br>
+
+<center>
+
+<form action="{$self}" method="POST">
+<input type="hidden" name="action" value="userRenameSubmit">
+<input type="hidden" name="filename" value="{$filename}">
+<input type="hidden" name="fullFilename" value="{$fullFilename}">
+
+<table bgcolor="#cccccc" width="500" cellpadding="8" cellspacing="0">
+
+<tr>
+<td algn="left">
+
+Old Filename: <b>{$filename}</b><br>
+<br>
+New Filename: <input type="text" name="newFilename" value="{$filename}" size="80"><br>
+
+</td></tr>
+<tr><td align="right">
+<input type="submit" value="Rename">
+</td></tr>
+
+</td>
+</tr>
+</table>
+
+</form>
+
+</center>
+
+{tmplImport('footer.tmpl')}

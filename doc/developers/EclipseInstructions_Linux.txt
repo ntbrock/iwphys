@@ -1,0 +1,178 @@
+2007-Jan-17 : NOTE - These have been complimented by the windows 
+instructions that live in : IWP_WinEclipseSourceforgeCVS_HOWTO - Taylor
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+
+Linux Developer Instructions for developing IWP using Eclipse
+2006-Apr-28 Taylor Brockman <brockman@jonx.org>
+
+$ = Command Line Activity
+* = UI Activity
+
+The goal of this document is to walk a new developer to the project
+through checking out his CVS source tree, setting up the Eclipse project,
+and getting the code to run in debug mode for the first time.
+
+----------------------------------------------------------------------------
+
+1. Set up your filesystem.
+
+I always like to use $projectname/sandbox/ for my cvs or svn checkouts.
+
+$ cd ~
+$ mkdir -p iwp/sandbox
+$ cd !$
+
+           - - - - - - -   - - - - - - -   - - - - - - - 
+
+
+2. CVS checkout from Sourceforge
+
+First you do a fresh checkout, and then you run an update and tell
+it to prune empty directories. This second step is highly recommended
+as the CVS tree has changed a lot over time, and there is no way to
+remove a directory from CVS once it's created.
+
+$ cd ~/iwp/sandbox
+$ cvs -dusername@cvs.sourceforge.net:/cvsroot/iwp checkout -A .
+$ cvs -q update -dP
+
+(note: you can get password-less ssh working by generating an 
+ ssh keypair, and posting your id.pub to sourceforge via the
+ user account page. Look in the sourceforge help section for details).
+
+           - - - - - - -   - - - - - - -   - - - - - - - 
+
+
+3. Try an ant command line build
+
+$ ant clean dist
+
+You will need to make sure that ant is in your unix path:
+  $ which ant
+  /usr/java/apache-ant-1.6.5/bin/ant
+
+And probably java too:
+  $ which java
+  /usr/java/jdk1.5.0_06/bin/java
+
+
+(Note: The required libraries (external .jar's, like the xml parser,
+and some xml-rpc stuff) are put into the /lib/ path of the cvs
+checkout, making it easy to start a fresh build. We previously required
+developers to install these packages else where in their system, but 
+now they are packaged in the tree).
+
+           - - - - - - -   - - - - - - -   - - - - - - - 
+
+4. Fire up eclipse.
+
+I've installed it in /usr/java/eclipse/. I am running the latest: 3.1.1
+for Linux.
+
+$ /usr/java/eclipse/eclipse
+
+           - - - - - - -   - - - - - - -   - - - - - - - 
+
+5. Create a new Project from an existing ant build file.
+
+* Main UI: MenuBar -> File -> New -> Project
+
+* New Project Dialog: Java Project from Existing Ant Buildfile -> Next
+
+* Ant Build File -> Browse -> Select the build.xml from ~/iwp/sandbox/
+
+(Note: if you started eclipse from ~/iwp/sandbox, then build.xml should
+ be easy to find in the file Browser).
+
+The New java Project dialog should change:
+    Project Name: Interactive Web Physics
+    Select javac declaration to use to define project: 
+         < > "javac" task found in target "compile"
+
+* Click 'Finish'.
+
+A new open project should appear on the Package Explorer on the left of the
+Main UI.
+
+           - - - - - - -   - - - - - - -   - - - - - - - 
+
+6. Create a command to run the Designer w/o any Arguments
+
+* Main UI: Package Explorer -> [Project] Interactive Web Physics ->
+  [Folder] src -> [Package] edu.ncssm.iwp.bin -> Right Click IWP_Designer.
+
+* Run As -> Java Application
+
+This should show some output in the console at the bottom, and launch
+the IWP Designer main menu. Close the resulting window.
+
+* Main UI: Menubar -> Run -> Run
+
+* Run Dialog: java Application -> IWP_Designer
+
+This should have been created when you ran the application. Verify 
+that it is there.
+
+* Run Dialog: IWP_Designer -> Arguments Tab -> 
+   Turn OFF 'Use Default working direcotry' 
+   Click the [File System] button, and choose ~/iwp/sandbox as the 
+    working directory.
+
+* Press [Apply]
+
+
+(Note: The icons in the designer are broken because the .jar path
+  doesnt' match the filesystem path. Haven't decided the best way
+  to fix this yet. brock)
+
+           - - - - - - -   - - - - - - -   - - - - - - - 
+
+7. Create a command to debug the Animator w/ a File Argument
+
+* Main UI: Package Explorer -> [Project] Interactive Web Physics ->
+  [Folder] src -> [Package] edu.ncssm.iwp.bin -> Right Click IWP_Animator.
+
+* Debug As -> Java Application
+
+An empty animator should pop up. 
+
+* Close the Animator.
+
+* Main UI: Menubar -> Run -> Debug
+
+* Debug Dialog: Right Click IWP_Animator -> Duplicate
+
+* [Set] Name: IWP_Animator Acceleration01.iwp
+
+* Click Arguments Tab
+
+* Program Arguments: doc/packagedProblems/acceleration01.iwp
+
+* Set to OFF 'Use default working directory'
+
+* Click [File System] button, Choose ~/iwp/sandbox/
+
+* Press [Apply] To save.
+
+* Make sure IWP_Animator Accelerator01.iwp is Highlighed on the left,
+  and press [Debug]
+
+The Animator will start up in debug mode. When a breakpoint is hit, 
+Eclipse Main UI will change to the Debug Perspective and allow you to
+view variables, the stack, and step through the code line by line.
+
+           - - - - - - -   - - - - - - -   - - - - - - - 
+
+8. Parting Notes
+
+The little 'Bug' and 'Play' icons in the toolbar are useful for restarting
+your application after you have made changes to the code.
+
+Remember that you must 'cvs commit' to put your work back into the
+CVS repository and make it available for other people to work with. 
+We always try to keep the CVS tree working. (Called Trunk Stable development).
+
+
+
+----------------------------------------------------------------------------

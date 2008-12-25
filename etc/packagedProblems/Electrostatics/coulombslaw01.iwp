@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>1.0</start>
+			<stop>1000.0</stop>
+			<change>1.0</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>20.0</xmax>
+			<ymin>-0.15</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>0.01</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.08</xmin>
+			<xmax>0.08</xmax>
+			<ymin>-0.16</ymin>
+			<ymax>0.0</ymax>
+			<xgrid>0.01</xgrid>
+			<ygrid>0.01</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Two balls of equal mass (see Input for value) are suspended from long strings of equal length.  The balls are initially charged to the same value of charge Qo.  You can add charge to each ball in increments of the initial charge by clicking on the step button (>>).  The number by which the charge on each ball is multiplied is listed as an output.  The X- and Y-coordinates of the blue ball are also given as outputs.  Determine the value of the initial charge Qo.  This requires a net force analysis as well as Coulomb's Law.  Once you've determined Qo, check your value by changing the mass to something different.  Calculate what the separation of the balls should be for that mass.  Then check to see if you're right.</text>
+		</description>
+		<input>
+			<name>yo</name>
+			<text>Initial Y-coord</text>
+			<initialValue>-0.15</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>q</name>
+			<text>Charge</text>
+			<initialValue>9.43E-10</initialValue>
+			<units>C</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass of either ball</text>
+			<initialValue>2.0E-5</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>k</name>
+			<text>Force constant</text>
+			<initialValue>9.0E9</initialValue>
+			<units>Nm^2/kg^2</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>n</name>
+			<text>Charge multiplier</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>t</value>
+			</calculator>
+		</output>
+		<output>
+			<name>L</name>
+			<text>Length of string</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>-yo</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>xcube</name>
+			<text>X-coordinate cubed</text>
+			<units>m^3</units>
+			<calculator type="parametric">
+				<value>(k*t*t*q^2*L)/(4*m*9.8)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>F</name>
+			<text>Electric force</text>
+			<units>N</units>
+			<calculator type="parametric">
+				<value>k*t*t*q^2/(4*xcube^(2/3))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>d</name>
+			<text>Separation</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>2*xcube^(1/3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>stringr</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>Qred.xpos</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>yo-xcube^(2/3)/(2*yo)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>stringl</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>Qblue.xpos</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>yo-xcube^(2/3)/(2*yo)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Qred</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.005</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.005</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-xcube^(1/3)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo-xcube^(2/3)/(2*yo)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Qblue</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.005</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.005</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xcube^(1/3)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo-xcube^(2/3)/(2*yo)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>s</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2*xcube^(1/3)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xb</name>
+			<text>X-blue</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Qblue.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>yb</name>
+			<text>Y-blue</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Qblue.ypos</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

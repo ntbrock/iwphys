@@ -1,0 +1,62 @@
+  
+<problem>
+
+   <meta>
+      <author>brockman</author>
+	  <description>description</description>
+   </meta>
+
+   <window>
+      <minX value="-10"/>
+      <maxX value="10"/>
+      <minY value="-10"/>
+      <maxY value="10"/>
+      <gridX value="1"/>
+      <gridY value="1"/>
+   </window>
+
+   <time>
+      <start value="0.0"/>
+      <stop value="10.0"/>
+      <step value="0.1"/>
+      <frameDelayMS value="333"/>
+   </time>
+
+   <bumpers>
+
+   <polyBumper color="#0000ff" mass="24">
+      <motionX initDisp="-5" initVelocity=".3" accel="0.5*t^2" />
+      <motionY initDisp="0" initVelocity=".01" accel="0" />
+      <boundary>
+         <point x="1.0" y="1.0"/>
+         <point x="1.0" y="-1.0"/>
+         <point x="0" y="-1.5"/>
+         <point x="-1.0" y="-1.0"/>
+         <point x="-1.0" y="1.0"/>
+         <point x="0" y="1.5"/>
+      </boundary>
+   </polyBumper>
+
+
+   <polyBumper color="#ff0000" mass="24">
+      <motionX initDisp="5" initVelocity="-.1" accel="0.5*t^2" />
+      <motionY initDisp="0" initVelocity="0" accel="0" />
+      <boundary>
+         <point x="1.0" y="1.0"/>
+         <point x="1.0" y="-1.0"/>
+         <point x="-1.0" y="-1.0"/>
+         <point x="-1.0" y="1.0"/>
+      </boundary>
+   </polyBumper>
+
+
+   </bumpers>
+
+</problem>
+
+<!--
+   <circleBumper color="#ff0000" mass="124" radius="6">
+      <motionX initDisp="0" initVelocity="0" accel="0.5*t^2" />
+      <motionY initDisp="100" initVelocity="0" accel="0" />
+   </circleBumper>
+-->

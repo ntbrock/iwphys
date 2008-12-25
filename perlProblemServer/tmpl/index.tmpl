@@ -1,0 +1,41 @@
+
+{tmplImport('header.tmpl');}
+
+<center>
+<table width="90%" border="0" cellpadding="20" cellspacing="0">
+
+<tr>
+<td valign="top">
+
+<a href="{$self}?action=walkthrough"><img src="gfx/WalkthroughIcon.png" alt="IWP: Walkthrough Tutorial" border="0"></a>
+<br>
+<br>
+<br>
+
+<a href="{$self}?action=browse"><img src="gfx/BrowseUserProblems.png" alt="IWP: Browse User Problems" border="0"></a>
+<br>
+<br>
+<br>
+
+<a href="{$self}?action=newUser"><img src="gfx/NewUserRegistration.png" alt="IWP: New User Registration" border="0"></a>
+<br>
+<br>
+<br>
+
+<a href="{$self}?action=loginPrompt"><img src="gfx/UserLogin.png" alt="IWP: Existing User Login" border="0"></a>
+<br>
+<br>
+<br>
+
+</td>
+<td valign="top">
+
+{tmplImport('../content/frontPageBlock.html');}
+
+</td>
+</tr>
+</table>
+</center>
+
+{tmplImport('footer.tmpl')}
+

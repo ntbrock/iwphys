@@ -1,0 +1,41 @@
+IWP (Interactive Web Physics)  Version 4. Release Date: 2008-Sep-15
+
+Function Reference
+
+The following functions all take one parameter and can be used in your problem.
+
+  sign
+  exp
+  toRadians
+  toDegrees
+  step
+  cot
+  sec
+  csc
+  tan
+  sqrt
+  sin
+  cos
+  ln
+  atan
+  asin
+  acos
+  abs
+  modtwo
+  random
+  rand
+  signum
+  
+	
+The following constants are also available:
+
+  e
+  pi
+  	
+Note, you cannot name your own objects with any of the function or constants names defined by IWP.
+
+To see all of the functions in action, Load the Function Reference Pacakged problem:
+
+Designer : File -> Open -> Packaged Problems -> Function Reference -> TEST_matchFunctions.iwp
+
+

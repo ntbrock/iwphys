@@ -1,0 +1,40 @@
+
+2007-Jan-29 Brockman
+I am enabling the ordered object calculation
+
+= Symbol extractor in Mequation works
+= Convert the Euler_Calculator_designer to use the new MEquation parser.
+= Write a test for the symbol extractor
+= In the GWindow_Animator, actually rejumble the objects
+= Make all calculations look at the current tick. Dont' travel back one. Time test works.
+= Try out all the packaged problems - some hav emissing variables.
+
+= Make the canvas bigger by default
+
+
+= Make DObjcet an interface in plugin: IWPObject
+= Make a DObjectFactory and a DObject list designableObjects - and have this read from
+   the plugin list.
+  
+= Create an IPWObjectFactory visual testing harness.
+
+= Clean up the time input widget on the Animator.
+
+= Ending time doesn't appear to be honored now. 
+
+= create a new object; Floating STring, plus document descriing hwo to create a new object.
+
+= The animation ordering now needs to be independent of the calculation ordering. I may geto
+bject overlapping problems now.
+
+--------------------
+
+* File -> Save should re-use load format and not have a sub-menu.
+* File -> Save should should pre-display the current filename in the dialog.
+
+* Create a new object: Plot Overlay, Function overlay.
+
+
+
+
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+	<settings>
+		<label>IWP_Wave_Demo</label>
+		<root_path>\</root_path>
+		<output_path>classes\</output_path>
+		<source_path>src\</source_path>
+		<jdkprofile_ref>JDK version 1.5.0_04</jdkprofile_ref>
+		<compiler_ref>&lt;Default&gt;</compiler_ref>
+		<ant_ref/>
+	</settings>
+	<ant_events/>
+	<run_items/>
+	<runtimes>
+		<runtime>
+			<label>&lt;Default&gt;</label>
+			<application_ref/>
+			<applet_ref/>
+			<debugger_ref/>
+			<param/>
+			<run>classes\IWP_Wave_Demo.htm</run>
+		</runtime>
+	</runtimes>
+	<libraries/>
+	<files>
+		<include>
+			<folderitem>
+				<path>classes</path>
+			</folderitem>
+			<folderitem>
+				<path>src</path>
+			</folderitem>
+			<fileitem>
+				<path>classes\IWP_Wave_Demo.htm</path>
+				<folder>classes</folder>
+				<url>classes\IWP_Wave_Demo.htm</url>
+				<browser>true</browser>
+			</fileitem>
+			<fileitem>
+				<path>src\IWP_Wave_Demo.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\SingleWave.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\Wave.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\WaveObject.java</path>
+				<folder>src</folder>
+			</fileitem>
+		</include>
+	</files>
+	<tasks/>
+</project>

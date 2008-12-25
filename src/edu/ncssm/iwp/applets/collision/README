@@ -1,0 +1,26 @@
+Collision applet - IWP Codebase
+Taylor Brockman <brockman@jonx.org>
+January 16, 2003
+
+This is a project to test the efficiency and hew a design for a library-style
+IWP usage. The old codebase was getting too clunky w/ a heavy GUI that nobody
+really knew how to design + maintain. We decided (like good programmers) to
+reuse our code in a more efficient manner: strip out the 'good stuff' and 
+make it available for re-use in a library for other physics software and
+applets.
+
+The goal is to steer the development pace of any future Physics software
+that our group may produce towards a modular, student-oriented speed. We
+need short, concise projects that are educational, modular, and worthwhile
+for all parties involved.
+
+This code experiement is a test-run of this concept. I am going to dust off
+my textbooks and write a 2 Dimensional collision applet from scratch, re-using
+as much of IWP as I can. Brian Sweeney, my partner in crime, is going to 
+produce a different applet: a 2 Dimensional multi-function plotter, but take
+his own, independent approach. Both of us will explore this concept then
+reunite our efforts to negotiate a clean, elegant design of the soon-to-be
+iwp library code.
+
+
+

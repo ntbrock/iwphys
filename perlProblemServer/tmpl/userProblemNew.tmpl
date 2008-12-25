@@ -1,0 +1,24 @@
+
+{tmplImport('header.tmpl');}
+
+<br>
+
+<br>
+<br>
+
+<center><applet code="edu.ncssm.iwp.bin.IWP_Applet" archive="{$selfPath}/content/iwp_applet.jar" width="800" height="600">
+
+<param name="ps_username" value="{$user->{username}}">
+<param name="ps_password" value="{$user->{password}}">
+<param name="ps_host" value="{$rpcHost}">
+
+</applet></center>
+
+<br><br>
+
+
+<center>(<i>The Java Applet will create resizable popup windows on your desktop</i>)</center><br>
+<br>
+
+
+{tmplImport('footer.tmpl')}

@@ -1,0 +1,11 @@
+/* AUTOMATICALLY GENERATED ON Sat Oct 04 14:54:48 EDT 2003*/
+/* DO NOT EDIT */
+
+grant {
+  permission java.util.PropertyPermission "org.apache.xmlrpc.TypeFactory", "read";
+};
+
+grant signedBy "Brock",  codeBase "file:iwp_applet.jar" {
+  permission java.util.PropertyPermission "org.apache.xmlrpc.TypeFactory", "read", signedBy "Brock";
+};
+

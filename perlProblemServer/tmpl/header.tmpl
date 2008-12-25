@@ -1,0 +1,63 @@
+<html>
+
+<head>
+  <title>Interactive Web Physics { $title ne '<blank>' ? ": $title" : '' }</title>
+
+<style type="text/css">
+<!--
+body \{ margin: 0px;\} 
+
+-->
+</style>
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#333333" vlink="#333333">
+
+<table border="0" width="100%" cellpadding="4" cellspacing="0">
+<tr bgcolor="{$color->{table}}">
+
+<td valign="center" align="left"><a href="{$self}"><img src="{$selfPath}/gfx/IWP_Banner.png" alt="Interactive Web Physics: A physics simulation tool for teachers and students" border="0"></a></td>
+<td align="center"><nobr><b>{ $title ne '<blank>' ? "$title" : '' }</b></nobr></td>
+<td align="right">
+
+	<font size="-1">
+	<nobr>
+
+
+{
+
+
+
+	if ( $user ) {
+		$OUT .= "<b><a href=\"$self?action=userHome\">$user->{username}</a></b>&nbsp;&nbsp;";
+		$OUT .= "[<a href=\"$self?action=userHome\">My Problems</a>]&nbsp;&nbsp;";
+		$OUT .= "[<a href=\"$self?action=logout\">Logout</a>]&nbsp;&nbsp;";
+	} else { 
+		$OUT .= "[<a href=\"$self?action=loginPrompt\">User Login</a>]&nbsp;&nbsp;";
+		$OUT .= "[<a href=\"$self?action=newUser\">New User Registration</a>]&nbsp;&nbsp;";
+	}	
+
+}
+	<a href="{$self}?action=help"><b>HELP</b></a> &nbsp;
+
+	</nobr>
+	</font>
+
+</td>
+
+</tr>
+
+<!--
+<tr bgcolor="#ffffff">
+  <td colspan="3" align="left"><font size="-1"><i>Interactive Web Physics: Problem Server - 06.12.04 Release</i></font> &nbsp;</td>
+</tr>
+-->
+
+<tr>
+<td colspan="3">
+
+{if ($error)  {
+	$OUT.="<center><font color=\"red\" size=\"+1\"><b>ERROR: $error</b></font></center><br>";
+}}
+
+<!-- end header.tmpl -->

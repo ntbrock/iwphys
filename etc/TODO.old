@@ -1,0 +1,102 @@
+
+
+
+06/24/01 - Strugging w/ init/reset functions. COULD have a think(0) iteration
+           to do time == 0 priming of all objects. still undecided.
+
+           ok.. i've passed some changes through. now, the toplevel stuff
+           (objects / animators) now get initial problem states when 
+           resetting / initting.
+
+           // BUG: The Input widgets aren't displaying. FIXED
+           BUG: The Reset button now DOES draw the new input fields,
+                and the input fields need some gui-spacing working (beautify)
+           BUG: The GWindow_Animator_Inputs needs a reset button to  
+                set the values that the users have entered.... the 
+                Input_Animators then need to take their' object's names,
+                so they can set vars (object.value) properly.
+
+           TODO: ProblemManager Menubar interfaces.
+
+
+
+06/23/01 - XML stuff mostly wrapped up.
+           BUG: in the calculators for the Shape width/height. Set to zero's.
+	            this seems to be in the XML Loading. 
+                HA! Found it. was using 'equation' instaed of 'calculator' in 
+                SAX.
+
+
+06/22/01 - in the middle of SAX decoders (readers). made it all the way
+		   to the DObject_Solid. still need to finish GShape (calc's),
+           and fillin the two path calculators for the Solid object.
+           Then, do the 'author' tag.... and do Writes!
+
+           After that, we should be able to load DProblems out of 
+           .xml files.... and I can finish the work on the designer.
+
+           A tricky part of the designer / animator will be to put
+           all the DProblemManager conduits in place via file menus.
+
+
+
+------------------------------------------------------------------------------
+brockman todo
+------------------------------------------------------------------------------
+
+04/30/01: was working on the Problem designer. need to fully flesh that out.
+          (transpose gui from GAccessor_Designer to DObject_designer). The 
+          next steps after that will be to:
+          1. Rip out all problem-specific info form the Brain,, and have
+             it only deal w/ 'DProblem's
+          2. Make sure all the cascading designer 'gets' work + gui's are 
+             operational...  DProblem <-> DObject <-> ( MCalculator, GShape, etc )
+          The next steps after that will be obvious.. but the system will be
+          mostly reconstructed at that point... going to have the make the
+          animator read DProblem objects.
+
+          could work on:
+            XML serialization
+            Turning the HTTP server into servlets?
+
+04/30/01: ICONS DON'T WORK ANYMORE!
+
+
+
+------------------------------------------------------------------------------
+ OLD TODO
+------------------------------------------------------------------------------
+
+
+[7/24/00] ProblemServer: More user adminstration functionality - delete user
+[7/24/00] ProblemServer: Student / Assignment interface / database?  (low prior)
+[7/24/00] ProblemServer: HTTP image loading + file transfers from the /data/html directory.
+
+[7/24/00] Brain: Replace all of the Remote access stuff w/ DProblem + DProbemClient + ! TEST !. Get it to load problems from the server,, and save them back.
+
+[7/24/00] GraphicsEngine: Outsource the graphic rendering stuff out to the Objects.
+[7/24/00] GraphicsEngine: put the mouse feedback layer over the graphics panel + make a new input type.
+
+[7/24/00] Objects: Move all object-specific listing / control to the 'DObjectRegistry'
+
+[7/24/00] GE: Enhance the space object to create inclined planes, or potentially user definable shapes / graphics
+[7/24/00] GE: Draw lines.
+[7/24/00] GE: Include some stock pictures? (low)
+
+[7/24/00] Be able to graph variables over time.
+[7/24/00] Pendulum problems -- inclusion of angular inputs + processing. BIG CHANGE... have to think about this one and get a good plan in order. Polar coordinate conversion system.
+
+[7/24/00] Vectors on objects ( velocity / acceleration radio buttons ? )
+[7/24/00] Waves Object
+[7/24/00] Doppler Object
+[7/24/00] E/M (Generic? woo hoo!) field objects
+[7/24/00] Point charge object? .. or charge attribute on a solid? mmmmm ,, or a charged solid?
+
+[7/24/00] Optical bench problems. Big changes.
+
+
+
+
+
+				
+

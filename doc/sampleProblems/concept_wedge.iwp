@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.0</xmin>
+			<xmax>60.0</xmax>
+			<ymin>-1.0</ymin>
+			<ymax>60.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</window>
+		<description>
+			<text>Concept_wedge
+
+2004.09.18: iwpmtg
+
+Concept Problem.
+</text>
+		</description>
+		<input>
+			<name>G</name>
+			<text>G</text>
+			<initialValue>9.8</initialValue>
+			<units>m/s^2</units>
+		</input>
+		<input>
+			<name>WedgeAngle</name>
+			<text>Wedge Angle</text>
+			<initialValue>20.0</initialValue>
+			<units>Degrees</units>
+		</input>
+		<input>
+			<name>WedgeWidth</name>
+			<text>Wedge Width</text>
+			<initialValue>8.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>BlockWidth</name>
+			<text>Block Width</text>
+			<initialValue>1.0</initialValue>
+			<units>m</units>
+		</input>
+		<solid>
+			<name>Wedge</name>
+			<shape type="line">
+				<width>
+					<calculator type="parametric">
+						<value>-1*WedgeWidth.value</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>WedgeWidth.value*tan(toRadians(WedgeAngle.value))</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="true" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>WedgeWidth.value</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Block</name>
+			<shape type="polygon">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>BlockWidth*cos(toRadians(WedgeAngle))</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-BlockWidth*sin(toRadians(WedgeAngle))</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>(BlockWidth*cos(toRadians(WedgeAngle))+BlockWidth*sin(toRadians(WedgeAngle)))</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>(BlockWidth*cos(toRadians(WedgeAngle))-BlockWidth*sin(toRadians(WedgeAngle)))</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>BlockWidth*sin(toRadians(WedgeAngle))</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>BlockWidth*cos(toRadians(WedgeAngle))</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="true" xAccel="false" xVel="true" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>0</velocity>
+					<acceleration>G*sin(toRadians(WedgeAngle.value))*cos(toRadians(WedgeAngle.value))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>WedgeWidth.value*tan(toRadians(WedgeAngle.value))</displacement>
+					<velocity>0</velocity>
+					<acceleration>-G*sin(toRadians(WedgeAngle.value))*sin(toRadians(WedgeAngle.value))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

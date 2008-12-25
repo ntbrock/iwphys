@@ -1,0 +1,18 @@
+2006-Apr-25 brockman
+
+There are two distribution packages that can be built:
+
+	iwp.jar  (ant target 'jar')
+
+	iwpStudent.jar    (ant target 'jarStudent')
+
+
+Both of these jars are signed by our own keystore. They are basically
+the same thing except they have different manifest files.
+
+The iwp.jar is the proper file to drop into the webserver to run 
+the applets.
+
+This is an extra comment.
+
+This is a second comment.

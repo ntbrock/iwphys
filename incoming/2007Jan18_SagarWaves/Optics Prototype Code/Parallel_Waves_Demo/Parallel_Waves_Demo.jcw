@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workspace>
+	<settings>
+		<label>Parallel_Waves_Demo</label>
+	</settings>
+	<users>
+		<user>
+			<path>Parallel_Waves_Demo.jcu</path>
+		</user>
+	</users>
+	<projects>
+		<project>
+			<path>Parallel_Waves_Demo.jcp</path>
+		</project>
+	</projects>
+</workspace>

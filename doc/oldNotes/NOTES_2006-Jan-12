@@ -1,0 +1,66 @@
+
+20:44 iwp session @ sunset.
+
+Need to replace minml w/ some jaxb generated code. That would be hot.
+
+Replace BBrain w/ a singleton.
+
+GAccessor_designer should be abstract. Apply the abstract concept to
+the other designers?
+
+What about change it over to an dinterface implementation?
+
+
+* Clean out system.err's.
+
+
+* Run in debug mode and watch what goes on.
+
+
+Does jaxb allow you to render xml back out?
+
+I think XmlNode is my xml parser. Need to rip him out too.
+
+
+21:24 awesome. I'm down to just xml deprecation warnings.
+
+21:47 Wow, this is going to take a long time to do. 
+
+
+
+Fix this:
+DObject_Description.java:
+
+	/* DEPRECATED */
+	public DObject_designer getObject_designer ( ) { 
+		System.err.println ( "[DObject_Description] getObject_designer call is DEPRECATED!");
+		return new DObject_Description_designer ( this );
+	}
+
+	public DObject_designer getDesigner ( ) {
+		return new DObject_Description_designer ( this );
+	}
+
+
+
+* Remove constants.
+
+21:53 going through the codebase and ripping out all the System.err's.
+
+
+21:57 still a lot of systm.err here.
+[brockman@sin sandbox]$ egrep -rni System.err * |grep -v \~ |wc -l
+538
+
+* Clean up the bin dir.
+
+22:33 almost have all system.err's out. what about system.out?
+
+22:39 all of the errors + warnings are out.
+
+* look at System.out's.
+
+$ egrep -rni System.out * |grep -v \~ |wc -l
+221
+
+

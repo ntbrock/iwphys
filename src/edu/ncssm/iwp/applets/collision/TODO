@@ -1,0 +1,12 @@
+TODO
+
+
+- create the GridGraphics object
+- start at the Collision.start() method + go from there
+- get the applet running
+
+
+- need GridGraphic overlay objects - graphics, text boxes, input objects,
+                                      graphs (Variable -vs - time)
+
+

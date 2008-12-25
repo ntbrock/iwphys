@@ -1,0 +1,534 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>0.14</stop>
+			<change>0.01</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>0.1</xmax>
+			<ymin>-0.1</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>0.01</xgrid>
+			<ygrid>0.01</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.1</xmin>
+			<xmax>0.1</xmax>
+			<ymin>-0.1</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>0.02</xgrid>
+			<ygrid>0.02</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A red ball is connected to a spring which is fixed at the left side of the screen. The ball is initially at the unstretched/uncompressed position of the spring, x = 0. A blue ball, soon to appear, has the same charge as the red ball.  
+
+In order to bring the blue ball into the picture, click the step button (>>) once.  You'll see the blue ball attached to a horizontal insulating handle.The red ball is forced away from its initial position and compresses the spring due to electrostatic force of the blue ball. Click the step button once again to move the blue ball to the left. The spring compresses more.
+
+The X-coordinates of the balls are given as outputs. These enable one to determine the separation of the balls as well as the displacement of the red ball from equillibrium. Both of these are related to the electrostatic force that either ball exerts on the other.
+
+Click on the step (>>) button to move the blue ball toward the left in increments of 0.01 m and view the corresponding position of the red ball. (Don't use the play button, >, as this may give incorrect results.)  
+
+Something to think about:  How does the separation of the balls change as the blue ball moves to the left? Why does this make sense (based on the forces acting on the red ball)?</text>
+		</description>
+		<input>
+			<name>d1</name>
+			<text>Initial position of right ball</text>
+			<initialValue>0.08</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>k</name>
+			<text>Electrostatic constant</text>
+			<initialValue>8.99E9</initialValue>
+			<units>Nm²/C²</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>c</name>
+			<text>Spring Constant</text>
+			<initialValue>0.2</initialValue>
+			<units>N/m</units>
+		</input>
+		<input>
+			<name>q1</name>
+			<text>Q-right</text>
+			<initialValue>5.0E-8</initialValue>
+			<units>C</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>q2</name>
+			<text>Q-left</text>
+			<initialValue>5.0E-8</initialValue>
+			<units>C</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>h</name>
+			<text>Spring height</text>
+			<initialValue>0.03</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>Rod</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.2*step(t)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.010</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(d1+.1-t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>QR</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(d1-t)*step(t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>QL</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>d2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>a0</name>
+			<text>Constant</text>
+			<units>m^3</units>
+			<calculator type="parametric">
+				<value>-step(t)*k*q1*q2/c</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a1</name>
+			<text>a1</text>
+			<units>m²</units>
+			<calculator type="parametric">
+				<value>(d1-t)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a2</name>
+			<text>a2</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(d1-t)*2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>Q</name>
+			<text>Q</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(3*a1-a2^2)/9</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>R</name>
+			<text>R</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(9*a2*a1-27*a0-2*a2^3)/54</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>D</name>
+			<text>D</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>Q^3+R^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>S</name>
+			<text>S</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(R+sqrt(D))^(1/3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>T</name>
+			<text>T</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(R-sqrt(D))^(1/3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>d2</name>
+			<text>X-coord of Q-red</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>a2/3-S-T</value>
+			</calculator>
+		</output>
+		<output>
+			<name>xr</name>
+			<text>X-coord. of Q-blue</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>QR.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>r</name>
+			<text>Separation</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>xr-d2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>p</name>
+			<text>Spring pitch</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(d2+0.1)/6</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>line1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>p/2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>h/2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.1</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>p</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-h</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.1+p/2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0+h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line3</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>p</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>h</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.1+3*p/2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line4</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>p</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-h</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.1+5*p/2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line5</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>p</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>h</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.1+7*p/2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line6</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>p</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-h</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.1+9*p/2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line7</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>p/2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>h/2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.1+11*p/2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

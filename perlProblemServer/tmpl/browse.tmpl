@@ -1,0 +1,29 @@
+
+{tmplImport('header.tmpl');}
+
+<br>
+
+<table border="0" cellpadding="3" cellspacing="0" width="95%" align="center">
+
+<tr><td colspan="3">Path: <b>{$path}</b></td></tr>
+
+<tr bgcolor="#cccccc"><th>Filename</th><th>Author</th><th>Description</th></tr>
+
+{foreach my $dir ( @{$subdirs} ) {
+
+	$OUT .= "<tr><td colspan=\"1\"><nobr><a href=\"$self$dir->{relativePath}\"><img src=\"/pps/gfx/smallFolder.png\" Alt=\"Folder\" border=\"0\" align=\"absmiddle\">[ $dir->{filename} ]</a></nobr></td><td colspan=\"2\">&nbsp;</td></tr>\n";
+}}
+
+
+{foreach my $file ( @{$files} ) {
+	$OUT .= "<tr><td valign=\"top\"><a href=\"$self$file->{relativePath}\">$file->{filename}</a></td>";
+	$OUT .= "<td valign=\"top\" align=\"center\">&nbsp;&nbsp;$file->{username}&nbsp;&nbsp;</td>";
+	$OUT .= "<td valign=\"top\" width=\"100%\">$file->{description}</td></tr>\n";
+}}
+
+</table>
+
+<br><br>
+
+{tmplImport('footer.tmpl')}
+

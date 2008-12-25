@@ -1,0 +1,32 @@
+
+{tmplImport('header.tmpl')}
+
+<br>
+
+<center>
+
+<form action="{$self}" method="POST">
+<input type="hidden" name="action" value="userDeleteSubmit">
+<input type="hidden" name="filename" value="{$filename}">
+<input type="hidden" name="fullFilename" value="{$fullFilename}">
+
+
+<table bgcolor="#cccccc" width="500" cellpadding="8" cellspacing="0">
+
+<tr>
+<td algn="center">
+
+Delete File: <b>{$fullFilename}</b><br>
+
+<br>
+<input name="YesNo" type="submit" value="Yes"> &nbsp; <input type="submit" value="No">
+
+</td>
+</tr>
+</table>
+
+
+</form>
+
+
+{tmplImport('footer.tmpl')}

@@ -1,0 +1,21 @@
+
+{tmplImport('header.tmpl');}
+
+<br>
+<center>Filename: <b>{$filename}</b></center><br>
+
+<br>
+
+<center><applet code="edu.ncssm.iwp.bin.IWP_Applet" archive="{$selfPath}/content/iwp_applet.jar" width="400" height="200">
+<param name="problem" value="{$url =~ s/ /%20/g; $url}">
+<param name="student" value="true">
+</applet></center>
+
+<br><br>
+
+<center>(<i>The Java Applet will create resizable popup windows on your desktop</i>)</center><br>
+<br>
+
+{tmplImport('footer.tmpl')}
+
+

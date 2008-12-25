@@ -1,0 +1,43 @@
+
+{tmplImport('header.tmpl')}
+
+<br>
+
+<form action="{$self}" method="POST">
+
+<table bgcolor="#cccccc" align="center" width="400" border="0" cellspacing="0" cellpadding="8">
+
+<input type="hidden" name="action" value="authenticate">
+<input type="hidden" name="destinationDispatch" value="{$destinationDispatch}">
+
+<tr bgcolor="#999999">
+  <td colspan="2" align="center"><b>IWP ProblemServer Login</b></td>
+</tr>
+
+<tr>
+ <td><nobr>Email Address:</nobr></td>
+ <td><input name="username" type="text" size="35"></td>
+</tr>
+
+<tr>
+ <td>Password:</td>
+ <td><input name="password" type="password" size="25"></td>
+</tr>
+
+<tr>
+<td align="center" colspan="2">
+<input type="submit" value="Login">
+</td>
+</tr>
+
+</table>
+
+</form>
+
+<br>
+
+<center>Don't have an account? &nbsp; <a href="{$self}?action=newUser">Create Your User Account Here</a>.</center>
+<br>
+<br>
+
+{tmplImport('footer.tmpl')}

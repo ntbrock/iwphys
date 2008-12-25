@@ -1,0 +1,32 @@
+{tmplImport('header.tmpl');}
+
+<br>
+
+<center>
+<table bgcolor="#cccccc" cellpadding=8 cellspacing=0 border=0 width="400">
+
+<tr bgcolor="#999999"><td align="center"><b>Account Successfully Created</b></td></tr>
+
+<tr><td>Login / Email: <b>{$username}</b></td></tr>
+<tr><td>Organization: <b>{$organization}</b></td></tr>
+<tr><td>Real Name: <b>{$realName}</b></td></tr>
+
+</table>
+
+<br>
+
+<form action="{$self}" method="POST">
+
+<input type="hidden" name="action" value="authenticate">
+<input type="hidden" name="username" value="{$username}">
+<input type="hidden" name="password" value="{$password}">
+
+<input type="submit" value="Login Now">
+
+</form>
+
+
+<br>
+
+{tmplImport('footer.tmpl')}
+

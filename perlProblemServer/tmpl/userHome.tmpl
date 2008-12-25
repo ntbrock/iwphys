@@ -1,0 +1,65 @@
+
+
+{tmplImport('header.tmpl');}
+
+<table border="0" cellpadding="20" cellspacing="0" align="center">
+<tr>
+  <td>Username: <b>{$user->{username}}</b></td>
+  <td>Real Name: <b>{$user->{realName}}</b></td>
+</tr>
+</table>
+
+
+<!-- Toolbar Block -->
+
+<center>
+<form action="{$self}" method="GET">
+<input type="hidden" name="action" value="userProblemNew">
+
+<input type="submit" value="Design New Problem">
+
+</form>
+</center>
+
+
+
+<table border="1" cellpadding="3" cellspacing="0" width="90%" align="center">
+<tr bgcolor="#cccccc"><th>Filename</th><th>Last Modified</th><th>Author</th><th>Description</th><th>Rename</th><th>Delete</th></tr>
+
+{foreach my $dir ( @{$subdirs} ) {
+
+	$OUT .= "<tr><td colspan=\"1\"><nobr><a href=\"$self$dir->{relativePath}\">[ $dir->{filename} ]</a></nobr></td><td colspan=\"5\">&nbsp;</td></tr>\n";
+}}
+
+
+{foreach my $file ( @{$files} ) {
+	$OUT .= "<tr><td valign=\"top\"><a href=\"$self?action=userProblemDesign&filename=$file->{relativePath}\">$file->{filename}</a></td>";
+	$OUT .= "<td valign=\"top\" align=\"center\"><nobr>$file->{lastModified}</nobr></td>";
+	$OUT .= "<td valign=\"top\" align=\"center\">$file->{username}</td>";
+	$OUT .= "<td valign=\"top\" width=\"100%\">$file->{description}</td>\n";
+	$OUT .= "<td valign=\"top\" align=\"center\"><a href=\"$self?action=userRename&filename=$file->{relativePath}\">Rename</a></td>\n";
+	$OUT .= "<td valign=\"top\" align=\"center\"><a href=\"$self?action=userDelete&filename=$file->{relativePath}\">Delete</a></td></tr>\n";
+
+}}
+
+</table>
+
+<br><br>
+
+<!-- Toolbar Block -->
+
+<center>
+<form action="{$self}" method="GET">
+<input type="hidden" name="action" value="userProblemNew">
+
+<input type="submit" value="Design New Problem">
+
+</form>
+</center>
+
+
+<br>
+
+{tmplImport('footer.tmpl')}
+
+

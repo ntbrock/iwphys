@@ -1,0 +1,19 @@
+Interactive Web Physics
+2006-Aug-31 brockman
+
+2007-Jan-18 brockman: Update with notes for new key because old one expired.
+
+Creating a self-signed certificate for signing jars. This gives more access to 
+the applet, allowing use of problemserver and local file storage.
+
+
+$ keytool -genkey -validity 720 -keystore ./etc/jarsign.keystore -dname "CN=N. Taylor Brockman,OU=Software,O=Interactive Web Physics iwphys.org,L=Durham,ST=NC,C=US" -alias key -storepass iwpkey
+
+$ keytool -selfcert -keystore ./etc/jarsign.keystore -validity 720 -alias key -storepass iwpkey
+
+$ and dist
+
+
+2007-Jan-17 brockman: I had to flip the keystore to Binary CVS Storage to get it to 
+work under windows. I also had to to this with a Jar file.
+

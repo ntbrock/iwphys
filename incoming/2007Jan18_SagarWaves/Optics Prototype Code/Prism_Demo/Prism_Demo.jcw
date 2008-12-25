@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workspace>
+	<settings>
+		<label>Prism_Demo</label>
+	</settings>
+	<users>
+		<user>
+			<path>Prism_Demo.jcu</path>
+		</user>
+	</users>
+	<projects>
+		<project>
+			<path>Prism_Demo.jcp</path>
+		</project>
+	</projects>
+</workspace>

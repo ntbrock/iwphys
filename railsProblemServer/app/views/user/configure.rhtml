@@ -1,0 +1,26 @@
+<h1>Configure the User System</h1>
+
+<% if flash['notice'] %>
+  <p><%= flash['notice'] %></p>
+<% end %>
+
+<%= error_messages_for 'user_configuration' %>
+<%= form_tag :action => 'configure' %>
+  <table>
+    <tr>
+      <th><label for="user_configuration_email_confirmation">
+        Email confirmation:
+      </label></th>
+      <td>
+        <%= check_box 'user_configuration', 'email_confirmation' %>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="user_configuration_email_sender">
+        Email Sender:
+      </label></th>
+      <td><%= text_field 'user_configuration', 'email_sender' %></td>
+    </tr>
+  </table>
+  <%= submit_tag "Save" %>
+<%= end_form_tag %>
