@@ -23,7 +23,7 @@ public class MagicImageIconLoader
     		MediaTracker m = new MediaTracker(new JPanel());
 			Image img = Toolkit.getDefaultToolkit().createImage(file.readBytes());
 			
-			img = img.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+			//img = img.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 			
 			m.addImage(img,0);
 			m.waitForAll();
