@@ -572,7 +572,9 @@ public class DProblem extends DEntity
     	// This is the big reset for tick order.
     	this.objectsInTickOrder = new Vector();
     	for ( Iterator i = newObjects.iterator(); i.hasNext(); ) { 
+
     		IWPObject object = (IWPObject) i.next();
+			//System.err.println("[DProblem] ticking objecT: " + object.getName() ) ;
     		
     		// Instead of adding via addObject, add via objectsInTickOrder.
     		this.objectsInTickOrder.add(object);

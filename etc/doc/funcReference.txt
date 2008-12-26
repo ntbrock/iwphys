@@ -31,6 +31,16 @@ The following constants are also available:
 
   e
   pi
+
+
+The following time variables are also available:
+
+  t, curTime
+  delta_t, deltaTime
+  startTime
+  stopTime, endTime
+
+
   	
 Note, you cannot name your own objects with any of the function or constants names defined by IWP.
 

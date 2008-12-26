@@ -37,6 +37,7 @@ public interface MVariables
 	public static String CURTIME = "curTime";
 	public static String STARTTIME = "startTime";
 	public static String ENDTIME = "endTime";
+	public static String STOPTIME = "stopTime";
 	public static String DELTATIME = "deltaTime";
 	
 	// DObject_Output

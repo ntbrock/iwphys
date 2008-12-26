@@ -172,8 +172,15 @@ public class DObject_Time implements IWPXmlable, IWPObject, IWPCalculated, IWPAn
         state.vars().setAtCurrentTick( getName() + "."+MVariables.CURTIME, curTimeDouble  );
         state.vars().setAtCurrentTick( getName() + "."+MVariables.DELTATIME, deltaTimeDouble );
         state.vars().setAtCurrentTick( getName() + "."+MVariables.STARTTIME, startTime.doubleValue() );
+        state.vars().setAtCurrentTick( getName() + "."+MVariables.STOPTIME,   stopTime.doubleValue() );
         state.vars().setAtCurrentTick( getName() + "."+MVariables.ENDTIME,   stopTime.doubleValue() );
         
+        state.vars().setAtCurrentTick( MVariables.CURTIME, curTimeDouble  );
+        state.vars().setAtCurrentTick( MVariables.DELTATIME, deltaTimeDouble );
+        state.vars().setAtCurrentTick( MVariables.STARTTIME, startTime.doubleValue() );
+        state.vars().setAtCurrentTick( MVariables.STOPTIME,   stopTime.doubleValue() );
+        state.vars().setAtCurrentTick( MVariables.ENDTIME,   stopTime.doubleValue() );
+
         // set these at the top for convenience and v2 compliance. Node that I am dropping support for delta_x in V3.
         state.vars().setAtCurrentTick( MVariables.T,       curTimeDouble );
         state.vars().setAtCurrentTick( MVariables.DELTA_T, deltaTimeDouble );
@@ -189,10 +196,20 @@ public class DObject_Time implements IWPXmlable, IWPObject, IWPCalculated, IWPAn
     {
         ArrayList out = new ArrayList(10);
 
+
+
         out.add(getName() + "." + MVariables.CURTIME );
         out.add(getName() + "." + MVariables.STARTTIME );
         out.add(getName() + "." + MVariables.ENDTIME );
+		out.add(getName() + "." + MVariables.STOPTIME );
         out.add(getName() + "." + MVariables.DELTATIME );
+
+        out.add( MVariables.CURTIME );
+        out.add( MVariables.STARTTIME );
+        out.add( MVariables.ENDTIME );
+		out.add( MVariables.STOPTIME );
+        out.add( MVariables.DELTATIME );
+
         out.add( MVariables.T );
         out.add( MVariables.DELTA_T );
 

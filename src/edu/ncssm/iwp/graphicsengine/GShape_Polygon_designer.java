@@ -17,7 +17,7 @@ import java.awt.*;
 
 public class GShape_Polygon_designer extends JPanel implements GShape_designer_interface
 {
-	public static final int INPUT_LENGTH = 18;
+	public static final int INPUT_LENGTH = 22;
 	public static final boolean INPUT_MULTILINE = false;
 	
 	GShape_designer parentContainer;

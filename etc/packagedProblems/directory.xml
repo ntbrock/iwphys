@@ -650,6 +650,11 @@
 	</category>
 	<category>
 		<name>TEST Developer Test</name>
+
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_timeVariables.iwp</filename>
+			<summary>Shows the use of 'startTime', 'stopTime', and 't'.</summary>
+		</problemLink>
 		<problemLink>
 			<filename>/packagedProblems/TEST Developer Test/TEST_attachedVectors.iwp</filename>
 			<summary>This problem tests the attached vector rendering capabilities.</summary>
