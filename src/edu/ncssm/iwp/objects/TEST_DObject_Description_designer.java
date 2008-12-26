@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import edu.ncssm.iwp.util.*;
-
+import edu.ncssm.iwp.problemdb.*;
 
 public class TEST_DObject_Description_designer extends JPanel implements ActionListener
 {
@@ -23,9 +23,8 @@ public class TEST_DObject_Description_designer extends JPanel implements ActionL
 
 	public TEST_DObject_Description_designer ( )
 	{
-
 		oObject = new DObject_Description (  );
-		oDesigner = (DObject_designer) oObject.getDesigner (  );
+		oDesigner = (DObject_designer) oObject.getDesigner ( );
 
 		oGetButton = new JButton ( "DObject_Description_designer.get ( )" );
 		oGetButton.addActionListener ( this );

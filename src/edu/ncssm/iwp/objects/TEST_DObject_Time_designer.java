@@ -10,6 +10,7 @@ package edu.ncssm.iwp.objects;
 import javax.swing.*;
 import edu.ncssm.iwp.util.IWPLog;
 import java.awt.event.*;
+import edu.ncssm.iwp.problemdb.*;
 
 public class TEST_DObject_Time_designer extends JPanel implements ActionListener
 {
@@ -20,9 +21,8 @@ public class TEST_DObject_Time_designer extends JPanel implements ActionListener
 
     public TEST_DObject_Time_designer ( )
     {
-
         oObject = new DObject_Time (  );
-        oDesigner = (DObject_designer) oObject.getDesigner (  );
+        oDesigner = (DObject_designer) oObject.getDesigner ( );
 
         oGetButton = new JButton ( "DObject_Time_designer.get ( )" );
         oGetButton.addActionListener ( this );

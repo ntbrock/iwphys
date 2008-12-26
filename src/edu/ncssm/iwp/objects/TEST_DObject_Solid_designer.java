@@ -13,6 +13,7 @@ import edu.ncssm.iwp.util.IWPLog;
 
 import java.awt.*;
 import java.awt.event.*;
+import edu.ncssm.iwp.problemdb.*;
 
 
 public class TEST_DObject_Solid_designer extends JPanel implements ActionListener
@@ -24,9 +25,8 @@ public class TEST_DObject_Solid_designer extends JPanel implements ActionListene
 
 	public TEST_DObject_Solid_designer ( )
 	{
-
 		oObject = new DObject_Solid (  );
-		oDesigner = (DObject_designer) oObject.getDesigner (  );
+		oDesigner = (DObject_designer) oObject.getDesigner ( );
 
 		oGetButton = new JButton ( "DObject_Solid_designer.get ( )" );
 		oGetButton.addActionListener ( this );

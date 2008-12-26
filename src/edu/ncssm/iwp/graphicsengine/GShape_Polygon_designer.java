@@ -15,7 +15,14 @@ import javax.swing.*;
 import java.util.*;
 import java.awt.*;
 
-public class GShape_Polygon_designer extends JPanel implements GShape_designer_interface {
+public class GShape_Polygon_designer extends JPanel implements GShape_designer_interface
+{
+	public static final int INPUT_LENGTH = 18;
+	public static final boolean INPUT_MULTILINE = false;
+	
+	GShape_designer parentContainer;
+	
+	JPanel panelForPoints;
 
     Vector xInputs;
     Vector yInputs;
@@ -24,12 +31,13 @@ public class GShape_Polygon_designer extends JPanel implements GShape_designer_i
     
     public static final int INIT_PTS=3;
 
-    public GShape_Polygon_designer(GShape in) {
-	shape=in;
-	xInputs=new Vector(3,1);
-	yInputs=new Vector(3,1);
-	children=new Vector(INIT_PTS,1);
-	if(in instanceof GShape_Polygon) {
+    public GShape_Polygon_designer(GShape_designer parent, GShape in) {
+		this.parentContainer = parent;
+		shape=in;
+		xInputs=new Vector(3,1);
+		yInputs=new Vector(3,1);
+		children=new Vector(INIT_PTS,1);
+	if (in instanceof GShape_Polygon) {
 	    xInputs=((GShape_Polygon)in).getXPointCalcs();
 	    yInputs=((GShape_Polygon)in).getYPointCalcs();
 	} else {
@@ -50,25 +58,44 @@ public class GShape_Polygon_designer extends JPanel implements GShape_designer_i
     protected void init() {
 	children=new Vector(xInputs.size(),1);
 	for(int i=0;i<xInputs.size();i++) {
-	    children.add(i,new GPolygon_Point( ((MCalculator_Parametric)xInputs.elementAt(i)).getSimpleParametricDesigner("x path", 5),
-					       ((MCalculator_Parametric)yInputs.elementAt(i)).getSimpleParametricDesigner("y path", 5),
+		// 2008-Dec-25, brockman added wider polygon input fields
+	    children.add(i,new GPolygon_Point( ((MCalculator_Parametric)xInputs.elementAt(i)).getSimpleParametricDesigner("x path", INPUT_LENGTH, INPUT_MULTILINE),
+					       ((MCalculator_Parametric)yInputs.elementAt(i)).getSimpleParametricDesigner("y path", INPUT_LENGTH, INPUT_MULTILINE ),
 					       this,i));
 	    add((JPanel)children.elementAt(i));
 	}
     }
-    public void buildGui() {
 
-    	removeAll();
-    	setLayout(new GridLayout(children.size(),1));
+
+
+	/**
+	 * called initial time
+	 */
+	
+	public void buildGui() 
+	{
+		panelForPoints = this;
+		rebuildGui();
+
+	}
+	
+	/**
+	 * called subsequent times
+	 */
+    public void rebuildGui() {
+
+    	panelForPoints.removeAll();
+    	panelForPoints.setLayout(new GridLayout(children.size(),1));
+
     	//setSize(1000,5000);
-     	
-    	
+     	    	
     	for(int i=0;i<children.size();i++) {
-    		add((JPanel)children.elementAt(i));
+    		panelForPoints.add((JPanel)children.elementAt(i));
     	}
 
+    	revalidate();
+		parentContainer.rebuildGui();
 
-    	validate();
     	IWPLog.debug(this,"[GShape_Polygon_designer] children size: " +children.size());
     }
     
@@ -100,7 +127,7 @@ public class GShape_Polygon_designer extends JPanel implements GShape_designer_i
 		((GPolygon_Point)children.elementAt(i)).decrimentIndex();
 	    }
 	    */
-	    buildGui();
+	    rebuildGui();
 	}
 					  
     }
@@ -114,8 +141,8 @@ public class GShape_Polygon_designer extends JPanel implements GShape_designer_i
  
     	
     	children.add ( index,
-				   new GPolygon_Point( ((MCalculator_Parametric)dummy.elementAt(0)).getSimpleParametricDesigner("x path", 5),
-						   			  	((MCalculator_Parametric)dummy.elementAt(1)).getSimpleParametricDesigner("y path", 5),
+				   new GPolygon_Point( ((MCalculator_Parametric)dummy.elementAt(0)).getSimpleParametricDesigner("x path", INPUT_LENGTH, INPUT_MULTILINE),
+						   			  	((MCalculator_Parametric)dummy.elementAt(1)).getSimpleParametricDesigner("y path", INPUT_LENGTH, INPUT_MULTILINE),
 					   			   this,index));
     	
     	/*
@@ -130,7 +157,7 @@ public class GShape_Polygon_designer extends JPanel implements GShape_designer_i
 	}
 	*/
 	rebuildIndicies();
-	buildGui();
+	rebuildGui();
     }
     public void addPointAfter(int index) {
 	addPointBefore(index+1);

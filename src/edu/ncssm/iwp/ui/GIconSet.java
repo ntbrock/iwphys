@@ -20,7 +20,7 @@ import edu.ncssm.iwp.exceptions.*;
 
 public class GIconSet
 {
-	public static String ICON_PATH = "/images/";
+	public static String ICON_PATH = "/images/icon/"; // 2008-Dec-25 brockman moved icons to subpath
 	public static String DEFAULT_ICON = "icon_DObject_Unknown.gif";
 	
 	Hashtable iconCache = new Hashtable();

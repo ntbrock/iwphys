@@ -154,7 +154,13 @@ public class MCalculator_Parametric extends MCalculator
 	{
 		return new MCalculator_Parametric_subDesigner ( this, label, inputLength );
  	}
-	
+
+	// 2008-Dec-25 brockman, multiline input.
+	public MCalculator_Abstract_subDesigner getSubDesigner ( String label, int inputLength, boolean inputOnNewLine )
+	{
+		return new MCalculator_Parametric_subDesigner ( this, label, inputLength, inputOnNewLine );
+ 	}
+
 	
 	/**
 	 * Simple designer is just a text input field for Parametric equations.
@@ -173,6 +179,10 @@ public class MCalculator_Parametric extends MCalculator
 		return new MCalculator_Parametric_simpleDesigner ( label, this, inputLength );
  	}
 	
+	public MCalculator_Parametric_simpleDesigner getSimpleParametricDesigner ( String label, int inputLength, boolean inputOnNewLine )
+	{
+		return new MCalculator_Parametric_simpleDesigner ( label, this, inputLength, inputOnNewLine );
+ 	}
 	
 	
 

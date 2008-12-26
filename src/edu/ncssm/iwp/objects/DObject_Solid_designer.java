@@ -19,8 +19,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import edu.ncssm.iwp.util.*;
-
-
+import edu.ncssm.iwp.problemdb.DProblem_designer;
 
 public class DObject_Solid_designer extends DObject_designer implements  KeyListener
 {
@@ -33,7 +32,6 @@ public class DObject_Solid_designer extends DObject_designer implements  KeyList
     GInput_ColorSelector inputColor;
     MCalculator_designer inputCalcX;
     MCalculator_designer inputCalcY;
-
 
     public DObject_Solid_designer ( DObject_Solid iobject )
     {
@@ -170,9 +168,7 @@ public class DObject_Solid_designer extends DObject_designer implements  KeyList
 
     public void iwpRepaint()
     {
-        invalidate();
-        validate();
-        repaint();
+		super.iwpRepaint();
     }
 
 }

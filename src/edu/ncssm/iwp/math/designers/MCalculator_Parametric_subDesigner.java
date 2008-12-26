@@ -39,6 +39,13 @@ public class MCalculator_Parametric_subDesigner
 		add(editor);
 	}
 
+	// 2008-Dec-25, Request to make the polygon input fields bigger
+	public MCalculator_Parametric_subDesigner ( MCalculator_Parametric iObject, String label, int inputLength, boolean inputOnNewLine )
+	{
+		editor = new MEquation_Editor( label, iObject.getEquation(), inputLength, inputOnNewLine );
+		add(editor);
+	}
+
 	public MCalculator getCalculator ( )
 		throws InvalidEquationException
 	{

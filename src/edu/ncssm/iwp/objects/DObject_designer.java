@@ -85,10 +85,19 @@ public abstract class DObject_designer extends GAccessor_designer
         add(BorderLayout.CENTER, inputNorth );
 
         // override the width to the size of the designer.
-        Dimension preferredSize = getPreferredSize();
-        setPreferredSize ( new Dimension ( WIDTH, preferredSize.height ));
+       // Dimension preferredSize = getPreferredSize();
+       // setPreferredSize ( new Dimension ( WIDTH, preferredSize.height ));
     }
 
+
+	// 2008-Dec-25 brockman 
+	protected void iwpRepaint()
+	{
+	    invalidate();
+	    validate();
+	    repaint();		
+	}
+	
 }
 
 

@@ -72,6 +72,7 @@ public class TEST_IWPObject extends GFrame implements WindowListener, ChangeList
 	JSlider timeSlider;
 	JTextField timeShow;
 	JMenuBar menuBar;
+
 	
 	
 	public TEST_IWPObject ( String className )
@@ -192,7 +193,7 @@ public class TEST_IWPObject extends GFrame implements WindowListener, ChangeList
 			
 			GIconSet icons = new GIconSet();
 			
-			designer = designed.getDesigner();
+			designer = designed.getDesigner( );
 			
 			p.add(BorderLayout.NORTH, new JLabel(icons.getObjectIcon(object)));
 			p.add(BorderLayout.CENTER, new JScrollPane( designer ) );

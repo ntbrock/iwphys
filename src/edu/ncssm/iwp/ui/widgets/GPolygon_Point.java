@@ -56,21 +56,19 @@ public class GPolygon_Point extends JPanel implements ActionListener {
 	titleBorder.setTitleJustification(TitledBorder.LEFT);
 	setBorder(titleBorder);
 
-	JPanel east = new JPanel();
-	east.setLayout(new GridLayout(3,1));
-	east.add(insertAbove);
-	east.add(delete);
-	east.add(insertBelow);
+	JPanel buttonPanel = new JPanel();
+	buttonPanel.setLayout(new GridLayout(1,3));
+	buttonPanel.add(insertAbove);
+	buttonPanel.add(delete);
+	buttonPanel.add(insertBelow);
 	
 	JPanel center = new JPanel();
-	center.setLayout(new BorderLayout());
-	
-	
-	center.add(BorderLayout.NORTH,xDes);
-	center.add(BorderLayout.CENTER,yDes);
+	center.setLayout(new GridLayout(2,1));
+	center.add(xDes);
+	center.add(yDes);
 	
 	setLayout(new BorderLayout());
-	add(BorderLayout.WEST,east);
+	add(BorderLayout.SOUTH,buttonPanel);
 	add(BorderLayout.CENTER,center);
 	
 	center.repaint();
@@ -96,7 +94,9 @@ public class GPolygon_Point extends JPanel implements ActionListener {
     public void incrimentIndex() {index++;resetTitleBorder();}
     public void decrimentIndex() {index--;resetTitleBorder();}
     public void setIndex(int in) {index=in;resetTitleBorder();}
-    public void actionPerformed(ActionEvent e) {
+    
+
+	public void actionPerformed(ActionEvent e) {
 	//IWPLog.debug(this,""+e.getActionCommand());
 	String tmp=e.getActionCommand();
 	if(tmp.equals("insert above")) {
@@ -108,5 +108,9 @@ public class GPolygon_Point extends JPanel implements ActionListener {
 	} else {
 	    IWPLog.info(this,"[GPolygon_Point] actionPerformed fell through...");
 	}
+	
+		// 2008-Dec-25 brockman, attempting to patch some ui redraw issues.
+		parent.invalidate();
+		parent.repaint();
     }
 }

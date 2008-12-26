@@ -10,7 +10,7 @@ import edu.ncssm.iwp.util.IWPLog;
 
 import java.awt.*;
 import java.awt.event.*;
-
+import edu.ncssm.iwp.problemdb.*;
 
 public class TEST_DObject_Window_designer extends JPanel implements ActionListener
 {
@@ -21,9 +21,8 @@ public class TEST_DObject_Window_designer extends JPanel implements ActionListen
 
 	public TEST_DObject_Window_designer ( )
 	{
-
 		oObject = new DObject_Window ( );
-		oDesigner = (DObject_designer)oObject.getDesigner (  );
+		oDesigner = (DObject_designer)oObject.getDesigner ( );
 
 		oGetButton = new JButton ( "DObject_Window_designer.get ( )" );
 		oGetButton.addActionListener ( this );

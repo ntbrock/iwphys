@@ -69,7 +69,7 @@ public class GShape_designer extends GAccessor implements ItemListener
         dependantSection=new JPanel();
         /* set up designer "cards" */
         default_designer=new GShape_default_designer(shape);
-        polygon_designer=new GShape_Polygon_designer(shape);
+        polygon_designer=new GShape_Polygon_designer(this, shape);
         bitmap_designer = new GShape_Bitmap_designer(shape);
 
         buildGui();
@@ -147,11 +147,25 @@ public class GShape_designer extends GAccessor implements ItemListener
         attributeSubPanel.add ( BorderLayout.CENTER, drawVectors );
         attributeSubPanel.add ( BorderLayout.SOUTH, graphable );
 
-        add(BorderLayout.EAST, attributeSubPanel);
+		// 2008-Dec-05, need to keep everythig pushed to the top.
+		JPanel pushToTopPanel = new JPanel();
+		pushToTopPanel.setLayout(new BorderLayout());
+		pushToTopPanel.add(BorderLayout.NORTH, attributeSubPanel);
+
+
+        add(BorderLayout.EAST, pushToTopPanel );
         validate();
 
     }
 
+
+	// 2008-Dec-25 brockman, trying to get the main scrollbar of teh designer to 
+	// recognize the change in size
+	public void rebuildGui()
+	{
+		revalidate();
+		solidDesigner.revalidate();
+	}
 
     //ACCESSORS
 
@@ -233,6 +247,8 @@ public class GShape_designer extends GAccessor implements ItemListener
             //buildGui();
             buildDependantSection();
         }
+
+		iwpRepaint();
     }
 
 
@@ -255,14 +271,20 @@ public class GShape_designer extends GAccessor implements ItemListener
         if(solidDesigner!=null) {
             solidDesigner.doValidation();
         } else {
-            setSize(getPreferredSize());
+            //setSize(getPreferredSize());
             validate();
             repaint();
         }
         
-        solidDesigner.iwpRepaint();
-       
+        iwpRepaint();
     }
+
+
+	protected void iwpRepaint()
+	{
+		revalidate();
+		solidDesigner.iwpRepaint();
+	}
 
 
 }

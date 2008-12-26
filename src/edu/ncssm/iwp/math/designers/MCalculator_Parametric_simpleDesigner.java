@@ -21,6 +21,8 @@ public class MCalculator_Parametric_simpleDesigner extends GAccessor_designer
 {
 	String label;
 	MCalculator_Parametric_subDesigner subDesign;
+
+
 	
 	public MCalculator_Parametric_simpleDesigner ( String label )
 	{
@@ -41,6 +43,13 @@ public class MCalculator_Parametric_simpleDesigner extends GAccessor_designer
 		buildGui();
 	}
 	
+	// 2008-Dec-25 brockman
+	public MCalculator_Parametric_simpleDesigner ( String label, MCalculator_Parametric calc, int inputLength, boolean inputOnNewLine )
+	{
+		this.subDesign = (MCalculator_Parametric_subDesigner)calc.getSubDesigner(label, inputLength, inputOnNewLine );
+		buildGui();
+	}
+
 	
 	
 	private void buildGui()

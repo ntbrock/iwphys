@@ -21,6 +21,7 @@ import edu.ncssm.iwp.problemdb.DProblem;
 import edu.ncssm.iwp.problemdb.DProblemState;
 import edu.ncssm.iwp.ui.GAccessor_designer;
 import edu.ncssm.iwp.math.*;
+import edu.ncssm.iwp.problemdb.DProblem_designer;
 
 public class DObject_Grapher
 	implements IWPObject, IWPAnimated, IWPDrawable, IWPCalculated, IWPDesigned, IWPXmlable
@@ -118,7 +119,7 @@ public class DObject_Grapher
 	}
 
 	// Interface: Desinable
-	public GAccessor_designer getDesigner()
+	public GAccessor_designer getDesigner( )
 	{
 		return new DObject_Grapher_designer(this);
 	}

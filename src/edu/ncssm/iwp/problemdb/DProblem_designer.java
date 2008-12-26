@@ -710,6 +710,15 @@ public class DProblem_designer extends GAccessor_designer
 
     
     
+    public void iwpRepaint()
+    {
+		System.err.println("[DProblem_designer] iwpRepaint invoked!");
+        invalidate();
+        validate();
+        repaint();
+		
+    }
+
 }
 
 

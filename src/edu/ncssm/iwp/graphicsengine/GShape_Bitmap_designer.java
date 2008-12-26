@@ -1,3 +1,8 @@
+/**
+ * 2008-Dec-25 enhancing the Bitmap selector to read dynamically from the .jar /images/bitmap/ directory
+ * brockman
+ */
+
 package edu.ncssm.iwp.graphicsengine;
 
 import javax.swing.*;
@@ -33,7 +38,7 @@ public class GShape_Bitmap_designer
     	setLayout(new BorderLayout());
 
     	
-    	Panel inputFrame = new Panel();
+    	JPanel inputFrame = new JPanel();
     	inputFrame.setLayout(new GridLayout(4,1));
     	
     	
@@ -52,23 +57,8 @@ public class GShape_Bitmap_designer
     	
 
     	//Image Dropdown Selector - Cory    	
-        String[] fileList = {
-                "car_final",
-                "ncssmlogo",
-                "pullhand",
-                "pushhand",
-                "weight",
-                "wagon",
-                "rope",
-                "disc",
-                "speaker",
-                "earth",
-                "mars",
-                "moon",
-                "sun",
-                
-        
-				};
+		// 2008-Dec-25 brockman, added the dynamic filename reader 
+        String[] fileList = GShape_Bitmap_fileList.readBitmapFileList();
 
 		inputFile = new GInput_Selector("Shape", fileList);
 		
@@ -91,11 +81,7 @@ public class GShape_Bitmap_designer
         } catch ( CannotLoadIconX x ) { 
         	add ( new JLabel ( "Icon Error", JLabel.CENTER ));
         }
-        
-
-		
-		
-    	
+           	
     	
 /*    	// Add in file name
     	inputFile = new GInput_Text("File", "/images/a.png" );
@@ -104,16 +90,20 @@ public class GShape_Bitmap_designer
     
     
     public void refreshIcon() {
+
     	this.remove(icon);
-    	
     	
         try { 
         	icon = new JLabel(loadIcon());
         	add (BorderLayout.SOUTH,icon );
+
         } catch ( CannotLoadIconX x ) { 
-        	System.out.println("Refresh Error");
+        	System.err.println("[GShape_Bitmap_Designer] Refresh Error: " + x);
+			x.printStackTrace();
         }
-        
+
+		// 2008-Dec-25 brockman, trying to get the icon change selection to update
+        this.revalidate();
         this.repaint();
           			
     }
@@ -133,17 +123,16 @@ public class GShape_Bitmap_designer
     	in.makeHeightCalculator( inputHeight.getValue() );
     	in.makeAngleCalculator( inputAngle.getValue());
     	
-    	in.makeFilename("/images/"+inputFile.getValue()+".png");
-    	
+    	in.makeFilename( GShape_Bitmap_fileList.translateFilenameIntoFullPath(inputFile.getValue() ) );
+
     	return in;
     }	
     
     
-    //Temporary Try loading Shits and Giggles Stuff
-   
+    //Temporary Try loading 
     private ImageIcon loadIcon() throws CannotLoadIconX
 	{
-    	String source = "/images/"+inputFile.getValue()+".png";
+    	String source = GShape_Bitmap_fileList.translateFilenameIntoFullPath(inputFile.getValue());
 	
 		try { 
 			IWPMagicFile file = new IWPMagicFile(source);

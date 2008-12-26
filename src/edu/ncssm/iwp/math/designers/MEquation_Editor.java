@@ -24,6 +24,8 @@ public class MEquation_Editor extends JComponent implements DocumentListener
 	MEquation equation;
 	GInput_Text inputText;
 	int inputLength = -1;
+	boolean inputOnNewLine = false; // 2008-Dec-25, ability to have doubleLine Inputs.
+
 
 	public MEquation_Editor ( String label )
 	{
@@ -46,12 +48,23 @@ public class MEquation_Editor extends JComponent implements DocumentListener
 		this.inputLength = inputLength;
 		buildGui();
 	}
-	
+
+	// 2008-Dec-25 
+	public MEquation_Editor ( String label, MEquation equation, int inputLength, boolean inputOnNewLine )
+	{
+		this.label = label;
+		this.equation = equation;
+		this.inputLength = inputLength;
+		this.inputOnNewLine = inputOnNewLine;
+		buildGui();
+	}
 	
 	
 	private void buildGui()
-	{
-		if ( inputLength > 0 ) { 
+	{	
+		if ( inputOnNewLine ) { 
+			inputText = new GInput_Text(label, equation.getEquationString(), inputLength, inputOnNewLine);
+		} else if ( inputLength > 0 ) { 
 			inputText = new GInput_Text(label, equation.getEquationString(), inputLength );
 		} else {
 			inputText = new GInput_Text(label, equation.getEquationString() );

@@ -9,6 +9,8 @@ package edu.ncssm.iwp.objects;
 import edu.ncssm.iwp.plugin.*;
 import edu.ncssm.iwp.util.*;
 import edu.ncssm.iwp.ui.*;
+import edu.ncssm.iwp.problemdb.DProblem_designer;
+
 
 public class DObject_GraphWindow extends DObject_AbstractWindow
  implements IWPObject, IWPXmlable, IWPDesigned

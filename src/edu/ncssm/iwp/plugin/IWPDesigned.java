@@ -2,6 +2,7 @@ package edu.ncssm.iwp.plugin;
 
 import edu.ncssm.iwp.exceptions.InvalidObjectNameX;
 import edu.ncssm.iwp.ui.GAccessor_designer;
+import edu.ncssm.iwp.problemdb.DProblem_designer;
 
 
 /**

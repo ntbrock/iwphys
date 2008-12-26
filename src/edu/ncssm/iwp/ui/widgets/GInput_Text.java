@@ -14,6 +14,7 @@ import java.awt.event.*;
 
 public class GInput_Text extends GInput
 {
+	boolean inputOnNewLine = false;
 	int inputLength = FIELD_WIDTH;
 	static int FIELD_WIDTH = 20;
 
@@ -36,6 +37,16 @@ public class GInput_Text extends GInput
 		setValue(iValue);
 		buildGui();
 	}
+
+	public GInput_Text(String iLabel, String iValue, int inputLength, boolean inputOnNewLine )
+	{
+		super(iLabel);
+		this.inputLength = inputLength;
+		this.inputOnNewLine = inputOnNewLine;
+		
+		setValue(iValue);
+		buildGui();
+	}
 		
 	
 	
@@ -44,8 +55,19 @@ public class GInput_Text extends GInput
 	private void buildGui() 
 	{
 		setLayout(new BorderLayout() );
-		if ( isLabelDefined() ) { add(BorderLayout.WEST, getLabel()); }
-		add(BorderLayout.CENTER, inputField);		
+		
+		// 2008-Dec-25 
+		if ( this.inputOnNewLine ) { 
+
+			if ( isLabelDefined() ) { add(BorderLayout.NORTH, getLabel()); }
+			add(BorderLayout.CENTER, inputField);
+
+		} else { 
+			// Classic behavior 
+			if ( isLabelDefined() ) { add(BorderLayout.WEST, getLabel()); }
+			add(BorderLayout.CENTER, inputField);	
+		}
+
 		origBackground = inputField.getBackground();
 	}
 

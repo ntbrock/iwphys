@@ -15,6 +15,8 @@ import edu.ncssm.iwp.graphicsengine.IWPDrawer;
 import edu.ncssm.iwp.graphicsengine.GColor;
 import java.awt.Color;
 
+import edu.ncssm.iwp.problemdb.DProblem_designer;
+
 /**
  * 2007-Jan-19 IWP 3
  *
@@ -72,7 +74,7 @@ public class DObject_WaveBox
 		this.name = name;
 	}
 
-	public GAccessor_designer getDesigner()
+	public GAccessor_designer getDesigner( )
     {
         return new DObject_WaveBox_designer(this);
     }

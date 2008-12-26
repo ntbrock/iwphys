@@ -34,8 +34,9 @@ public class GWindow_Designer extends GFrame
     public static int MODE_APPLICATION = 1;
     public static int MODE_APPLET = 2;
 
-    public static int WINDOW_WIDTH = 640;
-    public static int WINDOW_HEIGHT = 580;
+//    public static int WINDOW_WIDTH = 640;
+	public static int WINDOW_WIDTH = 760; // 2008-Dec-25 widened the designer
+    public static int WINDOW_HEIGHT = 640;
 
 
     DProblem_designer problemDesigner;

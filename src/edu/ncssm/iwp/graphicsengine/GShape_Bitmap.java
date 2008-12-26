@@ -50,10 +50,10 @@ public class GShape_Bitmap extends GShape
 
         IWPMagicFile file = new IWPMagicFile(fileString);
         //MediaTracker m = new MediaTracker(new JPanel());
-        System.out.println(fileString);
+        //System.out.println(fileString);
         try { img = Toolkit.getDefaultToolkit().createImage(file.readBytes());
         } catch ( MagicFileNotFoundX e ) {
-            System.out.println("Icon Does Not Exist");
+            System.err.println("GShape_Bitmap: Bitmap Does Not Exist: " + fileString );
         }
 
 
