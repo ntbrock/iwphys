@@ -15,6 +15,7 @@ import java.awt.BorderLayout;
 
 import edu.ncssm.iwp.ui.*;
 import edu.ncssm.iwp.problemdb.*;
+import edu.ncssm.iwp.exceptions.*;
 import edu.ncssm.iwp.util.*;
 
 
@@ -147,9 +148,15 @@ public class IWP_Applet extends java.applet.Applet
     private void showAppletText()
     {
         setLayout ( new BorderLayout() );
-        add ( BorderLayout.NORTH, new JLabel ("Interactive Web Physics") );
-        add ( BorderLayout.SOUTH, new JLabel ("A new window should pop up") );
-    }
+
+		try { 
+			add ( BorderLayout.CENTER, new JLabel( MagicImageIconLoader.loadIcon ( "/images/IWPApplet.png") ));
+		} catch ( CannotLoadIconX x ) { 
+	        add ( BorderLayout.NORTH, new JLabel ("Interactive Web Physics") );
+	        add ( BorderLayout.SOUTH, new JLabel ("A new window should pop up") );
+		}
+		
+	}
 
 
     /**
