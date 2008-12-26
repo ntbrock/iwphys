@@ -38,7 +38,9 @@ public class DObject_Time_designer extends DObject_designer
         int horizGap = 30;
         int vertGap = 10;
 
-        input.setLayout ( new GridLayout( 5, 2, horizGap, vertGap) );
+		boolean displayUsePrecise = false;
+
+        input.setLayout ( new GridLayout( displayUsePrecise ? 5 : 4, 2, horizGap, vertGap) );
 
         inputStart = new JTextField ( "" + object.getStartTime(), TEXT_WIDTH );
         inputStop  = new JTextField ( "" + object.getStopTime(), TEXT_WIDTH );
@@ -58,12 +60,14 @@ public class DObject_Time_designer extends DObject_designer
         input.add ( new JLabel ( "Frames Per Second: " ) );
         input.add ( inputFps );
 
-        JLabel altText = new JLabel ( "Use Alternate Rounding Calculator: " );
-        altText.setToolTipText("Use the alternate rounding calculator when you see numbers close to zero off by a very very small amount. Turning this on, however, limits the use of numbers < 1E-9");
-        input.add ( altText );
-        input.add ( usePreciseCalculations );
+		if ( displayUsePrecise ) { 	
+        	JLabel altText = new JLabel ( "Use Alternate Rounding Calculator: " );
+        	altText.setToolTipText("Use the alternate rounding calculator when you see numbers close to zero off by a very very small amount. Turning this on, however, limits the use of numbers < 1E-9");
+        	input.add ( altText );
+        	input.add ( usePreciseCalculations );
+    	}
         
-        input.setBorder(new EmptyBorder(10,10,10,10));
+		input.setBorder(new EmptyBorder(10,10,10,10));
 
         buildEasyGui ( "Time", Color.WHITE, Color.BLACK, input );
     }
