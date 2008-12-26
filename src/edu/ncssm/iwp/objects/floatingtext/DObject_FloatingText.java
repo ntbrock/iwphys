@@ -26,6 +26,8 @@ import edu.ncssm.iwp.math.*;
 public class DObject_FloatingText
 	implements IWPObject, IWPAnimated, IWPDrawable, IWPCalculated, IWPDesigned, IWPXmlable
 {
+	public static final int DISPLAY_DECIMAL_DIGITS = 3;
+
 	String name = "New_FloatingText";
 	String text = "Default Text";
 	String units = "";
@@ -41,7 +43,6 @@ public class DObject_FloatingText
 
 	public GColor getGColor() { return fontColor; }
 
-	
 	//----------------
 
 	public GColor getFontColor() {
@@ -190,8 +191,9 @@ public class DObject_FloatingText
 		
 		if ( this.getShowValue() ) { 
 			if ( text.length() > 0 ) { text = text + " = "; }
-			
-
+		
+		
+			nf1.setMaximumFractionDigits(DISPLAY_DECIMAL_DIGITS);
 			text = text + nf1.format(nowValue);	
 		
 			// only display units if show value
