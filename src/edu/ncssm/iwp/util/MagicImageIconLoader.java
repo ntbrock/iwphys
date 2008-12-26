@@ -10,6 +10,8 @@ import edu.ncssm.iwp.exceptions.CannotLoadIconX;
 import edu.ncssm.iwp.exceptions.MagicFileNotFoundX;
 
 
+// TODO refactor: mod the GShape_Bitmap Designer to use this class
+
 public class MagicImageIconLoader
 {
 	
@@ -22,8 +24,6 @@ public class MagicImageIconLoader
 			IWPMagicFile file = new IWPMagicFile(source);
     		MediaTracker m = new MediaTracker(new JPanel());
 			Image img = Toolkit.getDefaultToolkit().createImage(file.readBytes());
-			
-			//img = img.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 			
 			m.addImage(img,0);
 			m.waitForAll();
