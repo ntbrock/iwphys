@@ -66,9 +66,16 @@ public class GShape_Bitmap_designer
 		
 		
 		if(shape.getFile()!="") {
-			String temp = shape.getFile();
-			inputFile.setSelected(temp.substring(8, temp.length()-4));
+
+			// The file needs to be broken down into the part after the last / and minus the .png
+			
+			String partialFile = GShape_Bitmap_fileList.stripPathAndExtension(shape.getFile());
+
+			// System.err.println("[GShape_Bitmap_Designer] looking for file: '" + partialFile + "'");
+
+			inputFile.setSelected(partialFile);
 		}
+		
 		inputFrame.add(inputFile);
 		
 
@@ -79,20 +86,19 @@ public class GShape_Bitmap_designer
         	icon = new JLabel(loadIcon());
         	add (BorderLayout.SOUTH,icon );
         } catch ( CannotLoadIconX x ) { 
-        	add ( new JLabel ( "Icon Error", JLabel.CENTER ));
+        	add ( new JLabel ( "Icon Error: Check etc/images/list.txt", JLabel.CENTER ));
         }
            	
-    	
-/*    	// Add in file name
-    	inputFile = new GInput_Text("File", "/images/a.png" );
-    	add(inputFile);*/
     }
     
     
     public void refreshIcon() {
 
-    	this.remove(icon);
-    	
+		if ( icon != null ) { 
+    		this.remove(icon);
+    	}
+		
+		
         try { 
         	icon = new JLabel(loadIcon());
         	add (BorderLayout.SOUTH,icon );

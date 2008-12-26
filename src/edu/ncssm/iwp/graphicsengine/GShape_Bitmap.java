@@ -5,6 +5,9 @@
 // "iwp.java"
 //
 // 2008-Dec-25 brockman, touching this file so that the CVS HEAD tag will apply
+//
+// To add new icons: add the file to /etc/images/bitmap, and add the filename to /etc/images/bitmap/list.txt
+
 
 package edu.ncssm.iwp.graphicsengine;
 
@@ -43,10 +46,9 @@ public class GShape_Bitmap extends GShape
     public String getFile() {return fileString; }
     public void setFile(String _file) { makeFilename(_file);}
 
-    public void makeFilename(String fName) {
+    public void makeFilename(String fName)
+	{
         fileString = fName;
-
-
 
         IWPMagicFile file = new IWPMagicFile(fileString);
         //MediaTracker m = new MediaTracker(new JPanel());
@@ -58,10 +60,12 @@ public class GShape_Bitmap extends GShape
 
 
         //Image has been created, now make sure it is loaded by thread pausing
+		if ( img != null ) {
         while(img.getWidth(null)<0) {
             try {Thread.sleep(100);} catch (InterruptedException e){};
         }
-
+	}
+	
 
 
     }

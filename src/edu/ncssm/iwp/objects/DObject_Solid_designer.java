@@ -67,10 +67,18 @@ public class DObject_Solid_designer extends DObject_designer implements  KeyList
 
         // Moved the calculators up to the otp.
         box.add(Box.createVerticalStrut( STRUT ));
-        box.add(inputCalcX);
+		JPanel topperX = new JPanel();
+		topperX.setLayout(new BorderLayout());
+		topperX.add(inputCalcX);
+		box.add(topperX);
+        //box.add(inputCalcX);
 
         box.add(Box.createVerticalStrut( STRUT ));
-        box.add(inputCalcY);
+		JPanel topperY = new JPanel();
+		topperY.setLayout(new BorderLayout());
+		topperY.add(inputCalcY);
+		box.add(topperY);
+		// box.add(inputCalcY);
 
         box.add(Box.createVerticalStrut( STRUT ));
         box.add(inputColor);
