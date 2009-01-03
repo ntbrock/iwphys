@@ -1,9 +1,14 @@
+Earth_1
+Earth_2
 a
 b
 c
 car_final
 disc
 earth
+female
+loop
+male
 mars
 moon
 ncssmlogo
@@ -11,6 +16,7 @@ pullhand
 pushhand
 rope
 rotate
+solenoid
 speaker
 spiral
 sun
