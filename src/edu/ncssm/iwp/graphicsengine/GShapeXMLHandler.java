@@ -77,7 +77,6 @@ public class GShapeXMLHandler extends IWPDefaultXmlHandler
         	inHeight = false;
         	inAngle = true;
         	
-        	setAngle = true;
         } else if (qName.equals("file") ) {
         	
         	shape.setFile((String)attrs.get("image"));
@@ -105,6 +104,7 @@ public class GShapeXMLHandler extends IWPDefaultXmlHandler
             } else if ( inAngle ) {
             	shape.setAngleCalculator ( calculator );
             	inWidth = false; inHeight = false; inAngle = false;
+            	setAngle = true;
             }
             else {
                 IWPLog.info(this,"[GShapeXMLHandler] Don't know where to put this eqn!");

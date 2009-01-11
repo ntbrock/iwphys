@@ -123,7 +123,8 @@ public abstract class GShape extends DEntity
         state.vars().setAtCurrentTick( solid.getName() + "." + MVariables.HEIGHT, height );
 
         double angle;  //Polygon Hack
-        if(this.getType()!="Polygon") {
+        // 2009-Jan-11 brockman, improved this this.getType()!="Polygon"
+        if( ! ( this instanceof GShape_Polygon ) ) {
             angle = getAngleCalculator().calculate(state.vars());
             state.vars().setAtCurrentTick(solid.getName() + "." + MVariables.ANGLE, angle);
         }

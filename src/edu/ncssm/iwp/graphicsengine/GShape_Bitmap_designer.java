@@ -51,8 +51,17 @@ public class GShape_Bitmap_designer
     								  ((MCalculator_Parametric)shape.getHeightCalculator()).getEquationString() );
     	inputFrame.add(inputHeight);
 
-    	inputAngle = new GInput_Text("Theta",
-				  ((MCalculator_Parametric)shape.getAngleCalculator()).getEquationString() );
+    	// 2009-Jan-11 brockman, Was getting an NPE in 4.0.2 here.
+    	// An old problem was saving w/o an <angle> child defined.
+
+    	if ( shape.getAngleCalculator() != null ) { 			
+    		inputAngle = new GInput_Text("Theta",
+    				((MCalculator_Parametric)shape.getAngleCalculator()).getEquationString() );
+    	} else {
+    		IWPLog.error(this, "Angle calculator was null.");
+    		inputAngle = new GInput_Text("Theta", "0");
+    	}
+
     	inputFrame.add(inputAngle);    	
     	
 

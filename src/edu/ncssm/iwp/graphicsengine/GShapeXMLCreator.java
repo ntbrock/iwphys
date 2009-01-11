@@ -94,9 +94,12 @@ public class GShapeXMLCreator extends XMLCreator
         height.addElement ( heightCreator.getElement( ) );
         elem.addElement ( height );
         
-        XMLElement angle = new XMLElement("angle");
-        angle.addElement ( angleCreator.getElement( ) );
-        elem.addElement ( angle );
+        // 2009-Jan-11 brockman, polygons don't save angles.
+        if ( ! ( shape instanceof GShape_Polygon ) ) { 
+        	XMLElement angle = new XMLElement("angle");
+        	angle.addElement ( angleCreator.getElement( ) );
+        	elem.addElement ( angle );
+        }
 
         XMLElement graphOptions = new XMLElement("graphOptions");
         graphOptions.addAttribute("graphVisible",""+shape.getIsGraphable());

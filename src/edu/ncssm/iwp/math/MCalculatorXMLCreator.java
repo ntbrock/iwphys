@@ -39,7 +39,10 @@ public class MCalculatorXMLCreator extends XMLCreator
 			}
 
 		} else {
-			IWPLog.info(this,"[MCalculatorXMLCreator] ERROR: Our Calculator detection fell thou!!!");
+			IWPLog.info(this,"[MCalculatorXMLCreator] ERROR: Our Calculator detection fell through!!!" );
+			if ( calc == null ) { 
+				IWPLog.info(this,"[MCalculatorXMLCreator] calc was NULL" );
+			}			
 			return null;
 		} 
 		

@@ -1,9 +1,12 @@
 package edu.ncssm.iwp.graphicsengine;
 
-import javax.swing.*;
-import java.awt.*;
-import edu.ncssm.iwp.ui.widgets.*;
+import java.awt.GridLayout;
+
+import javax.swing.JPanel;
+
 import edu.ncssm.iwp.math.MCalculator_Parametric;
+import edu.ncssm.iwp.ui.widgets.GInput_Text;
+import edu.ncssm.iwp.util.IWPLog;
 
 public class GShape_default_designer
 	extends JPanel implements GShape_designer_interface
@@ -29,9 +32,17 @@ public class GShape_default_designer
     								  ((MCalculator_Parametric)shape.getHeightCalculator()).getEquationString() );
     	add(inputHeight);
 
+    	// 2009-Jan-11 brockman, Was getting an NPE in 4.0.2 here.
+    	// An old problem was saving w/o an <angle> child defined.
     	
-    	inputAngle = new GInput_Text("Theta",
-				  ((MCalculator_Parametric)shape.getAngleCalculator()).getEquationString() );
+    	if ( shape.getAngleCalculator() != null ) { 			
+    		inputAngle = new GInput_Text("Theta",
+    				((MCalculator_Parametric)shape.getAngleCalculator()).getEquationString() );
+    	} else {
+    		IWPLog.error(this, "Angle calculator was null.");
+    		inputAngle = new GInput_Text("Theta", "0");
+    	}
+    	
     	add(inputAngle);
     }
 
