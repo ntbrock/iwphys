@@ -14,7 +14,7 @@ import java.awt.event.*;
 
 public class TEST_MCalculator_designer extends JPanel implements ActionListener
 {
-
+	private static final long serialVersionUID = 1L;
 	MCalculator oCalc;
 	MCalculator_designer designer;
 	

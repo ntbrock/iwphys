@@ -58,6 +58,8 @@ import java.util.*;
 
 public final class MCalculator_designer extends GAccessor_designer implements AlertListener
 {
+	private static final long serialVersionUID = 1L;
+	
 	public static final String DISPLAY_PARAMETRIC = "Parametric";
 	public static final String DISPLAY_EULER = "Euler";
 	public static final String DISPLAY_RK2 = "RK2";

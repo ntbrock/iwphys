@@ -5,7 +5,7 @@ import java.util.Hashtable;
 
 public class DProblemMetaDB extends DEntity
 {
-
+	private static final long serialVersionUID = 1L;
 	//	String sProblemFile;
 	Hashtable oProblemHash;    /* where all the user info is kept in RAM */
 

@@ -11,7 +11,7 @@ import edu.ncssm.iwp.util.*;
 public class DMemoryUserDB implements DUserDB, Serializable
 {
 
-
+	private static final long serialVersionUID = 1L;
 	Hashtable userHash;    /* where all the user info is kept in RAM */
 	String storageFile;
 

@@ -10,8 +10,10 @@ import edu.ncssm.iwp.objects.DObject_GraphWindow;
 import edu.ncssm.iwp.util.IWPLog;
 
 public class GWindow_Animator_Graph_setProperties extends JFrame
-    implements ActionListener{
-
+    implements ActionListener
+{
+	private static final long serialVersionUID = 1L;
+	
     JTextField minX;
     JTextField maxX;
     JTextField minY;

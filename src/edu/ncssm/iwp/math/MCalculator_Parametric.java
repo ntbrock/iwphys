@@ -19,6 +19,7 @@ import edu.ncssm.iwp.exceptions.*;
 
 public class MCalculator_Parametric extends MCalculator
 {
+	private static final long serialVersionUID = 1L;
 	// Moving the derivative code out to a higher level.
 	private double curDisp;
 	private double curVel;

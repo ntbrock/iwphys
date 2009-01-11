@@ -23,6 +23,7 @@ import edu.ncssm.iwp.exceptions.*;
 public class MCalculator_Parametric_subDesigner
 	extends MCalculator_Abstract_subDesigner 
 {
+	private static final long serialVersionUID = 1L;
 
 	MCalculator_Parametric object;
 	MEquation_Editor editor;

@@ -10,7 +10,8 @@ public class GWindow_Animator_setTimeProperties
     extends GWindow_Animator_setTimePropertiesAbstract
     implements IWPAnimated
 {
-
+	private static final long serialVersionUID = 1L;
+	
     public GWindow_Animator_setTimeProperties(GWindow_Animator parent)
     {
     	super(parent);

@@ -11,8 +11,9 @@ import edu.ncssm.iwp.util.*;
 
 public class DProblemManager_FileOpen_gui extends GAccessor
 {
+	private static final long serialVersionUID = 1L;
+	
 	DProblemManager manager;
-
 
 	JFileChooser fileChooser;
 	JFrame tmpFrame;

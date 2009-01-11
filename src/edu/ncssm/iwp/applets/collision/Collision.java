@@ -13,6 +13,7 @@ import edu.ncssm.iwp.exceptions.InvalidEquationException;
 
 public class Collision extends JApplet
 {
+	private static final long serialVersionUID = 1L;
     BumperProblem problem;
     GridGraphics graphics;
     ProblemTimer timer;

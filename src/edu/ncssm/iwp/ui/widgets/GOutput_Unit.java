@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class GOutput_Unit extends GOutput_Text
 {
-
+	private static final long serialVersionUID = 1L;
 	JLabel textUnit = new JLabel();
 
 	//---- Constructors ----

@@ -19,6 +19,7 @@ import java.awt.*;
 
 public class MCalculator_Euler_subDesigner extends MCalculator_Abstract_subDesigner
 {
+	private static final long serialVersionUID = 1L;
 	MCalculator_Euler object;
 	MEquation_Editor oInitDisp;
 	MEquation_Editor oInitVel;

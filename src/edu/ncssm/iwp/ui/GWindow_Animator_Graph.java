@@ -51,7 +51,8 @@ import edu.ncssm.iwp.util.IWPLogPopup;
 public class GWindow_Animator_Graph extends JFrame
     implements IWPAnimated,ItemListener,ActionListener, GShape_GraphPropertySelectorChangeListener
 {
-
+	private static final long serialVersionUID = 1L;
+	
     protected GWindow_Animator parent;
     protected Collection objects;
 

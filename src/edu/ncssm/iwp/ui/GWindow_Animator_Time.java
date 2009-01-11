@@ -30,6 +30,8 @@ import edu.ncssm.iwp.util.*;
 public class GWindow_Animator_Time extends GAccessor_animator
 	implements ActionListener, IWPAnimated
 {
+	private static final long serialVersionUID = 1L;
+	
 	GWindow_Animator parent;
 
     //JPanel infoPanel = new JPanel();

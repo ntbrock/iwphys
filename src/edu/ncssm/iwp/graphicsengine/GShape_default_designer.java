@@ -8,7 +8,7 @@ import edu.ncssm.iwp.math.MCalculator_Parametric;
 public class GShape_default_designer
 	extends JPanel implements GShape_designer_interface
 {
-    
+	private static final long serialVersionUID = 1L;    
     GShape shape;
     GInput_Text inputWidth;
     GInput_Text inputHeight;

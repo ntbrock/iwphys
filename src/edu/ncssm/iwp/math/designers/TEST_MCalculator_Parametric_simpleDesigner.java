@@ -11,7 +11,7 @@ import java.awt.event.*;
 
 public class TEST_MCalculator_Parametric_simpleDesigner extends JPanel implements ActionListener
 {
-
+	private static final long serialVersionUID = 1L;
 	MCalculator oCalc;
 	MCalculator_Parametric_simpleDesigner designer;
 

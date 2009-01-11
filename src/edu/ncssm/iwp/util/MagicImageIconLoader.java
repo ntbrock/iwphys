@@ -3,7 +3,6 @@ package edu.ncssm.iwp.util;
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.event.*;
 
 import edu.ncssm.iwp.util.IWPMagicFile;
 import edu.ncssm.iwp.exceptions.CannotLoadIconX;

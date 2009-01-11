@@ -14,6 +14,7 @@ import java.awt.event.*;
 
 public class GInput_Text extends GInput
 {
+	private static final long serialVersionUID = 1L;
 	boolean inputOnNewLine = false;
 	int inputLength = FIELD_WIDTH;
 	static int FIELD_WIDTH = 20;

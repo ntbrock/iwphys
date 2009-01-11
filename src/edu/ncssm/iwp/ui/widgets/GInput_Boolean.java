@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class GInput_Boolean extends GInput
 {
-
+	private static final long serialVersionUID = 1L;
 	JCheckBox stateButton = new JCheckBox();
 
 	//---- Constructors ----

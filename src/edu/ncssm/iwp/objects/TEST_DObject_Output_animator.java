@@ -16,7 +16,7 @@ import java.awt.event.*;
 public class TEST_DObject_Output_animator
 	extends JPanel implements ActionListener
 {
-
+	private static final long serialVersionUID = 1L;
 	DObject_Output oObject;
 	DObject_animator oAnimator;
 	JButton oGetButton;

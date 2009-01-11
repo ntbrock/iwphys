@@ -31,6 +31,7 @@ import edu.ncssm.iwp.util.*;
 public class GWindow_Designer extends GFrame
     implements ActionListener, WindowListener, ProblemListener
 {
+	private static final long serialVersionUID = 1L;
     public static int MODE_APPLICATION = 1;
     public static int MODE_APPLET = 2;
 

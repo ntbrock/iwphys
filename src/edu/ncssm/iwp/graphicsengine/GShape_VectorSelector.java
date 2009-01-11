@@ -3,8 +3,11 @@ package edu.ncssm.iwp.graphicsengine;
 import javax.swing.*;
 import java.awt.*;
 
-public class GShape_VectorSelector extends JPanel {
-    protected JRadioButton xVel;
+public class GShape_VectorSelector extends JPanel
+{
+	private static final long serialVersionUID = 1L;
+	
+	protected JRadioButton xVel;
     protected JRadioButton xAccel;
     protected JRadioButton yVel;
     protected JRadioButton yAccel;

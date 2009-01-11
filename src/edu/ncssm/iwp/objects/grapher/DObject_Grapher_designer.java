@@ -6,24 +6,31 @@
 
 package edu.ncssm.iwp.objects.grapher;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.*;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import edu.ncssm.iwp.math.designers.MCalculator_designer;
-import edu.ncssm.iwp.objects.*;
-import edu.ncssm.iwp.plugin.*;
+import edu.ncssm.iwp.exceptions.DesignerInputException;
+import edu.ncssm.iwp.exceptions.InvalidEquationException;
+import edu.ncssm.iwp.exceptions.InvalidObjectNameX;
+import edu.ncssm.iwp.graphicsengine.GColor;
+import edu.ncssm.iwp.objects.DObject_designer;
+import edu.ncssm.iwp.plugin.IWPObject;
 import edu.ncssm.iwp.ui.widgets.GInput_ColorSelector;
 import edu.ncssm.iwp.util.IWPLogPopup;
-import edu.ncssm.iwp.graphicsengine.GColor;
-import edu.ncssm.iwp.exceptions.*;
 
 
 public class DObject_Grapher_designer extends DObject_designer implements  KeyListener
 {
+	private static final long serialVersionUID = 1L;
     static int TEXT_WIDTH = 6;
 
     DObject_Grapher object;

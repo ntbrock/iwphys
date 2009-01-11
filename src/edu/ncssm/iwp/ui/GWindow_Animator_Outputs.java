@@ -26,7 +26,8 @@ import edu.ncssm.iwp.util.*;
 public class GWindow_Animator_Outputs
 	extends GAccessor_animator implements IWPAnimated
 {
-
+	private static final long serialVersionUID = 1L;
+	
 	GWindow_Animator parent;
 	Collection output_animators = null;
 

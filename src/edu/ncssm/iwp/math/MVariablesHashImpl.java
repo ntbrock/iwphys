@@ -14,6 +14,7 @@ import edu.ncssm.iwp.exceptions.UnknownVariableException;
 
 public class MVariablesHashImpl extends Hashtable implements MVariables
 {
+	private static final long serialVersionUID = 1L;
 
 	public double get(String name)
 		throws UnknownVariableException

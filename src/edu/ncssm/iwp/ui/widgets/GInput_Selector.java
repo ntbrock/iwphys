@@ -13,7 +13,7 @@ import java.awt.BorderLayout;
 
 public class GInput_Selector extends GInput
 {
-
+	private static final long serialVersionUID = 1L;
 	JComboBox comboBox;
 
 	public GInput_Selector(String iLabel, String[] iValues)

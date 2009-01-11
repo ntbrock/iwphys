@@ -20,7 +20,7 @@ import edu.ncssm.iwp.math.MCalculator_Parametric;
 public class GShape_Bitmap_designer
 	extends JPanel implements GShape_designer_interface, ItemListener
 {
-    
+	private static final long serialVersionUID = 1L;
 
     GShape shape;
     GInput_Text inputWidth;

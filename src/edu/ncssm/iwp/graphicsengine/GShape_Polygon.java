@@ -19,6 +19,7 @@ import java.util.Vector;
 
 public class GShape_Polygon extends GShape
 {
+	private static final long serialVersionUID = 1L;
 	/*
 	 * These vectors hold the point calcuators for the polygon.
 	 */

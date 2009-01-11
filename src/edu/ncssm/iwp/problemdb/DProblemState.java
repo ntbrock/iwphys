@@ -25,7 +25,7 @@ import edu.ncssm.iwp.util.IWPLog;
 
 public class DProblemState extends DEntity
 {
-
+	private static final long serialVersionUID = 1L;
 	public final static int FORWARD = 1;
 	public final static int STOP = 0;
 	public final static int BACKWARD = -1;

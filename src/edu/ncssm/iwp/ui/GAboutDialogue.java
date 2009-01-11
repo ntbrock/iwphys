@@ -22,7 +22,7 @@ import edu.ncssm.iwp.util.buildversion.*;
 
 public class GAboutDialogue extends GFrame implements ActionListener, WindowListener
 {
-
+	private static final long serialVersionUID = 1L;
 	
 	String helpFile = IWPFileLocations.HELP_MAGIC;
 	String gplFile = IWPFileLocations.GPL_MAGIC;

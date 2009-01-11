@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class GInput_Unit extends GInput_Text
 {
-
+	private static final long serialVersionUID = 1L;
 	JTextField inputUnit = new JTextField();
 
 	//---- Constructors ----

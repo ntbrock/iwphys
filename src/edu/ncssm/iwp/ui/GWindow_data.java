@@ -11,8 +11,10 @@ import java.util.*;
 import javax.swing.*;
 import edu.ncssm.iwp.util.*;
 
-public class GWindow_data extends JFrame {
-    
+public class GWindow_data extends JFrame
+{
+	private static final long serialVersionUID = 1L;
+	
     DProblem problem;
     DProblemState state;
     JTabbedPane pane;

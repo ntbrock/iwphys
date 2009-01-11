@@ -565,6 +565,7 @@ interface ConnectionEventListener
 
 class MasterWindow extends GFrame implements ConnectionEventListener
 {
+	private static final long serialVersionUID = 1L;
     private JTabbedPane tabbedPane;
     private ConnectInfoPanel connectInfoPanel;
     private FileManagerPanel loadPanel;
@@ -656,6 +657,7 @@ class MasterWindow extends GFrame implements ConnectionEventListener
 class ConnectInfoPanel extends JPanel
     implements ActionListener
 {
+	private static final long serialVersionUID = 1L;
     public static final String DEFAULT_MESSAGE_STRING = "";
 
     public int TEXT_FIELD_COLUMNS = 35;
@@ -791,6 +793,7 @@ class FileManagerPanel extends JPanel implements ListSelectionListener,
                                                  ActionListener,
                                                  MouseListener
 {
+	private static final long serialVersionUID = 1L;
     public static final String TYPE_LOAD = "LOAD";
     public static final String TYPE_SAVE = "SAVE";
 
@@ -1103,6 +1106,8 @@ class FileManagerPanel extends JPanel implements ListSelectionListener,
 
 class DirectoryPanel extends JPanel
 {
+	private static final long serialVersionUID = 1L;
+	
     JTextField dirField = null;
 
     public DirectoryPanel ( )
@@ -1136,6 +1141,7 @@ class DirectoryPanel extends JPanel
 
 class FilenameSaveAsPanel extends JPanel
 {
+	private static final long serialVersionUID = 1L;
     JTextField fileField = null;
 
     public FilenameSaveAsPanel ( ActionListener listener )
@@ -1174,6 +1180,7 @@ class FilenameSaveAsPanel extends JPanel
 
 class NorthCenterPanel extends JPanel
 {
+	private static final long serialVersionUID = 1L;
     public NorthCenterPanel ( JComponent north, JComponent center )
     {
         setLayout ( new BorderLayout ( ) );
@@ -1184,6 +1191,7 @@ class NorthCenterPanel extends JPanel
 
 class CenterSouthPanel extends JPanel
 {
+	private static final long serialVersionUID = 1L;
     public CenterSouthPanel ( JComponent center, JComponent south )
     {
         setLayout ( new BorderLayout ( ) );
@@ -1196,6 +1204,7 @@ class CenterSouthPanel extends JPanel
 
 class FlowLayoutPanel extends JPanel
 {
+	private static final long serialVersionUID = 1L;
     public FlowLayoutPanel ( JComponent addObject )
     {
         setLayout ( new FlowLayout ( ) );
@@ -1207,6 +1216,7 @@ class FlowLayoutPanel extends JPanel
 
 class FileInformationPanel extends JPanel
 {
+	private static final long serialVersionUID = 1L;
     public static final int FIELD_WIDTH = 15;
 
     private JTextField fileNameField;
@@ -1280,7 +1290,7 @@ class FileInformationPanel extends JPanel
 
 class FileButtonPanel extends JPanel
 {
-
+	private static final long serialVersionUID = 1L;
     public FileButtonPanel ( String accessType,
                              ActionListener listener )
     {

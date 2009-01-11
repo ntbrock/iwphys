@@ -29,7 +29,8 @@ import edu.ncssm.iwp.objects.directory.*;
 public class GWindow_PackagedProblemBrowser
 	extends GFrame implements ActionListener, TreeSelectionListener, MouseListener
 {
-
+	private static final long serialVersionUID = 1L;
+	
 	public static final int DEFAULT_WIDTH = 640;
 	public static final int DEFAULT_HEIGHT = 500;
 	

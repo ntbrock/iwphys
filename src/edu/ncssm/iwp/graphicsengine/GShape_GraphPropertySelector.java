@@ -14,6 +14,7 @@ import javax.swing.JRadioButton;
 
 public class GShape_GraphPropertySelector extends JPanel implements ActionListener
 {
+	private static final long serialVersionUID = 1L;
     public JRadioButton xPos;
     protected JRadioButton xVel;
     protected JRadioButton xAccel;

@@ -26,6 +26,7 @@ import edu.ncssm.iwp.util.IWPMagicFile;
 
 public class GShape_Bitmap extends GShape
 {
+	private static final long serialVersionUID = 1L;
     private Image img;
     protected String fileString;
 

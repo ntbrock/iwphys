@@ -14,7 +14,8 @@ import edu.ncssm.iwp.exceptions.*;
 
 public class GShape_Rectangle extends GShape
 {
-
+	private static final long serialVersionUID = 1L;
+	
 	public GShape_Rectangle ( DObject_Solid solid )
     {
         super( solid, "1", "1", "0" ); // default is a 1x1 circle.

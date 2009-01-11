@@ -16,7 +16,7 @@ import java.awt.*;
 
 public class GOutput_Graph extends GOutput
 {
-
+	private static final long serialVersionUID = 1L;
 	DObject_Output graphObject;
 	double range;
 	double domain; //how long a time period you want to use

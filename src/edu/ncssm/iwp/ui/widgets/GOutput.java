@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class GOutput extends JPanel
 {
-
+	private static final long serialVersionUID = 1L;
 	JLabel textLabel = new JLabel();
 
 	//---- Constructors ----

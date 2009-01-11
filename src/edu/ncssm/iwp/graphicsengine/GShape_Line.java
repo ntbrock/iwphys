@@ -23,6 +23,7 @@ import edu.ncssm.iwp.exceptions.*;
 
 public class GShape_Line extends GShape
 {
+	private static final long serialVersionUID = 1L;
     int lineThickness = 1;   // Default of 1, means just a simple Swing line drae
 
     

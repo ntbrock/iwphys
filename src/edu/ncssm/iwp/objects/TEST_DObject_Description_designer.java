@@ -7,16 +7,19 @@
 
 package edu.ncssm.iwp.objects;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import edu.ncssm.iwp.util.*;
-import edu.ncssm.iwp.problemdb.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import edu.ncssm.iwp.util.IWPLog;
 
 public class TEST_DObject_Description_designer extends JPanel implements ActionListener
 {
-
+	private static final long serialVersionUID = 1L;
+	
 	DObject_Description oObject;
 	DObject_designer oDesigner;
 	JButton oGetButton;

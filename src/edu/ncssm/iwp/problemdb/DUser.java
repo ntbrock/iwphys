@@ -2,6 +2,7 @@ package edu.ncssm.iwp.problemdb;
 
 public class DUser extends DEntity
 {
+	private static final long serialVersionUID = 1L;
 	public String username;
 	public String password;
 	public String email;

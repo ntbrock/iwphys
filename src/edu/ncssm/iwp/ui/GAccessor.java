@@ -15,7 +15,7 @@ import javax.swing.*;
 
 public class GAccessor extends JPanel
 {
-
+	private static final long serialVersionUID = 1L;
 	public GAccessor() {}
 
 	public void think( DProblemState iState ) {}

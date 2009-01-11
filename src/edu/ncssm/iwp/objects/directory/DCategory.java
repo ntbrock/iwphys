@@ -7,6 +7,7 @@ import java.util.Collection;
 
 public class DCategory extends DEntity
 {
+	private static final long serialVersionUID = 1L;
 	public String name = "Default Name";
 	public Collection problemLinks = new ArrayList(20);
 	public boolean expandedByDefault = false;

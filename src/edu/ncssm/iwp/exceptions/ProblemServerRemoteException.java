@@ -3,6 +3,7 @@ package edu.ncssm.iwp.exceptions;
 
 public class ProblemServerRemoteException extends Exception
 {
+	private static final long serialVersionUID = 1L;
     private String friendlyMessage = "no friendly message specified";
 
 	public ProblemServerRemoteException ( ) { }

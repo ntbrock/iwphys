@@ -22,7 +22,8 @@ import edu.ncssm.iwp.ui.GWindow_Animator;
 public class GWindow_Animator_setWindowProperties
     extends GWindow_Animator_setWindowPropertiesAbstract
 {
-
+	private static final long serialVersionUID = 1L;
+	
     public GWindow_Animator_setWindowProperties( GWindow_Animator parent )
     {
     	super( parent );

@@ -5,6 +5,7 @@ import java.util.*;
 
 public class Authkey implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	public static final int AUTHKEY_LIFETIME = 3600;
 	public static final int AUTHKEY_LENGTH = 16;
 

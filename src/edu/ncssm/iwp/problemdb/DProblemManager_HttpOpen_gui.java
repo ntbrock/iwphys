@@ -13,6 +13,7 @@ import edu.ncssm.iwp.util.*;
 public class DProblemManager_HttpOpen_gui extends JFrame
 	implements ActionListener
 {
+	private static final long serialVersionUID = 1L;
 
 	DProblemManager manager;
 	GWindow_Designer designer;

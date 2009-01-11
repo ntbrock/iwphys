@@ -16,6 +16,7 @@ import java.awt.*;
 
 public class MCalculator_RK4_subDesigner extends MCalculator_Abstract_subDesigner
 {
+	private static final long serialVersionUID = 1L;
 	MCalculator_RK4 object;
 	MEquation_Editor oInitDisp;
 	MEquation_Editor oInitVel;

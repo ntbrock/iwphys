@@ -14,6 +14,7 @@ import edu.ncssm.iwp.math.designers.MCalculator_Abstract_subDesigner;
 
 public class MCalculator_RK4 extends MCalculator_Diff
 {
+	private static final long serialVersionUID = 1L;
 	public MCalculator_RK4()
 	{
 		super ( new MEquation(), new MEquation(), new MEquation() );

@@ -19,6 +19,7 @@ import edu.ncssm.iwp.math.designers.MCalculator_Abstract_subDesigner;
 
 public class MCalculator_RK2 extends MCalculator_Diff
 {
+	private static final long serialVersionUID = 1L;
 
 	public MCalculator_RK2 ()
 	{

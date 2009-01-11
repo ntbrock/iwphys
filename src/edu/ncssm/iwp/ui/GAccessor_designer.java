@@ -9,7 +9,7 @@ package edu.ncssm.iwp.ui;
 
 public class GAccessor_designer extends GAccessor
 {
-
+	private static final long serialVersionUID = 1L;
 	public GAccessor_designer() {}
 
 }

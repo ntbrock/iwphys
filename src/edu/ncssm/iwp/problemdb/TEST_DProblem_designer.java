@@ -7,7 +7,7 @@ import java.awt.event.*;
 
 public class TEST_DProblem_designer extends JPanel implements ActionListener
 {
-
+	private static final long serialVersionUID = 1L;
 	DProblem oProblem;
 	DProblem_designer oDesigner;
 	JButton oGetButton;

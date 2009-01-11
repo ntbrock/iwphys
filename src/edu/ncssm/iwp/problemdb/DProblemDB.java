@@ -15,6 +15,7 @@ import edu.ncssm.iwp.util.*;
 
 public class DProblemDB extends DEntity
 {
+	private static final long serialVersionUID = 1L;
 	public static final String PROBLEM_FILE_EXTENSION = ".iwp";
 
 	String problemDirectory;

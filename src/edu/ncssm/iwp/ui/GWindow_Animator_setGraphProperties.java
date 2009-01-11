@@ -21,6 +21,8 @@ import java.text.NumberFormat;
 
 public class GWindow_Animator_setGraphProperties extends JPanel implements ActionListener
 {
+	private static final long serialVersionUID = 1L;
+	
 	JTextField minX = new JTextField("",5);
     JTextField maxX = new JTextField("",5);
     JTextField minY = new JTextField("",5);

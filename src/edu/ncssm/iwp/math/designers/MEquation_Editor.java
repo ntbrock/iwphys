@@ -20,6 +20,7 @@ import edu.ncssm.iwp.exceptions.*;
 
 public class MEquation_Editor extends JComponent implements DocumentListener
 {
+	private static final long serialVersionUID = 1L;
 	String label;
 	MEquation equation;
 	GInput_Text inputText;

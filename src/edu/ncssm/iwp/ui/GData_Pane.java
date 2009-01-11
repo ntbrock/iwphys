@@ -10,8 +10,9 @@ import javax.swing.JTabbedPane;
 
 public class GData_Pane extends JTabbedPane {
 
-protected GWindow_Animator parent;
-protected DObject_Window window;
+	private static final long serialVersionUID = 1L;
+	protected GWindow_Animator parent;
+	protected DObject_Window window;
 
     public GData_Pane(GWindow_Animator a) {
 	parent=a;

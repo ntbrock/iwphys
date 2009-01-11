@@ -32,7 +32,7 @@ import edu.ncssm.iwp.util.IWPLogPopup;
 public class DObject_Input_designer extends DObject_designer
     implements DocumentListener, KeyListener
 {
-
+	private static final long serialVersionUID = 1L;
     public DObject_Input object;
 
     JTextField inputName;

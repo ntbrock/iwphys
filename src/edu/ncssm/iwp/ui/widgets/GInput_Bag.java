@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class GInput_Bag extends JPanel
 {
-
+	private static final long serialVersionUID = 1L;
 	JPanel data = new JPanel();
 	JPanel topData = new JPanel();
 

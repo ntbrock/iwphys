@@ -11,7 +11,7 @@ import java.awt.Color;
 
 public class GColor extends DEntity
 {
-
+	private static final long serialVersionUID = 1L;
 	int red = 0;
 	int green = 0;
 	int blue = 0;

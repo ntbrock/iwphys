@@ -19,11 +19,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 import edu.ncssm.iwp.util.*;
-import edu.ncssm.iwp.problemdb.DProblem_designer;
+
 
 public class DObject_Solid_designer extends DObject_designer implements  KeyListener
 {
-
+	private static final long serialVersionUID = 1L;
+	
     DObject_Solid object;
 
 

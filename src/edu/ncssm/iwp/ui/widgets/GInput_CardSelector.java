@@ -12,6 +12,7 @@ import java.awt.event.*;
 
 public class GInput_CardSelector extends GInput implements ItemListener
 {
+	private static final long serialVersionUID = 1L;
 	GInput_Card[] cards;
 
 	JComboBox selectBox;

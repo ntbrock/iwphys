@@ -31,6 +31,7 @@ import java.awt.event.*;
 
 public class DObject_Time_animator extends DObject_animator
 {
+	private static final long serialVersionUID = 1L;
 	/*
 	GWindow_Animator animator;
 	DObject_Time object;

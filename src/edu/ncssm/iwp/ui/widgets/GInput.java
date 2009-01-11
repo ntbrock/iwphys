@@ -18,6 +18,7 @@ import javax.swing.*;
 
 public class GInput extends JPanel
 {
+	private static final long serialVersionUID = 1L;
 	private JLabel label = null;
 
 	

@@ -22,6 +22,7 @@ import edu.ncssm.iwp.util.buildversion.*;
 
 public class GFuncReferenceDialogue extends GFrame implements ActionListener, WindowListener
 {
+	private static final long serialVersionUID = 1L;
 	String helpFile = IWPFileLocations.FUNC_REFERENCE;
 	String helpData;
 

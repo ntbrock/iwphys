@@ -4,6 +4,7 @@ import edu.ncssm.iwp.problemdb.DEntity;
 
 public class DProblemLink extends DEntity
 {
+	private static final long serialVersionUID = 1L;
 	public String filename;
 	public String summary;
 	

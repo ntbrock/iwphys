@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 public class DObject_Window_designer extends DObject_designer implements KeyListener
 {
+	private static final long serialVersionUID = 1L;
     static int TEXT_WIDTH = 6;
 
     DObject_Window object;

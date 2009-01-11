@@ -12,7 +12,7 @@ import java.text.*;
 
 public class GOutput_Timer extends GOutput
 {
-
+	private static final long serialVersionUID = 1L;
 	JLabel textValue = new JLabel();
 
 	double time = 0;

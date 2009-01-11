@@ -62,6 +62,7 @@ import edu.ncssm.iwp.util.IWPMagicFile;
 
 class DProblem_designer_gui extends JPanel implements ListSelectionListener, ActionListener
 {
+	private static final long serialVersionUID = 1L;
 	public static final String SPLASH_IMAGE_SOURCE = "/images/IWPSplash.jpg";
 	
 	
@@ -428,6 +429,7 @@ class DProblem_designer_gui extends JPanel implements ListSelectionListener, Act
 
 public class DProblem_designer extends GAccessor_designer
 {
+	private static final long serialVersionUID = 1L;
     /* vars */
     DProblem oProblem;
     DProblem_designer_gui oGui;
@@ -730,7 +732,7 @@ public class DProblem_designer extends GAccessor_designer
 */
 
 class DProblem_ObjectCellRenderer extends DefaultListCellRenderer {
-
+	private static final long serialVersionUID = 1L;
     GIconSet iconSet;
 
     public DProblem_ObjectCellRenderer ( JList list, GIconSet iIconSet )

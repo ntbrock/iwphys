@@ -141,4 +141,11 @@ class CommandSet
 }
 
 
-class NoArgException extends Exception { public String getMessage ( ) { return "Missing Arg"; } };
+class NoArgException extends Exception
+{
+	private static final long serialVersionUID = 1L;
+	public String getMessage ( )
+	{
+		return "Missing Arg";
+	}
+}

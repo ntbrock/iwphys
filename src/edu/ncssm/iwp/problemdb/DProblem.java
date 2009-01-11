@@ -23,7 +23,7 @@ import edu.ncssm.iwp.util.*;
 
 public class DProblem extends DEntity
 {
-
+	private static final long serialVersionUID = 1L;
     public String username;
     public String problemName;
     public String filename = null; // a good default filename.

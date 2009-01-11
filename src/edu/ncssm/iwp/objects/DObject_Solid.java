@@ -37,7 +37,7 @@ import edu.ncssm.iwp.plugin.IWPXmlable;
 import edu.ncssm.iwp.problemdb.DProblem;
 import edu.ncssm.iwp.problemdb.DProblemState;
 import edu.ncssm.iwp.ui.GAccessor_designer;
-import edu.ncssm.iwp.problemdb.DProblem_designer;
+
 
 
 public class DObject_Solid

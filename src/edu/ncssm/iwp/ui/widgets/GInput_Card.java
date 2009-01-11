@@ -12,14 +12,14 @@ import java.awt.*;
 
 public class GInput_Card extends GInput
 {
+	private static final long serialVersionUID = 1L;
+	public GInput_Card(String iLabel) {
 
-        public GInput_Card(String iLabel) {
+		super(iLabel);
+		setLayout(new BorderLayout());
+	}
 
-        	super(iLabel);
-        	setLayout(new BorderLayout());
-        }
-
-        public String toString() { return getLabelText(); }
+	public String toString() { return getLabelText(); }
 }
 
 

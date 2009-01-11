@@ -15,7 +15,6 @@ import edu.ncssm.iwp.graphicsengine.IWPDrawer;
 import edu.ncssm.iwp.graphicsengine.GColor;
 import java.awt.Color;
 
-import edu.ncssm.iwp.problemdb.DProblem_designer;
 
 /**
  * 2007-Jan-19 IWP 3

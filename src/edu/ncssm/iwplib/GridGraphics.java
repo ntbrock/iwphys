@@ -14,6 +14,7 @@ import edu.ncssm.iwp.util.*;
 
 public class GridGraphics extends Canvas
 {
+	private static final long serialVersionUID = 1L;
     public boolean DEBUG = false;
     public void debug ( String message ) { if(DEBUG) IWPLog.info(this,message); }
 

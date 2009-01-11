@@ -17,6 +17,7 @@ import edu.ncssm.iwp.util.*;
 
 public class DProblemVariables extends DEntity
 {
+	private static final long serialVersionUID = 1L;
 	Hashtable vars;
 
 /*--------------------------------------------------------------------*/

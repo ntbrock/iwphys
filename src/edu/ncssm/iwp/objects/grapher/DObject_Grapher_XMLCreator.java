@@ -1,7 +1,6 @@
 package edu.ncssm.iwp.objects.grapher;
 
-import edu.ncssm.iwp.graphicsengine.*;
-import edu.ncssm.iwp.math.*;
+import edu.ncssm.iwp.graphicsengine.GColorXMLCreator;
 import edu.ncssm.iwp.plugin.IWPObjectXmlCreator;
 import edu.ncssm.iwp.toolkit.xml.XMLElement;
 

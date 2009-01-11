@@ -2,6 +2,7 @@ package edu.ncssm.iwp.exceptions;
 
 public class MagicFileNotFoundX extends Exception
 {
+	private static final long serialVersionUID = 1L;
 
 	public MagicFileNotFoundX() {
 		super();

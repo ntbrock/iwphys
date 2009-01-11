@@ -27,6 +27,7 @@ import edu.ncssm.iwp.util.*;
 public class GGraph extends JPanel
 	implements IWPAnimated
 {
+	private static final long serialVersionUID = 1L;
 	// I'm saving this because I have to update objects in the problem Async - GraphWindow.
 	// I don't want the graph window to reset when I hit reset on the problem, just reload,
 	// so I cannot store the variables just in the GGraph. GGraph always reads from the problem objct.

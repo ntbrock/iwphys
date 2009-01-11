@@ -1,7 +1,9 @@
 package edu.ncssm.iwp.objects.grapher;
 
-import java.util.*;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import edu.ncssm.iwp.exceptions.InvalidEquationException;
 import edu.ncssm.iwp.exceptions.InvalidObjectNameX;
 import edu.ncssm.iwp.exceptions.UnknownTickException;
@@ -20,8 +22,6 @@ import edu.ncssm.iwp.plugin.IWPXmlable;
 import edu.ncssm.iwp.problemdb.DProblem;
 import edu.ncssm.iwp.problemdb.DProblemState;
 import edu.ncssm.iwp.ui.GAccessor_designer;
-import edu.ncssm.iwp.math.*;
-import edu.ncssm.iwp.problemdb.DProblem_designer;
 
 public class DObject_Grapher
 	implements IWPObject, IWPAnimated, IWPDrawable, IWPCalculated, IWPDesigned, IWPXmlable

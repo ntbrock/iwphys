@@ -19,6 +19,7 @@ import edu.ncssm.iwp.exceptions.*;
 
 public class MCalculator_Parametric_simpleDesigner extends GAccessor_designer
 {
+	private static final long serialVersionUID = 1L;
 	String label;
 	MCalculator_Parametric_subDesigner subDesign;
 

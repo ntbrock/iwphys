@@ -20,6 +20,7 @@ import edu.ncssm.iwplib.*;
 public class MCalculator_Euler extends MCalculator_Diff
 	implements CalculatorEuler
 {
+	private static final long serialVersionUID = 1L;
 	
 	public MCalculator_Euler ()
 	{

@@ -17,6 +17,7 @@ import java.awt.*;
 
 public class GShape_Polygon_designer extends JPanel implements GShape_designer_interface
 {
+	private static final long serialVersionUID = 1L;
 	public static final int INPUT_LENGTH = 22;
 	public static final boolean INPUT_MULTILINE = false;
 	

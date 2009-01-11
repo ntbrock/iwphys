@@ -6,10 +6,14 @@
 
 package edu.ncssm.iwp.objects;
 
-import edu.ncssm.iwp.problemdb.*;
-import edu.ncssm.iwp.plugin.*;
+import edu.ncssm.iwp.plugin.IWPDesigned;
+import edu.ncssm.iwp.plugin.IWPObject;
+import edu.ncssm.iwp.plugin.IWPObjectXmlCreator;
+import edu.ncssm.iwp.plugin.IWPObjectXmlHandler;
+import edu.ncssm.iwp.plugin.IWPXmlable;
+import edu.ncssm.iwp.problemdb.DProblem;
+import edu.ncssm.iwp.problemdb.DProblemState;
 import edu.ncssm.iwp.ui.GAccessor_designer;
-import edu.ncssm.iwp.problemdb.DProblem_designer;
 
 /**
  * It's ok for this guy not to implement IWPAnimated or IWPCalculated - he's not really

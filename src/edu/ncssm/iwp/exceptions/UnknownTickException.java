@@ -1,7 +1,8 @@
 package edu.ncssm.iwp.exceptions;
 
-public class UnknownTickException extends Exception {
-
+public class UnknownTickException extends Exception
+{
+	private static final long serialVersionUID = 1L;
 	public UnknownTickException() {
 		super();
 	}

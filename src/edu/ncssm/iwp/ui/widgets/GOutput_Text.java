@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class GOutput_Text extends GOutput
 {
-
+	private static final long serialVersionUID = 1L;
 	JLabel textValue = new JLabel();
 
 	double time = 0;

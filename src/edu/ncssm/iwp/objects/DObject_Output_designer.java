@@ -22,6 +22,7 @@ import edu.ncssm.iwp.math.*;
 public class DObject_Output_designer
     extends DObject_designer implements KeyListener
 {
+	private static final long serialVersionUID = 1L;
     DObject_Output object;
 
     public DObject_Output_designer ( DObject_Output iobject )

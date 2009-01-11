@@ -16,6 +16,7 @@ import java.awt.event.*;
 
 public class DObject_Input_animator extends DObject_animator implements KeyListener
 {
+	private static final long serialVersionUID = 1L;
 	DObject_Input object;
 	Color origInputBackground = null;
 	

@@ -30,6 +30,7 @@ import javax.swing.border.*;
 
 public class GShape_designer extends GAccessor implements ItemListener
 {
+	private static final long serialVersionUID = 1L;
    	GShape shape;
 
    	// I don't have a ref to the parent object here, but instead

@@ -14,6 +14,7 @@ import java.awt.*;
 
 public class DObject_Output_animator extends DObject_animator
 {
+	private static final long serialVersionUID = 1L;
 	public DObject_Output object;
 	public DObject_Output_animator (DObject_Output iObject)
 	{

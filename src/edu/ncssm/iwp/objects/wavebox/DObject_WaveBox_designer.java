@@ -26,6 +26,7 @@ import edu.ncssm.iwp.ui.widgets.GInput_ColorSelector;
 
 public class DObject_WaveBox_designer extends DObject_designer
 {
+	private static final long serialVersionUID = 1L;
     static int TEXT_WIDTH = 6;
 
     DObject_WaveBox object;

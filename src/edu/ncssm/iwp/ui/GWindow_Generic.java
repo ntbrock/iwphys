@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class GWindow_Generic extends GFrame
 {
-	
+	private static final long serialVersionUID = 1L;
 
 	public GWindow_Generic(String iTitle, Component iComp)
 	{

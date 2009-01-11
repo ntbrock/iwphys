@@ -11,6 +11,7 @@ import java.awt.*;
 
 public class DObject_Description_animator extends DObject_animator
 {
+	private static final long serialVersionUID = 1L;
 	DObject_Description object;
 
 	public DObject_Description_animator ( DObject_Description ipoObject )

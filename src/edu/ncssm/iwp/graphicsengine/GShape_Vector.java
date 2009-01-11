@@ -10,7 +10,9 @@ import java.lang.Math;
 
 public class GShape_Vector extends GShape_Line
 {
-   private Color vectorHeadColorOverrde;
+	private static final long serialVersionUID = 1L;
+	
+	private Color vectorHeadColorOverrde;
 
 	int lineThickness = 1;   // Default of 1, means just a simple Swing line drae
     

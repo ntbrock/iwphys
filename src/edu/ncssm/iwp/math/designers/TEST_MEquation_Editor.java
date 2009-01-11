@@ -11,6 +11,7 @@ import java.awt.event.*;
 
 public class TEST_MEquation_Editor extends JPanel implements ActionListener
 {
+	private static final long serialVersionUID = 1L;
 	MEquation_Editor editor;
 	
 	JPanel actionPanel;

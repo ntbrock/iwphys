@@ -38,7 +38,7 @@ import org.xml.sax.SAXException;
 
 public class TEST_IWPObject extends GFrame implements WindowListener, ChangeListener, ActionListener
 {
-
+	private static final long serialVersionUID = 1L;
 	public static void main ( String args[] )
 	{
 		if ( args.length == 0 ) { 
@@ -314,6 +314,8 @@ public class TEST_IWPObject extends GFrame implements WindowListener, ChangeList
 	
 	class AnonymousRenderPanel extends JPanel
 	{
+		private static final long serialVersionUID = 1L;
+		
 		DObject_Time time = new DObject_Time();
 		DObject_Window window = new DObject_Window();
 		DProblemState problemState = new DProblemState( new DProblem() );
@@ -512,6 +514,7 @@ public class TEST_IWPObject extends GFrame implements WindowListener, ChangeList
  */
 class NortherPanel extends JPanel
 {
+	private static final long serialVersionUID = 1L;
 	public NortherPanel ( JPanel subPanel )
 	{			
 		setLayout(new BorderLayout() );
@@ -609,6 +612,7 @@ class InternalObjectXmlParser
 
 class FactorySelectorFrame extends GFrame implements ActionListener
 {
+	private static final long serialVersionUID = 1L;
 	JButton objectButtons[];
 	
 	public FactorySelectorFrame(  )

@@ -7,18 +7,21 @@
 
 package edu.ncssm.iwp.objects;
 
-import javax.swing.*;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import edu.ncssm.iwp.util.IWPLog;
-
-import java.awt.*;
-import java.awt.event.*;
-import edu.ncssm.iwp.problemdb.*;
 
 
 public class TEST_DObject_Solid_designer extends JPanel implements ActionListener
 {
-
+	private static final long serialVersionUID = 1L;
+	
 	DObject_Solid oObject;
 	DObject_designer oDesigner;
 	JButton oGetButton;

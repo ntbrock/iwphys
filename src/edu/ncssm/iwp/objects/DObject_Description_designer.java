@@ -20,7 +20,7 @@ import javax.swing.border.*;
 
 public class DObject_Description_designer extends DObject_designer
 {
-
+	private static final long serialVersionUID = 1L;
     DObject_Description object; /* For the novelty */
 
 

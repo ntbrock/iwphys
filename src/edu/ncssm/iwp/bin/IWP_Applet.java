@@ -21,6 +21,7 @@ import edu.ncssm.iwp.util.*;
 
 public class IWP_Applet extends java.applet.Applet
 {
+	private static final long serialVersionUID = 1L;
 
     public static GWindow_Animator animator;
     public static GWindow_Designer designer;

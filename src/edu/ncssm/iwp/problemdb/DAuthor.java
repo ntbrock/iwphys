@@ -11,6 +11,7 @@ package edu.ncssm.iwp.problemdb;
 
 public class DAuthor extends DEntity
 {
+	private static final long serialVersionUID = 1L;
 	public String username = null;
 	public String name = null;
 	public String organization = null;

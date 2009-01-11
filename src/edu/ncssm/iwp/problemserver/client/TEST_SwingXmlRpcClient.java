@@ -13,7 +13,7 @@ import edu.ncssm.iwp.util.*;
 public class TEST_SwingXmlRpcClient extends JFrame
 	implements ProblemListener, ActionListener
 {
-
+	private static final long serialVersionUID = 1L;
 	//----- TEST ----------------------------------------------------------
 	/**
 	 * A Test frame

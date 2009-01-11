@@ -19,7 +19,7 @@ import edu.ncssm.iwp.exceptions.*;
 import edu.ncssm.iwp.util.*;
 
 public class GPolygon_Point extends JPanel implements ActionListener {
-    
+	private static final long serialVersionUID = 1L;
     //protected MCalculator xPos;
     //protected MCalculator yPos;
     protected MCalculator_Parametric_simpleDesigner xDes;

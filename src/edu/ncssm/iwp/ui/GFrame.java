@@ -19,7 +19,7 @@ import java.awt.Toolkit;
 
 public class GFrame extends JFrame
 {
-
+	private static final long serialVersionUID = 1L;
 	public GFrame() {}
 
 	public void centerOnScreen()

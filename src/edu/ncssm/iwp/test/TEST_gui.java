@@ -19,6 +19,7 @@ import java.awt.event.*;
 
 public class TEST_gui extends JFrame implements WindowListener
 {
+	private static final long serialVersionUID = 1L;
 	JTabbedPane tabbedPane;
 
 

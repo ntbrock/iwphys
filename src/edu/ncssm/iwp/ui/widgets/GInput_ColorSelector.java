@@ -15,6 +15,7 @@ import java.awt.event.*;
 
 public class GInput_ColorSelector extends GInput implements ActionListener
 {
+	private static final long serialVersionUID = 1L;
 	JButton colorButton = new JButton("Change");
 	Color color = new Color(0,0,255);
 

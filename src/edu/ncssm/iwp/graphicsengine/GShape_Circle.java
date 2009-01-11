@@ -13,7 +13,7 @@ import edu.ncssm.iwp.exceptions.*;
 
 public class GShape_Circle extends GShape
 {
-
+	private static final long serialVersionUID = 1L;
     public GShape_Circle ( DObject_Solid solid )
     {
         super( solid, "1", "1" ); // default is a 1x1 circle.

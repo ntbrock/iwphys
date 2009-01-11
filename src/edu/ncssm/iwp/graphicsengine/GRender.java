@@ -34,6 +34,7 @@ import edu.ncssm.iwp.util.IWPLog;
 public class GRender extends JPanel
 	implements IWPAnimated
 {
+	private static final long serialVersionUID = 1L;
 	// IWP3 has this set bigger.
 	public static final int WIDTH = 475;
 	public static final int HEIGHT = 475;
