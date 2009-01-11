@@ -76,7 +76,10 @@ import edu.ncssm.iwp.util.buildversion.BuildVersion;
  */
 
 public class GWindow_Animator implements WindowListener, ActionListener,
-        ProblemListener {
+        ProblemListener
+{
+	public static String TITLEBAR_VERSION_STRING = "(Version " + BuildVersion.VERSION + ")";
+	
     public static int MODE_APPLICATION = 1;
 
     public static int MODE_APPLET = 2;
@@ -142,7 +145,7 @@ public class GWindow_Animator implements WindowListener, ActionListener,
         // if applet mode, uise the applet's frame/contentPane.
         frame = new GFrame();
         frame.addWindowListener(this);
-        frame.setTitle("IWP Animator (Version " + BuildVersion.VERSION + ")");
+        frame.setTitle("IWP Animator " + TITLEBAR_VERSION_STRING);
         frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.centerOnScreen();
 
@@ -218,6 +221,12 @@ public class GWindow_Animator implements WindowListener, ActionListener,
 
         this.problem = iProblem;
 
+        // 2009-Jan-11 brockman, set problem filename in title
+        if ( problem.getFilename() != null ) {
+        	frame.setTitle("IWP Animator: " + problem.getFilename() );
+        }
+
+        
         // 2007-Jun-07 Brockman IWP3. To get rid of the +.0000000000000000001 double precision errors, I
         // can use an alternate number storage mechanism
         // System.err.println("DEBUG: setting precision mode to: " + problem.getTime().getUsePreciseCalculations() );
@@ -751,6 +760,10 @@ public class GWindow_Animator implements WindowListener, ActionListener,
                 "Unable to Save Animated problems. How did you get here?");
     }
 
+    public synchronized void indicateProblemLoadingBegin(String filename) {
+        frame.setTitle("IWP Animator: Please Wait, Loading: " + filename );
+    }
+    
     // -------------------------------------------------------------------
     // GUI Construction down here for cleanliness.
 

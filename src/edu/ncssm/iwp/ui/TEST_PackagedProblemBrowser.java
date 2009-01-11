@@ -28,6 +28,11 @@ public class TEST_PackagedProblemBrowser
 class DummyProblemListener implements ProblemListener
 {
 
+	public void indicateProblemLoadingBegin ( String filename )
+	{
+		
+	}
+	
 	public void loadProblem(DProblem problem) {
 
 		

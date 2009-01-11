@@ -109,7 +109,9 @@ public class GWindow_PackagedProblemBrowser
 			if (e.getSource() == openButton ) {
 			
 				if ( selectedProblemLink != null ) { 
-				
+
+					problemListener.indicateProblemLoadingBegin(selectedProblemLink.getFilename());
+					
 					IWPLog.debug(this, "Loading: " + selectedProblemLink.getFilename() );
 					DProblem problem = managerMagic.loadProblem( selectedProblemLink.getFilename() );
 			

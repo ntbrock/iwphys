@@ -38,6 +38,15 @@ public class DProblemManager_FileOpen_gui extends GAccessor
 		fileChooser.showOpenDialog(tmpFrame);
 	}
 
+	// 2009-Jan-11 brockman, loading ui improvements.
+	public String getSelectedFilename()
+	{
+		File foundFile = fileChooser.getSelectedFile();
+		if (foundFile == null) return null;
+		return foundFile.getName();
+	}
+	
+	
 	public DProblem getProblem( )
 		throws DataStoreException
 	{

@@ -112,7 +112,11 @@ public class TEST_SwingXmlRpcClient extends JFrame
 		}
 	}
 
-		
+	public  void indicateProblemLoadingBegin(String filename) {
+		IWPLog.info(this,"[TEST_SwingXmlRpcClient] indicateProblemLoadingBegin: " + filename );
+	}
+	
+	    
 	/**
 	 * used by main
 	 */

@@ -12,6 +12,7 @@ import edu.ncssm.iwp.plugin.*;
 import edu.ncssm.iwp.problemserver.client.*;
 import edu.ncssm.iwp.util.buildversion.*;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Hashtable;
@@ -370,10 +371,14 @@ public class GWindow_Designer extends GFrame
 
                 try {
                     IWPLog.debug(this,"[GWindow_Designer] opening local");
-
+                    
                     // I think this blocks the UI thread
                     DProblemManager_FileOpen_gui g = new DProblemManager_FileOpen_gui ( manager );
                     g.selectFile();
+                    
+                    // 2009-Jan-11 some sort of visual indicator that the problem is loading.
+                    indicateProblemLoadingBegin(g.getSelectedFilename());
+                    
                     DProblem prob = g.getProblem();
                     // brockman 2005-oct-16
                     designProblem ( prob );
@@ -398,7 +403,7 @@ public class GWindow_Designer extends GFrame
                     } catch ( IrreversibleLoadTypeException ile ) {
                         handleSaveAs();
                     } catch ( DataStoreException dse ) {
-                        IWPLogPopup.x(this,"ERROR: Unable to store file: " + dse.getMessage ( ), dse );
+                       IWPLogPopup.x(this,"ERROR: Unable to store file: " + dse.getMessage ( ), dse );
                     }
                 } else {
                     // I don't have a filename yet. I have to save as. Save as sets the filename in.
@@ -570,6 +575,8 @@ public class GWindow_Designer extends GFrame
     public void loadProblem ( DProblem problem )
     {
         designProblem ( problem );
+        
+        // Title is reset.
     }
 
     public void saveProblem ( ProblemWriter output )
@@ -578,6 +585,11 @@ public class GWindow_Designer extends GFrame
         output.writeProblem ( getProblem() );
     }
 
+    public  void indicateProblemLoadingBegin(String filename) {
+        setTitle("IWP Designer: Please Wait, Loading: " + filename );
+    }
+    
+    
 
     //--------------------------------------------------------------------
 
