@@ -1,4 +1,4 @@
-IWP (Interactive Web Physics)  Version 4. Release Date: 2008-Sep-15
+IWP (Interactive Web Physics)  Version 4. Release Date: 2009-Jan-27
 
 Please visit us on the web at: http://www.iwphys.org/
 See example problems at: http://iwp2.ncssm.edu/pps/
@@ -8,10 +8,10 @@ This software was written by students at the North Carolina School of Science an
 
 This software is designed to make authoring and viewing interactive physics problems over the web a snap. No programming is required.
 
-This latest version is version 3, which is a modernized build of the software initially started at the school in 1999. Primary Technical Support: taylor.brockman@gmail.com. Please help us by reporting bugs.
+This latest version is version 4, which is a modernized version of the software initially started at the school in 1999. Primary Technical Support: taylor.brockman@gmail.com. Please help us by reporting bugs.
 
 Many thanks to all the contributing developers, in alphabetical order:
-  Chris Clearfield. Ben Davis,  Paul Huang, Sagar Indurkhya, Milind Kulkarni, Ben Lee, Brian Sweeney
+  Chris Clearfield, Jason Cockrell, Ben Davis, Paul Huang, Sagar Indurkhya, Milind Kulkarni, Ben Lee, Cory Li, Brian Sweeney
 
 And a special thanks to:
   Dr. Loren Winters and NCSSM
