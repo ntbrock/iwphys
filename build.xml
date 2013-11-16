@@ -190,12 +190,14 @@
             <attribute name="Built-By" value="${user.name}"/>
             <attribute name="Build-Date" value="${DSTAMP}"/>
             <attribute name="Main-Class" value="edu.ncssm.iwp.bin.IWP_Animator"/>
+	    <attribute name="Permissions" value="all-permissions"/>
         </manifest>
 
         <manifest file="${designerMani}" mode="update">
             <attribute name="Built-By" value="${user.name}"/>
             <attribute name="Build-Date" value="${DSTAMP}"/>
             <attribute name="Main-Class" value="edu.ncssm.iwp.bin.IWP_Designer"/>
+	    <attribute name="Permissions" value="all-permissions"/>
         </manifest>
     </target>
 
