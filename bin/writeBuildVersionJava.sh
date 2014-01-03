@@ -1,6 +1,6 @@
 #!/bin/sh
 
-MAJOR_VERSION="4.0.5 Public Release"
+MAJOR_VERSION="4.0.5 Signed 2014-Jan-02"
 OUT_FILE="./src/edu/ncssm/iwp/util/buildversion/BuildVersion.java"
 
 echo "package edu.ncssm.iwp.util.buildversion;" >$OUT_FILE

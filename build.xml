@@ -17,7 +17,9 @@
 
 	<property name="designerMani" value="${build}/META-INF/designer.MF" />
 	<property name="studentMani"  value="${build}/META-INF/student.MF" />
-    <property name="keystore"     value="${etc}/jarsign.keystore" />
+        <property name="keystore"     value="${etc}/jarsign.keystore" />
+        <property name="keyalias"     value="key" />
+        <property name="keypass"      value="" />
 
 	<property name="jarfile"  value="iwp.jar" />
 	<property name="jarfileStudent"  value="iwpStudent.jar" />
@@ -124,7 +126,7 @@
 			</fileset>
 		</jar>
 
-        <signjar jar="${dist}/${jarfile}" alias="key" storepass="iwpkey" keystore="${keystore}" />
+        <signjar jar="${dist}/${jarfile}" alias="${keyalias}" storepass="${keypass}" keystore="${keystore}" />
 
  		<copy todir="${dist}">
 			<fileset file="${build}/${jarfile}" />
@@ -150,7 +152,7 @@
 			</fileset>
 		</jar>
 
-        <signjar jar="${build}/${jarfileStudent}" alias="key" storepass="iwpkey" keystore="${keystore}" />
+        <signjar jar="${build}/${jarfileStudent}" alias="${keyalias}" storepass="${keypass}" keystore="${keystore}" />
 
  		<copy todir="${dist}">
 			<fileset file="${build}/${jarfileStudent}" />

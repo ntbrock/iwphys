@@ -1,0 +1,47 @@
+HOWTO Use DigiCert to create a key and sign IWP .jar files for browser applet display.
+
+0. Determine the Subject
+Note that DigiCert will review the information against an ID.
+I ended up changing the certifiate to my personal name, scanning my SC license and passport,
+and sending in a notarized form.
+
+Subject:
+$ openssl x509 -in nathaniel_brockman.pem -subject
+
+/C=US/ST=South Carolina/L=Mt. Pleasant/O=Nathaniel Brockman/CN=Nathaniel Brockman
+
+
+1. Create a CSR + Private Key
+
+#http://www.sslshopper.com/article-most-common-openssl-commands.html
+openssl req -out CSR.csr -new -newkey rsa:2048 -nodes -keyout privateKey.key
+
+
+2. Upload CSR to DigiCert as new or re-key.
+
+
+3. Download the intermediate + root as .pem files, best to copy + paste from my account textbox.
+   DigiCert_Intermediate.pem
+   DigiCert_Root.pem
+
+4. Downlaod the key as a .pem file, best to copy paste to .pem file.
+   nathaniel_brockman.pem
+
+5. Build the key + certificate into a Java Key Store (jks)
+6. Import the other intermediate + root.
+
+   used Keyman to do these last two steps. Note that keytool doesn't have key import capabilities
+
+http://www.sslshopper.com/article-most-common-java-keytool-keystore-commands.html
+
+
+7. UPload to test!
+
+rsync -ravP dist/iwpStudent.jar visionis@iwphys.org:public_html/iwphys.org/4.0/iwpStudent_4_0_5.jar
+rsync -ravP dist/iwp.jar visionis@iwphys.org:public_html/iwphys.org/4.0/iwp_4_0_5.jar
+rsync -ravP dist/iwp.jar visionis@iwphys.org:public_html/iwphys.org/TEST_2014Jan02/iwp_applet.jar
+ 
+8. Test:
+
+http://iwphys.org/TEST_2014Jan02
+
