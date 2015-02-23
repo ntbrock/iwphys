@@ -1,4 +1,4 @@
-
+<!-- 2015-Feb-22 Updated to Version 4.1 to set sandbox permissions, new code signing and SSL -->
 <project name="Interactive Web Physics" default="dist" basedir=".">
 
 	<description>Interactive Web Physics Animator and Designer</description>
@@ -17,12 +17,14 @@
 
 	<property name="designerMani" value="${build}/META-INF/designer.MF" />
 	<property name="studentMani"  value="${build}/META-INF/student.MF" />
-        <property name="keystore"     value="${etc}/jarsign.keystore" />
-        <property name="keyalias"     value="key" />
-        <property name="keypass"      value="" />
 
-	<property name="jarfile"  value="iwp.jar" />
-	<property name="jarfileStudent"  value="iwpStudent.jar" />
+	<!-- Do not check in private information -->
+        <property name="keystore"     value="${etc}/nathaniel_brockman_2014Dec.keystore" />
+        <property name="keyalias"     value="brockman" />
+        <property name="keypass"      value="AAAAAAAAAAAAA" />
+
+	<property name="jarfile"  value="iwp-4_1.jar" />
+	<property name="jarfileStudent"  value="iwp-applet-4_1.jar" />
 
 
 	<path id="build.classpath">
@@ -126,7 +128,7 @@
 			</fileset>
 		</jar>
 
-        <signjar jar="${dist}/${jarfile}" alias="${keyalias}" storepass="${keypass}" keystore="${keystore}" />
+        <signjar jar="${dist}/${jarfile}" alias="${keyalias}" storepass="${keypass}" keystore="${keystore}" tsaurl="http://timestamp.comodoca.com/rfc3161"/>
 
  		<copy todir="${dist}">
 			<fileset file="${build}/${jarfile}" />
@@ -152,7 +154,7 @@
 			</fileset>
 		</jar>
 
-        <signjar jar="${build}/${jarfileStudent}" alias="${keyalias}" storepass="${keypass}" keystore="${keystore}" />
+        <signjar jar="${build}/${jarfileStudent}" alias="${keyalias}" storepass="${keypass}" keystore="${keystore}" tsaurl="http://timestamp.comodoca.com/rfc3161" />
 
  		<copy todir="${dist}">
 			<fileset file="${build}/${jarfileStudent}" />
@@ -192,7 +194,10 @@
             <attribute name="Built-By" value="${user.name}"/>
             <attribute name="Build-Date" value="${DSTAMP}"/>
             <attribute name="Main-Class" value="edu.ncssm.iwp.bin.IWP_Animator"/>
-	    <attribute name="Permissions" value="all-permissions"/>
+	    <!-- 2015Feb22 Brockman, Verison 4.1 sandbox pemissions for students -->
+	    <attribute name="Permissions" value="sandbox"/>
+	    <attribute name="Application-Name" value="Interactive Web Physics 4.1"/>
+	    <attribute name="Trusted-Only" value="false"/>
         </manifest>
 
         <manifest file="${designerMani}" mode="update">
