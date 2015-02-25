@@ -14,12 +14,11 @@ $problemPath = "etc" . $filesep . "problems";
 // Helpful urls.
 $animateUri = $prefixUri . "/webInterface.php";
 $problemListUri = $prefixUri . "/problemList.php";
-$jarUri = $prefixUri . "/content/iwp_applet.jar";
+$jarUri = $prefixUri . "/iwp-applet-4_1.jar";
 $gfxUri = $prefixUri . "/gfx";
 $helpUri = $prefixUri . "/help.php";
 $indexUri = $prefixUri . "/";
 
-$jarUri = $prefixUri . "/content/iwp_applet.jar";
 
 function common_header($sectionName) {
 	global $gfxUri, $indexUri, $helpUri, $problemListUri;
@@ -60,7 +59,7 @@ function common_footer() {
 </tr>
 </table>
 
-	<center>Copyright &copy; 2008 Loren Winters, Taylor Brockman, IWP</center>
+	<center>Copyright &copy; 2008-2015 Loren Winters, Taylor Brockman, IWP</center>
 </body>
 </html>
 

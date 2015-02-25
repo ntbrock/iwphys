@@ -9,7 +9,12 @@ include_once('common.inc');
 $iwpPath = $_SERVER['PATH_INFO'];
 
 // The fully formed URL to the problem file.
-$iwpUrl = 'http://' . $_SERVER['HTTP_HOST'] . $prefixUri . '/' . $problemPath . $iwpPath;
+// Special Cloudflare logic to detect forwarded SSL  2015Feb25 Brockman
+$httpSecure = false;
+if ( ! empty($_SERVER['HTTPS']) ) { $httpSecure = true; }
+if ( ! empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) { $httpSecure = true; }
+
+$iwpUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $prefixUri . '/' . $problemPath . $iwpPath;
 
 $iwpUrl = preg_replace("/[ ]/", "%20", $iwpUrl, -1 );
 
@@ -27,8 +32,11 @@ $iwpUrl = preg_replace("/[ ]/", "%20", $iwpUrl, -1 );
 
 <br><br>
 
-<center>(<i>The Java Applet will create resizable popup windows on your desktop</i>)</center><br>
+
+  <center><p><i><font size="+2">Java Applet not running?</font></i></p><p>Look for a 'Plug In Blocked' <img src="/pps/gfx/plugin-blocked.png"> in the URL location bar of your web browser. You will need to give your permission to run the applet!  Upgrading to Java Version 8 is also a great idea.</p></center>
+
 <br>
+
 
 
 <? common_footer(); ?>
