@@ -29,7 +29,7 @@ import edu.ncssm.iwp.problemdb.*;
 import edu.ncssm.iwp.exceptions.*;
 
 import edu.ncssm.iwp.util.*;
-
+import com.alee.laf.WebLookAndFeel;
 
 public class IWP_Designer
 {
@@ -40,6 +40,9 @@ public class IWP_Designer
 
 	public static void main(String args[])
 	{
+		// 2015-Jun-20 Interactive Web Physics 5 - Fresh Look and Feel
+		WebLookAndFeel.install ();
+
 		// brockman goofin around. 08.10.03
         //Make sure we have nice window decorations.
         // JFrame.setDefaultLookAndFeelDecorated(true);

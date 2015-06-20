@@ -1,4 +1,4 @@
-<!-- 2015-Feb-22 Updated to Version 4.1 to set sandbox permissions, new code signing and SSL -->
+<!-- 2015-Jun-20 Welcome to Interactive Web Physics Version 5! -->
 <project name="Interactive Web Physics" default="dist" basedir=".">
 
 	<description>Interactive Web Physics Animator and Designer</description>
