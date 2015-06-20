@@ -23,7 +23,6 @@ public class DProblemManager_HTTP extends DProblemManager_Base
 		throws DataStoreException
 	{
 		try { 
-		    
 			URL url = new URL ( urlString );
 			IWPLog.info(this,"[DProblemManager_HTTP] URL :"+urlString);
 			BufferedReader in = new BufferedReader ( new InputStreamReader ( url.openStream ( ) ) );

@@ -12,7 +12,7 @@ package edu.ncssm.iwp.bin;
 import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
-
+import java.net.URL;
 import edu.ncssm.iwp.ui.*;
 import edu.ncssm.iwp.problemdb.*;
 import edu.ncssm.iwp.exceptions.*;
@@ -194,17 +194,55 @@ public class IWP_Applet extends java.applet.Applet
      * @return
      */
 
-    private DProblem loadHttpProblem (String url)
+    private DProblem loadHttpProblem (String paramProblem)
     {
 
         try {
             DProblemManager_HTTP probManager = new DProblemManager_HTTP();
-            return probManager.loadProblem ( getParameter ( PARAMETER_PROBLEM ) );
+
+			// 2015-Mar-16 - Security Exception Debugging Code
+			// ---------------------------------------------------------
+			if ( true ) { 
+				System.err.println("[IWP_Applet:206] Applet.getCodeBase(): " + this.getCodeBase() );
+				System.err.println("[IWP_Applet:207] ParamterProblem: " + paramProblem );
+				// Object o = new java.net.URL(url).getContent();
+				// System.err.println("[DProblemManager_HTTP:28] URL.getContent: " + o );
+			}
+
+			// Remap to take relative URL filenames, 2015Mar
+			// ---------------------------------------------------------
+
+			URL codeBase = this.getCodeBase();
+			String url = null;
+
+			if ( paramProblem.startsWith("http://") || paramProblem.startsWith("https://") ) {
+				// Direct, full url
+				url = paramProblem;
+			} else { 
+				// Build the URL from teh codeBase.
+				if ( codeBase.toString().endsWith("/") ) { 
+					url = codeBase + paramProblem;					
+				} else { 
+					url = codeBase + "/" + paramProblem;
+				}
+			}
+
+			if ( url != null ) { 
+				return probManager.loadProblem ( url );
+			} else { 
+				return null;
+			}
+
+			// ---------------------------------------------------------
         }
         catch ( Exception e ) {
+			
             // any exception will cause a default problem to be loaded.
             JOptionPane.showMessageDialog(null,
             "Error: " + e.getClass().getName() + "\n" + e.getMessage() + "\nUsing blank problem.", "Error in loading Problem", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+
+
             return null;
         }
     }
