@@ -1,4 +1,4 @@
-<!-- 2015-Jun-20 Welcome to Interactive Web Physics Version 5! -->
+<!-- 2015-Feb-22 Updated to Version 4.1 to set sandbox permissions, new code signing and SSL -->
 <project name="Interactive Web Physics" default="dist" basedir=".">
 
 	<description>Interactive Web Physics Animator and Designer</description>
@@ -19,12 +19,12 @@
 	<property name="studentMani"  value="${build}/META-INF/student.MF" />
 
 	<!-- Do not check in private information -->
-        <property name="keystore"     value="${etc}/nathaniel_brockman_2014Dec.keystore" />
+        <property name="keystore"     value="${etc}/nathaniel_brockman_2016Jan.keystore" />
         <property name="keyalias"     value="brockman" />
-        <property name="keypass"      value="AAAAAAAAAAAAA" />
+        <property name="keypass"      value="hwRAAAAAAA" />
 
-	<property name="jarfile"  value="iwp-4_1.jar" />
-	<property name="jarfileStudent"  value="iwp-applet-4_1.jar" />
+	<property name="jarfile"  value="iwp-4_1_2.jar" />
+	<property name="jarfileStudent"  value="iwp-applet-4_1_2.jar" />
 
 
 	<path id="build.classpath">
