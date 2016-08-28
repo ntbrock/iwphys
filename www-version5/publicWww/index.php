@@ -1,35 +1,16 @@
+<?php
+// 2016-Aug-28 Brockman - Revamp for IWP5
+// 'New-age' php script tha trenders the right java code based on the PATH_INFO
+
+include_once('iwp-config.php');
+
+?>
+
 <!DOCTYPE html>
+<meta charset="utf-8">
 <html lang="en">
 
-<head>
-  <!-- Template - StartBootStrap.com Heroic Features - https://startbootstrap.com/template-overviews/heroic-features/ -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Interactive Web Physics - iwphys.org</title>
-
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.css" rel="stylesheet"> <!-- Version 4.6.3 -->
-
-    <!-- Custom CSS -->
-    <link href="css/heroic-features.css" rel="stylesheet">
-
-    <!-- IWP Common Application CSS -->
-    <link href="css/iwphys-common.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
+<?php include_once("iwp-head.php") ?>
 
 <body>
 
@@ -107,7 +88,7 @@
                         <h3>em-ratio-1c <i class="fa fa-star fa-1x" style="color: #FFD700;"></i></h3>
                         <p>Electro Magnetic Fields, Dr. Loren Winters</p>
                         <p>
-                          <a href="./animations/Charged Particle Motion/em-ratio-1.iwp" class="btn btn-default">Animate</a>
+                          <a href="animate.php/iwp-packaged/Charged%20Particle%20Motion/em-ratio-1.iwp.html" class="btn btn-default">Animate</a>
                           <!-- <a href="#" class="btn btn-default"><i class="fa fa-icon-star fa-2x" style="color: black"></i></a> -->
                         </p>
                     </div>

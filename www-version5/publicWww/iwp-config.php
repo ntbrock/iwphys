@@ -11,8 +11,8 @@ $animationPath = "animations";
 //----------------------------------------------------------------------------------------
 // Relative URL Routes
 
-$prefixUri       = '/';
-$indexUri        = $prefixUri;
+$prefixUri       = '/www.iwphys.org/';
+$baseUri         = $prefixUri;
 $animateUri      = $prefixUri . "animate.php";
 $xtojUri         = $prefixUri . "xtoj.php";
 $problemListUri  = $prefixUri . "problemList.php";
