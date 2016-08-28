@@ -8,7 +8,7 @@
 $animationPath = "animations";
 
 // Webserver Prefix 
-$prefixUri   = '/www.iwphys.org/';
+$prefixUri   = '/5/';
 
 include_once("iwp-common.php");
 ?>
