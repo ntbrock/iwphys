@@ -16,7 +16,7 @@
     <link href="<?= $baseUrl ?>css/heroic-features.css" rel="stylesheet">
 
     <!-- IWP Common Application CSS -->
-    <link href="<?= $baseUrl ?>css/iwphys-common.css" rel="stylesheet">
+    <link href="<?= $baseUrl ?>css/iwp-common.css" rel="stylesheet">
 <!--    <link href="<?= $baseUrl ?>css/iwp5.css" rel="stylesheet"> -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

@@ -9,3 +9,7 @@ a.navbar-brand {
 .navbar-nav li a { 
       color: #eee !important;
 }
+
+.jumbotron { 
+	   background-color: rgba(251, 241, 173, 0.7 ); /* #fbf1ad; */
+}
