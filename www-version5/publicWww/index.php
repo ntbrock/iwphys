@@ -17,17 +17,6 @@ include_once('iwp-config.php');
     <div class="container">
 
         <!-- Jumbotron Header -->
-<!--
-        <header class="jumbotron hero-spacer">
-            <h1>A Warm Welcome!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-            <p><a class="btn btn-primary btn-large">Call to action!</a>
-            </p>
-        </header>
-
-        <hr>
--->
-
         <div class="row">
             <div class="col-lg-12">
         <header class="jumbotron hero-spacer">
@@ -42,8 +31,9 @@ include_once('iwp-config.php');
 
         <!-- Title -->
         <div class="row">
-            <div class="col-lg-12">
-                <h3>Charged Particle Motion</h3>
+            <div class="col-lg-12" style="margin-bottom: 0.5em;">
+                <h3>Physics Animations for the Web Browser - Featured Animations</h3>
+		
             </div>
         </div>
 	<!-- /.row -->

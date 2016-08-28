@@ -14,6 +14,8 @@ header('Content-Type: text/html');
 <body>
 
 <?php include_once("iwp-nav.php") ?>
+     
+  <div class="iwp-animate">
 
   <div id="problem" problem-uri="<?= $xtojUrl ?>"></div>
 
@@ -98,6 +100,7 @@ header('Content-Type: text/html');
     </tr>
   </table>
 
+  </div> <!-- end iwp-animate -->
 
   <script type="text/javascript">
     // On Pageload, pull our hardcoded unit test.

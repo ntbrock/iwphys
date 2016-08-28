@@ -72,7 +72,7 @@ foreach ( $animationFiles as $file ) {
             <img src="./screenshots/<?= $file ?>.png" alt="">
                 <div class="caption">
                    <h3><?= $name ?></i></h3> <!-- color: #FFD700; -->
-                          <a href="<?= $animateUrl ?>/<?= $uri ?>" class="btn btn-default">Animate</a>
+                          <a href="<?= $baseAnimateUrl ?><?= $uri ?>" class="btn btn-default">Animate</a>
                         <p>
 			<i class="fa fa-star-o fa-1x" style="color: #ccc;"></i>	
 			<?= readIwpFileDescription($file) ?>
