@@ -88,7 +88,7 @@ include_once('iwp-config.php');
                         <h3>em-ratio-1c <i class="fa fa-star fa-1x" style="color: #FFD700;"></i></h3>
                         <p>Electro Magnetic Fields, Dr. Loren Winters</p>
                         <p>
-                          <a href="animate.php/iwp-packaged/Charged%20Particle%20Motion/em-ratio-1.iwp.html" class="btn btn-default">Animate</a>
+                          <a href="animate.php/iwp-packaged/Charged%20Particle%20Motion/em-ratio-1.iwp" class="btn btn-default">Animate</a>
                           <!-- <a href="#" class="btn btn-default"><i class="fa fa-icon-star fa-2x" style="color: black"></i></a> -->
                         </p>
                     </div>
