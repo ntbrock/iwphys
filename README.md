@@ -12,7 +12,7 @@ Please welcome the **Web** back to **Interactive Web Physics**!
 
 Summer 2016, Ryan Steed (c/o 2017) and Taylor Brockman (c/o 1999) build a clean, HTML 5 browser only, build of the IWP Animator.
 
-Kudos to Dr. Jonathan Bennett, Dr. Loren Winters, and all past code contirbutors for inspirations and overall success of this project.
+Kudos to Dr. Jonathan Bennett, Dr. Loren Winters, and all past code contributors for inspiration and success of this project.
 
 
 ## Version 5 Feature Set
