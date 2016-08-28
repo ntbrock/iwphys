@@ -26,5 +26,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script charset="utf-8" type="text/javascript" src="<?= $baseUri ?>js/jquery-3.0.0.js"></script>
+
 </head>
 <?php return ''; ?>

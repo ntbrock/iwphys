@@ -41,7 +41,6 @@ $baseUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $b
 $iwpFile =  $animationPath . $pathInfo;
 if ( ! file_exists ( $iwpFile ) ) { die("No Such File: " . $iwpFile); }
 
-$description = 'todo';
 
 function readIwpFileJson($fullPath) { 
 	 $xml_string = file_get_contents($fullPath);
@@ -66,6 +65,86 @@ function endsWith($haystack, $needle) {
 function startsWith($haystack, $needle) {
   // search backwards starting from haystack length characters from the end
   return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
+}
+function str_replace_first($from, $to, $subject)
+{
+    $from = '/'.preg_quote($from, '/').'/';
+    return preg_replace($from, $to, $subject, 1);
+}
+
+
+// This method is a recursive directory find
+// Rather than call find . |grep iwp, I use the readdir to make it system agnos
+function recurseFind($dir, $pattern, $depthRemaining )
+{
+	global $filesep;
+	$subFiles = array();
+	$subDirs = array();
+
+	$dh = opendir($dir);
+	while ( false != ($file = readdir($dh)) ) { 
+		if ( $file != '.' && $file != '..' ) {
+
+			$fullFile = $dir . DIRECTORY_SEPARATOR . $file;
+
+			if ( is_dir($fullFile) ) { 
+				array_push($subDirs, $fullFile);
+			} else {
+				if ( preg_match($pattern, $fullFile) ) { 
+					array_push($subFiles, $fullFile);
+				}
+			}
+		}
+	}
+	closedir($dh);
+
+	// 2016-Aug-28 -- Limiting the recursion
+	if ( $depthRemaining > 0 ) { 
+
+	foreach ( $subDirs as $subDir ) { 
+		foreach ( recurseFind($subDir, $pattern, $depthRemaining-- ) as $subsubFile ) {
+			array_push($subFiles, $subsubFile );
+		}
+	}
+
+	}
+
+	return $subFiles;
+}
+
+function recurseDirs($dir, $depthRemaining )
+{
+	global $filesep;
+	$subFiles = array();
+	$subDirs = array();
+
+	$dh = opendir($dir);
+	while ( false != ($file = readdir($dh)) ) { 
+		if ( $file != '.' && $file != '..' ) {
+
+			$fullFile = $dir . DIRECTORY_SEPARATOR . $file;
+
+			if ( is_dir($fullFile) ) { 
+				array_push($subDirs, $fullFile);
+			} else {
+			// SKIP ALL FILES
+			}
+		}
+	}
+	closedir($dh);
+
+	// 2016-Aug-28 -- Limiting the recursion
+	if ( $depthRemaining > 0 ) { 
+
+	foreach ( $subDirs as $subDir ) { 
+		foreach ( recurseDirs($subDir, $depthRemaining-- ) as $subsubFile ) {
+			array_push($subDirs, $subsubFile );
+		}
+	}
+
+	}
+
+	return $subDirs;
 }
 
 ?>
