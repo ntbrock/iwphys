@@ -50,7 +50,7 @@ function readIwpFileDescription($fullPath) {
 
 	 $text = $jobject['objects']['description']['text'];
 
-	 return limit_text ( $text, 23 ); // 23 words
+	 return limit_text ( $text, 35 ); // 35 words
 }
 
 //----------------------------------------------------------------------------------------

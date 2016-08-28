@@ -17,4 +17,5 @@ a.navbar-brand {
 .jumbotron { 
 /*	   background-color: rgba(251, 241, 173, 0.7 );  #fbf1ad; */
 	   background-color: #eee;
+	   margin-top: 2em;
 }

@@ -18,11 +18,18 @@ include_once('iwp-config.php');
     <!-- Page Content -->
     <div class="container">
 
+        <div class="row">
+            <div class="col-lg-12" style="margin-bottom: 0.5em;">
+	    	 <h1>Welcome the <b>Web</b> back to <b>Interactive Web Physics</b>!</h1>
+		
+            </div>
+        </div>
+
         <!-- Jumbotron Header -->
         <div class="row">
             <div class="col-lg-12">
         <header class="jumbotron hero-spacer">
-                <p>Welcome the <b>Web</b> back to <b>Interactive Web Physics</b>!</p>
+
 		<p> In Version 5, Animations play natively using all major web browsers and tablets using HTML <i class="fa fa-html5"></i></p>
 		<p>When you find something that can be improved, please <a href="https://github.com/ntbrock/iwphys/issues">open a new github issue.</a></p>
 </header>
@@ -34,7 +41,7 @@ include_once('iwp-config.php');
         <!-- Title -->
         <div class="row">
             <div class="col-lg-12" style="margin-bottom: 0.5em;">
-                <h3>Physics Animations for the Web Browser - Featured Animations</h3>
+                <h1>Featured Physics Animations for the Web Browser</h1>
 		
             </div>
         </div>
@@ -43,63 +50,10 @@ include_once('iwp-config.php');
         <!-- Page Features -->
         <div class="row text-center">
 
-            <div class="col-md-4 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="./images/iwp-screenshots/em-ratio-1c.png" alt="">
-                    <div class="caption">
-                        <h3>em-ratio-1c <i class="fa fa-star fa-1x" style="color: #FFD700;"></i></h3>
-                        <p>Electro Magnetic Fields, Dr. Loren Winters</p>
-                        <p>
-                          <a href="animate.php/iwp-packaged/Charged%20Particle%20Motion/em-ratio-1.iwp" class="btn btn-default">Animate</a>
-                          <!-- <a href="#" class="btn btn-default"><i class="fa fa-icon-star fa-2x" style="color: black"></i></a> -->
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="./images/iwp-screenshots/em-ratio-1c.png" alt="">
-                    <div class="caption">
-                        <h3>em-ratio-1d <i class="fa fa-star-o fa-1x" style="color: #ccc;"></i></h3>
-                        <p>Electro Magnetic Fields, Dr. Loren Winters</p>
-                        <p>
-                          <a href="./animations/Charged Particle Motion/em-ratio-1.iwp" class="btn btn-default">Animate</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Feature Label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Feature Label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
+	<?php include_once('index-popular-animations.php') ?>
 
         </div>
         <!-- /.row -->
-
-        <hr>
 
         <!-- Footer -->
         <footer>
