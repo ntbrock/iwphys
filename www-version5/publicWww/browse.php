@@ -9,7 +9,9 @@ include_once('iwp-config.php');
 <meta charset="utf-8">
 <html lang="en">
 
-<?php include_once("iwp-head.php") ?>
+<head>
+  <?php include_once("iwp-head.php") ?>
+</head>
 
 <body>
     <?php include_once("iwp-nav.php") ?>
@@ -69,12 +71,16 @@ foreach ( $animationFiles as $file ) {
 ?>
             <div class="col-md-4 col-sm-6 hero-feature">
               <div class="thumbnail">
+                   <h3><?= $name ?></i></h3> <!-- color: #FFD700; -->
             <img src="./screenshots/<?= $file ?>.png" alt="">
                 <div class="caption">
-                   <h3><?= $name ?></i></h3> <!-- color: #FFD700; -->
+
                           <a href="<?= $baseAnimateUrl ?><?= $uri ?>" class="btn btn-default">Animate</a>
                         <p>
-			<i class="fa fa-star-o fa-1x" style="color: #ccc;"></i>	
+			<i class="fa fa-star-o fa-1x" style="color: #ddd;"></i>	
+			<i class="fa fa-bug fa-1x" style="color: #ddd;"></i>	
+			</p>
+			<p>
 			<?= readIwpFileDescription($file) ?>
                         </p>
                 </div>

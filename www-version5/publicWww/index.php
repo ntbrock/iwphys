@@ -8,7 +8,9 @@ include_once('iwp-config.php');
 <meta charset="utf-8">
 <html lang="en">
 
-<?php include_once("iwp-head.php") ?>
+<head>
+  <?php include_once("iwp-head.php") ?>
+</head>
 
 <body>
     <?php include_once("iwp-nav.php") ?>

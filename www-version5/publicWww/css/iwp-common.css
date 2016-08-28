@@ -10,6 +10,10 @@ a.navbar-brand {
       color: #eee !important;
 }
 
+.thumbnail { 
+	   height: 300px;
+}
+
 .jumbotron { 
 /*	   background-color: rgba(251, 241, 173, 0.7 );  #fbf1ad; */
 	   background-color: #eee;

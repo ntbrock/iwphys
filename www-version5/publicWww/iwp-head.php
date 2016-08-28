@@ -1,4 +1,3 @@
-<head>
     <!-- Template - StartBootStrap.com Heroic Features - https://startbootstrap.com/template-overviews/heroic-features/ -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +16,6 @@
 
     <!-- IWP Common Application CSS -->
     <link href="<?= $baseUrl ?>css/iwp-common.css" rel="stylesheet">
-<!--    <link href="<?= $baseUrl ?>css/iwp5.css" rel="stylesheet"> -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,8 +32,5 @@
 
     <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/d3.min.js"></script>
     <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/math.js"></script>
-    <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5.js"></script>
 
-
-</head>
 <?php return ''; ?>

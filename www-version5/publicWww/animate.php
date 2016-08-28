@@ -9,7 +9,14 @@ header('Content-Type: text/html');
 <meta charset="utf-8">
 <html lang="en">
 
-<?php include_once("iwp-head.php") ?>
+<head>
+  <?php include_once("iwp-head.php") ?>
+
+  <!-- IWP5 Animation includes -->
+  <link href="<?= $baseUrl ?>css/iwp5.css" rel="stylesheet">
+  <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5.js"></script>
+
+</head>
 
 <body>
 
