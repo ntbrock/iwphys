@@ -1,4 +1,5 @@
-<?
+<?php
+// 2016-Aug-28 Brockman IWP Version5 Revamp!
 // 2008-Jan-25 Brockman NCSSM IWP
 // Simple PHP replacement for legacy .cgi script.
 // Lists all the problems for easy copy + paste.
@@ -12,7 +13,7 @@ common_header("Problem List");
 <b>IWP Problem List</b><br>
 <br>
 
-<?
+<?php
 $problemFiles = recurseFind($problemPath, '/.iwp$/');
 foreach ( $problemFiles as $file ) { 
 	$problemUrl = preg_replace("!$problemPath!", "", $file);
@@ -29,7 +30,7 @@ common_footer();
 
 
 
-<?
+<?php
 // This method is a recursive directory find
 // Rather than call find . |grep iwp, I use the readdir to make it system agnos
 function recurseFind($dir, $pattern)
