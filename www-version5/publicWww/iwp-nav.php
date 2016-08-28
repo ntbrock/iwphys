@@ -18,6 +18,10 @@
                         <a href="http://www.iwphys.org/">Web Browser Animations for Physics Students and Educators</a>
                     </li>
                     <li>
+                        <a href="<?= $browseUrl ?>">Browse Animations</a>
+                    </li>
+
+                    <li>
                         <a href="http://github.com/ntbrock/iwphys"><i class="fa fa-git"></i> Open Source on Github</a>
                     </li>
 		    <li>

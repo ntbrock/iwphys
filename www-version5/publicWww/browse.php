@@ -23,13 +23,15 @@ include_once('iwp-config.php');
 <?php
 
 $searchPath = $animationPath . $pathInfo;
-$searchName = ucfirst($searchPath);
+$searchName = str_replace("/", " / ", ucfirst($searchPath));
 echo "<h1>Browsing $searchName</h1>";
 
 // RENDER Row per Animation Dir
 // RENDER Tile per Animation
 
-$animationDirs = recurseDirs($searchPath, 2 );
+$animationDirs = recurseDirs($searchPath, 0 );
+array_unshift($animationDirs, $searchPath );
+// print_r($animationDirs);
 foreach ( $animationDirs as $dir ) { 
 
 	$animationFiles = recurseFind($dir, '/.iwp$/', 0 );
@@ -40,7 +42,7 @@ foreach ( $animationDirs as $dir ) {
         <!-- Directory -->
         <div class="row">
             <div class="col-lg-12">
-                <h3><?= $dir ?></h3>
+                <h3><?php if ( $dir != $searchPath ) { echo $dir; } ?></h3>
             </div>
         </div>
 	<!-- /.row -->
