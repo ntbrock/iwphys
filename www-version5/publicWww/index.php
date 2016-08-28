@@ -4,9 +4,7 @@
 
 include_once('iwp-config.php');
 
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <meta charset="utf-8">
 <html lang="en">
 
