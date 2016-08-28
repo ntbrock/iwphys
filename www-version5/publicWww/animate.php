@@ -107,5 +107,8 @@ header('Content-Type: text/html');
       calculateVarsAtStep(0);
     });
   </script>
+
+  <?php include_once('iwp-foot.php'); ?>
+
 </body>
-<html>
+</html>

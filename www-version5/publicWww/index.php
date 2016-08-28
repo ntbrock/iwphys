@@ -128,6 +128,8 @@ include_once('iwp-config.php');
     </div>
     <!-- /.container -->
 
+    <?php include_once('iwp-foot.php'); ?>
+
 </body>
 
 </html>
