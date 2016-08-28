@@ -31,5 +31,5 @@
     <script charset="utf-8" type="text/javascript" src="<?= $baseUri ?>js/jquery-3.0.0.js"></script>
     <script charset="utf-8" type="text/javascript" src="<?= $baseUri ?>js/math.js"></script>
     <script charset="utf-8" type="text/javascript" src="<?= $baseUri ?>js/iwp5.js"></script>
-
+    <script charset="utf-8" type="text/javascript" src="<?= $baseUri ?>js/bootstrap.min.js"></script>
 </head>

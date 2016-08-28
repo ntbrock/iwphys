@@ -13,6 +13,8 @@ header('Content-Type: text/html');
 
 <body>
 
+<?php include_once("iwp-nav.php") ?>
+
   <div id="problem" problem-uri="<?= $xtojUrl ?>"></div>
 
   <div id="canvasDiv">

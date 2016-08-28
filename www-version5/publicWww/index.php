@@ -13,38 +13,7 @@ include_once('iwp-config.php');
 <?php include_once("iwp-head.php") ?>
 
 <body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Interactive Web Physics</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="http://www.iwphys.org/">Web Browser Animations for Physics Students and Educators</a>
-                    </li>
-                    <li>
-                        <a href="http://github.com/ntbrock/iwphys">Open Source on Github</a>
-                    </li>
-		    <li>
-		      <a href="https://github.com/ntbrock/iwphys/issues">Github Issues</a>
-		    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+    <?php include_once("iwp-nav.php") ?>
 
     <!-- Page Content -->
     <div class="container">
@@ -158,12 +127,6 @@ include_once('iwp-config.php');
 
     </div>
     <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
 
 </body>
 
