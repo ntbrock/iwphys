@@ -43,10 +43,14 @@ if ( ! file_exists ( $iwpFile ) ) { die("No Such File: " . $iwpFile); }
 
 $description = 'todo';
 
-function readIwpFileDescription($fullPath) { 
+function readIwpFileJson($fullPath) { 
 	 $xml_string = file_get_contents($fullPath);
 	 $xml = simplexml_load_string($xml_string);
-	 $json = json_encode($xml);
+	 return json_encode($xml);
+}
+
+function readIwpFileDescription($fullPath) { 
+	 $json = readIwpFileJson($fullPath);
 	 $jobject = json_decode($json,true);
 	 return $jobject['objects']['description']['text'];
 }
