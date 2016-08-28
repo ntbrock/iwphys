@@ -6,7 +6,7 @@
 $baseUri     = $prefixUri;
 $animateUri  = $prefixUri . "animate.php";
 $xtojUri     = $prefixUri . "xtoj.php";
-$browseUri   = $prefixUri . "problemList.php";
+$browseUri   = $prefixUri . "browse.php";
 
 
 //----------------------------------------------------------------------------------------

@@ -30,8 +30,11 @@ include_once('iwp-config.php');
 
         <div class="row">
             <div class="col-lg-12">
-                <p>Please welcome the <b>Web</b> back to <b>Interactive Web Physics</b>! In Version 5, Animations play natively using all major web browsers and tablets.</p>
+        <header class="jumbotron hero-spacer">
+                <p>Welcome the <b>Web</b> back to <b>Interactive Web Physics</b>!</p>
+		<p> In Version 5, Animations play natively using all major web browsers and tablets using HTML <i class="fa fa-html5"></i></p>
 		<p>When you find something that can be improved, please <a href="https://github.com/ntbrock/iwphys/issues">open a new github issue.</a></p>
+</header>
             </div>
         </div>
 
