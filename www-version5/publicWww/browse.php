@@ -77,10 +77,10 @@ foreach ( $animationFiles as $file ) {
 
                           <a target="_anim" href="<?= $baseAnimateUrl ?><?= $uri ?>" class="btn btn-default">Animate</a>
                         <p>
-			<i class="fa fa-star-o" style="color: #ddd;"></i>	
-			<i class="fa fa-bug" style="color: #ddd;"></i>	
-			<a target="_xtoj" href="<?= $baseXtojUrl ?><?= $uri ?>"><i class="fa fa-file-code-o fa-1x" style="color: #ddd;"></i></a>
-			<a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems/<?= str_replace_first('/iwp-packaged','',$uri) ?>"><i class="fa fa-coffee fa-1x" style="color: #ddd;"></i></a>
+			<i class="fa fa-star-o" style="color: #333;"></i>	
+			<i class="fa fa-bug" style="color: #333;"></i>	
+			<a target="_xtoj" href="<?= $baseXtojUrl ?><?= $uri ?>"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+			<a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems/<?= str_replace_first('/iwp-packaged','',$uri) ?>"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 			</p>
 			<p>
 			<?= readIwpFileDescription($file) ?>

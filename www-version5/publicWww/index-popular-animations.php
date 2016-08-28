@@ -7,10 +7,10 @@
 
                           <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/damped-1.iwp" class="btn btn-default">Animate</a>
                         <p>
-					<i class="fa fa-star-o" style="color: #ddd;"></i>	
-					   	     <i class="fa fa-bug" style="color: #ddd;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/damped-1.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #ddd;"></i></a>
-								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/damped-1.iwp"><i class="fa fa-coffee fa-1x" style="color: #ddd;"></i></a>
+					<i class="fa fa-star-o" style="color: #333;"></i>	
+					   	     <i class="fa fa-bug" style="color: #333;"></i>	
+						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/damped-1.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/damped-1.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
 															  The blue line plots position (vertical) as a function of time (horizontal) for damped SHM.  The red line plots the decay of the ..                        </p>
@@ -25,10 +25,10 @@
 
                           <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/damped-SHM-template.iwp" class="btn btn-default">Animate</a>
                         <p>
-					<i class="fa fa-star-o" style="color: #ddd;"></i>	
-					   	     <i class="fa fa-bug" style="color: #ddd;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/damped-SHM-template.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #ddd;"></i></a>
-								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/damped-SHM-template.iwp"><i class="fa fa-coffee fa-1x" style="color: #ddd;"></i></a>
+					<i class="fa fa-star-o" style="color: #333;"></i>	
+					   	     <i class="fa fa-bug" style="color: #333;"></i>	
+						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/damped-SHM-template.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/damped-SHM-template.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
 															  This plots position (vertical) as a function of time (horizontal) for an object subject to a Hooke's Law restoring force.
@@ -45,10 +45,10 @@ Suppose that the ..                        </p>
 
                           <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/lissajous-figures.iwp" class="btn btn-default">Animate</a>
                         <p>
-					<i class="fa fa-star-o" style="color: #ddd;"></i>	
-					   	     <i class="fa fa-bug" style="color: #ddd;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/lissajous-figures.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #ddd;"></i></a>
-								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/lissajous-figures.iwp"><i class="fa fa-coffee fa-1x" style="color: #ddd;"></i></a>
+					<i class="fa fa-star-o" style="color: #333;"></i>	
+					   	     <i class="fa fa-bug" style="color: #333;"></i>	
+						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/lissajous-figures.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/lissajous-figures.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
 															  An object is subject to independent restoring forces along the x- and y-axes.  It's like being pulled on by springs along both axes ..                        </p>
@@ -66,10 +66,10 @@ Suppose that the ..                        </p>
 
                           <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/pendulum01.iwp" class="btn btn-default">Animate</a>
                         <p>
-					<i class="fa fa-star-o" style="color: #ddd;"></i>	
-					   	     <i class="fa fa-bug" style="color: #ddd;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/pendulum01.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #ddd;"></i></a>
-								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/pendulum01.iwp"><i class="fa fa-coffee fa-1x" style="color: #ddd;"></i></a>
+					<i class="fa fa-star-o" style="color: #333;"></i>	
+					   	     <i class="fa fa-bug" style="color: #333;"></i>	
+						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/pendulum01.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/pendulum01.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
 															  A pendulum is released from rest and oscillates in a vertical plane. The angle of release, mass of the bob, gravitational field, and ..                        </p>
@@ -84,10 +84,10 @@ Suppose that the ..                        </p>
 
                           <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/shm-01.iwp" class="btn btn-default">Animate</a>
                         <p>
-					<i class="fa fa-star-o" style="color: #ddd;"></i>	
-					   	     <i class="fa fa-bug" style="color: #ddd;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/shm-01.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #ddd;"></i></a>
-								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/shm-01.iwp"><i class="fa fa-coffee fa-1x" style="color: #ddd;"></i></a>
+					<i class="fa fa-star-o" style="color: #333;"></i>	
+					   	     <i class="fa fa-bug" style="color: #333;"></i>	
+						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/shm-01.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/shm-01.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
 															  A ball is attached to a horizontal spring (not shown) which causes the ball to oscillate about the origin. Run the animation until ..                        </p>
@@ -102,10 +102,10 @@ Suppose that the ..                        </p>
 
                           <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/shm-02.iwp" class="btn btn-default">Animate</a>
                         <p>
-					<i class="fa fa-star-o" style="color: #ddd;"></i>	
-					   	     <i class="fa fa-bug" style="color: #ddd;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/shm-02.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #ddd;"></i></a>
-								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/shm-02.iwp"><i class="fa fa-coffee fa-1x" style="color: #ddd;"></i></a>
+					<i class="fa fa-star-o" style="color: #333;"></i>	
+					   	     <i class="fa fa-bug" style="color: #333;"></i>	
+						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/shm-02.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/shm-02.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
 															  A ball is attached to a horizontal spring (not shown) which causes the ball to oscillate about the origin. Run the animation. Note ..                        </p>
