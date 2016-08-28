@@ -7,7 +7,7 @@ $baseUri     = $prefixUri;
 $animateUri  = $prefixUri . "animate.php";
 $xtojUri     = $prefixUri . "xtoj.php";
 $browseUri   = $prefixUri . "browse.php";
-
+$screenshotsUri   = $prefixUri . "screenshots";
 
 //----------------------------------------------------------------------------------------
 // Web Script path setup
@@ -24,9 +24,11 @@ if ( ! empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_P
 $animateUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $animateUri . $pathInfo;
 $baseAnimateUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $animateUri;
 $xtojUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $xtojUri . $pathInfo;
+$baseXtojUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $xtojUri;
 $baseUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $baseUri;
 $browseUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $browseUri;
 
+$screenshotsUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $screenshotsUri;
 
 //----------------------------------------------------------------------------------------
 // Filesystem Scanning
@@ -45,7 +47,23 @@ function readIwpFileJson($fullPath) {
 function readIwpFileDescription($fullPath) { 
 	 $json = readIwpFileJson($fullPath);
 	 $jobject = json_decode($json,true);
-	 return $jobject['objects']['description']['text'];
+
+	 $text = $jobject['objects']['description']['text'];
+
+	 $width = 160;
+	 $string = $text;
+
+	 // http://stackoverflow.com/questions/79960/how-to-truncate-a-string-in-php-to-the-word-closest-to-a-certain-number-of-chara
+	 // Remove newlines from xml
+	 $string = trim(preg_replace('/\s\s+/', ' ', $string));
+
+	 if (strlen($string) > $width) 
+	 {
+	     $string = wordwrap($string, $width);
+	     $string = substr($string, 0, strpos($string, "\n"));
+	 }
+	 return $string;
+	 
 }
 
 //----------------------------------------------------------------------------------------

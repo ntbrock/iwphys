@@ -69,16 +69,17 @@ foreach ( $animationFiles as $file ) {
 	$name = str_replace_first($dir.'/', '', $file);
 	$uri = str_replace_first($animationPath,'',$file);
 ?>
-            <div class="col-md-4 col-sm-6 hero-feature">
+            <div class="col-md-3 col-sm-6 hero-feature">
               <div class="thumbnail">
                    <h3><?= $name ?></i></h3> <!-- color: #FFD700; -->
-            <img src="./screenshots/<?= $file ?>.png" alt="">
+            <img src="<?= $screenshotsUrl ?><?= $uri ?>.png" alt="">
                 <div class="caption">
 
                           <a href="<?= $baseAnimateUrl ?><?= $uri ?>" class="btn btn-default">Animate</a>
                         <p>
-			<i class="fa fa-star-o fa-1x" style="color: #ddd;"></i>	
-			<i class="fa fa-bug fa-1x" style="color: #ddd;"></i>	
+			<i class="fa fa-star-o" style="color: #ddd;"></i>	
+			<i class="fa fa-bug" style="color: #ddd;"></i>	
+			<a target="_xtoj" href="<?= $baseXtojUrl ?><?= $uri ?>"><i class="fa fa-file-code-o fa-1x" style="color: #ddd;"></i></a>
 			</p>
 			<p>
 			<?= readIwpFileDescription($file) ?>
