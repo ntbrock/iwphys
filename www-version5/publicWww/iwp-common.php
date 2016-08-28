@@ -50,24 +50,21 @@ function readIwpFileDescription($fullPath) {
 
 	 $text = $jobject['objects']['description']['text'];
 
-	 $width = 160;
-	 $string = $text;
-
-	 // http://stackoverflow.com/questions/79960/how-to-truncate-a-string-in-php-to-the-word-closest-to-a-certain-number-of-chara
-	 // Remove newlines from xml
-	 $string = trim(preg_replace('/\s\s+/', ' ', $string));
-
-	 if (strlen($string) > $width) 
-	 {
-	     $string = wordwrap($string, $width);
-	     $string = substr($string, 0, strpos($string, "\n"));
-	 }
-	 return $string;
-	 
+	 return limit_text ( $text, 23 ); // 23 words
 }
 
 //----------------------------------------------------------------------------------------
 // Functions
+
+// http://stackoverflow.com/questions/965235/how-can-i-truncate-a-string-to-the-first-20-words-in-php
+function limit_text($text, $limit) {
+      if (str_word_count($text, 0) > $limit) {
+          $words = str_word_count($text, 2);
+          $pos = array_keys($words);
+          $text = substr($text, 0, $pos[$limit]) . '..';
+      }
+      return $text;
+    }
 
 // http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
 function endsWith($haystack, $needle) {
