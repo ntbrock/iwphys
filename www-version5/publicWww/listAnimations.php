@@ -4,8 +4,8 @@
 // Simple PHP replacement for legacy .cgi script.
 // Lists all the problems for easy copy + paste.
 
+include_once('iwp-config.php');
 include_once('common.inc');
-
 
 common_header("Problem List");
 ?>

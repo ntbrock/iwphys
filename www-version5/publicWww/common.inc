@@ -2,24 +2,7 @@
 /// Common.inc configuration file for IWP2 php replacement scripts.
 //
 
-// Update this with the location of the script
-$prefixUri = '/';
-
-// fwd slash for unix. back slash for dos.
-$filesep = '/';
-
-// where the problems on disk are located.
-$problemPath = "animations"; // etc" . $filesep . "problems";
-
-// Helpful urls.
-$animateUri = $prefixUri . "/animate.php";
-$problemListUri = $prefixUri . "/problemList.php";
-
-// $jarUri = $prefixUri . "/iwp-applet-4_1_2.jar"; // brockman 2016-Jan-11
-// $gfxUri = $prefixUri . "/gfx";
-// $helpUri = $prefixUri . "/help.php";
-$indexUri = $prefixUri . "/";
-
+require_once('iwp-config.php');
 
 
 function common_header($sectionName) {

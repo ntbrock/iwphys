@@ -1,8 +1,11 @@
-<?
+<?php
+// 2016-Aug-28 Brockman - Revamp for IWP5
 // 2008-Jan-25 Brockman NCSSM IWP
-// New-age php script tha trenders the right java code based on the PATH_INFO
+// 'New-age' php script tha trenders the right java code based on the PATH_INFO
 
+include_once('iwp-config.php');
 include_once('common.inc');
+
 
 // in url bar. Need to be respectful of the file paths.
 
