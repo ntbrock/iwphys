@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>1.0E-8</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>1.0E-5</xmax>
+			<ymin>-1.0</ymin>
+			<ymax>1.0</ymax>
+			<xgrid>1.0E-6</xgrid>
+			<ygrid>0.1</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.1</xmin>
+			<xmax>0.1</xmax>
+			<ymin>-0.05</ymin>
+			<ymax>0.15</ymax>
+			<xgrid>0.01</xgrid>
+			<ygrid>0.01</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Challenge 4.  Explore Electric Field
+Investigate the effect of an electric field on the motion of an electron.
+Notes:
+Positive E-fields are to the right and positive B-fields are out of the screen.
+After making a change in any Input, click Reset.
+The grid spacing is 0.01 m along both axes.
+Form of powers of ten entry:  5E-3 = 0.005
+</text>
+		</description>
+		<input>
+			<name>qmr</name>
+			<text>Charge to mass</text>
+			<initialValue>-1.76E11</initialValue>
+			<units>C/kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Magnitude of initial velocity</text>
+			<initialValue>260000.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>ef</name>
+			<text>Electric Field</text>
+			<initialValue>0.0</initialValue>
+			<units>N/C</units>
+		</input>
+		<input>
+			<name>mf</name>
+			<text>Magnetic field</text>
+			<initialValue>0.0</initialValue>
+			<units>T</units>
+		</input>
+		<solid>
+			<name>Q</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.004</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.004</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>0</velocity>
+					<acceleration>qmr*(ef+mf*Q.yvel)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo</velocity>
+					<acceleration>-qmr*mf*Q.xvel</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>x</name>
+			<text>X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Q.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Q.ydisp</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

@@ -1,0 +1,619 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>12.0</stop>
+			<change>1.0</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-2.0</xmin>
+			<xmax>2.0</xmax>
+			<ymin>-2.0</ymin>
+			<ymax>2.0</ymax>
+			<xgrid>0.2</xgrid>
+			<ygrid>0.2</ygrid>
+			<xunit>mm</xunit>
+			<yunit>mm</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>A rainbow is formed when the direction of sunlight to raindrops is such that a ray internally reflected in a drop refracts out of the drop along a line of sight that reaches the observer. The angular difference between the direction of the sunlight and the direction of the refracted ray to the observer depends on the frequency of the light, since the speed of light in water depends on frequency. This is why a spectrum of colors is produced in the rainbow. The raindrop acts like a prism. 
+
+The index of refraction of 1.331 is for red light. Run the applet to see how the Angular Difference increases as the index of refraction is increased in increments of 0.001 to the value of 1.343 for violet light at the opposite end of the visible light spectrum.
+
+The black lines are normals to the raindrop.</text>
+		</description>
+		<input>
+			<name>R</name>
+			<text>Radius of drop</text>
+			<initialValue>1.0</initialValue>
+			<units>mm</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>ni</name>
+			<text>Initial index of refraction</text>
+			<initialValue>1.331</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>k</name>
+			<text>Multiplier for time</text>
+			<initialValue>0.0010</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>i</name>
+			<text>Angle of incidence</text>
+			<initialValue>56.0</initialValue>
+			<units>deg</units>
+		</input>
+		<output>
+			<name>n</name>
+			<text>Index of refraction</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>ni+k*t</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ir</name>
+			<text>Angle of incidence</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>toRadians(i)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>bg</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>153</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>drop</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2*R</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2*R</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>incidentray_1</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>cos(ir)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sin(ir)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-R-cos(ir)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-sin(ir)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>normal_1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-1.5*R</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>r1</name>
+			<text>Angle of refraction 1</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>asin(sin(ir)/n)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>x1</name>
+			<text>X-target 1</text>
+			<units>mm</units>
+			<calculator type="parametric">
+				<value>R*cos(2*r1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>y1</name>
+			<text>Y-target 1</text>
+			<units>mm</units>
+			<calculator type="parametric">
+				<value>R*sin(2*r1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>normal_2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1.5*x1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1.5*y1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refractedray_1</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>x1+R</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>y1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-R</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>r2</name>
+			<text>Angle of refraction 2</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>asin(n*sin(r1))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>L</name>
+			<text>Length of secant</text>
+			<units>mm</units>
+			<calculator type="parametric">
+				<value>2*R*cos(r1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>reflectedray_2</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>L*cos(PI+3*r1)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>L*sin(PI+3*r1)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x1</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>y1</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>x2</name>
+			<text>X-target 2</text>
+			<units>mm</units>
+			<calculator type="parametric">
+				<value>x1+L*cos(PI+3*r1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>y2</name>
+			<text>Y-target 2</text>
+			<units>mm</units>
+			<calculator type="parametric">
+				<value>y1+L*sin(PI+3*r1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>normal_3</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1.5*x2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1.5*y2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refractedray_3</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>cos(PI+4*r1-r2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sin(PI+4*r1-r2)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>y2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>ang_diff</name>
+			<text>Angular Diff.</text>
+			<units>deg</units>
+			<calculator type="parametric">
+				<value>toDegrees(ir-4*r1+r2)+360</value>
+			</calculator>
+		</output>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>sunlight</name>
+			<text>Direction of sunlight</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>-R</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-1.9*R</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>sight_line</name>
+			<text>Line of sight</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>-1.6*R</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>0.75*R</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>raindrop</name>
+			<text>Raindrop</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>-0.75*R</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.25*R</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>title</name>
+			<text>Reflection and Dispersion of Light in a Rain Drop</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>20</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>204</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.7*R</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-1.94*R</value>
+				</calculator>
+			</xpath>
+		</object>
+	</objects>
+</problem>

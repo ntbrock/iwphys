@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>-2.0</start>
+			<stop>2.0</stop>
+			<change>0.01</change>
+			<fps>100.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>-2.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-5.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-5.0</ymin>
+			<ymax>5.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</window>
+		<description>
+			<text>The pointer traces out a quadratic function of the form:
+
+y = a + bx + cx²</text>
+		</description>
+		<solid>
+			<name>integrator</name>
+			<shape type="polygon">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>pointer.xpos-psize/2</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>pointer.ypos</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>pointer.xpos+psize/2</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>pointer.ypos</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>pointer.xpos+psize/2</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>pointer.xpos-psize/2</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="true" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>pointer</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>psize</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>psize</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a+b*t+c*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>a</name>
+			<text>a</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>b</name>
+			<text>b</text>
+			<initialValue>2.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>c</name>
+			<text>c</text>
+			<initialValue>1.7</initialValue>
+			<units></units>
+		</input>
+		<output>
+			<name>x</name>
+			<text>X</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>pointer.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>pointer.ypos</value>
+			</calculator>
+		</output>
+		<input>
+			<name>psize</name>
+			<text>Strip width</text>
+			<initialValue>0.1</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>dt</name>
+			<text>Delta-t</text>
+			<initialValue>0.01</initialValue>
+			<units>s</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>sarea</name>
+			<text>Strip area</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>psize*pointer.ypos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>Integral</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>psize</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>psize</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(a*t+b*(t^2)/2+c*(t^3)/3)-(a*ti+b*(ti^2)/2+c*(ti^3)/3)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>ti</name>
+			<text>Start time</text>
+			<initialValue>-2.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>sum</name>
+			<text>Integral</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>Integral.ypos</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

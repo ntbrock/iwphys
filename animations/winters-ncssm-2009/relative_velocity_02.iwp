@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.05</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-25.0</xmin>
+			<xmax>25.0</xmax>
+			<ymin>-25.0</ymin>
+			<ymax>25.0</ymax>
+			<xgrid>5.0</xgrid>
+			<ygrid>5.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>A car moves at constant velocity to the right. (The view is looking down on the car.) At a particular time, a ball is thrown out the window at the angle given under Inputs. The path of the ball can be displayed in either the reference frame of the road (ground) or of the car by selecting 1 or 0 for Frame. Note that  air resistance is ignored. The vectors represent:
+    red--velocity of car wrt road
+    green--velocity of ball wrt car
+    blue--velocity of ball wrt road
+</text>
+		</description>
+		<input>
+			<name>v_rg</name>
+			<text>Speed of river wrt ground</text>
+			<initialValue>10.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>v_br</name>
+			<text>Speed of boat wrt river</text>
+			<initialValue>5.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Angle of boat's velocity wrt river</text>
+			<initialValue>90.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>F</name>
+			<text>Frame (0=river;1=bank)</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>s</name>
+			<text>Shift</text>
+			<initialValue>20.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>ar</name>
+			<text>Angle in radians</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(a)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vx_bg</name>
+			<text>Vx of boat wrt ground</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>v_rg+v_br*cos(ar)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vy_bg</name>
+			<text>Vy of ball wrt ground</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>v_br*sin(ar)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ab</name>
+			<text>Angle of boat wrt ground</text>
+			<units>deg</units>
+			<calculator type="parametric">
+				<value>toDegrees(atan(vy_bg/vx_bg))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vb</name>
+			<text>Boat's speed wrt road</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>(vx_bg^2+vy_bg^2)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>ground_frame</name>
+			<text>Reference Frame of Ground</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>16</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>20</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>10</value>
+				</calculator>
+			</xpath>
+		</object>
+		<solid>
+			<name>background</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>50*step(1-F)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>50*step(1-F)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>20</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>river</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>50</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>30</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>river_frame</name>
+			<text>Reference Frame of River</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>16</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>20*step(1-F)+100*step(F)</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>10</value>
+				</calculator>
+			</xpath>
+		</object>
+		<solid>
+			<name>boat</name>
+			<shape type="rectangle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vx_bg*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>vy_bg*t-15</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

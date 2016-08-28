@@ -1,0 +1,79 @@
+<DOCTYPE! html>
+<meta charset="utf-8">
+
+  <head>
+    <title>JSON navigation sample - 2016Aug10</title>
+    <link rel="stylesheet" type="text/css" href="../css/jsonRendering.css"/>
+    <script charset="utf-8" src="../js/d3.min.js"></script>
+    <script charset="utf-8" src="../js/jquery-3.0.0.js"></script>
+    <script charset="utf-8" src="../js/math.js"></script>
+    <script type="text/javascript" src="../js/jsonRendering.js"></script>
+  </head>
+
+<body>
+  <h1>IWP JSON Parsing Unit Test</h1>
+
+  <div id="problem" problem-uri="../clone-problemServer/packagedProblems/Oscillations/shm-01.json"></div>
+
+    <span id="canvasDiv">
+      <svg id="canvas" width="500" height="500" viewbox="0 0 1000 1000" preserveAspectRatio="xMinYMin meet"></svg>
+    </span>
+
+  <div id="time">
+    <table id="playBar">
+      <tr>  
+        <td class="bottomBorder">
+          <span>Time: </span>
+          <span id="itime">--</span>
+        </td>
+        <td id="addMe">
+          <input id="resetButton" type="button" onclick="handleResetClick()" value="Reset"></input>
+        </td>
+        <td id="buttonControls">
+          <span><input id="backButton" type="button" onclick="handleBackClick()" value="<<"></input></span>
+          <span><input id="startStopButton" type="button" onclick="handleStartClick()" value="Start"></input></span>
+          <span><input id="forwardButton" type="button" onclick="handleForwardClick()" value=">>"></input></span>
+        </td>
+        <td class="bottomBorder">
+          <span>Time Step: </span>
+          <span><input id="itime_change" type="text" value="0.05" size="4em"/></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+ <table id="variableTable"></table>
+
+  <table id="iwindow">
+    <tr><th>Window Settings</th></tr>
+    <tr><td>X min: <input id="iwindow_xmin" type="text"><br/></td></tr>
+    <tr><td>X max: <input id="iwindow_xmax" type="text"><br/></td></tr>
+    <tr><td>X grid: <input id="iwindow_xgrid" type="text"><br/></td></tr>
+    <tr><td>X unit: <input id="iwindow_xunit" type="text"><br/></td></tr>
+    <tr><td>Y min: <input id="iwindow_ymin" type="text"><br/></td></tr>
+    <tr><td>Y max: <input id="iwindow_ymax" type="text"><br/></td></tr>
+    <tr><td>Y grid: <input id="iwindow_ygrid" type="text"><br/></td></tr>
+    <tr><td>Y unit: <input id="iwindow_yunit" type="text"><br/></td></tr>
+  </table>
+
+  <input id="windowSettings" type="button" onclick="windowSettingsOn()" value="Window Settings"/>
+  
+  <h3>GraphWindow</h3>
+  <div id="graphWindow"></div>
+
+  <p>Description</p>
+  <div id="description"></div>
+  <p>Author: </p>
+  <div id="authorUsername">Loading...</div>
+
+
+  <script type="text/javascript">
+    // On Pageload, pull our hardcoded unit test.
+    $.getJSON( $('#problem').attr('problem-uri'), function(problem) {
+      parseProblemToMemory(problem);
+      renderProblemFromMemory();
+      calculateVarsAtStep(0);
+    });
+  </script>
+</body>
+<html>

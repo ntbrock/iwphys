@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.01</change>
+			<fps>100.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</window>
+		<description>
+			<text>The green object uses RK2.
+The red object uses Euler's method.
+The orange object uses RK4.</text>
+		</description>
+		<output>
+			<name>pxg</name>
+			<text>G-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Green.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>pxr</name>
+			<text>R-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Red.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vxg</name>
+			<text>G-velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Green.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vxr</name>
+			<text>R-velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Red.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>axg</name>
+			<text>G-accel</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>Green.xaccel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>axr</name>
+			<text>R-accel</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>Red.xaccel</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>Red</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>a.value</displacement>
+					<velocity>0</velocity>
+					<acceleration>-(k.value/m.value)*sin(Red.xdisp)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-3</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Green</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="RK2">
+					<displacement>a.value</displacement>
+					<velocity>0</velocity>
+					<acceleration>-(k.value/m.value)*sin(Green.xdisp)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Orange</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>102</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="RK4">
+					<displacement>a.value</displacement>
+					<velocity>0</velocity>
+					<acceleration>-(k.value/m.value)*sin(Orange.xdisp)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>a</name>
+			<text>Amplitude</text>
+			<initialValue>9.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass</text>
+			<initialValue>2.5</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>k</name>
+			<text>Spring constant</text>
+			<initialValue>10.0</initialValue>
+			<units>N/m</units>
+		</input>
+	</objects>
+</problem>

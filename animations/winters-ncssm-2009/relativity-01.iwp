@@ -1,0 +1,1091 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.05</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-1.0</ymin>
+			<ymax>5.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>A carship makes a journey from the Earth to Alpha Centauri. The journey can be viewed from the viewpoint of either the ship or the Earth by selecting 1 or 0 for the Frame.  The notation (rf Earth) or (rf Ship) indicates the reference frame from which the corresponding quantity is measured. The unit distance is cy = light-year.  The Time given under outputs is the elapsed time in years (rather than s) as measured from a clock at rest in the reference frame of the observer.</text>
+		</description>
+		<input>
+			<name>v_over_c</name>
+			<text>v/c</text>
+			<initialValue>0.8</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>c</name>
+			<text>Speed of Light</text>
+			<initialValue>1.0</initialValue>
+			<units>c</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>Lo</name>
+			<text>Earth to Star (Earth)</text>
+			<initialValue>4.0</initialValue>
+			<units>cy</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>frame</name>
+			<text>Frame (1=Ship; 0=Earth)</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<output>
+			<name>y</name>
+			<text>Gamma</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>1/sqrt(1-v_over_c^2)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>to</name>
+			<text>Elapsed time (Ship)</text>
+			<units>y</units>
+			<calculator type="parametric">
+				<value>t</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>td</name>
+			<text>Elapsed time (Earth)</text>
+			<units>y</units>
+			<calculator type="parametric">
+				<value>t*y</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>t</name>
+			<text>Time</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>step(frame)*to+step(1-step(frame))*td</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>v</name>
+			<text>Velocity</text>
+			<units>c</units>
+			<calculator type="parametric">
+				<value>v_over_c*c</value>
+			</calculator>
+		</output>
+		<output>
+			<name>Lc</name>
+			<text>Earth to Star (Ship)</text>
+			<units>cy</units>
+			<calculator type="parametric">
+				<value>Lo/y</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>bg</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>100</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>100</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sa</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sb</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sc</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sd</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>se</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sf</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sg</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sh</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>si</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sj</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sk</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sl</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sm</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.03</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-1+random(6)</displacement>
+					<velocity>-(random(1)/2)^2*step(frame)</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>random(4)</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Home_e</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/earth.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.2*step(1-step(frame))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Home_s</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/earth.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.2*step(frame)/y</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2-v*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Alpha_e</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/sun.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.4*step(1-step(frame))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.4</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>Lo</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Alpha_s</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/sun.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.4*step(frame)/y</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.4</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2+Lc-v*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ship_e</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/car_final.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.2*step(1-step(frame))/y</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>v*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ship_s</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/car_final.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.2*step(frame)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>span_proper</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>Alpha_e.xpos-Home_e.xpos</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01*step(1-step(frame))</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>Home_e.xpos+.5*(Alpha_e.xpos-Home_e.xpos)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>label_proper</name>
+			<text>Earth to Star (rf Earth)</text>
+			<units>cy</units>
+			<value>
+				<calculator type="parametric">
+					<value>Lo</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>true</showValue>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>span_proper.ypos-.2</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>span_proper.xpos-1-50*step(frame)</value>
+				</calculator>
+			</xpath>
+		</object>
+		<solid>
+			<name>span_contracted</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>Lc</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01*step(frame)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>Home_s.xpos+.5*Lc</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>label_contracted</name>
+			<text>Earth to Star (rf Ship)</text>
+			<units>cy</units>
+			<value>
+				<calculator type="parametric">
+					<value>Lc</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>true</showValue>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>span_contracted.ypos-.18</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>span_contracted.xpos-.5-50*step(1-step(frame))</value>
+				</calculator>
+			</xpath>
+		</object>
+	</objects>
+</problem>

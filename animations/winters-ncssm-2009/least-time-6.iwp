@@ -1,0 +1,527 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>50.0</stop>
+			<change>1.0</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>50.0</xmax>
+			<ymin>-1.0</ymin>
+			<ymax>4.0</ymax>
+			<xgrid>5.0</xgrid>
+			<ygrid>0.5</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.1</xmin>
+			<xmax>1.1</xmax>
+			<ymin>-1.1</ymin>
+			<ymax>1.1</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>0.1</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>The lower half of the screen is water, and the upper half is air.  Running the animation plots paths of rays from an object in the lower left-hand corner of the screen to an observer in the upper right-hand corner.  Physically, only one of the infinite number of paths is possible.  That one path is the one for which the ray takes the least time from object to observer.  
+
+Click on Show graph to display the travel times in air (red), water (blue), and the total travel time (black) as a function of the x-axis coordinate where the path bends.*  The value of x for which the total time is a minimum is the path that light actually takes. 
+
+Since the minimum is fairly broad, it's difficult to determine the corresponding value of x accurately.  One shouldn't assume that the minimum occurs where the times of travel in the air and the water are the same.  A more accurate predictor is the violet line.  The zero of this function is the value of x corresponding to the least total time of travel and also the value of x for which Snell's holds.
+
+The zero of the function mentioned above is also calculated analytically and is given as the output labeled Quartic root.
+
+*The time scale in the graph is related to the x-coordinate of the bend as follows:  x = (initial bend coordinate) + (x-step)(time).
+
+Note to authors:  The solution of the quartic differs slightly from the least-time method.  This is an unresolved discrepancy.  Using the quartic root to calculate the angles of incidence and refraction does yield values that obey Snell's Law.  Perhaps there is a problem in the time calculation.</text>
+		</description>
+		<input>
+			<name>n</name>
+			<text>Index of refraction</text>
+			<initialValue>1.33</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>xo</name>
+			<text>X of observer</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>yo</name>
+			<text>Y of observer</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>x1</name>
+			<text>X of object</text>
+			<initialValue>-1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>y1</name>
+			<text>Y of object</text>
+			<initialValue>-1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>xi</name>
+			<text>Initial bend coordinate</text>
+			<initialValue>-1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>xs</name>
+			<text>X-step</text>
+			<initialValue>0.04</initialValue>
+			<units></units>
+		</input>
+		<output>
+			<name>x</name>
+			<text>X-coord. at bend</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>xi+xs*t</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>time_water</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>n*((x-x1)^2+y1^2)^.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>time_air</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>((xo-x)^2+yo^2)^.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>time_total</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>n*((x-x1)^2+y1^2)^.5+((xo-x)^2+yo^2)^.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>path_water</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>x-x1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-y1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x1</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>y1</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>path_air</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(x-xo)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-yo</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>water_time</name>
+			<text>Time in water</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>time_water.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>air_time</name>
+			<text>Time in air</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>time_air.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>total_time</name>
+			<text>Total time</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>time_total.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>d_water</name>
+			<text>Distance in water</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>((x-x1)^2+y1^2)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>d_air</name>
+			<text>Distance in air</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>((xo-x)^2+yo^2)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ai</name>
+			<text>Angle of inc.</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>toDegrees(acos(abs(y1)/d_water))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ar</name>
+			<text>Angle of ref</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>toDegrees(acos(yo/d_air))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>a4</name>
+			<text>a4</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>n^2-1</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a3</name>
+			<text>a3</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-2*(xo+x1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a2</name>
+			<text>a2</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>xo^2+4*xo*x1+x1^2+(n^2*yo^2-y1^2)/a4</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a1</name>
+			<text>a1</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-2*(xo*x1*(xo+x1)+(x1*n^2*yo^2-xo*y1^2)/a4)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a0</name>
+			<text>a0</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>xo^2*x1^2+((n*x1*yo)^2-(xo*y1)^2)/a4</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>quartic</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>0</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>x^4+a3*x^3+a2*x^2+a1*x+a0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>p</name>
+			<text>p</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-a2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>q</name>
+			<text>q</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>a1*a3-4*a0</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>r</name>
+			<text>r</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>4*a2*a0-a1^2-a3^2*a0</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a</name>
+			<text>a</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>q-p^2/3</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>b</name>
+			<text>b</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>r-p*q/3+2*p^3/27</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>A</name>
+			<text>A</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(-b/2+(b^2/4+a^3/27)^.5)^(1/3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>B</name>
+			<text>B</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(-b/2-(b^2/4+a^3/27)^.5)^(1/3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>y</name>
+			<text>root of cubic</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(A+B)-p/3</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>R</name>
+			<text>R</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(a3^2/4-a2+y)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>F</name>
+			<text>E</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(3*a3^2/4-R^2-2*a2-(4*a3*a2-8*a1-a3^3)/(4*R))^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>z3</name>
+			<text>Quartic root</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-a3/4-R/2+F/2</value>
+			</calculator>
+		</output>
+		<output>
+			<name>z4</name>
+			<text>root 4</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-a3/4-R/2-F/2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ait</name>
+			<text>Angle of inc. (z3)</text>
+			<units>deg</units>
+			<calculator type="parametric">
+				<value>toDegrees(acos(abs(y1)/((z3-x1)^2+y1^2)^.5))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>art</name>
+			<text>Angle of ref. (z3)</text>
+			<units>deg</units>
+			<calculator type="parametric">
+				<value>toDegrees(acos(yo/((xo-z3)^2+yo^2)^.5))</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

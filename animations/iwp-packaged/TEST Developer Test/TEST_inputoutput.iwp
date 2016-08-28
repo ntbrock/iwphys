@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name>Taylor Brockman</name>
+		<organization>IWP</organization>
+		<email>taylor.brockman@gmail.com</email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.02</change>
+			<fps>15.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>The output should be the same as the input, always.</text>
+		</description>
+		<input>
+			<name>input</name>
+			<text>Input</text>
+			<initialValue>10</initialValue>
+			<units>m</units>
+		</input>
+        <output>
+            <name>output</name>
+            <text>Output</text>
+            <units>m</units>
+			<calculator type="parametric">
+    			<value>input</value>
+			</calculator>
+        </output>
+	</objects>
+</problem>

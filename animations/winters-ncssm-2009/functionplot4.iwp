@@ -1,0 +1,342 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>-2.0</start>
+			<stop>5.0</stop>
+			<change>0.01</change>
+			<fps>50.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>-2.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-5.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-5.0</ymin>
+			<ymax>5.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>The pointer traces out a function of the form:
+
+y = a + bx + cx^2+dx^3+ex^4
+
+to do:
+
+fix tangent line
+integration area forced to trapezoidal shape</text>
+		</description>
+		<solid>
+			<name>integrator</name>
+			<shape type="polygon" drawTrails="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>ti</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>yi</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>t</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>pointer.ypos</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>t</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>ti</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>pointer</name>
+			<shape type="rectangle" drawTrails="true">
+				<width>
+					<calculator type="parametric">
+						<value>psize</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>a+b*ti+c*ti^2+d*ti^3+e*ti^4</displacement>
+					<velocity>b+2*c*ti+3*d*ti^2+4*e*ti^3</velocity>
+					<acceleration>2*c+6*d.value*t+12*e.value*t^2</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>a</name>
+			<text>a</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>b</name>
+			<text>b</text>
+			<initialValue>2.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>c</name>
+			<text>c</text>
+			<initialValue>1.7</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>d</name>
+			<text>d</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>e</name>
+			<text>e</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<output>
+			<name>ti</name>
+			<text>Start time</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>time_start</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>pointer.ypos</value>
+			</calculator>
+		</output>
+		<input>
+			<name>psize</name>
+			<text>Strip width</text>
+			<initialValue>0.1</initialValue>
+			<units></units>
+		</input>
+		<output>
+			<name>sarea</name>
+			<text>Strip area</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>psize*pointer.ypos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>Deriv_line</name>
+			<shape type="line" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>b+2*c*t</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>153</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>pointer.xpos-.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>pointer.ypos-0.5*(b+2*c*t+3*d.value*t^2+4*e.value*t^3)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>slope</name>
+			<text>Derivative</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>b+2*c*t</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>velocity</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>psize</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>pointer.yvel</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>accel</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>psize</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>pointer.yaccel</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>yi</name>
+			<text>Y initial</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>a+b*ti+c*ti^2+d*ti^3+e*ti^4</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

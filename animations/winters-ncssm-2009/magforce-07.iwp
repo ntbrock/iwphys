@@ -1,0 +1,325 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>1.0E-8</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>1.0E-5</xmax>
+			<ymin>-0.2</ymin>
+			<ymax>0.2</ymax>
+			<xgrid>1.0E-6</xgrid>
+			<ygrid>0.02</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.2</xmin>
+			<xmax>0.2</xmax>
+			<ymin>-0.35</ymin>
+			<ymax>0.05</ymax>
+			<xgrid>0.02</xgrid>
+			<ygrid>0.02</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>The view is that of an observer in space looking down on one of the poles of the Earth. An electron orbits the Earth at the equator under the influence of the magnetic force due to the Earth's magnetic field. The gravitational force on the electron can be ignored in comparison to the magnetic force. Which pole, magnetic north or south, is directly below the observer?</text>
+		</description>
+		<input>
+			<name>q</name>
+			<text>Charge</text>
+			<initialValue>1.6E-19</initialValue>
+			<units>C</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass</text>
+			<initialValue>9.11E-31</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Magnitude of initial velocity</text>
+			<initialValue>260000.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Direction of initial velocity</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>Efield</name>
+			<text>Electric Field</text>
+			<initialValue>0.0</initialValue>
+			<units>N/C</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>B</name>
+			<text>Magnetic field</text>
+			<initialValue>1.0E-5</initialValue>
+			<units>T</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>sf</name>
+			<text>Scale factor</text>
+			<initialValue>1.0E-13</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>R</name>
+			<text>Charge/Mass</text>
+			<units>C/kg</units>
+			<calculator type="parametric">
+				<value>q/m</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>background</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-.2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Earth</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.28</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.28</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-.148</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Avector</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*P.xaccel</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*P.yaccel</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>P.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>P.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>P</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*cos(toRadians(a))</velocity>
+					<acceleration>R*B*P.yvel</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*sin(toRadians(a))</velocity>
+					<acceleration>R*(Efield-B*P.xvel)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>x</name>
+			<text>X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.xpos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.ypos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>Pole</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.005</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.005</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-.15</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>XP</name>
+			<text>Which pole?</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>16</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>-.155</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>.01</value>
+				</calculator>
+			</xpath>
+		</object>
+		<output>
+			<name>a</name>
+			<text>Acceleration</text>
+			<units>m/s^2</units>
+			<calculator type="parametric">
+				<value>R*vo*B</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

@@ -1,0 +1,551 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>2.0E-8</stop>
+			<change>1.0E-10</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>2.0E-8</xmax>
+			<ymin>-0.07</ymin>
+			<ymax>0.07</ymax>
+			<xgrid>1.0E-9</xgrid>
+			<ygrid>0.0070</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.075</xmin>
+			<xmax>0.125</xmax>
+			<ymin>-0.1</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>0.01</xgrid>
+			<ygrid>0.01</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>An electron is accelerated from rest under the influence of a potential V. At the origin, the electron enters crossed electric and magnetic fields.  The electric field is oriented in the -y direction and is produced by parallel plates with a potential difference equal to V.  The magnetic field is oriented in the -z direction (into screen) and is produced by Helmholtz coils.
+Vectors:  red = velocity     green = magnetic force     black = electric force  
+blue = acceleration
+</text>
+		</description>
+		<input>
+			<name>size</name>
+			<text>Size scale</text>
+			<initialValue>0.0030</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>R</name>
+			<text>Charge to mass ratio</text>
+			<initialValue>1.756E11</initialValue>
+			<units>C/kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>s</name>
+			<text>Sign of charge</text>
+			<initialValue>-1.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>u</name>
+			<text>B-field ON = 1 or OFF = 0</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>z</name>
+			<text>E-field ON = 1 or OFF = 0</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>d</name>
+			<text>Plate separation</text>
+			<initialValue>0.06</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>V1</name>
+			<text>Accelerating potential</text>
+			<initialValue>2000.0</initialValue>
+			<units>V</units>
+		</input>
+		<input>
+			<name>r</name>
+			<text>Coil radius/separation</text>
+			<initialValue>0.07</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>n</name>
+			<text>Turns per coil</text>
+			<initialValue>320.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>i</name>
+			<text>Coil current</text>
+			<initialValue>0.75</initialValue>
+			<units>A</units>
+		</input>
+		<input>
+			<name>x</name>
+			<text>Acceleration distance</text>
+			<initialValue>0.05</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>xc</name>
+			<text>Coasting distance</text>
+			<initialValue>0.02</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vscale</name>
+			<text>Scale Factor for V</text>
+			<initialValue>1.0E-9</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>fscale</name>
+			<text>Scale factor for force</text>
+			<initialValue>4.0E-7</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>tf</name>
+			<text>Time in fields</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>(t-to-t1)*step(t-to-t1)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>V2</name>
+			<text>Plate potential</text>
+			<units>V</units>
+			<calculator type="parametric">
+				<value>V1*z</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vo</name>
+			<text>Entry velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>(2*R*V1)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>Ef</name>
+			<text>Electric field</text>
+			<units>V/m</units>
+			<calculator type="parametric">
+				<value>s*V2/d</value>
+			</calculator>
+		</output>
+		<output>
+			<name>B</name>
+			<text>Magnetic field</text>
+			<units>T</units>
+			<calculator type="parametric">
+				<value>u*s*0.000000899*i*n/r</value>
+			</calculator>
+		</output>
+		<output>
+			<name>to</name>
+			<text>Time to plates</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>2*x/vo</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>t1</name>
+			<text>Time to coast</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>xc/vo</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>px</name>
+			<text>X-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>py</name>
+			<text>Y-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.ypos</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>coil1</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r*2*u</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r*2*u</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.055</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>coil2</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r*1.9*u</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r*1.9*u</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.055</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>plate1</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.11</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>z*size/2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.055</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>d/2+size/4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>plate2</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.11</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>z*size/2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.055</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-d/2-size/4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>gun</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>x</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2*size</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-(x/2+xc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>vvect</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>vscale*P.xvel</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>vscale*P.yvel</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>P.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>P.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fnetvect</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(s*B*P.yvel*step(t-to-t1)+(V1/x)*step(to-t))*fscale</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>s*(E-B*P.xvel)*step(t-to-t1)*fscale</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>P.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>P.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fevect</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>s*E*fscale*step(t-to-t1)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>P.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>P.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>fmvect</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*B*P.yvel*fscale*step(t-to-t1)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-s*B*P.xvel*fscale*step(t-to-t1)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>P.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>P.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>P</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>size</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>size</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-x-xc</displacement>
+					<velocity>0</velocity>
+					<acceleration>s*(R*B*P.yvel*step(t-to-t1)+R*(V1/x)*step(to-t))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>0</velocity>
+					<acceleration>s*R*(Ef-B*P.xvel)*step(t-to-t1)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

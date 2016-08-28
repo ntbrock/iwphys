@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>Reset the applet to reinitialize the slopes and intercepts of the lines. </text>
+		</description>
+		<output>
+			<name>m1</name>
+			<text>Slope of line 1</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>sign(rand(1)-rand(1))*rand(10)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>m2</name>
+			<text>Slope of line 2</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>sign(rand(1)-rand(1))*rand(10)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>b1</name>
+			<text>Intercept of line 1</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>sign(rand(1)-rand(1))*rand(5)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>b2</name>
+			<text>Intercept of line 2</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>sign(rand(1)-rand(1))*rand(5)</value>
+			</calculator>
+		</output>
+		<input>
+			<name>scale</name>
+			<text>Line scale factor</text>
+			<initialValue>100.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>intx_x</name>
+			<text>Intersection X-Coord.</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(b2-b1)/(m1-m2)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>intx_y</name>
+			<text>Intersection Y-Coord.</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(m1*b2-m2*b1)/(m1-m2)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>delta_m</name>
+			<text>Difference of slopes</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>m1-m2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>line1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1*scale</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>m1*scale</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0+b1</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1*scale</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>m2*scale</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0+b2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line1Clone</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-1*scale</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-m1*scale</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0+b1</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line2Clone</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-1*scale</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-m2*scale</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0+b2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>solution</name>
+			<text>Solution? (1=yes; 0=no)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(abs(m1-m2))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

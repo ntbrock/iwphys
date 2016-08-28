@@ -1,0 +1,337 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.099</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-20.0</xmin>
+			<xmax>20.0</xmax>
+			<ymin>-20.0</ymin>
+			<ymax>20.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<solid>
+			<name>RopeClone</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/rope.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>3.14/2</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(t-1)*(vo*1+.5*a*1^2)+step(1-t)*(vo*t+.5*a*t^2)+4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Weight</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/weight.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(t-1)*(vo*1+.5*a*1^2)+step(1-t)*(vo*t+.5*a*t^2)-7</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Rope</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/rope.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>3.14/2</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(t-1)*(vo*1+.5*a*1^2)+step(1-t)*(+vo*t+.5*a*t^2)-4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Pullhand</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/pullhand.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>(3.14*3)/2</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(t-1)*(vo*1+.5*a*1^2)+step(1-t)*(vo*t+.5*a*t^2)+6</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Dial</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>4</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>4</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(t-1)*(vo*1+.5*a*1^2)+step(1-t)*(vo*t+.5*a*t^2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Pointer</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2*sin(2*3.14(T/tmax))*step(.5-t)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2*cos(2*3.14(T/tmax))</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(t-1)*(vo*1+.5*a*1^2)+step(1-t)*(vo*t+.5*a*t^2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>g</name>
+			<text>Gravity</text>
+			<initialValue>9.8</initialValue>
+			<units>m/s/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>ai</name>
+			<text>Acceleration</text>
+			<initialValue>9.8</initialValue>
+			<units>m/s/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass of Weight</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Initial Velocity</text>
+			<initialValue>0.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>tmax</name>
+			<text>Scale Max</text>
+			<initialValue>20.0</initialValue>
+			<units>N</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>a</name>
+			<text>Acceleration</text>
+			<units>m/s/s</units>
+			<calculator type="parametric">
+				<value>ai*step(t)*(1-exp(-t))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>T</name>
+			<text>Tension Force</text>
+			<units>N</units>
+			<calculator type="parametric">
+				<value>m*a+m*g</value>
+			</calculator>
+		</output>
+		<output>
+			<name>Vf</name>
+			<text>Velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>vo+t*((T-m*g)/m)</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

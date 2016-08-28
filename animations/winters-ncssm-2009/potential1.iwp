@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.1</change>
+			<fps>20.0</fps>
+		</time>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<input>
+			<name>a</name>
+			<text>A</text>
+			<initialValue>0.1</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>b</name>
+			<text>B</text>
+			<initialValue>2.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>c</name>
+			<text>C</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>d</name>
+			<text>D</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<solid>
+			<name>particle</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a.value*t^b.value+c.value*t^d.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>5.0</stop>
+			<change>0.02</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-50.0</ymin>
+			<ymax>50.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>10.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A ball is attached to a horizontal spring (not shown) which causes the ball to oscillate about the origin. Run the animation. Note that values of time, position, velocity, and acceleration appear above the play buttons. When the animation stops, click on Show graph to display graphs of position, velocity, and acceleration as a function of time.</text>
+		</description>
+		<output>
+			<name>pxr</name>
+			<text>Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Red.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vxr</name>
+			<text>Velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Red.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>axr</name>
+			<text>Acceleration</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>Red.xaccel</value>
+			</calculator>
+		</output>
+		<input>
+			<name>ar</name>
+			<text>Amplitude</text>
+			<initialValue>9.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>pr</name>
+			<text>Phase</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>mr</name>
+			<text>Mass</text>
+			<initialValue>2.5</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>kr</name>
+			<text>Spring constant</text>
+			<initialValue>10.0</initialValue>
+			<units>N/m</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>Red</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="true" xVel="true" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ar.value*cos((kr.value/mr.value)^.5*t+toRadians(pr.value)*1)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

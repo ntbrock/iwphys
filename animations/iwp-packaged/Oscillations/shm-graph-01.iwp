@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-5.0</ymin>
+			<ymax>5.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-5.0</ymin>
+			<ymax>5.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Run the applet to display a position vs. time graph of an object in simple harmonic motion.  By entering a value of phase other than 0, a second graph will appear shifted in phase by the amount of the adjustment.</text>
+		</description>
+		<input>
+			<name>a</name>
+			<text>Amplitude</text>
+			<initialValue>3.5</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>w</name>
+			<text>Angular velocity</text>
+			<initialValue>0.897</initialValue>
+			<units>1/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>p</name>
+			<text>Phase</text>
+			<initialValue>2.0</initialValue>
+			<units>rad</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>deltap</name>
+			<text>Phase adjustment</text>
+			<initialValue>0.0</initialValue>
+			<units>rad</units>
+		</input>
+		<solid>
+			<name>pathadj</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a*cos(w*t+p+deltap)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>path</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a*cos(w*t+p)</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

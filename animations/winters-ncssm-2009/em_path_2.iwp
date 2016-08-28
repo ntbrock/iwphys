@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>5.0E-8</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>-0.8</xmin>
+			<xmax>0.8</xmax>
+			<ymin>-0.8</ymin>
+			<ymax>0.8</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>0.1</ygrid>
+		</window>
+		<description>
+			<text>A charged particle moves under the influence of an electric field oriented
+along the y-axis and a magnetic field oriented along the z-axis (perpendicular
+to the screen).  Note these sign conventions:
+Direction of positive E is +y (toward top of screen)
+Direction of positive B is +z (outward from screen)
+The sign of the charge is the same as that of the charge/mass ratio.
+Note that the time step is 50 ns. It doesnt display to the right. </text>
+		</description>
+		<input>
+			<name>qmr</name>
+			<text>Charge to mass</text>
+			<initialValue>-1.76E11</initialValue>
+			<units>C/kg</units>
+		</input>
+		<input>
+			<name>ef</name>
+			<text>Electric Field</text>
+			<initialValue>2.0</initialValue>
+			<units>N/C</units>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Initial speed</text>
+			<initialValue>200000.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>ang</name>
+			<text>Initial angle</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>mf</name>
+			<text>Magnetic field</text>
+			<initialValue>1.0E-5</initialValue>
+			<units>T</units>
+		</input>
+		<solid>
+			<name>Q</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.05</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.05</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo.value*cos(toRadians(ang.value))</velocity>
+					<acceleration>qmr.value*mf.value*Q.yvel</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo.value*sin(toRadians(ang.value))</velocity>
+					<acceleration>qmr.value*(ef.value-mf.value*Q.xvel)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>x</name>
+			<text>X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Q.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Q.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vx</name>
+			<text>Vx</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Q.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vy</name>
+			<text>Vy</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Q.yvel</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

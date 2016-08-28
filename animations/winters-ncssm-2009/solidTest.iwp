@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.2</change>
+			<fps>30.0</fps>
+		</time>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>200.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>200.0</ymax>
+			<xgrid>20.0</xgrid>
+			<ygrid>20.0</ygrid>
+		</window>
+		<description>
+			<text>Test_1.iwp sample xml file!
+Shoot the Ball off of the mountain onto the Target.  YEEHAW!</text>
+		</description>
+		<output>
+			<name>ballx</name>
+			<text>Ball X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Ball.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>bally</name>
+			<text>Ball Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Ball.ydisp</value>
+			</calculator>
+		</output>
+		<input>
+			<name>tgt_x</name>
+			<text>Target X</text>
+			<initialValue>75.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>gunvel</name>
+			<text>Gun Velocity</text>
+			<initialValue>24.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>disp_y</name>
+			<text>Y DIsplacement</text>
+			<initialValue>100.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>gunangle</name>
+			<text>Gun Angle</text>
+			<initialValue>45.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>Target</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2.5</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>tgt_x.value</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.25</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>GunBarrel</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>8</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>disp_y.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Ball</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0+gunvel.value*cos(gunangle.value)*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>disp_y.value+gunvel.value*sin(gunangle.value)*t+0.5*(-9.8)*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>GunBase</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>8</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>6</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-6</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>disp_y.value-5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>LeftWall</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>disp_y.value</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(disp_y.value)/2-5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Floor</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>400</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>150</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>My Solid</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>25</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

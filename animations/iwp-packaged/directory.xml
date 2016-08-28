@@ -1,0 +1,800 @@
+<?xml version="1.0"?>
+<directory>
+	<title>Packaged Problems for IWP</title>
+
+	<category>
+		<name>Function Reference</name>
+		<problemLink>
+			<filename>/packagedProblems/Function Reference/TEST_mathFunctions.iwp</filename>
+			<summary>All Math Functions provided by IWP
+</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Function Reference/TEST_mathConstants.iwp</filename>
+			<summary>All Math Constants provided by IWP
+</summary>
+		</problemLink>
+	</category>
+
+	<category>
+		<name>Oscillations</name>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/lissajous-figures.iwp</filename>
+			<summary>An object is subject to independent restoring forces along the x- and y-axes.  It's like being pulled on by springs along both axes simultaneously.  Do the following.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-01.iwp</filename>
+			<summary>A ball is attached to a horizontal spring (not shown) which causes the ball to oscillate about the origin. Run the animation until it stops. Click on Show graph. </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-02.iwp</filename>
+			<summary>A ball is attached to a horizontal spring (not shown) which causes the ball to oscillate about the origin. Run the animation. Note that values of time, position, velocity, and acceleration appear above the play buttons. When the animation stops, click on Show graph to display graphs of position, velocity, and acceleration as a function of time.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-circle-analogy-01.iwp</filename>
+			<summary>Demonstration of the circular motion analogy for simple harmonic motion</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-graph-01.iwp</filename>
+			<summary>Run the applet to display a position vs. time graph of an object in simple harmonic motion.  By entering a value of phase other than 0, a second graph will appear shifted in phase by the amount of the adjustment.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-graph-02.iwp</filename>
+			<summary>Run the applet to display a position vs. time graph of an object in simple harmonic motion.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-phase-01.iwp</filename>
+			<summary>The red and blue objects have the same mass and oscillate in SHM with the same period and amplitude.  The only thing different is the phase.  Change the phase of the blue object so that it starts at the same position and with the same velocity and acceleration as the red object.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-phase-02.iwp</filename>
+			<summary>The red and blue objects have the same mass and oscillate in SHM with the same period and amplitude.  The only thing different is the phase.  Determine what the phase of the blue object must be so that it starts at the same position and with the same velocity and acceleration as the red object.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-phase-03.iwp</filename>
+			<summary>The red and blue objects have the same mass and oscillate in SHM with the same period and amplitude.  The only thing different is the phase.  Determine what the phase of the blue object must be so that it starts at the same position and with the same velocity and acceleration as the red object.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-synchronize-02.iwp</filename>
+			<summary>Two objects of equal mass oscillate independently in SHM about the origin. The two objects are initially in phase.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-synchronize.iwp</filename>
+			<summary>Two objects of equal mass oscillate independently in SHM about the origin. The two objects are initially in phase.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-xva-plot.iwp</filename>
+			<summary>The black square shows an object in 1-dimensional simple harmonic motion along the x-axis.  Each of the circular colored markers represents one of the following plots for the object's motion.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/spring-motion.iwp</filename>
+			<summary>A red ball is connected to a spring which is fixed at the left side of the screen. </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/vertical-spring-01.iwp</filename>
+			<summary>A platform (black) of mass 0.0500 kg is suspended from a fixed support by a rubber band that obeys Hooke's Law.  Standard masses can be added to the platform in increments of 0.0500 kg.  When the red stick is pulled away, the platform with its weight will oscillate vertically about its equilibrium position. </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/damped-1.iwp</filename>
+			<summary>The blue line plots position (vertical) as a function of time (horizontal) for damped SHM.  The red line plots the decay of the amplitude.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/damped-SHM-template.iwp</filename>
+			<summary>This plots position (vertical) as a function of time (horizontal) for an object subject to a Hooke's Law restoring force.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-compare-01.iwp</filename>
+			<summary>1. Two objects of equal mass oscillate independently in SHM about the origin. Find ratios of each of the following (blue/red):</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/shm-compare-template.iwp</filename>
+			<summary>The blue and red objects oscillate in SHM.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Oscillations/pendulum01.iwp</filename>
+			<summary>A pendulum is released from rest and oscillates in a vertical plane. The angle of release, mass of the bob, gravitational field, and length of the string can be adjusted. At large angles, the applet may show unphysical behavior.</summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>Optics, Physical</name>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Physical/air-wedge-1.iwp</filename>
+			<summary>Monochromatic light is incident on an air wedge.  Play the animation to advance the position of the incident ray by the given increment.  The phase difference is given as an output in units of wavelengths. All distance units are in micrometers (10^-6 m).  </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Physical/air-wedge-3.iwp</filename>
+			<summary>Monochromatic light is incident on an air wedge.  Playing the animation advances the position of the incident ray by the given increment.  The phase difference is given as an output in units of wavelengths. All distance units are in micrometers (10^-6 m).  In order to precisely position the incident ray, select an initial position near the one you're looking for.  Then select a small position increment.  Setting the incident angle to 0 degrees is also recommended.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Physical/air-wedge-template.iwp</filename>
+			<summary>Monochromatic light is incident on an air wedge.  The angle of the wedge may be changed by changing the height of the triangular post.  Playing the animation advances the position of the incident ray in the given increments.  The phase difference is given as an output in multiples of wavelengths.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Physical/double-slit-1.iwp</filename>
+			<summary>Two sources of monochromatic waves are situated on either side of the origin.  The sources oscillate in phase.  The pattern of interference fringes is projected on a screen near the top of the display.  Playing the animation will decrease the source separation and show the resulting change in the interference pattern.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Physical/thin-film-1.iwp</filename>
+			<summary>A ray of light is incident from air (blue) on a thin film (yellow).  The film is deposited on a transparent medium (gray).  Light is reflected from the upper and lower surfaces of the film.  The reflected rays interfere.  (Grid units are 100 nm.) The phase difference between the reflected rays is given in units of wavelengths. Playing the animation will increase the wavelength by the selected increment.  The default values for wavelength and increment will advance the wavelengths through the range of visible light.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Physical/thin-film-2.iwp</filename>
+			<summary>A ray of light is incident from air on a thin soap film (yellow).  The medium below the film is also air.  Light is reflected from the upper and lower surfaces of the film.  The reflected rays interfere.  (Grid units are 100 nm.) The phase difference between the reflected rays is given in units of wavelengths. Playing the animation will increase the film thickness by the indicated increment.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Physical/2-source-inter.iwp</filename>
+			<summary>This applet draws wavefront diagrams of waves from two sources.</summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>Magnetism</name>
+		<problemLink>
+			<filename>/packagedProblems/Magnetism/helmholtz-3.iwp</filename>
+			<summary>Play the applet in order to plot the magnetic field along the axis of a pair of Helmholtz coils as a function of the distance from the axis midpoint.  The red and blue lines are the fields of the individual coils.  The green line is the net field.  (Note that the value of Time is the same as x in meters.</summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>Charged Particle Motion</name>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/cp-efield-02.iwp</filename>
+			<summary>A charged particle moves under the influence of an electric field oriented along the y-axis.  Note this sign convention: The direction of positive E is +y (toward top of screen)  The red and blue vectors on the particle represents its velocity and acceleration.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/cp-efield.iwp</filename>
+			<summary>A charged particle moves under the influence of an electric field oriented along the y-axis as shown by the vector at lower right.  Note this sign convention:  Direction of positive E is +y (toward top of screen)  The red and blue vectors on the particle represents its velocity and acceleration.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/cp-mfield-02.iwp</filename>
+			<summary>A charged particle moves under the influence of a magnetic field oriented along the z-axis (perpendicular to the screen).  The direction of positive B is +z (outward from screen).  The blue vector on the particle represents its acceleration.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/cp-mfield.iwp</filename>
+			<summary>A charged particle moves under the influence of a magnetic field oriented along the z-axis (perpendicular to the screen).  The direction of positive B is +z (outward from screen).  The blue vector on the particle represents its acceleration.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/cp-template.iwp</filename>
+			<summary>A charged particle moves under the influence of an electric field oriented</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/cp-unknown-1.iwp</filename>
+			<summary>Three different charged particles of equal kinetic energy move under the influence of a uniform magnetic field oriented perpendicular to the screen.   Graphs of vertical position vs. time can be displayed by clicking Show graph.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/em-ratio-1.iwp</filename>
+			<summary>An electron is accelerated from rest under the influence of a potential V1. At the origin, the electron enters crossed electric and magnetic fields.  The electric field is oriented in the -y direction and is produced by parallel plates with a potential difference equal to V1.  The magnetic field is oriented in the -z direction (into screen) and is produced by Helmholtz coils with current.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/em-ratio-1b.iwp</filename>
+			<summary>An electron is accelerated from rest under the influence of a potential V1 (not shown). At the origin, the electron enters a uniform electric field.  The electric field is oriented in the -y direction and is produced by parallel plates with a potential difference equal to V1. </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/em-ratio-1c.iwp</filename>
+			<summary>An electron is accelerated from rest under the influence of a potential V1 (not shown). At the origin, the electron enters a uniform magnetic field produced by Helmholtz coils.  Within the area encircled by the coils, the electron follows a circular path. </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/em-ratio-1d.iwp</filename>
+			<summary>An electron is accelerated from rest under the influence of a potential V1 (not shown). At the origin, the electron enters crossed electric and magnetic fields.  The electric field is oriented in the -y direction and is produced by parallel plates with a potential difference equal to V2.  The magnetic field is oriented in the -z direction (into screen) and is produced by Helmholtz coils.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/em-ratio-2.iwp</filename>
+			<summary>An electron is accelerated from rest and enters an electric field produced by parallel plates with a constant potential difference across them.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/em-ratio-2b.iwp</filename>
+			<summary>An electron is accelerated from rest under the influence of a potential V1. Near the origin, the electron enters a uniform magnetic field produced by Helmholtz coils.   The magnetic field is oriented in the -z direction (into screen).  The magnitude of the magnetic field may be adjusted by changing the current in the coils.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/em-ratio-2c.iwp</filename>
+			<summary>An electron is accelerated from rest under the influence of a potential V1. At the origin, the electron enters crossed electric and magnetic fields.  The electric field is oriented in the -y direction and is produced by parallel plates with a potential difference equal to V2.  The magnetic field is oriented in the -z direction (into screen) and is produced by Helmholtz coils.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/em-ratio-2d.iwp</filename>
+			<summary>An electron is accelerated from rest and enters an electric field produced by parallel plates with a constant potential difference across them.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/em-ratio-3.iwp</filename>
+			<summary>An electron is accelerated from rest under the influence of a potential V. At the origin, the electron enters crossed electric and magnetic fields.  The electric field is oriented in the -y direction and is produced by parallel plates with a potential difference equal to V.  The magnetic field is oriented in the -z direction (into screen) and is produced by Helmholtz coils.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/mass-spec.iwp</filename>
+			<summary>Two singly-ionized isotopes of the same element are injected at the same velocity into a region of uniform magnetic field pointing out of the screen.  (There is no field below the x-axis).  Determine the ratio of the masses of the isotopes.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/pitch1-para.iwp</filename>
+			<summary>An electron is accelerated to the right in an electron gun under the influence of a uniform electric field.  When the electron exits the gun, it enters a region of uniform magnetic field pointing from the origin to the box target.  (The electric field outside of the gun is 0.) Note that the path of the electron on the screen is a 2D slice of a 3D path.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/velocity-selector-02.iwp</filename>
+			<summary>A charged particle moves under the influence of an electric field oriented along the y-axis and a magnetic field oriented along the z-axis.  Sign conventions:</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/velocity-selector.iwp</filename>
+			<summary>A charged particle moves under the influence of an electric field oriented along the y-axis and a magnetic field oriented along the z-axis.  Sign conventions:</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/cpchall01.iwp</filename>
+			<summary>Challenge 1. An electron is shot along the +y-axis from the origin. Enter the magnetic field that will make the electron move in a path of radius 0.050 m. Note that a positive value of B-field indicates that B points outward from the screen. Also note the following: After making a change in any Input, click Reset. The grid spacing is 0.01 m along both axes. </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/cpchall02.iwp</filename>
+			<summary>Challenge 2.  Orbiting alpha particle</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/cpchall03.iwp</filename>
+			<summary>Challenge 3.  Unknown X particle</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Charged Particle Motion/cpchall04.iwp</filename>
+			<summary>Challenge 4.  Explore electric field</summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>Waves and Sound</name>
+		<problemLink>
+			<filename>/packagedProblems/Waves and Sound/beats.iwp</filename>
+			<summary>The blue and green waves are superimposed to produce the red wave.  When the frequencies are nearly the same, beats are produced.  Determine the frequencies of the green and blue waves.  Also determine the beat frequency.  Note that the x-axis is a time axis.  In order to spread out the waves for easier viewing, click on the Window tab above and change the value of X Max to something smaller.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Waves and Sound/doppler4.iwp</filename>
+			<summary>A source of point spherical waves moves along the x-axis at constant velocity. The current position of the source is indicated by a red dot.  Note that the spacing of the dark, vertical grid lines is 200 m.  Determine the period of the wave, the velocity of the wave, the velocity of the source, the frequency perceived by an observer at the right edge of the screen, and the frequency perceived by an observer at the left edge of the screen.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Waves and Sound/doppler5.iwp</filename>
+			<summary>A source of point spherical waves moves along the x-axis at constant velocity. The current position of the source is indicated by a red dot.  The spacing of the dark, vertical grid lines is 200 m.  Determine the Mach number of the source.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Waves and Sound/plucked-cord.iwp</filename>
+			<summary>This animation represents waves on a string plucked at its center.  The yellow line is the actual waveform that would appear.  This can be thought of as  the superposition of two waves (blue and red) that separate after t = 0, moving in opposite direcitons with equal speed, frequency, and wavelength.  At any time, the sum of the blue and red waves is the yellow wave.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Waves and Sound/trav-wave-3.iwp</filename>
+			<summary>Consider the following model of a linear medium such as a string:  a chain of point masses joined by light, strong threads. Traveling waves of constant frequency and wavelength are generated on the medium.  The motion of the wave is to the right while the motions of the point masses are vertical.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Waves and Sound/wavedraw.iwp</filename>
+			<summary>This applet draws standing wave forms. Diagrams may be screen-captured and imported into documents.</summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>Kinematics (1d)</name>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/acceleration01.iwp</filename>
+			<summary>Play the animation to view an object moving horizontally across the screen.  Its acceleration is uniform.  Step through the animation and take measurements of x-position and time to use for finding the acceleration. The object enters the field of view at -10.0 m and leaves (momentarily) at +10.0 m.  Tic marks are placed every meter.  Read positions of one side of the object to the nearest 0.1 m.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-01.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-02.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-03.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-04.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-05.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph of an object having the given initial velocity and acceleration.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-06.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph of an object having the given initial velocity and acceleration.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-07.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph of an object having the given initial velocity and acceleration.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-08.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph of an object having the given initial velocity and acceleration.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-09.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph of an object having the given initial velocity and acceleration.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-10.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph of an object having the given initial velocity and acceleration.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-11.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph of the blue dot.  In your notes, sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/dvat-template.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/haretortoise.iwp</filename>
+			<summary>The graph shows position vs. time of two objects which we will call a hare (red) and a tortoise (blue). The animals are in a race. The tortoise gets the advantage of a head start 100 m ahead of the hare. The hare runs ten times as fast as the tortoise does.  Where and when does the hare catch up to the tortoise?</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/haretortoise2.iwp</filename>
+			<summary>Now the tortoise has an acceleration to try to outrun the rabbit. (Note that the axis scales have been changed.)  Play the animation to see how the hare won't be able to catch the tortoise.  Change the acceleration to 0.5 m/s**2, reset, and run again.  Click Show graph.  The black line shows the distance between the hare and tortoise as a function of time.  Note how it dips to a minimum and then rises without ever reaching zero.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/kingraph1.iwp</filename>
+			<summary>Play the applet to show a position vs. time graph of the blue dot.  In your notes, sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/kingraph2.iwp</filename>
+			<summary>Play the animation to display a position vs. time graph of the red dot.  The values of position and velocity are given as outputs.  Record in your notes a table of positions and velocities at about 6 different times.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/velocity01.iwp</filename>
+			<summary>Play the animation to show a position vs. time graph of a uniformly-accelerating object. The blue line remains tangent to the path of the object. Therefore, the slope of the blue line is the instantaneous velocity of the object. Its value is given above the play buttons. Predict how graphs of velocity vs. time and acceleration vs. time will appear. Then click on Show Graph to display a velocity vs. time graph of the motion. Click on yAccel in the Graph window to show the acceleration vs. time graph also.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/velocity02.iwp</filename>
+			<summary>The situation is similar to the last problem but with different initial values.   Change the inputs in order to model the motion of an object thrown vertically from the ground at 30 m/s. (What should you input for the acceleration?). Type in  values of initial position, initial velocity, and  acceleration and run the animation.  Remember to click Reset whenever you change an input.  Click Show graph to show velocity vs. time and acceleration vs. time graphs.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/velocity02b.iwp</filename>
+			<summary>The situation is similar to the last problem but with different initial values.   Change the inputs in order to model the motion of an object thrown vertically from the ground (initial position of 0 m) at 25 m/s. (What should you input for the acceleration?). Type in  values of initial position, initial velocity, and  acceleration and run the animation.  Remember to click Reset whenever you change an input.  Click Show graph to show velocity vs. time and acceleration vs. time graphs.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/velocity03.iwp</filename>
+			<summary>A position vs. time graph of a uniformly-accelerating object is shown. The blue line is always tangent to the path of the object.  Determine the acceleration of the object by doing the following:  </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/window01.iwp</filename>
+			<summary>These two objects fall from rest under the influence of gravity only.  The red object is released at t = 0. The release of the green object is delayed by 1.0 s.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (1d)/roadrage-bk.iwp</filename>
+			<summary>This applet models a problem presented by Boris Korsunsky in The Physics Teacher magazine:  Two objects approach each other initially with </summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>Gravitation</name>
+		<problemLink>
+			<filename>/packagedProblems/Gravitation/planetary-system-02.iwp</filename>
+			<summary>Four moons revolve around a planet in circular orbits.  Determine the period and radius of each orbit. Use the buttons on the right to start/stop the animation and step it frame-by-frame.  Readouts of time and position coordinates are displayed above the buttons.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Gravitation/planetary-system-retrograde.iwp</filename>
+			<summary>This animation shows the retrograde motion of two moons of a planet (blue) from the point of view of the middle moon.  From the point of view of the planet, the orbits would be circular.Gravitational forces between planets are ignored.</summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>Forces</name>
+		<problemLink>
+			<filename>/packagedProblems/Forces/hookeslaw03.iwp</filename>
+			<summary>A platform (black) is suspended from a fixed support by a rubber band.  Weight can be added to the platform.  When the red stick is pulled away, the platform with its weight will oscillate vertically and eventually come to rest at its equilibrium position. The goal of the problem is to take data to find the spring constant of the rubber band and to find the mass of the platform.  For the latter, you'll need one measurement other than those described below.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/incplane04.iwp</filename>
+			<summary>An object slides down an inclined plane under the influence of gravity and kinetic friction.  The plane makes an angle of 30 degrees with the horizontal.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/incplane05.iwp</filename>
+			<summary>An object slides down an inclined plane. The coefficient of kinetic friction, which is initially 0, can be changed. The inclination of the plane, the initial x-coordinate of the block, and the initial velocity can also be changed.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/stopblock01.iwp</filename>
+			<summary>An object moving horizontally is slowed by a force of kinetic friction.  Adjust the initial velocity so that the right side of the block stops at the right-hand edge of the screen.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/turntable05.iwp</filename>
+			<summary>A penny on a turntable slides off when the turntable reaches a certain frequency. What is the coefficient of static friction of the turntable?  How does the result depend on the radius of the path?</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/bppb6.iwp</filename>
+			<summary>The animation shows a spherical object  falling through a fluid with </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/fallcompare-simulation.iwp</filename>
+			<summary>The green ball falls in a vacuum, while the red ball experiences a drag force from the fluid in which it falls. The acceleration of the red ball is a = -g + kv**2, where g = 9.8 N/kg, v is the speed of the ball, and k is a coefficient (which we term the drag factor) that depends on characteristics of the ball and the fluid. You may change the value of k to see how that influences the red ball. The vertical separation of the two balls is displayed in the list of outputs.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/fallcompare-template.iwp</filename>
+			<summary>Simulation of two objects falling from rest in a gravitational field.  </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/incplane-template.iwp</filename>
+			<summary>An object slides down an inclined plane.  The angle of inclination of the plane and the coefficient of kinetic friction may be adjusted.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/leaf.iwp</filename>
+			<summary>The physical situation for this problem is like that of the falling leaf where the leaf experiences a lift force that is proportional to and perpendicular to its velocity.  In this case, we treat the leaf as if it were a particle, even though we know that its shape is essential to the drag force that it experiences. Unlike the falling leaf problem, we include the option of a non-zero initial velocity.  Both the</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/mass-bppb-3.iwp</filename>
+			<summary>The animation allows you to check your calculated results against your</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/projectile-drag-2.iwp</filename>
+			<summary>The green projectile is subject to a v-squared drag force.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/projectile-drag-lift-2.iwp</filename>
+			<summary>The projectile is subject to a downward gravitational field, a drag force opposing the velocity and proportional to v-squared, and a lift force proportional to and perpendicular to the velocity.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Forces/turntable04.iwp</filename>
+			<summary>A turntable accelerates uniformly.  Three discs are held in place by static friction.  In what order will the discs break free?</summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>Kinematics (2d)</name>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/ballcart01.iwp</filename>
+			<summary>A ball is projected vertically from a cart moving horizontally at constant velocity. Why does the ball land in the cart?</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/ballcart02.iwp</filename>
+			<summary>A ball is projected vertically from a moving cart.  Select parameters such that the ball will land in the cart.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/ballcart04.iwp</filename>
+			<summary>A ball is projected vertically from a moving cart.  Select parameters such that the ball will land in the cart.  Velocity vectors are shown on the cart and the ball.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/projectile-template-2.iwp</filename>
+			<summary>A projectile is launched at an angle from a cliff. A target moves at 0, constant, or uniformly changing velocity. Hit the target with the projectile.  Velocity vectors are shown on the projectile.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/projectile-template.iwp</filename>
+			<summary>A projectile is launched at an angle from a cliff. A target moves at 0, constant, or uniformly changing velocity. Hit the target with the projectile.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/pursuit-template.iwp</filename>
+			<summary>Change the pursuer's x- and y-velocity components to intercept the target.  When you are successful, you can make the circle fit inside the square by stepping the animation. Note that there is more than one solution. Try finding the solution for which the pursuer intercepts the target at the right edge of the grid.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/dartgun3.iwp</filename>
+			<summary>Select the angle of launch of the ball to hit the target.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/globalcrossing-bk.iwp</filename>
+			<summary>Global Crossing (TPT 9-04):  Two cars X and Y approach an intersection of two perpendicular roads as shown.  The velocities of the cars are vx and vy.  At the moment when car X reaches the intersection, the separation between the cars is d.  What is the minimum separation between the cars during this motion?  (Note that t = 0 is set for the time at which we are given the positions of the two cars.)  Click on the graph tab for a graph of separation vs. time.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/mgr1-2.iwp</filename>
+			<summary>Start the applet.  Blue moves in a circle at constant speed.  At t=0, Blue releases a green ball.  Note the path taken by the ball. </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/race-template-2.iwp</filename>
+			<summary>Two objects move with zero or uniform acceleration in a straight line</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/vector01.iwp</filename>
+			<summary>Vectors A, B, and C are shown in a tip-to-tail arrangement with vector A starting from the origin.  Change the components of vector C in order that the sum of the three vectors is 0.  Click Reset after entering the coordinates.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Kinematics (2d)/clock-02.iwp</filename>
+			<summary>The minute and second hands of this clock move at the same rate as those of a normal clock.</summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>Momentum, Collisions, KE</name>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-elastic-2.iwp</filename>
+			<summary>Two gliders collide in an elastic collision.  The red glider is initially stationary. The x-coordinate of the center of mass of the system of gliders is shown as a black dot.  Play the animation.  Click Show Graph.  The velocities of the two objects and of the center of mass will be displayed as a function of time.  Try collisions for different values of mass and initial velocity.  After a while, you should be able to predict the final velocities, given any pair of initial velocities.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-elastic-3.iwp</filename>
+			<summary>Two gliders collide in an elastic collision. The x-coordinate of the center of mass of the system of gliders is shown as a black dot.  Play the animation.  Click Show Graph.  The velocities of the two objects and of the center of mass will be displayed as a function of time.  Try collisions for different values of mass and initial velocity.  After a while, you should be able to predict the final velocities, given any pair of initial velocities.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-elastic-4.iwp</filename>
+			<summary>What is the total momentum of this system?  Why can't you use the law of conservation of momentum to calculate what the velocities of both objects after the collision are?</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-inelastic-01a.iwp</filename>
+			<summary>Answer these questions using the animation.  The grid spacing in meters is given in the upper right, and the elapsed time and masses of the objects are given under Outputs. </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-inelastic-01b.iwp</filename>
+			<summary>Check your answers.  Velocities and momenta are given under inputs and outputs.  Click on Show Graph for velocity vs. time graphs.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-inelastic-02a.iwp</filename>
+			<summary>Two objects collide and stick together.  The animation stops as the collision starts.  You are to predict the velocity after collision of the combined blocks.  Use the fact that the total momentum is conserved.  This means that the sum of the momenta of the blocks before the collision is equal to the sum of the momenta after the collision.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-inelastic-02b.iwp</filename>
+			<summary>Check your answers.  Velocities and momenta are given under inputs and outputs.  Click on Show Graph for velocity vs. time graphs.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-inelastic-03a.iwp</filename>
+			<summary>Two objects collide and stick together.  The animation stops as the collision starts.  Use conservation of momentum to predict the velocity after collision of the combined blocks. </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-inelastic-03b.iwp</filename>
+			<summary>Check your answers as usual.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-inelastic-04a.iwp</filename>
+			<summary>One object moving left collides with another moving right. They stick together in the collision.  The animation stops as the collision starts.  Use conservation of momentum to predict the velocity after collision of the combined blocks. Momentum is a vector, so you have to take into account the direction of the velocity.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-inelastic-04b.iwp</filename>
+			<summary>Check your answers as usual.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-inelastic-05.iwp</filename>
+			<summary>Create a collision where the combined blocks move to the left after the collision.  You can change masses, positions, and initial velocities.  After changing the inputs, click the Reset button before playing.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-inelastic-template.iwp</filename>
+			<summary>Two objects collide and stick together.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/collision-symmetric.iwp</filename>
+			<summary>Two gliders of equal mass collide in an elastic collision.  Play the animation.  Click Show Graph.  The velocities of the two objects will be displayed as a function of time.  Try collisions for different pairs of initial velocities.  After a while, you should be able to predict the final velocities, given any pair of initial velocities.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Momentum, Collisions, KE/finalke-03.iwp</filename>
+			<summary>1. Two dimunitive cars, initially at rest, are subjected at t =0  to an identical and constant force in the +x direction.  How do the kinetic energies (see outputs) of the two cars compare after traveling the same distance?  Does your answer depend on the masses of the cars?  the applied force?  the position of the finish line?</summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>Optics, Geometric</name>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/apparent-depth-6.iwp</filename>
+			<summary>An alien on shore observes a neutrally-buoyant object (orange) in the water.  The angle subtended by the refracted rays at the alien's eye is shown in yellow.  The apparent position of the object is shown in gray.  The refracted rays from the alien's eye are extended backward into the water.  Playing the animation will move the object the right.  Unphysical behavior may be shown if the object moves too far to the right.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/apparent-depth-template.iwp</filename>
+			<summary>An observer at upper right views a neutrally-buoyant object (orange) in the water.  The angle subtended by the refracted rays at the observer's eye is shown in yellow.  The apparent position of the object is shown in gray.  The refracted rays from the observer's eye are extended backward into the water.  Playing the animation will move the object the right.  Unphysical behavior may be shown if the object moves too far to the right.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/least-time-6.iwp</filename>
+			<summary>The lower half of the screen is water, and the upper half is air.  Running the animation plots paths of rays from an object in the lower left-hand corner of the screen to an observer in the upper right-hand corner.  Physically, only one of the infinite number of paths is possible.  That one path is the one for which the ray takes the least time from object to observer.  </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/prism-1.iwp</filename>
+			<summary>A ray of light is incident from air on a prism with index of refraction 1.5. Playing the animation will increase the angle of incidence in 1 degree increments.  Normals to the sides of the prism are indicated by blue lines.  The angle of incidence is given as an output.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/prism-3b.iwp</filename>
+			<summary>A ray of light is incident from air on a prism with the given index of refraction. Normals to the sides of the prism are shown in red. Playing the animation will increase the vertex angle of the prism in 1 degree increments.  (If the critical angle is exceeded for the ray incident on the right side of the prism, non-physical results may occur.)</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/prism-6.iwp</filename>
+			<summary>The dispersion of white light by crown glass is modeled. The index of refraction ranges from 1.513 for red light to 1.532 for violet light.  Playing the animation will decrease the angle of incidence in 1 degree increments. </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/ray-refraction-3b.iwp</filename>
+			<summary>The blue and gray areas represent media of different optical densities.  n2/n1 is the ratio of the optical density of the gray medium to that of the blue medium.  The normal to the boundary is shown in red.  The path of a light ray is shown in yellow.  The ray is incident from the blue medium.  Playing the applet forward or backwards will increase or decrease the angle of incidence.  Explain why the refracted ray disappears at a particular angle.  Use Snell's Law to show that the angle at which the refracted ray disappears is correct.  Values of the angles of incidence and refraction are given as outputs.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/ray-refraction-3c.iwp</filename>
+			<summary>The blue and gray areas represent media of different optical densities.  n2/n1 is the ratio of the optical density of the gray medium to that of the blue medium.  The normal to the boundary is shown in red.  The path of a light ray is shown in yellow.  The ray is incident from the blue medium.  Playing the applet forward or backwards will increase or decrease the angle of incidence.  Explain why the refracted ray disappears at a particular angle.  Use Snell's Law to show that the angle at which the refracted ray disappears is correct.  Values of the angles of incidence and refraction are given as outputs.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/ray-refraction-3d.iwp</filename>
+			<summary>The red line at y = 0 represents a boundary between media of different indices of refraction. The path of a light ray is shown in blue.  Playing the applet forward or backwards will increase or decrease the angle of incidence.  Determine the ratio of the index of refraction of the upper medium (above the boundary) to that of the lower medium (below the axis.)</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/ray-refraction-3e.iwp</filename>
+			<summary>The red line at y = 0 represents a boundary between different media. The path of a light ray is shown in blue.  Playing the applet forward or backwards will change the angle of incidence.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/ray-refraction-3f.iwp</filename>
+			<summary>The blue and gray areas represent different media.  Incident, reflected, and refracted light rays in the media are shown. In which medium is the speed of light greater?  How do you know?</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/ray-refraction-4c.iwp</filename>
+			<summary>The blue, red, and gray areas represent media of different indices of refraction.  (The media are indexed 1,2,3 from the bottom up.)  The path of a light ray is shown in yellow.  The ray is incident from the blue medium.  Playing the applet forward or reverse will increase or decrease the initial angle of incidence.  </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/ray-refraction-4e.iwp</filename>
+			<summary>The blue, red, and gray areas represent media of different indices of refraction. They are indexed 1 to 3 from the bottom up. The path of a light ray incident from the blue medium is shown in yellow.  The angle of incidence is given as an output.  Playing the applet forward or reverse will increase or decrease the initial angle of incidence.  In order to increase the precision with which the incident angle can be read, decrease the Angle Increment.  Also change the Starting angle to something very near the angle you're looking for so that you don't have to step through many angles.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/ray-refraction-4g.iwp</filename>
+			<summary>The blue, red, and gray areas represent different media. The path of a light ray incident from the blue medium is shown in yellow.  Rank the media according to the speed of light in them.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/refracted-waves-3.iwp</filename>
+			<summary>Plane waves of constant frequency move up the screen, crossing from one medium (blue) into another (gray).  The wave speed in each medium is different.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/refracted-waves-4.iwp</filename>
+			<summary>Plane waves of constant frequency move up the screen, crossing from one medium (blue) into another (gray).  The wave speed in each medium is different.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/refracted-waves-5.iwp</filename>
+			<summary>Plane waves of constant frequency move up the screen, crossing from one medium (blue) into another (gray).  The wave speed decreases in the upper medium.  Since the frequency is constant and speed = frequency x wavelength, the wavelength is less in the upper medium.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/refraction-in-box-2.iwp</filename>
+			<summary>A ray of light (red) is incident from air on a transparent medium (blue box). The ray enters from the bottom of the screen.  The initial angle of incidence is the smallest that it can be in order to result in a refracted ray emerging from the right side of the box.  At smaller angles, the ray would be totally reflected internally from the right boundary of the box. The animation can be played in order to increase the angle of incidence.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Optics, Geometric/refraction-in-box-3.iwp</filename>
+			<summary>A ray of light (red) is incident from air on a box filled with water (blue). The ray enters from the bottom of the screen.  Play the applet.  Explain why the light ray takes the path that it does.  What path will the ray take if the angle of incidence of the ray entering the box is greater than 61.3 degrees?</summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>Electrostatics</name>
+		<problemLink>
+			<filename>/packagedProblems/Electrostatics/coulombslaw01.iwp</filename>
+			<summary>Two balls of equal mass (see Input for value) are suspended from long strings of equal length.  The balls are initially charged to the same value of charge Qo.  You can add charge to each ball in increments of the initial charge by clicking on the step button (>>).  The number by which the charge on each ball is multiplied is listed as an output.  The X- and Y-coordinates of the blue ball are also given as outputs.  Determine the value of the initial charge Qo.  This requires a net force analysis as well as Coulomb's Law.  Once you've determined Qo, check your value by changing the mass to something different.  Calculate what the separation of the balls should be for that mass.  Then check to see if you're right.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Electrostatics/coulombslaw02.iwp</filename>
+			<summary>The blue and red balls have the same size, shape, and composition. They have a coating of graphite paint, which makes their surfaces good conductors. The red ball, hanging from a long thread, is initially uncharged while the blue ball has been charged by momentarily touching it to a plastic strip rubbed with fur.  The blue ball, which is attached to a horizontal insulating handle, is momentarily touched to the red ball.  </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Electrostatics/coulombslaw03.iwp</filename>
+			<summary>A red ball is connected to a spring which is fixed at the left side of the screen. The ball is initially at the unstretched/uncompressed position of the spring, x = 0. A blue ball, soon to appear, has the same charge as the red ball.  </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Electrostatics/efield-plot-02.iwp</filename>
+			<summary>Two charges (red and blue) are positioned on the x-axis and produce an electric field in the space surrounding them. A positive test charge (green) is initially located on the y-axis. Lines (black) from the red and blue charges to the position of the test charge are shown. Vectors representing the magnitude and direction of the fields of the red and blue charges and of the net field are shown at the position of the test charge.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Electrostatics/efield-plot-02a.iwp</filename>
+			<summary>A charge (red) is positioned at the origin. A positive test charge is represented by the black dot. A vector representing the magnitude and direction of the electric field of the red charge at the position of the test charge is shown.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Electrostatics/efield-plot-02b.iwp</filename>
+			<summary>Two charges (red and blue) are positioned on the x-axis and produce an electric field in the space surrounding them. A positive test charge is represented by the green dot. Vectors representing the magnitude and direction of the fields of the red and blue charges and of the net field are shown at the position of the test charge.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Electrostatics/efield-plot-02c.iwp</filename>
+			<summary>Two charges (red and blue) are positioned on the x-axis and produce an electric field in the space surrounding them. A positive test charge is represented by the green dot. Vectors representing the magnitude and direction of the fields of the red and blue charges and of the net field are shown at the position of the test charge.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/Electrostatics/inverse-r-squared-test.iwp</filename>
+			<summary>A charged ball hanging from a long thread is deflected to the left by a second charged ball connected to an insulating handle.  As the second charge is moved to the left, the first charge deflects more.  Determine the relationship between the electric force on the first charge and its separation from the second charge.</summary>
+		</problemLink>
+	</category>
+	<category>
+		<name>TEST Developer Test</name>
+
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_timeVariables.iwp</filename>
+			<summary>Shows the use of 'startTime', 'stopTime', and 't'.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_attachedVectors.iwp</filename>
+			<summary>This problem tests the attached vector rendering capabilities.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_attachedXAccelZero.iwp</filename>
+			<summary>Test for the Xacceleration vector zero. If the problem exists, then the xaccel vector jumps at t=0.3.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_calcDiff.iwp</filename>
+			<summary>Compare the effectiveness of Euler (Red) -vs- RK2 (Green) -vs- RK4 (Blue)</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_constants.iwp</filename>
+			<summary></summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_eulerCrossPath.iwp</filename>
+			<summary>Shows the difference between v2 and v3 when self-referencing properties across the x and y paths.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_euler.iwp</filename>
+			<summary>Very simple test for Euler calculations. It's important to remember that the Initial Displacement and Velocity can be dynamic equations and </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_FloatingText.iwp</filename>
+			<summary>This problem is a Test problem for the new DObject_Floating Text.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_graph.iwp</filename>
+			<summary>This is a problem that tests graphing of shapes.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_hiddenInputs.iwp</filename>
+			<summary>TEST for hidden inputs. Make sure that the value of the hidden input
+</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_inputoutput.iwp</filename>
+			<summary>The output should be the same as the input, always.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_inputs.iwp</filename>
+			<summary>This is a problem that tests the inputs.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_mathConstants.iwp</filename>
+			<summary>All Math Constants provided by IWP
+</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_mathFunctions.iwp</filename>
+			<summary>All Math Functions provided by IWP
+</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_mathOps.iwp</filename>
+			<summary>TEST Math Operators
+</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_outputs.iwp</filename>
+			<summary>This is a problem that tests the outputs.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_random.iwp</filename>
+			<summary>Displays Random Path Trails</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_rk2.iwp</filename>
+			<summary>Very simple test for Rk2 calculations. It's important to remember that the Initial Displacement and Velocity can be dynamic equations and </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_rk4.iwp</filename>
+			<summary>Very simple test for Rk4 calculations. It's important to remember that the Initial Displacement and Velocity can be dynamic equations and </summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_self.iwp</filename>
+			<summary>Test for Self referencing objects.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_shapes.iwp</filename>
+			<summary>This is a problem that tests the various kinds of shapes.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_solidReadsOutput.iwp</filename>
+			<summary>TEST for a solid reading an output variable for its value.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_time.iwp</filename>
+			<summary>This is a problem that tests the time object.
+</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_trails.iwp</filename>
+			<summary>This is a problem that tests the object trails.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_unitSymbols.iwp</filename>
+			<summary>TEST Unit Symbols.
+</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_vectorShape.iwp</filename>
+			<summary>This is a problem that tests the vector Shape</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_verySmall.iwp</filename>
+			<summary>Very small problem.</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_wavebox_1.iwp</filename>
+			<summary>This is a problem that test the WaveBox
+</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_Wavebox_Doppler.iwp</filename>
+			<summary>6/7/07 - Sagar Indurkhya - Basic Wavebox Test Problem</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_wavebox_Sinusoidal.iwp</filename>
+			<summary>This is a problem that test the WaveBox Sinusoidal Functionality</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_checkboxes_2off.iwp</filename>
+			<summary>10/20/07 - Cory Li - Checkbox Test (Both off)</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_checkboxes_twoon.iwp</filename>
+			<summary>10/20/07 - Cory Li - Checkbox Test (Both on)</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_checkboxes_dataon.iwp</filename>
+			<summary>10/20/07 - Cory Li - Checkbox Test (Data on)</summary>
+		</problemLink>
+		<problemLink>
+			<filename>/packagedProblems/TEST Developer Test/TEST_checkboxes_gridon.iwp</filename>
+			<summary>10/20/07 - Cory Li - Checkbox Test (Grid on)</summary>
+		</problemLink>
+	</category>
+
+</directory>
+

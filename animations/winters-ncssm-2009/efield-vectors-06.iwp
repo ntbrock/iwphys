@@ -1,0 +1,1522 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>The four panels show four representations of the electric fields at the indicated point due to the blue and red charged particles.  The charges are given as inputs. The color of the vector indicates the charge that it goes with. Only one panel is correct.  Choose the panel that has the correct electric field diagram. </text>
+		</description>
+		<input>
+			<name>c1</name>
+			<text>Charge of blue</text>
+			<initialValue>-2.0</initialValue>
+			<units>nC</units>
+		</input>
+		<input>
+			<name>c2</name>
+			<text>Charge of red</text>
+			<initialValue>2.0</initialValue>
+			<units>nC</units>
+		</input>
+		<input>
+			<name>sf</name>
+			<text>Scale Factor</text>
+			<initialValue>20.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>k</name>
+			<text>K constant</text>
+			<initialValue>1.0</initialValue>
+			<units>Jm^2/C</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>show_net</name>
+			<text>Show Net Fields (0,1)?</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>delta_x</name>
+			<text>Change in x</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>delta_y</name>
+			<text>Change in y</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>correct</name>
+			<text>Correct choice (1,2,3,4) = (A,B,C,D)</text>
+			<initialValue>2.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>s1</name>
+			<text>Switch One</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(correct-1.5)*step(2.5-correct)*(-1) + step(correct-3.5)*(-1)+step(correct-.5)*step(1.5-correct)+step(correct-2.5)*step(3.5-correct)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>s2</name>
+			<text>Switch One</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(correct-1.5)*step(2.5-correct) + step(correct-3.5)*(-1)+step(correct-.5)*step(1.5-correct)+step(correct-2.5)*step(3.5-correct)*(-1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>ChargeOne</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-8</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>8</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ChargeTwo</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-4</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>8</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ChargeOneB</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>4</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>8</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ChargeOneC</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>4</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ChargeOneD</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-8</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ChargeTwoB</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>8</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>8</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ChargeTwoC</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>8</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ChargeTwoD</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-4</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>PointOne</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-8+delta_x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>4+delta_y</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>PointOneB</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>4+delta_x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>4+delta_y</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>PointOneC</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>4+delta_x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-6+delta_y</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>PointOneD</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-8+delta_x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-6+delta_y</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F1</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(dxOne/d1)*EnOne*sf*s1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(dyOne/d1)*EnOne*sf*s1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOne.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOne.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F1B</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(-dxOneB/dbOne)*EnOneB*sf*s1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(-dyOneB/dbOne)*EnOneB*sf*s1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOneB.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOneB.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F1C</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(-dxOneC/dcOne)*EnOneC*sf*s1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(-dyOneC/dcOne)*EnOneC*sf*s1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOneC.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOneC.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F1D</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(dxOneD/ddOne)*EnOneD*sf*s1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(dyOneD/ddOne)*EnOneD*sf*s1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOneD.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOneD.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F2</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(EnTwo/d2) * dxTwo * sf*s2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(EnTwo/d2) * dyTwo * sf*s2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOne.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOne.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F2B</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(EnTwoB/dbTwo) * dxTwoB * sf*s2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(EnTwoB/dbTwo) * dyTwoB * sf*s2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOneB.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOneB.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F2C</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(-EnTwoC/dcTwo) * dxTwoC * sf*s2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(-EnTwoC/dcTwo) * dyTwoC * sf*s2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOneC.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOneC.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F2D</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(-EnTwoD/ddTwo) * dxTwoD * sf*s2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(-EnTwoD/ddTwo) * dyTwoD * sf*s2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOneD.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOneD.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Fnet1</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>((dxOne/d1)* EnOne*s1 + (dxTwo/d2) *s2* EnTwo)*sf*show_net</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>((dyOne/d1)*s1* EnOne + (dyTwo/d2) * s2*EnTwo)*sf*show_net</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>255</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOne.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOne.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Fnet1B</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>((-dxOneB/dbOne)* (s1)*EnOneB +(s2)*(dxTwoB/dbTwo) * EnTwoB)*sf*show_net</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>((-dyOneB/dbOne)*(s1)* EnOneB +(s2)*(dyTwoB/dbTwo) * EnTwoB)*sf*show_net</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>255</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOneB.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOneB.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Fnet1C</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>((-dxOneC/dcOne)*s1* EnOneC - s2*(dxTwoC/dcTwo) * EnTwoC)*sf*show_net</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>((-dyOneC/dcOne)* EnOneC*s1 - (dyTwoC/dcTwo) * s2*EnTwoC)*sf*show_net</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>255</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOneC.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOneC.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Fnet1D</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>((dxOneD/ddOne)*s1* EnOneD - s2*(dxTwoD/ddTwo) * EnTwoD)*sf*show_net</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>((dyOneD/ddOne)* EnOneD*s1 - (dyTwoD/ddTwo) * s2*EnTwoD)*sf*show_net</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>255</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>PointOneD.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>PointOneD.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>dxOne</name>
+			<text>Distance1 X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeOne.xpos - PointOne.xpos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dxOneB</name>
+			<text>Distance1 X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeOneB.xpos - PointOneB.xpos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dxOneC</name>
+			<text>Distance1 X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeOneC.xpos - PointOneC.xpos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dxOneD</name>
+			<text>Distance1 X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeOneD.xpos - PointOneD.xpos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dyOne</name>
+			<text>Distance1 Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeOne.ypos - PointOne.ypos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dyOneB</name>
+			<text>Distance1 Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeOneB.ypos - PointOneB.ypos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dyOneC</name>
+			<text>Distance1 Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeOneC.ypos - PointOneC.ypos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dyOneD</name>
+			<text>Distance1 Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeOneD.ypos - PointOneD.ypos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dxTwo</name>
+			<text>Distance2 X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeTwo.xpos - PointOne.xpos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dxTwoB</name>
+			<text>Distance2 X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeTwoB.xpos - PointOneB.xpos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dxTwoC</name>
+			<text>Distance2 X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeTwoC.xpos - PointOneC.xpos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dxTwoD</name>
+			<text>Distance2 X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeTwoD.xpos - PointOneD.xpos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dyTwo</name>
+			<text>Distance2 Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeTwo.ypos - PointOne.ypos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dyTwoB</name>
+			<text>Distance2 Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeTwoB.ypos - PointOneB.ypos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dyTwoC</name>
+			<text>Distance2 Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeTwoC.ypos - PointOneC.ypos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dyTwoD</name>
+			<text>Distance2 Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(ChargeTwoD.ypos - PointOneD.ypos)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>d1</name>
+			<text>Distance 1</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(dxOne^2 + dyOne^2)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dbOne</name>
+			<text>Distance 1</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(dxOneB^2 + dyOneB^2)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dcOne</name>
+			<text>Distance 1</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(dxOneC^2 + dyOneC^2)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ddOne</name>
+			<text>Distance 1</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(dxOneD^2 + dyOneD^2)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>d2</name>
+			<text>Distance 2</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(dxTwo^2 + dyTwo^2)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dbTwo</name>
+			<text>Distance 2</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(dxTwoB^2 + dyTwoB^2)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dcTwo</name>
+			<text>Distance 2</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(dxTwoC^2 + dyTwoC^2)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ddTwo</name>
+			<text>Distance 2</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(dxTwoD^2 + dyTwoD^2)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>EnOne</name>
+			<text>Electric Field Blue</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-c1/(d1)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>EnOneB</name>
+			<text>Electric Field Blue</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-c1/(dbOne)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>EnOneC</name>
+			<text>Electric Field Blue</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-c1/(dcOne)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>EnOneD</name>
+			<text>Electric Field Blue</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-c1/(ddOne)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>EnTwo</name>
+			<text>Electric Field Red</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-c2/(d2)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>EnTwoB</name>
+			<text>Electric Field Red</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-c2/(dbTwo)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>EnTwoC</name>
+			<text>Electric Field Red</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-c2/(dcTwo)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>EnTwoD</name>
+			<text>Electric Field Red</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-c2/(ddTwo)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>B</name>
+			<text>B</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>20</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>A</name>
+			<text>A</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>20</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>C</name>
+			<text>C</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>20</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>D</name>
+			<text>D</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>20</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</xpath>
+		</object>
+		<solid>
+			<name>line_1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line_2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>5.0</stop>
+			<change>0.01</change>
+			<fps>30.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>0.0</xmin>
+			<xmax>2.0</xmax>
+			<ymin>-1.0</ymin>
+			<ymax>1.0</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>0.1</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>The blue line plots position (vertical) as a function of time (horizontal) for damped SHM.  The red line plots the decay of the amplitude.</text>
+		</description>
+		<input>
+			<name>A</name>
+			<text>Initial position</text>
+			<initialValue>1.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass of object</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>k</name>
+			<text>Spring constant</text>
+			<initialValue>100.0</initialValue>
+			<units>N/m</units>
+		</input>
+		<input>
+			<name>R</name>
+			<text>Damping coefficient</text>
+			<initialValue>2.0</initialValue>
+			<units>kg/s</units>
+		</input>
+		<output>
+			<name>wo</name>
+			<text>Undamped frequency</text>
+			<units>Hz</units>
+			<calculator type="parametric">
+				<value>(k/m)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>w</name>
+			<text>Damped frequency</text>
+			<units>Hz</units>
+			<calculator type="parametric">
+				<value>(wo^2-(R/(2*m))^2)^.5</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>Object</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>A</displacement>
+					<velocity>0</velocity>
+					<acceleration>-(k*Object.ypos+R*Object.yvel)/m</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Envelope</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>exp(-R*t/(2*m))</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

@@ -1,0 +1,1340 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>14.0</stop>
+			<change>1.0</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>15.0</xmax>
+			<ymin>1.1</ymin>
+			<ymax>1.3</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>0.01</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.5</xmin>
+			<xmax>1.5</xmax>
+			<ymin>-1.5</ymin>
+			<ymax>1.5</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>0.1</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>An alien on shore observes a neutrally-buoyant object (orange) in the water.  The angle subtended by the refracted rays at the alien's eye is shown in yellow.  The apparent position of the object is shown in gray.  The refracted rays from the alien's eye are extended backward into the water.  Playing the animation will move the object the right.  Unphysical behavior may be shown if the object moves too far to the right.
+
+The magnification is the ratio of the angle subtended at the eye by the refracted rays and the angle that would be subtended in the absence of water.  A graph of magnification as a function of time can be displayed by clicking on Show graph.  Each unit of time represents a horizontal displacement of 0.1 grid units.
+
+Note that magnification is not the ratio of image to object size.  It is, however, the ratio of the component of the image diameter perpendicular to the line of sight to the corresponding component of the object diameter.
+
+Notes for instructor:
+Apparent rays are constructed on the assumption that the apparent distance to the right-hand side of the image is inversely proportional to the angle subtended at the eye by the refracted rays.  (This takes the diameter of the object to be a constant.  Basically, we're looking for the location at which the object in air would subtend an angle equal to the angle subtended by the refracted rays.)  
+
+1 refers to the rays (incident, refracted, apparent from the left side of the object).
+2 refers to the rays (incident, refracted, apparent from the right side of the object).
+
+The X-intercept is the point where the ray incident from water refracts into air.  These coordinates are determined using the principle of least time.  The equation resulting from the application of the principle is a quartic, which is solved for the applicable real root.
+
+Notation:
+(xo,yo) = coordinates of observer
+(x1,y1) = coordinates of left side of object
+(x2,y1) = coordinates of right side of object
+(z,0) = coordinates of left ray at boundary
+(zd,0) = coordinates of right ray at boundary</text>
+		</description>
+		<input>
+			<name>n</name>
+			<text>Index of refraction</text>
+			<initialValue>1.33</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>xo</name>
+			<text>X of observer</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>yo</name>
+			<text>Y of observer</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>xco</name>
+			<text>Initial X of object</text>
+			<initialValue>-1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>yco</name>
+			<text>Initial Y of object</text>
+			<initialValue>-1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>w</name>
+			<text>Width of object</text>
+			<initialValue>0.4</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>h</name>
+			<text>Thickness of coin</text>
+			<initialValue>0.04</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>xc</name>
+			<text>X-actual</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>xco+.1*t</value>
+			</calculator>
+		</output>
+		<output>
+			<name>x1</name>
+			<text>Left side of coin</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>xc-w/2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>y1</name>
+			<text>Y-actual</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>yco</value>
+			</calculator>
+		</output>
+		<output>
+			<name>x2</name>
+			<text>Right side of coin</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>xc+w/2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>air</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>11</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2.75</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>water</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>11</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-2.75</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>a4</name>
+			<text>a4</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>n^2-1</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a3</name>
+			<text>a3</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-2*(xo+x1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a2</name>
+			<text>a2</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>xo^2+4*xo*x1+x1^2+(n^2*yo^2-y1^2)/a4</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a1</name>
+			<text>a1</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-2*(xo*x1*(xo+x1)+(x1*n^2*yo^2-xo*y1^2)/a4)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a0</name>
+			<text>a0</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>xo^2*x1^2+((n*x1*yo)^2-(xo*y1)^2)/a4</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>p</name>
+			<text>p</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-a2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>q</name>
+			<text>q</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>a1*a3-4*a0</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>r</name>
+			<text>r</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>4*a2*a0-a1^2-a3^2*a0</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a</name>
+			<text>a</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>q-p^2/3</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>b</name>
+			<text>b</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>r-p*q/3+2*p^3/27</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>A</name>
+			<text>A</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(-b/2+(b^2/4+a^3/27)^.5)^(1/3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>B</name>
+			<text>B</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(-b/2-(b^2/4+a^3/27)^.5)^(1/3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>y</name>
+			<text>root of cubic</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(A+B)-p/3</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>R</name>
+			<text>R</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(a3^2/4-a2+y)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>E</name>
+			<text>E</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(3*a3^2/4-R^2-2*a2-(4*a3*a2-8*a1-a3^3)/(4*R))^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>z</name>
+			<text>X-intercept 1</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-a3/4-R/2+E/2</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ai1</name>
+			<text>Angle of inc. 1</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>toDegrees(acos(abs(y1)/((z-x1)^2+y1^2)^.5))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ar1</name>
+			<text>Angle of ref. 1</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>toDegrees(acos(yo/((xo-z)^2+yo^2)^.5))</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>sweep_air</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>xo</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>yo</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>z</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>zd</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>d3</name>
+			<text>d3</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-2*(xo+x2)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>d2</name>
+			<text>d2</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>xo^2+4*xo*x2+x2^2+(n^2*yo^2-y1^2)/a4</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>d1</name>
+			<text>d1</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-2*(xo*x2*(xo+x2)+(x2*n^2*yo^2-xo*y1^2)/a4)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>d0</name>
+			<text>d0</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>xo^2*x2^2+((n*x2*yo)^2-(xo*y1)^2)/a4</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>pd</name>
+			<text>pd</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-d2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>qd</name>
+			<text>qd</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>d1*d3-4*d0</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>rd</name>
+			<text>rd</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>4*d2*d0-d1^2-d3^2*d0</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ad</name>
+			<text>ad</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>qd-pd^2/3</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>bd</name>
+			<text>bd</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>rd-pd*qd/3+2*pd^3/27</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>Ad</name>
+			<text>Ad</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(-bd/2+(bd^2/4+ad^3/27)^.5)^(1/3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>Bd</name>
+			<text>Bd</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(-bd/2-(bd^2/4+ad^3/27)^.5)^(1/3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>yd</name>
+			<text>root of cubic</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(Ad+Bd)-pd/3</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>Rd</name>
+			<text>Rd</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(d3^2/4-d2+yd)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>Ed</name>
+			<text>Ed</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(3*d3^2/4-Rd^2-2*d2-(4*d3*d2-8*d1-d3^3)/(4*Rd))^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>zd</name>
+			<text>X-intercept 2</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-d3/4-Rd/2+Ed/2</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>sweep_water</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>x1</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>y1</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>x2</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>y1</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>zd</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>z</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>ai2</name>
+			<text>Angle of inc. 2</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>toDegrees(acos(abs(y1)/((zd-x2)^2+y1^2)^.5))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ar2</name>
+			<text>Angle of ref. 2</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>toDegrees(acos(yo/((xo-zd)^2+yo^2)^.5))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>zero1</name>
+			<text>Zero 1</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>z^4+a3*z^3+a2*z^2+a1*z+a0</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>zero2</name>
+			<text>Zero 2</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>zd^4+d3*zd^3+d2*zd^2+d1*zd+d0</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ang_dia_water</name>
+			<text>Angular dia. (water)</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>acos(yo/((xo-z)^2+yo^2)^.5)-acos(yo/((xo-zd)^2+yo^2)^.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ang_dia_undev</name>
+			<text>Angular dia. (no water)</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>asin((xo-x1)/((xo-x1)^2+(yo-y1)^2)^.5)-asin((xo-x2)/((xo-x2)^2+(yo-y1)^2)^.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>g1</name>
+			<text>g1</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>((x1-xo)^2+(y1-yo)^2)^.5/((xo-z)^2+yo^2)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>g2</name>
+			<text>g2</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>((x2-xo)^2+(y1-yo)^2)^.5/((xo-zd)^2+yo^2)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>m</name>
+			<text>Magnification</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>ang_dia_water/ang_dia_undev</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>body</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.45</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo+.03</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo-.58</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>face</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.14</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo+.03</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo-.02</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>hair</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.23</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo+.033</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo+.03</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>mouth</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo+.03</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo-.07</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>eye_left</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.04</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.04</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>eye_right</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.04</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.04</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo+.06</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>app_ray_1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(z-xo)*g2/m</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-yo*g2/m</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>app_ray_2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(zd-xo)*g2/m</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-yo*g2/m</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>magnification</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>m</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>object</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>w</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>h</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xc</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>y1-h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>image</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>xo+(z-xo)*g2/m</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>yo*(1-g2/m)</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>xo+(zd-xo)*g2/m</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>yo*(1-g2/m)</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>xo+(zd-xo)*g2/m</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>yo*(1-g2/m)-h</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>xo+(z-xo)*g2/m</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>yo*(1-g2/m)-h</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xa</name>
+			<text>X-apparent</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(xo+(z-xo)*g2/m+xo+(zd-xo)*g2/m)/2</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ya</name>
+			<text>Y-apparent</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>yo*(1-g2/m)</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>left_leg</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-.3*.65</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-.5*.65</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo+.03</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo-.58</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>right_leg</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.3*.65</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-.5*.65</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo+.03</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo-.58</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>left_arm</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-.3*.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.3*.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo+.03</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo-.3</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>right_arm</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.3*.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.3*.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo+.03</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo-.3</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>land</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1.7</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>51</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xo+.32</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-.75</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

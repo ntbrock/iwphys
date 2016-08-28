@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>150.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>20.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-20.0</xmin>
+			<xmax>200.0</xmax>
+			<ymin>-20.0</ymin>
+			<ymax>200.0</ymax>
+			<xgrid>20.0</xgrid>
+			<ygrid>20.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Three projectiles are launched with different initial velocities and reach the same maximum height. Denote the paths as follow:
+
+A: red
+B: green
+C: blue
+
+List the projectiles in order of a) increasing initial speed and b) time of flight.</text>
+		</description>
+		<input>
+			<name>h</name>
+			<text>Launch altitude</text>
+			<initialValue>0.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Grav. field, g</text>
+			<initialValue>10.0</initialValue>
+			<units>N/kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>a1</name>
+			<text>Launch angle</text>
+			<initialValue>78.6</initialValue>
+			<units>deg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>a2</name>
+			<text>Launch angle</text>
+			<initialValue>68.2</initialValue>
+			<units>deg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>a3</name>
+			<text>Launch angle</text>
+			<initialValue>73.3</initialValue>
+			<units>deg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>v1</name>
+			<text>Mag. of launch velocity</text>
+			<initialValue>51.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>v2</name>
+			<text>Mag. of launch velocity</text>
+			<initialValue>53.8</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>v3</name>
+			<text>Mag. of launch velocity</text>
+			<initialValue>52.2</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>Ball1</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>v1*cos(toRadians(a1))*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>h+v1*sin(toRadians(a1))*t-0.5*g*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Ball2</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>102</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>v2*cos(toRadians(a2))*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>h+v2*sin(toRadians(a2))*t-0.5*g*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Ball3</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>v3*cos(toRadians(a3))*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>h+v3*sin(toRadians(a3))*t-0.5*g*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

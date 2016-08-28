@@ -1,0 +1,333 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>1000000.0</stop>
+			<change>100.0</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>200000.0</xmax>
+			<ymin>-4.0E8</ymin>
+			<ymax>4.0E8</ymax>
+			<xgrid>20000.0</xgrid>
+			<ygrid>5.0E7</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.0E8</xmin>
+			<xmax>1.0E8</xmax>
+			<ymin>-1.0E8</ymin>
+			<ymax>1.0E8</ymax>
+			<xgrid>1.0E7</xgrid>
+			<ygrid>1.0E7</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>This is supposed to illustrate escape velocity. However, the Euler's method approximation is too crude except for very small time intervals that make the animation run too slow.</text>
+		</description>
+		<input>
+			<name>G</name>
+			<text>Gravitational constant</text>
+			<initialValue>6.67E-11</initialValue>
+			<units>Nm^2/kg^2</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>sfa</name>
+			<text>Scale factor for acceleration</text>
+			<initialValue>1.0E7</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>me</name>
+			<text>Mass of Earth</text>
+			<initialValue>5.97E24</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass of rocket</text>
+			<initialValue>1000.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>re</name>
+			<text>Radius of Earth, Re</text>
+			<initialValue>6370000.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Initial velocity of rocket</text>
+			<initialValue>11181.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<solid>
+			<name>space</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>500000000</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>500000000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>earth</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2*re</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2*re</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>rocket</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2000000</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2000000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>re</displacement>
+					<velocity>vo</velocity>
+					<acceleration>-G*me/(rocket.xpos)^2</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>ag</name>
+			<text>Ag</text>
+			<units>m/s^2</units>
+			<calculator type="parametric">
+				<value>-G*me/(rocket.xpos)^2</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vesc</name>
+			<text>Escape velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>(2*G*me/re)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>v</name>
+			<text>V / Vesc</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>rocket.xvel/vesc</value>
+			</calculator>
+		</output>
+		<output>
+			<name>K</name>
+			<text>Kinetic Energy</text>
+			<units>J</units>
+			<calculator type="parametric">
+				<value>m*rocket.xvel^2/2</value>
+			</calculator>
+		</output>
+		<output>
+			<name>U</name>
+			<text>Grav. Pot. Energy</text>
+			<units>J</units>
+			<calculator type="parametric">
+				<value>-G*m*me/rocket.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>TE</name>
+			<text>Mechanical Energy</text>
+			<units>J</units>
+			<calculator type="parametric">
+				<value>K+U</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>K_bar</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sfa</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>K/1000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2*sfa</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2*sfa+K/2000</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>U_bar</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sfa</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-U/1000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>3*sfa</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2*sfa+U/2000</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>TE_bar</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sfa</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>TE/1000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>4*sfa</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2*sfa+TE/2000</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

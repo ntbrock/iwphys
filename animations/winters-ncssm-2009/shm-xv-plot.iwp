@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.02</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-20.0</ymin>
+			<ymax>20.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>5.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-15.0</xmin>
+			<xmax>15.0</xmax>
+			<ymin>-15.0</ymin>
+			<ymax>15.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>For an object in 1-dimensional simple harmonic motion, he above is a graph of one of the following:
+
+a.  x-axis:  position     y-axis:  velocity
+b.  x-axis:  position     y-axis:  acceleration
+c   x-axis:  velocity       y-axis:  acceleration</text>
+		</description>
+		<output>
+			<name>px</name>
+			<text>Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Red.xdisp</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vx</name>
+			<text>Velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Red.xvel</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ax</name>
+			<text>Acceleration</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>Red.xaccel</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<input>
+			<name>a</name>
+			<text>Amplitude</text>
+			<initialValue>8.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>p</name>
+			<text>Phase</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>Red</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>a*cos(w^.5*t+toRadians(p))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-a*w*sin(w^.5*t+toRadians(p))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>w</name>
+			<text>Angular speed</text>
+			<initialValue>1.5</initialValue>
+			<units>1/s</units>
+			<hidden>1</hidden>
+		</input>
+	</objects>
+</problem>

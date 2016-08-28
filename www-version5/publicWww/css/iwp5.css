@@ -1,0 +1,75 @@
+body {
+	font-size:   20                ;
+	font-family: "PT Serif", serif ;
+	color:       #333              ;
+	position:    relative		   ;
+	width:       960px			   ;
+}
+table {
+	height:           auto         ;
+	display:          inline-block ;
+	border-collapse:  collapse     ;
+	background-color: #ddd         ;
+	padding:          1%           ;
+	margin:           1%	       ;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ;
+}
+svg {
+	position: relative;
+	height: 100%;
+	z-index: -1;
+}
+#iwindow {
+	visibility: hidden;
+	position: fixed;
+	top: 0;
+	right: 10%;
+	width: 342px;
+	height: 464px;
+}
+#variableTable {
+	visibility: visible;
+	width: auto;
+	position: fixed;
+	top: 0;
+	right: 10%;
+}
+#playBar {
+	visibility: visible;
+	position: fixed;
+	bottom: 0;
+	width: auto;
+	left: 5%;
+}
+#tabs {
+	visibility: visible;
+	position: fixed;
+	width: auto;
+	top: 85%;
+	right: 8%;
+}
+#otherInfo {
+	visibility: hidden;
+	position: fixed;
+	top: 0;
+	right: 10%;
+	width: 342px;
+	height: 464px;
+}
+#otherInfo td {
+	text-align: left;
+	font-size: 14px;
+}
+th, td {
+	padding:        15px   ;
+	text-align:     center ;
+	vertical-align: center ;
+}
+.bottomBorder {
+	position:      relative        ;
+	text-align:    center          ;
+	border-bottom: 1px black solid ;
+}
+.italic {
+	font-style: italic;
+}

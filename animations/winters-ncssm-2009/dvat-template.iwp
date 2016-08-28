@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>5.0</stop>
+			<change>0.02</change>
+			<fps>30.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-50.0</ymin>
+			<ymax>50.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>10.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.5</xmin>
+			<xmax>5.5</xmax>
+			<ymin>-50.0</ymin>
+			<ymax>50.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>10.0</ygrid>
+			<xunit>s</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Play the applet to show a position vs. time graph.  Sketch your predictions for the shapes of the corresponding velocity vs. time and acceleration vs. time graphs.  Then click on Show graph to check your predictions.  The velocity vs. time graph is the blue line, and the acceleration vs. time graph is the red line.</text>
+		</description>
+		<input>
+			<name>a</name>
+			<text>Initial position</text>
+			<initialValue>30.0</initialValue>
+			<units>     m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>b</name>
+			<text>Initial velocity</text>
+			<initialValue>-10.0</initialValue>
+			<units>  m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>c</name>
+			<text>Acceleration</text>
+			<initialValue>-5.0</initialValue>
+			<units>m/s²</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>object</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a+b*t+c*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>object_clone</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="true" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a+b*t+c*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>object_clone_clone</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="true" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a+b*t+c*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

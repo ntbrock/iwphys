@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>5.0E-8</change>
+			<fps>100.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.0</xmin>
+			<xmax>1.0</xmax>
+			<ymin>-1.0</ymin>
+			<ymax>1.0</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>0.1</ygrid>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<input>
+			<name>qmr</name>
+			<text>Charge/Mass</text>
+			<initialValue>1.76E11</initialValue>
+			<units>C/kg</units>
+		</input>
+		<input>
+			<name>Bo</name>
+			<text>Initial magnetic field</text>
+			<initialValue>1.0E-6</initialValue>
+			<units>T</units>
+		</input>
+		<output>
+			<name>wo</name>
+			<text>Initial ang freq</text>
+			<units>1/s</units>
+			<calculator type="parametric">
+				<value>qmr*Bo</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>e</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>R</displacement>
+					<velocity>0</velocity>
+					<acceleration>-wo*e.yvel*cos(wo*t)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo</velocity>
+					<acceleration>wo*e.xvel*cos(wo*t)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>vo</name>
+			<text>Initial speed</text>
+			<initialValue>100000.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<output>
+			<name>v</name>
+			<text>Speed</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>((e.xvel)^2+(e.yvel)^2)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>R</name>
+			<text>Radius</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>vo/wo</value>
+			</calculator>
+		</output>
+		<output>
+			<name>To</name>
+			<text>Period</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>2*PI.value/wo</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

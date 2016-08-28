@@ -1,0 +1,570 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>20.0</stop>
+			<change>1.0</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>50.0</xmax>
+			<ymin>0.0</ymin>
+			<ymax>1.0</ymax>
+			<xgrid>5.0</xgrid>
+			<ygrid>0.1</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-500.0</xmin>
+			<xmax>500.0</xmax>
+			<ymin>-500.0</ymin>
+			<ymax>500.0</ymax>
+			<xgrid>100.0</xgrid>
+			<ygrid>100.0</ygrid>
+			<xunit>nm</xunit>
+			<yunit>nm</yunit>
+		</window>
+		<description>
+			<text>This isn't working correctly.  The 2nd reflected ray doesn't have the right angle or length.  The corresponding refracted ray doesn't have the correct angle.
+
+A ray of light is incident from air (blue) on a thin film (yellow).  The film is deposited on a transparent medium (gray).  Light is reflected from the upper and lower surfaces of the film.  The reflected rays interfere.  (Grid units are in nanometers.)
+
+Playing the animation will increase the thickness of the film (or wavelength) by the selected increment.  The default values for wavelength and increment will advance the wavelengths through the range of visible light.
+
+The phase difference is calculated for the selected angle of incidence, and phase reversals on reflection are included.  Setting n of the film equal to 1 or to n of the lower medium will yield unphysical results.</text>
+		</description>
+		<input>
+			<name>do</name>
+			<text>Initial thickness of film</text>
+			<initialValue>100.0</initialValue>
+			<units>nm</units>
+		</input>
+		<input>
+			<name>di</name>
+			<text>Thickness increment</text>
+			<initialValue>0.0</initialValue>
+			<units>nm</units>
+		</input>
+		<input>
+			<name>n1</name>
+			<text>n of upper medium</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>n2</name>
+			<text>n of film</text>
+			<initialValue>1.33</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>n3</name>
+			<text>n of lower medium</text>
+			<initialValue>1.7</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>wo</name>
+			<text>Wavelength in air</text>
+			<initialValue>400.0</initialValue>
+			<units>nm</units>
+		</input>
+		<input>
+			<name>wi</name>
+			<text>Wavelength increment</text>
+			<initialValue>15.0</initialValue>
+			<units>nm</units>
+		</input>
+		<input>
+			<name>i</name>
+			<text>Inclination</text>
+			<initialValue>5.0</initialValue>
+			<units>°</units>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Angle of incident ray</text>
+			<initialValue>30.0</initialValue>
+			<units>°</units>
+		</input>
+		<input>
+			<name>s</name>
+			<text>Scale</text>
+			<initialValue>500.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>d</name>
+			<text>Thickness of film</text>
+			<units>nm</units>
+			<calculator type="parametric">
+				<value>do+di*t</value>
+			</calculator>
+		</output>
+		<output>
+			<name>w</name>
+			<text>Wavelength</text>
+			<units>nm</units>
+			<calculator type="parametric">
+				<value>wo+wi*t</value>
+			</calculator>
+		</output>
+		<output>
+			<name>slope</name>
+			<text>Slope</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>tan(toRadians(i))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ar</name>
+			<text>Angle of refraction 1</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>asin(n1*sin(toRadians(a))/n2)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>pd</name>
+			<text>Phase difference</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>2*d*n2/(w*cos(ar))+step(n3/n2-1)/2-step(n2/n1-1)/2</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>medium1</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2*s</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>s+d</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s/2-d/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>medium2</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>-s</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>d/2-s*slope</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>s</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>d/2+s*slope</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>s</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-d/2</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>-s</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-d/2</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>medium3</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2*s</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>s-d/2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-(d/2+s)/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>incidentray1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-s*tan(toRadians(a+i))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>s</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>d/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>reflectedtray1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*tan(toRadians(a-i))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>s</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>d/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refractedray1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>d*sin(ar+toRadians(i))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-d</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>d/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>alpha</name>
+			<text>Rotated angle</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>toRadians(i)+ar</value>
+			</calculator>
+		</output>
+		<output>
+			<name>x</name>
+			<text>X</text>
+			<units>nm</units>
+			<calculator type="parametric">
+				<value>2*d/(cot(alpha)-tan(toRadians(i)))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y</text>
+			<units>nm</units>
+			<calculator type="parametric">
+				<value>x*tan(toRadians(i))+d/2</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>reflectedray2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>x-d*tan(alpha)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>y+d/2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>d*sin(alpha)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-d/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refractedray2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*tan(toRadians(a-i))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>s</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>y</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>art</name>
+			<text>Angle of refraction 2</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>asin(n2*sin(ar+toRadians(i))/n3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>refractedray3</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>s*sin(art)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-s</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>d*sin(ar+toRadians(i))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-d/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>phasediff</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>pd</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

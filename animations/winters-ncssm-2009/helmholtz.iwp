@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>-0.05</start>
+			<stop>0.05</stop>
+			<change>0.0010</change>
+			<fps>50.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.05</xmin>
+			<xmax>0.05</xmax>
+			<ymin>0.0</ymin>
+			<ymax>0.0010</ymax>
+			<xgrid>0.01</xgrid>
+			<ygrid>1.0E-4</ygrid>
+		</window>
+		<description>
+			<text>This calculates the magnetic field of a Helmholtz coils configuration.
+The blue and green lines are the fields of the individual coils.
+The red line is the net field.
+Position is measured relative to the point midway between the coils on
+the axis running through them.
+Time simply has to do with how fast the graph is drawn and has no
+physical meaning with respect to the coils.</text>
+		</description>
+		<input>
+			<name>R</name>
+			<text>Radius of Coil</text>
+			<initialValue>0.1</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>S</name>
+			<text>Separation of Coils</text>
+			<initialValue>0.1</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>N</name>
+			<text>Number of Turns</text>
+			<initialValue>100.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>i</name>
+			<text>Current</text>
+			<initialValue>1.0</initialValue>
+			<units>A</units>
+		</input>
+		<input>
+			<name>uo</name>
+			<text>Mu-0</text>
+			<initialValue>1.256636E-6</initialValue>
+			<units>Tm/A</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>k</name>
+			<text>Constant</text>
+			<units>Tm^3</units>
+			<calculator type="parametric">
+				<value>uo*i*N*R^2/2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>x</name>
+			<text>Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.xpos</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>Q</name>
+			<shape type="circle" drawTrails="true">
+				<width>
+					<calculator type="parametric">
+						<value>.0001</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.00001</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>k/(R^2+(S/2+t)^2)^1.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>R</name>
+			<shape type="circle" drawTrails="true">
+				<width>
+					<calculator type="parametric">
+						<value>.0001</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.00001</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>k/(R^2+(S/2-t)^2)^1.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>P</name>
+			<shape type="circle" drawTrails="true">
+				<width>
+					<calculator type="parametric">
+						<value>.0001</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.00001</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>Q.ypos+R.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>Bleft</name>
+			<text>Left magnetic field</text>
+			<units>T</units>
+			<calculator type="parametric">
+				<value>Q.ypos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>Bright</name>
+			<text>Right magnetic field</text>
+			<units>T</units>
+			<calculator type="parametric">
+				<value>R.ypos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>Bnet</name>
+			<text>Net magnetic field</text>
+			<units>T</units>
+			<calculator type="parametric">
+				<value>P.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>Bo</name>
+			<text>Field at x=0</text>
+			<units>T</units>
+			<calculator type="parametric">
+				<value>2*k/(R^2+(S/2)^2)^1.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>Br</name>
+			<text>Field relative to B(0)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>Bnet/Bo</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

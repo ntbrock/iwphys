@@ -1,0 +1,283 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.021</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.2</xmin>
+			<xmax>0.2</xmax>
+			<ymin>-0.2</ymin>
+			<ymax>0.2</ymax>
+			<xgrid>0.02</xgrid>
+			<ygrid>0.02</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A penny on a turntable slides off when the turntable reaches a certain frequency. What is the coefficient of static friction of the turntable?  How does the result depend on the radius of the path?</text>
+		</description>
+		<input>
+			<name>r</name>
+			<text>Radius of turntable</text>
+			<initialValue>0.2</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>alpha</name>
+			<text>Angular acceleration</text>
+			<initialValue>2.0</initialValue>
+			<units>1/s²</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Gravitational field</text>
+			<initialValue>9.8</initialValue>
+			<units>N/kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>wo</name>
+			<text>Initial angular velocity</text>
+			<initialValue>0.0</initialValue>
+			<units>1/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>rc</name>
+			<text>Radius of path</text>
+			<initialValue>0.15</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>u</name>
+			<text>Coeff. of static friction</text>
+			<initialValue>0.55</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>background</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.4</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.4</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>table</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>r*2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r*2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>255</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>hand</name>
+			<shape type="line" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>r*cos(wo*t+alpha*t^2/2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r*sin(wo*t+alpha*t^2/2)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>coin</name>
+			<shape type="circle" drawTrails="true">
+				<width>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>153</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>step(ts-t)*(rc*cos(wo*t+alpha*t^2/2))+step(t-ts)*(xs+vxs*(t-ts))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(ts-t)*(rc*sin(wo*t+alpha*t^2/2))+step(t-ts)*(ys+vys*(t-ts))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>w</name>
+			<text>Angular velocity</text>
+			<units>1/s</units>
+			<calculator type="parametric">
+				<value>wo+alpha*t</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>f</name>
+			<text>Freq. of turntable</text>
+			<units>1/s</units>
+			<calculator type="parametric">
+				<value>w/(2*PI.value)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ts</name>
+			<text>Time at slip</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>((u*g/rc)^.5-wo)/alpha</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>as</name>
+			<text>Angle at slip of coin</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>wo*ts+alpha*ts^2/2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>xs</name>
+			<text>X at slip of coin</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>rc*cos(as)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ys</name>
+			<text>Y at slip</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>rc*sin(as)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vxs</name>
+			<text>Vx at slip</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>-rc*sin(as)*(wo+alpha*ts)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vys</name>
+			<text>Vy at slip</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>rc*cos(as)*(wo+alpha*ts)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

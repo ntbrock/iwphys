@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.05</change>
+			<fps>15.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<input>
+			<name>mode</name>
+			<text>Animation</text>
+			<initialValue>1.0</initialValue>
+			<units>1, 2, 3, 4</units>
+		</input>
+		<input>
+			<name>physlet</name>
+			<text>Physlet</text>
+			<initialValue>0.0</initialValue>
+			<units>0, 1</units>
+		</input>
+		<input>
+			<name>xo</name>
+			<text>X initial</text>
+			<initialValue>-8.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>yo</name>
+			<text>Y initial</text>
+			<initialValue>-5.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vx</name>
+			<text>Initial Velocity</text>
+			<initialValue>4.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vy</name>
+			<text>Y Velocity</text>
+			<initialValue>4.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>tc</name>
+			<text>Critical Time</text>
+			<initialValue>1.5</initialValue>
+			<units>s</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>xa</name>
+			<text>X in 1</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(xo+vx*t)*step(1.5-mode)*step(mode-.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>xb</name>
+			<text>X in 2</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(xo+vx*t)*step(2.5-mode)*step(mode-1.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>xc</name>
+			<text>X in 3</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(xo+vx*t)*step(3.5-mode)*step(mode-2.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>xd</name>
+			<text>X in 4</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>((xo+vx*t)*step(tc-t)+(xo+vx*tc)*step(1-step(tc-t)+0)+0)*step(4.5-mode)*step(mode-3.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ya</name>
+			<text>Y in 1</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(vy*(t-tc))*step(t-tc)*step(1.5-mode)*step(mode-.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>yb</name>
+			<text>Y in 2</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(.8*vy*(t-tc)+.25*vy*(t-tc)^2)*step(t-tc)*step(2.5-mode)*step(mode-1.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>yc</name>
+			<text>Y in 3</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(vy*(t-tc)-.25*vy*(t-tc)^2)*step(t-tc)*step(3.5-mode)*step(mode-2.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>yd</name>
+			<text>Y in 3</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(vy*(t-tc))*step(t-tc)*step(4.5-mode)*step(mode-3.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>ball</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xa+xb+xc+xd</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yo+ya+yb+yc+yd</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>push</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/pushhand.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1*step(t-tc+deltaTime*4)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1*step(1-step(physlet)*step(t-tc-deltaTime*4)+0)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ball.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ball.ypos-.8</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

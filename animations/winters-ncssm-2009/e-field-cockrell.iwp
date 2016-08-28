@@ -1,0 +1,909 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>0.0</xmin>
+			<xmax>4.0</xmax>
+			<ymin>0.0</ymin>
+			<ymax>4.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<solid>
+			<name>bg</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>have_c</name>
+			<text>Have C?</text>
+			<initialValue>1.0</initialValue>
+			<units>1: Y 0: N</units>
+		</input>
+		<input>
+			<name>k</name>
+			<text>k</text>
+			<initialValue>8.99</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>sf</name>
+			<text>Vector Scaling</text>
+			<initialValue>0.05</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>ax</name>
+			<text>A X Pos</text>
+			<initialValue>0.65</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>ay</name>
+			<text>A Y Pos</text>
+			<initialValue>0.2</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>qa</name>
+			<text>Charge A</text>
+			<initialValue>2.0</initialValue>
+			<units>coulombs</units>
+		</input>
+		<input>
+			<name>bx</name>
+			<text>B X Pos</text>
+			<initialValue>3.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>by</name>
+			<text>B Y Pos</text>
+			<initialValue>1.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>qb</name>
+			<text>Charge B</text>
+			<initialValue>0.0</initialValue>
+			<units>coulombs</units>
+		</input>
+		<input>
+			<name>cx</name>
+			<text>C X Pos</text>
+			<initialValue>3.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>cy</name>
+			<text>C Y Pos</text>
+			<initialValue>2.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>qc</name>
+			<text>Charge C</text>
+			<initialValue>1.0</initialValue>
+			<units>coulombs</units>
+		</input>
+		<output>
+			<name>qc</name>
+			<text>Charge C</text>
+			<units>coulombs</units>
+			<calculator type="parametric">
+				<value>step(have_c)*qc</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>chargeA</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.15</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.15</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ax</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ay</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>chargeB</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>bx</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>by</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>chargeC</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1*step(have_c)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>cx</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>cy</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>A</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((0.5-ax)*qa/((0.5-ax)^2+(0.5-ay)^2)^1.5+(0.5-bx)*qb/((0.5-bx)^2+(0.5-by)^2)^1.5+(0.5-cx)*qc/((0.5-cx)^2+(0.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((0.5-ay)*qa/((0.5-ax)^2+(0.5-ay)^2)^1.5+(0.5-by)*qb/((0.5-bx)^2+(0.5-by)^2)^1.5+(0.5-cy)*qc/((0.5-cx)^2+(0.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>B</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((0.5-ax)*qa/((0.5-ax)^2+(1.5-ay)^2)^1.5+(0.5-bx)*qb/((0.5-bx)^2+(1.5-by)^2)^1.5+(0.5-cx)*qc/((0.5-cx)^2+(1.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((1.5-ay)*qa/((0.5-ax)^2+(1.5-ay)^2)^1.5+(1.5-by)*qb/((0.5-bx)^2+(1.5-by)^2)^1.5+(1.5-cy)*qc/((0.5-cx)^2+(1.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>C</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((0.5-ax)*qa/((0.5-ax)^2+(2.5-ay)^2)^1.5+(0.5-bx)*qb/((0.5-bx)^2+(2.5-by)^2)^1.5+(0.5-cx)*qc/((0.5-cx)^2+(2.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((2.5-ay)*qa/((0.5-ax)^2+(2.5-ay)^2)^1.5+(2.5-by)*qb/((0.5-bx)^2+(2.5-by)^2)^1.5+(2.5-cy)*qc/((0.5-cx)^2+(2.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>D</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((0.5-ax)*qa/((0.5-ax)^2+(3.5-ay)^2)^1.5+(0.5-bx)*qb/((0.5-bx)^2+(3.5-by)^2)^1.5+(0.5-cx)*qc/((0.5-cx)^2+(3.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((3.5-ay)*qa/((0.5-ax)^2+(3.5-ay)^2)^1.5+(3.5-by)*qb/((0.5-bx)^2+(3.5-by)^2)^1.5+(3.5-cy)*qc/((0.5-cx)^2+(3.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>3.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((1.5-ax)*qa/((1.5-ax)^2+(0.5-ay)^2)^1.5+(1.5-bx)*qb/((1.5-bx)^2+(0.5-by)^2)^1.5+(1.5-cx)*qc/((1.5-cx)^2+(0.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((0.5-ay)*qa/((1.5-ax)^2+(0.5-ay)^2)^1.5+(0.5-by)*qb/((1.5-bx)^2+(0.5-by)^2)^1.5+(0.5-cy)*qc/((1.5-cx)^2+(0.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>G</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((1.5-ax)*qa/((1.5-ax)^2+(1.5-ay)^2)^1.5+(1.5-bx)*qb/((1.5-bx)^2+(1.5-by)^2)^1.5+(1.5-cx)*qc/((1.5-cx)^2+(1.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((1.5-ay)*qa/((1.5-ax)^2+(1.5-ay)^2)^1.5+(1.5-by)*qb/((1.5-bx)^2+(1.5-by)^2)^1.5+(1.5-cy)*qc/((1.5-cx)^2+(1.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>H</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((1.5-ax)*qa/((1.5-ax)^2+(2.5-ay)^2)^1.5+(1.5-bx)*qb/((1.5-bx)^2+(2.5-by)^2)^1.5+(1.5-cx)*qc/((1.5-cx)^2+(2.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((2.5-ay)*qa/((1.5-ax)^2+(2.5-ay)^2)^1.5+(2.5-by)*qb/((1.5-bx)^2+(2.5-by)^2)^1.5+(2.5-cy)*qc/((1.5-cx)^2+(2.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>I</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((1.5-ax)*qa/((1.5-ax)^2+(3.5-ay)^2)^1.5+(1.5-bx)*qb/((1.5-bx)^2+(3.5-by)^2)^1.5+(1.5-cx)*qc/((1.5-cx)^2+(3.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((3.5-ay)*qa/((1.5-ax)^2+(3.5-ay)^2)^1.5+(3.5-by)*qb/((1.5-bx)^2+(3.5-by)^2)^1.5+(3.5-cy)*qc/((1.5-cx)^2+(3.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>3.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>J</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((2.5-ax)*qa/((2.5-ax)^2+(0.5-ay)^2)^1.5+(2.5-bx)*qb/((2.5-bx)^2+(0.5-by)^2)^1.5+(2.5-cx)*qc/((2.5-cx)^2+(0.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((0.5-ay)*qa/((2.5-ax)^2+(0.5-ay)^2)^1.5+(0.5-by)*qb/((2.5-bx)^2+(0.5-by)^2)^1.5+(0.5-cy)*qc/((2.5-cx)^2+(0.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>K</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((2.5-ax)*qa/((2.5-ax)^2+(1.5-ay)^2)^1.5+(2.5-bx)*qb/((2.5-bx)^2+(1.5-by)^2)^1.5+(2.5-cx)*qc/((2.5-cx)^2+(1.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((1.5-ay)*qa/((2.5-ax)^2+(1.5-ay)^2)^1.5+(1.5-by)*qb/((2.5-bx)^2+(1.5-by)^2)^1.5+(1.5-cy)*qc/((2.5-cx)^2+(1.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>L</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((2.5-ax)*qa/((2.5-ax)^2+(2.5-ay)^2)^1.5+(2.5-bx)*qb/((2.5-bx)^2+(2.5-by)^2)^1.5+(2.5-cx)*qc/((2.5-cx)^2+(2.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((2.5-ay)*qa/((2.5-ax)^2+(2.5-ay)^2)^1.5+(2.5-by)*qb/((2.5-bx)^2+(2.5-by)^2)^1.5+(2.5-cy)*qc/((2.5-cx)^2+(2.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>M</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((2.5-ax)*qa/((2.5-ax)^2+(3.5-ay)^2)^1.5+(2.5-bx)*qb/((2.5-bx)^2+(3.5-by)^2)^1.5+(2.5-cx)*qc/((2.5-cx)^2+(3.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((3.5-ay)*qa/((2.5-ax)^2+(3.5-ay)^2)^1.5+(3.5-by)*qb/((2.5-bx)^2+(3.5-by)^2)^1.5+(3.5-cy)*qc/((2.5-cx)^2+(3.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>3.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>N</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((3.5-ax)*qa/((3.5-ax)^2+(0.5-ay)^2)^1.5+(3.5-bx)*qb/((3.5-bx)^2+(0.5-by)^2)^1.5+(3.5-cx)*qc/((3.5-cx)^2+(0.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((0.5-ay)*qa/((3.5-ax)^2+(0.5-ay)^2)^1.5+(0.5-by)*qb/((3.5-bx)^2+(0.5-by)^2)^1.5+(0.5-cy)*qc/((3.5-cx)^2+(0.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>3.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>O</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((3.5-ax)*qa/((3.5-ax)^2+(1.5-ay)^2)^1.5+(3.5-bx)*qb/((3.5-bx)^2+(1.5-by)^2)^1.5+(3.5-cx)*qc/((3.5-cx)^2+(1.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((1.5-ay)*qa/((3.5-ax)^2+(1.5-ay)^2)^1.5+(1.5-by)*qb/((3.5-bx)^2+(1.5-by)^2)^1.5+(1.5-cy)*qc/((3.5-cx)^2+(1.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>3.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>P</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((3.5-ax)*qa/((3.5-ax)^2+(2.5-ay)^2)^1.5+(3.5-bx)*qb/((3.5-bx)^2+(2.5-by)^2)^1.5+(3.5-cx)*qc/((3.5-cx)^2+(2.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((2.5-ay)*qa/((3.5-ax)^2+(2.5-ay)^2)^1.5+(2.5-by)*qb/((3.5-bx)^2+(2.5-by)^2)^1.5+(2.5-cy)*qc/((3.5-cx)^2+(2.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>3.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Q</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*k*2*((3.5-ax)*qa/((3.5-ax)^2+(3.5-ay)^2)^1.5+(3.5-bx)*qb/((3.5-bx)^2+(3.5-by)^2)^1.5+(3.5-cx)*qc/((3.5-cx)^2+(3.5-cy)^2)^1.5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*k*2*((3.5-ay)*qa/((3.5-ax)^2+(3.5-ay)^2)^1.5+(3.5-by)*qb/((3.5-bx)^2+(3.5-by)^2)^1.5+(3.5-cy)*qc/((3.5-cx)^2+(3.5-cy)^2)^1.5)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>3.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>3.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

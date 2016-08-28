@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>1.0</stop>
+			<change>0.01</change>
+			<fps>50.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.05</xmin>
+			<xmax>1.75</xmax>
+			<ymin>-5.5</ymin>
+			<ymax>10.5</ymax>
+			<xgrid>0.05</xgrid>
+			<ygrid>0.5</ygrid>
+		</window>
+		<description>
+			<text>Black = tan(x)
+Red = atan(x)
+Blue = tan(atan(x))
+Green = atan(tan(x))</text>
+		</description>
+		<output>
+			<name>tanx</name>
+			<text>tan(x)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>tan(tan.xdisp)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>atanx</name>
+			<text>arctan(x) </text>
+			<units></units>
+			<calculator type="parametric">
+				<value>atan(atan.xdisp)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>tanatanx</name>
+			<text>tan(arctan(x))</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>tan(atan(tan.xdisp))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>atantanx</name>
+			<text>arctan(tan(x))</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>atan(tan(atan.xdisp))</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>tan</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.09</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.6</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>tan(t)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>atan</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.067</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.45</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>atan(t)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>tanatan</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.045</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.3</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>tan(atan(t))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>atantan</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.022</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.15</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>255</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>atan(tan(t))</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

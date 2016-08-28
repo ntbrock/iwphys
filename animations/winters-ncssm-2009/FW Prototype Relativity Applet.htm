@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=us-ascii">
+<META content="MSHTML 6.00.6000.16809" name=GENERATOR></HEAD>
+<BODY><B>From:</B> Loren Winters [lwinters8@nc.rr.com]<BR><B>Sent:</B> Thursday, 
+May 07, 2009 8:36 PM<BR><B>To:</B> Winters, Loren<BR><B>Subject:</B> FW: 
+Prototype Relativity Applet<BR>
+<DIV dir=ltr align=left>&nbsp;</DIV><BR>
+<DIV class=OutlookMessageHeader lang=en-us dir=ltr align=left>
+<HR tabIndex=-1>
+<FONT face=Tahoma size=2><B>From:</B> Jason Cockrell 
+[mailto:pssvreported@gmail.com] <BR><B>Sent:</B> Thursday, May 07, 2009 8:32 
+PM<BR><B>To:</B> lwinters8@nc.rr.com<BR><B>Subject:</B> Re: Prototype Relativity 
+Applet<BR></FONT><BR></DIV>
+<DIV></DIV>Dr. Winters,<BR><BR>I've fixed the appearance of the Earth and star. 
+This was not a consequence of an incorrect parameter, but rather of the 
+particular window shape used to display the objects. I usually edit IWP in 
+full-screen, so I didn't realize this was happening. Interestingly, I discovered 
+upon viewing the standard size that some of the text was running over objects. I 
+gave the text 'more room' so this shouldn't happen anymore. The reason I bring 
+this up, however, is that it represents a significant inconsistency in the way 
+IWP is written:<BR><BR>All objects other than text are displayed according to 
+what I shall term a 'contrived size', meaning a size such as 5 meters or 90 
+nanometers or some other parameter which IWP converts to pixel sizes by scaling. 
+But text objects are displayed according to an 'absolute size' - the font size 
+is an actual input number of pixels, and will be that absolute size no matter 
+what. So, if you enlarge the window, objects other than text are scaled up 
+accordingly, but text remains the same size.<BR><BR>This means that the way IWP 
+displays its objects, if some are text and others are not, changes based on what 
+resolution of screen and size or shape of window a person is using.<BR><BR>If 
+you get a chance to talk to Taylor about this, I imagine it would only take two 
+or three lines of code to change the font size input parameter to scale with the 
+rest of the objects.<BR><BR>Jason Cockrell<BR><BR>
+<DIV class=gmail_quote>On Thu, May 7, 2009 at 7:54 PM, Loren Winters <SPAN 
+dir=ltr>&lt;<A 
+href="mailto:lwinters8@nc.rr.com">lwinters8@nc.rr.com</A>&gt;</SPAN> wrote:<BR>
+<BLOCKQUOTE class=gmail_quote 
+style="PADDING-LEFT: 1ex; MARGIN: 0pt 0pt 0pt 0.8ex; BORDER-LEFT: rgb(204,204,204) 1px solid">
+  <DIV>
+  <DIV dir=ltr align=left><SPAN><FONT face=Arial color=#0000ff 
+  size=2>Jason,</FONT></SPAN></DIV>
+  <DIV dir=ltr align=left><SPAN><FONT face=Arial color=#0000ff 
+  size=2></FONT></SPAN>&nbsp;</DIV>
+  <DIV dir=ltr align=left><SPAN><FONT face=Arial color=#0000ff size=2>This looks 
+  great. There's one change that should be easy to implement. From the Earth's 
+  frame, the Earth and the star should appear spherical. I love the stars. 
+  Interestingly, they twinkle from the ship's frame of 
+  reference.</FONT></SPAN></DIV>
+  <DIV dir=ltr align=left><SPAN><FONT face=Arial color=#0000ff 
+  size=2></FONT></SPAN>&nbsp;</DIV>
+  <DIV dir=ltr align=left><SPAN><FONT face=Arial color=#0000ff 
+  size=2>Loren</FONT></SPAN></DIV><BR>
+  <DIV lang=en-us dir=ltr align=left>
+  <HR>
+  <FONT face=Tahoma size=2><B>From:</B> Jason Cockrell [mailto:<A 
+  href="mailto:pssvreported@gmail.com" target=_blank>pssvreported@gmail.com</A>] 
+  <BR><B>Sent:</B> Thursday, May 07, 2009 6:57 PM<BR><B>To:</B> <A 
+  href="mailto:lwinters8@nc.rr.com" 
+  target=_blank>lwinters8@nc.rr.com</A><BR><B>Subject:</B> Re: Prototype 
+  Relativity Applet<BR></FONT><BR></DIV>
+  <DIV>
+  <DIV></DIV>
+  <DIV class=h5>
+  <DIV></DIV>Updates:<BR><BR>Mars replaced with Alpha Centauri<BR>Distances 
+  given in light-years, times given in years, velocities given in light-years / 
+  year (in other words, as a fraction of c)<BR>Objects made to contract as 
+  appropriate<BR>Stars added. Stars are stationary with respect to the Earth and 
+  show slight movement from the ship's frame of reference, in true Star Trek 
+  fashion.<BR>Clocks added on board and on Earth<BR>Labels added to indicate 
+  contracted and proper lengths<BR><BR>Jason Cockrell<BR><BR>
+  <DIV class=gmail_quote>On Thu, May 7, 2009 at 3:19 PM, <SPAN dir=ltr>&lt;<A 
+  href="mailto:lwinters8@nc.rr.com" 
+  target=_blank>lwinters8@nc.rr.com</A>&gt;</SPAN> wrote:<BR>
+  <BLOCKQUOTE class=gmail_quote 
+  style="PADDING-LEFT: 1ex; MARGIN: 0pt 0pt 0pt 0.8ex; BORDER-LEFT: rgb(204,204,204) 1px solid">Jason,<BR><BR>This 
+    looks good. A few things come to mind:<BR><BR>1. All horizontal dimensions, 
+    including Earth, Mars, and car need to adjust to the reference frame. This 
+    should create interesting squashed or elongated shapes. Does that make 
+    sense?<BR><BR>2. Can you put the distance scale in terms of light years? In 
+    the standard problem of this type, a spaceship travels to Alpha Centauri 4 
+    light years away. If the speed is 0.8c, then the time taken from the point 
+    of view of an Earth observer is 5 y.<BR><BR>I'd say go ahead with the clocks 
+    and labels. The time unit would be years. Digital clocks are 
+    fine.<BR><BR>Loren<BR>
+    <DIV>
+    <DIV></DIV>
+    <DIV><BR><BR>---- Jason Cockrell &lt;<A href="mailto:pssvreported@gmail.com" 
+    target=_blank>pssvreported@gmail.com</A>&gt; wrote:<BR>&gt; Dr. 
+    Winters,<BR>&gt;<BR>&gt; Here is a simple outline of the new relativity 
+    applet. It is physically<BR>&gt; sound, if a bit lacking in instructive 
+    power. Assuming this is what you had<BR>&gt; in mind, my next step will be 
+    to add Earth and ship clocks for visual aid<BR>&gt; and use floating text to 
+    indicate the proper and contracted lengths.<BR>&gt;<BR>&gt; Jason 
+    Cockrell<BR><BR></DIV></DIV></BLOCKQUOTE></DIV><BR></DIV></DIV></DIV></BLOCKQUOTE></DIV><BR></BODY></HTML>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>Enter a number A and the modulus B. Hit Reset to return A, mod B.</text>
+		</description>
+		<input>
+			<name>a</name>
+			<text>A</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>b</name>
+			<text>B</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<output>
+			<name>amodb</name>
+			<text>A Modulo B</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(a-0*b)*step(1*b-a)*(a-0*b)+step(a-1*b)*step(2*b-a)*(a-1*b)+step(a-2*b)*step(3*b-a)*(a-2*b)+step(a-3*b)*step(4*b-a)*(a-3*b)+step(a-4*b)*step(5*b-a)*(a-4*b)+step(a-5*b)*step(6*b-a)*(a-5*b)+step(a-6*b)*step(7*b-a)*(a-6*b)+step(a-7*b)*step(8*b-a)*(a-7*b)+step(a-8*b)*step(9*b-a)*(a-8*b)+step(a-9*b)*step(10*b-a)*(a-9*b)+step(a-10*b)*step(11*b-a)*(a-10*b)+step(a-11*b)*step(12*b-a)*(a-11*b)+step(a-12*b)*step(13*b-a)*(a-12*b)+step(a-13*b)*step(14*b-a)*(a-13*b)+step(a-14*b)*step(15*b-a)*(a-14*b)+step(a-15*b)*step(16*b-a)*(a-15*b)+step(a-16*b)*step(17*b-a)*(a-16*b)+step(a-17*b)*step(18*b-a)*(a-17*b)+step(a-18*b)*step(19*b-a)*(a-18*b)+step(a-19*b)*step(20*b-a)*(a-19*b)+step(a-20*b)*step(21*b-a)*(a-20*b)+step(a-21*b)*step(22*b-a)*(a-21*b)+step(a-22*b)*step(23*b-a)*(a-22*b)+step(a-23*b)*step(24*b-a)*(a-23*b)+step(a-24*b)*step(25*b-a)*(a-24*b)+step(a-25*b)*step(26*b-a)*(a-25*b)+step(a-26*b)*step(27*b-a)*(a-26*b)+step(a-27*b)*step(28*b-a)*(a-27*b)+step(a-28*b)*step(29*b-a)*(a-28*b)+step(a-29*b)*step(30*b-a)*(a-29*b)+step(a-30*b)*step(31*b-a)*(a-30*b)+step(a-31*b)*step(32*b-a)*(a-31*b)+step(a-32*b)*step(33*b-a)*(a-32*b)+step(a-33*b)*step(34*b-a)*(a-33*b)+step(a-34*b)*step(35*b-a)*(a-34*b)+step(a-35*b)*step(36*b-a)*(a-35*b)+step(a-36*b)*step(37*b-a)*(a-36*b)+step(a-37*b)*step(38*b-a)*(a-37*b)+step(a-38*b)*step(39*b-a)*(a-38*b)+step(a-39*b)*step(40*b-a)*(a-39*b)+step(a-40*b)*step(41*b-a)*(a-40*b)+step(a-41*b)*step(42*b-a)*(a-41*b)+step(a-42*b)*step(43*b-a)*(a-42*b)+step(a-43*b)*step(44*b-a)*(a-43*b)+step(a-44*b)*step(45*b-a)*(a-44*b)+step(a-45*b)*step(46*b-a)*(a-45*b)+step(a-46*b)*step(47*b-a)*(a-46*b)+step(a-47*b)*step(48*b-a)*(a-47*b)+step(a-48*b)*step(49*b-a)*(a-48*b)+step(a-49*b)*step(50*b-a)*(a-49*b)+step(a-50*b)*step(51*b-a)*(a-50*b)+step(a-51*b)*step(52*b-a)*(a-51*b)+step(a-52*b)*step(53*b-a)*(a-52*b)+step(a-53*b)*step(54*b-a)*(a-53*b)+step(a-54*b)*step(55*b-a)*(a-54*b)+step(a-55*b)*step(56*b-a)*(a-55*b)+step(a-56*b)*step(57*b-a)*(a-56*b)+step(a-57*b)*step(58*b-a)*(a-57*b)+step(a-58*b)*step(59*b-a)*(a-58*b)+step(a-59*b)*step(60*b-a)*(a-59*b)+step(a-60*b)*step(61*b-a)*(a-60*b)+step(a-61*b)*step(62*b-a)*(a-61*b)+step(a-62*b)*step(63*b-a)*(a-62*b)+step(a-63*b)*step(64*b-a)*(a-63*b)+step(a-64*b)*step(65*b-a)*(a-64*b)+step(a-65*b)*step(66*b-a)*(a-65*b)+step(a-66*b)*step(67*b-a)*(a-66*b)+step(a-67*b)*step(68*b-a)*(a-67*b)+step(a-68*b)*step(69*b-a)*(a-68*b)+step(a-69*b)*step(70*b-a)*(a-69*b)+step(a-70*b)*step(71*b-a)*(a-70*b)+step(a-71*b)*step(72*b-a)*(a-71*b)+step(a-72*b)*step(73*b-a)*(a-72*b)+step(a-73*b)*step(74*b-a)*(a-73*b)+step(a-74*b)*step(75*b-a)*(a-74*b)+step(a-75*b)*step(76*b-a)*(a-75*b)+step(a-76*b)*step(77*b-a)*(a-76*b)+step(a-77*b)*step(78*b-a)*(a-77*b)+step(a-78*b)*step(79*b-a)*(a-78*b)+step(a-79*b)*step(80*b-a)*(a-79*b)+step(a-80*b)*step(81*b-a)*(a-80*b)+step(a-81*b)*step(82*b-a)*(a-81*b)+step(a-82*b)*step(83*b-a)*(a-82*b)+step(a-83*b)*step(84*b-a)*(a-83*b)+step(a-84*b)*step(85*b-a)*(a-84*b)+step(a-85*b)*step(86*b-a)*(a-85*b)+step(a-86*b)*step(87*b-a)*(a-86*b)+step(a-87*b)*step(88*b-a)*(a-87*b)+step(a-88*b)*step(89*b-a)*(a-88*b)+step(a-89*b)*step(90*b-a)*(a-89*b)+step(a-90*b)*step(91*b-a)*(a-90*b)+step(a-91*b)*step(92*b-a)*(a-91*b)+step(a-92*b)*step(93*b-a)*(a-92*b)+step(a-93*b)*step(94*b-a)*(a-93*b)+step(a-94*b)*step(95*b-a)*(a-94*b)+step(a-95*b)*step(96*b-a)*(a-95*b)+step(a-96*b)*step(97*b-a)*(a-96*b)+step(a-97*b)*step(98*b-a)*(a-97*b)+step(a-98*b)*step(99*b-a)*(a-98*b)+step(a-99*b)*step(100*b-a)*(a-99*b)</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

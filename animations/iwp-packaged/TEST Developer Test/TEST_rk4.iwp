@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name>Taylor Brockman</name>
+		<organization>IWP</organization>
+		<email>taylor.brockman@gmail.com</email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.02</change>
+			<fps>15.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10</xmin>
+			<xmax>10</xmax>
+			<ymin>-10</ymin>
+			<ymax>10</ymax>
+			<xgrid>1</xgrid>
+			<ygrid>1</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+		</window>
+		<description>
+			<text>Very simple test for Rk4 calculations. It's important to remember that the Initial Displacement and Velocity can be dynamic equations and 
+possibly more complicated than just fixed numbers. This means they would be based on inputs values, which is illustrated here.</text>
+		</description>
+
+
+		<input>
+			<name>initxdisp</name>
+			<text>Initial X Displacement</text>
+			<initialValue>-10</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>initxvel</name>
+			<text>Initial X Velocity</text>
+			<initialValue>5</initialValue>
+			<units>m</units>
+		</input>
+
+
+		<solid>
+			<name>RkfourMover</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="RK4">
+					<displacement>initxdisp</displacement>
+					<velocity>initxvel</velocity>
+					<acceleration>-5*t</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="rk4">
+					<displacement>-10</displacement>
+					<velocity>0</velocity>
+					<acceleration>5</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+
+
+		<output>
+			<name>RkfourXDispOutput</name>
+			<text>X Disp</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkfourMover.xdisp</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>RkfourXVelOutput</name>
+			<text>X Vel</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkfourMover.xvel</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>RkfourXAccelOutput</name>
+			<text>X Accel</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkfourMover.xaccel</value>
+			</calculator>
+		</output>
+
+
+		<output>
+			<name>RkfourYVelOutput</name>
+			<text>Y Vel</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkfourMover.yvel</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>RkfourYDispOutput</name>
+			<text>Y Disp</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkfourMover.ydisp</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>RkfourYAccelOutput</name>
+			<text>Y Accel</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkfourMover.yaccel</value>
+			</calculator>
+		</output>
+
+
+	</objects>
+</problem>

@@ -1,0 +1,14 @@
+From: Cockrell, Jason 2009
+Sent: Wednesday, February 04, 2009 12:29 PM
+To: Winters, Loren
+Subject: Realization
+
+Dr. Winters,
+
+Almost immediately upon returning to my room, I had this important realization:
+
+( A Modulo B ) = ( (A/B) Modulo 1 ) X B
+
+This is important because, using the step function, the computational complexity of ( A Modulo B ) is proportional to A/B, whereas there is a way using powers of ten to achieve a computational complexity for ( A Modulo 1 ) proportional to the base-ten logarithm of A. Therefore, disregard my previous claims of a limit of 100 for the ratio A/B. It is actually relatively simple to find modulo values for very large A.
+
+Jason Cockrell

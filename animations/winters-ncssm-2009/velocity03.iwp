@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>20.0</stop>
+			<change>0.1</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.0</xmin>
+			<xmax>11.0</xmax>
+			<ymin>-50.0</ymin>
+			<ymax>50.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>10.0</ygrid>
+			<xunit>s</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A position vs. time graph of a uniformly-accelerating object is shown. The blue line is always tangent to the path of the object.  Determine the acceleration of the object by doing the following:  
+1.   Visually read coordinates from the graph to use in determining the slope of the line at times of 0, 2, 4, 6, 8, and 10 s.  Record your values in a table.
+2.  Plot a graph of of velocity vs. time and draw the best straight line through the data points.
+3.  Find the slope of the velocity vs. time graph.</text>
+		</description>
+		<input>
+			<name>a</name>
+			<text>Initial position</text>
+			<initialValue>-15.0</initialValue>
+			<units>     m</units>
+		</input>
+		<input>
+			<name>b</name>
+			<text>Initial velocity</text>
+			<initialValue>20.0</initialValue>
+			<units>  m/s</units>
+		</input>
+		<input>
+			<name>c</name>
+			<text>Acceleration</text>
+			<initialValue>-3.2</initialValue>
+			<units>m/ss</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>y</name>
+			<text>Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>object.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>derivative</name>
+			<text>Velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>b+c*t</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>object</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a+b*t+0.5*c*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Deriv_line</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(b+c*t)*2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>object.xpos-1</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>object.ypos-(b+c*t)</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

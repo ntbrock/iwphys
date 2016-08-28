@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-5.0</xmin>
+			<xmax>15.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</window>
+		<description>
+			<text>red ball experiences lift proportional to velocity--parametric
+blue ball experiences same--eulers
+green ball experiences lift and drag proportional to velocity--parametric
+black ball experiences lift and drag proportional to velocity--eulers (this
+one doesn't calculate correctly)</text>
+		</description>
+		<input>
+			<name>m</name>
+			<text>Mass</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Grav Field</text>
+			<initialValue>-10.0</initialValue>
+			<units>N/kg</units>
+		</input>
+		<input>
+			<name>k</name>
+			<text>Lift coeffiicient</text>
+			<initialValue>3.0</initialValue>
+			<units>kg/s</units>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Initial speed</text>
+			<initialValue>5.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Initial angle</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<output>
+			<name>ar</name>
+			<text>Initial angle (r)</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(a)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>x</name>
+			<text>X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vx</name>
+			<text>Vx</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>P.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vy</name>
+			<text>Vy</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>P.yvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ax</name>
+			<text>Ax</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>P.xaccel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ay</name>
+			<text>Ay</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>P.yaccel</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>P</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*cos(ar)</velocity>
+					<acceleration>-k*P.yvel/m</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*sin(ar)</velocity>
+					<acceleration>(g+k*P.xvel)/m</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Q</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(m^2*(-g)/k^2)*(k*t/m-sin(k*t/m)+(vo*k/(m*(-g)))*(sin(ar+k*t/m)-sin(ar)))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-(m^2*(-g)/k^2)*(1-cos(k*t/m)+(vo*k/(m*(-g)))*(cos(ar+k*t/m)-cos(ar)))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>d</name>
+			<text>Drag coefficient</text>
+			<initialValue>0.25</initialValue>
+			<units>kg/s</units>
+		</input>
+		<output>
+			<name>C</name>
+			<text>C</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>2*k*d/(d^2-k^2)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>B</name>
+			<text>B</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>-g*m^2/(d^2-k^2)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>R</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>B*(C+n*(exp(n*d*t))*(C*cos(k*t)+n*sin(k*t))+n*k*t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>B*(1+n*(exp(n*d*t))*(C*sin(k*t)+cos(k*t))+d*t)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>n</name>
+			<text>Negative</text>
+			<initialValue>-1.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>S</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*cos(ar)</velocity>
+					<acceleration>(n*k*S.yvel+n*d*S.xvel)/m</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*sin(ar)</velocity>
+					<acceleration>(g+k*S.xvel+n*d*S.yvel)/m</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

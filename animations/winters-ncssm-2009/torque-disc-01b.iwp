@@ -1,0 +1,522 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.05</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.0</xmin>
+			<xmax>1.0</xmax>
+			<ymin>-1.0</ymin>
+			<ymax>1.0</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>0.1</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>The green disc is free to rotate about at axle located at its center. Three forces represented by the red vectors act on the disc at positions indicated by the blue vectors. If the net torque on the disc is non-zero, the disc will undergo angular acceleration about the axle. A positive angular acceleration results in counterclockwise rotation from rest.</text>
+		</description>
+		<input>
+			<name>ra</name>
+			<text>Magnitude of Ra</text>
+			<initialValue>0.5</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>rb</name>
+			<text>Magnitude of Rb</text>
+			<initialValue>0.25</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>rc</name>
+			<text>Magnitude of Rc</text>
+			<initialValue>0.1</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>fa</name>
+			<text>Magnitude of Fa</text>
+			<initialValue>5.7</initialValue>
+			<units>N</units>
+		</input>
+		<input>
+			<name>fb</name>
+			<text>Magnitude of Fb</text>
+			<initialValue>8.3</initialValue>
+			<units>N</units>
+		</input>
+		<input>
+			<name>fc</name>
+			<text>Magnitude of Fc</text>
+			<initialValue>4.1</initialValue>
+			<units>N</units>
+		</input>
+		<input>
+			<name>ara</name>
+			<text>Direction of Ra</text>
+			<initialValue>15.0</initialValue>
+			<units>deg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>arb</name>
+			<text>Direction of Rb</text>
+			<initialValue>240.0</initialValue>
+			<units>deg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>arc</name>
+			<text>Direction of Rc</text>
+			<initialValue>150.0</initialValue>
+			<units>deg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>afa</name>
+			<text>Angle between Fa and Ra</text>
+			<initialValue>45.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>afb</name>
+			<text>Angle between Fb and Rb</text>
+			<initialValue>-90.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>afc</name>
+			<text>Angle between Fc and Rc</text>
+			<initialValue>-130.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>I</name>
+			<text>Rotational inertia</text>
+			<initialValue>2.0</initialValue>
+			<units>kgm^2</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>sf</name>
+			<text>Scale factor</text>
+			<initialValue>0.1</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>circle</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2*ra</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2*ra</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>255</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>axle</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>ra/10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>ra/10</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>r_a</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>ra*cos(toRadians(ara)+alpha*t^2/2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>ra*sin(toRadians(ara)+alpha*t^2/2)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>r_b</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>rb*cos(toRadians(arb)+alpha*t^2/2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>rb*sin(toRadians(arb)+alpha*t^2/2)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>r_c</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>rc*cos(toRadians(arc)+alpha*t^2/2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>rc*sin(toRadians(arc)+alpha*t^2/2)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F_a</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*fa*cos(toRadians(ara+afa)+alpha*t^2/2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*fa*sin(toRadians(ara+afa)+alpha*t^2/2)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ra*cos(toRadians(ara)+alpha*t^2/2)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ra*sin(toRadians(ara)+alpha*t^2/2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F_b</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*fb*cos(toRadians(arb+afb)+alpha*t^2/2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*fb*sin(toRadians(arb+afb)+alpha*t^2/2)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rb*cos(toRadians(arb)+alpha*t^2/2)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rb*sin(toRadians(arb)+alpha*t^2/2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>F_c</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*fc*cos(toRadians(afc+arc)+alpha*t^2/2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*fc*sin(toRadians(afc+arc)+alpha*t^2/2)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rc*cos(toRadians(arc)+alpha*t^2/2)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rc*sin(toRadians(arc)+alpha*t^2/2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>ta</name>
+			<text>Torque of A</text>
+			<units>Nm</units>
+			<calculator type="parametric">
+				<value>fa*ra*sin(toRadians(afa))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>tb</name>
+			<text>Torque of B</text>
+			<units>Nm</units>
+			<calculator type="parametric">
+				<value>fb*rb*sin(toRadians(afb))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>tc</name>
+			<text>Torque of C</text>
+			<units>Nm</units>
+			<calculator type="parametric">
+				<value>fc*rc*sin(toRadians(afc))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>tnet</name>
+			<text>Net torque</text>
+			<units>Nm</units>
+			<calculator type="parametric">
+				<value>ta+tb+tc</value>
+			</calculator>
+		</output>
+		<output>
+			<name>alpha</name>
+			<text>Angular accel.</text>
+			<units>1/s^2</units>
+			<calculator type="parametric">
+				<value>tnet/I</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>A</name>
+			<text>A</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>16</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>ra*sin(toRadians(ara)+alpha*t^2/2)</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>ra*cos(toRadians(ara)+alpha*t^2/2)+.05</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>B</name>
+			<text>B</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>16</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>rb*sin(toRadians(arb)+alpha*t^2/2)</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>rb*cos(toRadians(arb)+alpha*t^2/2)+.05</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>C</name>
+			<text>C</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>16</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>rc*sin(toRadians(arc)+alpha*t^2/2)</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>rc*cos(toRadians(arc)+alpha*t^2/2)-.07</value>
+				</calculator>
+			</xpath>
+		</object>
+	</objects>
+</problem>

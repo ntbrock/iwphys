@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<name>Loren Winters</name>
+		<organization>NCSSM</organization>
+		<email>winters@ncssm.edu</email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.05</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</window>
+		<description>
+			<text>An object oscillates in SHM in two dimensions.
+1. Make the object move in a horizontal or vertical line.
+2. Make the object move in a straight diagonal line.
+3. Make the object move in a circle.
+4. Make the object move in an ellipse.
+5. Make the object move in a figure 8.</text>
+		</description>
+		<output>
+			<name>xaccel</name>
+			<text>X-acceleration</text>
+			<units>m/ss</units>
+			<calculator>
+				<calculator type="parametric">
+					<value>Ball.xaccel</value>
+				</calculator>
+			</calculator>
+		</output>
+		<output>
+			<name>xdisp</name>
+			<text>X-position</text>
+			<units>m</units>
+			<calculator>
+				<calculator type="parametric">
+					<value>Ball.xdisp</value>
+				</calculator>
+			</calculator>
+		</output>
+			<output>
+			<name>xvel</name>
+			<text>X-velocity</text>
+			<units>m/s</units>
+			<calculator>
+				<calculator type="parametric">
+					<value>Ball.xvel</value>
+				</calculator>
+			</calculator>
+		</output>	
+		
+		
+		<input>
+			<name>Ax</name>
+			<text>X-amplitude</text>
+			<initialValue>9.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>Ay</name>
+			<text>Y-amplitude</text>
+			<initialValue>9.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass</text>
+			<initialValue>2.5</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>px</name>
+			<text>X-Phase</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>py</name>
+			<text>Y-Phase</text>
+			<initialValue>90.0</initialValue>
+			<units>deg</units>
+		</input>
+			<input>
+			<name>kx</name>
+			<text>X-Spring constant</text>
+			<initialValue>10.0</initialValue>
+			<units>N/m</units>
+		</input>
+			<input>
+			<name>ky</name>
+			<text>Y-Spring constant</text>
+			<initialValue>20.0</initialValue>
+			<units>N/m</units>
+		</input>
+		<solid>
+			<name>Ball</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>Ax.value*cos((kx.value/m.value)^.5*t+2*3.142*px.value/360)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>Ay.value*cos((ky.value/m.value)^.5*t+2*3.142*py.value/360)</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

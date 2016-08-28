@@ -1,0 +1,448 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>1.0E-13</stop>
+			<change>1.25E-16</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.0E-5</xmin>
+			<xmax>1.0E-5</xmax>
+			<ymin>-1.0E-5</ymin>
+			<ymax>1.0E-5</ymax>
+			<xgrid>2.0E-6</xgrid>
+			<ygrid>2.0E-6</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<input>
+			<name>have_bg</name>
+			<text>Have Background?</text>
+			<initialValue>1.0</initialValue>
+			<units>Y : 1, N : 0</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>bg</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1*step(have_bg)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>th_dummy</name>
+			<text>Thickness of Film</text>
+			<initialValue>3000.0</initialValue>
+			<units>nm</units>
+		</input>
+		<input>
+			<name>na</name>
+			<text>N 1</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>nb</name>
+			<text>N 2</text>
+			<initialValue>1.333</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>nc</name>
+			<text>N 3</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>a_dummy</name>
+			<text>Angle of Incidence</text>
+			<initialValue>30.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>f_dummy</name>
+			<text>Frequency</text>
+			<initialValue>420.0</initialValue>
+			<units>THz</units>
+		</input>
+		<input>
+			<name>c_dummy</name>
+			<text>Velocity of Light</text>
+			<initialValue>300.0</initialValue>
+			<units>Mm/s</units>
+		</input>
+		<output>
+			<name>th</name>
+			<text>Thickness of Film</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>th_dummy*(10^(-9))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ai</name>
+			<text>Angle of Incidence</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(a_dummy-90)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>f</name>
+			<text>Frequency</text>
+			<units>Hz</units>
+			<calculator type="parametric">
+				<value>f_dummy*10^12</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>c</name>
+			<text>Velocity of Light</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>c_dummy*10^6</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>l</name>
+			<text>Lambda</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>c/f</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>l_dummy</name>
+			<text>Lambda</text>
+			<units>nm</units>
+			<calculator type="parametric">
+				<value>l*(10^9)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ri</name>
+			<text>Initial Distance from Origin</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>7*l</value>
+			</calculator>
+		</output>
+		<output>
+			<name>va</name>
+			<text>Velocity A</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>c/na</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vb</name>
+			<text>Velocity B</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>c/nb</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vc</name>
+			<text>Velocity C</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>c/nc</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tc</name>
+			<text>First Intersection</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>ri/va</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ar</name>
+			<text>Angle of Reflection</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(90-a_dummy)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>are</name>
+			<text>Angle of Refraction</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>-pi/2+asin(toRadians(a_dummy)*na/nb)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>invert</name>
+			<text>Phase Inversion?</text>
+			<units>Y : 1, N : 0</units>
+			<calculator type="parametric">
+				<value>0</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>film</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>th</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-th/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>awave</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-ri*cos(ai)-.0000003*sin(2*pi*t*f)*sin(ai)+va*t*cos(ai)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-ri*sin(ai)+va*t*sin(ai)+.0000003*sin(2*pi*t*f)*cos(ai)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>atrace</name>
+			<shape type="rectangle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>step(ri-va*t)*awave.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(ri-va*t)*awave.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>dwave</name>
+			<shape type="rectangle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>step(t-tc)*(-.0000003*sin(pi*step(invert)+2*pi*(t-tc)*f)*sin(ar)+va*(t-tc)*cos(ar))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(t-tc)*(va*(t-tc)*sin(ar)+.0000003*sin(pi*step(invert)+2*pi*(t-tc)*f)*cos(ar))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>bwave</name>
+			<shape type="rectangle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(cos(are)*(vb*(t-tc))-sin(are)*.0000003*sin(2*pi*(t-tc)*f))*step(t-tc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(sin(are)*(vb*(t-tc))+cos(are)*.0000003*sin(2*pi*(t-tc)*f))*step(t-tc)</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

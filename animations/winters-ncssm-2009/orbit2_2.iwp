@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10000.0</stop>
+			<change>5.0</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>-1000.0</xmin>
+			<xmax>1000.0</xmax>
+			<ymin>-1000.0</ymin>
+			<ymax>1000.0</ymax>
+			<xgrid>100.0</xgrid>
+			<ygrid>100.0</ygrid>
+		</window>
+		<description>
+			<text>A planet orbits a star.  Investigate conditions for a stable orbit. 
+Note that the star would normally have motion, but that motion is 
+small compared to the motion of the planet when the mass
+of the planet is much smaller than the mass of the star. Note that
+the size of the planet scales as the cube root of its mass.</text>
+		</description>
+		<output>
+			<name>xp</name>
+			<text>X-position</text>
+			<units>au</units>
+			<calculator type="parametric">
+				<value>Planet.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>up</name>
+			<text>Planet Y-position</text>
+			<units>au</units>
+			<calculator type="parametric">
+				<value>Planet.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>d</name>
+			<text>Distance to Star</text>
+			<units>au</units>
+			<calculator type="parametric">
+				<value>(Planet.xdisp^2+Planet.ydisp^2)^0.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>sm</name>
+			<text>Star's mass</text>
+			<units>    </units>
+			<calculator type="parametric">
+				<value>sm.value</value>
+			</calculator>
+		</output>
+		<input>
+			<name>xo</name>
+			<text>Initial X</text>
+			<initialValue>500.0</initialValue>
+			<units>au</units>
+		</input>
+		<input>
+			<name>sm</name>
+			<text>Star mass</text>
+			<initialValue>1000.0</initialValue>
+			<units>    </units>
+		</input>
+		<input>
+			<name>pm</name>
+			<text>Planet mass</text>
+			<initialValue>1.0</initialValue>
+			<units>    </units>
+		</input>
+		<input>
+			<name>voy</name>
+			<text>Initial Vy</text>
+			<initialValue>1.63</initialValue>
+			<units>au/yr</units>
+		</input>
+		<input>
+			<name>yo</name>
+			<text>Initial Y</text>
+			<initialValue>0.0</initialValue>
+			<units>au</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vox</name>
+			<text>Initial Vx</text>
+			<initialValue>0.0</initialValue>
+			<units>au/yr</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>Planet</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>20*(pm.value)^(1/3)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20*(pm.value)^(1/3)</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>102</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>xo.value</displacement>
+					<velocity>vox.value</velocity>
+					<acceleration>-sm.value*Planet.xdisp/(Planet.xdisp^2+Planet.ydisp^2)^1.5</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>yo.value</displacement>
+					<velocity>voy.value</velocity>
+					<acceleration>-sm.value*Planet.ydisp/(Planet.xdisp^2+Planet.ydisp^2)^1.5</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Star</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>20*(sm.value)^(1/3)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20*(sm.value)^(1/3)</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>Local</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.02</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>3.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Two objects of equal mass oscillate independently in SHM about the origin. The two objects are initially in phase.
+
+Let b = the minimum number of cycles the blue object object must execute for the objects to be in phase again.
+Let r = the minimum number of cycles the red object object must execute for the objects to be in phase again.
+
+a. Use the position vs. time graphs to find b and r. Change the time scale of the graph as needed.
+
+b. If Tr is the period of the red object and Tb is the period of the blue object, why should b/r = Tr/Tb?  Verify your answer to #1 by finding the periods and forming their ratio.</text>
+		</description>
+		<output>
+			<name>redx</name>
+			<text>Red position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Red.xdisp</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>bluex</name>
+			<text>Blue position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Blue.xdisp</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>Blue</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>6*cos(10^.5*t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Red</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>8*cos(14.4^.5*t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-4</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

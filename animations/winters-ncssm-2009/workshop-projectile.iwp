@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-50.0</ymin>
+			<ymax>50.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>10.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-150.0</xmin>
+			<xmax>150.0</xmax>
+			<ymin>-150.0</ymin>
+			<ymax>150.0</ymax>
+			<xgrid>10.0</xgrid>
+			<ygrid>10.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<input>
+			<name>vo</name>
+			<text>Initial velocity</text>
+			<initialValue>20.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>h</name>
+			<text>Initial height</text>
+			<initialValue>100.0</initialValue>
+			<units>m</units>
+		</input>
+		<solid>
+			<name>Ball</name>
+			<shape type="rectangle" drawTrails="true" drawVectors="true">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="true" xVel="true" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="true" xAccel="false" xVel="true" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vo*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>h-9.8*t^2/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>vx</name>
+			<text>Horizontal velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Ball.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vy</name>
+			<text>Vericall velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Ball.yvel</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

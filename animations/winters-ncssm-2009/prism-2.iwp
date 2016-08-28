@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>25.0</stop>
+			<change>1.0</change>
+			<fps>30.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>1.0</xmax>
+			<ymin>-45.0</ymin>
+			<ymax>45.0</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>5.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.0</xmin>
+			<xmax>4.0</xmax>
+			<ymin>-0.5</ymin>
+			<ymax>4.5</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>0.5</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A ray of light is incident horizontally from air on a prism with the given index of refraction. Normals to the sides of the prism are indicated by blue lines. (If the critical angle is exceeded for the ray incident on the right side of the prism, non-physical results may occur.)
+
+1. Keeping the vertex angle at 30°, use Snells Law to determine the maximum index of refraction for which the ray emerges from the prism on the right.  Verify your answer using the animation.
+
+2. Now set the index of refraction to the value that you just calculated.  If you increase the vertex angle even by a measly millionth of a degree, must you increase or decrease the index of refraction in order to restore the angle of refraction of to that of problem 1?</text>
+		</description>
+		<input>
+			<name>angle</name>
+			<text>Angle of incidence</text>
+			<initialValue>0.0</initialValue>
+			<units>°</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>ai</name>
+			<text>Angle increment</text>
+			<initialValue>0.0</initialValue>
+			<units>°</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>n</name>
+			<text>Index of refraction</text>
+			<initialValue>1.5</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>h</name>
+			<text>Prism height</text>
+			<initialValue>4.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>v</name>
+			<text>Vertex angle</text>
+			<initialValue>30.0</initialValue>
+			<units>°</units>
+		</input>
+		<input>
+			<name>vi</name>
+			<text>Vertex angle increment</text>
+			<initialValue>0.0</initialValue>
+			<units>°</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>va</name>
+			<text>Vertex angle</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>v+vi*t</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>i</name>
+			<text>Angle of incidence</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>angle-ai*t</value>
+			</calculator>
+		</output>
+		<output>
+			<name>r</name>
+			<text>Angle of refraction 1</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>toDegrees(asin(sin(toRadians(i))/n))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>i2</name>
+			<text>Angle of incidence 2</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>va-r</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>r2</name>
+			<text>Angle of refraction 2</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>toDegrees(asin(sin(toRadians(i2))*n))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>d</name>
+			<text>Length of ray in prism</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(h/2)*sin(toRadians(va))/sin(toRadians(90+r-va))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ac</name>
+			<text>Critical angle</text>
+			<units>°</units>
+			<calculator type="parametric">
+				<value>toDegrees(asin(1/n))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>prism</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>h</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>h*tan(toRadians(va))</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>incidentray</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-.95*cos(toRadians(i))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-.95*sin(toRadians(i))</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refractedray</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>d*cos(toRadians(r))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>d*sin(toRadians(r))</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refractedray2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>4*cos(toRadians(va-r2))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>4*sin(toRadians(va-r2))</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>d*cos(toRadians(r))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(d*sin(toRadians(r))+h/2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>normal1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.25</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>normal2a</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25*tan(toRadians(va))</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>d*cos(toRadians(r))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>d*sin(toRadians(r))+h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>normal2b</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-.25*tan(toRadians(va))</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>d*cos(toRadians(r))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>d*sin(toRadians(r))+h/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

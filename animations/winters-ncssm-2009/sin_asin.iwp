@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>1.0</stop>
+			<change>0.01</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>-0.05</xmin>
+			<xmax>1.05</xmax>
+			<ymin>-0.05</ymin>
+			<ymax>1.05</ymax>
+			<xgrid>0.05</xgrid>
+			<ygrid>0.05</ygrid>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<solid>
+			<name>asin</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.05</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.05</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>sin(asin(t))</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

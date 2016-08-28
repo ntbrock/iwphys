@@ -1,0 +1,607 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.0025</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>0.5</xmax>
+			<ymin>-0.1</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>0.05</xgrid>
+			<ygrid>0.01</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.1</xmin>
+			<xmax>0.1</xmax>
+			<ymin>-0.1</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>0.02</xgrid>
+			<ygrid>0.02</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>A ball is fired out of a spring-loaded cannon. The spring is initially compressed 0.085 m before being released. Assume that the spring has lost all of its initial elastic potential energy as the ball is released at the origin. At what angle must the cannon be oriented </text>
+		</description>
+		<input>
+			<name>angle</name>
+			<text>Launch Angle</text>
+			<initialValue>60.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass of ball</text>
+			<initialValue>0.75</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>k</name>
+			<text>Spring Constant</text>
+			<initialValue>75.0</initialValue>
+			<units>N/m</units>
+		</input>
+		<input>
+			<name>h1</name>
+			<text>Spring height</text>
+			<initialValue>0.01</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Gravitation</text>
+			<initialValue>9.8</initialValue>
+			<units>m/s^2</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>yeq</name>
+			<text>Yeq</text>
+			<initialValue>0.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>xeq</name>
+			<text>Xeq</text>
+			<initialValue>0.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>sf</name>
+			<text>Scale Factor</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>c</name>
+			<text>Spring Compression</text>
+			<initialValue>85.0</initialValue>
+			<units>percent</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>t</name>
+			<text>Time corrected</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>t-delta_t</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>theta</name>
+			<text>theta</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(-90-angle)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>h</name>
+			<text>Spring Height</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>h1*sf</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>w</name>
+			<text>Angular speed</text>
+			<units>1/s</units>
+			<calculator type="parametric">
+				<value>(k/m)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>base</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>-theta</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>sf*0.1*sin(theta)+xeq-sf/2*sin(-theta)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>sf*0.1*cos(theta)+yeq+sf/2*cos(-theta)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>cannon</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.013*sf</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.04*sf</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>-theta</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>sf*0.1*sin(theta)+xeq+0.02*sf*sin(-theta)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>sf*0.1*cos(theta)+yeq-0.02*sf*cos(-theta)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ball</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.013*sf</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.013*sf</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>51</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>sf*(c/1000)*sin(theta)+xeq</displacement>
+					<velocity>0</velocity>
+					<acceleration>step(ts-t)*(-(ball.xpos-xeq)*k/m)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>sf*(c/1000)*cos(theta)+yeq</displacement>
+					<velocity>0</velocity>
+					<acceleration>step(ts-t)*(-(ball.ypos-yeq)*k/m)+step(t-ts)*(-g)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>p</name>
+			<text>Spring pitch</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(step(ts-t)*((-sign(cos(theta))*sign(ball.ypos-yeq)*((ball.ypos-yeq)^2+(ball.xpos-xeq)^2)^0.5+0.1*sf)/6)+step(t-ts)*osc*0.085)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>line1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>cos(theta)*(h/2)+sin(theta)*(-p/2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>cos(theta)*(-p/2)-sin(theta)*(h/2)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>sf*0.1*sin(theta)+xeq</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>sf*0.1*cos(theta)+yeq</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>cos(theta)*(-h)+sin(theta)*(-p)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>cos(theta)*(-p)-sin(theta)*(-h)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>cos(theta)*(h/2)+sin(theta)*(sf*0.1-p/2)+xeq</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>cos(theta)*(sf*0.1-p/2)-sin(theta)*(h/2)+yeq</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line3</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(h)*cos(theta)+sin(theta)*(-p)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(-p)*cos(theta)-sin(theta)*(h)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xeq+cos(theta)*(-h/2)+sin(theta)*(sf*0.1-3*p/2)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yeq+cos(theta)*(sf*0.1-3*p/2)-sin(theta)*(-h/2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line4</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(-h)*cos(theta)+(-p)*sin(theta)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(-p)*cos(theta)-(-h)*sin(theta)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xeq+(h/2)*cos(theta)+sin(theta)*(sf*0.1-5*p/2)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yeq+(sf*0.1-5*p/2)*cos(theta)-sin(theta)*(h/2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line5</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(h)*cos(theta)+sin(theta)*(-p)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(-p)*cos(theta)-sin(theta)*(h)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xeq+(-h/2)*cos(theta)+sin(theta)*(sf*0.1-7*p/2)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yeq+(sf*0.1-7*p/2)*cos(theta)-sin(theta)*(-h/2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line6</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(-h)*cos(theta)+sin(theta)*(-p)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(-p)*cos(theta)-sin(theta)*(-h)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xeq+(h/2)*cos(theta)+sin(theta)*(sf*0.1-9*p/2)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yeq+(sf*0.1-9*p/2)*cos(theta)-sin(theta)*(h/2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>line7</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(h/2)*cos(theta)+sin(theta)*(-p/2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(-p/2)*cos(theta)-sin(theta)*(h/2)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xeq+(-h/2)*cos(theta)+sin(theta)*(sf*0.1-11*p/2)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yeq+(sf*0.1-11*p/2)*cos(theta)-sin(theta)*(-h/2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>f</name>
+			<text>Frequency</text>
+			<units>1/s</units>
+			<calculator type="parametric">
+				<value>1/(2*pi)*(k/m)^0.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ts</name>
+			<text>Time of Separation</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>(1/f)*0.25</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dX</name>
+			<text>Spring compression</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>((ball.ypos-yeq)^2+(ball.xpos-xeq)^2)^0.5*step(ts-t)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>osc</name>
+			<text>Oscillator</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(t-ts)*(cos((t-ts-0.015)*2*3.14*f)*0.1*sf)*15^(ts-t)+0.1*sf</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>xb</name>
+			<text>X-pos of ball</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>ball.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>yb</name>
+			<text>Y-pos of ball</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>ball.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vxb</name>
+			<text>X-vel of ball</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>ball.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vyb</name>
+			<text>Y-vel of ball</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>ball.yvel</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

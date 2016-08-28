@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>Select A and B and click Reset to perform the 4 functions listed under Outputs. The A Round B function rounds A to the precision of B. For example 2.15 Round 0.1 returns 2.2.</text>
+		</description>
+		<input>
+			<name>a</name>
+			<text>A</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>b</name>
+			<text>B</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<output>
+			<name>in</name>
+			<text>In</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>a/b</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dummytenk</name>
+			<text>A Modulo 10000 Dummy</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(in-0*10000)*step(1*10000-in)*(in-0*10000)+step(in-1*10000)*step(2*10000-in)*(in-1*10000)+step(in-2*10000)*step(3*10000-in)*(in-2*10000)+step(in-3*10000)*step(4*10000-in)*(in-3*10000)+step(in-4*10000)*step(5*10000-in)*(in-4*10000)+step(in-5*10000)*step(6*10000-in)*(in-5*10000)+step(in-6*10000)*step(7*10000-in)*(in-6*10000)+step(in-7*10000)*step(8*10000-in)*(in-7*10000)+step(in-8*10000)*step(9*10000-in)*(in-8*10000)+step(in-9*10000)*step(10*10000-in)*(in-9*10000)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dummythousand</name>
+			<text>A Modulo 1000 Dummy</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(dummytenk-0*1000)*step(1*1000-dummytenk)*(dummytenk-0*1000)+step(dummytenk-1*1000)*step(2*1000-dummytenk)*(dummytenk-1*1000)+step(dummytenk-2*1000)*step(3*1000-dummytenk)*(dummytenk-2*1000)+step(dummytenk-3*1000)*step(4*1000-dummytenk)*(dummytenk-3*1000)+step(dummytenk-4*1000)*step(5*1000-dummytenk)*(dummytenk-4*1000)+step(dummytenk-5*1000)*step(6*1000-dummytenk)*(dummytenk-5*1000)+step(dummytenk-6*1000)*step(7*1000-dummytenk)*(dummytenk-6*1000)+step(dummytenk-7*1000)*step(8*1000-dummytenk)*(dummytenk-7*1000)+step(dummytenk-8*1000)*step(9*1000-dummytenk)*(dummytenk-8*1000)+step(dummytenk-9*1000)*step(10*1000-dummytenk)*(dummytenk-9*1000)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dummyhundred</name>
+			<text>A Modulo 100 Dummy</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(dummythousand-0*100)*step(1*100-dummythousand)*(dummythousand-0*100)+step(dummythousand-1*100)*step(2*100-dummythousand)*(dummythousand-1*100)+step(dummythousand-2*100)*step(3*100-dummythousand)*(dummythousand-2*100)+step(dummythousand-3*100)*step(4*100-dummythousand)*(dummythousand-3*100)+step(dummythousand-4*100)*step(5*100-dummythousand)*(dummythousand-4*100)+step(dummythousand-5*100)*step(6*100-dummythousand)*(dummythousand-5*100)+step(dummythousand-6*100)*step(7*100-dummythousand)*(dummythousand-6*100)+step(dummythousand-7*100)*step(8*100-dummythousand)*(dummythousand-7*100)+step(dummythousand-8*100)*step(9*100-dummythousand)*(dummythousand-8*100)+step(dummythousand-9*100)*step(10*100-dummythousand)*(dummythousand-9*100)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dummyten</name>
+			<text>A Modulo 10 Dummy</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(dummyhundred-0*10)*step(1*10-dummyhundred)*(dummyhundred-0*10)+step(dummyhundred-1*10)*step(2*10-dummyhundred)*(dummyhundred-1*10)+step(dummyhundred-2*10)*step(3*10-dummyhundred)*(dummyhundred-2*10)+step(dummyhundred-3*10)*step(4*10-dummyhundred)*(dummyhundred-3*10)+step(dummyhundred-4*10)*step(5*10-dummyhundred)*(dummyhundred-4*10)+step(dummyhundred-5*10)*step(6*10-dummyhundred)*(dummyhundred-5*10)+step(dummyhundred-6*10)*step(7*10-dummyhundred)*(dummyhundred-6*10)+step(dummyhundred-7*10)*step(8*10-dummyhundred)*(dummyhundred-7*10)+step(dummyhundred-8*10)*step(9*10-dummyhundred)*(dummyhundred-8*10)+step(dummyhundred-9*10)*step(10*10-dummyhundred)*(dummyhundred-9*10)+0</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dummyone</name>
+			<text>A Modulo 1 Dummy</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(dummyten-0*1)*step(1*1-dummyten)*(dummyten-0*1)+step(dummyten-1*1)*step(2*1-dummyten)*(dummyten-1*1)+step(dummyten-2*1)*step(3*1-dummyten)*(dummyten-2*1)+step(dummyten-3*1)*step(4*1-dummyten)*(dummyten-3*1)+step(dummyten-4*1)*step(5*1-dummyten)*(dummyten-4*1)+step(dummyten-5*1)*step(6*1-dummyten)*(dummyten-5*1)+step(dummyten-6*1)*step(7*1-dummyten)*(dummyten-6*1)+step(dummyten-7*1)*step(8*1-dummyten)*(dummyten-7*1)+step(dummyten-8*1)*step(9*1-dummyten)*(dummyten-8*1)+step(dummyten-9*1)*step(10*1-dummyten)*(dummyten-9*1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>out</name>
+			<text>A Modulo B</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>dummyone*b</value>
+			</calculator>
+		</output>
+		<output>
+			<name>afloorb</name>
+			<text>A Floor B</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>a-out</value>
+			</calculator>
+		</output>
+		<output>
+			<name>aceilb</name>
+			<text>A Ceiling B</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>afloorb+b*step(a-afloorb)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>aroundb</name>
+			<text>A Round B</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>afloorb*step(afloorb+.5*b-a)+aceilb*step(1-step(afloorb+.5*b-a))</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

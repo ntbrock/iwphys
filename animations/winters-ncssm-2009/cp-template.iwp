@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>1.0E-8</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>1.0E-5</xmax>
+			<ymin>-0.2</ymin>
+			<ymax>0.2</ymax>
+			<xgrid>1.0E-6</xgrid>
+			<ygrid>0.02</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.2</xmin>
+			<xmax>0.2</xmax>
+			<ymin>-0.2</ymin>
+			<ymax>0.2</ymax>
+			<xgrid>0.02</xgrid>
+			<ygrid>0.02</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A charged particle moves under the influence of an electric field oriented
+along the y-axis and a magnetic field oriented along the z-axis (perpendicular
+to the screen).  Note these sign conventions:
+Direction of positive E is +y (toward top of screen)
+Direction of positive B is +z (outward from screen)</text>
+		</description>
+		<input>
+			<name>q</name>
+			<text>Charge</text>
+			<initialValue>-1.6E-19</initialValue>
+			<units>C</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass</text>
+			<initialValue>9.11E-31</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Magnitude of initial velocity</text>
+			<initialValue>260000.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Direction of initial velocity</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>Efield</name>
+			<text>Electric Field</text>
+			<initialValue>0.0</initialValue>
+			<units>N/C</units>
+		</input>
+		<input>
+			<name>B</name>
+			<text>Magnetic field</text>
+			<initialValue>2.96E-5</initialValue>
+			<units>T</units>
+		</input>
+		<solid>
+			<name>P</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*cos(toRadians(a))</velocity>
+					<acceleration>R*B*P.yvel</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*sin(toRadians(a))</velocity>
+					<acceleration>R*(Efield-B*P.xvel)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>x</name>
+			<text>X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vx</name>
+			<text>Vx</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>P.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vy</name>
+			<text>Vy</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>P.yvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>R</name>
+			<text>Charge/Mass</text>
+			<units>C/kg</units>
+			<calculator type="parametric">
+				<value>q/m</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

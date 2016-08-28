@@ -1,0 +1,354 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>0.1</stop>
+			<change>0.01</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>0.1</xmax>
+			<ymin>-0.1</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>0.01</xgrid>
+			<ygrid>0.01</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.1</xmin>
+			<xmax>0.1</xmax>
+			<ymin>-0.3</ymin>
+			<ymax>-0.1</ymax>
+			<xgrid>0.02</xgrid>
+			<ygrid>0.02</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>The blue and red balls have the same size, shape, and composition. They have a coating of graphite paint, which makes their surfaces good conductors. The red ball, hanging from a long thread, is initially uncharged while the blue ball has been charged by momentarily touching it to a balloon rubbed with fur.  The blue ball, which is attached to a horizontal insulating handle, is momentarily touched to the red ball. (These initial preparations are not shown in the animation.) 
+
+In order to see the state of the red and blue balls after their momentary contact, click the step button (>>) once.  The red ball deflects away from its initial equilibrium position. Note that the X-coordinates of the balls are given as outputs. These enable one to determine the separation of the balls and the horizontal deflection of the red ball. Both of these are related to electrostatic force that either ball exerts on the other.
+
+Click on the step (>>) button to move the right charge toward the left in increments of 0.01 m and view the corresponding position of the red ball.
+
+Step through the animation and take data on horizontal deflection of the left ball vs. separation of both balls. Graph and fit the data appropriately. Use a coefficient from the fit to determine the charge on either ball. In order to determine the relationship between the coefficient and the charge, you'll need to do a theoretical force analysis of the situation. In order to simplify the math, assume that the angle that the string makes with the vertical is small. This will allow you to say that the angle and its sine (or tangent) are approximately equal.</text>
+		</description>
+		<input>
+			<name>d1</name>
+			<text>Initial position of right ball</text>
+			<initialValue>0.08</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>k</name>
+			<text>k</text>
+			<initialValue>9.0E9</initialValue>
+			<units>Nm^2/C^2</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Gravitational field</text>
+			<initialValue>9.8</initialValue>
+			<units>N/kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>q1</name>
+			<text>Q-right</text>
+			<initialValue>5.0E-8</initialValue>
+			<units>C</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>q2</name>
+			<text>Q-left</text>
+			<initialValue>5.0E-8</initialValue>
+			<units>C</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>qs</name>
+			<text>Q (0 uncharged; 1=charged)</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>L</name>
+			<text>Length of string</text>
+			<initialValue>0.25</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass of either ball</text>
+			<initialValue>0.0010</initialValue>
+			<units>kg</units>
+		</input>
+		<solid>
+			<name>String</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>d2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-L+d2^2/(2*L)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Rod</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.010</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>d1+.1-t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-L+d2^2/(2*L)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>QR</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>d1-t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-L+d2^2/(2*L)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>QL</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>d2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-L+d2^2/(2*L)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>a0</name>
+			<text>Constant</text>
+			<units>m^3</units>
+			<calculator type="parametric">
+				<value>-step(t)*k*q1*q2*L/(m*g)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a1</name>
+			<text>a1</text>
+			<units>m^2</units>
+			<calculator type="parametric">
+				<value>(d1-t)^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>a2</name>
+			<text>a2</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(d1-t)*2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>Q</name>
+			<text>Q</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(3*a1-a2^2)/9</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>R</name>
+			<text>R</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(9*a2*a1-27*a0-2*a2^3)/54</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>D</name>
+			<text>D</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>Q^3+R^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>S</name>
+			<text>S</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(R+sqrt(D))^(1/3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>T</name>
+			<text>T</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(R-sqrt(D))^(1/3)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>d2</name>
+			<text>X-coord of Q-left</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>a2/3-S-T</value>
+			</calculator>
+		</output>
+		<output>
+			<name>xr</name>
+			<text>X-coord. of Q-right</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>QR.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>r</name>
+			<text>Separation</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>xr-d2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

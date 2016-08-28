@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.05</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>1.0</xmax>
+			<ymin>-20.0</ymin>
+			<ymax>20.0</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>5.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-20.0</xmin>
+			<xmax>0.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A ball bounces elastically off the right-side of the Animator window.</text>
+		</description>
+		<input>
+			<name>vo</name>
+			<text>Initial velocity</text>
+			<initialValue>20.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Angle of initial velocity</text>
+			<initialValue>30.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>xo</name>
+			<text>Initial x-coordinate</text>
+			<initialValue>-5.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>ar</name>
+			<text>Angle in radians</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(a)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>yo</name>
+			<text>Initial y-coordinate</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>xo*tan(ar)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tc</name>
+			<text>Time to collision</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>-xo/(vo*cos(ar))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>ball</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xo+vo*cos(ar)*t)*step(tc-t)+(-vo*cos(ar)*(t-tc))*step(t-tc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(yo+vo*sin(ar)*t)*step(tc-t)+(vo*sin(ar)*(t-tc))*step(t-tc)</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

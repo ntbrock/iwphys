@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>0.0</xmin>
+			<xmax>20.0</xmax>
+			<ymin>0.0</ymin>
+			<ymax>20.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</window>
+		<description>
+			<text>Dart gun problem from ETPT workshop</text>
+		</description>
+		<output>
+			<name>x</name>
+			<text>X</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>dart.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>dart.ydisp</value>
+			</calculator>
+		</output>
+		<input>
+			<name>gf</name>
+			<text>gravity field</text>
+			<initialValue>-9.8</initialValue>
+			<units>N/kg</units>
+		</input>
+		<input>
+			<name>angle</name>
+			<text>angle</text>
+			<initialValue>30.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>v</name>
+			<text>muzzle velocity</text>
+			<initialValue>15.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>ht</name>
+			<text>target height</text>
+			<initialValue>10.0</initialValue>
+			<units>m</units>
+		</input>
+		<solid>
+			<name>dart</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>v.value*cos(toRadians(angle.value))*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>10+v.value*sin(toRadians(angle.value))*t+.5*gf.value*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>gun_height</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>target</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>19</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ht.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>wall</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>20</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>10</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>floor</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

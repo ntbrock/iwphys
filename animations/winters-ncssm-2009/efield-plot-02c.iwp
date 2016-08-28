@@ -1,0 +1,386 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>20.0</stop>
+			<change>0.01001</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.1</xmin>
+			<xmax>0.1</xmax>
+			<ymin>-0.1</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>0.01</xgrid>
+			<ygrid>0.01</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Two charges (red and blue) are positioned on the x-axis and produce an electric field in the space surrounding them. A positive test charge is represented by the green dot. Vectors representing the magnitude and direction of the fields of the red and blue charges and of the net field are shown at the position of the test charge.
+
+Running or stepping the animation will move the test charge down the screen, and the E-field vectors will change accordingly. The direction of motion can be made horizontal or vertical in either direction by the appropriate choice of the X and Y motions:
+
+1 = move horizontally (vertically) to the right (up)
+0 = don't move
+-1= move horizontally (vertically) to the left (down)
+
+In addition, the initial coordinates of the test charge can be selected.
+
+For easier viewing, the vectors may be scaled to larger or smaller lengths by increasing or decreasing the vector scale factor.</text>
+		</description>
+		<input>
+			<name>k</name>
+			<text>Electrostatic constant</text>
+			<initialValue>0.0090</initialValue>
+			<units>Nm²/(pC)²</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>x1</name>
+			<text>Position of Red</text>
+			<initialValue>-0.05</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>x2</name>
+			<text>Position of Blue</text>
+			<initialValue>0.05</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>c1</name>
+			<text>Charge of red</text>
+			<initialValue>1.11</initialValue>
+			<units>pc</units>
+		</input>
+		<input>
+			<name>c2</name>
+			<text>Charge of blue</text>
+			<initialValue>1.11</initialValue>
+			<units>pc</units>
+		</input>
+		<input>
+			<name>xo</name>
+			<text>Initial X of test charge</text>
+			<initialValue>0.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>yo</name>
+			<text>Initial Y of test charge</text>
+			<initialValue>0.05</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>xi</name>
+			<text> X motion: 1,0,-1</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>yi</name>
+			<text>Y motion: 1,0,-1</text>
+			<initialValue>-1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>sf</name>
+			<text>Vector scale factor</text>
+			<initialValue>0.01</initialValue>
+			<units></units>
+		</input>
+		<output>
+			<name>x</name>
+			<text>X of test charge</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>xo+xi*t</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y of test charge</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>yo+yi*t</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>q1</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.0025</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.0025</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x1</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>q2</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.0025</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.0025</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>qt</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.0015</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.0015</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>y</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>r1</name>
+			<text>(R-left)²</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(x1-x)^2+y^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>r2</name>
+			<text>(R-right)²</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(x2-x)^2+y^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>exl</name>
+			<text>Ex-left</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>k*sf*c1*(x-x1)/r1^1.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>eyl</name>
+			<text>Ey-left</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>k*sf*c1*y/r1^1.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>exr</name>
+			<text>Ex-right</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>k*sf*c2*(x-x2)/r2^1.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>eyr</name>
+			<text>Ey-right</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>k*sf*c2*y/r2^1.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>e1</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>exl</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>eyl</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>y</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>e2</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>exr</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>eyr</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>y</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>enet</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(exr+exl)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(eyr+eyl)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>x</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>y</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

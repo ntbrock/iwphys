@@ -1,0 +1,244 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>400.0</stop>
+			<change>1.0</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-50.0</ymin>
+			<ymax>50.0</ymax>
+			<xgrid>10.0</xgrid>
+			<ygrid>10.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-50.0</xmin>
+			<xmax>50.0</xmax>
+			<ymin>-50.0</ymin>
+			<ymax>50.0</ymax>
+			<xgrid>10.0</xgrid>
+			<ygrid>10.0</ygrid>
+			<xunit></xunit>
+			<yunit></yunit>
+		</window>
+		<description>
+			<text>Blue line:  Jumps alternately between two polar functions of the form:
+r = a + bcos(cit + d), where the coefficients a to d are selectable for each
+function.  The angle increment, i, is also selectable.  The value of t is
+automatically incremented in steps of 1 starting at t = 0. 
+
+Red and green lines:  Plots of the individual functions
+
+The coefficients are initially set for two circles.</text>
+		</description>
+		<input>
+			<name>id</name>
+			<text> Angle increment</text>
+			<initialValue>173.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>a</name>
+			<text> a1</text>
+			<initialValue>20.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>b</name>
+			<text> b1</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>c</name>
+			<text> c1</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>d</name>
+			<text> d1</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>e</name>
+			<text> a2</text>
+			<initialValue>50.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>f</name>
+			<text> b2</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>g</name>
+			<text> c2</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>h</name>
+			<text> d2</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<solid>
+			<name>f</name>
+			<shape type="circle" drawTrails="true">
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(even*(a+b*sin(c*i*t+dr))+odd*(e+f*sin(g*i*t+hr)))*cos(i*t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(even*(a+b*sin(c*i*t+dr))+odd*(e+f*sin(g*i*t+hr)))*sin(i*t)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>r1</name>
+			<shape type="circle" drawTrails="true">
+				<width>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(a+b*sin(c*i*t+dr))*cos(i*t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(a+b*sin(c*i*t+dr))*sin(i*t)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>r2</name>
+			<shape type="circle" drawTrails="true">
+				<width>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>153</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(e+f*sin(g*i*t+hr))*cos(i*t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(e+f*sin(g*i*t+hr))*sin(i*t)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>i</name>
+			<text>Angle in radians</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(id)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dr</name>
+			<text>d1 in radians</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(d)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>hr</name>
+			<text>d2 in radians</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(h)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>even</name>
+			<text>Plot first function</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>modtwo(t+1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>odd</name>
+			<text>Plot second function</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>modtwo(t)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

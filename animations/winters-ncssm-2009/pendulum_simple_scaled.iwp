@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.01</change>
+			<fps>50.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-2.0</ymin>
+			<ymax>2.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-2.5</xmin>
+			<xmax>2.5</xmax>
+			<ymin>-4.5</ymin>
+			<ymax>0.5</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>0.5</ygrid>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<input>
+			<name>sf</name>
+			<text>Scale Factor</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>d</name>
+			<text>Length</text>
+			<initialValue>3.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>angle</name>
+			<text>Initial angle</text>
+			<initialValue>10.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Gravitational Field</text>
+			<initialValue>9.8</initialValue>
+			<units>N/kg</units>
+		</input>
+		<input>
+			<name>bobsize</name>
+			<text>Bob size</text>
+			<initialValue>0.2</initialValue>
+			<units>m</units>
+		</input>
+		<solid>
+			<name>string</name>
+			<shape type="polygon">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>.05*bobsize.value</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>-.05*bobsize.value</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>bob.xdisp-.05*bobsize.value</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>bob.ydisp</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>bob.xdisp+.05*bobsize.value</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>bob.ydisp</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="true" xVel="true" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>bob</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>bobsize.value*sf.value</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>bobsize.value*sf.value</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="true" xVel="true" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-ds.value*sin(toRadians(angle.value))</displacement>
+					<velocity>0</velocity>
+					<acceleration>g.value*bob.xdisp*bob.ydisp/(ds.value)^2</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>-ds.value*cos(toRadians(angle.value))</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>ax</name>
+			<text>X Acceleration</text>
+			<units>m/s²</units>
+			<calculator type="parametric">
+				<value>bob.xaccel</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ay</name>
+			<text>Y Acceleration</text>
+			<units>m/s²</units>
+			<calculator type="parametric">
+				<value>bob.yaccel</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>x</name>
+			<text>X Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>bob.xdisp</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>bob.ydisp</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ds</name>
+			<text>Length</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>sf.value*d.value</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

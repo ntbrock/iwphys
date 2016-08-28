@@ -1,0 +1,1784 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.0050</change>
+			<fps>15.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>A string represented by a chain of mass elements (assumed to be connected) is oscillated by a rod on the left. The right end of the string is initially free. The amount of damping can be selected with the damping coefficient.  There is no reflected wave from the free end, as the string can be thought of as extending to infinity on the right.
+
+If the right end is fixed, the damping coefficient is disabled. Standing waves are generated on the string. The horizontal distance from oscillator to fixed end is set at L = 19 m. Thus, if the frequency is adjusted to the nth harmonic f = nv/2L, where n = 1,2,3, etc, then the point where the rod attaches to the string will become a node of the standing wave pattern.
+</text>
+		</description>
+		<output>
+			<name>t</name>
+			<text>Inverts Time</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>-t</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<input>
+			<name>mode</name>
+			<text>Fixed End?</text>
+			<initialValue>0.0</initialValue>
+			<units>1 : Y, 0 : N</units>
+		</input>
+		<input>
+			<name>r</name>
+			<text>Radius of mass elements</text>
+			<initialValue>0.6</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>mu</name>
+			<text>Linear density of string</text>
+			<initialValue>0.05</initialValue>
+			<units>kg/m</units>
+		</input>
+		<input>
+			<name>ten</name>
+			<text>Tension in string</text>
+			<initialValue>50.0</initialValue>
+			<units>N</units>
+		</input>
+		<input>
+			<name>f</name>
+			<text>Frequency of oscillation</text>
+			<initialValue>4.0</initialValue>
+			<units>Hz</units>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Undamped amplitude</text>
+			<initialValue>5.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>gamma_dummy</name>
+			<text>Damping coefficient</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<output>
+			<name>v</name>
+			<text>Velocity of wave</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>sqrt(ten/mu)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>lambda</name>
+			<text>Wavelength</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>v/f</value>
+			</calculator>
+		</output>
+		<output>
+			<name>T</name>
+			<text>Period of oscillation</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>1/f</value>
+			</calculator>
+		</output>
+		<output>
+			<name>gamma</name>
+			<text>Damping</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(1-mode)*gamma_dummy</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>shift</name>
+			<text>Shift</text>
+			<units>rads</units>
+			<calculator type="parametric">
+				<value>4*pi*10/lambda-pi</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>bg</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xA</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-9</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xA.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xA.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xA.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xB</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-8.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xB.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xB.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xB.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xC</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-8</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xC.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xC.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xC.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xD</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-7.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xD.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xD.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xD.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xE</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-7</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xE.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xE.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xE.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xF</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-6.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xF.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xF.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xF.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xG</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-6</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xG.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xG.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xG.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xH</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-5.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xH.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xH.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xH.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xI</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xI.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xI.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xI.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xJ</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-4.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xJ.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xJ.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xJ.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xK</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-4</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xK.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xK.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xK.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xL</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-3.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xL.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xL.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xL.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xM</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-3</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xM.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xM.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xM.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xN</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-2.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xN.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xN.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xN.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xO</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xO.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xO.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xO.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xP</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-1.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xP.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xP.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xP.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xQ</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-1</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xQ.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xQ.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xQ.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xR</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xR.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xR.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xR.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xS</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xS.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xS.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xS.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xT</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xT.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xT.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xT.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xU</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xU.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xU.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xU.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xV</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xV.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xV.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xV.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xW</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xW.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xW.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xW.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xX</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xX.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xX.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xX.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xY</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>3</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xY.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xY.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xY.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xZ</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>3.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(xZ.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*xZ.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*xZ.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zA</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>4</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zA.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zA.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zA.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zB</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>4.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zB.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zB.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zB.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zC</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zC.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zC.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zC.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zD</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>5.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zD.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zD.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zD.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zE</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>6</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zE.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zE.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zE.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zF</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>6.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zF.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zF.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zF.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zG</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>7</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zG.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zG.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zG.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zH</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>7.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zH.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zH.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zH.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zI</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>8</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zI.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zI.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zI.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zJ</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>8.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zJ.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zJ.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zJ.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zK</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>9</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zK.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zK.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zK.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zL</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>9.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zL.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zL.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zL.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>zM</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>e^(-gamma*(zM.xpos+9)/v)*a*cos(2*pi*t/T+2*pi*zM.xpos/lambda)+step(mode)*a*cos(2*pi*t/T-2*pi*zM.xpos/lambda+shift)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>driver</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>30</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xA.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-15+xA.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>clamp</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.2*step(mode)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>30</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>zM.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-15</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>t</name>
+			<text>Inverts Time</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>-t</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

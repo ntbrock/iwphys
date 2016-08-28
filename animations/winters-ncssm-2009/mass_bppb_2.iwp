@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>-0.2</xmin>
+			<xmax>0.2</xmax>
+			<ymin>-0.3</ymin>
+			<ymax>0.1</ymax>
+			<xgrid>0.3</xgrid>
+			<ygrid>0.3</ygrid>
+		</window>
+		<description>
+			<text>The animation allows you to compare experimental and theoretical values</text>
+		</description>
+		<input>
+			<name>r</name>
+			<text>Radius of object</text>
+			<initialValue>0.0010</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>df</name>
+			<text>Density of fluid</text>
+			<initialValue>1000.0</initialValue>
+			<units>kg/m^3</units>
+		</input>
+		<input>
+			<name>n</name>
+			<text>Viscosity of fluid</text>
+			<initialValue>1.0</initialValue>
+			<units>kg/ms</units>
+		</input>
+		<output>
+			<name>y</name>
+			<text>Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>bppb.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>v</name>
+			<text>Velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>bppb.yvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>a</name>
+			<text>Acceleration</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>bppb.yaccel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>s</name>
+			<text>Yact - Ysim</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>-bppb.ydisp+actual.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>go</name>
+			<text>Initial accel.</text>
+			<units>N/kg</units>
+			<calculator type="parametric">
+				<value>-g.value*(1-df.value/do.value)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>k</name>
+			<text>k</text>
+			<units>kg/s</units>
+			<calculator type="parametric">
+				<value>6*PI.value*n.value*r.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>mg</name>
+			<text>Mass of  object in g</text>
+			<units>g</units>
+			<calculator type="parametric">
+				<value>m.value*1000</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vt</name>
+			<text>Terminal vel.</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>m.value*go.value/k.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>rn</name>
+			<text>Reynold's No.</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>-2*df.value*r.value*vt.value/n.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>km</name>
+			<text>k/m</text>
+			<units>1/s</units>
+			<calculator type="parametric">
+				<value>k.value/m.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>m</name>
+			<text>Mass of object</text>
+			<units>kg</units>
+			<calculator type="parametric">
+				<value>(4*PI.value/3)*do.value*(r.value)^3</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>Background</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-.25</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Cylinder</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.52</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-.25</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>bppb</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.01</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>vt.value*(t+(1/km.value)*(exp(-km.value*t)-1))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>tf</name>
+			<text>Time to .99*Vterm</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>ln(100)/km.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>xf</name>
+			<text>X at .99*Vterm</text>
+			<units>mm</units>
+			<calculator type="parametric">
+				<value>1000*vt.value*(ln(100)-.99)/km.value</value>
+			</calculator>
+		</output>
+		<input>
+			<name>d</name>
+			<text>Distance of fall</text>
+			<initialValue>0.25</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>t</name>
+			<text>Time of fall</text>
+			<initialValue>10.0</initialValue>
+			<units>s</units>
+		</input>
+		<output>
+			<name>vtm</name>
+			<text>Term.Vel. (calc)</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>d.value/t.value</value>
+			</calculator>
+		</output>
+		<input>
+			<name>g</name>
+			<text>Gravitational field</text>
+			<initialValue>9.8</initialValue>
+			<units>m/ss</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>mc</name>
+			<text>Mass (calc) in g</text>
+			<units>g</units>
+			<calculator type="parametric">
+				<value>1000*(9*vtm.value/(2*g.value*(r.value)^2)+df.value)*(4*PI.value*(r.value)^3/3)</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>actual</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.01</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-vtm.value*t</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>start</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.001</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>finish</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.001</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-d.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>do</name>
+			<text>Density of ball (calc)</text>
+			<units>kg/m^3</units>
+			<calculator type="parametric">
+				<value>mc.value/(4*PI.value*(10*r.value)^3/3)</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

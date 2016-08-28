@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>1000000.0</stop>
+			<change>1000.0</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>200000.0</xmax>
+			<ymin>-5.0E8</ymin>
+			<ymax>5.0E8</ymax>
+			<xgrid>20000.0</xgrid>
+			<ygrid>5.0E7</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-5.0E8</xmin>
+			<xmax>5.0E8</xmax>
+			<ymin>-5.0E8</ymin>
+			<ymax>5.0E8</ymax>
+			<xgrid>5.0E7</xgrid>
+			<ygrid>5.0E7</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>This animation demonstrates the retrograde motion of an outer planet such as Mars as viewed from the Earth. In the animation, the Earth is the blue object and is stationary, since this is the frame of reference for the observations. The Sun is the orange object, appearing to execute a nearly circular orbit around the Earth. Mars is the red object, appearing to reverse its direction of motion during its orbit. </text>
+		</description>
+		<solid>
+			<name>planet</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>4*10^7</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>4*10^7</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>153</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0-rc*cos(2*PI.value*t/(tc)+4)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0-rc*sin(2*PI.value*t/(tc)+4)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xp</name>
+			<text>X planet</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>planet.xpos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>yp</name>
+			<text>Y planet</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>planet.ypos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<input>
+			<name>rc</name>
+			<text>Radius of Black's orbit</text>
+			<initialValue>1.175E8</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>tc</name>
+			<text>Period of Black</text>
+			<initialValue>97200.0</initialValue>
+			<units>s</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>mc</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>3*10^7</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>3*10^7</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rc*cos(2*PI.value*t/(tc)+4)-rc*cos(2*PI.value*t/(tc)+4)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rc*sin(2*PI.value*t/(tc)+4)-rc*sin(2*PI.value*t/(tc)+4)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xc</name>
+			<text>X black</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>mc.xpos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>yc</name>
+			<text>Y black</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>mc.ypos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<input>
+			<name>rd</name>
+			<text>Radius of Orange's orbit</text>
+			<initialValue>3.54E8</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>td</name>
+			<text>Period of Orange</text>
+			<initialValue>507600.0</initialValue>
+			<units>s</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>md</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2.5*10^7</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2.5*10^7</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rd*cos(2*PI.value*t/(td)+6)-rc*cos(2*PI.value*t/(tc)+4)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rd*sin(2*PI.value*t/(td)+6)-rc*sin(2*PI.value*t/(tc)+4)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xd</name>
+			<text>X orange</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>md.xpos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>yd</name>
+			<text>Y orange</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>md.ypos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

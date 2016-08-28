@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.0999</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-5.0</ymin>
+			<ymax>5.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Elastic collision in one dimension</text>
+		</description>
+		<input>
+			<name>mp</name>
+			<text>Mass of Red</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>mq</name>
+			<text>Mass of Blue</text>
+			<initialValue>2.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>xp</name>
+			<text>Initial Position of Red</text>
+			<initialValue>9.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>xq</name>
+			<text>Initial Position of Blue</text>
+			<initialValue>-9.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>vp</name>
+			<text>Initial velocity of Red</text>
+			<initialValue>-2.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>vq</name>
+			<text>Initial velocity of Blue</text>
+			<initialValue>1.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<solid>
+			<name>Red</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>dp</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>dp</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="true" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xp+vp*t)*step(to-t)+(xp+vp*to-vpf*to+vpf*t)*step(t-to)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>dp/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Blue</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>dq</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>dq</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="true" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xq+vq*t)*step(to-t)+(xq+vq*to-vqf*to+vqf*t)*step(t-to)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>dq/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>so</name>
+			<text>Initial Separation</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>abs(xp-xq)+(-1/2)*(dp+dq)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>s</name>
+			<text>Separation</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Red.xpos-Blue.xpos+(-1/2)*(dp+dq)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vr</name>
+			<text>Relative velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>vq-vp</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>to</name>
+			<text>Initial time to collision</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>abs(so/vr)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tc</name>
+			<text>Time to collision</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>s/vr</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vpf</name>
+			<text>Final velocity of Red</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>((mp-mq)*vp+2*mq*vq)/(mp+mq)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vqf</name>
+			<text>Final velocity of Blue</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>(2*mp*vp+(mq-mp)*vq)/(mp+mq)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dp</name>
+			<text>Side of Red</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(mp)^0.5+.1</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dq</name>
+			<text>Side of Blue</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(mq)^0.5+.1</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

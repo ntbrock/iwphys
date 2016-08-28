@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>100.0</change>
+			<fps>100.0</fps>
+		</time>
+		<window>
+			<xmin>-400.0</xmin>
+			<xmax>400.0</xmax>
+			<ymin>-400.0</ymin>
+			<ymax>400.0</ymax>
+			<xgrid>40.0</xgrid>
+			<ygrid>40.0</ygrid>
+		</window>
+		<description>
+			<text>Four moons revolve around a planet in circular orbits.  Determine the period
+and radius of each orbit. Use the buttons on the right to start/stop the 
+animation and step it frame-by-frame.  Readouts of time and position coordinates are displayed above the buttons. All distance units are in 
+millions of meters.</text>
+		</description>
+		<input>
+			<name>ra</name>
+			<text>Radius A</text>
+			<initialValue>48.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>ta</name>
+			<text>Period of A</text>
+			<initialValue>7.0</initialValue>
+			<units>hr</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>ma</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>13</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>13</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ra.value*cos(2*PI.value*t/(ta.value*3600)+.5)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ra.value*sin(2*PI.value*t/(ta.value*3600)+.5)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>planet</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>40</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>40</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xa</name>
+			<text>X red</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>ma.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ya</name>
+			<text>Y red</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>ma.ydisp</value>
+			</calculator>
+		</output>
+		<input>
+			<name>rb</name>
+			<text>Radius B</text>
+			<initialValue>62.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>tb</name>
+			<text>Period of B</text>
+			<initialValue>10.0</initialValue>
+			<units>hr</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>mb</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>18</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>18</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>153</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rb.value*cos(2*PI.value*t/(tb.value*3600)+2)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rb.value*sin(2*PI.value*t/(tb.value*3600)+2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xb</name>
+			<text>X green</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>mb.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>yb</name>
+			<text>Y green</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>mb.ydisp</value>
+			</calculator>
+		</output>
+		<input>
+			<name>rc</name>
+			<text>Radius C</text>
+			<initialValue>117.5</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>tc</name>
+			<text>Period of C</text>
+			<initialValue>27.0</initialValue>
+			<units>hr</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>mc</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>30</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>30</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rc.value*cos(2*PI.value*t/(tc.value*3600)+4)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rc.value*sin(2*PI.value*t/(tc.value*3600)+4)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xc</name>
+			<text>X black</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>mc.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>yc</name>
+			<text>Y black</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>mc.ydisp</value>
+			</calculator>
+		</output>
+		<input>
+			<name>rd</name>
+			<text>Radius D</text>
+			<initialValue>354.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>td</name>
+			<text>Period of D</text>
+			<initialValue>141.0</initialValue>
+			<units>hr</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>md</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>25</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>153</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rd.value*cos(2*PI.value*t/(td.value*3600)+6)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rd.value*sin(2*PI.value*t/(td.value*3600)+6)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xd</name>
+			<text>X orange</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>md.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>yd</name>
+			<text>Y orange</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>md.ydisp</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

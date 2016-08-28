@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.02</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>2.0</xmax>
+			<ymin>-25.0</ymin>
+			<ymax>1.0</ymax>
+			<xgrid>0.2</xgrid>
+			<ygrid>5.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-20.0</ymin>
+			<ymax>1.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>These two objects fall from rest under the influence of gravity only.  The red object is released at t = 0. The release of the green object is delayed by 1.0 s.
+Change the height of the window so that one object will appear at the bottom of the window at the same time as the other object appears at the top of the window.</text>
+		</description>
+		<output>
+			<name>delay</name>
+			<text>Time delay</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>delay.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ya</name>
+			<text>y-position green</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>BallA.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>yb</name>
+			<text>y-position red</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>BallB.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>sy</name>
+			<text>y-separation</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>BallA.ydisp-BallB.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>winpos</name>
+			<text>Position of window</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>winpos.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>height</name>
+			<text>Height of window</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>height.value</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vya</name>
+			<text>y-velocity green</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>BallA.yvel</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vyb</name>
+			<text>y-velocity red</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>BallB.yvel</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<input>
+			<name>delay</name>
+			<text>Time delay</text>
+			<initialValue>1.0</initialValue>
+			<units>ms</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Grav. Field</text>
+			<initialValue>-9.8</initialValue>
+			<units>N/kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>winpos</name>
+			<text>Position of window</text>
+			<initialValue>-10.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>height</name>
+			<text>Height of window</text>
+			<initialValue>6.0</initialValue>
+			<units>m</units>
+		</input>
+		<solid>
+			<name>window_frame</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>6</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>height.value</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>winpos.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>window</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>5.9</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.97*height.value</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>winpos.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>BallA</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="true" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>153</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0.5*g.value*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>BallB</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="true" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0.5*g.value*(t+delay.value)^2-0.5*g.value*delay.value^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>cross1</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>height.value</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>winpos.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>cross2</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>6</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>winpos.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

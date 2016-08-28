@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>2.0E-8</stop>
+			<change>1.0E-10</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>2.0E-8</xmax>
+			<ymin>-0.03</ymin>
+			<ymax>0.03</ymax>
+			<xgrid>1.0E-7</xgrid>
+			<ygrid>0.0030</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.04</xmin>
+			<xmax>0.1</xmax>
+			<ymin>-0.07</ymin>
+			<ymax>0.07</ymax>
+			<xgrid>0.01</xgrid>
+			<ygrid>0.01</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>An electron is accelerated from rest under the influence of a potential V1 (not shown). At the origin, the electron enters a uniform magnetic field produced by Helmholtz coils.  Within the area encircled by the coils, the electron follows a circular path. </text>
+		</description>
+		<input>
+			<name>size</name>
+			<text>Size scale</text>
+			<initialValue>0.0030</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>R</name>
+			<text>Charge to mass ratio</text>
+			<initialValue>1.76E11</initialValue>
+			<units>C/kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>r</name>
+			<text>Coil radius</text>
+			<initialValue>0.07</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>s</name>
+			<text>Sign of charge</text>
+			<initialValue>-1.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>V1</name>
+			<text>Accelerating potential V1</text>
+			<initialValue>2000.0</initialValue>
+			<units>V</units>
+		</input>
+		<input>
+			<name>B</name>
+			<text>Magnetic Field</text>
+			<initialValue>-0.0031</initialValue>
+			<units>T</units>
+		</input>
+		<input>
+			<name>z</name>
+			<text>E-field ON = 1 or OFF = 0</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>V2</name>
+			<text>Plate potential</text>
+			<units>V</units>
+			<calculator type="parametric">
+				<value>V1*z</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vo</name>
+			<text>Initial velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>(2*R*V1)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>px</name>
+			<text>X-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>py</name>
+			<text>Y-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.ypos</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>coil1</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r*1.4</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r*1.4</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.05</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>coil2</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>r*1.3</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r*1.3</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.05</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>P</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>size</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>size</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo</velocity>
+					<acceleration>s*R*B*P.yvel</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>0</velocity>
+					<acceleration>s*R*(-B*P.xvel)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

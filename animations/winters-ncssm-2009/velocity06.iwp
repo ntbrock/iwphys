@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>5.0</stop>
+			<change>0.1</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.5</xmin>
+			<xmax>5.5</xmax>
+			<ymin>-25.0</ymin>
+			<ymax>25.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>5.0</ygrid>
+			<xunit>s</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Play the animation to show a position vs. time graph of a uniformly-accelerating object. Determine the acceleration of the object.</text>
+		</description>
+		<input>
+			<name>a</name>
+			<text>Initial position (max)</text>
+			<initialValue>5.0</initialValue>
+			<units>     m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>b</name>
+			<text>Initial velocity (max)</text>
+			<initialValue>2.0</initialValue>
+			<units>  m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>c</name>
+			<text>Acceleration</text>
+			<initialValue>2.8</initialValue>
+			<units>m/ss</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>yo</name>
+			<text>Initial position</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>a*random(1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vo</name>
+			<text>Initial velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>b*random(1)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>r</name>
+			<text>r</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>sign(yo-2)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>object</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="true" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>yo*r</displacement>
+					<velocity>vo*r</velocity>
+					<acceleration>c</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>y</name>
+			<text>Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>object.ypos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>v</name>
+			<text>Velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>object.yvel</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

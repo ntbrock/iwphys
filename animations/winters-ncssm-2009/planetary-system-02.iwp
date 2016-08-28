@@ -1,0 +1,329 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>1000000.0</stop>
+			<change>100.0</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>200000.0</xmax>
+			<ymin>-4.0E8</ymin>
+			<ymax>4.0E8</ymax>
+			<xgrid>20000.0</xgrid>
+			<ygrid>5.0E7</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-4.0E8</xmin>
+			<xmax>4.0E8</xmax>
+			<ymin>-4.0E8</ymin>
+			<ymax>4.0E8</ymax>
+			<xgrid>4.0E7</xgrid>
+			<ygrid>4.0E7</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Four moons revolve around a planet in circular orbits.  Determine the period and radius of each orbit. Use the buttons on the right to start/stop the animation and step it frame-by-frame.  Readouts of time and position coordinates are displayed above the buttons.</text>
+		</description>
+		<input>
+			<name>ra</name>
+			<text>Radius of A (red)</text>
+			<initialValue>4.8E7</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>ta</name>
+			<text>Period of A</text>
+			<initialValue>25200.0</initialValue>
+			<units>s</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>ma</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1.3*10^7</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1.3*10^7</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ra.value*cos(2*PI.value*t/(ta.value)+.5)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ra.value*sin(2*PI.value*t/(ta.value)+.5)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>planet</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>4*10^7</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>4*10^7</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xa</name>
+			<text>X red</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>ma.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ya</name>
+			<text>Y red</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>ma.ypos</value>
+			</calculator>
+		</output>
+		<input>
+			<name>rb</name>
+			<text>Radius of B (green)</text>
+			<initialValue>6.2E7</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>tb</name>
+			<text>Period of B</text>
+			<initialValue>36000.0</initialValue>
+			<units>s</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>mb</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1.8*10^7</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1.8*10^7</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>153</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rb.value*cos(2*PI.value*t/(tb.value)+2)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rb.value*sin(2*PI.value*t/(tb.value)+2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xb</name>
+			<text>X green</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>mb.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>yb</name>
+			<text>Y green</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>mb.ypos</value>
+			</calculator>
+		</output>
+		<input>
+			<name>rc</name>
+			<text>Radius of C (black)</text>
+			<initialValue>1.175E8</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>tc</name>
+			<text>Period of C</text>
+			<initialValue>97200.0</initialValue>
+			<units>s</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>mc</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>3*10^7</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>3*10^7</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rc.value*cos(2*PI.value*t/(tc.value)+4)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rc.value*sin(2*PI.value*t/(tc.value)+4)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xc</name>
+			<text>X black</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>mc.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>yc</name>
+			<text>Y black</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>mc.ypos</value>
+			</calculator>
+		</output>
+		<input>
+			<name>rd</name>
+			<text>Radius of D (orange)</text>
+			<initialValue>3.54E8</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>td</name>
+			<text>Period of D</text>
+			<initialValue>507600.0</initialValue>
+			<units>s</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>md</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2.5*10^7</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2.5*10^7</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>153</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rd.value*cos(2*PI.value*t/(td.value)+6)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rd.value*sin(2*PI.value*t/(td.value)+6)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xd</name>
+			<text>X orange</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>md.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>yd</name>
+			<text>Y orange</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>md.ypos</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

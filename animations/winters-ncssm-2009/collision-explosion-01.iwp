@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.04995</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-5.0</ymin>
+			<ymax>5.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Two objects are initially at rest.  A small explosive charge forces them quickly apart.</text>
+		</description>
+		<input>
+			<name>mp</name>
+			<text>Mass of Red</text>
+			<initialValue>3.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>mq</name>
+			<text>Mass of Blue</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>vp</name>
+			<text>Initial velocity of Red</text>
+			<initialValue>0.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vq</name>
+			<text>Initial velocity of Blue</text>
+			<initialValue>0.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>dt</name>
+			<text>Duration of explosion</text>
+			<initialValue>0.1</initialValue>
+			<units>s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>F</name>
+			<text>Average force of interaction</text>
+			<initialValue>100.0</initialValue>
+			<units>N</units>
+		</input>
+		<output>
+			<name>J</name>
+			<text>Impulse</text>
+			<units>Ns</units>
+			<calculator type="parametric">
+				<value>F*dt</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vpf</name>
+			<text>Final velocity of Red</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>J/mp+vp</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vqf</name>
+			<text>Final velocity of Blue</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>-J/mq+vq</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dp</name>
+			<text>Side of Red</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(mp)^0.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>dq</name>
+			<text>Side of Blue</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(mq)^0.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>xp</name>
+			<text>Initial position of Red</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>dp/2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>xq</name>
+			<text>Initial position of Blue</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>-dq/2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>Red</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>dp</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>dp</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="true" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xp+vpf*t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>dp/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Blue</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>dq</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>dq</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="true" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xq+vqf*t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>dq/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>charge</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>5*t*step(dt-t)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>10*(t)*step(dt-t)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>.4</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

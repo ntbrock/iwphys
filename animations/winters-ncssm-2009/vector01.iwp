@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Vectors A, B, and C are shown.  Change the components of vector C in order that the sum of the three vectors is 0.</text>
+		</description>
+		<solid>
+			<name>A</name>
+			<shape type="vector" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>xa</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>ya</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>xa</name>
+			<text>Ax</text>
+			<initialValue>5.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>xb</name>
+			<text>Bx</text>
+			<initialValue>3.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>xc</name>
+			<text>Cx</text>
+			<initialValue>-6.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>ya</name>
+			<text>Ay</text>
+			<initialValue>-6.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>yb</name>
+			<text>By</text>
+			<initialValue>10.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>yc</name>
+			<text>Cy</text>
+			<initialValue>-6.0</initialValue>
+			<units></units>
+		</input>
+		<solid>
+			<name>B</name>
+			<shape type="vector" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>xb</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>yb</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xa</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ya</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>C</name>
+			<shape type="vector" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>xc</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>yc</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xa+xb</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ya+yb</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

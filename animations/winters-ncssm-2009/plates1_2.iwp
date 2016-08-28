@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>1.0E-7</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>0.0</xmin>
+			<xmax>20.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</window>
+		<description>
+			<text>A proton initially moves to the right in a uniform electric field
+directed upward. Alter the field strength or the initial speed
+in order that the proton passes through the exit hole without
+hitting the plate.
+(Note that the time step is 100 ns. It doesn't display above.)</text>
+		</description>
+		<input>
+			<name>Q</name>
+			<text>Charge</text>
+			<initialValue>1.9E-19</initialValue>
+			<units>C</units>
+		</input>
+		<input>
+			<name>v</name>
+			<text>Initial speed</text>
+			<initialValue>2000000.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>mass</name>
+			<text>mass</text>
+			<initialValue>1.67E-27</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>E</name>
+			<text>E Field Strength</text>
+			<initialValue>10000.0</initialValue>
+			<units>N/C</units>
+		</input>
+		<solid>
+			<name>wall2</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>40</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>wall3</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>20</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Particle</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>v.value*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0.5*Q.value*E.value*t^2/mass.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>wall1</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>5</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

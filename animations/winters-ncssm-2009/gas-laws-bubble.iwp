@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.01</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<solid>
+			<name>bg</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sea</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>depth</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-10+depth/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>pf</name>
+			<text>Density of Fluid</text>
+			<initialValue>1.0</initialValue>
+			<units>g/mL</units>
+		</input>
+		<input>
+			<name>volstp</name>
+			<text>Volume of Gas at STP</text>
+			<initialValue>30.0</initialValue>
+			<units>mL</units>
+		</input>
+		<input>
+			<name>depth</name>
+			<text>Depth of Water</text>
+			<initialValue>15.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>initdepth</name>
+			<text>Initial Depth of Submersion</text>
+			<initialValue>10.0</initialValue>
+			<units>m</units>
+		</input>
+		<output>
+			<name>v</name>
+			<text>Velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>10*pf</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>submersion</name>
+			<text>Submersion Depth</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(initdepth-v*t)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vol</name>
+			<text>Volume of Bubble</text>
+			<units>mL</units>
+			<calculator type="parametric">
+				<value>101.325*volstp/(101.325+9.8*pf*submersion)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>rClone</name>
+			<text>dummy</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(3/4)*(vol/pi)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>r</name>
+			<text>Radius of Bubble</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>rClone^(1/3)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>tc</name>
+			<text>Time of Surfacing</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>initdepth/v-r/(2*v)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>bubble</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>step(tc-t)*r+step(t-tc)*r*(1+(8*(t-tc))^2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>r</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-10+depth-initdepth+v*t</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

@@ -1,0 +1,533 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<input>
+			<name>acc</name>
+			<text>Acceleration</text>
+			<initialValue>25.0</initialValue>
+			<units>m/s^2</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vel</name>
+			<text>Average Velocity</text>
+			<initialValue>7.5</initialValue>
+			<units>m/s</units>
+		</input>
+		<solid>
+			<name>P</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.3*step(num)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(P.xpos)-8.5)*signum(P.xpos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(P.ypos)-8.5)*signum(P.ypos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Q</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.3*step(num-1)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(Q.xpos)-8.5)*signum(Q.xpos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(Q.ypos)-8.5)*signum(Q.ypos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>R</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.3*step(num-2)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(R.xpos)-8.5)*signum(R.xpos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(R.ypos)-8.5)*signum(R.ypos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>S</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.3*step(num-3)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(S.xpos)-8.5)*signum(S.xpos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(S.ypos)-8.5)*signum(S.ypos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>T</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.3*step(num-4)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(T.xpos)-8.5)*signum(T.xpos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(T.ypos)-8.5)*signum(T.ypos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>U</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.3*step(num-5)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(U.xpos)-8.5)*signum(U.xpos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(U.ypos)-8.5)*signum(U.ypos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>V</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.3*step(num-6)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(V.xpos)-8.5)*signum(V.xpos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(V.ypos)-8.5)*signum(V.ypos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>W</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.3*step(num-7)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(W.xpos)-8.5)*signum(W.xpos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(W.ypos)-8.5)*signum(W.ypos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>X</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.3*step(num-8)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(X.xpos)-8.5)*signum(X.xpos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(X.ypos)-8.5)*signum(X.ypos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Y</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.3*step(num-9)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(Y.xpos)-8.5)*signum(Y.xpos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(Y.ypos)-8.5)*signum(Y.ypos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Z</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0.3*step(num-10)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0.3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(Z.xpos)-8.5)*signum(Z.xpos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>rand(10)-rand(10)</displacement>
+					<velocity>signum(rand(20)-rand(20))*(vel+rand(5)-rand(5))</velocity>
+					<acceleration>step(abs(Z.ypos)-8.5)*signum(Z.ypos)*(-1)*(acc+rand(5))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>num</name>
+			<text>Number of Molecules</text>
+			<initialValue>11.0</initialValue>
+			<units></units>
+		</input>
+	</objects>
+</problem>

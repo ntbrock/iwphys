@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>1.0</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Three forces in equilibrium are added tip-to-tail.</text>
+		</description>
+		<solid>
+			<name>a</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>ax*s</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>ay*s</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>b</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>bx*s</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>by*s</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>c</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-(ax+bx)*s</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-(ay+by)*s</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>ax</name>
+			<text>Ax</text>
+			<initialValue>6.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>ay</name>
+			<text>Ay</text>
+			<initialValue>2.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>bx</name>
+			<text>Bx</text>
+			<initialValue>-4.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>by</name>
+			<text>By</text>
+			<initialValue>7.5</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>s</name>
+			<text>Scale factor</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<solid>
+			<name>bt</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>bx*s</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>by*s</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ax*s</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ay*s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ct</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-(ax+bx)*s</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-(ay+by)*s</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(ax+bx)*s</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(ay+by)*s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>a</name>
+			<text>A</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(ax^2+ay^2)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>b</name>
+			<text>B</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(bx^2+by^2)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>c</name>
+			<text>C</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>((ax+bx)^2+(ay+by)^2)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ta</name>
+			<text>Angle A</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>todegrees(atan(ay/ax))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>tb</name>
+			<text>Angle B</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>todegrees(atan(by/bx))</value>
+			</calculator>
+		</output>
+		<output>
+			<name>sum</name>
+			<text>(Intermediate result)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(ay+by)/(bx+by)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tc</name>
+			<text>Angle C</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>todegrees(atan(sum))</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

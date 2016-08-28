@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>6.0</stop>
+			<change>0.05</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-20.0</ymin>
+			<ymax>20.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.5</xmin>
+			<xmax>5.5</xmax>
+			<ymin>-50.0</ymin>
+			<ymax>50.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>10.0</ygrid>
+			<xunit>s</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>The graph represents the position vs. time of a ball that rolls across a table at constant velocity for 2.0 s and then encounters a rough patch which cause the ball to decrease in velocity at a constant rate for the remainder of the time shown.  Note that the time is shown in grid units of 0.5 s and the position in grid units of 10.0 m.  Velocity is shown as an output.</text>
+		</description>
+		<input>
+			<name>a</name>
+			<text>Initial position</text>
+			<initialValue>0.0</initialValue>
+			<units>     m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>b</name>
+			<text>Initial velocity</text>
+			<initialValue>10.0</initialValue>
+			<units>  m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>c</name>
+			<text>Acceleration</text>
+			<initialValue>-2.0</initialValue>
+			<units>m/ss</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>y</name>
+			<text>Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>object.ypos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>v</name>
+			<text>Velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>g*step(delta_t-t)+object.yvel</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>object</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="true" yVel="true" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(t-2)*(a+b*(t-2)+(c/2)*(t-2)^2)+step(2-t)*(d+g*t+(f/2)*t^2)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>d</name>
+			<text>Initial position</text>
+			<initialValue>-20.0</initialValue>
+			<units>     m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Initial velocity</text>
+			<initialValue>10.0</initialValue>
+			<units>  m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>f</name>
+			<text>Acceleration</text>
+			<initialValue>0.0</initialValue>
+			<units>m/ss</units>
+			<hidden>1</hidden>
+		</input>
+	</objects>
+</problem>

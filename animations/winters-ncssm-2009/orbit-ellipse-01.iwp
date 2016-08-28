@@ -1,0 +1,276 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10000.0</stop>
+			<change>2.0</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1000.0</xmin>
+			<xmax>1000.0</xmax>
+			<ymin>-1000.0</ymin>
+			<ymax>1000.0</ymax>
+			<xgrid>100.0</xgrid>
+			<ygrid>100.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>Test of Ellipse should be 1 theoretically.
+dA/dt is the rate at which the radius vector sweeps out area. This is r*v/2.
+Area is the area swept out from t = 0. This is an integral of r*v/2.</text>
+		</description>
+		<output>
+			<name>d</name>
+			<text>Distance to Star</text>
+			<units>au</units>
+			<calculator type="parametric">
+				<value>(Planet.xpos^2+Planet.ypos^2)^0.5</value>
+			</calculator>
+		</output>
+		<input>
+			<name>xo</name>
+			<text>Initial X</text>
+			<initialValue>500.0</initialValue>
+			<units>au</units>
+		</input>
+		<input>
+			<name>sm</name>
+			<text>Star mass</text>
+			<initialValue>1000.0</initialValue>
+			<units>    </units>
+		</input>
+		<input>
+			<name>pm</name>
+			<text>Planet mass</text>
+			<initialValue>1.0</initialValue>
+			<units>    </units>
+		</input>
+		<input>
+			<name>voy</name>
+			<text>Initial Vy</text>
+			<initialValue>1.63</initialValue>
+			<units>au/yr</units>
+		</input>
+		<input>
+			<name>yo</name>
+			<text>Initial Y</text>
+			<initialValue>0.0</initialValue>
+			<units>au</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vox</name>
+			<text>Initial Vx</text>
+			<initialValue>0.0</initialValue>
+			<units>au/yr</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>Planet</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20*(pm)^(1/3)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20*(pm)^(1/3)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>102</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>xo</displacement>
+					<velocity>vox</velocity>
+					<acceleration>-sm*Planet.xpos/(Planet.xpos^2+Planet.ypos^2)^1.5</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>yo</displacement>
+					<velocity>voy</velocity>
+					<acceleration>-sm*Planet.ypos/(Planet.xpos^2+Planet.ypos^2)^1.5</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Star</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20*(sm)^(1/3)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20*(sm)^(1/3)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>ellipse</name>
+			<text>Test of Ellipse</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>((Planet.xpos+235)/735)^2+(Planet.ypos/700)^2</value>
+			</calculator>
+		</output>
+		<output>
+			<name>x</name>
+			<text>X-position</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>Planet.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y-position</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>Planet.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vx</name>
+			<text>X-velocity</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>Planet.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vy</name>
+			<text>Y-velocity</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>Planet.yvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>v</name>
+			<text>Speed</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>(vx^2+vy^2)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>rv</name>
+			<text>dA/dt</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>0.5*v*(Planet.xpos^2+Planet.ypos^2)^0.5</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>rate</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>0</velocity>
+					<acceleration>rv</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>A</name>
+			<text>Area</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>rate.xvel</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

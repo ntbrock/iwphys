@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.01</change>
+			<fps>100.0</fps>
+		</time>
+		<window>
+			<xmin>-5.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>0.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>5.0</xgrid>
+			<ygrid>5.0</ygrid>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<solid>
+			<name>dome</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>2*r.value</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2*r.value</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>r</name>
+			<text>Radius</text>
+			<initialValue>4.0</initialValue>
+			<units>m</units>
+		</input>
+		<solid>
+			<name>boy2</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.4</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.4</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vi.value</velocity>
+					<acceleration>9.8*cos(radians(initangle.value-deltaangle.value*t))*sin(radians(initangle.value-deltaangle.value*t))-ar.value*cos(radians(initangle.value-deltaangle.value*t))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>yi.value</displacement>
+					<velocity>0</velocity>
+					<acceleration>-9.8*(cos(radians(initangle.value-deltaangle.value*t)))^2-ar.value*sin(radians(initangle.value-deltaangle.value*t))</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>yi</name>
+			<text>Y-initial</text>
+			<initialValue>4.2</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>vi</name>
+			<text>V-initial</text>
+			<initialValue>0.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<output>
+			<name>ar</name>
+			<text>Centripetal acceleration</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>((boy.xvel)^2+(boy.yvel)^2)/r.value</value>
+			</calculator>
+		</output>
+		<input>
+			<name>deltaangle</name>
+			<text>Angle decrement</text>
+			<initialValue>0.1</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>initangle</name>
+			<text>Angle initial</text>
+			<initialValue>90.0</initialValue>
+			<units>deg</units>
+		</input>
+		<output>
+			<name>angle</name>
+			<text>Angle calculated</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>atan(boy.ydisp/boy.xdisp)</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>boy</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.4</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.4</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>255</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>xi.value</displacement>
+					<velocity>vi.value</velocity>
+					<acceleration>9.8*cos(angle.value)*sin(angle.value)-ar.value*cos(angle.value)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>yi.value</displacement>
+					<velocity>0</velocity>
+					<acceleration>-9.8*(cos(angle.value))^2-ar.value*sin(angle.value)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>xi</name>
+			<text>X-initial</text>
+			<initialValue>0.0</initialValue>
+			<units>m</units>
+		</input>
+	</objects>
+</problem>

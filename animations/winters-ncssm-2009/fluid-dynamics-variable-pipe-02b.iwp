@@ -1,0 +1,1452 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>5.0</stop>
+			<change>0.0125</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>Water travels through a pipe on the left and then rises to a higher elevation to flow through a pipe of different diameter on the right. What is the velocity of the water in the higher pipe and what is the difference in pressure between the higher and lower pipes?</text>
+		</description>
+		<solid>
+			<name>bg</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>pf</name>
+			<text>Density of Fluid</text>
+			<initialValue>1000.0</initialValue>
+			<units>kg/m^3</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>rise</name>
+			<text>Rise in Elevation</text>
+			<initialValue>8.1</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>wi</name>
+			<text>Diameter (letf)</text>
+			<initialValue>3.5</initialValue>
+			<units>cm</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>wf</name>
+			<text>Diameter (right)</text>
+			<initialValue>2.9</initialValue>
+			<units>cm</units>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Gravitational Acceleration</text>
+			<initialValue>9.8</initialValue>
+			<units>m/s^2</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>ta</name>
+			<text>Time of Relapse A</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>10/20+10/(20*(wi/wf)^2)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tb</name>
+			<text>Time of Relapse B</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>10/20+10/(20*(wi/wf)^2)+ta</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tc</name>
+			<text>Time of Relapse C</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>10/20+10/(20*(wi/wf)^2)+tb</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>td</name>
+			<text>Time of Relapse D</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>10/20+10/(20*(wi/wf)^2)+tc</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>te</name>
+			<text>Time of Relapse E</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>10/20+10/(20*(wi/wf)^2)+td</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tf</name>
+			<text>Time of Relapse F</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>10/20+10/(20*(wi/wf)^2)+te</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tg</name>
+			<text>Time of Relapse G</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>10/20+10/(20*(wi/wf)^2)+tf</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>th</name>
+			<text>Time of Relapse H</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>10/20+10/(20*(wi/wf)^2)+tg</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ti</name>
+			<text>Time of Relapse I</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>10/20+10/(20*(wi/wf)^2)+th</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tj</name>
+			<text>Time of Relapse J</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>10/20+10/(20*(wi/wf)^2)+ti</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tk</name>
+			<text>Time of Relapse K</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>10/20+10/(20*(wi/wf)^2)+tj</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>climbersub</name>
+			<text>Climbersub</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>step(ta-t)*t+step(t-ta)*step(tb-t)*(t-ta)+step(t-tb)*step(tc-t)*(t-tb)+step(t-tc)*step(td-t)*(t-tc)+step(t-td)*step(te-t)*(t-td)+step(t-te)*step(tf-t)*(t-te)+step(t-tf)*step(tg-t)*(t-tf)+step(t-tg)*step(th-t)*(t-tg)+step(t-th)*step(ti-t)*(t-th)+step(t-ti)*step(tj-t)*(t-ti)+step(t-tj)*step(tk-t)*(t-tj)+step(t-tk)*(t-tk)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>climber</name>
+			<text>Climber</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>climbersub*step(.5-climbersub)+(.5+(climbersub-.5)*(wi/wf)^2)*step(2-2*step(.5-climbersub))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>tubeidummy</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>10.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>wi*1.1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-rise/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>tubei</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>10.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>wi</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-rise/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>tubefdummy</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>wf*1.1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rise/2+5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rise/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>tubef</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>wf</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rise/2+5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rise/2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>jointa</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-wi/2-rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-wi*1.1/2-rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>rise/2</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-wf*1.1/2+rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>rise/2</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-wf/2+rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>jointb</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>wi/2-rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>wi*1.1/2-rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>rise/2</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>wf*1.1/2+rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>rise/2</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>wf/2+rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>jointc</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>wi/2-rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-wi/2-rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>rise/2</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-wf/2+rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>rise/2</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>wf/2+rise/2</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>dummya</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>wi*7/16</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>dummyb</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>wi*5/16</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>dummyc</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>wi*3/16</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>dummyd</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>wi*1/16</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>dummye</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>wi*-1/16</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>dummyf</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>wi*-3/16</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>dummyg</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>wi*-5/16</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>dummyz</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>wi*-7/16</displacement>
+					<velocity>0</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sliderz</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>climber*20-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>theta</name>
+			<text>Vector Angle</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>step(sliderz.xpos)*step(rise/2-sliderz.xpos-1)*atan(2)+step(1+sliderz.xpos)*step(1-step(sliderz.xpos))*atan(2*(1+sliderz.xpos))+step(rise/2-sliderz.xpos)*step(1-step(rise/2-sliderz.xpos-1))*atan(2*(rise/2-sliderz.xpos))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>slidera</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*cos(theta)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*sin(theta)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>climber*20-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(-slidera.xpos)*(dummya.ypos-rise/2)+step(slidera.xpos-rise/2)*step(slidera.xpos)*(dummya.ypos*wf/wi+rise/2)+step(1-step(-slidera.xpos)-step(slidera.xpos-rise/2))*(dummya.ypos+rise*(-1/2+slidera.xpos*2/rise))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sliderb</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*cos(theta)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*sin(theta)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>climber*20-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(-sliderb.xpos)*(dummyb.ypos-rise/2)+step(sliderb.xpos-rise/2)*step(sliderb.xpos)*(dummyb.ypos*wf/wi+rise/2)+step(1-step(-sliderb.xpos)-step(sliderb.xpos-rise/2))*(dummyb.ypos+rise*(-1/2+sliderb.xpos*2/rise))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sliderc</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*cos(theta)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*sin(theta)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>climber*20-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(-sliderc.xpos)*(dummyc.ypos-rise/2)+step(sliderc.xpos-rise/2)*step(sliderc.xpos)*(dummyc.ypos*wf/wi+rise/2)+step(1-step(-sliderc.xpos)-step(sliderc.xpos-rise/2))*(dummyc.ypos+rise*(-1/2+sliderc.xpos*2/rise))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sliderd</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*cos(theta)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*sin(theta)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>climber*20-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(-sliderd.xpos)*(dummyd.ypos-rise/2)+step(sliderd.xpos-rise/2)*step(sliderd.xpos)*(dummyd.ypos*wf/wi+rise/2)+step(1-step(-sliderd.xpos)-step(sliderd.xpos-rise/2))*(dummyd.ypos+rise*(-1/2+sliderd.xpos*2/rise))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>slidere</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*cos(theta)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*sin(theta)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>climber*20-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(-sliderd.xpos)*(dummye.ypos-rise/2)+step(sliderd.xpos-rise/2)*step(sliderd.xpos)*(dummye.ypos*wf/wi+rise/2)+step(1-step(-sliderd.xpos)-step(sliderd.xpos-rise/2))*(dummye.ypos+rise*(-1/2+sliderd.xpos*2/rise))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sliderf</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*cos(theta)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*sin(theta)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>climber*20-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(-sliderd.xpos)*(dummyf.ypos-rise/2)+step(sliderd.xpos-rise/2)*step(sliderd.xpos)*(dummyf.ypos*wf/wi+rise/2)+step(1-step(-sliderd.xpos)-step(sliderd.xpos-rise/2))*(dummyf.ypos+rise*(-1/2+sliderd.xpos*2/rise))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sliderg</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*cos(theta)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*sin(theta)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>climber*20-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(-sliderd.xpos)*(dummyg.ypos-rise/2)+step(sliderd.xpos-rise/2)*step(sliderd.xpos)*(dummyg.ypos*wf/wi+rise/2)+step(1-step(-sliderd.xpos)-step(sliderd.xpos-rise/2))*(dummyg.ypos+rise*(-1/2+sliderd.xpos*2/rise))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sliderh</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*cos(theta)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>(step(-sliderz.xpos)+step(2-2*step(-sliderz.xpos))*(wi/wf)^2)*sin(theta)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>climber*20-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(-sliderd.xpos)*(dummyz.ypos-rise/2)+step(sliderd.xpos-rise/2)*step(sliderd.xpos)*(dummyz.ypos*wf/wi+rise/2)+step(1-step(-sliderd.xpos)-step(sliderd.xpos-rise/2))*(dummyz.ypos+rise*(-1/2+sliderd.xpos*2/rise))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>deltap</name>
+			<text>Delta Pressure</text>
+			<units>kPa</units>
+			<calculator type="parametric">
+				<value>(0.5*pf*2^2*(1-(wi/wf)^2)+pf*g*rise)/1000</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vel</name>
+			<text>Velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>sliderz.xvel/10</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>dia_left</name>
+			<text>Diameter</text>
+			<units>cm</units>
+			<value>
+				<calculator type="parametric">
+					<value>wi</value>
+				</calculator>
+			</value>
+			<fontSize>14</fontSize>
+			<showValue>true</showValue>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>-1</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-8</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>dia_right</name>
+			<text>Diameter</text>
+			<units>cm</units>
+			<value>
+				<calculator type="parametric">
+					<value>wf</value>
+				</calculator>
+			</value>
+			<fontSize>14</fontSize>
+			<showValue>true</showValue>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>4.2</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>Elevation</name>
+			<text>Elevation rise</text>
+			<units>m</units>
+			<value>
+				<calculator type="parametric">
+					<value>rise</value>
+				</calculator>
+			</value>
+			<fontSize>16</fontSize>
+			<showValue>true</showValue>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>8</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>vleft</name>
+			<text>Initial velocity</text>
+			<units>m/s</units>
+			<value>
+				<calculator type="parametric">
+					<value>2.0</value>
+				</calculator>
+			</value>
+			<fontSize>16</fontSize>
+			<showValue>true</showValue>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>-8</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-8</value>
+				</calculator>
+			</xpath>
+		</object>
+	</objects>
+</problem>

@@ -1,0 +1,244 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>7.0E7</stop>
+			<change>86400.0</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>200000.0</xmax>
+			<ymin>-4.0E8</ymin>
+			<ymax>4.0E8</ymax>
+			<xgrid>20000.0</xgrid>
+			<ygrid>5.0E7</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-2.5E11</xmin>
+			<xmax>2.5E11</xmax>
+			<ymin>-2.5E11</ymin>
+			<ymax>2.5E11</ymax>
+			<xgrid>2.5E11</xgrid>
+			<ygrid>2.5E11</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Earth and Mars orbit the Sun in approximately circular orbits. The ratio of the average orbital radii of the planets is given.  Find the ratio of the accelerations.
+
+(Note that in order for the Sun and planets to appear larger than points on a planetary distance scale, the sizes of the Sun and planets were scaled up relative to the orbital radii.)</text>
+		</description>
+		<input>
+			<name>G</name>
+			<text>Gravitational constant</text>
+			<initialValue>6.67E-11</initialValue>
+			<units>Nm^2/kg^2</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>sfa</name>
+			<text>Scale factor for acceleration</text>
+			<initialValue>2.0E13</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>ms</name>
+			<text>Mass of Sun</text>
+			<initialValue>2.0E30</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>rs</name>
+			<text>Radius of Sun, Rs</text>
+			<initialValue>6.95E8</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>re</name>
+			<text>Radius of Earth's orbit</text>
+			<initialValue>1.5E11</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>rm</name>
+			<text>Radius of Mars orbit</text>
+			<initialValue>2.28E11</initialValue>
+			<units>m</units>
+		</input>
+		<solid>
+			<name>space</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>500000000000</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>500000000000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>C</name>
+			<text>Constant</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>4*PI^2/(G*ms)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>sun</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20*rs</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20*rs</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>te</name>
+			<text>Period of Earth</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>(C*re^3)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>earth</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1000*6370000</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1000*6370000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>re*cos(2*PI*t/te)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>re*sin(2*PI*t/te)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>tm</name>
+			<text>Period of Mars</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>(C*rm^3)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>mars</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2000*3394000</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2000*3394000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>rm*cos(2*PI*t/tm)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>rm*sin(2*PI*t/tm)</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

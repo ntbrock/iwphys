@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>-2.0</xmin>
+			<xmax>2.0</xmax>
+			<ymin>-2.0</ymin>
+			<ymax>2.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>0.5</ygrid>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<input>
+			<name>k</name>
+			<text>Spring constant</text>
+			<initialValue>1.0</initialValue>
+			<units>N/m</units>
+		</input>
+		<input>
+			<name>d</name>
+			<text>Equilibrium Extension</text>
+			<initialValue>1.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass of object</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Gravitational field</text>
+			<initialValue>-9.8</initialValue>
+			<units>N/kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Amplitude</text>
+			<initialValue>0.333</initialValue>
+			<units>m</units>
+		</input>
+		<output>
+			<name>f</name>
+			<text>Frequency</text>
+			<units>1/s</units>
+			<calculator type="parametric">
+				<value>(k.value/m.value)^.5</value>
+			</calculator>
+		</output>
+		<input>
+			<name>p</name>
+			<text>Phase</text>
+			<initialValue>0.0</initialValue>
+			<units></units>
+		</input>
+		<solid>
+			<name>ball</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a.value*cos(f.value*t-p.value)</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

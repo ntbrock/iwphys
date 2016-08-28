@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.025</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</window>
+		<description>
+			<text>The green ball falls in a vacuum, while the red ball experiences a drag force from the fluid in which it falls. The acceleration of the red ball is a = -g + kv², where g = 9.8 N/kg, v is the speed of the ball, and k is a coefficient (which we term the drag factor) that depends on characteristics of the ball and the fluid. You may change the value of k to see how that influences the red ball. The vertical separation of the two balls is displayed in the list of outputs.</text>
+		</description>
+		<output>
+			<name>ya</name>
+			<text>y-position A</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>BallA.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>yb</name>
+			<text>y-position B</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>BallB.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vya</name>
+			<text>y-velocity A</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>BallA.yvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vyb</name>
+			<text>y-velocity B</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>BallB.yvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>aya</name>
+			<text>y-acceleration A</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>BallA.yaccel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ayb</name>
+			<text>y-acceleration B</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>BallB.yaccel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>separation</name>
+			<text>y-separation</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>BallB.ydisp-BallA.ydisp</value>
+			</calculator>
+		</output>
+		<input>
+			<name>kb</name>
+			<text>Drag factor</text>
+			<initialValue>0.0</initialValue>
+			<units>1/m</units>
+		</input>
+		<solid>
+			<name>TubeA</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-3</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>BallA</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-3</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>9</displacement>
+					<velocity>0</velocity>
+					<acceleration>-9.8</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>TubeB</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>3</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>BallB</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>3</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>9</displacement>
+					<velocity>0</velocity>
+					<acceleration>-9.8+kb.value*BallB.yvel^2</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

@@ -1,0 +1,504 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>15.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>0.0</xmin>
+			<xmax>80.0</xmax>
+			<ymin>0.0</ymin>
+			<ymax>80.0</ymax>
+			<xgrid>80.0</xgrid>
+			<ygrid>80.0</ygrid>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<input>
+			<name>carH</name>
+			<text>Car height</text>
+			<initialValue>50.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vanH</name>
+			<text>van 2 heigth</text>
+			<initialValue>30.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>carx</name>
+			<text>Car X</text>
+			<initialValue>5.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vanx</name>
+			<text>Van Y</text>
+			<initialValue>5.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>carSpeed</name>
+			<text>Blue Car Speed</text>
+			<initialValue>3.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>vanSpeed</name>
+			<text>Red Car Speed</text>
+			<initialValue>2.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<solid>
+			<name>ground</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>80</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>80</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>40</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>40</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>road</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>80</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>40</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>40</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>40</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>stripe1</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>40</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>stripe2</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>30</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>40</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>stripe3</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>50</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>40</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>stripe4</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>70</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>40</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>backTire1</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>carXpos.value</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>carH.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>frontTire1</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>carXpos.value+7</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>carH.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>frame1</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>12</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>102</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>carXpos.value+3.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>carH.value+2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>cabin1</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>6</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2.5</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>102</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>carXpos.value+3.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>carH.value+4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>backTire2</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vanXpos.value</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>vanH.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>frontTire2</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vanXpos.value+7</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>vanH.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>frame2</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>12</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vanXpos.value+3.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>vanH.value+2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>cabin2</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>6</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2.5</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vanXpos.value+3.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>vanH.value+4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>carXpos</name>
+			<text>Blue Car Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(carSpeed.value*t)+carx.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vanXpos</name>
+			<text>Red Car Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(vanSpeed.value*t)+vanx.value</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

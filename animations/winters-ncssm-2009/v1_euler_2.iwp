@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.025</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>-1.0</xmin>
+			<xmax>20.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</window>
+		<description>
+			<text>An object moves horizontally through a fluid that exerts a force on
+the object that is proportional to the objects velocity. The acceleration
+of the object is a = -kv, where k is a constant that will be termed the
+drag factor. Adjust the drag factor and/or initial velocity so that the object
+goes as far as possible without leaving the field of view.</text>
+		</description>
+		<output>
+			<name>x</name>
+			<text>X-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Ball.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vx</name>
+			<text>X-velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Ball.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ax</name>
+			<text>X-acceleration</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>Ball.xaccel</value>
+			</calculator>
+		</output>
+		<input>
+			<name>vox</name>
+			<text>Initial x-velocity</text>
+			<initialValue>20.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>k</name>
+			<text>Drag factor</text>
+			<initialValue>0.0</initialValue>
+			<units>1/m</units>
+		</input>
+		<solid>
+			<name>Ball</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vox.value</velocity>
+					<acceleration>-k.value*Ball.xvel</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

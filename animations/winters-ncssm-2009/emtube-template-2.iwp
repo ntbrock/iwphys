@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>2.0E-8</stop>
+			<change>1.0E-10</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>2.0E-8</xmax>
+			<ymin>-0.03</ymin>
+			<ymax>0.03</ymax>
+			<xgrid>1.0E-7</xgrid>
+			<ygrid>0.0030</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.02</xmin>
+			<xmax>0.08</xmax>
+			<ymin>-0.05</ymin>
+			<ymax>0.05</ymax>
+			<xgrid>0.01</xgrid>
+			<ygrid>0.01</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>This is a template for a simulation that you are to complete.  The simulation is that of electrons in an electron tube.  Electron are accelerated horizontally from rest under the influence of a potential V1. At the origin, the electrons enter crossed electric and magnetic fields.  The electric field is oriented in the -y direction and is produced by parallel plates with a potential difference equal to V1.  The magnetic field is oriented in the -z direction (into screen) and is produced by Helmholtz coils.</text>
+		</description>
+		<input>
+			<name>q</name>
+			<text>Charge</text>
+			<initialValue>-1.6E-19</initialValue>
+			<units>C</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass</text>
+			<initialValue>9.11E-31</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>d</name>
+			<text>Plate separation</text>
+			<initialValue>0.06</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>V1</name>
+			<text>Accelerating potential V1</text>
+			<initialValue>2000.0</initialValue>
+			<units>V</units>
+		</input>
+		<input>
+			<name>V2</name>
+			<text>Plate potential V2</text>
+			<initialValue>2000.0</initialValue>
+			<units>V</units>
+		</input>
+		<output>
+			<name>px</name>
+			<text>X-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>py</name>
+			<text>Y-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>P.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>qmr</name>
+			<text>Charge to mass ratio</text>
+			<units>C/kg</units>
+			<calculator type="parametric">
+				<value>q/m</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>vo</name>
+			<text>Initial velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>(2*abs(qmr)*V1)^.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>E</name>
+			<text>Electric field</text>
+			<units>V/m</units>
+			<calculator type="parametric">
+				<value>-V2/d</value>
+			</calculator>
+		</output>
+		<output>
+			<name>B</name>
+			<text>Magnetic field</text>
+			<units>T</units>
+			<calculator type="parametric">
+				<value>write equation here</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>P</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.0025</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.0025</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo</velocity>
+					<acceleration>0</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>0</velocity>
+					<acceleration>qmr*E</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>plate1</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.08</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.0025</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>.04</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>d/2+.00125</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

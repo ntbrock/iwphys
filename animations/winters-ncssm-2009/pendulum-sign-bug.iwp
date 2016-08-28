@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.02</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-5.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-9.0</ymin>
+			<ymax>1.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A pendulum is released from rest and oscillates in a vertical plane. The angle of release, mass of the bob, gravitational field, and length of the string can be adjusted. At large angles, the applet may show unphysical behavior.</text>
+		</description>
+		<input>
+			<name>d</name>
+			<text>Length</text>
+			<initialValue>7.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Initial angle</text>
+			<initialValue>30.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Gravitational Field</text>
+			<initialValue>9.8</initialValue>
+			<units>N/kg</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass of bob</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+		<solid>
+			<name>string</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>bob.xpos</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>bob.ypos</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>bob</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-d.value*sin(toRadians(a))</displacement>
+					<velocity>0</velocity>
+					<acceleration>g.value*bob.xdisp*bob.ydisp/d.value^2-(bob.xvel^2+bob.yvel^2)*bob.xdisp/d.value^2</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>-d.value*cos(toRadians(a))</displacement>
+					<velocity>0</velocity>
+					<acceleration>-g.value*(bob.xdisp/d.value)^2-(bob.xvel^2+bob.yvel^2)*bob.ydisp/d.value^2</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>x</name>
+			<text>X Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>bob.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>bob.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ac</name>
+			<text>Cent. Acc.</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>(bob.xvel^2+bob.yvel^2)/d</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.05</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-100.0</ymin>
+			<ymax>100.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>10.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>100.0</ymax>
+			<xgrid>5.0</xgrid>
+			<ygrid>5.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Change the pursuer's x- and y-velocity components to intercept the target.  When you are successful, you can make the circle fit inside the square by stepping the animation. Note that there is more than one solution. Try finding the solution for which the pursuer intercepts the target at the right edge of the grid.</text>
+		</description>
+		<output>
+			<name>purx</name>
+			<text>Pursuer X-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Pursuer.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>tarx</name>
+			<text>Target X-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Target.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>pury</name>
+			<text>Pursuer Y-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Pursuer.ydisp</value>
+			</calculator>
+		</output>
+		<input>
+			<name>yop</name>
+			<text>Pursuer Yo</text>
+			<initialValue>90.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>xop</name>
+			<text>Pursuer Xo</text>
+			<initialValue>20.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>xot</name>
+			<text>Target Xo</text>
+			<initialValue>0.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>yot</name>
+			<text>Target Yo</text>
+			<initialValue>0.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>voxt</name>
+			<text>Target Vox</text>
+			<initialValue>30.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>voyt</name>
+			<text>Target Voy</text>
+			<initialValue>0.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>voxp</name>
+			<text>Pursuer Vox</text>
+			<initialValue>0.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>voyp</name>
+			<text>Pursuer Voy</text>
+			<initialValue>-40.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<solid>
+			<name>Pursuer</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xop.value+voxp.value*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yop.value+voyp.value*t</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Target</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xot.value+voxt.value*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>yot.value+voyt.value*t</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

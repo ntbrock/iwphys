@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.025</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Problem template.
+
+The blue and red objects oscillate in SHM.</text>
+		</description>
+		<output>
+			<name>pxr</name>
+			<text>R-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Red.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vxr</name>
+			<text>R-velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Red.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>axr</name>
+			<text>R-acceleration</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>Red.xaccel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>pxb</name>
+			<text>B-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Blue.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vxb</name>
+			<text>B-velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Blue.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>axb</name>
+			<text>B-acceleration</text>
+			<units>m/ss</units>
+			<calculator type="parametric">
+				<value>Blue.xaccel</value>
+			</calculator>
+		</output>
+		<input>
+			<name>mr</name>
+			<text>R-Mass</text>
+			<initialValue>2.5</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>mb</name>
+			<text>B-Mass</text>
+			<initialValue>2.5</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>ar</name>
+			<text>R-Amplitude</text>
+			<initialValue>9.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>ab</name>
+			<text>B-amplitude</text>
+			<initialValue>9.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>pr</name>
+			<text>R-phase</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>pb</name>
+			<text>B-Phase</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>kr</name>
+			<text>R-Spring constant</text>
+			<initialValue>10.0</initialValue>
+			<units>N/m</units>
+		</input>
+		<input>
+			<name>kb</name>
+			<text>B-Spring constant</text>
+			<initialValue>10.0</initialValue>
+			<units>N/m</units>
+		</input>
+		<solid>
+			<name>Red</name>
+			<shape type="circle" drawTrails="false" drawVectors="true">
+				<vectors yAccel="false" Vel="false" xAccel="true" yVel="false" xVel="true" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ar.value*cos((kr.value/mr.value)^.5*t+toRadians(pr.value)*1)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-3</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

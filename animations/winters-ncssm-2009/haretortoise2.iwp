@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>25.0</stop>
+			<change>0.2</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>25.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>300.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>50.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.5</xmin>
+			<xmax>25.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>300.0</ymax>
+			<xgrid>5.0</xgrid>
+			<ygrid>50.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>Now the tortoise has an acceleration to try to outrun the rabbit. (Note that the axis scales have been changed.)  Play the animation to see how the hare won't be able to catch the tortoise.  Change the acceleration to 0.5 m/s^2, reset, and run again.  Click Show graph.  The black line shows the distance between the hare and tortoise as a function of time.  Note how it dips to a minimum and then rises without ever reaching zero.
+
+What is the greatest acceleration that the tortoise can have and still be caught by the hare?  Where and when do their paths intersect?</text>
+		</description>
+		<output>
+			<name>x_hare</name>
+			<text>Pos of hare</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>hare.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>v_hare</name>
+			<text>Vel of hare</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>hare.yvel</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>x_tort</name>
+			<text>Pos of tort</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>tort.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>v_tort</name>
+			<text>Vel of tort</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>tort.yvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>sep</name>
+			<text>Separation</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>tort.ypos-hare.ypos</value>
+			</calculator>
+		</output>
+		<input>
+			<name>xo_hare</name>
+			<text>Initial pos. of hare</text>
+			<initialValue>0.0</initialValue>
+			<units>     m</units>
+		</input>
+		<input>
+			<name>vo_hare</name>
+			<text>Initial velocity of hare</text>
+			<initialValue>10.0</initialValue>
+			<units>  m/s</units>
+		</input>
+		<input>
+			<name>a_hare</name>
+			<text>Acceleration of hare</text>
+			<initialValue>0.0</initialValue>
+			<units>m/ss</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>xo_tort</name>
+			<text>Initial position of tortoise</text>
+			<initialValue>100.0</initialValue>
+			<units>     m</units>
+		</input>
+		<input>
+			<name>vo_tort</name>
+			<text>Initial velocity of tortoise</text>
+			<initialValue>1.0</initialValue>
+			<units>   m/s</units>
+		</input>
+		<input>
+			<name>a_tort</name>
+			<text>Acceleration of tortoise</text>
+			<initialValue>1.0</initialValue>
+			<units>m/ss</units>
+		</input>
+		<solid>
+			<name>tort</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.6</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>xo_tort.value+vo_tort.value*t+0.5*a_tort.value*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>hare</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.6</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>xo_hare.value+vo_hare.value*t+0.5*a_hare.value*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>separation</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>tort.ypos-hare.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

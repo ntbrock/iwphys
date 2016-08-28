@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>2.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>0.2</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A green ball makes a glancing elastic collision with an initially stationary red ball. The balls have equal mass.  The paths of the balls after the collision are perpendicular. The vectors shown represent momenta.
+</text>
+		</description>
+		<input>
+			<name>m</name>
+			<text>Mass of either sphere</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>angle</name>
+			<text>Angle of Green after collision</text>
+			<initialValue>60.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>v</name>
+			<text>Initial velocity of Green</text>
+			<initialValue>4.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>x</name>
+			<text>Initial x</text>
+			<initialValue>-5.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>sf</name>
+			<text>Scale factor</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>ar</name>
+			<text>Angle green in radians</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(angle)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>br</name>
+			<text>Angle of red in rad</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(90-angle)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>bd</name>
+			<text>Angle of Red after collision</text>
+			<units>deg</units>
+			<calculator type="parametric">
+				<value>90-angle</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tc</name>
+			<text>Time to collision</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>abs(x/v)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>v_b</name>
+			<text>Final velocity of Green</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>v*cos(ar)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>v_r</name>
+			<text>Final velocity of red</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>v*sin(ar)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>ball_b</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>step(tc-t)*(x+v*t)+step(t-tc)*v_b*cos(ar)*(t-tc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>step(t-tc)*v_b*sin(ar)*(t-tc)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>ball_r</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>step(t-tc)*v_r*cos(br)*(t-tc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-step(t-tc)*v_r*sin(br)*(t-tc)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>p</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*m*v*step(tc-t)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ball_b.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ball_b.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>p_b</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*m*v_b*cos(ar)*step(t-tc)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>sf*m*v_b*sin(ar)*step(t-tc)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ball_b.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ball_b.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>p_r</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>sf*m*v_r*cos(br)*step(t-tc)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-sf*m*v_r*sin(br)*step(t-tc)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ball_r.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ball_r.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

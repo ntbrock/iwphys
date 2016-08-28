@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<window>
+			<xmin>-0.5</xmin>
+			<xmax>0.5</xmax>
+			<ymin>-0.5</ymin>
+			<ymax>0.5</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>0.1</ygrid>
+		</window>
+		<description>
+			<text></text>
+		</description>
+		<input>
+			<name>do</name>
+			<text>Density of object</text>
+			<initialValue>7860.0</initialValue>
+			<units>kg/m^3</units>
+		</input>
+		<input>
+			<name>n</name>
+			<text>Viscosity of fluid</text>
+			<initialValue>1.1</initialValue>
+			<units>kg/ms</units>
+		</input>
+		<input>
+			<name>r</name>
+			<text>Radius</text>
+			<initialValue>5.0E-4</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>df</name>
+			<text>Density of fluid</text>
+			<initialValue>1261.0</initialValue>
+			<units>kg/m^3</units>
+		</input>
+		<output>
+			<name>go</name>
+			<text>Initial acceleration</text>
+			<units>N/kg</units>
+			<calculator type="parametric">
+				<value>9.8*(1-df.value/do.value)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>k</name>
+			<text>k, coefficient of v</text>
+			<units>kg/s</units>
+			<calculator type="parametric">
+				<value>6*PI.value*n.value*r.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>m</name>
+			<text>Mass of object</text>
+			<units>kg</units>
+			<calculator type="parametric">
+				<value>(4*PI.value/3)*do.value*(r.value)^3</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vt</name>
+			<text>Terminal speed</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>m.value*go.value/k.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>rn</name>
+			<text>Reynold's Number</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>2*df.value*r.value*vt.value/n.value</value>
+			</calculator>
+		</output>
+		<output>
+			<name>km</name>
+			<text>k/m</text>
+			<units>1/s</units>
+			<calculator type="parametric">
+				<value>k.value/m.value</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>bppb</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.02</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-vt.value*(t+(1/km.value)*(exp(-km.value*t)-1))</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

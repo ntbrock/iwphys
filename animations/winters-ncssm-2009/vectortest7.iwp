@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.1</change>
+			<fps>30.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>200.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>200.0</ymax>
+			<xgrid>20.0</xgrid>
+			<ygrid>20.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Projectile template
+
+A projectile is launched at an angle from a cliff.
+A target moves at 0, constant, or uniformly changing velocity.</text>
+		</description>
+		<output>
+			<name>ballx</name>
+			<text>Ball X-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Ball.xdisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>bally</name>
+			<text>Ball Y-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Ball.ydisp</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ballvx</name>
+			<text>X-velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Ball.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ballvy</name>
+			<text>Ball Y-velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Ball.yvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>targetx</name>
+			<text>Target X-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Target.xdisp</value>
+			</calculator>
+		</output>
+		<input>
+			<name>gunangle</name>
+			<text>Launch angle</text>
+			<initialValue>30.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>targetx</name>
+			<text>Target X-position</text>
+			<initialValue>0.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>gunheight</name>
+			<text>Launch altitude</text>
+			<initialValue>100.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>gunspeed</name>
+			<text>Launch speed</text>
+			<initialValue>40.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>targetvo</name>
+			<text>Target Vo</text>
+			<initialValue>20.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>targeta</name>
+			<text>Target acceleration</text>
+			<initialValue>0.0</initialValue>
+			<units>m/ss</units>
+		</input>
+		<input>
+			<name>gf</name>
+			<text>Grav. field, g</text>
+			<initialValue>9.8</initialValue>
+			<units>N/kg</units>
+		</input>
+		<solid>
+			<name>Floor</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>400</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>150</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>GunBase</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>8</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>6</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-6</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>gunheight.value-5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Ball</name>
+			<shape type="circle" drawTrails="false" drawVectors="true">
+				<vectors yAccel="true" Vel="true" xAccel="true" yVel="true" xVel="true" Accel="true"/>
+				<width>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>gunspeed.value*cos(toRadians(gunangle.value))*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>gunheight.value+gunspeed.value*sin(toRadians(gunangle.value))*t-0.5*(gf.value)*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>GunBarrel</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>8</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>gunheight.value</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Target</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>153</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>targetx.value+targetvo.value*t+0.5*targeta.value*t^2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.25</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>LeftWall</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>gunheight.value</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>(gunheight.value)/2-5</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

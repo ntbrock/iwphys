@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A ball is launched horizontally off a cliff at the same time that a cart directly below the ball is pushed in the same direction. By adjusting the height of the cliff as well as the initial velocities of the ball and cart (if you need to), make the ball land in the cart.</text>
+		</description>
+		<solid>
+			<name>Cart</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>51</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vx*t </value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Ball</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>v0*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>y0+0.5*a*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>vx</name>
+			<text>Cart Velocity</text>
+			<initialValue>7.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>y0</name>
+			<text>Height</text>
+			<initialValue>7.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Acceleration</text>
+			<initialValue>-9.8</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>v0</name>
+			<text>Launch Velocity</text>
+			<initialValue>7.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<output>
+			<name>vx</name>
+			<text>X-Velocity of Cart</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>vx</value>
+			</calculator>
+		</output>
+		<output>
+			<name>v0</name>
+			<text>X-Velocity of Ball</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>v0</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vy</name>
+			<text>Y-Velocity of Cart</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>0</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vyb</name>
+			<text>Y-Velocity of Ball</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>Ball.yvel</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

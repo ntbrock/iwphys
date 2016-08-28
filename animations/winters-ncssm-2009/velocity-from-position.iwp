@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>5.0</stop>
+			<change>0.2</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-25.0</ymin>
+			<ymax>25.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>5.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.5</xmin>
+			<xmax>5.5</xmax>
+			<ymin>-25.0</ymin>
+			<ymax>25.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>5.0</ygrid>
+			<xunit>s</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Play the animation to show a position vs. time graph of a uniformly-accelerating object (red dot). This animation shows how to determine the velocity of the object as a function of time. The two black dots are points equally-spaced in time on the  either side of the object on the path of the object. The time and position coordinates of these points are updated as they move with the object. 
+
+Imagine a line joining the two black dots. This is called a secant line. Since the dots are close to the object, the slope of the secant line is a close approximation to the slope of a line drawn tangent to curve at the position of the object. 
+
+Under outputs, the values of (T2 - T1), (Y2 - Y1), and their ratio are calculated. Although the ratio is an average velocity, it's a close approximation to the instantaneous velocity.</text>
+		</description>
+		<input>
+			<name>a</name>
+			<text>Initial position</text>
+			<initialValue>5.0</initialValue>
+			<units>     m</units>
+		</input>
+		<input>
+			<name>b</name>
+			<text>Initial velocity</text>
+			<initialValue>0.0</initialValue>
+			<units>  m/s</units>
+		</input>
+		<input>
+			<name>c</name>
+			<text>Acceleration</text>
+			<initialValue>2.0</initialValue>
+			<units>m/ss</units>
+		</input>
+		<input>
+			<name>dt</name>
+			<text>Delta t</text>
+			<initialValue>0.2</initialValue>
+			<units>s</units>
+		</input>
+		<output>
+			<name>y</name>
+			<text>Position (red)</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>object.ypos</value>
+			</calculator>
+		</output>
+		<solid>
+			<name>object</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.08</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.8</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a+b*t+0.5*c*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>p</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.05*step(t)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t-dt</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a+b*(t-dt)+0.5*c*(t-dt)^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>q</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.05*step(t)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t+dt</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a+b*(t+dt)+0.5*c*(t+dt)^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>objectClone</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t+2*dt</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>a+b*(t+2*dt)+0.5*c*(t+2*dt)^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>t2</name>
+			<text>T2</text>
+			<units>s</units>
+			<value>
+				<calculator type="parametric">
+					<value>q.xpos</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>true</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>(q.ypos+1)</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>(q.xpos+.5)</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>Y2</name>
+			<text>Y2</text>
+			<units>m</units>
+			<value>
+				<calculator type="parametric">
+					<value>q.ypos</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>true</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>q.ypos-1</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>q.xpos+.5</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>t1</name>
+			<text>T1</text>
+			<units>s</units>
+			<value>
+				<calculator type="parametric">
+					<value>p.xpos</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>true</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>(p.ypos+1)</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>(p.xpos-1)</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>Y1</name>
+			<text>Y1</text>
+			<units>m</units>
+			<value>
+				<calculator type="parametric">
+					<value>p.ypos</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>true</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>p.ypos-1</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>p.xpos-1</value>
+				</calculator>
+			</xpath>
+		</object>
+		<output>
+			<name>deltat</name>
+			<text>T2 - T1</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>2*dt</value>
+			</calculator>
+		</output>
+		<output>
+			<name>deltay</name>
+			<text>Y2 - Y1</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>q.ypos-p.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vave</name>
+			<text>(Y2 - Y1)/(T2 - T1)</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>deltay/deltat</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>Demonstration of an addition of waves problem.</text>
+		</description>
+		<object class="edu.ncssm.iwp.objects.grapher.DObject_Grapher">
+			<name>func1</name>
+			<equation>Sin(2*x-y/2)+5</equation>
+			<boxX>-10.0</boxX>
+			<boxY>-10.0</boxY>
+			<boxW>10.0</boxW>
+			<boxH>10.0</boxH>
+			<res>100</res>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+		</object>
+		<object class="edu.ncssm.iwp.objects.grapher.DObject_Grapher">
+			<name>func2</name>
+			<equation>Sin(x+y)</equation>
+			<boxX>-10.0</boxX>
+			<boxY>-10.0</boxY>
+			<boxW>10.0</boxW>
+			<boxH>10.0</boxH>
+			<res>100</res>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+		</object>
+		<object class="edu.ncssm.iwp.objects.grapher.DObject_Grapher">
+			<name>func12</name>
+			<equation>2*Sin(2*x-y/2) + Sin(x+y) - 6</equation>
+			<boxX>-10.0</boxX>
+			<boxY>-10.0</boxY>
+			<boxW>10.0</boxW>
+			<boxH>10.0</boxH>
+			<res>100</res>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>text_func1</name>
+			<text>Wave 1</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>6.5</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-9</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>text_func2</name>
+			<text>Wave 2</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>2</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-9</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>text_func12</name>
+			<text>Wave 1 + Wave 2</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>-3</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-9</value>
+				</calculator>
+			</xpath>
+		</object>
+	</objects>
+</problem>
