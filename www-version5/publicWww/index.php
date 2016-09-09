@@ -1,6 +1,6 @@
 <?php
 // 2016-Aug-28 Brockman - Revamp for IWP5
-// 'New-age' php script tha trenders the right java code based on the PATH_INFO
+// 'New-age' php script that renders the right java code based on the PATH_INFO
 
 include_once('iwp-config.php');
 

@@ -8,7 +8,7 @@
 $animationPath = "animations";
 
 // Webserver Prefix 
-$prefixUri   = '/5/';
+$prefixUri   = '/iwphys/git/iwphys/www-version5/publicWww/';
 
 include_once("iwp-common.php");
 ?>

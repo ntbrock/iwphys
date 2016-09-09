@@ -38,6 +38,6 @@ Kudos to Dr. Jonathan Bennett, Dr. Loren Winters, and all past code contributors
 - V6 - Create community of users who can contribute, curate, and organize new Animation content in the repo or on public www.
 
 - V6 - Virtual Reality Animations
-- 
 
+- V6 - Image / Textures on solids.
 
