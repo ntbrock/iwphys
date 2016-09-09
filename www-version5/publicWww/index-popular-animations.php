@@ -1,15 +1,17 @@
+<?=$prefixUri?>
+
         <div class="row text-center">
             <div class="col-md-4 col-sm-6 hero-feature">
               <div class="thumbnail">
                    <h3>damped-1.iwp</i></h3> <!-- color: #FFD700; -->
-            <img src="/5/screenshots/iwp-packaged/Oscillations/damped-1.iwp.png" alt="">
+            <img src="<?=$prefixUri?>screenshots/iwp-packaged/Oscillations/damped-1.iwp.png" alt="">
                 <div class="caption">
 
-                          <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/damped-1.iwp" class="btn btn-default">Animate</a>
+                          <a target="_anim" href="<?=$prefixUri?>animate.php/iwp-packaged/Oscillations/damped-1.iwp" class="btn btn-default">Animate</a>
                         <p>
 					<i class="fa fa-star-o" style="color: #333;"></i>	
 					   	     <i class="fa fa-bug" style="color: #333;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/damped-1.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+						     		  <a target="_xtoj" href="<?=$prefixUri?>xtoj.php/iwp-packaged/Oscillations/damped-1.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
 								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/damped-1.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
@@ -20,14 +22,14 @@
             <div class="col-md-4 col-sm-6 hero-feature">
               <div class="thumbnail">
                    <h3>damped-SHM-template.iwp</i></h3> <!-- color: #FFD700; -->
-            <img src="/5/screenshots/iwp-packaged/Oscillations/damped-SHM-template.iwp.png" alt="">
+            <img src="<?=$prefixUri?>screenshots/iwp-packaged/Oscillations/damped-SHM-template.iwp.png" alt="">
                 <div class="caption">
 
-                          <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/damped-SHM-template.iwp" class="btn btn-default">Animate</a>
+                          <a target="_anim" href="<?=$prefixUri ?>animate.php/iwp-packaged/Oscillations/damped-SHM-template.iwp" class="btn btn-default">Animate</a>
                         <p>
 					<i class="fa fa-star-o" style="color: #333;"></i>	
 					   	     <i class="fa fa-bug" style="color: #333;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/damped-SHM-template.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+						     		  <a target="_xtoj" href="<?=$prefixUri ?>xtoj.php/iwp-packaged/Oscillations/damped-SHM-template.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
 								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/damped-SHM-template.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
@@ -40,14 +42,14 @@ Suppose that the ..                        </p>
             <div class="col-md-4 col-sm-6 hero-feature">
               <div class="thumbnail">
                    <h3>lissajous-figures.iwp</i></h3> <!-- color: #FFD700; -->
-            <img src="/5/screenshots/iwp-packaged/Oscillations/lissajous-figures.iwp.png" alt="">
+            <img src="<?=$prefixUri ?>screenshots/iwp-packaged/Oscillations/lissajous-figures.iwp.png" alt="">
                 <div class="caption">
 
-                          <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/lissajous-figures.iwp" class="btn btn-default">Animate</a>
+                          <a target="_anim" href="<?=$prefixUri ?>animate.php/iwp-packaged/Oscillations/lissajous-figures.iwp" class="btn btn-default">Animate</a>
                         <p>
 					<i class="fa fa-star-o" style="color: #333;"></i>	
 					   	     <i class="fa fa-bug" style="color: #333;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/lissajous-figures.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+						     		  <a target="_xtoj" href="<?=$prefixUri ?>xtoj.php/iwp-packaged/Oscillations/lissajous-figures.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
 								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/lissajous-figures.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
@@ -61,14 +63,14 @@ Suppose that the ..                        </p>
             <div class="col-md-4 col-sm-6 hero-feature">
               <div class="thumbnail">
                    <h3>pendulum01.iwp</i></h3> <!-- color: #FFD700; -->
-            <img src="/5/screenshots/iwp-packaged/Oscillations/pendulum01.iwp.png" alt="">
+            <img src="<?=$prefixUri ?>screenshots/iwp-packaged/Oscillations/pendulum01.iwp.png" alt="">
                 <div class="caption">
 
-                          <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/pendulum01.iwp" class="btn btn-default">Animate</a>
+                          <a target="_anim" href="<?=$prefixUri ?>animate.php/iwp-packaged/Oscillations/pendulum01.iwp" class="btn btn-default">Animate</a>
                         <p>
 					<i class="fa fa-star-o" style="color: #333;"></i>	
 					   	     <i class="fa fa-bug" style="color: #333;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/pendulum01.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+						     		  <a target="_xtoj" href="<?=$prefixUri ?>xtoj.php/iwp-packaged/Oscillations/pendulum01.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
 								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/pendulum01.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
@@ -79,14 +81,14 @@ Suppose that the ..                        </p>
             <div class="col-md-4 col-sm-6 hero-feature">
               <div class="thumbnail">
                    <h3>shm-01.iwp</i></h3> <!-- color: #FFD700; -->
-            <img src="/5/screenshots/iwp-packaged/Oscillations/shm-01.iwp.png" alt="">
+            <img src="<?=$prefixUri ?>screenshots/iwp-packaged/Oscillations/shm-01.iwp.png" alt="">
                 <div class="caption">
 
-                          <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/shm-01.iwp" class="btn btn-default">Animate</a>
+                          <a target="_anim" href="<?=$prefixUri ?>animate.php/iwp-packaged/Oscillations/shm-01.iwp" class="btn btn-default">Animate</a>
                         <p>
 					<i class="fa fa-star-o" style="color: #333;"></i>	
 					   	     <i class="fa fa-bug" style="color: #333;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/shm-01.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+						     		  <a target="_xtoj" href="<?=$prefixUri ?>xtoj.php/iwp-packaged/Oscillations/shm-01.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
 								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/shm-01.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
@@ -97,14 +99,14 @@ Suppose that the ..                        </p>
             <div class="col-md-4 col-sm-6 hero-feature">
               <div class="thumbnail">
                    <h3>shm-02.iwp</i></h3> <!-- color: #FFD700; -->
-            <img src="/5/screenshots/iwp-packaged/Oscillations/shm-02.iwp.png" alt="">
+            <img src="<?=$prefixUri ?>screenshots/iwp-packaged/Oscillations/shm-02.iwp.png" alt="">
                 <div class="caption">
 
-                          <a target="_anim" href="/5/animate.php/iwp-packaged/Oscillations/shm-02.iwp" class="btn btn-default">Animate</a>
+                          <a target="_anim" href="<?=$prefixUri ?>animate.php/iwp-packaged/Oscillations/shm-02.iwp" class="btn btn-default">Animate</a>
                         <p>
 					<i class="fa fa-star-o" style="color: #333;"></i>	
 					   	     <i class="fa fa-bug" style="color: #333;"></i>	
-						     		  <a target="_xtoj" href="/5/xtoj.php/iwp-packaged/Oscillations/shm-02.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+						     		  <a target="_xtoj" href="<?=$prefixUri ?>xtoj.php/iwp-packaged/Oscillations/shm-02.iwp"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
 								     		    <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/shm-02.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 										       			</p>
 															<p>
