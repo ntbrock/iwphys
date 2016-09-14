@@ -29,38 +29,16 @@ header('Content-Type: text/html');
   <div id="canvasDiv">
     <svg id="canvas" viewbox="0 0 1000 1000" preserveAspectRatio="xMinYMin meet"></svg>
   </div>
-
-  <div>
-    <table id="playBar">
-      <tr>  
-        <td class="bottomBorder">
-          <span>Time: </span>
-          <span id="itime">--</span>
-        </td> 
-        <td id="buttonControls">
-          <span><input id="resetButton" type="button" onclick="handleResetClick()" value="Reset"></input></span>
-          <span><input id="backButton" type="button" onclick="handleBackClick()" value="<<"></input></span>
-          <span><input id="startStopButton" type="button" onclick="handleStartClick()" value="Start"></input></span>
-          <span><input id="forwardButton" type="button" onclick="handleForwardClick()" value=">>"></input></span>
-        </td>
-        <td class="bottomBorder">
-          <span>Time Step: </span>
-          <span><input id="itime_change" type="text" value="--" size="4em"/></span>
-        </td>
-      </tr>
-    </table>
-  </div>
-
+  <table id="tabs">
+    <tr>
+      <td id="vtb" class="bottomBorder"><input id="variableTableButton" type="button" onclick="variableTableOn()" value="Variables"/></td>
+      <td  id="ws" class=""><input id="windowSettings" type="button" onclick="windowSettingsOn()" value="Window"/></td>
+      <td  id="oib" class=""><input id="otherInfoButton" type="button" onclick="otherInfoOn()" value="About"/></td>
+    </tr>
+  </table>
+  
+  <div id="tabTables">
  <table id="variableTable"></table>
-
- <table id="tabs">
-  <tr>
-    <td id="vtb" class="bottomBorder"><input id="variableTableButton" type="button" onclick="variableTableOn()" value="Variables"/></td>
-    <td  id="ws" class=""><input id="windowSettings" type="button" onclick="windowSettingsOn()" value="Window Settings"/></td>
-    <td  id="oib" class=""><input id="otherInfoButton" type="button" onclick="otherInfoOn()" value="Additional Information"/></td>
-  </tr>
- </table>
-
  <table id="iwindow" align='center'>
     <tr><th>Window Settings</th></tr>
     <tr class="bottomBorder">
@@ -95,7 +73,7 @@ header('Content-Type: text/html');
     </tr>
     <tr class="bottomBorder">
       <td class="italic"><p>GraphWindow</p></td>
-      <td><div id="graphWindow">- Coming Soon -</div></td>
+      <td><div id="graphWindow">Coming Soon</div></td>
     </tr>
     <tr class="bottomBorder">
       <td class="italic"><p>Description</p></td>
@@ -106,7 +84,25 @@ header('Content-Type: text/html');
       <td><div id="authorUsername">Loading...</div></td>
     </tr>
   </table>
-
+  </div>
+    <table id="playBar">
+      <tr>  
+        <td class="bottomBorder">
+          <span>Time: </span>
+          <span id="itime">--</span>
+        </td> 
+        <td id="buttonControls">
+          <span><input id="resetButton" type="button" onclick="handleResetClick()" value="Reset"></input></span>
+          <span><input id="backButton" type="button" onclick="handleBackClick()" value="<<"></input></span>
+          <span><input id="startStopButton" type="button" onclick="handleStartClick()" value="Start"></input></span>
+          <span><input id="forwardButton" type="button" onclick="handleForwardClick()" value=">>"></input></span>
+        </td>
+        <td class="bottomBorder">
+          <span>Time Step: </span>
+          <span><input id="itime_change" type="text" value="--" size="4em"/></span>
+        </td>
+      </tr>
+    </table>
   </div> <!-- end iwp-animate -->
 
   <script type="text/javascript">

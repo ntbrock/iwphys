@@ -7,7 +7,6 @@
 	position:    relative	       ;
 	width:       960px			   ;
 }
-
 table {
 	height:           auto         ;
 	display:          inline-block ;
@@ -17,47 +16,45 @@ table {
 	margin:           1%	       ;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ;
 }
-svg {
-	position: relative;
-	height: 100%;
-	z-index: -1;
+#canvasDiv {
+	float: left;
+	width: 50%;
+	z-index: -1; 
+}
+#tabs {
+	font-size: 9pt;
+	visibility: visible;
+	clear: right;
+	overflow: auto;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+#tabTables {
+	clear: right;
+	overflow: auto;
+	width: 35%;
+	margin-left: 20%;
+	margin-top: 0;
 }
 #iwindow {
+	position: absolute;
 	visibility: hidden;
-	position: fixed;
-	top: 0;
-	right: 10%;
-	width: 342px;
-	height: 464px;
+	/*float: right;*/
+}
+#otherInfo {
+	position: absolute;
+	visibility: hidden;
 }
 #variableTable {
+	position: absolute;
 	visibility: visible;
-	width: auto;
-	position: fixed;
-	top: 0;
-	right: 10%;
 }
 #playBar {
 	visibility: visible;
-	position: fixed;
-	bottom: 0;
+	float: left;
 	width: auto;
-	left: 5%;
-}
-#tabs {
-	visibility: visible;
-	position: fixed;
-	width: auto;
-	top: 85%;
-	right: 8%;
-}
-#otherInfo {
-	visibility: hidden;
-	position: fixed;
-	top: 0;
-	right: 10%;
-	width: 342px;
-	height: 464px;
+	margin-right: 35%;
+	overflow: auto;
 }
 #otherInfo td {
 	text-align: left;
