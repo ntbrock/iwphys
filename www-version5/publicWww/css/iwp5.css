@@ -19,6 +19,7 @@ table {
 #canvasDiv {
 	float: left;
 	width: 50%;
+	margin-left: 2%;
 	z-index: -1; 
 }
 #tabs {

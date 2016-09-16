@@ -281,16 +281,16 @@ function addSolid(solid) {
 
   //HTML 
   if (solid.shape["@attributes"].type == "circle") {
-    console.log("it's a circle");
+    //console.log("it's a circle");
     svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(solid.shape.width.calculator.value)+ " ry=" +yHeight(solid.shape.height.calculator.value)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
   else if (solid.shape["@attributes"].type == "rectangle") {
     console.log("it's a rectangle");
-    svgSolids.push( "<rect x='500' y='500' id='solid_" +solid.name+ "' width=" +xWidth(solid.shape.width.calculator.value)+ " height=" +yHeight(solid.shape.height.calculator.value)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
+    svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
   else if (solid.shape["@attributes"].type == "line") {
-    console.log("it's a line")
-    //solids.push( "<path d='M ...
+    console.log("it's a line");
+    svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
   else {
     return;
@@ -343,7 +343,7 @@ function evaluateCalculator( calculator, vars ) {
 		} 
 
 	} else { 
-		console.log("DEVELOPER TODO: Unsupproted calculator type : ", calculator);
+		console.log("DEVELOPER: Unsupported calculator type : ", calculator);
 		return -1;
 	}
 
@@ -384,8 +384,10 @@ function parseProblemToMemory( problem ) {
     $.each( problem.objects.output, function( index, output ) {
       addOutput(output);
     });
-  } else { 
+  } else  if ( $.type ( problem.objects.output ) == 'item'){ 
     addOutput(problem.objects.output);
+  } else {
+    null;
   }
 
   // Solids - These could be an array OR a single item.
@@ -585,14 +587,17 @@ if (solid.shape.type == "circle") {
 		.attr("ry", yHeight(pathAndShape.height));
   }
   else if (solid.shape.type == "rectangle") {
-  	svgSolid.attr("x", xCanvas(pathAndShape.x))
-		.attr("y", yCanvas(pathAndShape.y))
+    svgSolid.attr("x", xCanvas(pathAndShape.x - pathAndShape.width / 2))
+		.attr("y", yCanvas(pathAndShape.y - pathAndShape.height / 2))
 		.attr("width", xWidth(pathAndShape.width))
 		.attr("height", yHeight(pathAndShape.height));
  }
   else if (solid.shape.type == "line") {
-    console.log("it's a line");
-    //line...
+    console.log("working");
+    svgSolid.attr("x1", xCanvas(pathAndShape.x))
+    .attr("x2", xCanvas(pathAndShape.x + pathAndShape.width))
+    .attr("y1", yCanvas(pathAndShape.y))
+    .attr("y2", yCanvas(pathAndShape.y + pathAndShape.width));
   }
   else {
   	console.log("!! Unidentified shape:550> solid = ", solid.shape.type);
