@@ -31,15 +31,17 @@ header('Content-Type: text/html');
   </div>
   <table id="tabs">
     <tr>
-      <td id="vtb" class="bottomBorder"><input id="variableTableButton" type="button" onclick="variableTableOn()" value="Variables"/></td>
-      <td  id="ws" class=""><input id="windowSettings" type="button" onclick="windowSettingsOn()" value="Window"/></td>
-      <td  id="oib" class=""><input id="otherInfoButton" type="button" onclick="otherInfoOn()" value="About"/></td>
+      <td id="it" class="bottomBorder"><input id="inputTableButton" type="button" onclick="inputTableOn()" value="Inputs"/></td>
+      <td id="ot" class=""><input id="outputTableButton" type="button" onclick="outputTableOn()" value="Outputs"/></td>
+      <td id="ws" class=""><input id="windowSettings" type="button" onclick="windowSettingsOn()" value="Window"/></td>
+      <td id="oib" class=""><input id="otherInfoButton" type="button" onclick="otherInfoOn()" value="About"/></td>
     </tr>
   </table>
   
-  <div id="tabTables">
- <table id="variableTable"></table>
- <table id="iwindow" align='center'>
+ <div id="tabTables" style="height:385px">
+ <table id="inputTable" class="trim"></table>
+ <table id="outputTable" class="trim"></table>
+ <table id="iwindow" align='center' class="trim">
     <tr><th>Window Settings</th></tr>
     <tr class="bottomBorder">
       <td>X min:</td>
@@ -66,7 +68,6 @@ header('Content-Type: text/html');
       <td>Y unit:</td>
       <td><input id="iwindow_yunit" type="text"></td></tr>
  </table>
-
   <table id="otherInfo">
     <tr>
       <th colspan="2">Additional Information</th>

@@ -33,7 +33,6 @@ table {
 #tabTables {
 	clear: right;
 	overflow: auto;
-	width: 35%;
 	margin-left: 20%;
 	margin-top: 0;
 }
@@ -46,9 +45,13 @@ table {
 	position: absolute;
 	visibility: hidden;
 }
-#variableTable {
+#inputTable {
 	position: absolute;
 	visibility: visible;
+}
+#outputTable {
+	position: absolute;
+	visibility: hidden;
 }
 #playBar {
 	visibility: visible;

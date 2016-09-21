@@ -285,11 +285,11 @@ function addSolid(solid) {
     svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(solid.shape.width.calculator.value)+ " ry=" +yHeight(solid.shape.height.calculator.value)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
   else if (solid.shape["@attributes"].type == "rectangle") {
-    console.log("it's a rectangle");
+    //console.log("it's a rectangle");
     svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
   else if (solid.shape["@attributes"].type == "line") {
-    console.log("it's a line");
+    //console.log("it's a line");
     svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
   else {
@@ -475,19 +475,36 @@ function renderProblemFromMemory() {
   $("#iwindow_ygrid").val( iwindow.ygrid );
   $("#iwindow_yunit").val( iwindow.yunit );
 
-// GraphWindow is a TODO feature for now.
-// $("#graphWindow").html( graphWindow );
+  // GraphWindow is a TODO feature for now.
+  // $("#graphWindow").html( graphWindow );
 
-  $("#variableTable").append("<tr><th colspan='2'>Inputs</th></tr>"+htmlInputs+"<tr><th colspan='2'>Outputs</th></tr>"+htmlOutputs);
+  $("#inputTable").append("<tr><th colspan='2'>Inputs</th></tr>"+htmlInputs);
+  $("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>"+htmlOutputs);
   //Moved to addSolidsToCanvas, 8 Aug 2016
   //$("#solids").html( solids.join(" ") );
 
+  fitText("inputTable");
   renderCanvasFromMemory();
   addSolidsToCanvas(svgSolids);
-};
+  };
 
-
-
+//21 Sep 2016 Ryan Steed
+//Auto-adjust font-size to fit table
+function fitText(input) {
+    var HeightDiv = $("#tabTables").height();
+    var toFit = $('#'+input);
+    console.log("input: ", input);
+    var HeightTable = toFit.height();
+    if (HeightTable > HeightDiv) {
+        var FontSizeTable = parseInt(toFit.css("font-size"), 10);
+        while (HeightTable > HeightDiv && FontSizeTable > 10) {
+            FontSizeTable--;
+            toFit.css("font-size", FontSizeTable);
+            HeightTable = toFit.height();
+        }
+    console.log("text fitted");
+    }
+  };
 function addSolidsToCanvas(solids) {
   //console.log("solids: ", solids);
   $("#canvas").append(svgSolids);
@@ -585,6 +602,7 @@ if (solid.shape.type == "circle") {
 		.attr("cy", yCanvas(pathAndShape.y))
 		.attr("rx", xWidth(pathAndShape.width))
 		.attr("ry", yHeight(pathAndShape.height));
+    console.log("rx: ", pathAndShape.width)
   }
   else if (solid.shape.type == "rectangle") {
     svgSolid.attr("x", xCanvas(pathAndShape.x - pathAndShape.width / 2))
@@ -593,11 +611,13 @@ if (solid.shape.type == "circle") {
 		.attr("height", yHeight(pathAndShape.height));
  }
   else if (solid.shape.type == "line") {
-    console.log("working");
+    // DEBUGGING RYAN STEED 21 SEP 2016
+    /*console.log("y1: ", yCanvas(pathAndShape.y));
+    console.log("y2: ", pathAndShape.y + pathAndShape.height);*/
     svgSolid.attr("x1", xCanvas(pathAndShape.x))
     .attr("x2", xCanvas(pathAndShape.x + pathAndShape.width))
     .attr("y1", yCanvas(pathAndShape.y))
-    .attr("y2", yCanvas(pathAndShape.y + pathAndShape.width));
+    .attr("y2", yCanvas(pathAndShape.y + pathAndShape.height));
   }
   else {
   	console.log("!! Unidentified shape:550> solid = ", solid.shape.type);
@@ -616,8 +636,10 @@ for line
 function windowSettingsOn() {
 	$("#iwindow").attr("style", "visibility:visible");
   $("#ws").attr("class", "bottomBorder");
-  variableTableOff();
+  inputTableOff();
   otherInfoOff();
+  outputTableOff();
+  fitText("iwindow");
 };
 function windowSettingsOff() {
 	$("#iwindow").attr("style", "visibility:hidden");
@@ -627,23 +649,40 @@ function windowSettingsOff() {
 function otherInfoOn() {
   $("#otherInfo").attr("style", "visibility:visible");
   $("#oib").attr("class", "bottomBorder");
-  variableTableOff();
+  outputTableOff();
   windowSettingsOff();
+  inputTableOff();
+  fitText("otherInfo");
 };
 function otherInfoOff() {
   $("#otherInfo").attr("style", "visibility:hidden");
   $("#oib").attr("class", "");
 }
 
-function variableTableOn() {
-  $("#variableTable").attr("style", "visibility:visible");
-  $("#vtb").attr("class", "bottomBorder");
+function outputTableOn() {
+  $("#outputTable").attr("style", "visibility:visible");
+  $("#ot").attr("class", "bottomBorder");
   otherInfoOff();
   windowSettingsOff();
+  inputTableOff();
+  fitText("outputTable");
 };
-function variableTableOff() {
-  $("#variableTable").attr("style", "visibility:hidden");
-  $("#vtb").attr("class", "");
+function outputTableOff() {
+  $("#outputTable").attr("style", "visibility:hidden");
+  $("#ot").attr("class", "");
+}
+
+function inputTableOn() {
+  $("#inputTable").attr("style", "visibility:visible");
+  $("#it").attr("class", "bottomBorder");
+  otherInfoOff();
+  windowSettingsOff();
+  outputTableOff();
+  fitText("inputTable");
+};
+function inputTableOff() {
+  $("#inputTable").attr("style", "visibility:hidden");
+  $("#it").attr("class", "");
 }
 
 //Click handles.
@@ -707,7 +746,6 @@ function hideReset() {
 function handleInputChange() {
   $("*").change( function () {   
                   handleResetClick();
-                  console.log("Awooga");
                 });
 }
 handleInputChange();
