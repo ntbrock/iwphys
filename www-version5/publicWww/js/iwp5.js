@@ -223,7 +223,7 @@ function addInput(input) {
   //console.log("addInput: ", input );
   inputs.push( input );
   // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"}
-  htmlInputs.push( "<tr id='input_" + input.name + "' class='bottomBorder'><td><label for='"+ input.name +"'>"+ input.text +"</label></td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
+  htmlInputs.push( "<tr id='input_" + input.name + "' class='bottomBorder'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
 }
 
 function addOutput(output) { 
@@ -238,7 +238,7 @@ function addOutput(output) {
 
   outputs.push( compiledOutput );
   // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { "@attributes": { "type": "parametric" }, "value": "Red.xaccel" } }
-  htmlOutputs.push( "<tr id='output_" + output.name + "' class='bottomBorder'><td><label for='"+ output.name +"'>"+ output.text +"</label></td><td><input id='" + output.name + "' type='text' value='-999'> " + output.units + "</td></tr>");
+  htmlOutputs.push( "<tr id='output_" + output.name + "' class='bottomBorder'><td>"+ output.text +"</td><td><input id='" + output.name + "' type='text' value='-999'> " + output.units + "</td></tr>");
 }
 
 
@@ -333,7 +333,6 @@ function evaluateCalculator( calculator, vars ) {
 		/*
 			{type : mathjs, compiled: Object}
 		*/
-
 		try { 
 			var result = calculator.compiled.eval(vars);
 			return result;
@@ -489,7 +488,7 @@ function renderProblemFromMemory() {
   };
 
 //21 Sep 2016 Ryan Steed
-//Auto-adjust font-size to fit table
+//Auto-adjust font-size so that font size fits the table.
 function fitText(input) {
     var HeightDiv = $("#tabTables").height();
     var toFit = $('#'+input);
