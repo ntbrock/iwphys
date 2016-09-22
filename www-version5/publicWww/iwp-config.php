@@ -7,8 +7,11 @@
 // where the problems on disk are located.
 $animationPath = "animations";
 
-// Webserver Prefix 
-$prefixUri   = '/iwphys/git/iwphys/www-version5/publicWww/';
+// Prod Webserver Prefix 
+$prefixUri   = '/5/';
+
+// Development environment
+//$prefixUri   = '/iwphys/git/iwphys/www-version5/publicWww/';
 
 include_once("iwp-common.php");
 ?>
