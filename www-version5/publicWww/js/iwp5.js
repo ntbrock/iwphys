@@ -320,10 +320,52 @@ function compileCalculator(iwpCalculator) {
 		// console.log("compileCalculator:171> value : ", iwpCalculator.value, " compiledTo: ", c)
 		return c;
 
-	} else { 
+	} else if ( incomingType == "euler") {
+    
+    var c =  { 
+      type: "euler-mathjs",
+      initDisplacementCompiled: math.compile( iwpCalculator.displacement ),
+      initVelocityCompiled: math.compile( iwpCalculator.velocity ),
+      accelerationCompiled: math.compile( iwpCalculator.acceleration ),
+      equation: { 
+        acceleration : iwpCalculator.acceleration,
+        velocity : iwpCalculator.velocity,
+        displacement : iwpCalculator.displacement
+      }
+    }
+    return c;
+    /*
+        <calculator type="euler">
+          <displacement>initxdisp</displacement>
+          <velocity>initxvel</velocity>
+          <acceleration>-5*t</acceleration>
+        </calculator>
+      
+    */
+
+  }
+  else { 
 		console.log("DEBUG ERROR: Only parameteric calculator supported in the August 2016 version, unable to handle: ", incomingType);
-		return {};
+		return {type:"unsupported", "incomingType": incomingType, "iwpCalculator": iwpCalculator };
 	}
+}
+
+/**
+ * 2016-Sep-23 - Sometimes single variable equations will evalate as object.value, not a numeric
+ * Remind Taylor about this if you have questions.
+ */
+
+function evaluateCompiledMath( compiled, vars ) { 
+
+  var newValue = compiled.eval(vars)
+
+  if ( $.isNumeric(newValue) ) {
+    return newValue;
+  } else if ( newValue["value"] != undefined ) { 
+     return newValue.value;
+  } else { 
+     throw("Unable to process compiled, not numeric, doesn't have value property: ", newValue)
+  }
 }
 
 
@@ -337,11 +379,45 @@ function evaluateCalculator( calculator, vars ) {
 			var result = calculator.compiled.eval(vars);
 			return result;
 		} catch ( err ) { 
-			console.log("evaluateCalculator:260> Unable to evaluate calculator: ", err, calculator.equation, vars);
+			console.log("evaluateCalculator:364> Unable to evaluate calculator: ", err, calculator.equation, vars);
 			return -1;
 		} 
+	} else if ( calculator.type == "euler-mathjs" ) {
+    try {
+      
+     
+      
+      // 2016-Sep-23 For Euler V5, store the cache of current displacement and velocity IN calculator.
+      // An enhancement would be to expose these values out as complex return ttypes of this function,
+      // so that they could he historically archived in the variable step array.
+      //  IIRC, IWPv4, these were available as xdisp, xvel, xaccell on solids, for example.
+      // Today, in IWP5, our return structure out of thi sufnction is a single double value.
 
-	} else { 
+      if ( calculator["initDisplacementValue"] == undefined ) { 
+        calculator.initDisplacementValue = evaluateCompiledMath(calculator.initDisplacementCompiled, vars)
+        console.log("iwp5:380> calculating initial displacement to: ", calculator.initDisplacementValue )
+      }
+
+      if ( calculator["initVelocityValue"] == undefined ) { 
+        calculator.initVelocityValue = evaluateCompiledMath(calculator.initVelocityCompiled, vars)
+        console.log("iwp5:380> calculating initial velocity to: ", calculator.initVelocityValue )
+      }
+
+
+      // then calculate the acceleratiion
+      var acceleration = calculator.accelerationCompiled.eval(vars);
+
+
+      // DO MORE MATH HERE
+      return calculator.initDisplacementValue;
+
+      // return displacement.value; 
+    } catch ( err ) {
+      console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, vars);
+      return -1;
+    }
+  }
+  else { 
 		console.log("DEVELOPER: Unsupported calculator type : ", calculator);
 		return -1;
 	}
@@ -504,6 +580,7 @@ function fitText(input) {
     console.log("text fitted");
     }
   };
+
 function addSolidsToCanvas(solids) {
   //console.log("solids: ", solids);
   $("#canvas").append(svgSolids);
@@ -601,7 +678,7 @@ if (solid.shape.type == "circle") {
 		.attr("cy", yCanvas(pathAndShape.y))
 		.attr("rx", xWidth(pathAndShape.width))
 		.attr("ry", yHeight(pathAndShape.height));
-    console.log("rx: ", pathAndShape.width)
+    //console.log("rx: ", pathAndShape.width)
   }
   else if (solid.shape.type == "rectangle") {
     svgSolid.attr("x", xCanvas(pathAndShape.x - pathAndShape.width / 2))
