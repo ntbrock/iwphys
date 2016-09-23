@@ -123,7 +123,8 @@ function calculateVarsAtStep(step) {
   $.extend(vars, varsConstants);
 	// Eveything begins with time, populate t.
 	vars.t = time.start + step * time.change;
-  vars.tDelta = queryTimeStepInputDouble();    
+  vars.tDelta = queryTimeStepInputDouble();  
+  vars.delta_t = vars.tDelta  
 	updateTimeDisplay(vars.t);
 	/*
   for each calulation, query dom for time step
@@ -132,7 +133,10 @@ function calculateVarsAtStep(step) {
 	*/
 	$.each( inputs, function( index, input ) {
 		// next load in variables for all of the inputs.
-		vars[input.name] = { value: queryUserFormInputDouble(input) };
+//		vars[input.name] = { value: queryUserFormInputDouble(input) };
+//BOOK
+    vars[input.name] = queryUserFormInputDouble(input);
+
     });
 
 	/* for each solid
@@ -145,21 +149,43 @@ function calculateVarsAtStep(step) {
 
 		// TODO - Derive Velocity and Acceleration!
 
-		var x = evaluateCalculator( solid.xpath.calculator, vars )
+		var xComplex = evaluateCalculator( solid.xpath.calculator, vars )
+    var x = xComplex.value
 
-		var y = evaluateCalculator( solid.ypath.calculator, vars )
+		var yComplex = evaluateCalculator( solid.ypath.calculator, vars )
+    var y = yComplex.value
 
-
-		calc = { 
+    var calc = { 
 			x: x,
 			xdisp: x,
-			y: y,
+			xvel: 0,
+      xaccel: 0,
+      y: y,
 			ydisp: y,
-			height: evaluateCalculator( solid.shape.height.calculator, vars ),
-			width: evaluateCalculator( solid.shape.width.calculator, vars )
+      yvel: 0,
+      yaccel: 0,
+			height: evaluateCalculator( solid.shape.height.calculator, vars ).value,
+			width: evaluateCalculator( solid.shape.width.calculator, vars ).value
 		}
 
+    // Hande Complex return types from Euler Calculator
+    if ( xComplex.velocity != undefined ) { 
+      calc.xvel = xComplex.velocity
+    }
+    if ( xComplex.acceleration != undefined ) { 
+      calc.xaccel = xComplex.acceleration
+    }
+    if ( yComplex.velocity != undefined ) { 
+      calc.yvel = yComplex.velocity
+    }
+    if ( yComplex.acceleration != undefined ) { 
+      calc.yaccel = yComplex.acceleration
+    }
+
 		vars[solid.name] = calc
+
+    console.log("iwp:178: Wrote solid: ", solid.name, " to vars: ", vars )
+
 
 		//	-> update the DOM with theose new results
 		updateSolidSvgPathAndShape(solid, calc)
@@ -171,7 +197,7 @@ function calculateVarsAtStep(step) {
 */
 	$.each( outputs, function( index, output ) {
 
-		var newValue = evaluateCalculator( output.calculator, vars );
+		var newValue = evaluateCalculator( output.calculator, vars ).value;
 		vars[output.name] = newValue;
 
 		// -> update the DOM with the new reuslts.
@@ -324,8 +350,8 @@ function compileCalculator(iwpCalculator) {
     
     var c =  { 
       type: "euler-mathjs",
-      initDisplacementCompiled: math.compile( iwpCalculator.displacement ),
-      initVelocityCompiled: math.compile( iwpCalculator.velocity ),
+      initialDisplacementCompiled: math.compile( iwpCalculator.displacement ),
+      initialVelocityCompiled: math.compile( iwpCalculator.velocity ),
       accelerationCompiled: math.compile( iwpCalculator.acceleration ),
       equation: { 
         acceleration : iwpCalculator.acceleration,
@@ -376,11 +402,25 @@ function evaluateCalculator( calculator, vars ) {
 			{type : mathjs, compiled: Object}
 		*/
 		try { 
+// Next Step: 2016Sep23 - Figure out why scientific notation is causing the mathjs eqn parsing exception:
+/*
+evaluateCalculator:364> Unable to evaluate calculator:  Error: Undefined symbol k(…)
+iwp5.js:415 evaluateCalculator:364> Equation:  k*(F^(-1.5)+G^(-1.5))
+iwp5.js:416 evaluateCalculator:364> Vars:  Object {step: 0, G: -9.8, t: -0.05, tDelta: 0.002, delta_t: 0.002…}
+iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: -0.05, tDelta: 0.002, delta_t: 0.002…}
+*/
+//vars.k = 0.000000738528
+//vars.F = 0.005125000000000001
+
+
 			var result = calculator.compiled.eval(vars);
-			return result;
+			return { value: result };
 		} catch ( err ) { 
-			console.log("evaluateCalculator:364> Unable to evaluate calculator: ", err, calculator.equation, vars);
-			return -1;
+			console.log("evaluateCalculator:364> Unable to evaluate calculator: ", err )
+      console.log("evaluateCalculator:364> Equation: ", calculator.equation )
+      console.log("evaluateCalculator:364> Vars: ", vars)
+
+			return { value: -1 };
 		} 
 	} else if ( calculator.type == "euler-mathjs" ) {
     try {
@@ -393,33 +433,56 @@ function evaluateCalculator( calculator, vars ) {
       //  IIRC, IWPv4, these were available as xdisp, xvel, xaccell on solids, for example.
       // Today, in IWP5, our return structure out of thi sufnction is a single double value.
 
-      if ( calculator["initDisplacementValue"] == undefined ) { 
-        calculator.initDisplacementValue = evaluateCompiledMath(calculator.initDisplacementCompiled, vars)
-        console.log("iwp5:380> calculating initial displacement to: ", calculator.initDisplacementValue )
+      if ( calculator["initialDisplacement"] == undefined ) { 
+        calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
+        calculator.currentDisplacement = calculator.initialDisplacement
+        //console.log("iwp5:380> calculating initial displacement to: ", calculator.initialDisplacement )
       }
 
-      if ( calculator["initVelocityValue"] == undefined ) { 
-        calculator.initVelocityValue = evaluateCompiledMath(calculator.initVelocityCompiled, vars)
-        console.log("iwp5:380> calculating initial velocity to: ", calculator.initVelocityValue )
+      if ( calculator["initialVelocity"] == undefined ) { 
+        calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
+        calculator.currentVelocity = calculator.initialVelocity
+        //console.log("iwp5:405> calculating initial velocity to: ", calculator.initialVelocity )
       }
 
+
+      console.log("iwp5:428> BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", vars )
 
       // then calculate the acceleratiion
       var acceleration = calculator.accelerationCompiled.eval(vars);
 
 
-      // DO MORE MATH HERE
-      return calculator.initDisplacementValue;
+      if ( currentStep == 0 ) { 
+          calculator.currentVelocity = calculator.initialVelocity;
+          calculator.currentDisplacement = calculator.initialDisplacement;
+      } else if ( changeStep > 0 ) { 
+          // Positive direction calcuation
+          calculator.currentVelocity += acceleration
+          calculator.currentDisplacement += calculator.currentVelocity
+
+      } else if ( changeStep < 0 ) { 
+          calculator.currentVelocity -= acceleration
+          calculator.currentDisplacement -= calculator.currentVelocity
+      } else { 
+        // No step direction
+      }
+
+      console.log("iwp5:428> AFTER STEP: ", currentStep, "/", changeStep, "  d: ", calculator.currentDisplacement, "  v: ", calculator.currentVelocity, " a: ", acceleration );
+
+      return { value: calculator.currentDisplacement,
+        displacement: calculator.currentDisplacement,
+        velocity: calculator.currentVelocity,
+        acceleration: acceleration }
 
       // return displacement.value; 
     } catch ( err ) {
       console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, vars);
-      return -1;
+      return { value: -1 };
     }
   }
   else { 
 		console.log("DEVELOPER: Unsupported calculator type : ", calculator);
-		return -1;
+		return { value: -1 };
 	}
 
 
@@ -450,8 +513,11 @@ function parseProblemToMemory( problem ) {
     $.each( problem.objects.input, function( index, input ) {
       addInput(input);
     });
-  } else { 
+  } else if ($.type ( problem.objects.output ) == 'item') {
     addInput(problem.objects.input);
+  } 
+  else { 
+    null
   }
 
   // Output - These could be an array OR a single item.
@@ -568,7 +634,7 @@ function renderProblemFromMemory() {
 function fitText(input) {
     var HeightDiv = $("#tabTables").height();
     var toFit = $('#'+input);
-    console.log("input: ", input);
+    // console.log("input: ", input);
     var HeightTable = toFit.height();
     if (HeightTable > HeightDiv) {
         var FontSizeTable = parseInt(toFit.css("font-size"), 10);
@@ -643,6 +709,7 @@ function renderCanvasFromMemory() {
 
 function queryTimeStepInputDouble() {
   time.change = parseFloat($("#itime_change").val());
+  return time.change;
 }
 
 function queryUserFormInputDouble(input) {
