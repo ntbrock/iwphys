@@ -34,6 +34,7 @@ function masterResetSteps() {
 	currentStep = 0;
 	changeStep = 0;
 	varsAtStep = [];
+  calculateVarsAtStep(0);
 }
 
 
@@ -139,6 +140,18 @@ function calculateVarsAtStep(step) {
 
     });
 
+  /*
+  for each output perofrm the calculator
+*/
+  $.each( outputs, function( index, output ) {
+
+    var newValue = evaluateCalculator( output.calculator, vars ).value;
+    vars[output.name] = newValue;
+
+    // -> update the DOM with the new reuslts.
+    updateUserFormOutputDouble(output, newValue);
+    });
+
 	/* for each solid
 		sequence of the solids does matter in the problem file. 
 	*/
@@ -193,16 +206,16 @@ function calculateVarsAtStep(step) {
 
 
 /*
-	for each output perofrm the calculator
-*/
-	$.each( outputs, function( index, output ) {
+  for each output perofrm the calculator
 
-		var newValue = evaluateCalculator( output.calculator, vars ).value;
-		vars[output.name] = newValue;
+  $.each( outputs, function( index, output ) {
 
-		// -> update the DOM with the new reuslts.
-		updateUserFormOutputDouble(output, newValue);
-    });
+    var newValue = evaluateCalculator( output.calculator, vars ).value;
+    vars[output.name] = newValue;
+
+    // -> update the DOM with the new reuslts.
+    updateUserFormOutputDouble(output, newValue);
+    });*/
 
 
 	//console.log(" calculateVarsAtStep, vars = ", vars);
@@ -324,8 +337,7 @@ function addSolid(solid) {
 }
 
 //-----------------------------------------------------------------------
-// Calculation Section
-
+// Calculation Section 
 
 function compileCalculator(iwpCalculator) { 
 
@@ -340,7 +352,7 @@ function compileCalculator(iwpCalculator) {
 
 		var c = { 
 			type: "mathjs",
-			compiled: math.compile( iwpCalculator.value ),
+			compiled: math.compile( (iwpCalculator.value) ),
 			equation: iwpCalculator.value
 		}
 		// console.log("compileCalculator:171> value : ", iwpCalculator.value, " compiledTo: ", c)
@@ -371,7 +383,7 @@ function compileCalculator(iwpCalculator) {
 
   }
   else { 
-		console.log("DEBUG ERROR: Only parameteric calculator supported in the August 2016 version, unable to handle: ", incomingType);
+		console.log("DEBUG ERROR: Only parametric and Euler supported in the August 2016 version, unable to handle: ", incomingType);
 		return {type:"unsupported", "incomingType": incomingType, "iwpCalculator": iwpCalculator };
 	}
 }
@@ -643,7 +655,7 @@ function fitText(input) {
             toFit.css("font-size", FontSizeTable);
             HeightTable = toFit.height();
         }
-    console.log("text fitted");
+    //console.log("text fitted");
     }
   };
 
