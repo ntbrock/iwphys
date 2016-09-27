@@ -60,7 +60,7 @@
 			<name>a</name>
 			<text>Inclination Angle</text>
 			<initialValue>30.0</initialValue>
-			<units>°</units>
+			<units>Degrees</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
@@ -351,7 +351,7 @@
 		<output>
 			<name>acc</name>
 			<text>Acceleration</text>
-			<units>m/s²</units>
+			<units>m/sÂ²</units>
 			<calculator type="parametric">
 				<value>g*(sin(ar)-u*cos(ar))</value>
 			</calculator>
