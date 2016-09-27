@@ -176,6 +176,24 @@
 			</ypath>
 		</solid>
 		<output>
+			<name>dq</name>
+			<text>Side of Blue</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(mq)^0.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>xcmo</name>
+			<text>Xcm initial</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(mp*xp+mq*xq)/(mp+mq)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
 			<name>so</name>
 			<text>Initial Separation</text>
 			<units>m</units>
@@ -244,24 +262,6 @@
 			<units>m</units>
 			<calculator type="parametric">
 				<value>(mp)^0.5</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>dq</name>
-			<text>Side of Blue</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>(mq)^0.5</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>xcmo</name>
-			<text>Xcm initial</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>(mp*xp+mq*xq)/(mp+mq)</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
