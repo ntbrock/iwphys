@@ -185,6 +185,15 @@
 			<hidden>1</hidden>
 		</output>
 		<output>
+			<name>dp</name>
+			<text>Side of Red</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>(mp)^0.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
 			<name>xcmo</name>
 			<text>Xcm initial</text>
 			<units>m</units>
@@ -253,15 +262,6 @@
 			<units>m/s</units>
 			<calculator type="parametric">
 				<value>(2*mp*vp+(mq-mp)*vq)/(mp+mq)</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>dp</name>
-			<text>Side of Red</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>(mp)^0.5</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
