@@ -261,8 +261,16 @@ function setGraphWindow(inGraphWindow) {
 function addInput(input) { 
   //console.log("addInput: ", input );
   inputs.push( input );
-  // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"}
-  htmlInputs.push( "<tr id='input_" + input.name + "' class='bottomBorder'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
+  // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"} 
+  // 07 Oct 2016 Honoring hidden flag
+  if (input.hidden == "1") {
+    //console.log("hidden");
+    htmlInputs.push( "<tr id='input_" + input.name + "' class='bottomBorder'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
+  }
+  else {
+    //console.log('visible');
+    htmlInputs.push( "<tr id='input_" + input.name + "' class='bottomBorder'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
+  }
 }
 
 function addOutput(output) { 
@@ -314,6 +322,8 @@ function addSolid(solid) {
 	ypath: { 
   		calculator : compileCalculator(solid.ypath.calculator)
   	}
+  //BOOK
+  // Add points here..?
   };
   solids.push(compiledSolid);
 
@@ -330,6 +340,10 @@ function addSolid(solid) {
   else if (solid.shape["@attributes"].type == "line") {
     //console.log("it's a line");
     svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
+  }
+  else if (solid.shape["@attributes"].type == "polygon") {
+    console.log("it's a polygon")
+    svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill="+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+">");  
   }
   else {
     return;
@@ -612,7 +626,6 @@ function yHeight(size) {
 
 function renderProblemFromMemory() { 
   // Render from memory into page
-
   $("#itime").html( time.start.toFixed(2) );
   $("#itime_change").val(time.change);
   $("#description").html( description.text );
@@ -630,16 +643,35 @@ function renderProblemFromMemory() {
 
   // GraphWindow is a TODO feature for now.
   // $("#graphWindow").html( graphWindow );
-
-  $("#inputTable").append("<tr><th colspan='2'>Inputs</th></tr>"+htmlInputs);
-  $("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>"+htmlOutputs);
+  $("#inputTable").append("<tr><th colspan='2'>Inputs</th></tr>");
+  $("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>");
+  $.each(htmlInputs, function( index, input ) {
+    if (input.hidden == "1") {
+      $("#inputTable").append(input);
+    }
+    else {
+      $("#inputTable").append(input);
+    }
+  })
+  $.each(htmlOutputs, function( index, output ) {
+    if (output.hidden == "1") {
+      $("#outputTable").append(output);
+      return;
+    }
+    else {
+      $("#outputTable").append(output);
+    }
+  })
+  /* Debugging 07 Oct 2016 Ryan Steed
+  //$("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>"+htmlOutputs);
+  */ 
   //Moved to addSolidsToCanvas, 8 Aug 2016
   //$("#solids").html( solids.join(" ") );
 
   fitText("inputTable");
   renderCanvasFromMemory();
   addSolidsToCanvas(svgSolids);
-  };
+};
 
 //21 Sep 2016 Ryan Steed
 //Auto-adjust font-size so that font size fits the table.
@@ -773,6 +805,11 @@ if (solid.shape.type == "circle") {
     .attr("x2", xCanvas(pathAndShape.x + pathAndShape.width))
     .attr("y1", yCanvas(pathAndShape.y))
     .attr("y2", yCanvas(pathAndShape.y + pathAndShape.height));
+  }
+  else if (solid.shape.type == "polygon") {
+    console.log("number of points: ", solid.shape);
+    //var points = "" + 
+    //svgSolid.attr("points", )
   }
   else {
   	console.log("!! Unidentified shape:550> solid = ", solid.shape.type);
