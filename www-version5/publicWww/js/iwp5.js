@@ -117,6 +117,68 @@ function archiveVarsAtStep( step, vars ) {
 
   
 
+function calculateOutputAtStep(output, step, vars) { 
+    var newValue = evaluateCalculator( output.name+".out", output.calculator, vars ).value;
+    vars[output.name] = newValue;
+
+    // -> update the DOM with the new reuslts.
+    updateUserFormOutputDouble(output, newValue);
+
+  console.log("iwp:127: Wrote output, pass 1: ", output.name, " to newValue: ", newValue )
+
+}
+
+
+function calculateSolidAtStep(solid, step, vars) { 
+
+    // TODO - Derive Velocity and Acceleration!
+
+    var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars )
+    var x = xComplex.value
+
+    var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars )
+    var y = yComplex.value
+
+    var calc = { 
+      x: x,
+      xdisp: x,
+      xpos: x,
+      xvel: 0,
+      xaccel: 0,
+      y: y,
+      ydisp: y,
+      ypos: y,
+      yvel: 0,
+      yaccel: 0,
+      height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars ).value,
+      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value
+    }
+
+    // Hande Complex return types from Euler Calculator
+    if ( xComplex.velocity != undefined ) { 
+      calc.xvel = xComplex.velocity
+    }
+    if ( xComplex.acceleration != undefined ) { 
+      calc.xaccel = xComplex.acceleration
+    }
+    if ( yComplex.velocity != undefined ) { 
+      calc.yvel = yComplex.velocity
+    }
+    if ( yComplex.acceleration != undefined ) { 
+      calc.yaccel = yComplex.acceleration
+    }
+
+    vars[solid.name] = calc
+
+    // WARNING: updating svg display deep inside the calc route.
+    updateSolidSvgPathAndShape(solid, calc)
+
+    console.log("iwp:178: Wrote solid: ", solid.name, " to SVG & vars: ", vars )
+
+}
+
+
+
 function calculateVarsAtStep(step) { 
 
   // vars should be a map of string to double, including the mathematical / physical constants.
@@ -139,17 +201,22 @@ function calculateVarsAtStep(step) {
 
     });
 
+
+  var failedOutputs = [];
+  var failedSolids = [];
+
   /*
   for each output perofrm the calculator
 */
   $.each( outputs, function( index, output ) {
 
-    var newValue = evaluateCalculator( output.calculator, vars ).value;
-    vars[output.name] = newValue;
+    try { 
+      calculateOutputAtStep(output, step, vars);
+    } catch ( err ) { 
+      failedOutputs.push(output);
+    }   
+  });
 
-    // -> update the DOM with the new reuslts.
-    updateUserFormOutputDouble(output, newValue);
-    });
 
 	/* for each solid
 		sequence of the solids does matter in the problem file. 
@@ -159,62 +226,45 @@ function calculateVarsAtStep(step) {
 		for x, y, h, w , perform the calculator 
 		*/
 
-		// TODO - Derive Velocity and Acceleration!
-
-		var xComplex = evaluateCalculator( solid.xpath.calculator, vars )
-    var x = xComplex.value
-
-		var yComplex = evaluateCalculator( solid.ypath.calculator, vars )
-    var y = yComplex.value
-
-    var calc = { 
-			x: x,
-			xdisp: x,
-			xvel: 0,
-      xaccel: 0,
-      y: y,
-			ydisp: y,
-      yvel: 0,
-      yaccel: 0,
-			height: evaluateCalculator( solid.shape.height.calculator, vars ).value,
-			width: evaluateCalculator( solid.shape.width.calculator, vars ).value
-		}
-
-    // Hande Complex return types from Euler Calculator
-    if ( xComplex.velocity != undefined ) { 
-      calc.xvel = xComplex.velocity
-    }
-    if ( xComplex.acceleration != undefined ) { 
-      calc.xaccel = xComplex.acceleration
-    }
-    if ( yComplex.velocity != undefined ) { 
-      calc.yvel = yComplex.velocity
-    }
-    if ( yComplex.acceleration != undefined ) { 
-      calc.yaccel = yComplex.acceleration
+    try { 
+     calculateSolidAtStep(solid, step, vars);
+        //  -> update the DOM with theose new results
+  
+    } catch ( err ) { 
+        console.log(":231 caught a faailed solid exception: ", err);
+      failedSolids.push(solid);
+	
     }
 
-		vars[solid.name] = calc
-
-    console.log("iwp:178: Wrote solid: ", solid.name, " to vars: ", vars )
+});
 
 
-		//	-> update the DOM with theose new results
-		updateSolidSvgPathAndShape(solid, calc)
-    });
+ console.log(":238 failedOutputs: ", failedOutputs);
+  console.log(":239 failedSolids: ", failedSolids);
 
+  var fatalOutputs = [];
+  var fatalSolids = [];
 
-/*
-  for each output perofrm the calculator
+  // REPLAY FAILURES
+  $.each( failedOutputs, function( index, output ) {
 
-  $.each( outputs, function( index, output ) {
+    try { 
+      calculateOutputAtStep(output, step, vars);
+    } catch ( err ) { 
+      fatalOutputs.push(output);
+    }   
+  });
 
-    var newValue = evaluateCalculator( output.calculator, vars ).value;
-    vars[output.name] = newValue;
+  $.each( failedSolids, function( index, solid ) {  
+    try { 
+      calculateSolidAtStep(solid, step, vars);  
+    } catch ( err ) { 
+      fatalSolids.push(solid);  
+    }
+  });
 
-    // -> update the DOM with the new reuslts.
-    updateUserFormOutputDouble(output, newValue);
-    });*/
+  console.log(":238 FATALOutputs: ", fatalOutputs);
+  console.log(":239 FATALSolids: ", fatalSolids);
 
 
 	//console.log(" calculateVarsAtStep, vars = ", vars);
@@ -425,7 +475,7 @@ function evaluateCompiledMath( compiled, vars ) {
 }
 
 
-function evaluateCalculator( calculator, vars ) {
+function evaluateCalculator( resultVariable, calculator, vars ) {
 
 	if ( calculator.type == "mathjs" )   {
 		/*
@@ -446,11 +496,12 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 			var result = calculator.compiled.eval(vars);
 			return { value: result };
 		} catch ( err ) { 
-			console.log("evaluateCalculator:364> Unable to evaluate calculator: ", err )
-      console.log("evaluateCalculator:364> Equation: ", calculator.equation )
-      console.log("evaluateCalculator:364> Vars: ", vars)
-
-			return { value: -1 };
+			console.log("evaluateCalculator:450> " + resultVariable + "> Unable to evaluate calculator: ", err );
+      console.log("evaluateCalculator:450> " + resultVariable + "> Equation: ", calculator.equation );
+      console.log("evaluateCalculator:450> " + resultVariable + "> Vars: ", vars);
+      
+			// return { value: undefined };  // was -1
+      throw err;
 		} 
 	} else if ( calculator.type == "euler-mathjs" ) {
     try {
@@ -507,12 +558,14 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       // return displacement.value; 
     } catch ( err ) {
       console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, vars);
-      return { value: -1 };
+      throw err;
+      //return { value: undefined }; // was -1
     }
   }
   else { 
 		console.log("DEVELOPER: Unsupported calculator type : ", calculator);
-		return { value: -1 };
+		throw err;
+    //return { value: undefined }; // was -1
 	}
 
 
