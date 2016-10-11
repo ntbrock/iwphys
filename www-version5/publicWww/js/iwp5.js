@@ -135,7 +135,6 @@ function calculateVarsAtStep(step) {
 	$.each( inputs, function( index, input ) {
 		// next load in variables for all of the inputs.
 //		vars[input.name] = { value: queryUserFormInputDouble(input) };
-//BOOK
     vars[input.name] = queryUserFormInputDouble(input);
 
     });
@@ -263,14 +262,11 @@ function addInput(input) {
   inputs.push( input );
   // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"} 
   // 07 Oct 2016 Honoring hidden flag
-  if (input.hidden == "1") {
-    //console.log("hidden");
-    htmlInputs.push( "<tr id='input_" + input.name + "' class='bottomBorder'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
+  var style = "";
+  if ( input.hidden == "1" ) { 
+    style = "display:none;'"
   }
-  else {
-    //console.log('visible');
-    htmlInputs.push( "<tr id='input_" + input.name + "' class='bottomBorder'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
-  }
+  htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='bottomBorder'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
 }
 
 function addOutput(output) { 
@@ -285,7 +281,11 @@ function addOutput(output) {
 
   outputs.push( compiledOutput );
   // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { "@attributes": { "type": "parametric" }, "value": "Red.xaccel" } }
-  htmlOutputs.push( "<tr id='output_" + output.name + "' class='bottomBorder'><td>"+ output.text +"</td><td><input id='" + output.name + "' type='text' value='-999'> " + output.units + "</td></tr>");
+  var style = ""
+  if ( output.hidden == "1" ) { 
+    style = "display:none;'"
+  }
+  htmlOutputs.push( "<tr style='" + style +"' id='output_" + output.name + "' class='bottomBorder'><td>"+ output.text +"</td><td><input id='" + output.name + "' type='text' value='-999'> " + output.units + "</td></tr>");
 }
 
 
@@ -322,9 +322,13 @@ function addSolid(solid) {
 	ypath: { 
   		calculator : compileCalculator(solid.ypath.calculator)
   	}
-  //BOOK
-  // Add points here..?
+  
   };
+
+  // Ifthe problem iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
+  // hard to do as part of the initialization because it is a dynamic list. 
+  // Add points here..? 
+  //BOOK
   solids.push(compiledSolid);
 
 
@@ -656,12 +660,14 @@ function renderProblemFromMemory() {
   $.each(htmlOutputs, function( index, output ) {
     if (output.hidden == "1") {
       $("#outputTable").append(output);
+
       return;
     }
     else {
       $("#outputTable").append(output);
     }
   })
+  //BOOK ^^ Doesn't work because calculations are dependent on HTML inputs - separate class? Might also create an invisible point table datum..
   /* Debugging 07 Oct 2016 Ryan Steed
   //$("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>"+htmlOutputs);
   */ 
