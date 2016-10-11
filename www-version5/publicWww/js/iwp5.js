@@ -117,23 +117,20 @@ function archiveVarsAtStep( step, vars ) {
 
   
 
-function calculateOutputAtStep(output, step, vars) { 
-    var newValue = evaluateCalculator( output.name+".out", output.calculator, vars ).value;
+function calculateOutputAtStep(output, step, vars, verbose) { 
+    var newValue = evaluateCalculator( output.name+".out", output.calculator, vars, verbose ).value;
     vars[output.name] = newValue;
 
     // -> update the DOM with the new reuslts.
     updateUserFormOutputDouble(output, newValue);
-
-  console.log("iwp:127: Wrote output, pass 1: ", output.name, " to newValue: ", newValue )
-
 }
 
 
-function calculateSolidAtStep(solid, step, vars) { 
+function calculateSolidAtStep(solid, step, vars, verbose) { 
 
     // TODO - Derive Velocity and Acceleration!
 
-    var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars )
+    var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
     var x = xComplex.value
 
     var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars )
@@ -173,7 +170,7 @@ function calculateSolidAtStep(solid, step, vars) {
     // WARNING: updating svg display deep inside the calc route.
     updateSolidSvgPathAndShape(solid, calc)
 
-    console.log("iwp:178: Wrote solid: ", solid.name, " to SVG & vars: ", vars )
+    //console.log("iwp:178: Wrote solid: ", solid.name, " to SVG & vars: ", vars )
 
 }
 
@@ -211,7 +208,7 @@ function calculateVarsAtStep(step) {
   $.each( outputs, function( index, output ) {
 
     try { 
-      calculateOutputAtStep(output, step, vars);
+      calculateOutputAtStep(output, step, vars, false );
     } catch ( err ) { 
       failedOutputs.push(output);
     }   
@@ -227,20 +224,19 @@ function calculateVarsAtStep(step) {
 		*/
 
     try { 
-     calculateSolidAtStep(solid, step, vars);
+     calculateSolidAtStep(solid, step, vars, false );
         //  -> update the DOM with theose new results
   
     } catch ( err ) { 
-        console.log(":231 caught a faailed solid exception: ", err);
+        //console.log(":231 caught a faailed solid exception: ", err);
       failedSolids.push(solid);
-	
     }
 
 });
 
 
- console.log(":238 failedOutputs: ", failedOutputs);
-  console.log(":239 failedSolids: ", failedSolids);
+  // console.log(":238 failedOutputs: ", failedOutputs);
+  // console.log(":239 failedSolids: ", failedSolids);
 
   var fatalOutputs = [];
   var fatalSolids = [];
@@ -249,7 +245,7 @@ function calculateVarsAtStep(step) {
   $.each( failedOutputs, function( index, output ) {
 
     try { 
-      calculateOutputAtStep(output, step, vars);
+      calculateOutputAtStep(output, step, vars, true );
     } catch ( err ) { 
       fatalOutputs.push(output);
     }   
@@ -257,15 +253,18 @@ function calculateVarsAtStep(step) {
 
   $.each( failedSolids, function( index, solid ) {  
     try { 
-      calculateSolidAtStep(solid, step, vars);  
+      calculateSolidAtStep(solid, step, vars, true );  
     } catch ( err ) { 
       fatalSolids.push(solid);  
     }
   });
 
-  console.log(":238 FATALOutputs: ", fatalOutputs);
-  console.log(":239 FATALSolids: ", fatalSolids);
-
+  if ( fatalOutputs.length > 0 ) { 
+    console.log(":238 Giving Up on Circular Calc - FATALOutputs: ", fatalOutputs);
+  }
+  if ( fatalSolids.length > 0 ) { 
+    console.log(":239 Giving Up on Circular Calc - FATALSolids: ", fatalSolids);
+  }
 
 	//console.log(" calculateVarsAtStep, vars = ", vars);
 	vars;
@@ -475,7 +474,7 @@ function evaluateCompiledMath( compiled, vars ) {
 }
 
 
-function evaluateCalculator( resultVariable, calculator, vars ) {
+function evaluateCalculator( resultVariable, calculator, vars, verbose ) {
 
 	if ( calculator.type == "mathjs" )   {
 		/*
@@ -492,14 +491,44 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 //vars.k = 0.000000738528
 //vars.F = 0.005125000000000001
 
+      // 2016Oct11 -- Parameteric Calculators need to calculate their own instantaneous velocity.
 
 			var result = calculator.compiled.eval(vars);
-			return { value: result };
+
+
+      if ( calculator.latestValue == undefined ) { 
+        calculator.previousValue = result;
+      } else { 
+        calculator.previousValue = calculator.latestValue;
+      }
+      calculator.latestValue = result;
+
+      // Instaneous Velocity Calculation.
+      calculator.velocity = ( calculator.latestValue - calculator.previousValue ) / vars["delta_t"]
+      //console.log("evaluateCalculator:509> " + resultVariable + "> Calculated Velicoty: "  + calculator.velocity + " (previous: " + calculator.previousValue + " latest: "+ calculator.latestValue + ")")
+
+      // Instanteous Acceleration Calcualtor
+      if ( calculator.latestVelocity == undefined ) { 
+        calculator.previousVelocity = calculator.velocity
+      } else { 
+        calculator.previousVelocity = calculator.latestVelocity;
+      }
+
+      calculator.latestVelocity = calculator.velocity;
+      calculator.acceleration = ( calculator.latestVelocity - calculator.previousVelocity ) / vars["delta_t"]
+
+
+
+			return { value: result, 
+        displacement: result,
+        velocity: calculator.velocity, 
+        acceleration: calculator.acceleration };
 		} catch ( err ) { 
+      if ( verbose ) { 
 			console.log("evaluateCalculator:450> " + resultVariable + "> Unable to evaluate calculator: ", err );
       console.log("evaluateCalculator:450> " + resultVariable + "> Equation: ", calculator.equation );
       console.log("evaluateCalculator:450> " + resultVariable + "> Vars: ", vars);
-      
+      }
 			// return { value: undefined };  // was -1
       throw err;
 		} 
@@ -527,7 +556,9 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       }
 
 
-      console.log("iwp5:428> BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", vars )
+      if ( verbose ) { 
+        console.log("iwp5:428> BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", vars )
+          }
 
       // then calculate the acceleratiion
       var acceleration = calculator.accelerationCompiled.eval(vars);
@@ -548,7 +579,9 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
         // No step direction
       }
 
+if ( verbose ) { 
       console.log("iwp5:428> AFTER STEP: ", currentStep, "/", changeStep, "  d: ", calculator.currentDisplacement, "  v: ", calculator.currentVelocity, " a: ", acceleration );
+}
 
       return { value: calculator.currentDisplacement,
         displacement: calculator.currentDisplacement,
@@ -557,14 +590,18 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
       // return displacement.value; 
     } catch ( err ) {
+      if ( verbose ) { 
       console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, vars);
+    }
       throw err;
       //return { value: undefined }; // was -1
     }
   }
   else { 
+    if ( verbose ) {
 		console.log("DEVELOPER: Unsupported calculator type : ", calculator);
 		throw err;
+  }
     //return { value: undefined }; // was -1
 	}
 
