@@ -34,7 +34,8 @@ function masterResetSteps() {
 	currentStep = 0;
 	changeStep = 0;
 	varsAtStep = [];
-  calculateVarsAtStep(0);
+  var vars0 = calculateVarsAtStep(0);
+  archiveVarsAtStep( currentStep, vars0 ); // Boot up the environment
 }
 
 
@@ -112,9 +113,10 @@ function handleStep() {
 
 
 function archiveVarsAtStep( step, vars ) {
-	varsAtStep[step] = vars
+  // console.log("Archving vars at step: " + step );
+  varsAtStep[step] = {};
+	$.extend(varsAtStep[step], vars)
 }
-
   
 
 function calculateOutputAtStep(output, step, vars, verbose) { 
@@ -129,6 +131,11 @@ function calculateOutputAtStep(output, step, vars, verbose) {
 function calculateSolidAtStep(solid, step, vars, verbose) { 
 
     // TODO - Derive Velocity and Acceleration!
+ 
+
+    if ( solid.name == "P" ) { 
+      var breaker = 1
+    }
 
     var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
     var x = xComplex.value
@@ -174,6 +181,8 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
 }
 
+// This was needed for self-referential euler's animations. like em-ratio-2d.iwp.
+var CONFIG_clone_step_from_previous = true;
 
 
 function calculateVarsAtStep(step) { 
@@ -181,6 +190,18 @@ function calculateVarsAtStep(step) {
   // vars should be a map of string to double, including the mathematical / physical constants.
   var vars = { step: step }
   $.extend(vars, varsConstants);
+
+  // EXPERIMENTAL: Pull the previous variables in from last step?
+  if ( CONFIG_clone_step_from_previous ) { 
+  try { 
+    $.extend(vars, varsAtStep[step-1])
+    //console.log("calculateVarsATStep:195> Cloned vars from past Step-1: " + (step-1) + " => ", JSON.stringify(varsAtStep) )
+  } catch(err) { 
+    console.log("calculateVarsAtStep:198> Exception when mirring past vars into current vars:", err)
+  }
+
+  }
+
 	// Eveything begins with time, populate t.
 	vars.t = time.start + step * time.change;
   vars.tDelta = queryTimeStepInputDouble();  
@@ -195,7 +216,6 @@ function calculateVarsAtStep(step) {
 		// next load in variables for all of the inputs.
 //		vars[input.name] = { value: queryUserFormInputDouble(input) };
     vars[input.name] = queryUserFormInputDouble(input);
-
     });
 
 
@@ -230,6 +250,7 @@ function calculateVarsAtStep(step) {
     } catch ( err ) { 
         //console.log(":231 caught a faailed solid exception: ", err);
       failedSolids.push(solid);
+      throw err;// DEBUG REMOVE THIS  BOOK
     }
 
 });
@@ -267,7 +288,10 @@ function calculateVarsAtStep(step) {
   }
 
 	//console.log(" calculateVarsAtStep, vars = ", vars);
-	vars;
+
+
+  //FIX - Must use the return keyword
+  return vars;
 }
 
 // After the problem parse, we want to call :   calculateVarsAtStep(currentStep = 0);
@@ -543,6 +567,9 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       //  IIRC, IWPv4, these were available as xdisp, xvel, xaccell on solids, for example.
       // Today, in IWP5, our return structure out of thi sufnction is a single double value.
 
+
+
+
       if ( calculator["initialDisplacement"] == undefined ) { 
         calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
         calculator.currentDisplacement = calculator.initialDisplacement
@@ -558,11 +585,16 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
       if ( verbose ) { 
         console.log("iwp5:428> BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", vars )
+
           }
 
-      // then calculate the acceleratiion
-      var acceleration = calculator.accelerationCompiled.eval(vars);
-
+      var acceleration = 0;
+      try { 
+        // then calculate the acceleratiion
+       acceleration = calculator.accelerationCompiled.eval(vars);
+      } catch ( err ) { 
+        console.log("evaluateCalculator:580> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
+      }
 
       if ( currentStep == 0 ) { 
           calculator.currentVelocity = calculator.initialVelocity;
@@ -579,8 +611,8 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
         // No step direction
       }
 
-if ( verbose ) { 
-      console.log("iwp5:428> AFTER STEP: ", currentStep, "/", changeStep, "  d: ", calculator.currentDisplacement, "  v: ", calculator.currentVelocity, " a: ", acceleration );
+if ( true ) { 
+      console.log("iwp5:428> " + resultVariable + " at t = " + vars["t"] + "> AFTER STEP: ", currentStep, "/", changeStep, "  d: ", calculator.currentDisplacement, "  v: ", calculator.currentVelocity, " a: ", acceleration );
 }
 
       return { value: calculator.currentDisplacement,

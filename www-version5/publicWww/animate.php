@@ -111,7 +111,8 @@ header('Content-Type: text/html');
     $.getJSON( $('#problem').attr('problem-uri'), function(problem) {
       parseProblemToMemory(problem);
       renderProblemFromMemory();
-      calculateVarsAtStep(0);
+      // calculateVarsAtStep(0);
+      masterResetSteps();
     });
   </script>
 
