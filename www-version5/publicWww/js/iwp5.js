@@ -250,7 +250,6 @@ function calculateVarsAtStep(step) {
     } catch ( err ) { 
         //console.log(":231 caught a faailed solid exception: ", err);
       failedSolids.push(solid);
-      throw err;// DEBUG REMOVE THIS  BOOK
     }
 
 });
@@ -401,7 +400,7 @@ function addSolid(solid) {
   // Ifthe problem iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
   // hard to do as part of the initialization because it is a dynamic list. 
   // Add points here..? 
-  //BOOK
+
   solids.push(compiledSolid);
 
 
@@ -789,7 +788,7 @@ function renderProblemFromMemory() {
       $("#outputTable").append(output);
     }
   })
-  //BOOK ^^ Doesn't work because calculations are dependent on HTML inputs - separate class? Might also create an invisible point table datum..
+  
   /* Debugging 07 Oct 2016 Ryan Steed
   //$("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>"+htmlOutputs);
   */ 
