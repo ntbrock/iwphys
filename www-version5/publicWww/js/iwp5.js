@@ -41,7 +41,6 @@ function masterResetSteps() {
     resetSolidCalculators(solid);
   });
 
-  
   var vars0 = calculateVarsAtStep(0);
 
   archiveVarsAtStep( currentStep, vars0 ); // Boot up the environment
@@ -110,10 +109,19 @@ function handleStep() {
 
 	if ( newStep != currentStep ) { 
 
-		// UI rendering is handled by the calculate as a side effect
-		var vars = calculateVarsAtStep(newStep);
+    // Back button poerformance - Let's look at the historical array of variables, if we have it, reload
+    // to avoid doing a recalcaultion
 
-		archiveVarsAtStep( newStep, vars );
+    //BOOK
+    if ( varsAtStep[newStep] != undefined ) { 
+      console.log("[iwp5.js:118] Step " + newStep + " already exist, reloading fro history.")
+      repaintStep(newStep);
+    } else { 
+  		// UI rendering is handled by the calculate as a side effect
+	 	  var vars = calculateVarsAtStep(newStep);
+  		archiveVarsAtStep( newStep, vars );
+    }
+
 	}
 
 	currentStep = newStep;
@@ -192,6 +200,35 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
 // This was needed for self-referential euler's animations. like em-ratio-2d.iwp.
 var CONFIG_clone_step_from_previous = false;
+
+
+// RENDERING steps:
+//  updateTimeDisplay(vars.t);
+//  updateUserFormOutputDouble(output, newValue);
+//  updateSolidSvgPathAndShape(solid, calc)
+
+/** 
+ * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
+ */
+function repaintStep(step) { 
+  var vars = varsAtStep[step];
+  if ( vars == undefined ) { 
+    throw "No previous calculations available at step: " + step;
+  } else { 
+
+    updateTimeDisplay(vars.t);  
+
+    //BOOK
+   $.each( outputs, function( index, output ) {
+      updateUserFormOutputDouble(output, vars[output.name]);
+   });
+
+  $.each( solids, function( index, solid ) {
+      updateSolidSvgPathAndShape(solid, vars[solid.name])
+   });
+  }
+}
+
 
 
 function calculateVarsAtStep(step) { 
