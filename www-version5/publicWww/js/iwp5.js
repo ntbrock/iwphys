@@ -227,6 +227,7 @@ function repaintStep(step) {
 }
 
 
+var CONFIG_throw_solid_calculation_exceptions = true;
 
 function calculateVarsAtStep(step) { 
 
@@ -292,6 +293,10 @@ function calculateVarsAtStep(step) {
   
     } catch ( err ) { 
         //console.log(":231 caught a faailed solid exception: ", err);
+          if ( CONFIG_throw_solid_calculation_exceptions ) { 
+         throw err;
+         }
+
       failedSolids.push(solid);
     }
 
@@ -571,6 +576,8 @@ function evaluateCompiledMath( compiled, vars ) {
   }
 }
 
+// Config flag for develoeprs to enable debugging of euler acceleration calculations - have fun!
+var CONFIG_throw_acceleration_calculation_exceptions = true;
 
 function evaluateCalculator( resultVariable, calculator, vars, verbose ) {
 
@@ -658,7 +665,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
 
       if ( verbose ) { 
-        console.log("iwp5:428> BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", vars )
+        console.log("iwp5:661> BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", vars )
 
           }
 
@@ -667,7 +674,11 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
         // then calculate the acceleratiion
        acceleration = calculator.accelerationCompiled.eval(vars);
       } catch ( err ) { 
-        console.log("evaluateCalculator:580> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
+        
+        console.log("evaluateCalculator:670> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
+        if ( CONFIG_throw_acceleration_calculation_exceptions ) { 
+         throw err;
+         }
       }
 
       if ( currentStep == 0 ) { 
@@ -973,7 +984,13 @@ function updateUserFormOutputDouble(output, newValue) {
 }
 
 function updateTimeDisplay(t) { 
-	$("#itime").html(t.toFixed(4));
+
+  var timeToDisplay = t.toFixed(4);
+  if ( timeToDisplay == 0 ) { 
+    timeToDisplay = t; // Handle very small numbers. 
+  }
+
+	$("#itime").html(timeToDisplay);
   //console.log("t = "+t);
 }
 
