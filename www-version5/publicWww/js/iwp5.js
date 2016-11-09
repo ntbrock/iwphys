@@ -227,7 +227,7 @@ function repaintStep(step) {
 }
 
 
-var CONFIG_throw_solid_calculation_exceptions = true;
+var CONFIG_throw_solid_calculation_exceptions = false;
 
 function calculateVarsAtStep(step) { 
 
@@ -577,7 +577,7 @@ function evaluateCompiledMath( compiled, vars ) {
 }
 
 // Config flag for develoeprs to enable debugging of euler acceleration calculations - have fun!
-var CONFIG_throw_acceleration_calculation_exceptions = true;
+var CONFIG_throw_acceleration_calculation_exceptions = false;
 
 function evaluateCalculator( resultVariable, calculator, vars, verbose ) {
 
