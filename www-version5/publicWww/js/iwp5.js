@@ -704,7 +704,7 @@ function parseProblemToMemory( problem ) {
 var canvasBox = { minX: 0, minY: 0, maxX: 1000, maxY: 1000 };
 function yCanvas(y) {
   var yDomain = iwindow.ymax - iwindow.ymin;
-  var yProportion = y / yDomain;
+  var yProportion = - y / yDomain;
   var yCorrected = yProportion + 0.5;
   var cDomain = canvasBox.maxY - canvasBox.minY;
   var cProportion = yCorrected * cDomain;
@@ -752,7 +752,7 @@ function yHeight(size) {
 function renderProblemFromMemory() { 
   // Render from memory into page
   $("#itime").html( time.start.toFixed(2) );
-  $("#itime_change").val(time.change);
+  $("#itime_change").val(time.change.toFixed(2));
   $("#description").html( description.text );
 
 //Debugging 29 Jul 2016
@@ -894,7 +894,7 @@ function queryUserFormInputDouble(input) {
 }
 
 function updateUserFormOutputDouble(output, newValue) { 
-	var readValue = $("#" + output.name).val(newValue);
+	var readValue = $("#" + output.name).val(newValue.toFixed(2));
 }
 
 function updateTimeDisplay(t) { 
@@ -920,7 +920,7 @@ if (solid.shape.type == "circle") {
   }
   else if (solid.shape.type == "rectangle") {
     svgSolid.attr("x", xCanvas(pathAndShape.x - pathAndShape.width / 2))
-		.attr("y", yCanvas(pathAndShape.y - pathAndShape.height / 2))
+		.attr("y", yCanvas(pathAndShape.y + pathAndShape.height / 2))
 		.attr("width", xWidth(pathAndShape.width))
 		.attr("height", yHeight(pathAndShape.height));
  }
@@ -1035,6 +1035,7 @@ function handleResetClick() {
 	updateTimeDisplay(0);
   handleStopClick();
 	masterResetSteps();
+  updateUserFormOutputDouble();
 	document.getElementById(buttonIds.startStop).setAttribute("value", "Start");
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleStartClick()");
 }
