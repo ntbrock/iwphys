@@ -111,10 +111,8 @@ function handleStep() {
 
     // Back button poerformance - Let's look at the historical array of variables, if we have it, reload
     // to avoid doing a recalcaultion
-
-    //BOOK
     if ( varsAtStep[newStep] != undefined ) { 
-      console.log("[iwp5.js:118] Step " + newStep + " already exist, reloading fro history.")
+      //console.log("[iwp5.js:118] Step " + newStep + " already exist, reloading for history.")
       repaintStep(newStep);
     } else { 
   		// UI rendering is handled by the calculate as a side effect
@@ -218,7 +216,6 @@ function repaintStep(step) {
 
     updateTimeDisplay(vars.t);  
 
-    //BOOK
    $.each( outputs, function( index, output ) {
       updateUserFormOutputDouble(output, vars[output.name]);
    });
@@ -304,43 +301,42 @@ function calculateVarsAtStep(step) {
   // console.log(":238 failedOutputs: ", failedOutputs);
   // console.log(":239 failedSolids: ", failedSolids);
 
-  var fatalOutputs = [];
-  var fatalSolids = [];
+  var fatalOutputs = failedOutputs;
+  var fatalSolids = failedSolids;
+  var fatalReplayAttemptsRemaining = 3;
 
-  // REPLAY FAILURES
-  $.each( failedOutputs, function( index, output ) {
+  while ( fatalReplayAttemptsRemaining > 0 ) { 
+    fatalReplayAttemptsRemaining -= 1;
+    var replayOutputs = fatalOutputs;
+    var replaySolids = fatalSolids;
 
-    try { 
-      calculateOutputAtStep(output, step, vars, true );
-    } catch ( err ) { 
-      fatalOutputs.push(output);
-    }   
-  });
+    fatalOutputs = [];
+    fatalSolids = [];
 
-  $.each( failedSolids, function( index, solid ) {  
-    try { 
-      calculateSolidAtStep(solid, step, vars, true );  
-    } catch ( err ) { 
-      fatalSolids.push(solid);  
-    }
-  });
+    // REPLAY FAILURES within a resonable maximum number of attempts.
+     $.each( replayOutputs, function( index, output ) {
+      try { 
+        calculateOutputAtStep(output, step, vars, true );
+      } catch ( err ) { 
+        fatalOutputs.push(output);
+      }   
+    });
 
- // REPLAY FAILURES
-  $.each( failedOutputs, function( index, output ) {
+    $.each( replaySolids, function( index, solid ) {  
+      try { 
+       calculateSolidAtStep(solid, step, vars, true );  
+      } catch ( err ) { 
+       fatalSolids.push(solid);  
+      }
+   });
 
-    try { 
-      calculateOutputAtStep(output, step, vars, true );
-    } catch ( err ) { 
-      fatalOutputs.push(output);
-    }   
-  });
-
+  }
 
   if ( fatalOutputs.length > 0 ) { 
-    console.log(":238 Giving Up on Circular Calc - FATALOutputs: ", fatalOutputs);
+    console.log(":238 Giving Up on Recursive Circular Calc - FATALOutputs: ", fatalOutputs);
   }
   if ( fatalSolids.length > 0 ) { 
-    console.log(":239 Giving Up on Circular Calc - FATALSolids: ", fatalSolids);
+    console.log(":239 Giving Up on Recursive Circular Calc - FATALSolids: ", fatalSolids);
   }
 
 	//console.log(" calculateVarsAtStep, vars = ", vars);
@@ -831,7 +827,7 @@ function yHeight(size) {
 function renderProblemFromMemory() { 
   // Render from memory into page
   $("#itime").html( time.start.toFixed(2) );
-  $("#itime_change").val(time.change.toFixed(2));
+  $("#itime_change").val(time.change);
   $("#description").html( description.text );
 
 //Debugging 29 Jul 2016
@@ -973,11 +969,11 @@ function queryUserFormInputDouble(input) {
 }
 
 function updateUserFormOutputDouble(output, newValue) { 
-	var readValue = $("#" + output.name).val(newValue.toFixed(3));
+	var readValue = $("#" + output.name).val(newValue.toFixed(4));
 }
 
 function updateTimeDisplay(t) { 
-	$("#itime").html(t.toFixed(2));
+	$("#itime").html(t.toFixed(4));
   //console.log("t = "+t);
 }
 
