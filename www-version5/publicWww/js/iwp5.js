@@ -34,7 +34,16 @@ function masterResetSteps() {
 	currentStep = 0;
 	changeStep = 0;
 	varsAtStep = [];
+  
+
+  // We also need to clear out previous parameteric displacements used for instant velecioty calculations.
+  $.each( solids, function( index, solid ) {
+    resetSolidCalculators(solid);
+  });
+
+  
   var vars0 = calculateVarsAtStep(0);
+
   archiveVarsAtStep( currentStep, vars0 ); // Boot up the environment
 }
 
@@ -182,7 +191,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 }
 
 // This was needed for self-referential euler's animations. like em-ratio-2d.iwp.
-var CONFIG_clone_step_from_previous = true;
+var CONFIG_clone_step_from_previous = false;
 
 
 function calculateVarsAtStep(step) { 
@@ -223,7 +232,7 @@ function calculateVarsAtStep(step) {
   var failedSolids = [];
 
   /*
-  for each output perofrm the calculator
+  for each output perform the calculator
 */
   $.each( outputs, function( index, output ) {
 
@@ -278,6 +287,17 @@ function calculateVarsAtStep(step) {
       fatalSolids.push(solid);  
     }
   });
+
+ // REPLAY FAILURES
+  $.each( failedOutputs, function( index, output ) {
+
+    try { 
+      calculateOutputAtStep(output, step, vars, true );
+    } catch ( err ) { 
+      fatalOutputs.push(output);
+    }   
+  });
+
 
   if ( fatalOutputs.length > 0 ) { 
     console.log(":238 Giving Up on Circular Calc - FATALOutputs: ", fatalOutputs);
@@ -361,6 +381,28 @@ function addOutput(output) {
 }
 
 
+
+/**
+ * 2016-Nov-09 - Reset the instantanous velcity calculations on reset 
+*/
+function resetSolidCalculators(solid) { 
+  if ( solid.xpath && solid.xpath.calculator ) { 
+      solid.xpath.calculator.latestValue = undefined;
+  }
+  if ( solid.ypath && solid.ypath.calculator ) { 
+      solid.ypath.calculator.latestValue = undefined;
+  }
+  /** We are not using velocity on height + width calcs */
+  /*
+  if ( solid.xpath && solid.xpath.calculator ) { 
+      solid.width.calculator.latestValue = null;
+  }
+  if ( solid.ypath && solid.ypath.calculator ) { 
+      solid.height.calculator.latestValue = null;
+  }
+  */
+  // BUGBUG - Not concerned about polypath reset yet.
+}
 
 
 function addSolid(solid) { 
@@ -894,7 +936,7 @@ function queryUserFormInputDouble(input) {
 }
 
 function updateUserFormOutputDouble(output, newValue) { 
-	var readValue = $("#" + output.name).val(newValue.toFixed(2));
+	var readValue = $("#" + output.name).val(newValue.toFixed(3));
 }
 
 function updateTimeDisplay(t) { 
