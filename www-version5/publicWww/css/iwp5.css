@@ -29,12 +29,15 @@ table {
 	overflow: auto;
 	margin-bottom: 0;
 	margin-top: 0;
+	width: 381px;
 }
 #tabTables {
 	clear: right;
 	overflow: auto;
 	margin-left: 20%;
 	margin-top: 0;
+	height: 400px;
+	width: 381px;
 }
 #iwindow {
 	position: absolute;
@@ -65,8 +68,8 @@ table {
 	font-size: 14px;
 }
 th, td {
-	padding:        15px   ;
-	text-align:     center ;
+	padding: 11px;
+	text-align:     center ;	
 	vertical-align: center ;
 }
 .bottomBorder {
@@ -76,4 +79,32 @@ th, td {
 }
 .italic {
 	font-style: italic;
+}
+#tabs td {
+	padding-left: 50px;
+	padding-right: 50px;
+}
+#time {
+	width: 80px;
+}
+#startStopButton {
+	width: 66px;
+}
+.border {
+	border-radius: 10px;
+    border: 2px solid #336699;
+    padding: 20px;
+}
+#buttonControls {
+	padding: 0;
+}
+#buttonControls div {
+	height: 30px;
+	width: 50px;
+	padding-bottom: 0px;
+	padding-top: 5px;
+	display: inline-block;
+}
+#buttonControls i {
+	vertical-align: middle;
 }

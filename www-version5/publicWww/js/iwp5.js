@@ -855,7 +855,6 @@ function renderProblemFromMemory() {
   // GraphWindow is a TODO feature for now.
   // $("#graphWindow").html( graphWindow );
   $("#inputTable").append("<tr><th colspan='2'>Inputs</th></tr>");
-  $("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>");
   $.each(htmlInputs, function( index, input ) {
     if (input.hidden == "1") {
       $("#inputTable").append(input);
@@ -864,14 +863,15 @@ function renderProblemFromMemory() {
       $("#inputTable").append(input);
     }
   })
+  $("#inputTable").append("<tr><th colspan='2'>Outputs</th></tr>");
   $.each(htmlOutputs, function( index, output ) {
     if (output.hidden == "1") {
-      $("#outputTable").append(output);
+      $("#inputTable").append(output);
 
       return;
     }
     else {
-      $("#outputTable").append(output);
+      $("#inputTable").append(output);
     }
   })
   
@@ -881,7 +881,7 @@ function renderProblemFromMemory() {
   //Moved to addSolidsToCanvas, 8 Aug 2016
   //$("#solids").html( solids.join(" ") );
 
-  fitText("inputTable");
+  fitText("#inputTable");
   renderCanvasFromMemory();
   addSolidsToCanvas(svgSolids);
 };
@@ -890,7 +890,7 @@ function renderProblemFromMemory() {
 //Auto-adjust font-size so that font size fits the table.
 function fitText(input) {
     var HeightDiv = $("#tabTables").height();
-    var toFit = $('#'+input);
+    var toFit = $(input);
     // console.log("input: ", input);
     var HeightTable = toFit.height();
     if (HeightTable > HeightDiv) {
@@ -1050,7 +1050,7 @@ function windowSettingsOn() {
   inputTableOff();
   otherInfoOff();
   outputTableOff();
-  fitText("iwindow");
+  fitText("#iwindow");
 };
 function windowSettingsOff() {
 	$("#iwindow").attr("style", "visibility:hidden");
@@ -1063,7 +1063,7 @@ function otherInfoOn() {
   outputTableOff();
   windowSettingsOff();
   inputTableOff();
-  fitText("otherInfo");
+  fitText("#otherInfo");
 };
 function otherInfoOff() {
   $("#otherInfo").attr("style", "visibility:hidden");
@@ -1076,7 +1076,7 @@ function outputTableOn() {
   otherInfoOff();
   windowSettingsOff();
   inputTableOff();
-  fitText("outputTable");
+  fitText("#outputTable");
 };
 function outputTableOff() {
   $("#outputTable").attr("style", "visibility:hidden");
@@ -1089,7 +1089,7 @@ function inputTableOn() {
   otherInfoOff();
   windowSettingsOff();
   outputTableOff();
-  fitText("inputTable");
+  fitText("#inputTable");
 };
 function inputTableOff() {
   $("#inputTable").attr("style", "visibility:hidden");
@@ -1112,7 +1112,7 @@ function handleGoClick() {
 	setStepDirection(1);
 
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleStopClick()");
-	document.getElementById(buttonIds.startStop).setAttribute("value", "Stop");
+	$("#startStopIcon").attr("class", "fa fa-pause fa-lg");
 }
 //Stops motion.					
 function handleStopClick() {
@@ -1120,7 +1120,7 @@ function handleStopClick() {
 	clearInterval(stepTrigger);
 	setStepDirection(0);
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleGoClick()");
-	document.getElementById(buttonIds.startStop).setAttribute("value", "Resume");
+	$("#startStopIcon").attr("class", "fa fa-play fa-lg");
 };
 //Resets simulation.
 function handleResetClick() {
@@ -1128,7 +1128,7 @@ function handleResetClick() {
   handleStopClick();
 	masterResetSteps();
   updateUserFormOutputDouble();
-	document.getElementById(buttonIds.startStop).setAttribute("value", "Start");
+	//document.getElementById(buttonIds.startStop).setAttribute("class", "Start");
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleStartClick()");
 }
 
@@ -1136,24 +1136,14 @@ function handleBackClick() {
 	clearInterval(stepTrigger);
 	stepBackwardAndPause();
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleGoClick()");
-	document.getElementById(buttonIds.startStop).setAttribute("value", "Resume");
+	$("#startStopIcon").attr("class", "fa fa-play fa-lg");
 };
 function handleForwardClick() {
 	clearInterval(stepTrigger);
 	stepForwardAndPause();
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleGoClick()");
-	document.getElementById(buttonIds.startStop).setAttribute("value", "Resume");
+	$("#startStopIcon").attr("class", "fa fa-play fa-lg");
 };
-
-
-function showReset() {
-	document.getElementById(buttonIds.reset).style.visibility = "visible";
-	document.getElementById(buttonIds.startStop).setAttribute("colspan", "1");
-}
-function hideReset() {
-	document.getElementById(buttonIds.reset).style.visibility = "collapse";
-	document.getElementById(buttonIds.startStop).setAttribute("colspan","2");
-}
 
 function handleInputChange() {
   $("*").change( function () {   

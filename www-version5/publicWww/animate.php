@@ -31,14 +31,17 @@ header('Content-Type: text/html');
   </div>
   <table id="tabs">
     <tr>
-      <td id="it" class="bottomBorder"><input id="inputTableButton" type="button" onclick="inputTableOn()" value="Inputs"/></td>
-      <td id="ot" class=""><input id="outputTableButton" type="button" onclick="outputTableOn()" value="Outputs"/></td>
-      <td id="ws" class=""><input id="windowSettings" type="button" onclick="windowSettingsOn()" value="Window"/></td>
-      <td id="oib" class=""><input id="otherInfoButton" type="button" onclick="otherInfoOn()" value="About"/></td>
+      <td id="it" class="bottomBorder" onclick="inputTableOn()"><i id="inputTableButton" class="fa fa-list fa-2x"></i></td>
+      <!-- 9 Nov 2016 Ryan Steed
+        Removed to create single variable tab:
+        <td id="ot" class=""><input id="outputTableButton" type="button" onclick="outputTableOn()" value="Outputs"/></td>
+      -->
+      <td id="ws" class=""  onclick="windowSettingsOn()"><i id="windowSettings" class="fa fa-clone fa-2x"></i></td>
+      <td id="oib" class="" onclick="otherInfoOn()"><i id="otherInfoButton" class="fa fa-question fa-2x"></td>
     </tr>
   </table>
   
- <div id="tabTables" style="height:385px">
+ <div id="tabTables">
  <table id="inputTable" class="trim"></table>
  <table id="outputTable" class="trim"></table>
  <table id="iwindow" align='center' class="trim">
@@ -81,22 +84,22 @@ header('Content-Type: text/html');
       <td><div id="description"></div></td>
     </tr>
     <tr class="bottomBorder">
-      <td class="italic"><p>Author: </p></td>
+      <td class="italic"><p>Author</p></td>
       <td><div id="authorUsername">Loading...</div></td>
     </tr>
   </table>
   </div>
     <table id="playBar">
       <tr>  
-        <td class="bottomBorder">
-          <span>Time: </span>
+        <td class="bottomBorder" id="time">
+          <span><i class="fa fa-clock-o"></i></span>
           <span id="itime">--</span>
         </td> 
         <td id="buttonControls">
-          <span><input id="resetButton" type="button" onclick="handleResetClick()" value="Reset"></input></span>
-          <span><input id="backButton" type="button" onclick="handleBackClick()" value="<<"></input></span>
-          <span><input id="startStopButton" type="button" onclick="handleStartClick()" value="Start"></input></span>
-          <span><input id="forwardButton" type="button" onclick="handleForwardClick()" value=">>"></input></span>
+          <div onclick="handleBackClick()" id="backButton"><i class="fa fa-step-backward fa-lg"></i></div>
+          <div onclick="handleStartClick()" id="startStopButton"><i id="startStopIcon" class="fa fa-play fa-lg"></i></div>
+          <div onclick="handleForwardClick()" id="forwardButton"><i class="fa fa-step-forward fa-lg"></i></div>
+          <div onclick="handleResetClick()" id="resetButton"><i class="fa fa-repeat fa-lg"></i></div>
         </td>
         <td class="bottomBorder">
           <span>Time Step: </span>
