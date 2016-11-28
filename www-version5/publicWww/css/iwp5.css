@@ -32,10 +32,6 @@ table {
 	width: 381px;
 }
 #tabTables {
-	clear: right;
-	overflow: auto;
-	margin-left: 20%;
-	margin-top: 0;
 	height: 400px;
 	width: 381px;
 }
@@ -44,28 +40,26 @@ table {
 	visibility: hidden;
 	/*float: right;*/
 }
-#otherInfo {
+#timeTab {
 	position: absolute;
 	visibility: hidden;
+	font-size: 16px;
 }
 #inputTable {
 	position: absolute;
 	visibility: visible;
 }
-#outputTable {
-	position: absolute;
-	visibility: hidden;
-}
 #playBar {
 	visibility: visible;
 	float: left;
-	width: auto;
-	margin-right: 35%;
+	width: 480px;
 	overflow: auto;
+	margin-right: 100%;
 }
-#otherInfo td {
-	text-align: left;
-	font-size: 14px;
+#otherInfo {
+	top: 150%;
+	height: auto;
+	width: 480px;
 }
 th, td {
 	padding: 11px;
@@ -77,6 +71,11 @@ th, td {
 	text-align:    center          ;
 	border-bottom: 1px black solid ;
 }
+.rightBorder {
+	position:      relative        ;
+	text-align:    center          ;
+	border-right: 1px black solid ;
+}
 .italic {
 	font-style: italic;
 }
@@ -85,7 +84,9 @@ th, td {
 	padding-right: 50px;
 }
 #time {
-	width: 80px;
+	width: 200px;
+	height: 48px;
+	font-size: 20px;
 }
 #startStopButton {
 	width: 66px;
@@ -96,7 +97,9 @@ th, td {
     padding: 20px;
 }
 #buttonControls {
-	padding: 0;
+	padding-bottom: 0px	;
+	padding-top: 0px ;
+	padding-left: 20px;
 }
 #buttonControls div {
 	height: 30px;

@@ -36,41 +36,78 @@ header('Content-Type: text/html');
         Removed to create single variable tab:
         <td id="ot" class=""><input id="outputTableButton" type="button" onclick="outputTableOn()" value="Outputs"/></td>
       -->
+      <td id="oib" class="" onclick="timeTabOn()"><i id="timeTabButton" class="fa fa-clock-o fa-2x"></td>
       <td id="ws" class=""  onclick="windowSettingsOn()"><i id="windowSettings" class="fa fa-clone fa-2x"></i></td>
-      <td id="oib" class="" onclick="otherInfoOn()"><i id="otherInfoButton" class="fa fa-question fa-2x"></td>
     </tr>
   </table>
   
  <div id="tabTables">
  <table id="inputTable" class="trim"></table>
- <table id="outputTable" class="trim"></table>
  <table id="iwindow" align='center' class="trim">
-    <tr><th>Window Settings</th></tr>
+    <tr><th colspan="3">Window Settings</th></tr>
+    <tr>
+      <td></td>
+      <td>X</td>
+      <td>Y</td>
     <tr class="bottomBorder">
-      <td>X min:</td>
-      <td><input id="iwindow_xmin" type="text"></td></tr>
+      <td>Min:</td>
+      <td><input id="iwindow_xmin" type="text"></td>
+      <td><input id="iwindow_ymin" type="text"></td>
+    </tr>
     <tr class="bottomBorder">
-      <td>X max:</td>
-      <td><input id="iwindow_xmax" type="text"></td></tr>
+      <td>Max:</td>
+      <td><input id="iwindow_xmax" type="text"></td>
+      <td><input id="iwindow_ymax" type="text"></td>
+    </tr>
     <tr class="bottomBorder">
-      <td>X grid:</td>
-      <td><input id="iwindow_xgrid" type="text"></td></tr>
+      <td>Grid:</td>
+      <td><input id="iwindow_xgrid" type="text"></td>
+      <td><input id="iwindow_ygrid" type="text"></td>
+    </tr>
     <tr class="bottomBorder">
-      <td>X unit:</td>
-      <td><input id="iwindow_xunit" type="text"></td></tr>
-    <tr class="bottomBorder">
-      <td>Y min:</td>
-      <td><input id="iwindow_ymin" type="text"></td></tr>
-    <tr class="bottomBorder">
-      <td>Y max:</td>
-      <td><input id="iwindow_ymax" type="text"></td></tr>
-    <tr class="bottomBorder">
-      <td>Y grid:</td>
-      <td><input id="iwindow_ygrid" type="text"></td></tr>
-    <tr class="bottomBorder">
-      <td>Y unit:</td>
-      <td><input id="iwindow_yunit" type="text"></td></tr>
+      <td>Unit:</td>
+      <td><input id="iwindow_xunit" type="text"></td>
+      <td><input id="iwindow_yunit" type="text"></td>
+    </tr>
  </table>
+ <table id="timeTab">
+    <tr>
+      <th colspan="2">Time Controls</th>
+    </tr>
+    <tr class="bottomBorder">
+      <td>
+          <span>Time Step</span>
+      </td>
+      <td>
+          <span><input id="itime_change" type="text" value="--"/> seconds</span>
+      </td>
+    </tr>
+    <tr class="bottomBorder">
+      <td>Start Time</td>
+      <td><span><input id="itime_start" type="text" value="--"/> seconds</span></td>
+    </tr>
+    <tr class="bottomBorder">
+      <td>Stop Time</td>
+      <td><span><input id="itime_stop" type="text" value="--"/> seconds</span></td>
+    </tr>
+  </table>
+  </div>
+
+    <table id="playBar">
+      <tr>  
+        <td class="bottomBorder" id="time">
+          <span><i class="fa fa-clock-o"></i></span>
+          <span id="itime">--</span>
+        </td> 
+        <td id="buttonControls">
+          <div onclick="handleBackClick()" id="backButton"><i class="fa fa-step-backward fa-lg"></i></div>
+          <div onclick="handleStartClick()" id="startStopButton"><i id="startStopIcon" class="fa fa-play fa-lg"></i></div>
+          <div onclick="handleForwardClick()" id="forwardButton"><i class="fa fa-step-forward fa-lg"></i></div>
+          <div onclick="handleResetClick()" id="resetButton"><i class="fa fa-repeat fa-lg"></i></div>
+        </td>
+      </tr>
+    </table>
+
   <table id="otherInfo">
     <tr>
       <th colspan="2">Additional Information</th>
@@ -88,25 +125,8 @@ header('Content-Type: text/html');
       <td><div id="authorUsername">Loading...</div></td>
     </tr>
   </table>
-  </div>
-    <table id="playBar">
-      <tr>  
-        <td class="bottomBorder" id="time">
-          <span><i class="fa fa-clock-o"></i></span>
-          <span id="itime">--</span>
-        </td> 
-        <td id="buttonControls">
-          <div onclick="handleBackClick()" id="backButton"><i class="fa fa-step-backward fa-lg"></i></div>
-          <div onclick="handleStartClick()" id="startStopButton"><i id="startStopIcon" class="fa fa-play fa-lg"></i></div>
-          <div onclick="handleForwardClick()" id="forwardButton"><i class="fa fa-step-forward fa-lg"></i></div>
-          <div onclick="handleResetClick()" id="resetButton"><i class="fa fa-repeat fa-lg"></i></div>
-        </td>
-        <td class="bottomBorder">
-          <span>Time Step: </span>
-          <span><input id="itime_change" type="text" value="--" size="4em"/></span>
-        </td>
-      </tr>
-    </table>
+ 
+
   </div> <!-- end iwp-animate -->
 
   <script type="text/javascript">

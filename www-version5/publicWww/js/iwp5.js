@@ -406,7 +406,8 @@ function addOutput(output) {
   	name: output.name,
   	text: output.text,
   	units: output.units,
-  	calculator:  compileCalculator(output.calculator)
+  	calculator: compileCalculator(output.calculator),
+    hidden: output.hidden //Hidden flag still needed - be careful about cutting off attributes here.
   }
 
   outputs.push( compiledOutput );
@@ -837,8 +838,10 @@ function yHeight(size) {
 
 function renderProblemFromMemory() { 
   // Render from memory into page
-  $("#itime").html( time.start.toFixed(2) );
-  $("#itime_change").val(time.change);
+  $("#itime").html( time.start.toString() );
+  $("#itime_change").val(time.change.toString());
+  $("#itime_start").val(time.start.toString());
+  $("#itime_stop").val(time.stop.toString());
   $("#description").html( description.text );
 
 //Debugging 29 Jul 2016
@@ -854,25 +857,33 @@ function renderProblemFromMemory() {
 
   // GraphWindow is a TODO feature for now.
   // $("#graphWindow").html( graphWindow );
-  $("#inputTable").append("<tr><th colspan='2'>Inputs</th></tr>");
-  $.each(htmlInputs, function( index, input ) {
-    if (input.hidden == "1") {
-      $("#inputTable").append(input);
-    }
-    else {
-      $("#inputTable").append(input);
+  console.log(outputs)
+  inputTitle = 0;
+  outputTitle = 0;
+
+  $.each(inputs, function(index, input) {
+    if ( input.hidden != "1" ) {
+      inputTitle = 1;
     }
   })
-  $("#inputTable").append("<tr><th colspan='2'>Outputs</th></tr>");
+  $.each(outputs, function(index, output) {
+    if ( output.hidden != "1" ) {
+      outputTitle = 1;
+      console.log("it's visible");
+    }
+  })
+  if ( inputTitle ) {
+    $("#inputTable").append("<tr><th colspan='2'>Inputs</th></tr>");
+  }
+  //$("#inputTable").append("<tr><th colspan='2'>Inputs</th></tr>");
+  $.each(htmlInputs, function( index, input ) {
+    $("#inputTable").append(input);
+  })
+  if ( outputTitle ) {
+    $("#inputTable").append("<tr><th colspan='2'>Outputs</th></tr>");
+  }
   $.each(htmlOutputs, function( index, output ) {
-    if (output.hidden == "1") {
-      $("#inputTable").append(output);
-
-      return;
-    }
-    else {
-      $("#inputTable").append(output);
-    }
+    $("#inputTable").append(output);
   })
   
   /* Debugging 07 Oct 2016 Ryan Steed
@@ -890,9 +901,11 @@ function renderProblemFromMemory() {
 //Auto-adjust font-size so that font size fits the table.
 function fitText(input) {
     var HeightDiv = $("#tabTables").height();
+    var WidthDiv = $("#tabTables").width();
     var toFit = $(input);
     // console.log("input: ", input);
     var HeightTable = toFit.height();
+    var WidthTable = toFit.width();
     if (HeightTable > HeightDiv) {
         var FontSizeTable = parseInt(toFit.css("font-size"), 10);
         while (HeightTable > HeightDiv && FontSizeTable > 10) {
@@ -902,6 +915,15 @@ function fitText(input) {
         }
     //console.log("text fitted");
     }
+    if (WidthTable > WidthDiv) {
+        var FontSizeTable = parseInt(toFit.css("font-size"), 10);
+        while (WidthTable > WidthDiv && FontSizeTable > 10) {
+            FontSizeTable--;
+            toFit.css("font-size", FontSizeTable);
+            WidthTable = toFit.width();
+        }
+    }
+    toFit.css("width", WidthDiv);
   };
 
 function addSolidsToCanvas(solids) {
@@ -980,16 +1002,15 @@ function queryUserFormInputDouble(input) {
 }
 
 function updateUserFormOutputDouble(output, newValue) { 
-	var readValue = $("#" + output.name).val(newValue.toFixed(4));
+	var readValue = $("#" + output.name).val(newValue.toPrecision(5));
 }
 
 function updateTimeDisplay(t) { 
 
-  var timeToDisplay = t.toFixed(4);
+  var timeToDisplay = t.toPrecision(5);
   if ( timeToDisplay == 0 ) { 
     timeToDisplay = t; // Handle very small numbers. 
   }
-
 	$("#itime").html(timeToDisplay);
   //console.log("t = "+t);
 }
@@ -1048,8 +1069,7 @@ function windowSettingsOn() {
 	$("#iwindow").attr("style", "visibility:visible");
   $("#ws").attr("class", "bottomBorder");
   inputTableOff();
-  otherInfoOff();
-  outputTableOff();
+  timeTabOff();
   fitText("#iwindow");
 };
 function windowSettingsOff() {
@@ -1057,38 +1077,23 @@ function windowSettingsOff() {
   $("#ws").attr("class", "");
 }
 
-function otherInfoOn() {
-  $("#otherInfo").attr("style", "visibility:visible");
+function timeTabOn() {
+  $("#timeTab").attr("style", "visibility:visible");
   $("#oib").attr("class", "bottomBorder");
-  outputTableOff();
   windowSettingsOff();
   inputTableOff();
-  fitText("#otherInfo");
+  fitText("#timeTab");
 };
-function otherInfoOff() {
-  $("#otherInfo").attr("style", "visibility:hidden");
+function timeTabOff() {
+  $("#timeTab").attr("style", "visibility:hidden");
   $("#oib").attr("class", "");
-}
-
-function outputTableOn() {
-  $("#outputTable").attr("style", "visibility:visible");
-  $("#ot").attr("class", "bottomBorder");
-  otherInfoOff();
-  windowSettingsOff();
-  inputTableOff();
-  fitText("#outputTable");
-};
-function outputTableOff() {
-  $("#outputTable").attr("style", "visibility:hidden");
-  $("#ot").attr("class", "");
 }
 
 function inputTableOn() {
   $("#inputTable").attr("style", "visibility:visible");
   $("#it").attr("class", "bottomBorder");
-  otherInfoOff();
+  timeTabOff();
   windowSettingsOff();
-  outputTableOff();
   fitText("#inputTable");
 };
 function inputTableOff() {
@@ -1099,7 +1104,6 @@ function inputTableOff() {
 //Click handles.
 function handleStartClick() {
 	handleGoClick();
-	showReset();
 }
 
 var buttonIds  = { startStop: "startStopButton", back: "backButton", forward: "forwardButton", reset: "resetButton" }
