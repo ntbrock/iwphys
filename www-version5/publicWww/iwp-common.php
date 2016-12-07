@@ -20,7 +20,7 @@ $httpSecure = false;
 if ( ! empty($_SERVER['HTTPS']) ) { $httpSecure = true; }
 if ( ! empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) { $httpSecure = true; }
 
-
+$animateFile = $pathInfo;
 $animateUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $animateUri . $pathInfo;
 $baseAnimateUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $animateUri;
 $xtojUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $xtojUri . $pathInfo;

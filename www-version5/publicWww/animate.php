@@ -21,6 +21,9 @@ header('Content-Type: text/html');
 <body>
 
 <?php include_once("iwp-nav.php") ?>
+
+      <h3><?= end(explode('/', $animateFile)) ?></h3>
+      <p><div id="description"></div></p>
      
   <div class="iwp-animate">
 
