@@ -742,13 +742,17 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
           calculator.currentDisplacement = calculator.initialDisplacement; // no t adjustment
 
       } else if ( changeStep > 0 ) { 
+        if ( acceleration != null ) { 
           // Positive direction calcuation
           calculator.currentVelocity += acceleration;
           calculator.currentDisplacement += calculator.currentVelocity * dt;
+            }
 
       } else if ( changeStep < 0 ) { 
+          if ( acceleration != null ) { 
           calculator.currentVelocity -= acceleration;
           calculator.currentDisplacement -= calculator.currentVelocity * dt;
+        }
       } else { 
         // No step direction
       }
