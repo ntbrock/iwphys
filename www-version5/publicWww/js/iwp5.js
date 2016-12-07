@@ -155,8 +155,59 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
     var x = xComplex.value
 
+ //----------------------------------------
+ /// 2016-Dec-07 attempt to alleivate circular dependency.
+ var calcX = { 
+      x: x,
+      xdisp: x,
+      xpos: x,
+      xvel: 0,
+      xaccel: 0
+    }
+
+  // Hande Complex return types from Euler Calculator
+    if ( xComplex.velocity != undefined ) { 
+      calcX.xvel = xComplex.velocity
+    }
+    if ( xComplex.acceleration != undefined ) { 
+      calcX.xaccel = xComplex.acceleration
+    }
+
+ vars[solid.name] = calcX;
+ //----------------------------------------
+
     var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars )
     var y = yComplex.value
+
+  //----- MORE TEST CODE
+
+
+ // Handle Complex return types from Euler Calculator
+     var calcY = { 
+      y: y,
+      ydisp: y,
+      ypos: y,
+      yvel: 0,  // fold in w/ terinary
+      yaccel: 0
+    }
+
+
+    if ( yComplex.velocity != undefined ) { 
+      calcY.yvel = yComplex.velocity
+    }
+    if ( yComplex.acceleration != undefined ) { 
+      calcY.yaccel = yComplex.acceleration
+    }
+
+  if ( xComplex.acceleration == null ) { 
+      console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
+    vars[solid.name] = calcY;
+     xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
+     x = xComplex.value
+
+  }
+
+  //-------------------------------------
 
     var calc = { 
       x: x,
@@ -650,7 +701,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       // Today, in IWP5, our return structure out of thi sufnction is a single double value.
 
 
-
+      var dt = vars["delta_t"]
 
       if ( calculator["initialDisplacement"] == undefined ) { 
         calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
@@ -660,7 +711,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
       if ( calculator["initialVelocity"] == undefined ) { 
         calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
-        calculator.currentVelocity = calculator.initialVelocity
+        calculator.currentVelocity = calculator.initialVelocity * dt;
         //console.log("iwp5:405> calculating initial velocity to: ", calculator.initialVelocity )
       }
 
@@ -670,10 +721,10 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
           }
 
-      var acceleration = 0;
+      var acceleration = null;
       try { 
         // then calculate the acceleratiion
-       acceleration = calculator.accelerationCompiled.eval(vars);
+       acceleration = calculator.accelerationCompiled.eval(vars)  * dt;
       } catch ( err ) { 
         
         console.log("evaluateCalculator:670> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
@@ -684,15 +735,20 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
       if ( currentStep == 0 ) { 
           calculator.currentVelocity = calculator.initialVelocity;
-          calculator.currentDisplacement = calculator.initialDisplacement;
+          if ( acceleration != null ) { 
+            calculator.currentVelocity += acceleration * 0.5;
+          }
+
+          calculator.currentDisplacement = calculator.initialDisplacement; // no t adjustment
+
       } else if ( changeStep > 0 ) { 
           // Positive direction calcuation
-          calculator.currentVelocity += acceleration
-          calculator.currentDisplacement += calculator.currentVelocity
+          calculator.currentVelocity += acceleration;
+          calculator.currentDisplacement += calculator.currentVelocity * dt;
 
       } else if ( changeStep < 0 ) { 
-          calculator.currentVelocity -= acceleration
-          calculator.currentDisplacement -= calculator.currentVelocity
+          calculator.currentVelocity -= acceleration;
+          calculator.currentDisplacement -= calculator.currentVelocity * dt;
       } else { 
         // No step direction
       }
