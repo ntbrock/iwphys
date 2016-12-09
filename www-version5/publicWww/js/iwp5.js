@@ -445,7 +445,7 @@ function addInput(input) {
   // 07 Oct 2016 Honoring hidden flag
   var style = "";
   if ( input.hidden == "1" ) { 
-    style = "display:none;'"
+    style = "display:none;"
   }
   htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='bottomBorder'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
 }
@@ -945,6 +945,12 @@ function renderProblemFromMemory() {
   $.each(htmlOutputs, function( index, output ) {
     $("#inputTable").append(output);
   })
+  if (!inputTitle && !outputTitle) {
+    console.log("nothin' doin");
+    timeTabOn();
+    $("#inputTable").css('display','none');
+    $("#it").css('display','none');
+  }
   
   /* Debugging 07 Oct 2016 Ryan Steed
   //$("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>"+htmlOutputs);
@@ -1130,6 +1136,7 @@ function windowSettingsOn() {
   $("#ws").attr("class", "bottomBorder");
   inputTableOff();
   timeTabOff();
+  graphTableOff();
   fitText("#iwindow");
 };
 function windowSettingsOff() {
@@ -1137,11 +1144,25 @@ function windowSettingsOff() {
   $("#ws").attr("class", "");
 }
 
+function graphTableOn() {
+  $("#graphTab").attr("style", "visibility:visible");
+  $("#gt").attr("class", "bottomBorder");
+  inputTableOff();
+  timeTabOff();
+  windowSettingsOff();
+  fitText("#graphTab");
+};
+function graphTableOff() {
+  $("#graphTab").attr("style", "visibility:hidden");
+  $("#gt").attr("class", "");
+}
+
 function timeTabOn() {
   $("#timeTab").attr("style", "visibility:visible");
   $("#oib").attr("class", "bottomBorder");
   windowSettingsOff();
   inputTableOff();
+  graphTableOff();
   fitText("#timeTab");
 };
 function timeTabOff() {
@@ -1154,6 +1175,7 @@ function inputTableOn() {
   $("#it").attr("class", "bottomBorder");
   timeTabOff();
   windowSettingsOff();
+  graphTableOff();
   fitText("#inputTable");
 };
 function inputTableOff() {

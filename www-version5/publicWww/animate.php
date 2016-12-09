@@ -10,7 +10,10 @@ header('Content-Type: text/html');
 <html lang="en">
 
 <head>
-  <?php include_once("iwp-head.php") ?>
+  <?php 
+    error_reporting(E_ERROR | E_WARNING | E_PARSE); //Dev
+    include_once("iwp-head.php") 
+  ?>
 
   <!-- IWP5 Animation includes -->
   <link href="<?= $baseUrl ?>css/iwp5.css" rel="stylesheet">
@@ -20,10 +23,16 @@ header('Content-Type: text/html');
 
 <body>
 
+  <div class="row" style="text-align: center">
+      <div class="col-lg-12 center" id="animationTitle">
+        <h3><?= str_replace(".iwp","",end(explode('/', $animateFile))); ?></h3>
+        <div id="authorUsername" style="font-style:italic">No Author</div>
+        <br/><div id="description"></div>
+        <hr>
+      </div>
+  </div>
 <?php include_once("iwp-nav.php") ?>
-
-      <h3><?= end(explode('/', $animateFile)) ?></h3>
-      <p><div id="description"></div></p>
+     
      
   <div class="iwp-animate">
 
@@ -32,7 +41,7 @@ header('Content-Type: text/html');
   <div id="canvasDiv">
     <svg id="canvas" viewbox="0 0 1000 1000" preserveAspectRatio="xMinYMin meet"></svg>
   </div>
-  <table id="tabs">
+  <table id="tabs" class="tab">
     <tr>
       <td id="it" class="bottomBorder" onclick="inputTableOn()"><i id="inputTableButton" class="fa fa-list fa-2x"></i></td>
       <!-- 9 Nov 2016 Ryan Steed
@@ -41,17 +50,18 @@ header('Content-Type: text/html');
       -->
       <td id="oib" class="" onclick="timeTabOn()"><i id="timeTabButton" class="fa fa-clock-o fa-2x"></td>
       <td id="ws" class=""  onclick="windowSettingsOn()"><i id="windowSettings" class="fa fa-clone fa-2x"></i></td>
+      <td id="gt" class="" onclick="graphTableOn()"><i id="graphTableButton" class="fa fa-area-chart fa-2x"></i></td>
     </tr>
   </table>
   
  <div id="tabTables">
- <table id="inputTable" class="trim"></table>
- <table id="iwindow" align='center' class="trim">
+  <table id="inputTable" class="tab"></table>
+  <table id="iwindow" class="tab" align='center' class="trim">
     <tr><th colspan="3">Window Settings</th></tr>
     <tr>
-      <td></td>
-      <td>X</td>
-      <td>Y</td>
+      <td style="width:33%"></td>
+      <td style="width:33%">X</td>
+      <td style="width:33%">Y</td>
     <tr class="bottomBorder">
       <td>Min:</td>
       <td><input id="iwindow_xmin" type="text"></td>
@@ -72,8 +82,8 @@ header('Content-Type: text/html');
       <td><input id="iwindow_xunit" type="text"></td>
       <td><input id="iwindow_yunit" type="text"></td>
     </tr>
- </table>
- <table id="timeTab">
+  </table>
+  <table id="timeTab" class="tab">
     <tr>
       <th colspan="2">Time Controls</th>
     </tr>
@@ -94,43 +104,29 @@ header('Content-Type: text/html');
       <td><span><input id="itime_stop" type="text" value="--"/> seconds</span></td>
     </tr>
   </table>
-  </div>
+  <table id="graphTab" class="tab">
+    <tr><td><div id="graphWindow">Coming Soon</div></td></tr>
+  </table>
+</div>
 
-    <table id="playBar">
-      <tr>  
-        <td class="bottomBorder" id="time">
-          <span><i class="fa fa-clock-o"></i></span>
-          <span id="itime">--</span>
-        </td> 
-        <td id="buttonControls">
-          <div onclick="handleBackClick()" id="backButton"><i class="fa fa-step-backward fa-lg"></i></div>
-          <div onclick="handleStartClick()" id="startStopButton"><i id="startStopIcon" class="fa fa-play fa-lg"></i></div>
-          <div onclick="handleForwardClick()" id="forwardButton"><i class="fa fa-step-forward fa-lg"></i></div>
-          <div onclick="handleResetClick()" id="resetButton"><i class="fa fa-repeat fa-lg"></i></div>
-        </td>
-      </tr>
-    </table>
-
-  <table id="otherInfo">
-    <tr>
-      <th colspan="2">Additional Information</th>
-    </tr>
-    <tr class="bottomBorder">
-      <td class="italic"><p>GraphWindow</p></td>
-      <td><div id="graphWindow">Coming Soon</div></td>
-    </tr>
-    <tr class="bottomBorder">
-      <td class="italic"><p>Description</p></td>
-      <td><div id="description"></div></td>
-    </tr>
-    <tr class="bottomBorder">
-      <td class="italic"><p>Author</p></td>
-      <td><div id="authorUsername">Loading...</div></td>
+  <table id="playBar">
+    <tr>  
+      <td class="bottomBorder" id="time">
+        <span><i class="fa fa-clock-o"></i></span>
+        <span id="itime">--</span>
+      </td> 
+      <td id="buttonControls">
+        <div onclick="handleBackClick()" id="backButton"><i class="fa fa-step-backward fa-lg"></i></div>
+        <div onclick="handleStartClick()" id="startStopButton"><i id="startStopIcon" class="fa fa-play fa-lg"></i></div>
+        <div onclick="handleForwardClick()" id="forwardButton"><i class="fa fa-step-forward fa-lg"></i></div>
+        <div onclick="handleResetClick()" id="resetButton"><i class="fa fa-repeat fa-lg"></i></div>
+      </td>
     </tr>
   </table>
+
  
 
-  </div> <!-- end iwp-animate -->
+</div> <!-- end iwp-animate -->
 
   <script type="text/javascript">
     // On Pageload, pull our hardcoded unit test.

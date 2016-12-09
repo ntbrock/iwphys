@@ -5,7 +5,7 @@
 	font-family: "PT Serif", serif ;
 	color:       #333              ;
 	position:    relative	       ;
-	width:       960px			   ;
+	width:       100%			   ;
 }
 table {
 	height:           auto         ;
@@ -18,7 +18,7 @@ table {
 }
 #canvasDiv {
 	float: left;
-	width: 50%;
+	width: 480px;
 	margin-left: 2%;
 	z-index: -1; 
 }
@@ -29,11 +29,25 @@ table {
 	overflow: auto;
 	margin-bottom: 0;
 	margin-top: 0;
-	width: 381px;
+	width: 600px;
+}
+#tabs td {
+	padding-left: 61px;
+	padding-right: 61px;
 }
 #tabTables {
 	height: 400px;
-	width: 381px;
+	width: 600px;
+}
+.tab {
+	table-layout: fixed;
+}
+.tab tr {
+	width: 550px;
+	display: table;
+}
+.tab td {
+	width: 50%;
 }
 #iwindow {
 	position: absolute;
@@ -49,18 +63,20 @@ table {
 	position: absolute;
 	visibility: visible;
 }
+#graphTab {
+	position: absolute;
+	visibility: visible;
+	visibility: hidden;
+}
 #playBar {
 	visibility: visible;
 	float: left;
 	width: 480px;
 	overflow: auto;
 	margin-right: 100%;
+	margin-bottom: 2px;
 }
-#otherInfo {
-	top: 150%;
-	height: auto;
-	width: 480px;
-}
+
 th, td {
 	padding: 11px;
 	text-align:     center ;	
@@ -78,10 +94,6 @@ th, td {
 }
 .italic {
 	font-style: italic;
-}
-#tabs td {
-	padding-left: 50px;
-	padding-right: 50px;
 }
 #time {
 	width: 200px;
@@ -110,4 +122,8 @@ th, td {
 }
 #buttonControls i {
 	vertical-align: middle;
+}
+#animationTitle {
+	width: 1080px;
+	margin-left: 32px;
 }
