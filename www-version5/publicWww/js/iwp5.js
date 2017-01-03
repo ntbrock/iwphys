@@ -549,8 +549,8 @@ function addSolid(solid) {
     //console.log("it's a line");
     svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
-  else if (solid.shape["@attributes"].type == "polygon") {
-    console.log("it's a polygon")
+  else if (solid.shape["@attributes"].type == "polygon" || solid.shape["@attributes"].type == "vector") {
+    console.log("it's a polygon/vector");
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill="+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+">");  
   }
   else {
@@ -946,7 +946,6 @@ function renderProblemFromMemory() {
     $("#inputTable").append(output);
   })
   if (!inputTitle && !outputTitle) {
-    console.log("nothin' doin");
     timeTabOn();
     $("#inputTable").css('display','none');
     $("#it").css('display','none');
@@ -1113,7 +1112,7 @@ if (solid.shape.type == "circle") {
     .attr("y2", yCanvas(pathAndShape.y + pathAndShape.height));
   }
   else if (solid.shape.type == "polygon") {
-    console.log("number of points: ", solid.shape);
+    //console.log("number of points: ", solid.shape);
     //var points = "" + 
     //svgSolid.attr("points", )
   }

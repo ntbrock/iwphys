@@ -29,7 +29,7 @@ table {
 	overflow: auto;
 	margin-bottom: 0;
 	margin-top: 0;
-	width: 600px;
+	width: 610px;
 }
 #tabs td {
 	padding-left: 61px;
@@ -37,7 +37,7 @@ table {
 }
 #tabTables {
 	height: 400px;
-	width: 600px;
+	width: 610px;
 }
 .tab {
 	table-layout: fixed;
@@ -71,10 +71,9 @@ table {
 #playBar {
 	visibility: visible;
 	float: left;
-	width: 480px;
+	width: 485px;
 	overflow: auto;
 	margin-right: 100%;
-	margin-bottom: 2px;
 }
 
 th, td {
