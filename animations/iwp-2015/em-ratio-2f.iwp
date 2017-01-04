@@ -55,7 +55,7 @@
 		<input>
 			<name>s</name>
 			<text>Sign of charge</text>
-			<initialValue>-1.0</initialValue>
+			<initialValue>1.0</initialValue>
 			<units></units>
 			<hidden>1</hidden>
 		</input>

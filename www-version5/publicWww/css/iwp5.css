@@ -20,7 +20,9 @@ table {
 	float: left;
 	width: 480px;
 	margin-left: 2%;
+	margin-right: 2%;
 	z-index: -1; 
+
 }
 #tabs {
 	font-size: 9pt;
@@ -73,7 +75,8 @@ table {
 	float: left;
 	width: 485px;
 	overflow: auto;
-	margin-right: 100%;
+	margin-right: 98.2%;
+	margin-left:1.8%;
 }
 
 th, td {

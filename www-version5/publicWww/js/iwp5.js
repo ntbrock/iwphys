@@ -137,7 +137,6 @@ function archiveVarsAtStep( step, vars ) {
 function calculateOutputAtStep(output, step, vars, verbose) { 
     var newValue = evaluateCalculator( output.name+".out", output.calculator, vars, verbose ).value;
     vars[output.name] = newValue;
-
     // -> update the DOM with the new reuslts.
     updateUserFormOutputDouble(output, newValue);
 }
@@ -204,7 +203,6 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     vars[solid.name] = calcY;
      xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
      x = xComplex.value
-
   }
 
   //-------------------------------------
@@ -300,7 +298,7 @@ function calculateVarsAtStep(step) {
 	// Eveything begins with time, populate t.
 	vars.t = time.start + step * time.change;
   vars.tDelta = queryTimeStepInputDouble();  
-  vars.delta_t = vars.tDelta  
+  vars.delta_t = vars.tDelta 
 	updateTimeDisplay(vars.t);
 	/*
   for each calulation, query dom for time step
@@ -328,7 +326,7 @@ function calculateVarsAtStep(step) {
       failedOutputs.push(output);
     }   
   });
-
+console.log(failedOutputs)
 
 	/* for each solid
 		sequence of the solids does matter in the problem file. 
@@ -377,7 +375,6 @@ function calculateVarsAtStep(step) {
         fatalOutputs.push(output);
       }   
     });
-
     $.each( replaySolids, function( index, solid ) {  
       try { 
        calculateSolidAtStep(solid, step, vars, true );  
@@ -387,6 +384,7 @@ function calculateVarsAtStep(step) {
    });
 
   }
+  //BOOK
 
   if ( fatalOutputs.length > 0 ) { 
     console.log(":238 Giving Up on Recursive Circular Calc - FATALOutputs: ", fatalOutputs);
@@ -578,7 +576,7 @@ function compileCalculator(iwpCalculator) {
 			equation: iwpCalculator.value
 		}
 		// console.log("compileCalculator:171> value : ", iwpCalculator.value, " compiledTo: ", c)
-		return c;
+    return c;
 
 	} else if ( incomingType == "euler") {
     
@@ -618,7 +616,6 @@ function compileCalculator(iwpCalculator) {
 function evaluateCompiledMath( compiled, vars ) { 
 
   var newValue = compiled.eval(vars)
-
   if ( $.isNumeric(newValue) ) {
     return newValue;
   } else if ( newValue["value"] != undefined ) { 
@@ -651,7 +648,6 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       // 2016Oct11 -- Parameteric Calculators need to calculate their own instantaneous velocity.
 
 			var result = calculator.compiled.eval(vars);
-
 
       if ( calculator.latestValue == undefined ) { 
         calculator.previousValue = result;
@@ -769,7 +765,7 @@ if ( true ) {
       // return displacement.value; 
     } catch ( err ) {
       if ( verbose ) { 
-      console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, vars);
+      console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, tDel);
     }
       throw err;
       //return { value: undefined }; // was -1
@@ -859,23 +855,29 @@ function yCanvas(y) {
 };
 
 function xCanvas(x) {
-// the proportional entry point in from window.xmin -> window.xmax needs to be interpolated into the 
-// propotional exit point between viewbox.minX -> viewbox.maxX 
   var xDomain = iwindow.xmax - iwindow.xmin;
+  var sum = - iwindow.xmin / xDomain;
+  console.log(sum)
   var xProportion = x / xDomain;
-
-  // xProprotion is a value between -1 -> 1
-  // xproprtion + 1 is a value between 0 -> 2
-
-  var xCorrected = xProportion + 0.5;
-
-  //Debugging 29 Jul 2016
-  //console.log("json:205: x:  ", x, "  xDomain: ", xDomain,  "  xProportion: ", xProportion, "  xCorrected: ", xCorrected );
-
+  var xCorrected = xProportion + sum;
   var cDomain = canvasBox.maxX - canvasBox.minX;
   var cProportion = xCorrected * cDomain;
-
   return cProportion;
+/* the proportional entry point in from window.xmin -> window.xmax needs to be interpolated into the 
+// propotional exit point between viewbox.minX -> viewbox.maxX 
+*/
+};
+function xCanvasGridlines(x) {
+  var xDomain = iwindow.xmax - iwindow.xmin;
+  var sum = - iwindow.xmin / xDomain;
+  var xProportion = x / xDomain;
+  var xCorrected = xProportion + 0.5;
+  var cDomain = canvasBox.maxX - canvasBox.minX;
+  var cProportion = xCorrected * cDomain;
+  return cProportion;
+/* the proportional entry point in from window.xmin -> window.xmax needs to be interpolated into the 
+// propotional exit point between viewbox.minX -> viewbox.maxX 
+*/
 };
 
 function xWidth(size) {
@@ -917,7 +919,6 @@ function renderProblemFromMemory() {
 
   // GraphWindow is a TODO feature for now.
   // $("#graphWindow").html( graphWindow );
-  console.log(outputs)
   inputTitle = 0;
   outputTitle = 0;
 
@@ -929,7 +930,7 @@ function renderProblemFromMemory() {
   $.each(outputs, function(index, output) {
     if ( output.hidden != "1" ) {
       outputTitle = 1;
-      console.log("it's visible");
+      //console.log("it's visible");
     }
   })
   if ( inputTitle ) {
@@ -1018,17 +1019,15 @@ function renderCanvasFromMemory() {
   */
   
   var xGridlines = (iwindow.xmax - iwindow.xmin)/iwindow.xgrid;
-  for ( var interval = 1; interval <= xGridlines-1; interval ++ ) {
+  for ( var interval = 1; interval < xGridlines; interval ++ ) {
     var xGridPosition = (interval - xGridlines/2)*iwindow.xgrid;
-    var coordinates = xCanvas(xGridPosition*iwindow.xgrid);;
     //console.log("whatItShouldBe: "+xCanvas(xGridPosition*iwindow.xgrid)+", coordinates: "+coordinates);
+    c.append( "<path d='M " + xCanvasGridlines(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
     if (xGridPosition == 0) {
       c.append( "<path d='M " + xCanvas(xGridPosition) + " 0 V 1000' stroke='black' fill='transparent'/>" );
     }
-    else {
-      c.append( "<path d='M " + xCanvas(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
     };
-  };
+
   // Add Y gridlines
   var yGridlines = (iwindow.ymax - iwindow.ymin)/iwindow.ygrid;
   //Debugging 7 Aug 2016
@@ -1092,15 +1091,15 @@ function updateSolidSvgPathAndShape(solid, pathAndShape) {
 if (solid.shape.type == "circle") {
     svgSolid.attr("cx", xCanvas(pathAndShape.x))
 		.attr("cy", yCanvas(pathAndShape.y))
-		.attr("rx", xWidth(pathAndShape.width))
-		.attr("ry", yHeight(pathAndShape.height));
+		.attr("rx", xWidth(pathAndShape.width/2))
+		.attr("ry", yHeight(pathAndShape.height/2));
     //console.log("rx: ", pathAndShape.width)
   }
   else if (solid.shape.type == "rectangle") {
-    svgSolid.attr("x", xCanvas(pathAndShape.x - pathAndShape.width / 2))
-		.attr("y", yCanvas(pathAndShape.y + pathAndShape.height / 2))
-		.attr("width", xWidth(pathAndShape.width))
-		.attr("height", yHeight(pathAndShape.height));
+    svgSolid.attr("width", xWidth(pathAndShape.width))
+		.attr("height", yHeight(pathAndShape.height))
+    .attr("x", xCanvas(pathAndShape.x - pathAndShape.width / 2))
+    .attr("y", yCanvas(pathAndShape.y + pathAndShape.height / 2));
  }
   else if (solid.shape.type == "line") {
     // DEBUGGING RYAN STEED 21 SEP 2016
