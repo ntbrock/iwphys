@@ -104,7 +104,15 @@ function handleStep() {
 		newStep = 0;
 	} 
 	// TODO - end of time.
-
+  /*time = { 
+    start : parseFloat(inTime.start),
+    stop : parseFloat(inTime.stop),
+    change : parseFloat(inTime.change),
+    fps : parseFloat(inTime.fps)
+   };*/
+  if (newStep == ( queryTimeStopInputDouble() / queryTimeStepInputDouble())) {
+    handleStopClick()
+  }
 	//console.log("handleStep:61> newStep: " + newStep)
 
 	if ( newStep != currentStep ) { 
@@ -296,8 +304,8 @@ function calculateVarsAtStep(step) {
   }
 
 	// Eveything begins with time, populate t.
-	vars.t = time.start + step * time.change;
-  vars.tDelta = queryTimeStepInputDouble();  
+	vars.t = queryTimeStartInputDouble() + step * time.change;
+  vars.tDelta = time.change 
   vars.delta_t = vars.tDelta 
 	updateTimeDisplay(vars.t);
 	/*
@@ -326,7 +334,6 @@ function calculateVarsAtStep(step) {
       failedOutputs.push(output);
     }   
   });
-console.log(failedOutputs)
 
 	/* for each solid
 		sequence of the solids does matter in the problem file. 
@@ -384,7 +391,6 @@ console.log(failedOutputs)
    });
 
   }
-  //BOOK
 
   if ( fatalOutputs.length > 0 ) { 
     console.log(":238 Giving Up on Recursive Circular Calc - FATALOutputs: ", fatalOutputs);
@@ -544,11 +550,14 @@ function addSolid(solid) {
     svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
   else if (solid.shape["@attributes"].type == "line") {
-    //console.log("it's a line");
+    //console.log("it's a line")
     svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
-  else if (solid.shape["@attributes"].type == "polygon" || solid.shape["@attributes"].type == "vector") {
-    console.log("it's a polygon/vector");
+  else if (solid.shape["@attributes"].type == "vector") {
+    svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");  
+  }
+  else if (solid.shape["@attributes"].type == "polygon") {
+    console.log("it's a polygon");
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill="+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+">");  
   }
   else {
@@ -856,8 +865,7 @@ function yCanvas(y) {
 
 function xCanvas(x) {
   var xDomain = iwindow.xmax - iwindow.xmin;
-  var sum = - iwindow.xmin / xDomain;
-  console.log(sum)
+  var sum = - iwindow.xmin / xDomain; 
   var xProportion = x / xDomain;
   var xCorrected = xProportion + sum;
   var cDomain = canvasBox.maxX - canvasBox.minX;
@@ -1054,6 +1062,14 @@ function queryTimeStepInputDouble() {
   time.change = parseFloat($("#itime_change").val());
   return time.change;
 }
+function queryTimeStartInputDouble() {
+  time.start = parseFloat($("#itime_start").val());
+  return time.start;
+}
+function queryTimeStopInputDouble() {
+  time.stop = parseFloat($("#itime_stop").val());
+  return time.stop;
+}
 
 function queryUserFormInputDouble(input) {
 
@@ -1114,6 +1130,20 @@ if (solid.shape.type == "circle") {
     //console.log("number of points: ", solid.shape);
     //var points = "" + 
     //svgSolid.attr("points", )
+  }
+  else if (solid.shape.type == "vector") {
+    /*svgSolid.attr("x1", xCanvas(pathAndShape.x))
+    .attr("x2", xCanvas(pathAndShape.x + pathAndShape.width))
+    .attr("y1", yCanvas(pathAndShape.y))
+    .attr("y2", yCanvas(pathAndShape.y + pathAndShape.height));*/
+    //BOOK
+    var x1 = xCanvas(pathAndShape.x)
+    var x2 = xCanvas(pathAndShape.x + pathAndShape.width)
+    var y1 = yCanvas(pathAndShape.y)
+    var y2 = yCanvas(pathAndShape.y + pathAndShape.height)
+    var point1 = ""+x1+","+y1+" "
+    var point2 = ""+x2+","+y2+" "
+    svgSolid.attr("points",point1+point2)
   }
   else {
   	console.log("!! Unidentified shape:550> solid = ", solid.shape.type);
