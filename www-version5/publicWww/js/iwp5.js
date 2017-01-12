@@ -1031,9 +1031,7 @@ function renderCanvasFromMemory() {
     var xGridPosition = (interval - xGridlines/2)*iwindow.xgrid;
     //console.log("whatItShouldBe: "+xCanvas(xGridPosition*iwindow.xgrid)+", coordinates: "+coordinates);
     c.append( "<path d='M " + xCanvasGridlines(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-    if (xGridPosition == 0) {
-      c.append( "<path d='M " + xCanvas(xGridPosition) + " 0 V 1000' stroke='black' fill='transparent'/>" );
-    }
+    c.append( "<path d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" );
     };
 
   // Add Y gridlines
@@ -1042,14 +1040,8 @@ function renderCanvasFromMemory() {
   //console.log("yGridlines: "+yGridlines);
   for ( var interval = 1; interval <= yGridlines-1; interval ++ ) {
     var yGridPosition = (interval - yGridlines/2)*iwindow.ygrid;
-    if (yGridPosition == 0) {
-      c.append( "<path d='M 0 " + yCanvas(yGridPosition) + " H 1000' stroke='black' fill='transparent'/>" );
-      //console.log("it's the origin");
-    }
-    else {
-      c.append( "<path d='M 0 " + yCanvas(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" );
-      //console.log("it's not");
-    };
+    c.append( "<path d='M 0 " + yCanvas(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" );
+    c.append( "<path d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" );
   };
 
   // Blitting / Double buffering approach
