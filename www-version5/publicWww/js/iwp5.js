@@ -1213,7 +1213,7 @@ var stepTrigger;
 
 //Restarts motion.
 function handleGoClick() {
-	stepTrigger = setInterval("handleStep()", 100);
+	stepTrigger = setInterval("handleStep()", 1 / time.fps * 1000);
 
 	setStepDirection(1);
 
