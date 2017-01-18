@@ -14,6 +14,7 @@ var graphWindow = {};
 var inputs = [];
 var outputs = [];
 var solids = [];
+var objects = [];
 
 var htmlInputs = [];
 var htmlOutputs = [];
@@ -474,8 +475,6 @@ function addOutput(output) {
   htmlOutputs.push( "<tr style='" + style +"' id='output_" + output.name + "' class='bottomBorder'><td>"+ output.text +"</td><td><input id='" + output.name + "' type='text' value='-999'> " + output.units + "</td></tr>");
 }
 
-
-
 /**
  * 2016-Nov-09 - Reset the instantanous velcity calculations on reset 
 */
@@ -565,6 +564,31 @@ function addSolid(solid) {
   };
 }
 
+function addObject(object) {
+  var compiledObject = {
+    name: object.name,
+    text: object.text,
+    units: object.units,
+    value: {
+      calculator: compileCalculator(object.value.calculator)
+    },
+    fontSize: object.fontSize,
+    xpath: { 
+      calculator : compileCalculator(object.xpath.calculator)
+    },
+    ypath: { 
+      calculator : compileCalculator(object.ypath.calculator)
+    }
+  }
+  objects.push( compiledObject );
+
+
+  if (object["@attributes"].class == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
+    //console.log("it's a circle");
+    svgSolids.push( "<text id='solid_" +object.name+ "' x='" + xCanvas(object.xpath.calculator.value) + "' y='"+yCanvas(object.ypath.calculator.value)+"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
+  }
+
+};
 //-----------------------------------------------------------------------
 // Calculation Section 
 
@@ -841,6 +865,13 @@ function parseProblemToMemory( problem ) {
     });
   } else { 
     addSolid(problem.objects.solid);
+  }
+  if ( $.type (problem.objects.object) == 'array' ) {
+    $.each( problem.objects.object, function( index, object) {
+      addObject(object);
+    });
+  } else {
+    addObject(problem.objects.object);
   }
 }
 
@@ -1124,19 +1155,28 @@ if (solid.shape.type == "circle") {
     //svgSolid.attr("points", )
   }
   else if (solid.shape.type == "vector") {
-    /*svgSolid.attr("x1", xCanvas(pathAndShape.x))
-    .attr("x2", xCanvas(pathAndShape.x + pathAndShape.width))
-    .attr("y1", yCanvas(pathAndShape.y))
-    .attr("y2", yCanvas(pathAndShape.y + pathAndShape.height));*/
-    //BOOK
+    //http://stackoverflow.com/questions/10316180/how-to-calculate-the-coordinates-of-a-arrowhead-based-on-the-arrow
     var x1 = xCanvas(pathAndShape.x)
     var x2 = xCanvas(pathAndShape.x + pathAndShape.width)
     var y1 = yCanvas(pathAndShape.y)
     var y2 = yCanvas(pathAndShape.y + pathAndShape.height)
-    var point1 = ""+x1+","+y1+" "
-    var point2 = ""+x2+","+y2+" "
-    svgSolid.attr("points",point1+point2)
+    var point1 = "" + x1 + "," + y1 + " "
+    var point2 = "" + x2 + "," + y2 + " "
+    var dx = x1 - x2
+    var dy = y1 - y2
+    var norm = Math.sqrt(dx ** 2 + dy ** 2)
+    var udx = dx / norm
+    var udy = dy / norm
+    var ax = udx * Math.sqrt(3) / 2 - udy * 1 / 2
+    var ay = udx * 1 / 2 + udy * Math.sqrt(3) / 2
+    var bx = udx * Math.sqrt(3) / 2 + udy * 1 / 2
+    var by = - udx * 1 / 2 + udy * Math.sqrt(3) / 2
+    var arrow1 = "" + (x2 + 30 * ax) + "," + (y2 + 30 * ay) + " "
+    var arrow2 = "" + (x2 + 30 * bx) + "," + (y2 + 30 * by) + " "
+
+    svgSolid.attr("points",point1+point2+arrow1+point2+arrow2)
   }
+  //Book
   else {
   	console.log("!! Unidentified shape:550> solid = ", solid.shape.type);
     return;
