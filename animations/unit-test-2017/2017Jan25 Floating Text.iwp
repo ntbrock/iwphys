@@ -46,12 +46,12 @@
 					<value>t*2*t*4</value>
 				</calculator>
 			</value>
-			<fontSize>14</fontSize>
+			<fontSize>24</fontSize>
 			<showValue>true</showValue>
 			<color>
-				<red>50</red>
-				<green>100</green>
-				<blue>150</blue>
+				<red>250</red>
+				<green>25</green>
+				<blue>25</blue>
 			</color>
 			<ypath>
 				<calculator type="parametric">
