@@ -889,16 +889,20 @@ function parseProblemToMemory( problem ) {
     $.each( problem.objects.solid, function( index, solid ) {
     addSolid(solid);
     });
-  } else { 
-    addSolid(problem.objects.solid);
+  } else if ( problem.objects.solid != null ) { 
+    // Workaround becaue the php xml to json for single solids, would an object.
+      addSolid(problem.objects.solid);
+    
   }
   // Objects
   if ( $.type (problem.objects.object) == 'array' ) {
     $.each( problem.objects.object, function( index, object) {
       addObject(object);
     });
-  } else {
+  } else if ( problem.objects.object != null ) { 
+ 
     addObject(problem.objects.object);
+  
   }
 }
 
@@ -1206,6 +1210,8 @@ if (solid.shape.type == "circle") {
   }
   else if (solid.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
     console.log("it's an object!")
+    svgSolid.attr("x",xCanvas(pathAndShape.x))
+    .attr("y",yCanvas(pathAndShape.y))
   }
   //Book
   else {
