@@ -19,6 +19,7 @@ var objects = [];
 var htmlInputs = [];
 var htmlOutputs = [];
 var svgSolids = [];
+var svgObjects =[];
 
 
 // What is a step? An interation that is a multiple of t delta.   Current T =   T0 + step * Tdelta
@@ -355,6 +356,21 @@ function calculateVarsAtStep(step) {
          }
 
       failedSolids.push(solid);
+  }});
+
+    $.each( objects, function( index, object )  {
+    /*
+    for x, y, h, w , perform the calculator 
+    */
+
+    try { 
+     calculateSolidAtStep(object, step, vars, false );
+        //  -> update the DOM with theose new results
+  
+    } catch ( err ) { 
+        //console.log(":231 caught a faailed solid exception: ", err);
+         throw err;      
+      //failedObjects.push(object);
     }
 
 });
@@ -567,6 +583,11 @@ function addSolid(solid) {
 function addObject(object) {
   var compiledObject = {
     name: object.name,
+    shape: {
+      type: object["@attributes"].class,
+      height: 1, 
+      width: 1,
+    },
     text: object.text,
     units: object.units,
     value: {
@@ -585,7 +606,7 @@ function addObject(object) {
 
   if (object["@attributes"].class == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
     //console.log("it's a circle");
-    svgSolids.push( "<text id='solid_" +object.name+ "' x='" + xCanvas(object.xpath.calculator.value) + "' y='"+yCanvas(object.ypath.calculator.value)+"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
+    svgObjects.push( "<text id='solid_" +object.name+ "' x='" + xCanvas(object.xpath.calculator.value) + "' y='"+yCanvas(object.ypath.calculator.value)+"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
   }
 
 };
@@ -663,7 +684,12 @@ var CONFIG_throw_acceleration_calculation_exceptions = false;
 
 function evaluateCalculator( resultVariable, calculator, vars, verbose ) {
 
-	if ( calculator.type == "mathjs" )   {
+  if ( calculator == null ) { 
+    //console.log("iwp5:688: Warning Null Clculaor for: ", resultVariable)
+
+    return { value: 0 }
+  }
+	else if ( calculator.type == "mathjs" )   {
 		/*
 			{type : mathjs, compiled: Object}
 		*/
@@ -866,6 +892,7 @@ function parseProblemToMemory( problem ) {
   } else { 
     addSolid(problem.objects.solid);
   }
+  // Objects
   if ( $.type (problem.objects.object) == 'array' ) {
     $.each( problem.objects.object, function( index, object) {
       addObject(object);
@@ -1000,6 +1027,7 @@ function renderProblemFromMemory() {
   fitText("#inputTable");
   renderCanvasFromMemory();
   addSolidsToCanvas(svgSolids);
+  addSolidsToCanvas(svgObjects);
 };
 
 //21 Sep 2016 Ryan Steed
@@ -1033,7 +1061,7 @@ function fitText(input) {
 
 function addSolidsToCanvas(solids) {
   //console.log("solids: ", solids);
-  $("#canvas").append(svgSolids);
+  $("#canvas").append(solids);
   //Blitting effect
   $("#canvasDiv").html($("#canvasDiv").html());
 }
@@ -1176,9 +1204,14 @@ if (solid.shape.type == "circle") {
 
     svgSolid.attr("points",point1+point2+arrow1+point2+arrow2)
   }
+  else if (solid.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
+    console.log("it's an object!")
+  }
   //Book
   else {
-  	console.log("!! Unidentified shape:550> solid = ", solid.shape.type);
+  	//Debugging 25 Jan 2017
+    //throw "Object in problem"; 
+    console.log("!! Unidentified shape:550> solid = ", solid.shape.type);
     return;
   };
 
