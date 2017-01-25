@@ -229,8 +229,15 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       yvel: 0,
       yaccel: 0,
       height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars ).value,
-      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value
+      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value   
     }
+
+    // For objects with a value beyond x , y, w , h
+    // BOOK 2 
+    if ( solid.value != null && solid.value.calculator != null ) { 
+      calc.objectValue = evaluateCalculator( solid.name+".objectValue", solid.value.calculator, vars ).value   
+    }
+     
 
     // Hande Complex return types from Euler Calculator
     if ( xComplex.velocity != undefined ) { 
@@ -581,6 +588,10 @@ function addSolid(solid) {
 }
 
 function addObject(object) {
+
+
+console.log("iwp5.js:593> addOBject: ", object)
+
   var compiledObject = {
     name: object.name,
     shape: {
@@ -590,6 +601,7 @@ function addObject(object) {
     },
     text: object.text,
     units: object.units,
+    showValue: ( object.showValue == "true" || false ),
     value: {
       calculator: compileCalculator(object.value.calculator)
     },
@@ -1209,9 +1221,24 @@ if (solid.shape.type == "circle") {
     svgSolid.attr("points",point1+point2+arrow1+point2+arrow2)
   }
   else if (solid.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
-    console.log("it's an object!")
+    
+    console.log("it's an object with propertieS: ", solid)
+
+    
+    var safeText = solid.text
+    if ( solid.text == null || solid.text instanceof Object ) { safeText = ""; }
+
+    var safeUnits = solid.units
+    if ( solid.units == null || solid.units instanceof Object ) { safeUnits = ""; }
+        
+
+    var newLabel = safeText
+     if ( solid.showValue ) { 
+       newLabel = safeText + " " + pathAndShape.objectValue + " " + safeUnits
+     }
     svgSolid.attr("x",xCanvas(pathAndShape.x))
     .attr("y",yCanvas(pathAndShape.y))
+    .html(newLabel)
   }
   //Book
   else {
