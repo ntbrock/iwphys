@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>5.0</stop>
+			<change>0.05</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>0.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>0.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>Two blocks initially rest next to each other on a frictionless surface. (The view is looking down on the surface.) At t = 0, an identical push is applied directly to each block. The push on each block remains constant as the blocks accelerate. Which block has more mass and why.</text>
+		</description>
+		<input>
+			<name>m1</name>
+			<text>Mass of green block</text>
+			<initialValue>3.0</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m2</name>
+			<text>Mass of red block</text>
+			<initialValue>2.0</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>P</name>
+			<text>Push</text>
+			<initialValue>12.0</initialValue>
+			<units>N</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>Green_Block</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="true" xVel="true" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>7.25</displacement>
+					<velocity>0</velocity>
+					<acceleration>-P/m1</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>push</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/pushhand.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>toRadians(90)</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>8.6</displacement>
+					<velocity>0</velocity>
+					<acceleration>-P/m1</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Red_Block</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="true" xVel="true" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>7.25</displacement>
+					<velocity>0</velocity>
+					<acceleration>-P/m2</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>push2</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/pushhand.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>toRadians(90)</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>8.6</displacement>
+					<velocity>0</velocity>
+					<acceleration>-P/m2</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>a</name>
+			<text>Acceleration</text>
+			<units>m/s^2</units>
+			<calculator type="parametric">
+				<value>-P/(m1+m2)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

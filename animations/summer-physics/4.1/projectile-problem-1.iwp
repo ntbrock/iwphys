@@ -1,0 +1,295 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.05</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>A red ball slides off a table. Ignoring friction, which animation correctly represents the path of the ball? Enter 1, 2, 3, or 4 to change animations. The horizontal and vertical positions, velocities, and accelerations of the ball are shown under Outputs.</text>
+		</description>
+		<input>
+			<name>g</name>
+			<text>Gravitation Acceleration</text>
+			<initialValue>9.8</initialValue>
+			<units>m/s/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vx</name>
+			<text>Horizontal Velocity</text>
+			<initialValue>10.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>h</name>
+			<text>Launch Height</text>
+			<initialValue>5.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>p</name>
+			<text>Launch Point</text>
+			<initialValue>-5.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>mode</name>
+			<text>Animation</text>
+			<initialValue>1.0</initialValue>
+			<units>1, 2, 3, 4</units>
+		</input>
+		<output>
+			<name>tc</name>
+			<text>Critical Time</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>(10+p)/vx</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>table</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>p</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>h</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>-10</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>h</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>-10</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-10</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>p</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-10</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>acca</name>
+			<text>Acc 1</text>
+			<units>m/s/s</units>
+			<calculator type="parametric">
+				<value>step(t-tc-.3)*step(1.5-mode)*step(mode-.5)*-g</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>accb</name>
+			<text>Acc 2</text>
+			<units>m/s/s</units>
+			<calculator type="parametric">
+				<value>step(t-tc)*-g*step(2.5-mode)*step(mode-1.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>accc</name>
+			<text>Acc 3</text>
+			<units>m/s/s</units>
+			<calculator type="parametric">
+				<value>step(t-tc)*-g*step(3.5-mode)*step(mode-2.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>accd</name>
+			<text>Acc 4</text>
+			<units>m/s/s</units>
+			<calculator type="parametric">
+				<value>-25*vx*step(t-tc)*step(tc-t+2*deltaTime)*step(4.5-mode)*step(mode-3.5)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>ball</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>-10</displacement>
+					<velocity>vx</velocity>
+					<acceleration>step(t-tc)*step(3.5-mode)*step(mode-2.5)*-.4*vx</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>h+.5</displacement>
+					<velocity>0</velocity>
+					<acceleration>acca+accb+accc+accd</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>x</name>
+			<text>X-coordinate</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>ball.xpos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>y</name>
+			<text>Y-coordinate</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>ball.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vxb</name>
+			<text>X-velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>ball.xvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>vyb</name>
+			<text>Y-velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>ball.yvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>axb</name>
+			<text>X-acceleration</text>
+			<units>m/s^2</units>
+			<calculator type="parametric">
+				<value>ball.xaccel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ayb</name>
+			<text>Y-acceleration</text>
+			<units>m/s^2</units>
+			<calculator type="parametric">
+				<value>ball.yaccel</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>
