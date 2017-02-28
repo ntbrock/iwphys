@@ -33,9 +33,13 @@ $screenshotsUrl = ( $httpSecure ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST
 //----------------------------------------------------------------------------------------
 // Filesystem Scanning
 
-// Look for the fiel on disk
+// Look for the fiel on disk, now senstiive to symlinks
 $iwpFile =  $animationPath . $pathInfo;
-if ( ! file_exists ( $iwpFile ) ) { die("No Such File: " . $iwpFile); }
+if ( ! file_exists ( $iwpFile ) ) {
+   if ( ! is_link($iwpFile) ) { 
+    die("No Such File or Link: " . $iwpFile);
+   }
+}
 
 
 function readIwpFileJson($fullPath) { 
@@ -135,7 +139,15 @@ function recurseDirs($dir, $depthRemaining )
 			if ( is_dir($fullFile) ) { 
 				array_push($subDirs, $fullFile);
 			} else {
-			// SKIP ALL FILES
+
+			  // 2017Feb28 
+			  if ( is_link($fullFile) ) { 
+//			     if ( is_dir(readlink($fullFile)) ) { 
+			        array_push($subDirs, $fullFile);
+//			     }	
+
+			  }
+
 			}
 		}
 	}

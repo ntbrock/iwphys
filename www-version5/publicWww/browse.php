@@ -22,6 +22,13 @@ include_once('iwp-config.php');
         <!-- Page Features -->
         <div class="row text-center">
 
+
+        <div class="row">
+            <div class="col-lg-12">
+	    	 <h3><a href="..">Parent Folder</a></h3>
+	    </div>
+        </div>
+
 <?php
 
 $searchPath = rtrim($animationPath . $pathInfo, "/");
@@ -35,6 +42,12 @@ echo "<h1 style='margin-bottom: 1em;'>Browsing $searchName</h1>";
 $animationDirs = recurseDirs($searchPath, 0 );
 array_unshift($animationDirs, $searchPath );
 // print_r($animationDirs);
+$currentDir = '';
+
+?>
+
+<?php
+
 foreach ( $animationDirs as $dir ) { 
 	$hrefDir = str_replace_first($animationPath, '', $dir);
 	$relDir = str_replace_first($searchPath.'/', '', $dir);
@@ -43,57 +56,55 @@ foreach ( $animationDirs as $dir ) {
 	<!-- Sub Directory -->
         <div class="row">
             <div class="col-lg-12">
-	    	 <h3><a href="<?= $browseUrl ?><?= $hrefDir ?>"><?= $relDir ?></a></h3>
+	    	 <h3><a href="<?= $browseUrl ?><?= $hrefDir ?>/"><?= $relDir ?></a></h3>
 	    </div>
         </div>
 
 <?php
-       } else { 
-	$animationFiles = recurseFind($dir, '/.iwp$/', 0 );
+     } else { 
+       $currentDir = $dir;
+}
+}
 ?>
-        <!-- Current Directory --> 
-<!--
-        <div class="row">
-            <div class="col-lg-12">
-                <h3><?= $dir ?></h3>
-            </div>
-        </div>
--->
-	<!-- /.row -->
 
+<!-- Current Directory --> 
+<?php
+$animationFiles = recurseFind($currentDir, '/.iwp$/', 0 );
+?>
 	<!-- Animations -->
         <div class="row">
 
 <?php
 foreach ( $animationFiles as $file ) { 
-	$name = str_replace_first($dir.'/', '', $file);
+//	$name = str_replace_first($dir.'/', '', $file);
+	$name = basename($file);
 	$uri = str_replace_first($animationPath,'',$file);
 ?>
             <div class="col-md-4 col-sm-6 hero-feature">
               <div class="thumbnail">
                    <h3><?= $name ?></i></h3> <!-- color: #FFD700; -->
-            <img src="<?= $screenshotsUrl ?><?= $uri ?>.png" alt="">
+            <img src="<?= $screenshotsUrl ?><?= $uri ?>.png" onerror="this.style.display='none';" alt="">
                 <div class="caption">
 
-                          <a target="_anim" href="<?= $baseAnimateUrl ?><?= $uri ?>" class="btn btn-default">Animate</a>
+
+<!--
                         <p>
 			<i class="fa fa-star-o" style="color: #333;"></i>	
 			<i class="fa fa-bug" style="color: #333;"></i>	
 			<a target="_xtoj" href="<?= $baseXtojUrl ?><?= $uri ?>"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
 			<a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems/<?= str_replace_first('/iwp-packaged','',$uri) ?>"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
 			</p>
+-->
 			<p>
 			<?= readIwpFileDescription($file) ?>
                         </p>
+                         <a target="_anim" href="<?= $baseAnimateUrl ?><?= $uri ?>" class="btn btn-primary" style="display: block;">Animate</a>
+
                 </div>
              </div>
            </div>
 <?php } ?>
 	</div>
-<?php }
-
-}
- ?>
 
      </div>
 </body>
