@@ -1208,7 +1208,7 @@ if (solid.shape.type == "circle") {
     var point2 = "" + x2 + "," + y2 + " "
     var dx = x1 - x2
     var dy = y1 - y2
-    var norm = Math.sqrt(dx ** 2 + dy ** 2)
+    var norm = Math.sqrt(Math.pow(dx,2) + Math.pow(dy,2))
     var udx = dx / norm
     var udy = dy / norm
     var ax = udx * Math.sqrt(3) / 2 - udy * 1 / 2
