@@ -8,10 +8,10 @@
 $animationPath = "animations";
 
 // Prod Webserver Prefix 
-$prefixUri   = '/5/';
+//$prefixUri   = '/5/';
 
 // Development environment
-//$prefixUri   = '/iwphys/git/iwphys/www-version5/publicWww/';
+$prefixUri   = '/iwphys/git/iwphys/www-version5/publicWww/';
 
 include_once("iwp-common.php");
 ?>
