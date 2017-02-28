@@ -41,10 +41,17 @@ if ( ! file_exists ( $iwpFile ) ) {
    }
 }
 
-
+/**
+ * Common method to manage file deserialization, fixes here take effect across entire codebase!
+ */
 function readIwpFileJson($fullPath) { 
 	 $xml_string = file_get_contents($fullPath);
+	 libxml_use_internal_errors(true);
 	 $xml = simplexml_load_string($xml_string);
+	 if ( $xml == "" ) { 
+	    $xml = simplexml_load_string( iconv("ISO-8859-1", "UTF-8", $xml_string) );
+	 }
+
 	 return json_encode($xml);
 }
 

@@ -40,6 +40,7 @@ echo "<h1 style='margin-bottom: 1em;'>Browsing $searchName</h1>";
 // RENDER Tile per Animation
 
 $animationDirs = recurseDirs($searchPath, 0 );
+natsort($animationDirs); // New: Sort by name ascending
 array_unshift($animationDirs, $searchPath );
 // print_r($animationDirs);
 $currentDir = '';
@@ -70,6 +71,7 @@ foreach ( $animationDirs as $dir ) {
 <!-- Current Directory --> 
 <?php
 $animationFiles = recurseFind($currentDir, '/.iwp$/', 0 );
+natsort($animationFiles);
 ?>
 	<!-- Animations -->
         <div class="row">
