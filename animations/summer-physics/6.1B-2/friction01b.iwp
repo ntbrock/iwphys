@@ -1,0 +1,361 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>5.0</stop>
+			<change>0.05</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>A red box slides down a wall. The box is in motion at t = 0. A constant force (for example, from a hand) is applied on the box to the right. The grid spacing is 1 meter. Assume the axis directions shown.</text>
+		</description>
+		<input>
+			<name>vo</name>
+			<text>Initial Velocity</text>
+			<initialValue>-3.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass of Box</text>
+			<initialValue>2.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>mu</name>
+			<text>Coeff. of Kinetic Friction</text>
+			<initialValue>0.4</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>N</name>
+			<text>Applied Force, P</text>
+			<initialValue>20.0</initialValue>
+			<units>N</units>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Gravitational Acceleration</text>
+			<initialValue>9.8</initialValue>
+			<units>m/s^2</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>Wall</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>9.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Box</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>7.5</displacement>
+					<velocity>0</velocity>
+					<acceleration>step(-N)*N/m</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>5.5</displacement>
+					<velocity>vo</velocity>
+					<acceleration>-g-step(N)*sign(Box.yvel)*N*mu/m</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Force</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>step(N)*2+step(-N)*-2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>Box.xpos-step(N)*3.5+step(-N)*3.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>Box.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>xpos</name>
+			<text>X Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Box.xpos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ypos</name>
+			<text>Y Position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>Box.ypos</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>fk</name>
+			<text>Friction Force</text>
+			<units>N</units>
+			<calculator type="parametric">
+				<value>step(N)*N*mu*sign(Box.yvel)*-1</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>v</name>
+			<text>Velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>abs(Box.yvel)</value>
+			</calculator>
+		</output>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>Pforce</name>
+			<text>Applied Force, P</text>
+			<units>N</units>
+			<value>
+				<calculator type="parametric">
+					<value>N</value>
+				</calculator>
+			</value>
+			<fontSize>15</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>Box.ypos-.1</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>Box.xpos-8.5</value>
+				</calculator>
+			</xpath>
+		</object>
+		<solid>
+			<name>xaxis</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-6</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>yaxis</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-6</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>4</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>xplus</name>
+			<text>+x</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>3.8</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-3.8</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>yplus</name>
+			<text>+y</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.4</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-6.3</value>
+				</calculator>
+			</xpath>
+		</object>
+	</objects>
+</problem>

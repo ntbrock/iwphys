@@ -1,0 +1,512 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>3.5</stop>
+			<change>0.02</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-5.0</xmin>
+			<xmax>15.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>false</drawGridNumbers>
+		</window>
+		<description>
+			<text>An object moves horizontally on a surface at constant velocity under the action of the forces shown.</text>
+		</description>
+		<input>
+			<name>m</name>
+			<text>Mass of block</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Magnitude of Initial velocity</text>
+			<initialValue>5.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Gravitational field</text>
+			<initialValue>9.8</initialValue>
+			<units>N/kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>u</name>
+			<text>Coefficient of kinetic friction</text>
+			<initialValue>0.5</initialValue>
+			<units>       </units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>A</name>
+			<text>Angle</text>
+			<initialValue>30.0</initialValue>
+			<units>deg</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>Arad</name>
+			<text>Angle in radians</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(A)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>T</name>
+			<text>Tension force</text>
+			<units>N</units>
+			<calculator type="parametric">
+				<value>u*m*g/(cos(Arad)+u*sin(Arad))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>Ground</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>block</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="true" xVel="true" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>9</displacement>
+					<velocity>-vo</velocity>
+					<acceleration>u*g-(T/m)*(cos(Arad)+u*sin(Arad))</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>weightv</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-m*g</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>block.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>block.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>normalv</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>m*g-T*sin(Arad)</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>block.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>block.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>frictionv</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>u*(m*g-T*sin(Arad))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>block.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>block.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>pullv</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>T*cos(toRadians(180-A))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>T*sin(toRadians(180-A))</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>102</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>block.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>block.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>cm</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>block.xpos</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>block.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>x</name>
+			<text>X-position</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>block.xpos</value>
+			</calculator>
+		</output>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>Normal</name>
+			<text>Normal</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>block.ypos+2.2</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>block.xpos-.5</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>Weight</name>
+			<text>Weight</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>block.ypos-2.3</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>block.xpos-.5</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>Friction</name>
+			<text>Friction</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>block.ypos+.25</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>block.xpos+2</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>Kinetic</name>
+			<text>Kinetic</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>block.ypos+.75</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>block.xpos+2</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>Tension</name>
+			<text>Tension</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>block.ypos+1</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>block.xpos-3</value>
+				</calculator>
+			</xpath>
+		</object>
+	</objects>
+</problem>

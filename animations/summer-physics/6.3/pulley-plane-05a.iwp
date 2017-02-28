@@ -10,297 +10,158 @@
 	<objects>
 		<time>
 			<start>0.0</start>
-			<stop>2.0E-8</stop>
-			<change>2.0E-10</change>
-			<fps>20.0</fps>
+			<stop>2.4</stop>
+			<change>0.05</change>
+			<fps>15.0</fps>
 		</time>
 		<GraphWindow>
 			<xmin>0.0</xmin>
-			<xmax>2.0E-8</xmax>
-			<ymin>-0.07</ymin>
-			<ymax>0.07</ymax>
-			<xgrid>1.0E-9</xgrid>
-			<ygrid>0.0070</ygrid>
+			<xmax>5.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>2.0</ygrid>
 		</GraphWindow>
 		<window>
-			<xmin>-0.075</xmin>
-			<xmax>0.125</xmax>
-			<ymin>-0.1</ymin>
-			<ymax>0.1</ymax>
-			<xgrid>0.01</xgrid>
-			<ygrid>0.01</ygrid>
+			<xmin>-3.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-3.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
 			<xunit>meters</xunit>
 			<yunit>meters</yunit>
-			<showAllDataAvailable>false</showAllDataAvailable>
-			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
-			<text>An electron is accelerated from rest and enters an electric field produced by parallel plates with a constant potential difference across them.
-</text>
+			<text>Two blocks are connected by a massless, unstretchable string which passes over a frictionless, massless pulley. There is no friction between the red block and the plane. When the blue block is released, the system of the two blocks accelerates. 
+What is the acceleration of the system and the tension in the connecting string in terms of the masses, the angle of inclination, and g?</text>
 		</description>
 		<input>
-			<name>size</name>
-			<text>Size scale</text>
-			<initialValue>0.0030</initialValue>
-			<units></units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>R</name>
-			<text>Charge to mass ratio</text>
-			<initialValue>1.756E11</initialValue>
-			<units>C/kg</units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>s</name>
-			<text>Sign of charge</text>
+			<name>w</name>
+			<text>Block Width</text>
 			<initialValue>1.0</initialValue>
-			<units></units>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m1</name>
+			<text>Mass of Red Block</text>
+			<initialValue>2.0</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m2</name>
+			<text>Mass of Blue Block</text>
+			<initialValue>1.8</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>xo</name>
+			<text>Initial X</text>
+			<initialValue>7.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Inclination of plane</text>
+			<initialValue>30.0</initialValue>
+			<units>deg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>run</name>
+			<text>Run of plane</text>
+			<initialValue>10.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>trim</name>
+			<text>X cutoff</text>
+			<initialValue>2.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>hb</name>
+			<text>Height boost</text>
+			<initialValue>2.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>g</name>
+			<text>Gravitational field</text>
+			<initialValue>9.8</initialValue>
+			<units>N/kg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
 			<name>u</name>
-			<text>B-field ON = 1 or OFF = 0</text>
+			<text>Coefficient of kinetic friction</text>
 			<initialValue>0.0</initialValue>
 			<units></units>
 			<hidden>1</hidden>
 		</input>
 		<input>
-			<name>z</name>
-			<text>E-field ON = 1 or OFF = 0</text>
-			<initialValue>1.0</initialValue>
+			<name>sf</name>
+			<text>Scale Factor</text>
+			<initialValue>0.1</initialValue>
 			<units></units>
 			<hidden>1</hidden>
 		</input>
-		<input>
-			<name>d</name>
-			<text>Plate separation d</text>
-			<initialValue>0.057</initialValue>
-			<units>m</units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>V1</name>
-			<text>Accelerating potential V1</text>
-			<initialValue>2000.0</initialValue>
-			<units>V</units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>r</name>
-			<text>Coil radius/separation</text>
-			<initialValue>0.07</initialValue>
-			<units>m</units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>n</name>
-			<text>Turns per coil</text>
-			<initialValue>320.0</initialValue>
-			<units></units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>i</name>
-			<text>Coil current</text>
-			<initialValue>0.75</initialValue>
-			<units>A</units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>x</name>
-			<text>Acceleration distance</text>
-			<initialValue>0.05</initialValue>
-			<units>m</units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>xc</name>
-			<text>Coasting distance</text>
-			<initialValue>0.02</initialValue>
-			<units>m</units>
-			<hidden>1</hidden>
-		</input>
-		<output>
-			<name>tf</name>
-			<text>Time in fields</text>
-			<units>s</units>
-			<calculator type="parametric">
-				<value>(t-to-t1)*step(t-to-t1)</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>V2</name>
-			<text>Plate potential V2</text>
-			<units>V</units>
-			<calculator type="parametric">
-				<value>400*z</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>vo</name>
-			<text>Entry velocity</text>
-			<units>m/s</units>
-			<calculator type="parametric">
-				<value>(2*R*V1)^.5</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>Ef</name>
-			<text>Electric field</text>
-			<units>V/m</units>
-			<calculator type="parametric">
-				<value>s*V2/d</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>B</name>
-			<text>Magnetic field</text>
-			<units>T</units>
-			<calculator type="parametric">
-				<value>u*s*0.000000899*i*n/r</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>to</name>
-			<text>Time to plates</text>
-			<units>s</units>
-			<calculator type="parametric">
-				<value>2*x/vo</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>t1</name>
-			<text>Time to coast</text>
-			<units>s</units>
-			<calculator type="parametric">
-				<value>xc/vo</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>px</name>
-			<text>X-position</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>P.xpos</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>py</name>
-			<text>Y-position</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>P.ypos</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
 		<solid>
-			<name>plate1</name>
+			<name>background</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>.11</value>
+						<value>13</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>z*size/2</value>
+						<value>13</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
 			</shape>
 			<color>
-				<red>51</red>
-				<green>51</green>
+				<red>255</red>
+				<green>255</green>
 				<blue>255</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>.055</value>
+					<value>3.5</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>d/2+size/4</value>
+					<value>3.5</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>plate2</name>
-			<shape type="rectangle" drawTrails="false" drawVectors="false">
+			<name>pulley</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>.11</value>
+						<value>1.1</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>z*size/2</value>
+						<value>1.1</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>51</red>
-				<green>51</green>
-				<blue>255</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>.055</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>-d/2-size/4</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>bg_3</name>
-			<shape type="rectangle" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>.08</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>.06</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
+				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
 			</shape>
@@ -311,46 +172,91 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-.04</value>
+					<value>0</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>h+hb</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>bg_4</name>
-			<shape type="rectangle" drawTrails="false" drawVectors="false">
+			<name>wedge</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-hb</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>run-trim</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-hb</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>run-trim</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>hb+trim*h/run</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>(run-2)*tan(ar)+hb+trim*h/run</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>.02</value>
+						<value>1</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>.06</value>
+						<value>1</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
 				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+					<initiallyOn yAccel="false" yVel="true" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
 			</shape>
 			<color>
-				<red>102</red>
-				<green>102</green>
-				<blue>102</blue>
+				<red>204</red>
+				<green>255</green>
+				<blue>204</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>.12</value>
+					<value>0</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -360,102 +266,155 @@
 			</ypath>
 		</solid>
 		<solid>
-			<name>gun_clone</name>
+			<name>base</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>x*1.02</value>
+						<value>run-trim</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>2*size*1.02</value>
+						<value>3</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>-(x/2+xc)</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>gun</name>
-			<shape type="rectangle" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>x</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>2*size</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
 			</shape>
 			<color>
 				<red>204</red>
-				<green>204</green>
+				<green>255</green>
 				<blue>204</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-(x/2+xc)</value>
+					<value>(run-trim)/2</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>-1.5</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>bg_1</name>
-			<shape type="rectangle" drawTrails="false" drawVectors="false">
+			<name>vertical</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>.25</value>
+						<value>0</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>.07</value>
+						<value>h+3+hb</value>
 					</calculator>
 				</height>
-				<angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-3</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>vertical2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
 					<calculator type="parametric">
 						<value>0</value>
 					</calculator>
-				</angle>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>3+hb+trim*h/run</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>run-trim</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-3</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>plane</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>run-trim</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-run*tan(ar)+trim*h/run</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>hb+h</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>string1</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>-cm.xpos</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>cm.xpos*tan(ar)</value>
+					</calculator>
+				</height>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -467,77 +426,29 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>cm.xpos</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>.065</value>
+					<value>cm.ypos</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>P</name>
-			<shape type="circle" drawTrails="true" drawVectors="false">
+			<name>string2</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>size</value>
+						<value>0</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>size</value>
+						<value>h+hb-blockb.ypos</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>255</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="euler">
-					<displacement>-x-xc</displacement>
-					<velocity>0</velocity>
-					<acceleration>s*(R*B*P.yvel*step(t-to-t1)+R*(V1/x)*step(to-t))</acceleration>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="euler">
-					<displacement>0</displacement>
-					<velocity>0</velocity>
-					<acceleration>s*R*(Ef-B*P.xvel)*step(t-to-t1)</acceleration>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>bg_2</name>
-			<shape type="rectangle" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>.25</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>.07</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -549,100 +460,263 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>-.55</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>-.065</value>
+					<value>blockb.ypos</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>line_1</name>
+			<name>block</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>w*cos(ar)</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>-w*sin(ar)</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>w*(cos(ar)+sin(ar))</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>w*(cos(ar)-sin(ar))</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>w*sin(ar)</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>w*cos(ar)</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>xo</displacement>
+					<velocity>0</velocity>
+					<acceleration>-acc*cos(ar)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>(run-xo)*tan(ar)+hb</displacement>
+					<velocity>0</velocity>
+					<acceleration>acc*sin(ar)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>blockb</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.9</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.9</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.55</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>1.8</displacement>
+					<velocity>0</velocity>
+					<acceleration>-acc</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>ar</name>
+			<text>Angle in radians</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(a)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>h</name>
+			<text>Height of plane</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>run*tan(ar)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>fk</name>
+			<text>Kinetic friction</text>
+			<units>N</units>
+			<calculator type="parametric">
+				<value>u*m1*g*cos(ar)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ten</name>
+			<text>Tension</text>
+			<units>N</units>
+			<calculator type="parametric">
+				<value>m1*m2*g(1+sin(ar)+u*cos(ar))/(m1+m2)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>acc</name>
+			<text>Acceleration</text>
+			<units>m/s^2</units>
+			<calculator type="parametric">
+				<value>g*(m2-m1*sin(ar)-u*m1*cos(ar))/(m1+m2)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>cm</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>xo+(w/2^.5)*cos(45/57.3-ar)</displacement>
+					<velocity>0</velocity>
+					<acceleration>-acc*cos(ar)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>(run-xo)*tan(ar)+(w/2^.5)*sin(45/57.3-ar)+hb</displacement>
+					<velocity>0</velocity>
+					<acceleration>acc*sin(ar)</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>point</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-.55</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>blockb.ypos</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>horizontal</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>.01</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>255</red>
-				<green>255</green>
-				<blue>255</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>-.021</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>-.015</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>line_2</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>.01</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>255</red>
-				<green>255</green>
-				<blue>255</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>-.07</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>-.015</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>vector_1</name>
-			<shape type="vector" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>.015</value>
+						<value>8</value>
 					</calculator>
 				</width>
 				<height>
@@ -650,232 +724,56 @@
 						<value>0</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
 			</shape>
 			<color>
-				<red>255</red>
-				<green>255</green>
-				<blue>255</blue>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-.036</value>
+					<value>0</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>-.011</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>vector_2</name>
-			<shape type="vector" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>-.015</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>255</red>
-				<green>255</green>
-				<blue>255</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>-.055</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>-.011</value>
+					<value>3.15</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
-			<name>V_1</name>
-			<text>V1</text>
-			<units></units>
+			<name>angle</name>
+			<text>Theta</text>
+			<units>deg</units>
 			<value>
 				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</value>
-			<fontSize>14</fontSize>
-			<showValue>false</showValue>
-			<color>
-				<red>255</red>
-				<green>255</green>
-				<blue>255</blue>
-			</color>
-			<ypath>
-				<calculator type="parametric">
-					<value>-.014</value>
-				</calculator>
-			</ypath>
-			<xpath>
-				<calculator type="parametric">
-					<value>-.048</value>
-				</calculator>
-			</xpath>
-		</object>
-		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
-			<name>accel_pot</name>
-			<text>accelerating potential</text>
-			<units></units>
-			<value>
-				<calculator type="parametric">
-					<value>0</value>
+					<value>a</value>
 				</calculator>
 			</value>
 			<fontSize>12</fontSize>
 			<showValue>false</showValue>
 			<color>
-				<red>255</red>
-				<green>255</green>
-				<blue>255</blue>
-			</color>
-			<ypath>
-				<calculator type="parametric">
-					<value>-.025</value>
-				</calculator>
-			</ypath>
-			<xpath>
-				<calculator type="parametric">
-					<value>-.07</value>
-				</calculator>
-			</xpath>
-		</object>
-		<solid>
-			<name>vector_3</name>
-			<shape type="vector" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>.018</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>.06</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>.0098</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>vector_4</name>
-			<shape type="vector" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>-.018</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>.06</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>-.01</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
-			<name>V_2</name>
-			<text>V2</text>
-			<units></units>
-			<value>
-				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</value>
-			<fontSize>14</fontSize>
-			<showValue>false</showValue>
-			<color>
 				<red>0</red>
 				<green>0</green>
 				<blue>0</blue>
 			</color>
 			<ypath>
 				<calculator type="parametric">
-					<value>-.002</value>
+					<value>3.3</value>
 				</calculator>
 			</ypath>
 			<xpath>
 				<calculator type="parametric">
-					<value>.057</value>
+					<value>6</value>
 				</calculator>
 			</xpath>
 		</object>
 		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
-			<name>deflection</name>
-			<text>deflection</text>
+			<name>M2</name>
+			<text>M2</text>
 			<units></units>
 			<value>
 				<calculator type="parametric">
@@ -891,18 +789,18 @@
 			</color>
 			<ypath>
 				<calculator type="parametric">
-					<value>0.002</value>
+					<value>point.ypos-.1</value>
 				</calculator>
 			</ypath>
 			<xpath>
 				<calculator type="parametric">
-					<value>.07</value>
+					<value>point.xpos-.2</value>
 				</calculator>
 			</xpath>
 		</object>
 		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
-			<name>potential</name>
-			<text>potential</text>
+			<name>M1</name>
+			<text>M1</text>
 			<units></units>
 			<value>
 				<calculator type="parametric">
@@ -918,12 +816,12 @@
 			</color>
 			<ypath>
 				<calculator type="parametric">
-					<value>-0.005</value>
+					<value>cm.ypos-.1</value>
 				</calculator>
 			</ypath>
 			<xpath>
 				<calculator type="parametric">
-					<value>.07</value>
+					<value>cm.xpos-.2</value>
 				</calculator>
 			</xpath>
 		</object>

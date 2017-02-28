@@ -1,0 +1,274 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>winters@ncssm.edu</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>1000000.0</stop>
+			<change>100.0</change>
+			<fps>20.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>200000.0</xmax>
+			<ymin>-4.0E8</ymin>
+			<ymax>4.0E8</ymax>
+			<xgrid>20000.0</xgrid>
+			<ygrid>5.0E7</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.0E7</xmin>
+			<xmax>1.0E7</xmax>
+			<ymin>-1.0E7</ymin>
+			<ymax>1.0E7</ymax>
+			<xgrid>1000000.0</xgrid>
+			<ygrid>1000000.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>The space shuttle orbits the Earth. The ratio of the shuttle's orbital radius to the Earth is given.
+
+The view is looking down on a pole.  The white line represents a meridian. Hence, it rotates at the same frequency as the Earth.</text>
+		</description>
+		<input>
+			<name>G</name>
+			<text>Gravitational constant</text>
+			<initialValue>6.67E-11</initialValue>
+			<units>Nm^2/kg^2</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>me</name>
+			<text>Mass of Earth</text>
+			<initialValue>5.97E24</initialValue>
+			<units>kg</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>re</name>
+			<text>Radius of Earth, Re</text>
+			<initialValue>6370000.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>space</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>500000000</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>500000000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>C</name>
+			<text>Constant</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>4*PI^2/(G*me)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>earth</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2*re</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2*re</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>ratio_a</name>
+			<text>Ra/Re</text>
+			<initialValue>1.05</initialValue>
+			<units></units>
+		</input>
+		<output>
+			<name>ra</name>
+			<text>Radius of A's orbit</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>ratio_a*re</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ta</name>
+			<text>Period of A</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>(C*ra^3)^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>sat_a</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>500000</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>500000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ra*cos(2*PI*t/ta)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ra*sin(2*PI*t/ta)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>pole</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>200000</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>200000</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>meridian</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>re*cos(2*PI*t/86400)</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>re*sin(2*PI*t/86400)</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>aga</name>
+			<text>Accel. of satellite</text>
+			<units>m/s^2</units>
+			<calculator type="parametric">
+				<value>G*me/ra^2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>
