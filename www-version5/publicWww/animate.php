@@ -27,6 +27,7 @@ header('Content-Type: text/html');
       <div class="col-lg-12 center" id="animationTitle">
         <h3><?= str_replace(".iwp","",end(explode('/', $animateFile))); ?></h3>
         <div id="authorUsername" style="font-style:italic">No Author</div>
+        <span title="IWP4 Java Version"><a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems/<?= $animateFile; ?>"><i class="fa fa-coffee fa-1x" style="color: #333;"></i> Java Applet</a></span>
         <br/><div id="description"></div>
         <hr>
       </div>
