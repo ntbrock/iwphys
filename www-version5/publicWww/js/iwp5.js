@@ -394,10 +394,10 @@ function calculateVarsAtStep(step) {
   
     } catch ( err ) { 
         //console.log(":231 caught a faailed solid exception: ", err);
-         throw err;      
-      //failedObjects.push(object);
-    }
-
+          if ( CONFIG_throw_solid_calculation_exceptions ) { 
+         throw err;
+         }
+      }
 });
 
 
