@@ -68,7 +68,7 @@ math.toRadians = function(degrees) { return degrees * Math.PI / 180; };
 math.toDegrees = function(radians) { return radians * 180 / Math.PI; };
 
 // Likely the are are other physical constants that we'll need to load as well.
-varsConstants = { G : -9.8 , step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } }}
+varsConstants = { G : -9.8 , step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } }, PI: {value: math.pi,},}
 
 
 function setStepDirection(newDirection) {
@@ -326,9 +326,7 @@ function calculateVarsAtStep(step) {
   } catch(err) { 
     console.log("calculateVarsAtStep:198> Exception when mirring past vars into current vars:", err)
   }
-
   }
-
 	// Eveything begins with time, populate t.
 	vars.t = queryTimeStartInputDouble() + step * time.change;
   vars.tDelta = time.change 
@@ -575,6 +573,7 @@ function addSolid(solid) {
 	ypath: { 
   		calculator : compileCalculator(solid.ypath.calculator)
   	}
+
   
   };
 
@@ -582,7 +581,7 @@ function addSolid(solid) {
   // hard to do as part of the initialization because it is a dynamic list. 
   // Add points here..? 
 if ( compiledSolid.shape.type == "polygon" ) {
-  //console.log(solid.shape.points.point) //BOOK 
+  //console.log(solid.shape.points.point) 
   //$.each( problem.objects.input, function( index, input ) {
   compiledSolid["points"] = []
   $.each( solid.shape.points.point, function( index, i) {
@@ -621,6 +620,9 @@ if ( compiledSolid.shape.type == "polygon" ) {
   else {
     return;
   };
+  if (solid.shape["@attributes"].drawTrails == "true") {
+    svgSolids.push("<polyline id='solid_" +solid.name+ "_trail' points='20,20 50,50' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='1' fill='none'></polyline>");
+  }
 }
 
 function addObject(object) {
@@ -1200,9 +1202,8 @@ function updateTimeDisplay(t) {
 function updateSolidSvgPathAndShape(solid, pathAndShape) { 
 	
 	var svgSolid = $("#solid_" + solid.name);
-
+  var svgTrail = $("#solid_" + solid.name + "_trail")
 	//console.log("updateSolidSvgPathAndShape: ", solid, svgSolid, pathAndShape);
-
 	// translate from math to visual.
 	/* pathAndShape: { height: 1, width: 1, x: 9, xdisp: 9, y: 0, ydisp: 0 }*/
 
@@ -1231,7 +1232,7 @@ if (solid.shape.type == "circle") {
   else if (solid.shape.type == "polygon") {
     //console.log("number of points: ", solid.shape);
     var points = pathAndShape.points
-    console.log(points[1].x)
+    //console.log(points[1].x)
     pointsAttr = ""
     $.each( pathAndShape.points, function( index, i ) {
       console.log(i)
@@ -1282,13 +1283,32 @@ if (solid.shape.type == "circle") {
     .attr("y",yCanvas(pathAndShape.y))
     .html(newLabel)
   }
-  //Book
+  
   else {
   	//Debugging 25 Jan 2017
     //throw "Object in problem"; 
     console.log("!! Unidentified shape:550> solid = ", solid.shape.type);
     return;
   };
+
+  //console.log("solid: ",solid)
+  //console.log("currentStep:",currentStep)
+  if (solid.shape.drawTrails == "true") {
+    var points = []
+    var pointsAttr = ""
+    for (i in varsAtStep) {      
+      var currentState = varsAtStep[i][solid.name]
+      console.log("currentState",currentState)
+      pair = {x: currentState.x, y: currentState.y }
+      points.push(pair)
+    }
+    $.each( points, function( index, i ) {
+      console.log(i)
+      pointsAttr += xCanvas(points[index].x)+","+yCanvas(points[index].y)+" "
+      console.log(pointsAttr)
+    });
+    svgTrail.attr("points", pointsAttr)
+  }
 
 
 /*for rectangle
