@@ -147,8 +147,10 @@ function archiveVarsAtStep( step, vars ) {
 function calculateOutputAtStep(output, step, vars, verbose) { 
     var newValue = evaluateCalculator( output.name+".out", output.calculator, vars, verbose ).value;
     vars[output.name] = newValue;
+
     // -> update the DOM with the new reuslts.
     updateUserFormOutputDouble(output, newValue);
+    return newValue
 }
 
 
@@ -216,7 +218,6 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
   }
 
   //-------------------------------------
-
     var calc = { 
       x: x,
       xdisp: x,
@@ -229,7 +230,24 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       yvel: 0,
       yaccel: 0,
       height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars ).value,
-      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value   
+      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value  
+    } //BOOK
+    if ( solid.shape.type == "polygon" ) {
+      //console.log(solid)
+      calc["points"] = []
+      $.each( solid.points, function( index, i) {
+      //console.log(i)
+      point = {
+        x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, vars).value,
+        y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, vars).value
+      };
+      calc.points.push(point);
+      });
+      console.log("just calced!",calc)
+      
+        //i.xpath = evaluateCalculator(solid.name+".x"+toString(counter), i.xpath.calculator, vars).value
+        //i.ypath = evaluateCalculator(solid.name+".x"+toString(counter), i.ypath.calculator, vars).value
+        //console.log("i after",i)      
     }
 
     // For objects with a value beyond x , y, w , h
@@ -252,7 +270,6 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     if ( yComplex.acceleration != undefined ) { 
       calc.yaccel = yComplex.acceleration
     }
-
     vars[solid.name] = calc
 
     // WARNING: updating svg display deep inside the calc route.
@@ -329,6 +346,7 @@ function calculateVarsAtStep(step) {
     });
 
 
+
   var failedOutputs = [];
   var failedSolids = [];
 
@@ -336,10 +354,12 @@ function calculateVarsAtStep(step) {
   for each output perform the calculator
 */
   $.each( outputs, function( index, output ) {
-
     try { 
-      calculateOutputAtStep(output, step, vars, false );
+      newValue = calculateOutputAtStep(output, step, vars, false );
+      vars[output.name] = queryUserFormInputDouble(output);
+      //console.log("added new variable:",output.name,vars[output.name])
     } catch ( err ) { 
+      //console.log("Failed Output:", output)
       failedOutputs.push(output);
     }   
   });
@@ -400,8 +420,10 @@ function calculateVarsAtStep(step) {
 
     // REPLAY FAILURES within a resonable maximum number of attempts.
      $.each( replayOutputs, function( index, output ) {
+      //console.log("Trying again",output)
       try { 
-        calculateOutputAtStep(output, step, vars, true );
+        newValue = calculateOutputAtStep(output, step, vars, true );
+        vars[output.name] = newValue
       } catch ( err ) { 
         fatalOutputs.push(output);
       }   
@@ -410,6 +432,7 @@ function calculateVarsAtStep(step) {
       try { 
        calculateSolidAtStep(solid, step, vars, true );  
       } catch ( err ) { 
+        console.log(err)
        fatalSolids.push(solid);  
       }
    });
@@ -558,6 +581,19 @@ function addSolid(solid) {
   // Ifthe problem iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
   // hard to do as part of the initialization because it is a dynamic list. 
   // Add points here..? 
+if ( compiledSolid.shape.type == "polygon" ) {
+  //console.log(solid.shape.points.point) //BOOK 
+  //$.each( problem.objects.input, function( index, input ) {
+  compiledSolid["points"] = []
+  $.each( solid.shape.points.point, function( index, i) {
+    var point = {
+      xpath: {calculator: compileCalculator(i.xpath.calculator),},
+      ypath: {calculator: compileCalculator(i.ypath.calculator),},
+    }
+  compiledSolid.points.push(point)
+  });
+  console.log("compiled polygon",compiledSolid)
+}
 
   solids.push(compiledSolid);
 
@@ -579,8 +615,8 @@ function addSolid(solid) {
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");  
   }
   else if (solid.shape["@attributes"].type == "polygon") {
-    console.log("it's a polygon");
-    svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill="+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+">");  
+    //console.log("it's a polygon:", solid.name);
+    svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");  
   }
   else {
     return;
@@ -590,7 +626,7 @@ function addSolid(solid) {
 function addObject(object) {
 
 
-console.log("iwp5.js:593> addOBject: ", object)
+//console.log("iwp5.js:593> addOBject: ", object)
 
   var compiledObject = {
     name: object.name,
@@ -741,13 +777,12 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       calculator.latestVelocity = calculator.velocity;
       calculator.acceleration = ( calculator.latestVelocity - calculator.previousVelocity ) / vars["delta_t"]
 
-
-
-			return { value: result, 
+      return { value: result, 
         displacement: result,
         velocity: calculator.velocity, 
         acceleration: calculator.acceleration };
-		} catch ( err ) { 
+		} 
+    catch ( err ) { 
       if ( verbose ) { 
 			console.log("evaluateCalculator:450> " + resultVariable + "> Unable to evaluate calculator: ", err );
       console.log("evaluateCalculator:450> " + resultVariable + "> Equation: ", calculator.equation );
@@ -930,8 +965,9 @@ function parseProblemToMemory( problem ) {
 var canvasBox = { minX: 0, minY: 0, maxX: 1000, maxY: 1000 };
 function yCanvas(y) {
   var yDomain = iwindow.ymax - iwindow.ymin;
+  var sum = iwindow.ymax / yDomain;
   var yProportion = - y / yDomain;
-  var yCorrected = yProportion + 0.5;
+  var yCorrected = yProportion + sum;
   var cDomain = canvasBox.maxY - canvasBox.minY;
   var cProportion = yCorrected * cDomain;
   return cProportion;
@@ -951,7 +987,6 @@ function xCanvas(x) {
 };
 function xCanvasGridlines(x) {
   var xDomain = iwindow.xmax - iwindow.xmin;
-  var sum = - iwindow.xmin / xDomain;
   var xProportion = x / xDomain;
   var xCorrected = xProportion + 0.5;
   var cDomain = canvasBox.maxX - canvasBox.minX;
@@ -1195,8 +1230,15 @@ if (solid.shape.type == "circle") {
   }
   else if (solid.shape.type == "polygon") {
     //console.log("number of points: ", solid.shape);
-    //var points = "" + 
-    //svgSolid.attr("points", )
+    var points = pathAndShape.points
+    console.log(points[1].x)
+    pointsAttr = ""
+    $.each( pathAndShape.points, function( index, i ) {
+      console.log(i)
+      pointsAttr += xCanvas(points[index].x+pathAndShape.x)+","+yCanvas(points[index].y+pathAndShape.y)+" "
+      console.log(pointsAttr)
+    });
+    svgSolid.attr("points", pointsAttr)
   }
   else if (solid.shape.type == "vector") {
     //http://stackoverflow.com/questions/10316180/how-to-calculate-the-coordinates-of-a-arrowhead-based-on-the-arrow
@@ -1222,7 +1264,7 @@ if (solid.shape.type == "circle") {
   }
   else if (solid.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
     
-    console.log("it's an object with propertieS: ", solid)
+    //console.log("it's an object with propertieS: ", solid)
 
     
     var safeText = solid.text
