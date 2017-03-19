@@ -346,7 +346,7 @@ A thermometer indicates the temperature of the gas in degrees Celsius. More prec
 						</xpath>
 						<ypath>
 							<calculator type="parametric">
-								<value>-6.5++13*(temp-t_l_def)/(t_u_def-t_l_def)</value>
+								<value>-6.5+13*(temp-t_l_def)/(t_u_def-t_l_def)</value>
 							</calculator>
 						</ypath>
 					</point>

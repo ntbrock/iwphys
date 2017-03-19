@@ -2,7 +2,7 @@
 
 <problem>
 	<author>
-		<username></username>
+		<username>winters@ncssm.edu</username>
 		<name></name>
 		<organization></organization>
 		<email></email>
@@ -10,23 +10,23 @@
 	<objects>
 		<time>
 			<start>0.0</start>
-			<stop>29.0</stop>
-			<change>1.0</change>
-			<fps>25.0</fps>
+			<stop>4.0</stop>
+			<change>0.02</change>
+			<fps>20.0</fps>
 		</time>
 		<GraphWindow>
 			<xmin>0.0</xmin>
-			<xmax>50.0</xmax>
-			<ymin>-90.0</ymin>
-			<ymax>90.0</ymax>
-			<xgrid>2.0</xgrid>
-			<ygrid>5.0</ygrid>
+			<xmax>4.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>2.0</ygrid>
 		</GraphWindow>
 		<window>
-			<xmin>-1.0</xmin>
-			<xmax>9.0</xmax>
+			<xmin>-6.0</xmin>
+			<xmax>1.0</xmax>
 			<ymin>-1.0</ymin>
-			<ymax>9.0</ymax>
+			<ymax>6.0</ymax>
 			<xgrid>1.0</xgrid>
 			<ygrid>1.0</ygrid>
 			<xunit>meters</xunit>
@@ -35,249 +35,48 @@
 			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
-			<text>The dispersion of white light by an equilateral prism made of crown glass is modeled. The index of refraction ranges from 1.513 for red light to 1.532 for violet light.  Playing the animation will decrease the angle of incidence in 1 degree increments. (The colored rays emerging from the prism represent broader bands of color that would appear in an actual situation. That is, the spread of colors from red to blue would be along a continuum rather in discrete lines.)
-
-For any particular angle of incidence, determine the angular spread between the emerging red and violet rays, assuming the indices of refraction given above.</text>
+			<text>Two cars of equal mass and initial velocity to the right collide with a wall. One car is stopped in the collision and the other bounces off the wall with a velocity of smaller magnitude than it struck the wall. Which car experiences the greater average force of impact in the collision with the wall?</text>
 		</description>
 		<input>
-			<name>angle</name>
-			<text>Initial angle of incidence</text>
-			<initialValue>60.0</initialValue>
-			<units>deg</units>
+			<name>vo</name>
+			<text>Initial velocity</text>
+			<initialValue>10.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>vs</name>
+			<text>Vertical shift</text>
+			<initialValue>-0.625</initialValue>
+			<units>m</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
-			<name>ai</name>
-			<text>Angle increment</text>
-			<initialValue>1.0</initialValue>
-			<units>deg</units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>n</name>
-			<text>Index of refraction (min)</text>
-			<initialValue>1.513</initialValue>
-			<units></units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>ni</name>
-			<text>Index of refraction increment</text>
-			<initialValue>0.0038</initialValue>
-			<units></units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>h</name>
-			<text>Prism height</text>
-			<initialValue>4.0</initialValue>
-			<units></units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>v</name>
-			<text>Vertex angle</text>
-			<initialValue>60.0</initialValue>
-			<units>deg</units>
-			<hidden>1</hidden>
+			<name>xo</name>
+			<text>Initial position</text>
+			<initialValue>-5.0</initialValue>
+			<units>m</units>
 		</input>
 		<output>
-			<name>var</name>
-			<text>Vertex angle</text>
-			<units>rad</units>
+			<name>tc</name>
+			<text>Time of collision</text>
+			<units>s</units>
 			<calculator type="parametric">
-				<value>toRadians(v)</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>i</name>
-			<text>Angle of incidence</text>
-			<units>deg</units>
-			<calculator type="parametric">
-				<value>angle-ai*t</value>
-			</calculator>
-		</output>
-		<output>
-			<name>irad</name>
-			<text>Angle of incidence</text>
-			<units>rad</units>
-			<calculator type="parametric">
-				<value>toRadians(angle-ai*t)</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>d</name>
-			<text>Length of ray in prism</text>
-			<units></units>
-			<calculator type="parametric">
-				<value>(h/2)*sin(var)/sin(1.57+asin(sin(irad)/n)-var)</value>
+				<value>-xo/vo</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
 		<solid>
-			<name>background</name>
+			<name>car</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>10</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>10</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>4</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>4</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>prism</name>
-			<shape type="polygon" drawTrails="false" drawVectors="false">
-				<points>
-					<point index="0">
-						<xpath>
-							<calculator type="parametric">
-								<value>0</value>
-							</calculator>
-						</xpath>
-						<ypath>
-							<calculator type="parametric">
-								<value>0</value>
-							</calculator>
-						</ypath>
-					</point>
-					<point index="1">
-						<xpath>
-							<calculator type="parametric">
-								<value>0</value>
-							</calculator>
-						</xpath>
-						<ypath>
-							<calculator type="parametric">
-								<value>h</value>
-							</calculator>
-						</ypath>
-					</point>
-					<point index="2">
-						<xpath>
-							<calculator type="parametric">
-								<value>h*cos(toRadians(30))</value>
-							</calculator>
-						</xpath>
-						<ypath>
-							<calculator type="parametric">
-								<value>h*sin(toRadians(30))</value>
-							</calculator>
-						</ypath>
-					</point>
-				</points>
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
 						<value>1</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>1</value>
-					</calculator>
-				</height>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>255</red>
-				<green>255</green>
-				<blue>255</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>incidentray</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>-2*cos(irad)</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>-2*sin(irad)</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>255</red>
-				<green>255</green>
-				<blue>255</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>h/2</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>refraya1</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>d*cos(asin(irad/n))</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>d*sin(asin(irad/n))</value>
+						<value>.35</value>
 					</calculator>
 				</height>
 				<angle>
@@ -292,31 +91,70 @@ For any particular angle of incidence, determine the angular spread between the 
 			<color>
 				<red>255</red>
 				<green>0</green>
-				<blue>0</blue>
+				<blue>51</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>(xo+vo*t)*step(tc-t)-(vo/2)*(t-tc)*step(t-tc)</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>h/2</value>
+					<value>1+vs</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>refrayb1</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
+			<name>bumper</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>9*cos(var-asin(n*sin(var-asin(sin(irad)/n))))</value>
+						<value>.1</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>9*sin(var-asin(n*sin(var-asin(sin(irad)/n))))</value>
+						<value>.1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xo+.5+vo*t)*step(tc-t)+(.5-(vo/2)*(t-tc))*step(t-tc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>.9+vs</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>top</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
 					</calculator>
 				</height>
 				<angle>
@@ -331,40 +169,31 @@ For any particular angle of incidence, determine the angular spread between the 
 			<color>
 				<red>255</red>
 				<green>0</green>
-				<blue>0</blue>
+				<blue>51</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>d*cos(asin(irad/n))</value>
+					<value>(xo+vo*t)*step(tc-t)+(-(vo/2)*(t-tc))*step(t-tc)</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>d*sin(asin(irad/n))+h/2</value>
+					<value>1.25+vs</value>
 				</calculator>
 			</ypath>
 		</solid>
-		<output>
-			<name>n2</name>
-			<text>n2</text>
-			<units></units>
-			<calculator type="parametric">
-				<value>n+ni</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
 		<solid>
-			<name>refraya2</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
+			<name>wheel</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>d*cos(asin(irad/n2))</value>
+						<value>.25</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>d*sin(asin(irad/n2))</value>
+						<value>.25</value>
 					</calculator>
 				</height>
 				<angle>
@@ -377,33 +206,33 @@ For any particular angle of incidence, determine the angular spread between the 
 				</graphOptions>
 			</shape>
 			<color>
-				<red>255</red>
-				<green>153</green>
-				<blue>0</blue>
+				<red>51</red>
+				<green>51</green>
+				<blue>51</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>(xo+vo*t-.25)*step(tc-t)+(.25-(vo/2)*(t-tc))*step(t-tc)</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>h/2</value>
+					<value>.75+vs</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>refrayb2</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
+			<name>wheel_2</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>9*cos(var-asin(n2*sin(var-asin(sin(irad)/n2))))</value>
+						<value>.25</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>9*sin(var-asin(n2*sin(var-asin(sin(irad)/n2))))</value>
+						<value>.25</value>
 					</calculator>
 				</height>
 				<angle>
@@ -416,42 +245,33 @@ For any particular angle of incidence, determine the angular spread between the 
 				</graphOptions>
 			</shape>
 			<color>
-				<red>255</red>
-				<green>153</green>
-				<blue>0</blue>
+				<red>51</red>
+				<green>51</green>
+				<blue>51</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>d*cos(asin(irad/n2))</value>
+					<value>(xo+vo*t+.25)*step(tc-t)+(-.25-(vo/2)*(t-tc))*step(t-tc)</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>d*sin(asin(irad/n2))+h/2</value>
+					<value>.75+vs</value>
 				</calculator>
 			</ypath>
 		</solid>
-		<output>
-			<name>n3</name>
-			<text>n3</text>
-			<units></units>
-			<calculator type="parametric">
-				<value>n+2*ni</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
 		<solid>
-			<name>refraya3</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
+			<name>window</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>d*cos(asin(irad/n3))</value>
+						<value>.35</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>d*sin(asin(irad/n3))</value>
+						<value>.2</value>
 					</calculator>
 				</height>
 				<angle>
@@ -466,31 +286,31 @@ For any particular angle of incidence, determine the angular spread between the 
 			<color>
 				<red>255</red>
 				<green>255</green>
-				<blue>0</blue>
+				<blue>255</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>(xo+vo*t)*step(tc-t)+(-(vo/2)*(t-tc))*step(t-tc)</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>h/2</value>
+					<value>1.35+vs</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>refrayb3</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
+			<name>head</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>9*cos(var-asin(n3*sin(var-asin(sin(irad)/n3))))</value>
+						<value>.15</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>9*sin(var-asin(n3*sin(var-asin(sin(irad)/n3))))</value>
+						<value>.20</value>
 					</calculator>
 				</height>
 				<angle>
@@ -503,216 +323,33 @@ For any particular angle of incidence, determine the angular spread between the 
 				</graphOptions>
 			</shape>
 			<color>
-				<red>255</red>
-				<green>255</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>d*cos(asin(irad/n3))</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>d*sin(asin(irad/n3))+h/2</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<output>
-			<name>n4</name>
-			<text>n4</text>
-			<units></units>
-			<calculator type="parametric">
-				<value>n+3*ni</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<solid>
-			<name>refraya4</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>d*cos(asin(irad/n4))</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>d*sin(asin(irad/n4))</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
+				<red>204</red>
 				<green>204</green>
 				<blue>0</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>(xo+vo*t)*step(tc-t)+(-(vo/2)*(t-tc))*step(t-tc)</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>h/2</value>
+					<value>1.35+vs</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>refrayb4</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
+			<name>wall</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>9*cos(var-asin(n4*sin(var-asin(sin(irad)/n4))))</value>
+						<value>.5</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>9*sin(var-asin(n4*sin(var-asin(sin(irad)/n4))))</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>204</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>d*cos(asin(irad/n4))</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>d*sin(asin(irad/n4))+h/2</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<output>
-			<name>n5</name>
-			<text>n5</text>
-			<units></units>
-			<calculator type="parametric">
-				<value>n+4*ni</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<solid>
-			<name>refraya5</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>d*cos(asin(irad/n5))</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>d*sin(asin(irad/n5))</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>51</green>
-				<blue>255</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>h/2</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>refrayb5</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>9*cos(var-asin(n5*sin(var-asin(sin(irad)/n5))))</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>9*sin(var-asin(n5*sin(var-asin(sin(irad)/n5))))</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>51</green>
-				<blue>255</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>d*cos(asin(irad/n5))</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>d*sin(asin(irad/n5))+h/2</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<output>
-			<name>n6</name>
-			<text>n6</text>
-			<units></units>
-			<calculator type="parametric">
-				<value>n+5*ni</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<solid>
-			<name>refraya6</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>d*cos(asin(irad/n6))</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>d*sin(asin(irad/n6))</value>
+						<value>6.05</value>
 					</calculator>
 				</height>
 				<angle>
@@ -727,31 +364,109 @@ For any particular angle of incidence, determine the angular spread between the 
 			<color>
 				<red>153</red>
 				<green>0</green>
-				<blue>153</blue>
+				<blue>51</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>0.75</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>h/2</value>
+					<value>3</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>refrayb6</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
+			<name>road</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>9*cos(var-asin(n6*sin(var-asin(sin(irad)/n6))))</value>
+						<value>7</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>9*sin(var-asin(n6*sin(var-asin(sin(irad)/n6))))</value>
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-2.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>carClone</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.35</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xo+vo*t)*step(tc-t)-(0)*(t-tc)*step(t-tc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>4+vs</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>bumperClone</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
 					</calculator>
 				</height>
 				<angle>
@@ -765,37 +480,253 @@ For any particular angle of incidence, determine the angular spread between the 
 			</shape>
 			<color>
 				<red>153</red>
-				<green>0</green>
+				<green>153</green>
 				<blue>153</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>d*cos(asin(irad/n6))</value>
+					<value>(xo+.5+vo*t)*step(tc-t)+(.5-(0)*(t-tc))*step(t-tc)</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>d*sin(asin(irad/n6))+h/2</value>
+					<value>3.9+vs</value>
 				</calculator>
 			</ypath>
 		</solid>
-		<output>
-			<name>rred</name>
-			<text>Angle of ref. (red)</text>
-			<units>deg</units>
-			<calculator type="parametric">
-				<value>toDegrees(asin(n*sin(var-asin(sin(irad)/n))))</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>rviol</name>
-			<text>Angle of ref. (viol)</text>
-			<units>deg</units>
-			<calculator type="parametric">
-				<value>toDegrees(asin(n6*sin(var-asin(sin(irad)/n6))))</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
+		<solid>
+			<name>topClone</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xo+vo*t)*step(tc-t)+(-(0)*(t-tc))*step(t-tc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>4.25+vs</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>wheelClone</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xo+vo*t-.25)*step(tc-t)+(.25-(0)*(t-tc))*step(t-tc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>3.75+vs</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>wheel_2Clone</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xo+vo*t+.25)*step(tc-t)+(-.25-(0)*(t-tc))*step(t-tc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>3.75+vs</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>windowClone</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.35</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xo+vo*t)*step(tc-t)+(-(0)*(t-tc))*step(t-tc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>4.35+vs</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>headClone</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.15</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.20</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>(xo+vo*t)*step(tc-t)+(-(0)*(t-tc))*step(t-tc)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>4.35+vs</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>roadClone</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>7</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-2.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2.5</value>
+				</calculator>
+			</ypath>
+		</solid>
 	</objects>
 </problem>

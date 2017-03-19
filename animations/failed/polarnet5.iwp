@@ -31,8 +31,6 @@
 			<ygrid>20.0</ygrid>
 			<xunit></xunit>
 			<yunit></yunit>
-			<showAllDataAvailable>false</showAllDataAvailable>
-			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
 			<text>Blue line:  Jumps alternately between two polar functions of the form:
@@ -84,7 +82,7 @@ The coefficients are initially set for two circles.</text>
 			<hidden>1</hidden>
 		</input>
 		<input>
-			<name>m</name>
+			<name>f</name>
 			<text> b2</text>
 			<initialValue>50.0</initialValue>
 			<units></units>
@@ -118,11 +116,6 @@ The coefficients are initially set for two circles.</text>
 						<value>1000</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -157,11 +150,6 @@ The coefficients are initially set for two circles.</text>
 						<value>.1</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -173,12 +161,12 @@ The coefficients are initially set for two circles.</text>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>(even*(a+b*sin(c*i*t+dr))+odd*(j+m*sin(g*i*t+hr)))*cos(i*t)</value>
+					<value>(even*(a+b*sin(c*i*t+dr))+odd*(j+f*sin(g*i*t+hr)))*cos(i*t)</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>(even*(a+b*sin(c*i*t+dr))+odd*(j+m*sin(g*i*t+hr)))*sin(i*t)</value>
+					<value>(even*(a+b*sin(c*i*t+dr))+odd*(j+f*sin(g*i*t+hr)))*sin(i*t)</value>
 				</calculator>
 			</ypath>
 		</solid>
@@ -196,12 +184,7 @@ The coefficients are initially set for two circles.</text>
 						<value>.2</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
+				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
 				</graphOptions>
 			</shape>
@@ -235,12 +218,7 @@ The coefficients are initially set for two circles.</text>
 						<value>.2</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
+				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="true"/>
 				</graphOptions>
 			</shape>
@@ -251,12 +229,12 @@ The coefficients are initially set for two circles.</text>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>(e+m*sin(g*i*t+hr))*cos(i*t)</value>
+					<value>(e+f*sin(g*i*t+hr))*cos(i*t)</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>(e+m*sin(g*i*t+hr))*sin(i*t)</value>
+					<value>(e+f*sin(g*i*t+hr))*sin(i*t)</value>
 				</calculator>
 			</ypath>
 		</solid>

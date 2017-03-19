@@ -31,8 +31,6 @@
 			<ygrid>2.0</ygrid>
 			<xunit>meters</xunit>
 			<yunit>meters</yunit>
-			<showAllDataAvailable>false</showAllDataAvailable>
-			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
 			<text>The red and blue objects have the same mass and oscillate in SHM with the same period and amplitude.  The only thing different is the phase.  Click Show Graph to see position vs. time graphs of both objects.
@@ -162,12 +160,7 @@ Determine what the phase of the blue object must be so that it starts at the sam
 						<value>1</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
+				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
 				</graphOptions>
 			</shape>
@@ -178,7 +171,7 @@ Determine what the phase of the blue object must be so that it starts at the sam
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>ar*cos((kr/mr)^.5*t+(pr)*1)</value>
+					<value>ar.value*cos((kr.value/mr.value)^.5*t+(pr.value)*1)</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -201,12 +194,7 @@ Determine what the phase of the blue object must be so that it starts at the sam
 						<value>1</value>
 					</calculator>
 				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
+				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
 				</graphOptions>
 			</shape>
@@ -217,7 +205,7 @@ Determine what the phase of the blue object must be so that it starts at the sam
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>ab*cos((kb/mb)^.5*t+(pb)*1)</value>
+					<value>ab.value*cos((kb.value/mb.value)^.5*t+(pb.value)*1)</value>
 				</calculator>
 			</xpath>
 			<ypath>
