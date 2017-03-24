@@ -580,49 +580,55 @@ function addSolid(solid) {
 	ypath: { 
   		calculator : compileCalculator(solid.ypath.calculator)
   	}
-
-  
   };
 
   // Ifthe problem iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
   // hard to do as part of the initialization because it is a dynamic list. 
   // Add points here..? 
-if ( compiledSolid.shape.type == "polygon" ) {
-  //console.log(solid.shape.points.point) 
-  //$.each( problem.objects.input, function( index, input ) {
-  compiledSolid["points"] = []
-  $.each( solid.shape.points.point, function( index, i) {
-    var point = {
-      xpath: {calculator: compileCalculator(i.xpath.calculator),},
-      ypath: {calculator: compileCalculator(i.ypath.calculator),},
-    }
-  compiledSolid.points.push(point)
-  });
-  console.log("compiled polygon",compiledSolid)
-}
+  if ( compiledSolid.shape.type == "polygon" ) {
+    //console.log(solid.shape.points.point) 
+    //$.each( problem.objects.input, function( index, input ) {
+    compiledSolid["points"] = []
+    $.each( solid.shape.points.point, function( index, i) {
+      var point = {
+        xpath: {calculator: compileCalculator(i.xpath.calculator),},
+        ypath: {calculator: compileCalculator(i.ypath.calculator),},
+      }
+    compiledSolid.points.push(point)
+    });
+    console.log("compiled polygon",compiledSolid)
+  }
+  if ( compiledSolid.shape.type == "Bitmap") {
+    console.log("it's a bitmap")
+    compiledSolid.fileUri = "images/"+solid.shape.file["@attributes"].image.split("/images/")[1]
+    console.log("fileUri:",compiledSolid.fileUri)
+  }
 
   solids.push(compiledSolid);
 
 
   //HTML 
-  if (solid.shape["@attributes"].type == "circle") {
+  if (compiledSolid.shape.type == "circle") {
     //console.log("it's a circle");
     svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(solid.shape.width.calculator.value)+ " ry=" +yHeight(solid.shape.height.calculator.value)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
-  else if (solid.shape["@attributes"].type == "rectangle") {
+  else if (compiledSolid.shape.type == "rectangle") {
     //console.log("it's a rectangle");
     svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
-  else if (solid.shape["@attributes"].type == "line") {
+  else if (compiledSolid.shape.type == "line") {
     //console.log("it's a line")
     svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
-  else if (solid.shape["@attributes"].type == "vector") {
+  else if (compiledSolid.shape.type == "vector") {
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");  
   }
-  else if (solid.shape["@attributes"].type == "polygon") {
+  else if (compiledSolid.shape.type == "polygon") {
     //console.log("it's a polygon:", solid.name);
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");  
+  }
+  else if (compiledSolid.shape.type == "Bitmap") {
+    svgSolids.push("<image width='100' height='100' x='500' y='500' xlink:href='"+compiledSolid.fileUri+"'>");
   }
   else {
     return;
