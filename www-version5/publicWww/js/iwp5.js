@@ -216,6 +216,12 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
      xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
      x = xComplex.value
   }
+  if ( yComplex.acceleration == null ) { 
+      console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
+    vars[solid.name] = calcY;
+     yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose )
+     y = yComplex.value
+  }
 
   //-------------------------------------
     var calc = { 
@@ -271,7 +277,6 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       calc.yaccel = yComplex.acceleration
     }
     vars[solid.name] = calc
-
     // WARNING: updating svg display deep inside the calc route.
     updateSolidSvgPathAndShape(solid, calc)
 
@@ -331,6 +336,7 @@ function calculateVarsAtStep(step) {
 	vars.t = queryTimeStartInputDouble() + step * time.change;
   vars.tDelta = time.change 
   vars.delta_t = vars.tDelta 
+  vars.tDel = vars.tDelta
 	updateTimeDisplay(vars.t);
 	/*
   for each calulation, query dom for time step
@@ -341,6 +347,7 @@ function calculateVarsAtStep(step) {
 		// next load in variables for all of the inputs.
 //		vars[input.name] = { value: queryUserFormInputDouble(input) };
     vars[input.name] = queryUserFormInputDouble(input);
+    vars[input.name]["value"] = vars[input.name]
     });
 
 
@@ -873,7 +880,7 @@ if ( true ) {
       // return displacement.value; 
     } catch ( err ) {
       if ( verbose ) { 
-      console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, tDel);
+      console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, dt);
     }
       throw err;
       //return { value: undefined }; // was -1
