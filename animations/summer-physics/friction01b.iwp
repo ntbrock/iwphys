@@ -31,6 +31,8 @@
 			<ygrid>1.0</ygrid>
 			<xunit>meters</xunit>
 			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
 			<text>A red box slides down a wall. The box is in motion at t = 0. A constant force (for example, from a hand) is applied on the box to the right. The grid spacing is 1 meter. Assume the axis directions shown.</text>
@@ -81,6 +83,11 @@
 						<value>20</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -115,6 +122,11 @@
 						<value>5</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -153,6 +165,11 @@
 						<value>0</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -249,6 +266,11 @@
 						<value>0</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -283,6 +305,11 @@
 						<value>-2</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>

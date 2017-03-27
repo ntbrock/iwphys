@@ -31,6 +31,8 @@
 			<ygrid>0.02</ygrid>
 			<xunit>meters</xunit>
 			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
 			<text>A block slides frictionlessly toward a relaxed spring. As the block compresses the spring, the spring does work on the block, bringing it to a stop. Determine the spring constant of the spring.
@@ -116,6 +118,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>.01</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -159,6 +166,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>h/2</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -193,6 +205,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>h</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -227,6 +244,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>-h</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -261,6 +283,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>h</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -295,6 +322,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>-h</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -329,6 +361,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>h</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -363,6 +400,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>-h/2</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -397,6 +439,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>h</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -418,7 +465,7 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 			</ypath>
 		</solid>
 		<solid>
-			<name>end</name>
+			<name>stop</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
@@ -431,6 +478,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>h</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -465,6 +517,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>.093</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -499,6 +556,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 						<value>h</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -533,7 +595,7 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 			<text>Stopping time</text>
 			<units>s</units>
 			<calculator type="parametric">
-				<value>tc+PI/(2*w)</value>
+				<value>tc+pi/(2*w)</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
@@ -574,11 +636,11 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 			<hidden>1</hidden>
 		</output>
 		<output>
-			<name>xend</name>
+			<name>xstop</name>
 			<text>Position of spring end</text>
 			<units>m</units>
 			<calculator type="parametric">
-				<value>end.xpos</value>
+				<value>stop.xpos</value>
 			</calculator>
 		</output>
 	</objects>

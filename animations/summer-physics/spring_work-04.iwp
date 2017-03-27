@@ -464,7 +464,7 @@
 			</ypath>
 		</solid>
 		<solid>
-			<name>end</name>
+			<name>stop</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
@@ -594,7 +594,7 @@
 			<text>Stopping time</text>
 			<units>s</units>
 			<calculator type="parametric">
-				<value>tc+PI/(2*w)</value>
+				<value>tc+pi/(2*w)</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
@@ -635,11 +635,11 @@
 			<hidden>1</hidden>
 		</output>
 		<output>
-			<name>xend</name>
+			<name>xstop</name>
 			<text>Position of spring end</text>
 			<units>m</units>
 			<calculator type="parametric">
-				<value>end.xpos</value>
+				<value>stop.xpos</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
@@ -650,19 +650,19 @@
 					<point index="0">
 						<xpath>
 							<calculator type="parametric">
-								<value>end.xpos</value>
+								<value>stop.xpos</value>
 							</calculator>
 						</xpath>
 						<ypath>
 							<calculator type="parametric">
-								<value>-.01*k*end.xpos</value>
+								<value>-.01*k*stop.xpos</value>
 							</calculator>
 						</ypath>
 					</point>
 					<point index="1">
 						<xpath>
 							<calculator type="parametric">
-								<value>end.xpos</value>
+								<value>stop.xpos</value>
 							</calculator>
 						</xpath>
 						<ypath>
@@ -799,7 +799,7 @@
 			<units>m</units>
 			<value>
 				<calculator type="parametric">
-					<value>end.xpos</value>
+					<value>stop.xpos</value>
 				</calculator>
 			</value>
 			<fontSize>12</fontSize>
@@ -826,7 +826,7 @@
 			<units>N</units>
 			<value>
 				<calculator type="parametric">
-					<value>-k*end.xpos</value>
+					<value>-k*stop.xpos</value>
 				</calculator>
 			</value>
 			<fontSize>12</fontSize>
@@ -853,7 +853,7 @@
 			<units>J</units>
 			<value>
 				<calculator type="parametric">
-					<value>-k*end.xpos^2/2</value>
+					<value>-k*stop.xpos^2/2</value>
 				</calculator>
 			</value>
 			<fontSize>12</fontSize>
@@ -880,7 +880,7 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>-0.02*k*(end.xpos)</value>
+						<value>-0.02*k*(stop.xpos)</value>
 					</calculator>
 				</width>
 				<height>
@@ -904,7 +904,7 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>end.xpos</value>
+					<value>stop.xpos</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -919,7 +919,7 @@
 			<units>N</units>
 			<value>
 				<calculator type="parametric">
-					<value>-k*end.xpos</value>
+					<value>-k*stop.xpos</value>
 				</calculator>
 			</value>
 			<fontSize>12</fontSize>
