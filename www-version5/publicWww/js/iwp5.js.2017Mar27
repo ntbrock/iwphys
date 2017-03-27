@@ -156,88 +156,107 @@ function calculateOutputAtStep(output, step, vars, verbose) {
 
 function calculateSolidAtStep(solid, step, vars, verbose) { 
 
-    // TODO - Derive Velocity and Acceleration!
- 
+  // 2017Mar27 - Defensive Code 
 
-    if ( solid.name == "P" ) { 
-      var breaker = 1
-    }
+  if ( solid.name == "bob" ) { 
+    //throw "Break"
+  }
 
-    var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
-    var x = xComplex.value
+  if ( ! vars[solid.name] ) {  vars[solid.name] = { xvel: 0, yvel: 0, xdisp: 0, ydisp: 0  } }
+  if ( ! vars[solid.name].xvel ) { vars[solid.name].xvel = 0 }
+  if ( ! vars[solid.name].yvel ) { vars[solid.name].yvel = 0 }
+  if ( ! vars[solid.name].xdisp ) { vars[solid.name].xdisp = 0 }
+  if ( ! vars[solid.name].ydisp ) { vars[solid.name].ydisp = 0 }
 
- //----------------------------------------
- /// 2016-Dec-07 attempt to alleivate circular dependency.
- var calcX = { 
+
+  // X
+  var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
+  var x = xComplex.value
+  var calcX = { 
       x: x,
       xdisp: x,
       xpos: x,
-      xvel: 0,
-      xaccel: 0
+      xvel: xComplex.velocity != undefined ? xComplex.velocity : 0,
+      xaccel: xComplex.acceleration != undefined ? xComplex.acceleration : 0
     }
 
-  // Hande Complex return types from Euler Calculator
-    if ( xComplex.velocity != undefined ) { 
-      calcX.xvel = xComplex.velocity
-    }
-    if ( xComplex.acceleration != undefined ) { 
-      calcX.xaccel = xComplex.acceleration
-    }
 
- vars[solid.name] = calcX;
- //----------------------------------------
+// EXPERIMENT
+    $.extend(vars[solid.name], calcX)
 
-    var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars )
-    var y = yComplex.value
-
-  //----- MORE TEST CODE
-
-
- // Handle Complex return types from Euler Calculator
-     var calcY = { 
+  // Y 
+  var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose )
+  var y = yComplex.value
+  var calcY = { 
       y: y,
       ydisp: y,
       ypos: y,
-      yvel: 0,  // fold in w/ terinary
-      yaccel: 0
+      yvel: yComplex.velocity != undefined  ? yComplex.velocity : 0,
+      yaccel: yComplex.acceleration != undefined ? yComplex.acceleration : 0
+    }
+
+// EXPERIMENT
+    $.extend(vars[solid.name], calcY)
+
+  // X - REPEAT
+  xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
+  x = xComplex.value
+  calcX = { 
+      x: x,
+      xdisp: x,
+      xpos: x,
+      xvel: xComplex.velocity != undefined ? xComplex.velocity : 0,
+      xaccel: xComplex.acceleration != undefined ? xComplex.acceleration : 0
+    }
+
+  // Y 
+  yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose )
+  y = yComplex.value
+  calcY = { 
+      y: y,
+      ydisp: y,
+      ypos: y,
+      yvel: yComplex.velocity != undefined  ? yComplex.velocity : 0,
+      yaccel: yComplex.acceleration != undefined ? yComplex.acceleration : 0
     }
 
 
-    if ( yComplex.velocity != undefined ) { 
-      calcY.yvel = yComplex.velocity
-    }
-    if ( yComplex.acceleration != undefined ) { 
-      calcY.yaccel = yComplex.acceleration
-    }
-
+  // Handle Edge case of no accelearation
   if ( xComplex.acceleration == null ) { 
       console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
-    vars[solid.name] = calcY;
+    $.extend(vars[solid.name],calcX);
      xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
      x = xComplex.value
   }
   if ( yComplex.acceleration == null ) { 
       console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
-    vars[solid.name] = calcY;
+    $.extend(vars[solid.name],calcY);
      yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose )
      y = yComplex.value
   }
 
-  //-------------------------------------
-    var calc = { 
+
+  // Assemble both dimensions into the new package to be written to vars.
+  var calc = { 
       x: x,
       xdisp: x,
       xpos: x,
-      xvel: 0,
-      xaccel: 0,
+      xvel: xComplex.velocity != undefined ? xComplex.velocity : 0,
+      xaccel: xComplex.acceleration != undefined ? xComplex.acceleration : 0,
       y: y,
       ydisp: y,
       ypos: y,
-      yvel: 0,
-      yaccel: 0,
+      yvel: yComplex.velocity != undefined ? yComplex.velocity : 0,
+      yaccel: yComplex.acceleration != undefined ? yComplex.acceleration : 0,
       height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars ).value,
       width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value  
-    } //BOOK
+    } 
+
+    calc.xaccel = 0.1
+    calc.yaccel = 0.1
+
+
+
     if ( solid.shape.type == "polygon" ) {
       //console.log(solid)
       calc["points"] = []
@@ -263,20 +282,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     }
      
 
-    // Hande Complex return types from Euler Calculator
-    if ( xComplex.velocity != undefined ) { 
-      calc.xvel = xComplex.velocity
-    }
-    if ( xComplex.acceleration != undefined ) { 
-      calc.xaccel = xComplex.acceleration
-    }
-    if ( yComplex.velocity != undefined ) { 
-      calc.yvel = yComplex.velocity
-    }
-    if ( yComplex.acceleration != undefined ) { 
-      calc.yaccel = yComplex.acceleration
-    }
-    vars[solid.name] = calc
+    vars[solid.name] = calc;
     // WARNING: updating svg display deep inside the calc route.
     updateSolidSvgPathAndShape(solid, calc)
 
@@ -855,7 +861,8 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
        acceleration = calculator.accelerationCompiled.eval(vars)  * dt;
       } catch ( err ) { 
         
-        console.log("evaluateCalculator:670> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
+        console.log("evaluateCalculator:858> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
+        acceleration = 0;
         if ( CONFIG_throw_acceleration_calculation_exceptions ) { 
          throw err;
          }
@@ -1018,18 +1025,10 @@ function xCanvasGridlines(x) {
   var cDomain = canvasBox.maxX - canvasBox.minX;
   var cProportion = xCorrected * cDomain;
   return cProportion;
-};
-function yCanvasGridlines(y) {
-  var yDomain = iwindow.ymax - iwindow.ymin;
-  var yProportion = y / yDomain;
-  var yCorrected = yProportion + 0.5;
-  var cDomain = canvasBox.maxY - canvasBox.minY;
-  var cProportion = yCorrected * cDomain;
-  return cProportion;
-};
 /* the proportional entry point in from window.xmin -> window.xmax needs to be interpolated into the 
 // propotional exit point between viewbox.minX -> viewbox.maxX 
 */
+};
 
 function xWidth(size) {
   var xDomain = iwindow.xmax - iwindow.xmin;
@@ -1184,7 +1183,7 @@ function renderCanvasFromMemory() {
   //console.log("yGridlines: "+yGridlines);
   for ( var interval = 1; interval <= yGridlines-1; interval ++ ) {
     var yGridPosition = (interval - yGridlines/2)*iwindow.ygrid;
-    c.append( "<path d='M 0 " + yCanvasGridlines(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" );
+    c.append( "<path d='M 0 " + yCanvas(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" );
     c.append( "<path d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" );
   };
 
