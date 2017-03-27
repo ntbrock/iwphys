@@ -345,9 +345,9 @@ function calculateVarsAtStep(step) {
 	*/
 	$.each( inputs, function( index, input ) {
 		// next load in variables for all of the inputs.
-//		vars[input.name] = { value: queryUserFormInputDouble(input) };
+    //vars[input.name] = { value: queryUserFormInputDouble(input) };
     vars[input.name] = queryUserFormInputDouble(input);
-    vars[input.name]["value"] = vars[input.name]
+    //vars[input.name]["value"] = vars[input.name];
     });
 
 
@@ -628,7 +628,7 @@ function addSolid(solid) {
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");  
   }
   else if (compiledSolid.shape.type == "Bitmap") {
-    svgSolids.push("<image width='100' height='100' x='500' y='500' xlink:href='"+compiledSolid.fileUri+"'>");
+    svgSolids.push("<image width='100' height='100' x='0' y='0' xlink:href='"+compiledSolid.fileUri+"'>");
   }
   else {
     return;
@@ -687,25 +687,32 @@ function compileCalculator(iwpCalculator) {
 				</calculator>
 		*/
 
+    var e = migrateLegacyEquation(iwpCalculator.value);
+
 		var c = { 
 			type: "mathjs",
-			compiled: math.compile( (iwpCalculator.value) ),
-			equation: iwpCalculator.value
+			compiled: math.compile( e ),
+			equation: e
 		}
 		// console.log("compileCalculator:171> value : ", iwpCalculator.value, " compiledTo: ", c)
     return c;
 
 	} else if ( incomingType == "euler") {
     
+
+    var a = migrateLegacyEquation(iwpCalculator.acceleration);
+    var v = migrateLegacyEquation(iwpCalculator.velocity);
+    var d = migrateLegacyEquation(iwpCalculator.displacement);
+
     var c =  { 
       type: "euler-mathjs",
-      initialDisplacementCompiled: math.compile( iwpCalculator.displacement ),
-      initialVelocityCompiled: math.compile( iwpCalculator.velocity ),
-      accelerationCompiled: math.compile( iwpCalculator.acceleration ),
+      initialDisplacementCompiled: math.compile( d ),
+      initialVelocityCompiled: math.compile( v ),
+      accelerationCompiled: math.compile( a ),
       equation: { 
-        acceleration : iwpCalculator.acceleration,
-        velocity : iwpCalculator.velocity,
-        displacement : iwpCalculator.displacement
+        acceleration : a,
+        velocity : v,
+        displacement : d
       }
     }
     return c;
@@ -723,6 +730,10 @@ function compileCalculator(iwpCalculator) {
 		console.log("DEBUG ERROR: Only parametric and Euler supported in the August 2016 version, unable to handle: ", incomingType);
 		return {type:"unsupported", "incomingType": incomingType, "iwpCalculator": iwpCalculator };
 	}
+}
+
+function migrateLegacyEquation(toMigrate) {
+  return toMigrate.replace(/[.]value/g,"")
 }
 
 /**
