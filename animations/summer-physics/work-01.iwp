@@ -60,7 +60,7 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>1</value>
+						<value>.5</value>
 					</calculator>
 				</width>
 				<height>
@@ -258,5 +258,14 @@
 				</calculator>
 			</ypath>
 		</solid>
+		<output>
+			<name>vo</name>
+			<text>Velocity</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>2.8333333333333335</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
 	</objects>
 </problem>
