@@ -236,7 +236,8 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       yvel: 0,
       yaccel: 0,
       height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars ).value,
-      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value  
+      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value,
+      angle: evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, vars).value  
     } //BOOK
     if ( solid.shape.type == "polygon" ) {
       //console.log(solid)
@@ -572,7 +573,10 @@ function addSolid(solid) {
   		},
   		height: { 
   			calculator: compileCalculator(solid.shape.height.calculator)
-  		}
+  		},
+      angle: {
+        calculator: compileCalculator(solid.shape.angle.calculator)
+      },
   	},
   	xpath: { 
   		calculator : compileCalculator(solid.xpath.calculator)
@@ -600,7 +604,7 @@ function addSolid(solid) {
   }
   if ( compiledSolid.shape.type == "Bitmap") {
     console.log("it's a bitmap")
-    compiledSolid.fileUri = "images/"+solid.shape.file["@attributes"].image.split("/images/")[1]
+    compiledSolid.fileUri = "../../images/"+solid.shape.file["@attributes"].image.split("/images/")[1]
     console.log("fileUri:",compiledSolid.fileUri)
   }
 
@@ -628,7 +632,8 @@ function addSolid(solid) {
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");  
   }
   else if (compiledSolid.shape.type == "Bitmap") {
-    svgSolids.push("<image width='100' height='100' x='0' y='0' xlink:href='"+compiledSolid.fileUri+"'>");
+    //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+compiledSolid.fileUri+"'><title>"+solid.name+"</title></image>");
+    svgSolids.push("image "+compiledSolid.fileUri);    
   }
   else {
     return;
@@ -1146,7 +1151,32 @@ function fitText(input) {
 
 function addSolidsToCanvas(solids) {
   //console.log("solids: ", solids);
-  $("#canvas").append(solids);
+  for (i in solids) {
+    if (solids[i].includes("image")) {
+      solidUri = solids[i].replace("image ","")
+      //console.log(solidUri);
+      var idArray = solidUri.split("/")
+      var id = "solid_"+idArray[idArray.length-1].split(".")[0] // Get solid name back; temporary fix.
+      var img = document.createElementNS('http://www.w3.org/2000/svg', 'image')
+      img.setAttributeNS(null,'id',id)
+      $("svg").append(img)
+      $("#"+id).attr("xlink:href",solidUri)
+      delete solids[i]
+
+      /*
+      var img = document.createElementNS('http://www.w3.org/2000/svg','image');
+      img.setAttributeNS(null,'height','536');
+      img.setAttributeNS(null,'width','536');
+      img.setAttributeNS('http://www.w3.org/1999/xlink','href','https://upload.wikimedia.org/wikipedia/commons/2/22/SVG_Simple_Logo.svg');
+      img.setAttributeNS(null,'x','10');
+      img.setAttributeNS(null,'y','10');
+      img.setAttributeNS(null, 'visibility', 'visible');
+      $('svg').append(img);
+      */
+    }
+    $("#canvas").append(solids[i]);
+  }
+  //$("#canvas").append(solids);
   //Blitting effect
   $("#canvasDiv").html($("#canvasDiv").html());
 }
@@ -1315,7 +1345,18 @@ if (solid.shape.type == "circle") {
     .attr("y",yCanvas(pathAndShape.y))
     .html(newLabel)
   }
-  
+  else if (solid.shape.type == "Bitmap") {
+    console.log(solid.name.toLowerCase())
+    var angle = pathAndShape.angle*-180/Math.PI
+    var xTran = xCanvas(pathAndShape.x)+xWidth(pathAndShape.width*2)/2
+    var yTran = yCanvas(pathAndShape.y)//yHeight(pathAndShape.height*2)/2//-yHeight(pathAndShape.height)
+    $("#solid_"+solid.name.toLowerCase()).attr("x",xCanvas(pathAndShape.x))
+    .attr("y",yCanvas(pathAndShape.y))
+    .attr("preserveAspectRatio","none")
+    .attr("width",xWidth(pathAndShape.width*2))
+    .attr("height",yHeight(pathAndShape.height*2))
+    .attr("transform","rotate("+angle+" "+xTran+" "+yTran+")");
+  }
   else {
   	//Debugging 25 Jan 2017
     //throw "Object in problem"; 
