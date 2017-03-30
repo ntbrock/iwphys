@@ -212,13 +212,13 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
   if ( xComplex.acceleration == null ) { 
       console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
-    vars[solid.name] = calcY;
+    vars[solid.name] = $.extend(calcX,calcY);
      xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
      x = xComplex.value
   }
   if ( yComplex.acceleration == null ) { 
       console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
-    vars[solid.name] = calcY;
+    vars[solid.name] = $.extend(calcX,calcY);
      yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose )
      y = yComplex.value
   }
