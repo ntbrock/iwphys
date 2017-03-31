@@ -68,7 +68,7 @@ math.toRadians = function(degrees) { return degrees * Math.PI / 180; };
 math.toDegrees = function(radians) { return radians * 180 / Math.PI; };
 
 // Likely the are are other physical constants that we'll need to load as well.
-varsConstants = { G : -9.8 , step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } }, PI: {value: math.pi,},}
+varsConstants = { G : -9.8 , step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } },}
 
 
 function setStepDirection(newDirection) {
