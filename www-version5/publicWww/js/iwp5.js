@@ -341,6 +341,7 @@ function calculateVarsAtStep(step) {
   vars.tDelta = time.change 
   vars.delta_t = vars.tDelta 
   vars.tDel = vars.tDelta
+  vars.deltaTime = time.change
 	updateTimeDisplay(vars.t);
 	/*
   for each calulation, query dom for time step
