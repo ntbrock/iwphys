@@ -33,7 +33,7 @@
 			<yunit>meters</yunit>
 		</window>
 		<description>
-			<text>A charged particle moves under the influence of a magnetic field oriented along the z-axis (perpendicular to the screen).  The direction of positive B is +z (outward from screen).  The blue vector on the particle represents its acceleration.</text>
+			<text>A charged particle moves under the influence of a magnetic field oriented along the z-axis (perpendicular to the screen).  The direction of positive B is +z (outward from screen).  The blue vector on the particle represents its acceleration. The grid scale is located under the tab marked by two boxes.</text>
 		</description>
 		<input>
 			<name>q</name>
