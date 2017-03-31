@@ -237,7 +237,6 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       yaccel: 0,
       height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars ).value,
       width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value,
-      angle: evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, vars).value  
     } //BOOK
     if ( solid.shape.type == "polygon" ) {
       //console.log(solid)
@@ -255,6 +254,10 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
         //i.xpath = evaluateCalculator(solid.name+".x"+toString(counter), i.xpath.calculator, vars).value
         //i.ypath = evaluateCalculator(solid.name+".x"+toString(counter), i.ypath.calculator, vars).value
         //console.log("i after",i)      
+    }
+    if ( solid.shape.angle ) {
+      console.log("solid.shape",solid.shape)
+      calc["angle"] = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, vars).value  
     }
 
     // For objects with a value beyond x , y, w , h
@@ -496,7 +499,7 @@ function setGraphWindow(inGraphWindow) {
 }
 
 function addInput(input) { 
-  //console.log("addInput: ", input );
+  console.log("addInput: ", input );
   inputs.push( input );
   // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"} 
   // 07 Oct 2016 Honoring hidden flag
@@ -574,9 +577,6 @@ function addSolid(solid) {
   		height: { 
   			calculator: compileCalculator(solid.shape.height.calculator)
   		},
-      angle: {
-        calculator: compileCalculator(solid.shape.angle.calculator)
-      },
   	},
   	xpath: { 
   		calculator : compileCalculator(solid.xpath.calculator)
@@ -604,6 +604,9 @@ function addSolid(solid) {
   }
   if ( compiledSolid.shape.type == "Bitmap") {
     console.log("it's a bitmap")
+    if (solid.shape.angle) {
+      compiledSolid["angle"] = {calculator: compileCalculator(solid.shape.angle.calculator)}
+    }
     compiledSolid.fileUri = "../../images/"+solid.shape.file["@attributes"].image.split("/images/")[1]
     console.log("fileUri:",compiledSolid.fileUri)
   }
@@ -944,11 +947,16 @@ function parseProblemToMemory( problem ) {
     $.each( problem.objects.input, function( index, input ) {
       addInput(input);
     });
-  } else if ($.type ( problem.objects.output ) == 'item') {
+  } else if ($.type ( problem.objects.input ) == 'item') {
     addInput(problem.objects.input);
+  } else if ($.type ( problem.objects.input ) == 'object') {
+    addInput(problem.objects.input);
+  
   } 
+
+
   else { 
-    null
+    console.log("iwp5:954> Unable to handle input: ", $.type ( problem.objects.input ))
   }
 
   // Output - These could be an array OR a single item.
@@ -958,6 +966,9 @@ function parseProblemToMemory( problem ) {
     });
   } else  if ( $.type ( problem.objects.output ) == 'item'){ 
     addOutput(problem.objects.output);
+  } else if ($.type ( problem.objects.output ) == 'object') {
+    addInput(problem.objects.output);
+  
   } else {
     null;
   }
@@ -1355,7 +1366,9 @@ if (solid.shape.type == "circle") {
     .attr("preserveAspectRatio","none")
     .attr("width",xWidth(pathAndShape.width*2))
     .attr("height",yHeight(pathAndShape.height*2))
-    .attr("transform","rotate("+angle+" "+xTran+" "+yTran+")");
+    if (solid.shape.angle) {
+      svgSolid.attr("transform","rotate("+angle+" "+xTran+" "+yTran+")");
+    }
   }
   else {
   	//Debugging 25 Jan 2017
@@ -1371,14 +1384,14 @@ if (solid.shape.type == "circle") {
     var pointsAttr = ""
     for (i in varsAtStep) {      
       var currentState = varsAtStep[i][solid.name]
-      console.log("currentState",currentState)
+      //console.log("currentState",currentState)
       pair = {x: currentState.x, y: currentState.y }
       points.push(pair)
     }
     $.each( points, function( index, i ) {
-      console.log(i)
+      //console.log(i)
       pointsAttr += xCanvas(points[index].x)+","+yCanvas(points[index].y)+" "
-      console.log(pointsAttr)
+      //console.log(pointsAttr)
     });
     svgTrail.attr("points", pointsAttr)
   }

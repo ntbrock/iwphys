@@ -76,45 +76,6 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
-			<name>magnet_NClone</name>
-			<shape type="rectangle" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>1.5</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>1.5</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>255</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>-3+t</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>0.5</value>
-				</calculator>
-			</ypath>
-		</solid>
 		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
 			<name>NtopClone</name>
 			<text>N</text>
@@ -266,7 +227,6 @@
 			<text>switch time</text>
 			<initialValue>1.9</initialValue>
 			<units>s</units>
-			<hidden>1</hidden>
 		</input>
 		<solid>
 			<name>magnet_N</name>

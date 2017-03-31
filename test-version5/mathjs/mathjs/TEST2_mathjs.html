@@ -1,0 +1,33 @@
+<html><head>
+    <title>TEST_mathjs</title>
+    <script src="math.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+</head>
+<body>
+<h1>TEST_mathjs</h1>
+<a href="http://mathjs.org/">http://mathjs.org/<a>
+
+<h3>Test1 - Multiplication</h3>
+<p> from: <a href="https://www.iwphys.org/TEST_2016Jun10/xtoj.php/Users/winters@ncssm.edu/em-ratio-1c.iwp">https://www.iwphys.org/TEST_2016Jun10/xtoj.php/Users/winters@ncssm.edu/em-ratio-1c.iwp</a>
+
+<p>eqn = -g*(bob.xdisp/d)^2-(bob.xvel^2+bob.yvel^2)*bob.ydisp/d^2</p>
+
+<p>result: <span id="result">Calculating...</span></p>
+<p>expected: 100</p>
+
+<script type="text/javascript">
+  var eqn = math.compile("bob.yvel^2");
+
+  var scope = {"G":-9.8,"PI":{"value":3.141592653589793},"t":0,"tDelta":0.05,"delta_t":0.05,"tDel":0.05,"d":7,"a":15,"g":5.6,"m":1,"bob":{"x":-1.8117333157176452,"xdisp":-1.8117333157176452,"xpos":-1.8117333157176452,"xvel":0,"xaccel":0}};
+
+  console.log("Eqn: ", eqn);
+
+  console.log("Eval: ", eqn.eval(scope));
+
+  $("#result").html( eqn.eval(scope) );
+
+</script>
+
+
+</body>
+</html>
