@@ -10,68 +10,103 @@
 	<objects>
 		<time>
 			<start>0.0</start>
-			<stop>5.0</stop>
-			<change>0.05</change>
-			<fps>20.0</fps>
+			<stop>3.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
 		</time>
 		<GraphWindow>
 			<xmin>0.0</xmin>
-			<xmax>5.0</xmax>
+			<xmax>10.0</xmax>
 			<ymin>-10.0</ymin>
 			<ymax>10.0</ymax>
-			<xgrid>1.0</xgrid>
-			<ygrid>1.0</ygrid>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
 		</GraphWindow>
 		<window>
 			<xmin>-10.0</xmin>
 			<xmax>10.0</xmax>
 			<ymin>-10.0</ymin>
 			<ymax>10.0</ymax>
-			<xgrid>1.0</xgrid>
-			<ygrid>1.0</ygrid>
-			<xunit>meters</xunit>
-			<yunit>meters</yunit>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
 			<showAllDataAvailable>false</showAllDataAvailable>
 			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
-			<text>A red box slides down a wall. The box is in motion at t = 0. A constant force (for example, from a hand) is applied on the box to the right. The grid spacing is 1 meter. Assume the axis directions shown.</text>
+			<text>A bar magnet is pushed into a loop of conducting wire. While the magnet is moving into the loop, what is the direction of the induced current in loop from the point of view of the observer?</text>
 		</description>
-		<input>
-			<name>vo</name>
-			<text>Initial Velocity</text>
-			<initialValue>-3.0</initialValue>
-			<units>m/s</units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>m</name>
-			<text>Mass of Box</text>
-			<initialValue>2.0</initialValue>
-			<units>kg</units>
-		</input>
-		<input>
-			<name>mu</name>
-			<text>Coeff. of Kinetic Friction</text>
-			<initialValue>0.4</initialValue>
-			<units></units>
-		</input>
-		<input>
-			<name>N</name>
-			<text>Applied Force, P</text>
-			<initialValue>20.0</initialValue>
-			<units>N</units>
-		</input>
-		<input>
-			<name>g</name>
-			<text>Gravitational Acceleration</text>
-			<initialValue>9.8</initialValue>
-			<units>m/s^2</units>
-			<hidden>1</hidden>
-		</input>
 		<solid>
-			<name>Wall</name>
+			<name>bg</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>NtopClone</name>
+			<text>N</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>20</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>0.25</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-3.25+t</value>
+				</calculator>
+			</xpath>
+		</object>
+		<solid>
+			<name>loop</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/loop.png"/>
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
@@ -80,7 +115,46 @@
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>20</value>
+						<value>3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-1</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>magnet_S</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>4.6</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1.5</value>
 					</calculator>
 				</height>
 				<angle>
@@ -99,7 +173,47 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>9.5</value>
+					<value>-6+t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>observer</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/female.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>4</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>4</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>6</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -108,18 +222,24 @@
 				</calculator>
 			</ypath>
 		</solid>
+		<input>
+			<name>tc</name>
+			<text>switch time</text>
+			<initialValue>1.9</initialValue>
+			<units>s</units>
+		</input>
 		<solid>
-			<name>Box</name>
+			<name>magnet_N</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>3</value>
+						<value>1.5*step(tc-t)</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>5</value>
+						<value>1.5</value>
 					</calculator>
 				</height>
 				<angle>
@@ -137,32 +257,55 @@
 				<blue>0</blue>
 			</color>
 			<xpath>
-				<calculator type="euler">
-					<displacement>7.5</displacement>
-					<velocity>0</velocity>
-					<acceleration>step(-N)*N/m</acceleration>
+				<calculator type="parametric">
+					<value>-3+t</value>
 				</calculator>
 			</xpath>
 			<ypath>
-				<calculator type="euler">
-					<displacement>5.5</displacement>
-					<velocity>vo</velocity>
-					<acceleration>-g-step(N)*sign(Box.yvel)*N*mu/m</acceleration>
+				<calculator type="parametric">
+					<value>0.5</value>
 				</calculator>
 			</ypath>
 		</solid>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>Ntop</name>
+			<text>N</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>20</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>0.25</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>-3.25+t*step(tc-t)-10*step(t-tc)</value>
+				</calculator>
+			</xpath>
+		</object>
 		<solid>
-			<name>Force</name>
-			<shape type="vector" drawTrails="false" drawVectors="false">
+			<name>magnet_shield</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>step(N)*2+step(-N)*-2</value>
+						<value>4.6</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>0</value>
+						<value>1.5</value>
 					</calculator>
 				</height>
 				<angle>
@@ -175,66 +318,31 @@
 				</graphOptions>
 			</shape>
 			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>Box.xpos-step(N)*3.5+step(-N)*3.5</value>
+					<value>-6+t</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>Box.ypos</value>
+					<value>0.5</value>
 				</calculator>
 			</ypath>
 		</solid>
-		<output>
-			<name>xpos</name>
-			<text>X Position</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>Box.xpos</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>ypos</name>
-			<text>Y Position</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>Box.ypos</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>fk</name>
-			<text>Friction Force</text>
-			<units>N</units>
-			<calculator type="parametric">
-				<value>step(N)*N*mu*sign(Box.yvel)*-1</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>v</name>
-			<text>Velocity</text>
-			<units>m/s</units>
-			<calculator type="parametric">
-				<value>abs(Box.yvel)</value>
-			</calculator>
-		</output>
 		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
-			<name>Pforce</name>
-			<text>Applied Force, P</text>
-			<units>N</units>
+			<name>S</name>
+			<text>S</text>
+			<units></units>
 			<value>
 				<calculator type="parametric">
-					<value>N</value>
+					<value>0</value>
 				</calculator>
 			</value>
-			<fontSize>15</fontSize>
+			<fontSize>20</fontSize>
 			<showValue>false</showValue>
 			<color>
 				<red>0</red>
@@ -243,18 +351,19 @@
 			</color>
 			<ypath>
 				<calculator type="parametric">
-					<value>Box.ypos-.1</value>
+					<value>0.25</value>
 				</calculator>
 			</ypath>
 			<xpath>
 				<calculator type="parametric">
-					<value>Box.xpos-8.5</value>
+					<value>-8+t</value>
 				</calculator>
 			</xpath>
 		</object>
 		<solid>
-			<name>xaxis</name>
-			<shape type="vector" drawTrails="false" drawVectors="false">
+			<name>hand</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/pushhand.png"/>
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
@@ -263,12 +372,12 @@
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>0</value>
+						<value>2</value>
 					</calculator>
 				</height>
 				<angle>
 					<calculator type="parametric">
-						<value>0</value>
+						<value>-pi/2</value>
 					</calculator>
 				</angle>
 				<graphOptions graphVisible="false">
@@ -276,113 +385,20 @@
 				</graphOptions>
 			</shape>
 			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-6</value>
+					<value>-10+t</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>4</value>
+					<value>0.5</value>
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
-			<name>yaxis</name>
-			<shape type="vector" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>-2</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>-6</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>4</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
-			<name>xplus</name>
-			<text>+x</text>
-			<units></units>
-			<value>
-				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</value>
-			<fontSize>12</fontSize>
-			<showValue>false</showValue>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<ypath>
-				<calculator type="parametric">
-					<value>3.8</value>
-				</calculator>
-			</ypath>
-			<xpath>
-				<calculator type="parametric">
-					<value>-3.8</value>
-				</calculator>
-			</xpath>
-		</object>
-		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
-			<name>yplus</name>
-			<text>+y</text>
-			<units></units>
-			<value>
-				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</value>
-			<fontSize>12</fontSize>
-			<showValue>false</showValue>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<ypath>
-				<calculator type="parametric">
-					<value>1.4</value>
-				</calculator>
-			</ypath>
-			<xpath>
-				<calculator type="parametric">
-					<value>-6.3</value>
-				</calculator>
-			</xpath>
-		</object>
 	</objects>
 </problem>

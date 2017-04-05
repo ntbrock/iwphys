@@ -31,6 +31,8 @@
 			<ygrid>1.0</ygrid>
 			<xunit>meters</xunit>
 			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
 			<text>A pendulum is set up on the surface of Planet X. The bob is released from rest and oscillates in a vertical plane. What is the acceleration due to gravity on the surface of Planet X?</text>
@@ -77,6 +79,11 @@
 						<value>.5</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -115,6 +122,11 @@
 						<value>bob.ypos</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>

@@ -10,8 +10,8 @@
 	<objects>
 		<time>
 			<start>0.0</start>
-			<stop>6.1</stop>
-			<change>0.099</change>
+			<stop>4.0</stop>
+			<change>0.1</change>
 			<fps>10.0</fps>
 		</time>
 		<GraphWindow>
@@ -35,42 +35,65 @@
 			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
-			<text></text>
+			<text>A bar magnet is pulled out of a loop of conducting wire. While the magnet is moving out of the loop, what is the direction of the induced current in loop from the point of view of the observer? The red end of the magnet is the North pole.</text>
 		</description>
-		<output>
-			<name>p2</name>
-			<text>Horizontal Box Position</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>step(3-t)*vo*t+step(t-3)*step(6-t)*(vo*3-vo*(t-3))+step(t-6)*0</value>
-			</calculator>
-		</output>
-		<output>
-			<name>p1</name>
-			<text>Vertical Box Position</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>step(3-t)*vo*t+step(t-3)*step(6-t)*(vo*3-vo*(t-3))+step(t-6)*0</value>
-			</calculator>
-		</output>
 		<solid>
-			<name>Rope</name>
-			<shape type="Bitmap" drawTrails="false" drawVectors="false">
-				<file image="/images/bitmap/rope.png"/>
+			<name>bg</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>.5</value>
+						<value>20</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>.2</value>
+						<value>20</value>
 					</calculator>
 				</height>
 				<angle>
 					<calculator type="parametric">
-						<value>(3.14*3)/2</value>
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>loop</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/loop.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>3</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
 					</calculator>
 				</angle>
 				<graphOptions graphVisible="false">
@@ -84,111 +107,33 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-8</value>
+					<value>-1</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>p1+1</value>
+					<value>.5</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>Box1</name>
-			<shape type="rectangle" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>1</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>1</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>102</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>-8</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>step(3-t)*vo*t+step(t-3)*step(6-t)*(vo*3-vo*(t-3))+step(t-6)*0</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>Box2</name>
-			<shape type="rectangle" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>1</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>1</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>153</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>step(3-t)*vo*t+step(t-3)*step(6-t)*(vo*3-vo*(t-3))+step(t-6)*0</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>Pullhand</name>
+			<name>hand</name>
 			<shape type="Bitmap" drawTrails="false" drawVectors="false">
 				<file image="/images/bitmap/pullhand.png"/>
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>1</value>
+						<value>2</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>1</value>
+						<value>2</value>
 					</calculator>
 				</height>
 				<angle>
 					<calculator type="parametric">
-						<value>(3.14*3)/2</value>
+						<value>0</value>
 					</calculator>
 				</angle>
 				<graphOptions graphVisible="false">
@@ -202,40 +147,72 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-8</value>
+					<value>-8.3-t</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>p1+2</value>
+					<value>0.5</value>
 				</calculator>
 			</ypath>
 		</solid>
-		<input>
-			<name>vo</name>
-			<text>Velocity</text>
-			<initialValue>2.8333333333333335</initialValue>
-			<units>m/s</units>
-			<hidden>1</hidden>
-		</input>
 		<solid>
-			<name>PushHand</name>
-			<shape type="Bitmap" drawTrails="false" drawVectors="false">
-				<file image="/images/bitmap/pushhand.png"/>
+			<name>magnet_S</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>1</value>
+						<value>4.6</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>1</value>
+						<value>1.5</value>
 					</calculator>
 				</height>
 				<angle>
 					<calculator type="parametric">
-						<value>step(t-3)*3.14/2+step(3-t)*-3.14/2</value>
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>153</red>
+				<green>153</green>
+				<blue>153</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-t-4.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>observer</name>
+			<shape type="Bitmap" drawTrails="false" drawVectors="false">
+				<file image="/images/bitmap/female.png"/>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>4</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>4</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
 					</calculator>
 				</angle>
 				<graphOptions graphVisible="false">
@@ -249,23 +226,53 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>(p1-1)*step(3-t)+step(t-3)*(p1+1)</value>
+					<value>6</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>-.5</value>
 				</calculator>
 			</ypath>
 		</solid>
-		<output>
-			<name>vo</name>
-			<text>Velocity</text>
-			<units>m/s</units>
-			<calculator type="parametric">
-				<value>2.8333333333333335</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
+		<solid>
+			<name>magnet_N</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1.5</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-t-1.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0.5</value>
+				</calculator>
+			</ypath>
+		</solid>
 	</objects>
 </problem>

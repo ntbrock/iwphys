@@ -10,112 +10,220 @@
 	<objects>
 		<time>
 			<start>0.0</start>
-			<stop>5.0</stop>
-			<change>0.01</change>
-			<fps>20.0</fps>
+			<stop>60.0</stop>
+			<change>1.0</change>
+			<fps>25.0</fps>
 		</time>
 		<GraphWindow>
 			<xmin>0.0</xmin>
-			<xmax>1.0</xmax>
-			<ymin>-0.2</ymin>
-			<ymax>0.2</ymax>
-			<xgrid>0.1</xgrid>
-			<ygrid>0.02</ygrid>
+			<xmax>50.0</xmax>
+			<ymin>-90.0</ymin>
+			<ymax>90.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>5.0</ygrid>
 		</GraphWindow>
 		<window>
-			<xmin>-0.2</xmin>
-			<xmax>0.2</xmax>
-			<ymin>-0.2</ymin>
-			<ymax>0.2</ymax>
-			<xgrid>0.02</xgrid>
-			<ygrid>0.02</ygrid>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
 			<xunit>meters</xunit>
 			<yunit>meters</yunit>
 			<showAllDataAvailable>false</showAllDataAvailable>
 			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
-			<text>A block slides frictionlessly toward a relaxed spring. As the block compresses the spring, the spring does work on the block, bringing it to a stop. Determine the spring constant of the spring.
+			<text>The blue, red, and gray areas represent media of different indices of refraction. The path of a light ray incident from the blue medium is shown in yellow.  The angle of incidence is given as an output.  Playing the applet forward or reverse will increase or decrease the initial angle of incidence.  In order to increase the precision with which the incident angle can be read, decrease the Angle Increment.  Also change the Starting angle to something very near the angle you're looking for so that you don't have to step through many angles.
 
-Caution: Unphysical results (such as the block passing through the wall) may be result from some combinations of initial velocity and mass. In such cases, one simply imagines that the spring and support extend further to the right. The block will always return, given enough time.</text>
+The problem is to find the relative indices of refraction n1:n2:n3.  That is, find the ratios n2/n1 and n3/n2.  For good results, measure angles to the nearest tenth of a degree.</text>
 		</description>
 		<input>
-			<name>q</name>
-			<text>Phase</text>
-			<initialValue>90.0</initialValue>
+			<name>angle</name>
+			<text>Initial angle of incidence</text>
+			<initialValue>30.0</initialValue>
 			<units>deg</units>
+		</input>
+		<input>
+			<name>s</name>
+			<text>Angle increment</text>
+			<initialValue>1.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>n1</name>
+			<text>Index of refraction 1</text>
+			<initialValue>1.6</initialValue>
+			<units></units>
 			<hidden>1</hidden>
 		</input>
 		<input>
-			<name>vo</name>
-			<text>Magnitude of initial velocity</text>
-			<initialValue>1.18</initialValue>
-			<units>m/s</units>
-		</input>
-		<input>
-			<name>xb</name>
-			<text>Position of wall</text>
-			<initialValue>0.195</initialValue>
-			<units>m</units>
+			<name>n2</name>
+			<text>Index of refraction 2</text>
+			<initialValue>1.2</initialValue>
+			<units></units>
 			<hidden>1</hidden>
 		</input>
 		<input>
-			<name>xo</name>
-			<text>Initial position of block</text>
-			<initialValue>-0.15</initialValue>
-			<units>m</units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>m</name>
-			<text>Mass of block</text>
-			<initialValue>1.25</initialValue>
-			<units>kg</units>
-		</input>
-		<input>
-			<name>k</name>
-			<text>Spring Constant</text>
-			<initialValue>84.5</initialValue>
-			<units>N/m</units>
-			<hidden>1</hidden>
-		</input>
-		<input>
-			<name>h</name>
-			<text>Spring height</text>
-			<initialValue>0.03</initialValue>
-			<units>m</units>
+			<name>n3</name>
+			<text>Index of refraction 3</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
 			<hidden>1</hidden>
 		</input>
 		<output>
-			<name>w</name>
-			<text>Angular speed</text>
-			<units>1/s</units>
+			<name>i</name>
+			<text>Angle of incidence</text>
+			<units>deg</units>
 			<calculator type="parametric">
-				<value>(k/m)^.5</value>
+				<value>angle+s*t</value>
+			</calculator>
+		</output>
+		<output>
+			<name>r</name>
+			<text>Angle of refraction 1</text>
+			<units>deg</units>
+			<calculator type="parametric">
+				<value>toDegrees(asin(sin(toRadians(i))/n))</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
 		<output>
-			<name>xs</name>
-			<text>Stopping distance</text>
-			<units>m</units>
+			<name>r2</name>
+			<text>Angle of refraction 2</text>
+			<units>deg</units>
 			<calculator type="parametric">
-				<value>vo*(m/k)^0.5</value>
+				<value>toDegrees(asin(sin(toRadians(r))/m))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>n</name>
+			<text>n2/n1</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>n2/n1</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>m</name>
+			<text>n3/n2</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>n3/n2</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ac</name>
+			<text>Critical angle 1</text>
+			<units>deg</units>
+			<calculator type="parametric">
+				<value>toDegrees(asin(n2/n1))</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>ad</name>
+			<text>Critical angle 2</text>
+			<units>deg</units>
+			<calculator type="parametric">
+				<value>toDegrees(asin(n3/n2))</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
 		<solid>
-			<name>motion</name>
-			<shape type="circle" drawTrails="false" drawVectors="false">
+			<name>incidentmed</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>0</value>
+						<value>20</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>.01</value>
+						<value>9</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-5.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refmed1</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2.08</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refractedray</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2*tan(asin(sin(toRadians(i))/n))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>2</value>
 					</calculator>
 				</height>
 				<angle>
@@ -129,314 +237,32 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 			</shape>
 			<color>
 				<red>255</red>
-				<green>0</green>
-				<blue>51</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>step(t-tc)*step(tse-t)*a*cos(w*(t-tc)+toRadians(q))</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<output>
-			<name>p</name>
-			<text>Spring pitch</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>(xb+motion.xpos)/6</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<solid>
-			<name>line1</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>-p/2</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>h/2</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
+				<green>255</green>
 				<blue>0</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>xb</value>
+					<value>-6</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>-1</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>line3</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>p</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>h</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>xb-3*p/2</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>-h/2</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>line4</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>p</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>-h</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>xb-5*p/2</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>h/2</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>line5</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>p</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>h</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>xb-7*p/2</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>-h/2</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>line6</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>p</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>-h</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>xb-9*p/2</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>h/2</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>line7</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>p</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>h</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>xb-11*p/2</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>-h/2</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>line8</name>
-			<shape type="line" drawTrails="false" drawVectors="false">
-				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
-				<width>
-					<calculator type="parametric">
-						<value>p/2</value>
-					</calculator>
-				</width>
-				<height>
-					<calculator type="parametric">
-						<value>-h/2</value>
-					</calculator>
-				</height>
-				<angle>
-					<calculator type="parametric">
-						<value>0</value>
-					</calculator>
-				</angle>
-				<graphOptions graphVisible="false">
-					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
-				</graphOptions>
-			</shape>
-			<color>
-				<red>0</red>
-				<green>0</green>
-				<blue>0</blue>
-			</color>
-			<xpath>
-				<calculator type="parametric">
-					<value>xb-12*p/2</value>
-				</calculator>
-			</xpath>
-			<ypath>
-				<calculator type="parametric">
-					<value>0</value>
-				</calculator>
-			</ypath>
-		</solid>
-		<solid>
-			<name>Block</name>
+			<name>refmed2</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>h</value>
+						<value>20</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>h</value>
+						<value>9</value>
 					</calculator>
 				</height>
 				<angle>
@@ -450,32 +276,32 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 			</shape>
 			<color>
 				<red>102</red>
-				<green>204</green>
-				<blue>255</blue>
+				<green>102</green>
+				<blue>102</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>(xo+vo*t)*step(tc-t)*step(tse-t)-step(t-tc)*step(tse-t)*(motion.xpos+0.5*h)+step(t-tse)*(-1*vo*(t-tse)-0.5*h)</value>
+					<value>0</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>5.5</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>stop</name>
-			<shape type="rectangle" drawTrails="false" drawVectors="false">
+			<name>refractedray2</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>.002</value>
+						<value>9*tan(asin(sin(toRadians(r))/m))</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>h</value>
+						<value>9</value>
 					</calculator>
 				</height>
 				<angle>
@@ -488,33 +314,33 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 				</graphOptions>
 			</shape>
 			<color>
-				<red>153</red>
-				<green>0</green>
-				<blue>51</blue>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>xb-12*p/2</value>
+					<value>2*tan(asin(sin(toRadians(i))/n))-6</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>0</value>
+					<value>1</value>
 				</calculator>
 			</ypath>
 		</solid>
 		<solid>
-			<name>wall</name>
+			<name>refmed1_clone</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>.01</value>
+						<value>4</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>.093</value>
+						<value>2</value>
 					</calculator>
 				</height>
 				<angle>
@@ -527,13 +353,13 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 				</graphOptions>
 			</shape>
 			<color>
-				<red>0</red>
+				<red>204</red>
 				<green>0</green>
 				<blue>0</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>xb+.005</value>
+					<value>-8</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -543,17 +369,17 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 			</ypath>
 		</solid>
 		<solid>
-			<name>table</name>
-			<shape type="rectangle" drawTrails="false" drawVectors="false">
+			<name>incidentray</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>2*xb+3</value>
+						<value>4</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>h</value>
+						<value>4/tan(toRadians(i))</value>
 					</calculator>
 				</height>
 				<angle>
@@ -566,9 +392,93 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 				</graphOptions>
 			</shape>
 			<color>
-				<red>153</red>
-				<green>153</green>
-				<blue>153</blue>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-6-4</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-1-4/tan(toRadians(i))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refmed2_clone</name>
+			<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>-10</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>2*tan(asin(sin(toRadians(i))/n))-6</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="2">
+						<xpath>
+							<calculator type="parametric">
+								<value>2*tan(asin(sin(toRadians(i))/n))-6</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>10</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="3">
+						<xpath>
+							<calculator type="parametric">
+								<value>-10</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>10</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
 			</color>
 			<xpath>
 				<calculator type="parametric">
@@ -577,71 +487,246 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>-h-.001</value>
+					<value>1</value>
 				</calculator>
 			</ypath>
 		</solid>
-		<output>
-			<name>tc</name>
-			<text>Time of collision</text>
-			<units>s</units>
-			<calculator type="parametric">
-				<value>(abs(xo)-h/2)/vo</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>ts</name>
-			<text>Stopping time</text>
-			<units>s</units>
-			<calculator type="parametric">
-				<value>tc+pi/(2*w)</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>vs</name>
-			<text>max vel</text>
-			<units>m/s</units>
-			<calculator type="parametric">
-				<value>a*w</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>a</name>
-			<text>Amplitude</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>xs</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>tse</name>
-			<text>Time of Separation</text>
-			<units>s</units>
-			<calculator type="parametric">
-				<value>tc+pi/w</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>phys</name>
-			<text>Correct Model</text>
-			<units>T/F</units>
-			<calculator type="parametric">
-				<value>sign(xb-xs)</value>
-			</calculator>
-			<hidden>1</hidden>
-		</output>
-		<output>
-			<name>xstop</name>
-			<text>Position of spring end</text>
-			<units>m</units>
-			<calculator type="parametric">
-				<value>stop.xpos</value>
-			</calculator>
-		</output>
+		<solid>
+			<name>incidentray_clone</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>9*tan(toRadians(i))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-9</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-6</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-1</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refractedray_clone</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2*tan(asin(sin(toRadians(i))/n))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-2</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-6+2*tan(asin(sin(toRadians(i))/n))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>incidentray_clone_2</name>
+			<shape type="vector" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>9*tan(toRadians(i))</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>-9</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-6+4*tan(asin(sin(toRadians(i))/n))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-1</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>refmed2Clone</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>9</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-9.5</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>5.5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>1</name>
+			<text>Medium 1</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>16</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>4</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>2</name>
+			<text>Medium 2</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>16</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>-.3</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>4</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>3</name>
+			<text>Medium 3</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>16</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.5</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>4</value>
+				</calculator>
+			</xpath>
+		</object>
 	</objects>
 </problem>

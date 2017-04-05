@@ -31,6 +31,8 @@
 			<ygrid>1.0</ygrid>
 			<xunit>meters</xunit>
 			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
 			<text>A pendulum is released from rest and oscillates in a vertical plane.  For which positions (A, B, C) is the tangential acceleration 0? maximum? centripetal acceleration 0? maximum?</text>
@@ -77,6 +79,11 @@
 						<value>bob.ypos</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -111,6 +118,11 @@
 						<value>.5</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -122,16 +134,16 @@
 			</color>
 			<xpath>
 				<calculator type="euler">
-					<displacement>-d.value*sin(toRadians(a))</displacement>
+					<displacement>-d*sin(toRadians(a))</displacement>
 					<velocity>0</velocity>
-					<acceleration>g.value*bob.xdisp*bob.ydisp/d.value^2-(bob.xvel^2+bob.yvel^2)*bob.xdisp/d.value^2</acceleration>
+					<acceleration>g*bob.xdisp*bob.ydisp/d^2-(bob.xvel^2+bob.yvel^2)*bob.xdisp/d^2</acceleration>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="euler">
-					<displacement>-d.value*cos(toRadians(a))</displacement>
+					<displacement>-d*cos(toRadians(a))</displacement>
 					<velocity>0</velocity>
-					<acceleration>-g.value*(bob.xdisp/d.value)^2-(bob.xvel^2+bob.yvel^2)*bob.ydisp/d.value^2</acceleration>
+					<acceleration>-g*(bob.xdisp/d)^2-(bob.xvel^2+bob.yvel^2)*bob.ydisp/d^2</acceleration>
 				</calculator>
 			</ypath>
 		</solid>
