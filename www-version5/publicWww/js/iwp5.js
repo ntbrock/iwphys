@@ -112,7 +112,10 @@ function handleStep() {
     change : parseFloat(inTime.change),
     fps : parseFloat(inTime.fps)
    };*/
-  if (newStep == ( queryTimeStopInputDouble() / queryTimeStepInputDouble())) {
+  console.log("stop step", queryTimeStopInputDouble() / queryTimeStepInputDouble())
+  console.log('current step', newStep)
+  if (newStep == ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {   
+    console.log("stop time reached")
     handleStopClick()
   }
 	//console.log("handleStep:61> newStep: " + newStep)
