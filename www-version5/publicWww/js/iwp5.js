@@ -68,7 +68,7 @@ math.toRadians = function(degrees) { return degrees * Math.PI / 180; };
 math.toDegrees = function(radians) { return radians * 180 / Math.PI; };
 
 // Likely the are are other physical constants that we'll need to load as well.
-varsConstants = { G : -9.8 , step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } },}
+varsConstants = { G : -9.8, step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } },}
 
 
 function setStepDirection(newDirection) {
@@ -112,8 +112,8 @@ function handleStep() {
     change : parseFloat(inTime.change),
     fps : parseFloat(inTime.fps)
    };*/
-  console.log("stop step", queryTimeStopInputDouble() / queryTimeStepInputDouble())
-  console.log('current step', newStep)
+  //console.log("stop step", queryTimeStopInputDouble() / queryTimeStepInputDouble())
+  //console.log('current step', newStep)
   if (newStep == ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {   
     console.log("stop time reached")
     handleStopClick()
@@ -150,7 +150,7 @@ function archiveVarsAtStep( step, vars ) {
 function calculateOutputAtStep(output, step, vars, verbose) { 
     var newValue = evaluateCalculator( output.name+".out", output.calculator, vars, verbose ).value;
     vars[output.name] = newValue;
-
+    //console.log("newValue for",output.name,evaluateCalculator( output.name+".out", output.calculator, vars, verbose ))
     // -> update the DOM with the new reuslts.
     updateUserFormOutputDouble(output, newValue);
     return newValue
@@ -164,7 +164,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
     if ( solid.name == "P" ) { 
       var breaker = 1
-    }
+    } 
 
     var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
     var x = xComplex.value
@@ -327,7 +327,7 @@ var CONFIG_throw_solid_calculation_exceptions = false;
 function calculateVarsAtStep(step) { 
 
   // vars should be a map of string to double, including the mathematical / physical constants.
-  var vars = { step: step }
+  var vars = { step: step}
   $.extend(vars, varsConstants);
 
   // EXPERIMENTAL: Pull the previous variables in from last step?
@@ -368,12 +368,20 @@ function calculateVarsAtStep(step) {
 */
   $.each( outputs, function( index, output ) {
     try { 
-      newValue = calculateOutputAtStep(output, step, vars, false );
-      vars[output.name] = queryUserFormInputDouble(output);
+      var newValue = calculateOutputAtStep(output, step, vars, false );
+      //console.log("newValue",newValue)
+      if ( isNaN(newValue) ) {
+        throw "not a number"
+      };
+      if ( !isFinite(newValue) ) {
+        throw "not finite"
+      }
+      vars[output.name] = newValue;
       //console.log("added new variable:",output.name,vars[output.name])
     } catch ( err ) { 
       //console.log("Failed Output:", output)
       failedOutputs.push(output);
+      //console.log("FailedOutputs",failedOutputs)
     }   
   });
 
@@ -386,9 +394,8 @@ function calculateVarsAtStep(step) {
 		*/
 
     try { 
-     calculateSolidAtStep(solid, step, vars, false );
+     calculateSolidAtStep(solid, step, vars, true );
         //  -> update the DOM with theose new results
-  
     } catch ( err ) { 
         //console.log(":231 caught a faailed solid exception: ", err);
           if ( CONFIG_throw_solid_calculation_exceptions ) { 
@@ -404,7 +411,7 @@ function calculateVarsAtStep(step) {
     */
 
     try { 
-     calculateSolidAtStep(object, step, vars, false );
+     calculateSolidAtStep(object, step, vars, true );
         //  -> update the DOM with theose new results
   
     } catch ( err ) { 
@@ -435,7 +442,7 @@ function calculateVarsAtStep(step) {
      $.each( replayOutputs, function( index, output ) {
       //console.log("Trying again",output)
       try { 
-        newValue = calculateOutputAtStep(output, step, vars, true );
+        var newValue = calculateOutputAtStep(output, step, vars, true );
         vars[output.name] = newValue
       } catch ( err ) { 
         fatalOutputs.push(output);
@@ -503,7 +510,7 @@ function setGraphWindow(inGraphWindow) {
 }
 
 function addInput(input) { 
-  console.log("addInput: ", input );
+  //console.log("addInput: ", input );
   inputs.push( input );
   // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"} 
   // 07 Oct 2016 Honoring hidden flag
@@ -756,7 +763,7 @@ function migrateLegacyEquation(toMigrate) {
 function evaluateCompiledMath( compiled, vars ) { 
 
   var newValue = compiled.eval(vars)
-  if ( $.isNumeric(newValue) ) {
+  if ( $.isNumeric(newValue)) {
     return newValue;
   } else if ( newValue["value"] != undefined ) { 
      return newValue.value;
@@ -766,7 +773,7 @@ function evaluateCompiledMath( compiled, vars ) {
 }
 
 // Config flag for develoeprs to enable debugging of euler acceleration calculations - have fun!
-var CONFIG_throw_acceleration_calculation_exceptions = false;
+var CONFIG_throw_acceleration_calculation_exceptions = true;
 
 function evaluateCalculator( resultVariable, calculator, vars, verbose ) {
 
@@ -793,6 +800,9 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       // 2016Oct11 -- Parameteric Calculators need to calculate their own instantaneous velocity.
 
 			var result = calculator.compiled.eval(vars);
+      if ( !isFinite(result) ) {
+        throw "compiled vars are not finite"
+      }
 
       if ( calculator.latestValue == undefined ) { 
         calculator.previousValue = result;
@@ -814,7 +824,9 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
       calculator.latestVelocity = calculator.velocity;
       calculator.acceleration = ( calculator.latestVelocity - calculator.previousVelocity ) / vars["delta_t"]
-
+      if (resultVariable.slice(resultVariable.length-4) == ".out") {
+        //console.log("it's an output")
+      }
       return { value: result, 
         displacement: result,
         velocity: calculator.velocity, 
@@ -857,17 +869,23 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
 
       if ( verbose ) { 
-        console.log("iwp5:661> BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", vars )
+        console.log("iwp5:661>", resultVariable, "BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", JSON.stringify(vars) )
 
           }
 
       var acceleration = null;
       try { 
         // then calculate the acceleratiion
-       acceleration = calculator.accelerationCompiled.eval(vars)  * dt;
-      } catch ( err ) { 
-        
-        console.log("evaluateCalculator:670> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
+       acceleration = calculator.accelerationCompiled.eval(vars) * dt;
+       if (!isFinite(acceleration)) {
+        throw "acceleration is not finite"
+       }
+       if ( isNaN(acceleration) ) {
+        console.log("calculatorObject",calculator,"with dt of",dt)
+        throw "for resultVariable acceleration is NaN with vars "+vars
+       }
+      } catch ( err ) {
+        console.log("evaluateCalculator:881> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
         if ( CONFIG_throw_acceleration_calculation_exceptions ) { 
          throw err;
          }
@@ -900,7 +918,8 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 if ( true ) { 
       console.log("iwp5:428> " + resultVariable + " at t = " + vars["t"] + "> AFTER STEP: ", currentStep, "/", changeStep, "  d: ", calculator.currentDisplacement, "  v: ", calculator.currentVelocity, " a: ", acceleration );
 }
-
+      //Return only value if just an output?
+      
       return { value: calculator.currentDisplacement,
         displacement: calculator.currentDisplacement,
         velocity: calculator.currentVelocity,
