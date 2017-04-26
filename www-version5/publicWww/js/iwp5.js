@@ -455,6 +455,9 @@ function calculateVarsAtStep(step) {
         console.log(err)
        fatalSolids.push(solid);  
       }
+    if (fatalReplayAttemptsRemaining == 1) {
+      CONFIG_throw_acceleration_calculation_exceptions = false;
+    }
    });
 
   }
