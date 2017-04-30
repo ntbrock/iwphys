@@ -650,7 +650,7 @@ function addSolid(solid) {
   }
   else if (compiledSolid.shape.type == "Bitmap") {
     //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+compiledSolid.fileUri+"'><title>"+solid.name+"</title></image>");
-    svgSolids.push("image "+compiledSolid.fileUri);    
+    svgSolids.push("Bitmap "+compiledSolid.fileUri);    
   }
   else {
     return;
@@ -1187,11 +1187,12 @@ function fitText(input) {
   };
 
 function addSolidsToCanvas(solids) {
-  //console.log("solids: ", solids);
+  console.log("solids: ", solids);
   for (i in solids) {
-    if (solids[i].includes("image")) {
-      solidUri = solids[i].replace("image ","")
-      //console.log(solidUri);
+    if (solids[i].includes("Bitmap")) {
+      console.log(solids[i])
+      solidUri = solids[i].replace("Bitmap ","")
+      console.log(solidUri);
       var idArray = solidUri.split("/")
       var id = "solid_"+idArray[idArray.length-1].split(".")[0] // Get solid name back; temporary fix.
       var img = document.createElementNS('http://www.w3.org/2000/svg', 'image')
@@ -1217,6 +1218,7 @@ function addSolidsToCanvas(solids) {
   //Blitting effect
   $("#canvasDiv").html($("#canvasDiv").html());
 }
+
 function renderCanvasFromMemory() { 
   var c = $("#canvas");
   // Parse viewbox attributes from canvas to override defaults.
