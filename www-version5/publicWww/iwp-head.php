@@ -5,6 +5,12 @@
     <meta name="description" content="Interactive Web Physics Animations">
     <meta name="author" content="Taylor Brockman">
 
+    <!-- Link unfurling -->
+    <meta property="og:title" content="IWP5"/>
+    <meta property="og:description" content="Interactive Web Physics is a Java and JavaScript, Web-based animation and problem designer tool. Anyone can quickly design mathematics or physics animations and simulations that run in a web browser."/>
+    <meta property="og:image" content="screenshots/unfurlSample.png"/>
+    <meta property="twitter:card" content="summary_large_image">
+
     <title>Interactive Web Physics - iwphys.org</title>
 
     <!-- Bootstrap Core CSS -->

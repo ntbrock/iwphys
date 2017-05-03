@@ -17,6 +17,8 @@ header('Content-Type: text/html');
 
   <!-- IWP5 Animation includes -->
   <link href="<?= $baseUrl ?>css/iwp5.css" rel="stylesheet">
+  <meta property="og:title" content="<?= str_replace(".iwp","",end(explode('/', $animateFile))); ?>"/>
+  <meta name="description" content="Interactive Web Physics Animations">
   <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5.js"></script>
 
 </head>
@@ -40,7 +42,8 @@ header('Content-Type: text/html');
   <div id="problem" problem-uri="<?= $xtojUrl ?>"></div>
 
   <div id="canvasDiv">
-    <svg id="canvas" viewbox="0 0 1000 1000" preserveAspectRatio="xMinYMin meet"></svg>
+    <svg id="canvas" viewbox="0 0 1000 1000" preserveAspectRatio="xMinYMin meet" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    </svg>
   </div>
   <table id="tabs" class="tab">
     <tr>
