@@ -9,9 +9,10 @@ header('Content-Type: text/html');
 <meta charset="utf-8">
 <html lang="en">
 
-<head>
+<head> 
   <?php 
     error_reporting(E_ERROR | E_WARNING | E_PARSE); //Dev
+    $config_suppressHeadOgTags = true;
     include_once("iwp-head.php") 
   ?>
 
