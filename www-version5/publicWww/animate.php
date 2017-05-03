@@ -17,8 +17,8 @@ header('Content-Type: text/html');
 
   <!-- IWP5 Animation includes -->
   <link href="<?= $baseUrl ?>css/iwp5.css" rel="stylesheet">
-  <meta property="og:title" content="<?= str_replace(".iwp","",end(explode('/', $animateFile))); ?>"/>
-  <meta name="description" content="Interactive Web Physics Animations">
+  <meta property="og:title" content="<?= str_replace(".iwp","",end(explode('/', $animateFile))); ?> - Interactive Web Physics"/>
+  <meta name="description" content="Click to play animation in your web browser.">
   <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5.js"></script>
 
 </head>
