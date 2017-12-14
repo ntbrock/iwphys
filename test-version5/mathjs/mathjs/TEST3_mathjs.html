@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title>TEST3_mathjs</title>
+  <script src="math.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+</head>
+
+<body>
+  <h3>Test 3 - Parametric equations</h3>
+
+  <p>x(t) = a*cos(t)</p>
+  <p>y(t) = a*sin(t)</p>
+  <p>z(t) = t</p>
+
+  <p>var a = 2</p>
+  <p>var t = 2</p>
+
+  <p>result: <span id="result">Calculating...</span></p>
+  <p>expected: <-0.833, 1.819, 2></p>
+
+  <script type="text/javascript">
+    var x_eq = math.compile("a*cos(t rad)");
+    var y_eq = math.compile("a*sin(t rad)");
+    var z_eq = math.compile("t");
+    var scope = {a: 2.0, t:2.0};
+
+    console.log("x(t): ", x_eq);
+    console.log("y(t): ", y_eq);
+    console.log("z(t): ", z_eq);
+
+    console.log("Eval: <", x_eq.eval(scope), ", ", y_eq.eval(scope), ", ", z_eq.eval(scope), ">");
+
+    $("#result").html("<" + x_eq.eval(scope) + ", " + y_eq.eval(scope) + ", " + z_eq.eval(scope) + ">"); //??
+  </script>
+</body>
+</html>
