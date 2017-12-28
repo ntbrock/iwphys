@@ -10,7 +10,37 @@
 
 <h3>Test2 - Taylor's Playground</h3>
 
+  <div id="controls">
+    <button onclick="plotlyAddData(this);">Add Data</button>
+  </div>
+
   <div id="graph"></div>
+
+<script type="text/javascript">
+
+function plotlyAddData(button) { 
+  var dom = $(button);
+
+  // var plot = $('#graph');
+
+  var plot = document.getElementById('graph');
+
+  console.log("TEST_plotlyGraphTB2:23> Clicked: ", dom,  " plot.data: " , plot.data )
+
+
+// extend one trace
+Plotly.addTraces('graph',
+  {
+    x: [0.0, 0.1, 0.2, 0.8],
+    y: [math.random(),math.random(),math.random(),math.random()]
+  }
+)
+
+  
+}
+
+</script>
+
 
 <script type="text/javascript">
 
@@ -37,7 +67,7 @@ for (var i = 0; i < n; i++) {
   frames[2].data[0].y[i] = Math.cos(t * Math.PI);
 }
 
-Plotly.plot('graph', [{
+var plotlyPromise = Plotly.plot('graph', [{
   x: frames[0].data[0].x,
   y: frames[0].data[0].y,
   line: {simplify: false},
@@ -51,7 +81,9 @@ Plotly.plot('graph', [{
       {method: 'animate', args: [['circle']], label: 'circle'}
     ]
   }]
-}).then(function() {
+})
+
+plotlyPromise.then(function(plotly) {
   Plotly.addFrames('graph', frames);
 });
 
