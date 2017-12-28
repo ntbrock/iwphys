@@ -6,40 +6,122 @@
 </head>
 <body>
 <h1>TEST_plotlyGraphTB2</h1>
-<a href="https://plot.ly/javascript/animations/">https://plot.ly/javascript/animations/<a>
+<a href="https://plot.ly/javascript/animations/">https://plot.ly/javascript/animations/<a> | 
+<a href="https://plot.ly/javascript/plotlyjs-function-reference/#plotlyrestyle">Plotly.js Function Reference</a> |
+<a href="https://plot.ly/javascript/reference/">Chart Attribute reference</a>
 
-<h3>Test2 - Taylor's Playground</h3>
+<h3>Test2 - Taylor's Animation Concept</h3>
 
   <div id="controls">
-    <button onclick="plotlyAddData(this);">Add Data</button>
+    <button onclick="plotlyReset(this);">Reset</button>
+
+    <button onclick="plotlyStepForward(this);">Step Forward</button>
+
+    <button onclick="plotlyPlay(this);">Play</button>
+
+    <button onclick="plotlyPause(this);">Pause</button>
+
   </div>
+
+  <h3>T = <span id="currentT"></span>  Tick =  <span id="tick"></span></h3>
 
   <div id="graph"></div>
 
 <script type="text/javascript">
 
+var tick = 0
+var currentT = 0.0
+var deltaT = 0.01
+var animateT = false
+var maxT = 8.5
+
+function calculateT(t) { 
+  // TODO replace with math.sj
+  return math.sqrt(t); // math.random()
+}
+
+
+function plotlyStepForward(button) { 
+  plotlyAddData(button);
+}
+
+function plotlyPlay(button) { 
+  animateT = true;
+}
+
+function plotlyPause(button) { 
+  animateT = false;
+}
+
+function plotlyAnimatorThreadStart() { 
+  setInterval(function() {
+
+    if ( currentT > maxT ) { 
+      animateT = false;
+    }
+
+    if ( animateT ) { 
+      plotlyAddData();
+    }
+  }, 250)
+}
+// Begin the animation thread after page load
+setInterval(function(){ plotlyAnimatorThreadStart(); }, 250);
+
+
+function plotlyReset(button) { 
+
+  // Reset our time ticker
+  currentT = tick * deltaT;
+  $("#currentT").html(currentT);
+  $("#tick").html(tick);
+
+  Plotly.deleteTraces('graph', 0);
+
+  // Initialize our chart with one trace
+  Plotly.addTraces('graph',
+  {
+    x: [currentT],
+    y: [calculateT(currentT)]
+  })
+
+  // Update the styling of our new line
+  var update = {
+    opacity: 1,
+    'marker.color': 'red',
+    mode: "lines",
+    name: "Random-ness"
+  };
+
+  Plotly.restyle('graph', update, 0); //0 means the 1st trace.
+
+}
+
+
 function plotlyAddData(button) { 
-  var dom = $(button);
 
   // var plot = $('#graph');
 
   var plot = document.getElementById('graph');
 
-  console.log("TEST_plotlyGraphTB2:23> Clicked: ", dom,  " plot.data: " , plot.data )
+  // Increment time by one delta.
+  tick = tick + 1
+  currentT = tick * deltaT;
+  $("#currentT").html(currentT);
+  $("#tick").html(tick);
 
-
-// extend one trace
-Plotly.addTraces('graph',
+  // Initialize our chart with one trace
+  Plotly.extendTraces('graph',
   {
-    x: [0.0, 0.1, 0.2, 0.8],
-    y: [math.random(),math.random(),math.random(),math.random()]
-  }
-)
+    x: [[currentT]],
+    y: [[calculateT(currentT)]]
+  }, [0] )
 
-  
 }
 
+
 </script>
+
 
 
 <script type="text/javascript">
@@ -72,8 +154,8 @@ var plotlyPromise = Plotly.plot('graph', [{
   y: frames[0].data[0].y,
   line: {simplify: false},
 }], {
-  xaxis: {range: [-Math.PI, Math.PI]},
-  yaxis: {range: [-1.2, 1.2]},
+  xaxis: {range: [0, 9]},
+  yaxis: {range: [0, 3]},
   updatemenus: [{
     buttons: [
       {method: 'animate', args: [['sine']], label: 'sine'},
