@@ -78,6 +78,9 @@ function iwpReset(button) {
   $("#currentT").html(currentT);
   $("#tick").html(tick);
 
+  // t=0 calculation to initalize historical memory array
+  ticks[tick] = { x: currentT, y: calculateT(currentT) }
+
   // TODO - Clean Graph
   console.log("easelGraphTB3:79> Todo Clean Easel and re-draw gridlines")
 }
@@ -95,18 +98,26 @@ function iwpAddData(button) {
   $("#currentT").html(currentT);
   $("#tick").html(tick);
 
+  var thisX = currentT;
+  var thisY = calculateT(currentT);
+   // Historical record in memory of past calculations
+  ticks[tick] = { x: thisX, y: thisY }
 
-  var newX = currentT;
-  var newY = calculateT(currentT);
+  var lastX = 0
+  var lastY = 0
 
-  // Historical record in memory of past calculations
-  ticks[tick] = { x: newX, y: newY }
+  if ( tick > 0 ) { 
+    // console.log("canvasGraphTB3:110> Ticks: ", ticks)
+    var lastX = ticks[tick-1].x
+    var lastY = ticks[tick-1].y
+  }
+
 
   // TODO IMPLEMENT POINT ADD
 
-canvasAddLine(newX,newY,newX,newY)
+  iwpCanvasAddLine(lastX,lastY,thisX, thisY)
 
-  console.log("easelGraphTB3:99> Todo Add Data Point")
+  // console.log("easelGraphTB3:99> Adding Data Point: ", [ lastX,lastY,thisX, thisY ])
 
 
 }
@@ -121,31 +132,36 @@ var stage = null;
 
   // initialize canvas here.
 
-  function canvasInit() { 
+  function iwpCanvasInit() { 
 
-  stage = new createjs.Stage("canvas");
+ 
+ var canvas = document.getElementById('canvas');
+    // Create an empty project and a view for the canvas:
+    paper.setup(canvas);
+   
 
+    // Draw the view now:
+    paper.view.draw();
+
+
+  }
+
+  function iwpCanvasAddLine(x1,y1,x2,y2) { 
+
+    var simpleScale =100
+
+    var start = new paper.Point(x1*simpleScale, y1*simpleScale);
+    var stop = new paper.Point(x2*simpleScale, y2*simpleScale);
+
+    var path = new paper.Path.Line(start, stop);
+    // Give the stroke a color
+    path.strokeColor = 'red';
+
+    paper.view.draw();
 
   }
 
-  function canvasAddLine(x1,y1,x2,y2) { 
 
-var circle1 = new createjs.Shape();
-circle1.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
-circle1.x = x1;
-circle1.y = y1;
-
-var circle2 = new createjs.Shape();
-circle2.graphics.beginFill("Orange").drawCircle(0, 0, 50);
-circle2.x = x2;
-circle2.y = y2;
-
-stage.addChild(circle1);
-stage.addChild(circle2);
-
-stage.update();
-
-  }
 </script>
 
 
@@ -155,7 +171,7 @@ stage.update();
 // Begin the animation thread after page load
 $(function() {
 
-  canvasInit();
+  iwpCanvasInit();
 
   setInterval(function(){
     iwpAnimatorThreadStart();
