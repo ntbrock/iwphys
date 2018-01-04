@@ -1,0 +1,23 @@
+2017Dec28 NCSSM IWP - Canvas Library Review - Plotly gets SLOW
+
+https://www.createjs.com/easeljs
+
+http://fabricjs.com/
+
+https://konvajs.github.io/
+
+http://paperjs.org/
+
+
+Let's try paperjs!
+
+http://paperjs.org/tutorials/animation/creating-animations/
+
+
+
+function onFrame(event) {
+	// Each frame, change the fill color of the path slightly by
+	// adding 1 to its hue:
+	path.fillColor.hue += 1;
+}
+

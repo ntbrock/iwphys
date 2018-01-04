@@ -1,0 +1,48 @@
+2017Jan04 IWP5 Graphing Meeting Notes
+
+Agenda
+
+- Last/Next/Blockers?
+
+Taylor
+L> Graph Prototypes in 2 differrnt tools. Wireframed the new UI.
+N> Prototype in a 3rd technology - D3, Labeling axes the right way in prototype.
+
+Matt
+L> Try to get the Axes working on prototype, hitting Null Pointer Exceptions.
+N> Next week: demo of axes.
+
+Jon
+L> Reviewed 20 more animations that we want to use again this year. Will add the list to teh trello - Hands floating in space, animations that need the graphing feature. Found one that's not converted to IWP5, still linked to iwp2.ncssm.edu. 
+N> Post the List to Trello.  Excited to see the demos!  How can I test?
+
+
+
+- Trello Review - Including the new list of 10 bugs.
+	
+	- Plotly - Pro's nice label, good api, colorization, axes.  Con - Slow to animate by adding on data points.
+
+	- Easel - Pro's very fast, implementation matches IWP4 blank canvas.  Con - Would need to rebuild all the axes rendering, etc ourselves.
+
+	- D3 - Data Driven Documents -- In between solution. It's the same tech that we're using for animations that Ryan S. did.
+		* Taylor> Demo of D3.
+		Pro - easlier to convert / port from the animation
+		Con - May need code refactoring -- Watch out for global variables during the refactor!
+
+
+- Demonstration of graphing progress
+
+- Show the task breakdown of January / February development plan
+
+- Review an animation that needs graphing that currently doesn’t work
+
+- Find a way Dr. Bennett can contirbue in next 2 weeks.
+
+- How are we going to Enable preview testing?
+
+- Null Pointer Exception w/ Matt.
+
+- Try Version 4 on Matt's  Laptop - java!
+
+
+
