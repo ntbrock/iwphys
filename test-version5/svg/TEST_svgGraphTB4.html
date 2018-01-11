@@ -24,7 +24,9 @@
 </head>
 <body>
 <h1>TEST_svgGraphTB4</h1>
-<a href="https://css-tricks.com/how-to-make-charts-with-svg/">CSS Tricks - How To make charts with SVG<a>
+<a href="https://css-tricks.com/how-to-make-charts-with-svg/">CSS Tricks - How To make charts with SVG<a><br>
+<a href="https://www.dashingd3js.com/svg-paths-and-d3js">SVG Paths and d3</a><br>
+
 
 <h3>Test4 - Taylor's Svg Canvas Performance</h3>
 
@@ -199,14 +201,24 @@ function iwpAddData(button) {
 
     var start = 0;
     var stop = 0;
-
+/*
     // 1. Add a line segment
     svg.append('line')
       .classed("iwp-graph-line", true)
-      .attr("x1", xScale(x1))
-      .attr("y1", yScale(y1))
-      .attr("x2", xScale(x2))
-      .attr("y2", yScale(y2))
+      .attr("x1", )
+      .attr("y1", )
+      .attr("x2", )
+      .attr("y2", )
+*/
+
+    var path = d3.path()
+    path.moveTo( xScale(x1), yScale(y1) );
+    path.lineTo( xScale(x2), yScale(y2) );
+    console.log("svgGraphTB4:219> path: ", path )
+
+    svg.append('path')
+      .classed("iwp-graph-line", true)
+      .attr("d", path )
 
   }
 
