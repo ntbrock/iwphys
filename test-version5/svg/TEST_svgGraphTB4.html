@@ -8,13 +8,29 @@
 
 
       .iwp-axis-line {
-        stroke:rgb(100,100,100);
+        
         stroke-width: 0.1;
       }
 
       .iwp-graph-line { 
         stroke:rgb(255,0,0);
         stroke-width: 0.3;
+      }
+
+
+      .iwp-graph-axis line { 
+        stroke: rgb(150,150,150);
+        stroke-width: 0.2;
+      }
+
+      .iwp-graph-axis path { 
+        stroke: rgb(150,150,150);
+        stroke-width: 0.2;
+      }
+
+      .iwp-graph-axis text { 
+        fill: rgb(150,150,150);
+        font-size: 6px;
       }
 
 
@@ -202,10 +218,10 @@ function iwpAddData(button) {
 
     
       var xAxis = d3.axisBottom(xScale).ticks(10);
-      xAxis(svg.append("g").classed("iwp-graph-x-axis",true))
+      xAxis(svg.append("g").classed("iwp-graph-axis",true).classed("iwp-graph-x-axis",true))
 
       var yAxis = d3.axisLeft(yScale).ticks(10);
-      yAxis(svg.append("g").classed("iwp-graph-y-axis",true))
+      yAxis(svg.append("g").classed("iwp-graph-axis",true).classed("iwp-graph-y-axis",true))
 
 
       
