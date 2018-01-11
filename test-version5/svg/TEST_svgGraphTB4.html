@@ -2,6 +2,20 @@
     <title>TEST_svgGraphTB4</title>
     <script src="math.js" type="text/javascript"></script>
     <script src="jquery-1.12.2.min.js" type="text/javascript"></script>
+    <script src="d3.v4.min.js" type="text/javascript"></script>
+
+    <style>
+
+
+      .iwp-axis-line {
+        stroke:rgb(100,100,100);
+      }
+
+
+
+    </style>
+
+
 </head>
 <body>
 <h1>TEST_svgGraphTB4</h1>
@@ -22,7 +36,14 @@
 
   <h3>T = <span id="currentT"></span>  Tick =  <span id="tick"></span></h3>
 
-  <canvas id="canvas" width="700" height="400"></canvas>
+  <div style="border-style: solid; display: inline-block;">
+  
+  <svg class="chart" style="width: 400px; height: 400px;" viewBox="-50 -50 100 100">
+
+  </svg>
+
+
+</div>
 
 
 
@@ -80,8 +101,18 @@ function iwpReset(button) {
   // t=0 calculation to initalize historical memory array
   ticks[tick] = { x: currentT, y: calculateT(currentT) }
 
-  // TODO - Clean Graph
-  console.log("easelGraphTB3:79> Todo Clean Easel and re-draw gridlines")
+
+  /*
+  var canvas = d3.select('body').append('svg')
+                                  .attr('width', 700)
+                                  .attr('height', 400);
+var path = canvas.append('polyline')
+                     .attr('points', data)
+                     .attr('style', "fill:none;stroke:red;stroke-width:3")
+
+         
+                    */
+
 }
 
 
@@ -132,8 +163,30 @@ var stage = null;
   // initialize canvas here.
 
   function iwpCanvasInit() { 
+    
+   var svg = d3.select('svg');
 
-    console.log("TODO: SVG INIT")
+   console.log("svgGraphTB4:108> svg: " , svg )
+
+   svg.append('line')
+      .attr("x1", 0)
+      .attr("y1", -1000)
+      .attr("x2", 0)
+      .attr("y2", 1000)
+      .classed("iwp-axis-line", true)
+      
+
+  svg.append('line')
+      .attr("x1", -1000)
+      .attr("y1", 0)
+      .attr("x2", 1000)
+      .attr("y2", 0)
+      .classed("iwp-axis-line", true)
+      
+
+
+
+
   }
 
   function iwpCanvasAddLine(x1,y1,x2,y2) { 
@@ -148,7 +201,8 @@ var stage = null;
     path.strokeColor = 'red';
 
     
-    console.log("TODO: SVG LINE DRAW")
+
+    $(".chart").append('<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" style="stroke:rgb(255,0,0);stroke-width:2" />')
 
   }
 

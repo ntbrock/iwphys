@@ -16,9 +16,7 @@ Jon
 L> Reviewed 20 more animations that we want to use again this year. Will add the list to teh trello - Hands floating in space, animations that need the graphing feature. Found one that's not converted to IWP5, still linked to iwp2.ncssm.edu. 
 N> Post the List to Trello.  Excited to see the demos!  How can I test?
 
-
-
-- Trello Review - Including the new list of 10 bugs.
+= Trello Review - Including the new list of 10 bugs.
 	
 	- Plotly - Pro's nice label, good api, colorization, axes.  Con - Slow to animate by adding on data points.
 
@@ -29,20 +27,19 @@ N> Post the List to Trello.  Excited to see the demos!  How can I test?
 		Pro - easlier to convert / port from the animation
 		Con - May need code refactoring -- Watch out for global variables during the refactor!
 
+= Demonstration of graphing progress
 
-- Demonstration of graphing progress
+= Show the task breakdown of January / February development plan
 
-- Show the task breakdown of January / February development plan
+= Review an animation that needs graphing that currently doesn’t work
 
-- Review an animation that needs graphing that currently doesn’t work
+= Find a way Dr. Bennett can contirbue in next 2 weeks. - Wireframes and UI Research
 
-- Find a way Dr. Bennett can contirbue in next 2 weeks.
+= Null Pointer Exception w/ Matt.
 
-- How are we going to Enable preview testing?
+= Try Version 4 on Matt's  Laptop - java!
 
-- Null Pointer Exception w/ Matt.
-
-- Try Version 4 on Matt's  Laptop - java!
+? How are we going to Enable preview testing?
 
 
 
