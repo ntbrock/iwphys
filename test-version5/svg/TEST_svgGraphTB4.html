@@ -172,6 +172,7 @@ function iwpAddData(button) {
     .domain([-10, 10])
     .range([10, -10]);
 
+  var path = d3.path()
 
   // initialize canvas here.
 
@@ -186,14 +187,22 @@ function iwpAddData(button) {
       .attr("x2", xScale(0))
       .attr("y2", yScale(1000))
 
-  svg.append('line')
-      .classed("iwp-axis-line", true)
-      .attr("x1", xScale(-1000))
-      .attr("y1", yScale(0))
-      .attr("x2", xScale(1000))
-      .attr("y2", yScale(0))
+    svg.append('line')
+        .classed("iwp-axis-line", true)
+        .attr("x1", xScale(-1000))
+        .attr("y1", yScale(0))
+        .attr("x2", xScale(1000))
+        .attr("y2", yScale(0))
+
+
+    svg.append('path')
+      .classed("iwp-graph-line", true)
+      .attr("d", path )
+   
   }
 
+
+   
 
   function iwpCanvasAddLine(x1,y1,x2,y2) { 
 
@@ -201,24 +210,37 @@ function iwpAddData(button) {
 
     var start = 0;
     var stop = 0;
-/*
+
     // 1. Add a line segment
-    svg.append('line')
-      .classed("iwp-graph-line", true)
-      .attr("x1", )
-      .attr("y1", )
-      .attr("x2", )
-      .attr("y2", )
-*/
+    // Comprable, but more objects.
 
-    var path = d3.path()
-    path.moveTo( xScale(x1), yScale(y1) );
-    path.lineTo( xScale(x2), yScale(y2) );
-    console.log("svgGraphTB4:219> path: ", path )
+    var lineSegments = false
 
+    if ( lineSegments ) { 
+
+      svg.append('line')
+        .classed("iwp-graph-line", true)
+        .attr("x1", xScale(x1) )
+        .attr("y1", yScale(y1))
+        .attr("x2", xScale(x2) )
+        .attr("y2", yScale(y2) )
+
+    } else { 
+
+      // Method 2 -- Managing a line path in memory and manipulating it, and rerawing it.
+      path.moveTo( xScale(x1), yScale(y1) );
+      path.lineTo( xScale(x2), yScale(y2) );
+      svg.selectAll('path').attr("d", path)
+
+    }
+    /*
+    svg.selectAll('path').remove();
     svg.append('path')
       .classed("iwp-graph-line", true)
       .attr("d", path )
+*/
+
+    
 
   }
 
