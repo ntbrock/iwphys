@@ -45,7 +45,7 @@
 
   <div style="border-style: solid; display: inline-block;">
   
-  <svg class="chart" style="width: 400px; height: 400px;" viewBox="-10 -10 20 20">
+  <svg class="chart" style="width: 400px; height: 400px;" viewBox="-100 -100 200 200">
 
   </svg>
 
@@ -166,11 +166,11 @@ function iwpAddData(button) {
 
   var xScale = d3.scaleLinear()
     .domain([-10, 10])
-    .range([-10, 10]);
+    .range([-100, 100]);
 
   var yScale = d3.scaleLinear()
     .domain([-10, 10])
-    .range([10, -10]);
+    .range([100, -100]);
 
   var path = d3.path()
 
@@ -179,6 +179,11 @@ function iwpAddData(button) {
   function iwpCanvasInit() { 
 
    console.log("svgGraphTB4:108> svg: " , svg )
+
+
+   var manualAxisCreation = false
+
+   if ( manualAxisCreation ) { 
 
    svg.append('line')
       .classed("iwp-axis-line", true)
@@ -193,7 +198,22 @@ function iwpAddData(button) {
         .attr("y1", yScale(0))
         .attr("x2", xScale(1000))
         .attr("y2", yScale(0))
+    } else { 
 
+    
+      var xAxis = d3.axisBottom(xScale).ticks(10);
+      xAxis(svg.append("g").classed("iwp-graph-x-axis",true))
+
+      var yAxis = d3.axisLeft(yScale).ticks(10);
+      yAxis(svg.append("g").classed("iwp-graph-y-axis",true))
+
+
+      
+
+//      var yAxis = d3.axisLeft(yScale).ticks(1);
+//      svg.call(yAxis)
+
+    }
 
     svg.append('path')
       .classed("iwp-graph-line", true)
@@ -214,7 +234,7 @@ function iwpAddData(button) {
     // 1. Add a line segment
     // Comprable, but more objects.
 
-    var lineSegments = false
+    var lineSegments = true
 
     if ( lineSegments ) { 
 
