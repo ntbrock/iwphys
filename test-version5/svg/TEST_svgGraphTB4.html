@@ -9,8 +9,13 @@
 
       .iwp-axis-line {
         stroke:rgb(100,100,100);
+        stroke-width: 0.1;
       }
 
+      .iwp-graph-line { 
+        stroke:rgb(255,0,0);
+        stroke-width: 0.3;
+      }
 
 
     </style>
@@ -38,7 +43,7 @@
 
   <div style="border-style: solid; display: inline-block;">
   
-  <svg class="chart" style="width: 400px; height: 400px;" viewBox="-50 -50 100 100">
+  <svg class="chart" style="width: 400px; height: 400px;" viewBox="-10 -10 20 20">
 
   </svg>
 
@@ -118,9 +123,6 @@ var path = canvas.append('polyline')
 
 function iwpAddData(button) { 
 
-  // var plot = $('#graph');
-
-  var plot = document.getElementById('graph');
 
   // Increment time by one delta.
   tick = tick + 1
@@ -158,36 +160,38 @@ function iwpAddData(button) {
 
 <script type="text/javascript">
 
-var stage = null;
+  var svg = d3.select('svg');
+
+  var xScale = d3.scaleLinear()
+    .domain([-10, 10])
+    .range([-10, 10]);
+
+  var yScale = d3.scaleLinear()
+    .domain([-10, 10])
+    .range([10, -10]);
+
 
   // initialize canvas here.
 
   function iwpCanvasInit() { 
-    
-   var svg = d3.select('svg');
 
    console.log("svgGraphTB4:108> svg: " , svg )
 
    svg.append('line')
-      .attr("x1", 0)
-      .attr("y1", -1000)
-      .attr("x2", 0)
-      .attr("y2", 1000)
       .classed("iwp-axis-line", true)
-      
+      .attr("x1", xScale(0))
+      .attr("y1", yScale(-1000))
+      .attr("x2", xScale(0))
+      .attr("y2", yScale(1000))
 
   svg.append('line')
-      .attr("x1", -1000)
-      .attr("y1", 0)
-      .attr("x2", 1000)
-      .attr("y2", 0)
       .classed("iwp-axis-line", true)
-      
-
-
-
-
+      .attr("x1", xScale(-1000))
+      .attr("y1", yScale(0))
+      .attr("x2", xScale(1000))
+      .attr("y2", yScale(0))
   }
+
 
   function iwpCanvasAddLine(x1,y1,x2,y2) { 
 
@@ -196,16 +200,15 @@ var stage = null;
     var start = 0;
     var stop = 0;
 
-    var path = 0;
-    // Give the stroke a color
-    path.strokeColor = 'red';
-
-    
-
-    $(".chart").append('<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" style="stroke:rgb(255,0,0);stroke-width:2" />')
+    // 1. Add a line segment
+    svg.append('line')
+      .classed("iwp-graph-line", true)
+      .attr("x1", xScale(x1))
+      .attr("y1", yScale(y1))
+      .attr("x2", xScale(x2))
+      .attr("y2", yScale(y2))
 
   }
-
 
 </script>
 
@@ -220,7 +223,7 @@ $(function() {
 
   setInterval(function(){
     iwpAnimatorThreadStart();
-  }, 250);
+  }, 20);
 });
 
 
