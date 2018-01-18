@@ -129,13 +129,14 @@ function handleStep() {
       //console.log("[iwp5.js:118] Step " + newStep + " already exist, reloading for history.")
       repaintStep(newStep);
 
-      // iwp5.1 - Adding Hook into the graph capabilties
-      regraphStep(newStep);
-
     } else { 
   		// UI rendering is handled by the calculate as a side effect
 	 	  var vars = calculateVarsAtStep(newStep);
   		archiveVarsAtStep( newStep, vars );
+
+      // iwp5.1 - Adding Hook into the graph capabilties
+      graphStep(newStep, vars);
+
     }
 
 	}
@@ -219,13 +220,13 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     }
 
   if ( xComplex.acceleration == null ) { 
-      console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
+      //console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
      xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
      x = xComplex.value
   }
   if ( yComplex.acceleration == null ) { 
-      console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
+      //console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
      yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose )
      y = yComplex.value
@@ -326,27 +327,6 @@ function repaintStep(step) {
   }
 }
 
-
-/** 
- * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
- */
-function regraphStep(step) { 
-  var vars = varsAtStep[step];
-  if ( vars == undefined ) { 
-    throw "No previous calculations available at step: " + step;
-  } else { 
-
-    
-
-   $.each( outputs, function( index, output ) {
-      updateUserFormOutputDouble(output, vars[output.name]);
-   });
-
-   $.each( solids, function( index, solid ) {
-      updateSolidSvgPathAndShape(solid, vars[solid.name])
-   });
-  }
-}
 
 
 
@@ -471,7 +451,7 @@ function calculateVarsAtStep(step) {
      $.each( replayOutputs, function( index, output ) {
       //console.log("Trying again",output)
       try { 
-        var newValue = calculateOutputAtStep(output, step, vars, true );
+        var newValue = calculateOutputAtStep(output, step, vars, false );
         vars[output.name] = newValue
       } catch ( err ) { 
         fatalOutputs.push(output);
@@ -550,7 +530,7 @@ function addInput(input) {
   if ( input.hidden == "1" ) { 
     style = "display:none;"
   }
-  htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='bottomBorder'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
+  htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
 }
 
 function addOutput(output) { 
@@ -570,7 +550,7 @@ function addOutput(output) {
   if ( output.hidden == "1" ) { 
     style = "display:none;'"
   }
-  htmlOutputs.push( "<tr style='" + style +"' id='output_" + output.name + "' class='bottomBorder'><td>"+ output.text +"</td><td><input id='" + output.name + "' type='text' value='-999'> " + output.units + "</td></tr>");
+  htmlOutputs.push( "<tr style='" + style +"' id='output_" + output.name + "' class='iwp-output-row'><td>"+ output.text +"</td><td><input id='" + output.name + "' type='text' value='-999'> " + output.units + "</td></tr>");
 }
 
 /**
@@ -947,9 +927,6 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
         // No step direction
       }
 
-if ( true ) { 
-      console.log("iwp5:428> " + resultVariable + " at t = " + vars["t"] + "> AFTER STEP: ", currentStep, "/", changeStep, "  d: ", calculator.currentDisplacement, "  v: ", calculator.currentVelocity, " a: ", acceleration );
-}
       //Return only value if just an output?
       
       return { value: calculator.currentDisplacement,
