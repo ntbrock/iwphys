@@ -21,6 +21,7 @@ header('Content-Type: text/html');
   <meta property="og:title" content="<?= str_replace(".iwp","",end(explode('/', $animateFile))); ?> - Interactive Web Physics"/>
   <meta name="og:description" content="Click to play animation in your web browser."/>
   <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5.js"></script>
+  <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5-ui.js"></script>
   <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5-graph.js"></script>
 
 </head>
@@ -28,116 +29,147 @@ header('Content-Type: text/html');
 <body>
 
 <?php include_once("iwp-nav.php") ?>
+
+<!-- Json IWP Content controls -->
+<div id="problem" problem-uri="<?= $xtojUrl ?>"></div>
      
-  <div class="iwp-container">
-  <div class="iwp-animate">
+<div class="iwp-animation-container">
+  <div class="iwp-animation">
 
-  <div id="problem" problem-uri="<?= $xtojUrl ?>"></div>
+  <!-- Left Hand Side -->
+  <div class="iwp-left-container">
 
-  <table id="playBar">
-    <tr>  
-      <td class="bottomBorder" id="time">
-        <span><i class="fa fa-clock-o"></i></span>
-        <span id="itime">--</span>
-      </td> 
-      <td id="buttonControls">
-        <div onclick="handleBackClick()" id="backButton"><i class="fa fa-step-backward fa-lg"></i></div>
-        <div onclick="handleStartClick()" id="startStopButton"><i id="startStopIcon" class="fa fa-play fa-lg"></i></div>
-        <div onclick="handleForwardClick()" id="forwardButton"><i class="fa fa-step-forward fa-lg"></i></div>
-        <div onclick="handleResetClick()" id="resetButton"><i class="fa fa-repeat fa-lg"></i></div>
-      </td>
-    </tr>
-  </table>
+    <!-- Time controls -->
+    <div class="iwp-control-container iwp-time-control-container">
+      <table class="iwp-time-controls">
+        <tr>  
+          <td id="time">
+            <span><i class="fa fa-clock-o"></i></span>
+            <span id="itime">--</span>
+          </td> 
+          <td id="buttonControls">
+            <div onclick="handleBackClick()" id="backButton"><i class="fa fa-step-backward fa-lg"></i></div>
+            <div onclick="handleStartClick()" id="startStopButton"><i id="startStopIcon" class="fa fa-play fa-lg"></i></div>
+            <div onclick="handleForwardClick()" id="forwardButton"><i class="fa fa-step-forward fa-lg"></i></div>
+            <div onclick="handleResetClick()" id="resetButton"><i class="fa fa-repeat fa-lg"></i></div>
+          </td>
+        </tr>
+      </table>
+    </div>
 
+    <!-- Canvas -->
+    <div id="canvasDiv" class="iwp-animation-canvas-container">
+      <svg id="canvas" class="iwp-animation-canvas" viewbox="0 0 1000 1000" preserveAspectRatio="xMinYMin meet" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+      </svg>
+    </div>
 
-  <table id="tabs" class="tab">
-    <tr>
-      <td id="it" class="bottomBorder" onclick="inputTableOn()"><i id="inputTableButton" class="fa fa-list fa-2x"></i> Animate</td>
-      <!-- 9 Nov 2016 Ryan Steed
-        Removed to create single variable tab:
-        <td id="ot" class=""><input id="outputTableButton" type="button" onclick="outputTableOn()" value="Outputs"/></td>
-      -->
-      <td id="gt" class="" onclick="graphTableOn()"><i id="graphTableButton" class="fa fa-area-chart fa-2x"> </i> Graph</td>
-      <td id="oib" class="" onclick="timeTabOn()"><i id="timeTabButton" class="fa fa-clock-o fa-2x"> </i> Time</td>
-      <td id="ws" class=""  onclick="windowSettingsOn()"><i id="windowSettings" class="fa fa-clone fa-2x"> </i> Window </td>
-    </tr>
-  </table>
-
-
-  <div id="canvasDiv">
-    <svg id="canvas" viewbox="0 0 1000 1000" preserveAspectRatio="xMinYMin meet" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-    </svg>
   </div>
-    
- <div id="tabTables">
-  <table id="inputTable" class="tab"></table>
-  <table id="iwindow" class="tab" align='center' class="trim">
-    <tr><th colspan="3">Window Settings</th></tr>
-    <tr>
-      <td style="width:33%"></td>
-      <td style="width:33%">X</td>
-      <td style="width:33%">Y</td>
-    <tr class="bottomBorder">
-      <td>Min:</td>
-      <td><input id="iwindow_xmin" type="text"></td>
-      <td><input id="iwindow_ymin" type="text"></td>
-    </tr>
-    <tr class="bottomBorder">
-      <td>Max:</td>
-      <td><input id="iwindow_xmax" type="text"></td>
-      <td><input id="iwindow_ymax" type="text"></td>
-    </tr>
-    <tr class="bottomBorder">
-      <td>Grid:</td>
-      <td><input id="iwindow_xgrid" type="text"></td>
-      <td><input id="iwindow_ygrid" type="text"></td>
-    </tr>
-    <tr class="bottomBorder">
-      <td>Unit:</td>
-      <td><input id="iwindow_xunit" type="text"></td>
-      <td><input id="iwindow_yunit" type="text"></td>
-    </tr>
-  </table>
-  <table id="timeTab" class="tab">
-    <tr>
-      <th colspan="2">Time Controls</th>
-    </tr>
-    <tr class="bottomBorder">
-      <td>
-          <span>Time Step</span>
-      </td>
-      <td>
-          <span><input id="itime_change" type="text" value="--"/> seconds</span>
-      </td>
-    </tr>
-    <tr class="bottomBorder">
-      <td>Start Time</td>
-      <td><span><input id="itime_start" type="text" value="--"/> seconds</span></td>
-    </tr>
-    <tr class="bottomBorder">
-      <td>Stop Time</td>
-      <td><span><input id="itime_stop" type="text" value="--"/> seconds</span></td>
-    </tr>
-  </table>
-  <table id="graphTab" class="tab">
-    <tr><td><div id="graphWindow">Coming Soon</div></td></tr>
-  </table>
-</div>
 
-  <div class="row" style="text-align: center">
-      <div class="col-lg-12 center" id="animationTitle">
-        <h3><?= str_replace(".iwp","",end(explode('/', $animateFile))); ?></h3>
-        <br/><div id="description"></div>
-        <hr>
+  <!-- Right Hand Side -->
+  <div class="iwp-right-container">
+
+    <!-- Tab Controls -->
+    <div class="iwp-control-container iwp-tab-control-container">
+    <table class="iwp-tab-controls" class="tab">
+      <tr>
+        <td id="it" class="bottomBorder" onclick="animationTabOn()" iwp-tab="animationTab">
+          <i id="inputTableButton" class="fa fa-list fa-2x"></i> Animate</td>
+        <td id="gt" class="" onclick="graphTabOn()" iwp-tab="graphTab">
+          <i id="graphTableButton" class="fa fa-area-chart fa-2x"> </i> Graph</td>
+        <td id="oib" class="" onclick="timeTabOn()" iwp-tab="timeTab">
+          <i id="timeTabButton" class="fa fa-clock-o fa-2x"> </i> Time</td>
+        <td id="ws" class=""  onclick="iwindowTabOn()" iwp-tab="iwindowTab">
+          <i id="windowSettings" class="fa fa-clone fa-2x"> </i> Window </td>
+      </tr>
+    </table>
+    </div>
+
+    <div class="iwp-tab-container">
+
+      <!-- 2018 Animation Table now contains description and some re-imagined inputs -->
+      <div class="iwp-tab" id="animationTab" style="display:inline;">
+
+        <div id="animationTitle">
+            <h3><?= str_replace(".iwp","",end(explode('/', $animateFile))); ?></h3>
+            <br/><div id="description"></div>
+        </div>
+
+        <table id="inputTable"></table>
+
+        <table id="outputTable"></table>
+
       </div>
-  </div>
+
+
+      <!-- 2018 Graph Table now contains an SVG canvas for the graph -->
+      <div id="graphTab" class="iwp-tab">
+        <svg id="graph" class="iwp-graph" viewBox="-100 -100 200 200">    
+      </div>
+
+
+      <!-- Window Settings -->
+      <div id="iwindowTab" class="iwp-tab">
+        <table class="trim">
+          <tr><th colspan="3">Window Settings</th></tr>
+          <tr>
+            <td style="width:33%"></td>
+            <td style="width:33%">X</td>
+            <td style="width:33%">Y</td>
+          <tr class="bottomBorder">
+            <td>Min:</td>
+            <td><input id="iwindow_xmin" type="text"></td>
+            <td><input id="iwindow_ymin" type="text"></td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Max:</td>
+            <td><input id="iwindow_xmax" type="text"></td>
+            <td><input id="iwindow_ymax" type="text"></td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Grid:</td>
+            <td><input id="iwindow_xgrid" type="text"></td>
+            <td><input id="iwindow_ygrid" type="text"></td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Unit:</td>
+            <td><input id="iwindow_xunit" type="text"></td>
+            <td><input id="iwindow_yunit" type="text"></td>
+          </tr>
+        </table>
+      </div>
 
 
 
- 
+     <!-- Time Controls -->
+      <div id="timeTab" class="iwp-tab">
+        <table class="trim">
+          <tr>
+            <th colspan="2">Time Controls</th>
+          </tr>
+          <tr class="bottomBorder">
+            <td>
+                <span>Time Step</span>
+            </td>
+            <td>
+                <span><input id="itime_change" type="text" value="--"/> seconds</span>
+            </td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Start Time</td>
+            <td><span><input id="itime_start" type="text" value="--"/> seconds</span></td>
+          </tr>
+          <tr class="bottomBorder">
+            <td>Stop Time</td>
+            <td><span><input id="itime_stop" type="text" value="--"/> seconds</span></td>
+          </tr>
+        </table>
+      </div>
 
-</div> <!-- end iwp-animate -->
-</div> <!-- end iwp-conatiner -->
+    </div> <!-- end iwp-tab-container -->
+  </div> <!-- end iwp-right-container -->
+
+</div> <!-- end iwp-animation -->
+</div> <!-- end iwp-animation-container -->
 
   <script type="text/javascript">
     // On Pageload, pull our hardcoded unit test.

@@ -1461,58 +1461,6 @@ for line
 }
 
 
-//Hide and reveal table tabs.
-function windowSettingsOn() {
-	$("#iwindow").attr("style", "visibility:visible");
-  $("#ws").attr("class", "bottomBorder");
-  inputTableOff();
-  timeTabOff();
-  graphTableOff();
-  fitText("#iwindow");
-};
-function windowSettingsOff() {
-	$("#iwindow").attr("style", "visibility:hidden");
-  $("#ws").attr("class", "");
-}
-
-function graphTableOn() {
-  $("#graphTab").attr("style", "visibility:visible");
-  $("#gt").attr("class", "bottomBorder");
-  inputTableOff();
-  timeTabOff();
-  windowSettingsOff();
-  fitText("#graphTab");
-};
-function graphTableOff() {
-  $("#graphTab").attr("style", "visibility:hidden");
-  $("#gt").attr("class", "");
-}
-
-function timeTabOn() {
-  $("#timeTab").attr("style", "visibility:visible");
-  $("#oib").attr("class", "bottomBorder");
-  windowSettingsOff();
-  inputTableOff();
-  graphTableOff();
-  fitText("#timeTab");
-};
-function timeTabOff() {
-  $("#timeTab").attr("style", "visibility:hidden");
-  $("#oib").attr("class", "");
-}
-
-function inputTableOn() {
-  $("#inputTable").attr("style", "visibility:visible");
-  $("#it").attr("class", "bottomBorder");
-  timeTabOff();
-  windowSettingsOff();
-  graphTableOff();
-  fitText("#inputTable");
-};
-function inputTableOff() {
-  $("#inputTable").attr("style", "visibility:hidden");
-  $("#it").attr("class", "");
-}
 
 //Click handles.
 function handleStartClick() {
