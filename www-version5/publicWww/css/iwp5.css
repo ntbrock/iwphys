@@ -1,5 +1,11 @@
 /** 2016-Aug-28 IWP5 - Migration of animation CSS into public WWW theme */
 
+.iwp-container { 
+	margin-left: 10%;
+	width: 1125px;
+
+ }
+
 .iwp-animate {
 	font-size:   20                ;
 	font-family: "PT Serif", serif ;
@@ -12,34 +18,43 @@ table {
 	display:          inline-block ;
 	border-collapse:  collapse     ;
 	background-color: #ddd         ;
-	padding:          1%           ;
-	margin:           1%	       ;
+	padding:          0.5em        ;
+	margin:           0.5em	       ;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ;
+	min-height: 65px;
 }
 #canvasDiv {
-	float: left;
+	/*float: left;*/
+	display: inline-block;
 	width: 480px;
-	margin-left: 2%;
-	margin-right: 2%;
+	margin: 0.5em;
+	padding: 0.5em;
 	z-index: -1; 
 
 }
+
+#tabTables {
+	overflow: hidden;
+	vertical-align: top;
+	display: inline-block;
+	height: 400px;
+	width: 610px;
+}
+
 #tabs {
 	font-size: 9pt;
 	visibility: visible;
 	clear: right;
 	overflow: auto;
-	margin-bottom: 0;
-	margin-top: 0;
+/*	margin-bottom: 0;
+	margin-top: 0; */
 	width: 610px;
 }
+
+/** Controls the tab button widths */
 #tabs td {
-	padding-left: 61px;
-	padding-right: 61px;
-}
-#tabTables {
-	height: 400px;
-	width: 610px;
+	padding-left: 56px;
+	padding-right: 56px;
 }
 .tab {
 	table-layout: fixed;
@@ -75,8 +90,8 @@ table {
 	float: left;
 	width: 485px;
 	overflow: auto;
-	margin-right: 98.2%;
-	margin-left:1.8%;
+	/* margin-right: 98.2%; */
+	/* margin-left:1.8%; */
 }
 
 th, td {

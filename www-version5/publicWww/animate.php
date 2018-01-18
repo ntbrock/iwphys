@@ -26,39 +26,48 @@ header('Content-Type: text/html');
 
 <body>
 
-  <div class="row" style="text-align: center">
-      <div class="col-lg-12 center" id="animationTitle">
-        <h3><?= str_replace(".iwp","",end(explode('/', $animateFile))); ?></h3>
-        <div id="authorUsername" style="font-style:italic">No Author</div>
-        <span title="IWP4 Java Version"><a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems/<?= $animateFile; ?>"><i class="fa fa-coffee fa-1x" style="color: #333;"></i> Java Applet</a></span>
-        <br/><div id="description"></div>
-        <hr>
-      </div>
-  </div>
 <?php include_once("iwp-nav.php") ?>
      
-     
+  <div class="iwp-container">
   <div class="iwp-animate">
 
   <div id="problem" problem-uri="<?= $xtojUrl ?>"></div>
+
+  <table id="playBar">
+    <tr>  
+      <td class="bottomBorder" id="time">
+        <span><i class="fa fa-clock-o"></i></span>
+        <span id="itime">--</span>
+      </td> 
+      <td id="buttonControls">
+        <div onclick="handleBackClick()" id="backButton"><i class="fa fa-step-backward fa-lg"></i></div>
+        <div onclick="handleStartClick()" id="startStopButton"><i id="startStopIcon" class="fa fa-play fa-lg"></i></div>
+        <div onclick="handleForwardClick()" id="forwardButton"><i class="fa fa-step-forward fa-lg"></i></div>
+        <div onclick="handleResetClick()" id="resetButton"><i class="fa fa-repeat fa-lg"></i></div>
+      </td>
+    </tr>
+  </table>
+
+
+  <table id="tabs" class="tab">
+    <tr>
+      <td id="it" class="bottomBorder" onclick="inputTableOn()"><i id="inputTableButton" class="fa fa-list fa-2x"></i> Animate</td>
+      <!-- 9 Nov 2016 Ryan Steed
+        Removed to create single variable tab:
+        <td id="ot" class=""><input id="outputTableButton" type="button" onclick="outputTableOn()" value="Outputs"/></td>
+      -->
+      <td id="gt" class="" onclick="graphTableOn()"><i id="graphTableButton" class="fa fa-area-chart fa-2x"> </i> Graph</td>
+      <td id="oib" class="" onclick="timeTabOn()"><i id="timeTabButton" class="fa fa-clock-o fa-2x"> </i> Time</td>
+      <td id="ws" class=""  onclick="windowSettingsOn()"><i id="windowSettings" class="fa fa-clone fa-2x"> </i> Window </td>
+    </tr>
+  </table>
+
 
   <div id="canvasDiv">
     <svg id="canvas" viewbox="0 0 1000 1000" preserveAspectRatio="xMinYMin meet" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
     </svg>
   </div>
-  <table id="tabs" class="tab">
-    <tr>
-      <td id="it" class="bottomBorder" onclick="inputTableOn()"><i id="inputTableButton" class="fa fa-list fa-2x"></i></td>
-      <!-- 9 Nov 2016 Ryan Steed
-        Removed to create single variable tab:
-        <td id="ot" class=""><input id="outputTableButton" type="button" onclick="outputTableOn()" value="Outputs"/></td>
-      -->
-      <td id="oib" class="" onclick="timeTabOn()"><i id="timeTabButton" class="fa fa-clock-o fa-2x"></td>
-      <td id="ws" class=""  onclick="windowSettingsOn()"><i id="windowSettings" class="fa fa-clone fa-2x"></i></td>
-      <td id="gt" class="" onclick="graphTableOn()"><i id="graphTableButton" class="fa fa-area-chart fa-2x"></i></td>
-    </tr>
-  </table>
-  
+    
  <div id="tabTables">
   <table id="inputTable" class="tab"></table>
   <table id="iwindow" class="tab" align='center' class="trim">
@@ -114,24 +123,20 @@ header('Content-Type: text/html');
   </table>
 </div>
 
-  <table id="playBar">
-    <tr>  
-      <td class="bottomBorder" id="time">
-        <span><i class="fa fa-clock-o"></i></span>
-        <span id="itime">--</span>
-      </td> 
-      <td id="buttonControls">
-        <div onclick="handleBackClick()" id="backButton"><i class="fa fa-step-backward fa-lg"></i></div>
-        <div onclick="handleStartClick()" id="startStopButton"><i id="startStopIcon" class="fa fa-play fa-lg"></i></div>
-        <div onclick="handleForwardClick()" id="forwardButton"><i class="fa fa-step-forward fa-lg"></i></div>
-        <div onclick="handleResetClick()" id="resetButton"><i class="fa fa-repeat fa-lg"></i></div>
-      </td>
-    </tr>
-  </table>
+  <div class="row" style="text-align: center">
+      <div class="col-lg-12 center" id="animationTitle">
+        <h3><?= str_replace(".iwp","",end(explode('/', $animateFile))); ?></h3>
+        <br/><div id="description"></div>
+        <hr>
+      </div>
+  </div>
+
+
 
  
 
 </div> <!-- end iwp-animate -->
+</div> <!-- end iwp-conatiner -->
 
   <script type="text/javascript">
     // On Pageload, pull our hardcoded unit test.
