@@ -1,6 +1,7 @@
 /** 
  * Interactive Web Physics 5 - Javascript SVG Animation Implementation
- * Ryan Steed, Taylor Brockman 2016
+ * Ryan Steed, Taylor Brockman 2016 - Version 5.0 Initial Port to HTML + SVG
+ * Matthew Mims, Taylor Brockman 2018  - Version 5.1 Added Graphing and D3
  */
 
 //-----------------------------------------------------------------------
@@ -127,6 +128,10 @@ function handleStep() {
     if ( varsAtStep[newStep] != undefined ) { 
       //console.log("[iwp5.js:118] Step " + newStep + " already exist, reloading for history.")
       repaintStep(newStep);
+
+      // iwp5.1 - Adding Hook into the graph capabilties
+      regraphStep(newStep);
+
     } else { 
   		// UI rendering is handled by the calculate as a side effect
 	 	  var vars = calculateVarsAtStep(newStep);
@@ -320,6 +325,30 @@ function repaintStep(step) {
    });
   }
 }
+
+
+/** 
+ * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
+ */
+function regraphStep(step) { 
+  var vars = varsAtStep[step];
+  if ( vars == undefined ) { 
+    throw "No previous calculations available at step: " + step;
+  } else { 
+
+    
+
+   $.each( outputs, function( index, output ) {
+      updateUserFormOutputDouble(output, vars[output.name]);
+   });
+
+   $.each( solids, function( index, solid ) {
+      updateSolidSvgPathAndShape(solid, vars[solid.name])
+   });
+  }
+}
+
+
 
 
 var CONFIG_throw_solid_calculation_exceptions = false;

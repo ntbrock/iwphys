@@ -1,0 +1,19 @@
+
+
+Matt
+L> Finished the Easel cartesian remapping, added grid lines. Started a d3 unit test, haven't gotten the poly line to update.
+N> Finish the d3 polyline.
+
+Taylor
+L> Finished a d3 viz. Demo.  svg/d3 unit test, testing performance.
+N> Working session today, then get into a good spot to demo to Dr. Bennett.
+
+
+
+
+1. Line
+
+2. Polyline
+
+3. Path
+

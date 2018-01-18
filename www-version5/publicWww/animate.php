@@ -21,6 +21,7 @@ header('Content-Type: text/html');
   <meta property="og:title" content="<?= str_replace(".iwp","",end(explode('/', $animateFile))); ?> - Interactive Web Physics"/>
   <meta name="og:description" content="Click to play animation in your web browser."/>
   <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5.js"></script>
+  <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5-graph.js"></script>
 
 </head>
 
