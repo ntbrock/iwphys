@@ -8,7 +8,7 @@
 $animationPath = "animations";
 
 // Prod Webserver Prefix 
-$prefixUri   = '/5/';
+$prefixUri   = '/master/';
 
 // Development environment
 //$prefixUri   = '/iwphys/git/iwphys/www-version5/publicWww/';
