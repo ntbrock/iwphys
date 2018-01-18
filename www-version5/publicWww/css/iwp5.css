@@ -103,6 +103,9 @@ table {
 
 
 
+#inputTable { 
+	margin-top: 10px;
+}
 
 th, td {
 	padding: 11px;
@@ -110,14 +113,14 @@ th, td {
 	vertical-align: center ;
 }
 .bottomBorder {
-	position:      relative        ;
-	text-align:    center          ;
-	border-bottom: 1px black solid ;
+	position:      relative;
+	text-align:    center;
+	border-bottom: 1px black solid;
 }
 .rightBorder {
-	position:      relative        ;
-	text-align:    center          ;
-	border-right: 1px black solid ;
+	position:      relative;
+	text-align:    center;
+	border-right: 1px black solid;
 }
 .italic {
 	font-style: italic;
