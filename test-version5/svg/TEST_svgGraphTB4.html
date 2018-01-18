@@ -12,11 +12,25 @@
         stroke-width: 0.1;
       }
 
-      .iwp-graph-line { 
+      .grid line {
+        stroke: lightgrey;
+        stroke-width: 0.3;
+      }
+
+      .iwp-pos-path {
         stroke:rgb(255,0,0);
         stroke-width: 0.3;
       }
 
+      .iwp-vel-path {
+        stroke:rgb(0,255,0);
+        stroke-width: 0.3;
+      }
+
+      .iwp-acc-path {
+        stroke:rgb(0,0,255);
+        stroke-width: 0.3;
+      }
 
     </style>
 
@@ -39,12 +53,20 @@
 
     <button onclick="iwpPause(this);">Pause</button>
 
+    <!--
+    <button onclick="togglePos();">Position</button>
+
+    <button onclick="toggleVel();">Velocity</button>
+
+    <button onclick="toggleAcc();">Acceleration</button>
+    -->
+
   </div>
 
   <h3>T = <span id="currentT"></span>  Tick =  <span id="tick"></span></h3>
 
   <div style="border-style: solid; display: inline-block;">
-  
+
   <svg class="chart" style="width: 400px; height: 400px;" viewBox="-100 -100 200 200">
 
   </svg>
@@ -62,40 +84,59 @@ var deltaT = 0.01
 var animateT = false
 var maxT = 8.5
 var ticks = []
+var posBool = true
+var velBool = true
+var accBool = true
 
-function calculateT(t) { 
-  // TODO replace with math.sj
-  return math.sqrt(t); // math.random()
+function calculatePos(t) {
+  // TODO replace with math.js
+  return 8*math.sin(t); // math.random()
 }
 
+function calculateVel(t) {
+  // TODO replace with math.js
+  return 8*math.cos(t); // math.random()
+}
 
-function iwpStepForward(button) { 
+function calculateAcc(t) {
+  // TODO replace with math.js
+  return -8*math.sin(t); // math.random()
+}
+
+function togglePos() {
+  if (posBool) {
+//    iwp-pos-path.display = "none";
+    posBool = false
+  }
+}
+
+function iwpStepForward(button) {
   iwpAddData(button);
 }
 
-function iwpPlay(button) { 
+function iwpPlay(button) {
   animateT = true;
 }
 
-function iwpPause(button) { 
+function iwpPause(button) {
   animateT = false;
 }
 
-function iwpAnimatorThreadStart() { 
+function iwpAnimatorThreadStart() {
   setInterval(function() {
 
-    if ( currentT > maxT ) { 
+    if ( currentT > maxT ) {
       animateT = false;
     }
 
-    if ( animateT ) { 
+    if ( animateT ) {
       iwpAddData();
     }
   }, 250)
 }
 
 
-function iwpReset(button) { 
+function iwpReset(button) {
 
   tick = 0;
   animateT = false;
@@ -117,13 +158,13 @@ var path = canvas.append('polyline')
                      .attr('points', data)
                      .attr('style', "fill:none;stroke:red;stroke-width:3")
 
-         
+
                     */
 
 }
 
 
-function iwpAddData(button) { 
+function iwpAddData(button) {
 
 
   // Increment time by one delta.
@@ -133,23 +174,29 @@ function iwpAddData(button) {
   $("#tick").html(tick);
 
   var thisX = currentT;
-  var thisY = calculateT(currentT);
+  var thisYpos = calculatePos(currentT);
+  var thisYvel = calculateVel(currentT);
+  var thisYacc = calculateAcc(currentT);
    // Historical record in memory of past calculations
-  ticks[tick] = { x: thisX, y: thisY }
+  ticks[tick] = { x: thisX, pos: thisYpos, vel: thisYvel, acc: thisYacc }
 
   var lastX = 0
-  var lastY = 0
+  var lastYpos = 0
+  var lastYvel = 0
+  var lastYacc = 0
 
-  if ( tick > 0 ) { 
+  if ( tick > 0 ) {
     // console.log("canvasGraphTB3:110> Ticks: ", ticks)
     var lastX = ticks[tick-1].x
-    var lastY = ticks[tick-1].y
+    var lastYpos = ticks[tick-1].pos
+    var lastYvel = ticks[tick-1].vel
+    var lastYacc = ticks[tick-1].acc
   }
 
 
   // TODO IMPLEMENT POINT ADD
 
-  iwpCanvasAddLine(lastX,lastY,thisX, thisY)
+  iwpCanvasAddLine(lastX,thisX,lastYpos,thisYpos,lastYvel,thisYvel,lastYacc,thisYacc)
 
   // console.log("easelGraphTB3:99> Adding Data Point: ", [ lastX,lastY,thisX, thisY ])
 
@@ -172,18 +219,20 @@ function iwpAddData(button) {
     .domain([-10, 10])
     .range([100, -100]);
 
-  var path = d3.path()
+  var posPath = d3.path()
+  var velPath = d3.path()
+  var accPath = d3.path()
 
   // initialize canvas here.
 
-  function iwpCanvasInit() { 
+  function iwpCanvasInit() {
 
    console.log("svgGraphTB4:108> svg: " , svg )
 
 
    var manualAxisCreation = false
 
-   if ( manualAxisCreation ) { 
+   if ( manualAxisCreation ) {
 
    svg.append('line')
       .classed("iwp-axis-line", true)
@@ -198,33 +247,40 @@ function iwpAddData(button) {
         .attr("y1", yScale(0))
         .attr("x2", xScale(1000))
         .attr("y2", yScale(0))
-    } else { 
+    } else {
 
-    
-      var xAxis = d3.axisBottom(xScale).ticks(10);
+      var xGrid = d3.axisTop(xScale).ticks(10).tickSize(1000)
+      xGrid(svg.append("g").classed("grid", true).attr("transform", "translate(0, 100)"))
+
+      var yGrid = d3.axisRight(yScale).ticks(10).tickSize(1000)
+      yGrid(svg.append("g").classed("grid", true).attr("transform", "translate(-100, 0)"))
+
+      var xAxis = d3.axisBottom(xScale).ticks(10)
       xAxis(svg.append("g").classed("iwp-graph-x-axis",true))
 
-      var yAxis = d3.axisLeft(yScale).ticks(10);
+      var yAxis = d3.axisLeft(yScale).ticks(10)
       yAxis(svg.append("g").classed("iwp-graph-y-axis",true))
-
-
-      
-
 //      var yAxis = d3.axisLeft(yScale).ticks(1);
 //      svg.call(yAxis)
 
     }
 
-    svg.append('path')
-      .classed("iwp-graph-line", true)
-      .attr("d", path )
-   
+    redPath = svg.append('path')
+              .classed("iwp-pos-path", true)
+              .attr("d", posPath )
+    greenPath = svg.append('path')
+              .classed("iwp-vel-path", true)
+              .attr("d", velPath )
+    bluePath = svg.append('path')
+              .classed("iwp-acc-path", true)
+              .attr("d", accPath )
+
   }
 
 
-   
 
-  function iwpCanvasAddLine(x1,y1,x2,y2) { 
+
+  function iwpCanvasAddLine(x1,x2,pos1,pos2,vel1,vel2,acc1,acc2) {
 
     var simpleScale =100
 
@@ -234,9 +290,9 @@ function iwpAddData(button) {
     // 1. Add a line segment
     // Comprable, but more objects.
 
-    var lineSegments = true
+    var lineSegments = false
 
-    if ( lineSegments ) { 
+    if ( lineSegments ) {
 
       svg.append('line')
         .classed("iwp-graph-line", true)
@@ -245,12 +301,18 @@ function iwpAddData(button) {
         .attr("x2", xScale(x2) )
         .attr("y2", yScale(y2) )
 
-    } else { 
+    } else {
 
       // Method 2 -- Managing a line path in memory and manipulating it, and rerawing it.
-      path.moveTo( xScale(x1), yScale(y1) );
-      path.lineTo( xScale(x2), yScale(y2) );
-      svg.selectAll('path').attr("d", path)
+      posPath.moveTo( xScale(x1), yScale(pos1) );
+      posPath.lineTo( xScale(x2), yScale(pos2) );
+      redPath.attr("d", posPath)
+      velPath.moveTo( xScale(x1), yScale(vel1) );
+      velPath.lineTo( xScale(x2), yScale(vel2) );
+      greenPath.attr("d", velPath)
+      accPath.moveTo( xScale(x1), yScale(acc1) );
+      accPath.lineTo( xScale(x2), yScale(acc2) );
+      bluePath.attr("d", accPath)
 
     }
     /*
@@ -260,7 +322,7 @@ function iwpAddData(button) {
       .attr("d", path )
 */
 
-    
+
 
   }
 
