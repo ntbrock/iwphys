@@ -69,13 +69,11 @@
 
     <button onclick="iwpPause(this);">Pause</button>
 
-    <!--
     <button onclick="togglePos();">Position</button>
 
     <button onclick="toggleVel();">Velocity</button>
 
     <button onclick="toggleAcc();">Acceleration</button>
-    -->
 
   </div>
 
@@ -100,9 +98,6 @@ var deltaT = 0.01
 var animateT = false
 var maxT = 8.5
 var ticks = []
-var posBool = true
-var velBool = true
-var accBool = true
 
 function calculatePos(t) {
   // TODO replace with math.js
@@ -120,10 +115,15 @@ function calculateAcc(t) {
 }
 
 function togglePos() {
-  if (posBool) {
-//    iwp-pos-path.display = "none";
-    posBool = false
-  }
+  $(".iwp-pos-path").toggle()
+}
+
+function toggleVel() {
+  $(".iwp-vel-path").toggle()
+}
+
+function toggleAcc() {
+  $(".iwp-acc-path").toggle()
 }
 
 function iwpStepForward(button) {
