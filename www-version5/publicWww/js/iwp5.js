@@ -1,6 +1,7 @@
 /** 
  * Interactive Web Physics 5 - Javascript SVG Animation Implementation
- * Ryan Steed, Taylor Brockman 2016
+ * Ryan Steed, Taylor Brockman 2016 - Version 5.0 Initial Port to HTML + SVG
+ * Matthew Mims, Taylor Brockman 2018  - Version 5.1 Added Graphing and D3
  */
 
 //-----------------------------------------------------------------------
@@ -127,10 +128,15 @@ function handleStep() {
     if ( varsAtStep[newStep] != undefined ) { 
       //console.log("[iwp5.js:118] Step " + newStep + " already exist, reloading for history.")
       repaintStep(newStep);
+
     } else { 
   		// UI rendering is handled by the calculate as a side effect
 	 	  var vars = calculateVarsAtStep(newStep);
   		archiveVarsAtStep( newStep, vars );
+
+      // iwp5.1 - Adding Hook into the graph capabilties
+      graphStep(newStep, vars);
+
     }
 
 	}
@@ -214,13 +220,13 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     }
 
   if ( xComplex.acceleration == null ) { 
-      console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
+      //console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
      xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
      x = xComplex.value
   }
   if ( yComplex.acceleration == null ) { 
-      console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
+      //console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
      yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose )
      y = yComplex.value
@@ -320,6 +326,9 @@ function repaintStep(step) {
    });
   }
 }
+
+
+
 
 
 var CONFIG_throw_solid_calculation_exceptions = false;
@@ -442,7 +451,7 @@ function calculateVarsAtStep(step) {
      $.each( replayOutputs, function( index, output ) {
       //console.log("Trying again",output)
       try { 
-        var newValue = calculateOutputAtStep(output, step, vars, true );
+        var newValue = calculateOutputAtStep(output, step, vars, false );
         vars[output.name] = newValue
       } catch ( err ) { 
         fatalOutputs.push(output);
@@ -521,7 +530,7 @@ function addInput(input) {
   if ( input.hidden == "1" ) { 
     style = "display:none;"
   }
-  htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='bottomBorder'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
+  htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
 }
 
 function addOutput(output) { 
@@ -541,7 +550,7 @@ function addOutput(output) {
   if ( output.hidden == "1" ) { 
     style = "display:none;'"
   }
-  htmlOutputs.push( "<tr style='" + style +"' id='output_" + output.name + "' class='bottomBorder'><td>"+ output.text +"</td><td><input id='" + output.name + "' type='text' value='-999'> " + output.units + "</td></tr>");
+  htmlOutputs.push( "<tr style='" + style +"' id='output_" + output.name + "' class='iwp-output-row'><td>"+ output.text +"</td><td><input id='" + output.name + "' type='text' value='-999'> " + output.units + "</td></tr>");
 }
 
 /**
@@ -918,9 +927,6 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
         // No step direction
       }
 
-if ( true ) { 
-      console.log("iwp5:428> " + resultVariable + " at t = " + vars["t"] + "> AFTER STEP: ", currentStep, "/", changeStep, "  d: ", calculator.currentDisplacement, "  v: ", calculator.currentVelocity, " a: ", acceleration );
-}
       //Return only value if just an output?
       
       return { value: calculator.currentDisplacement,
@@ -1432,58 +1438,6 @@ for line
 }
 
 
-//Hide and reveal table tabs.
-function windowSettingsOn() {
-	$("#iwindow").attr("style", "visibility:visible");
-  $("#ws").attr("class", "bottomBorder");
-  inputTableOff();
-  timeTabOff();
-  graphTableOff();
-  fitText("#iwindow");
-};
-function windowSettingsOff() {
-	$("#iwindow").attr("style", "visibility:hidden");
-  $("#ws").attr("class", "");
-}
-
-function graphTableOn() {
-  $("#graphTab").attr("style", "visibility:visible");
-  $("#gt").attr("class", "bottomBorder");
-  inputTableOff();
-  timeTabOff();
-  windowSettingsOff();
-  fitText("#graphTab");
-};
-function graphTableOff() {
-  $("#graphTab").attr("style", "visibility:hidden");
-  $("#gt").attr("class", "");
-}
-
-function timeTabOn() {
-  $("#timeTab").attr("style", "visibility:visible");
-  $("#oib").attr("class", "bottomBorder");
-  windowSettingsOff();
-  inputTableOff();
-  graphTableOff();
-  fitText("#timeTab");
-};
-function timeTabOff() {
-  $("#timeTab").attr("style", "visibility:hidden");
-  $("#oib").attr("class", "");
-}
-
-function inputTableOn() {
-  $("#inputTable").attr("style", "visibility:visible");
-  $("#it").attr("class", "bottomBorder");
-  timeTabOff();
-  windowSettingsOff();
-  graphTableOff();
-  fitText("#inputTable");
-};
-function inputTableOff() {
-  $("#inputTable").attr("style", "visibility:hidden");
-  $("#it").attr("class", "");
-}
 
 //Click handles.
 function handleStartClick() {

@@ -1,82 +1,110 @@
 /** 2016-Aug-28 IWP5 - Migration of animation CSS into public WWW theme */
+/* 2018Jan18 Brockman - Major Refactor to modern styles */
 
-.iwp-animate {
-	font-size:   20                ;
-	font-family: "PT Serif", serif ;
-	color:       #333              ;
-	position:    relative	       ;
-	width:       100%			   ;
-}
+
 table {
-	height:           auto         ;
-	display:          inline-block ;
-	border-collapse:  collapse     ;
-	background-color: #ddd         ;
-	padding:          1%           ;
-	margin:           1%	       ;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ;
+	height: auto;
+	width: 100%;
+	display: inline-block;
+	border-collapse: collapse;
+	background-color: #eee;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05) ;
+	min-height: 65px;
 }
-#canvasDiv {
-	float: left;
-	width: 480px;
-	margin-left: 2%;
-	margin-right: 2%;
-	z-index: -1; 
 
+
+
+.iwp-animation-container { 
+	width: 100%;
+	min-width: 1150px;
 }
-#tabs {
+
+.iwp-animation {
+	font-size:   16px;
+	font-family: "PT Serif", serif;
+	color:       #333;
+	position:    relative;
+	width:       1150px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/** Major layout into left and right halfs of the screen */
+
+.iwp-left-container { 
+	width: 500px;
+
+	display: inline-block;
+	height: 90vh;
+	vertical-align: top;
+	margin: 5px;
+	margin-right: 25px;
+}
+
+.iwp-right-container { 
+	width: 600px;
+
+	display: inline-block;
+	height: 90vh;
+	vertical-align: top;
+	margin: 5px;
+}
+
+
+.iwp-control-container { 
+	width: 100%;
+	min-height: 70px;
+	margin-bottom: 5px;
+	display: inline-block;
+}
+
+
+.iwp-time-control-container {
+}
+
+.iwp-tab-control-container {
+}
+
+
+.iwp-tab-controls {
 	font-size: 9pt;
 	visibility: visible;
 	clear: right;
 	overflow: auto;
-	margin-bottom: 0;
-	margin-top: 0;
-	width: 610px;
+	width: 100%;
 }
-#tabs td {
-	padding-left: 61px;
-	padding-right: 61px;
+
+/** Controls the tab button widths */
+.iwp-tab-controls td {
+	padding-left: 45px;
+	padding-right: 45px;
 }
-#tabTables {
+
+
+.iwp-tab-container {
+	overflow: visible;
+	vertical-align: top;
+	display: inline-block;
 	height: 400px;
-	width: 610px;
+	width: 100%;
 }
-.tab {
+
+.iwp-tab {
+	display: none; /** Start off invisible, then get turned on via Jquery */
 	table-layout: fixed;
 }
-.tab tr {
+.iwp-tab table tr {
 	width: 550px;
 	display: table;
 }
-.tab td {
+.iwp-tab table td {
 	width: 50%;
 }
-#iwindow {
-	position: absolute;
-	visibility: hidden;
-	/*float: right;*/
-}
-#timeTab {
-	position: absolute;
-	visibility: hidden;
-	font-size: 16px;
-}
-#inputTable {
-	position: absolute;
-	visibility: visible;
-}
-#graphTab {
-	position: absolute;
-	visibility: visible;
-	visibility: hidden;
-}
-#playBar {
-	visibility: visible;
-	float: left;
-	width: 485px;
-	overflow: auto;
-	margin-right: 98.2%;
-	margin-left:1.8%;
+
+
+
+#inputTable { 
+	margin-top: 10px;
 }
 
 th, td {
@@ -85,14 +113,14 @@ th, td {
 	vertical-align: center ;
 }
 .bottomBorder {
-	position:      relative        ;
-	text-align:    center          ;
-	border-bottom: 1px black solid ;
+	position:      relative;
+	text-align:    center;
+	border-bottom: 1px black solid;
 }
 .rightBorder {
-	position:      relative        ;
-	text-align:    center          ;
-	border-right: 1px black solid ;
+	position:      relative;
+	text-align:    center;
+	border-right: 1px black solid;
 }
 .italic {
 	font-style: italic;
@@ -125,7 +153,55 @@ th, td {
 #buttonControls i {
 	vertical-align: middle;
 }
-#animationTitle {
-	width: 1080px;
-	margin-left: 32px;
+
+
+/** 
+ * 2018 Animations
+ */
+
+.iwp-animation-canvas-container {
+	display: inline-block;
+	width: 500px;
+	z-index: -1; 
+
+}
+
+.iwp-animation-canvas {
+	border: solid #ccc 1px;
+}
+
+
+/**
+ * 2018 Graphing
+ */
+
+.iwp-graph { 
+	width: 500px;
+	height: 500px;
+	border: solid #ccc 1px;
+}
+
+
+.iwp-axis-line {
+	stroke-width: 0.1;
+}
+
+.iwp-graph-line { 
+	stroke:rgb(255,0,0);
+	stroke-width: 0.3;
+}
+
+.iwp-graph-axis line { 
+	stroke: rgb(150,150,150);
+	stroke-width: 0.2;
+}
+
+.iwp-graph-axis path { 
+	stroke: rgb(150,150,150);
+	stroke-width: 0.2;
+}
+
+.iwp-graph-axis text { 
+	fill: rgb(150,150,150);
+	font-size: 6px;
 }

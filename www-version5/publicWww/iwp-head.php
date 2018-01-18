@@ -21,7 +21,7 @@
     <title>Interactive Web Physics - iwphys.org</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="<?= $baseUrl ?>css/bootstrap.css" rel="stylesheet">
+    <link href="<?= $baseUrl ?>css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="<?= $baseUrl ?>css/font-awesome.css" rel="stylesheet"> <!-- Version 4.6.3 -->
 
     <!-- Custom CSS -->
@@ -37,13 +37,10 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script charset="utf-8" type="text/javascript" src="<?= $baseUri ?>js/jquery-3.0.0.js"></script>
-
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="<?= $baseUrl ?>js/bootstrap.min.js"></script>
-
-    <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/d3.min.js"></script>
-    <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/math.js"></script>
+    <!-- 2018Jan18 Modernized Javascript Libraries -->
+    <script charset="utf-8" type="text/javascript" src="<?= $baseUri ?>js/jquery-3.2.1.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/bootstrap-3.3.7.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/d3.v4.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/math.min.js"></script>
 
 <?php return ''; ?>
