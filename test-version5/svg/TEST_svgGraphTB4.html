@@ -1,0 +1,306 @@
+<html><head>
+    <title>TEST_svgGraphTB4</title>
+    <script src="math.js" type="text/javascript"></script>
+    <script src="jquery-1.12.2.min.js" type="text/javascript"></script>
+    <script src="d3.v4.min.js" type="text/javascript"></script>
+
+    <style>
+
+
+      .iwp-axis-line {
+        
+        stroke-width: 0.1;
+      }
+
+      .iwp-graph-line { 
+        stroke:rgb(255,0,0);
+        stroke-width: 0.3;
+      }
+
+
+      .iwp-graph-axis line { 
+        stroke: rgb(150,150,150);
+        stroke-width: 0.2;
+      }
+
+      .iwp-graph-axis path { 
+        stroke: rgb(150,150,150);
+        stroke-width: 0.2;
+      }
+
+      .iwp-graph-axis text { 
+        fill: rgb(150,150,150);
+        font-size: 6px;
+      }
+
+
+    </style>
+
+
+</head>
+<body>
+<h1>TEST_svgGraphTB4</h1>
+<a href="https://css-tricks.com/how-to-make-charts-with-svg/">CSS Tricks - How To make charts with SVG<a><br>
+<a href="https://www.dashingd3js.com/svg-paths-and-d3js">SVG Paths and d3</a><br>
+
+
+<h3>Test4 - Taylor's Svg Canvas Performance</h3>
+
+  <div id="controls">
+    <button onclick="iwpReset(this);">Reset</button>
+
+    <button onclick="iwpStepForward(this);">Step Forward</button>
+
+    <button onclick="iwpPlay(this);">Play</button>
+
+    <button onclick="iwpPause(this);">Pause</button>
+
+  </div>
+
+  <h3>T = <span id="currentT"></span>  Tick =  <span id="tick"></span></h3>
+
+  <div style="border-style: solid; display: inline-block;">
+  
+  <svg class="chart" style="width: 400px; height: 400px;" viewBox="-100 -100 200 200">
+
+  </svg>
+
+
+</div>
+
+
+
+<script type="text/javascript">
+
+var tick = 0
+var currentT = 0.0
+var deltaT = 0.01
+var animateT = false
+var maxT = 8.5
+var ticks = []
+
+function calculateT(t) { 
+  // TODO replace with math.sj
+  return math.sqrt(t); // math.random()
+}
+
+
+function iwpStepForward(button) { 
+  iwpAddData(button);
+}
+
+function iwpPlay(button) { 
+  animateT = true;
+}
+
+function iwpPause(button) { 
+  animateT = false;
+}
+
+function iwpAnimatorThreadStart() { 
+  setInterval(function() {
+
+    if ( currentT > maxT ) { 
+      animateT = false;
+    }
+
+    if ( animateT ) { 
+      iwpAddData();
+    }
+  }, 250)
+}
+
+
+function iwpReset(button) { 
+
+  tick = 0;
+  animateT = false;
+
+  // Reset our time ticker
+  currentT = tick * deltaT;
+  $("#currentT").html(currentT);
+  $("#tick").html(tick);
+
+  // t=0 calculation to initalize historical memory array
+  ticks[tick] = { x: currentT, y: calculateT(currentT) }
+
+
+  /*
+  var canvas = d3.select('body').append('svg')
+                                  .attr('width', 700)
+                                  .attr('height', 400);
+var path = canvas.append('polyline')
+                     .attr('points', data)
+                     .attr('style', "fill:none;stroke:red;stroke-width:3")
+
+         
+                    */
+
+}
+
+
+function iwpAddData(button) { 
+
+
+  // Increment time by one delta.
+  tick = tick + 1
+  currentT = tick * deltaT;
+  $("#currentT").html(currentT);
+  $("#tick").html(tick);
+
+  var thisX = currentT;
+  var thisY = calculateT(currentT);
+   // Historical record in memory of past calculations
+  ticks[tick] = { x: thisX, y: thisY }
+
+  var lastX = 0
+  var lastY = 0
+
+  if ( tick > 0 ) { 
+    // console.log("canvasGraphTB3:110> Ticks: ", ticks)
+    var lastX = ticks[tick-1].x
+    var lastY = ticks[tick-1].y
+  }
+
+
+  // TODO IMPLEMENT POINT ADD
+
+  iwpCanvasAddLine(lastX,lastY,thisX, thisY)
+
+  // console.log("easelGraphTB3:99> Adding Data Point: ", [ lastX,lastY,thisX, thisY ])
+
+
+}
+
+</script>
+
+
+
+<script type="text/javascript">
+
+  var svg = d3.select('svg');
+
+  var xScale = d3.scaleLinear()
+    .domain([-10, 10])
+    .range([-100, 100]);
+
+  var yScale = d3.scaleLinear()
+    .domain([-10, 10])
+    .range([100, -100]);
+
+  var path = d3.path()
+
+  // initialize canvas here.
+
+  function iwpCanvasInit() { 
+
+   console.log("svgGraphTB4:108> svg: " , svg )
+
+
+   var manualAxisCreation = false
+
+   if ( manualAxisCreation ) { 
+
+   svg.append('line')
+      .classed("iwp-axis-line", true)
+      .attr("x1", xScale(0))
+      .attr("y1", yScale(-1000))
+      .attr("x2", xScale(0))
+      .attr("y2", yScale(1000))
+
+    svg.append('line')
+        .classed("iwp-axis-line", true)
+        .attr("x1", xScale(-1000))
+        .attr("y1", yScale(0))
+        .attr("x2", xScale(1000))
+        .attr("y2", yScale(0))
+    } else { 
+
+    
+      var xAxis = d3.axisBottom(xScale).ticks(10);
+      xAxis(svg.append("g").classed("iwp-graph-axis",true).classed("iwp-graph-x-axis",true))
+
+      var yAxis = d3.axisLeft(yScale).ticks(10);
+      yAxis(svg.append("g").classed("iwp-graph-axis",true).classed("iwp-graph-y-axis",true))
+
+
+      
+
+//      var yAxis = d3.axisLeft(yScale).ticks(1);
+//      svg.call(yAxis)
+
+    }
+
+    svg.append('path')
+      .classed("iwp-graph-line", true)
+      .attr("d", path )
+   
+  }
+
+
+   
+
+  function iwpCanvasAddLine(x1,y1,x2,y2) { 
+
+    var simpleScale =100
+
+    var start = 0;
+    var stop = 0;
+
+    // 1. Add a line segment
+    // Comprable, but more objects.
+
+    var lineSegments = true
+
+    if ( lineSegments ) { 
+
+      svg.append('line')
+        .classed("iwp-graph-line", true)
+        .attr("x1", xScale(x1) )
+        .attr("y1", yScale(y1))
+        .attr("x2", xScale(x2) )
+        .attr("y2", yScale(y2) )
+
+    } else { 
+
+      // Method 2 -- Managing a line path in memory and manipulating it, and rerawing it.
+      path.moveTo( xScale(x1), yScale(y1) );
+      path.lineTo( xScale(x2), yScale(y2) );
+      svg.selectAll('path').attr("d", path)
+
+    }
+    /*
+    svg.selectAll('path').remove();
+    svg.append('path')
+      .classed("iwp-graph-line", true)
+      .attr("d", path )
+*/
+
+    
+
+  }
+
+</script>
+
+
+<!-- On Start -->
+<script type="text/javascript">
+
+// Begin the animation thread after page load
+$(function() {
+
+  iwpCanvasInit();
+
+  setInterval(function(){
+    iwpAnimatorThreadStart();
+  }, 20);
+});
+
+
+</script>
+
+
+
+
+</body>
+</html>

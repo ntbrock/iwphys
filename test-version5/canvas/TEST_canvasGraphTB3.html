@@ -1,0 +1,188 @@
+<html><head>
+    <title>TEST_easelGraphTB3</title>
+    <script src="math.js" type="text/javascript"></script>
+    <script src="jquery-1.12.2.min.js" type="text/javascript"></script>
+    <script src="paper-full.min.js" type="text/javascript"></script>
+</head>
+<body>
+<h1>TEST_easelGraphTB3</h1>
+<a href="https://www.createjs.com/getting-started/easeljs">EaselJs Getting Started<a>
+
+<h3>Test3 - Taylor's EaselJs Canvas Performance</h3>
+
+  <div id="controls">
+    <button onclick="iwpReset(this);">Reset</button>
+
+    <button onclick="iwpStepForward(this);">Step Forward</button>
+
+    <button onclick="iwpPlay(this);">Play</button>
+
+    <button onclick="iwpPause(this);">Pause</button>
+
+  </div>
+
+  <h3>T = <span id="currentT"></span>  Tick =  <span id="tick"></span></h3>
+
+  <canvas id="canvas" width="700" height="400"></canvas>
+
+
+
+<script type="text/javascript">
+
+var tick = 0
+var currentT = 0.0
+var deltaT = 0.01
+var animateT = false
+var maxT = 8.5
+var ticks = []
+
+function calculateT(t) { 
+  // TODO replace with math.sj
+  return math.sqrt(t); // math.random()
+}
+
+
+function iwpStepForward(button) { 
+  iwpAddData(button);
+}
+
+function iwpPlay(button) { 
+  animateT = true;
+}
+
+function iwpPause(button) { 
+  animateT = false;
+}
+
+function iwpAnimatorThreadStart() { 
+  setInterval(function() {
+
+    if ( currentT > maxT ) { 
+      animateT = false;
+    }
+
+    if ( animateT ) { 
+      iwpAddData();
+    }
+  }, 250)
+}
+
+
+function iwpReset(button) { 
+
+  tick = 0;
+  animateT = false;
+
+  // Reset our time ticker
+  currentT = tick * deltaT;
+  $("#currentT").html(currentT);
+  $("#tick").html(tick);
+
+  // t=0 calculation to initalize historical memory array
+  ticks[tick] = { x: currentT, y: calculateT(currentT) }
+
+  // TODO - Clean Graph
+  console.log("easelGraphTB3:79> Todo Clean Easel and re-draw gridlines")
+}
+
+
+function iwpAddData(button) { 
+
+  // var plot = $('#graph');
+
+  var plot = document.getElementById('graph');
+
+  // Increment time by one delta.
+  tick = tick + 1
+  currentT = tick * deltaT;
+  $("#currentT").html(currentT);
+  $("#tick").html(tick);
+
+  var thisX = currentT;
+  var thisY = calculateT(currentT);
+   // Historical record in memory of past calculations
+  ticks[tick] = { x: thisX, y: thisY }
+
+  var lastX = 0
+  var lastY = 0
+
+  if ( tick > 0 ) { 
+    // console.log("canvasGraphTB3:110> Ticks: ", ticks)
+    var lastX = ticks[tick-1].x
+    var lastY = ticks[tick-1].y
+  }
+
+
+  // TODO IMPLEMENT POINT ADD
+
+  iwpCanvasAddLine(lastX,lastY,thisX, thisY)
+
+  // console.log("easelGraphTB3:99> Adding Data Point: ", [ lastX,lastY,thisX, thisY ])
+
+
+}
+
+</script>
+
+
+
+<script type="text/javascript">
+
+var stage = null;
+
+  // initialize canvas here.
+
+  function iwpCanvasInit() { 
+
+ 
+ var canvas = document.getElementById('canvas');
+    // Create an empty project and a view for the canvas:
+    paper.setup(canvas);
+   
+
+    // Draw the view now:
+    paper.view.draw();
+
+
+  }
+
+  function iwpCanvasAddLine(x1,y1,x2,y2) { 
+
+    var simpleScale =100
+
+    var start = new paper.Point(x1*simpleScale, y1*simpleScale);
+    var stop = new paper.Point(x2*simpleScale, y2*simpleScale);
+
+    var path = new paper.Path.Line(start, stop);
+    // Give the stroke a color
+    path.strokeColor = 'red';
+
+    //paper.view.draw();
+
+  }
+
+
+</script>
+
+
+<!-- On Start -->
+<script type="text/javascript">
+
+// Begin the animation thread after page load
+$(function() {
+
+  iwpCanvasInit();
+
+  setInterval(function(){
+    iwpAnimatorThreadStart();
+  }, 250);
+});
+
+
+</script>
+
+
+
+
+</body>
+</html>
