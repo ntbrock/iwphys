@@ -1,0 +1,67 @@
+<html><head>
+    <title>Infer 90% Percentile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<style>
+	body { 
+		margin: 1.5em;
+	}
+	label { 
+	display: block;
+		margin: 0.5em;
+	}
+
+	input {
+	        width: 160px;	
+		margin: 0.5em;
+		margin-bottom: 1em;
+		font-size: 150%;
+	}
+
+</style>
+
+	
+	</head>
+<body>
+<h1>Infer 90% Percentile</h1>
+
+<h3 style="color:blue;">Input</h3>
+<div>
+<label for="50th">50th Percentile (Median)</label> <input id="50th" name="50th" value="100000"></div>
+
+<div>
+<label for="75th">75th Percentile </label> <input id="75th" name="75th" value="135000"></div>
+
+<h3 style="color:darkorange;">Calculation Result</h3>
+
+<div>
+<label for="90th">90th Percentile</label> <input id="90th" name="90th"></div>
+
+<div>
+<label for="100th">100th Percentile (Max)</label> <input id="100th" name="100th"></div>
+
+
+<script type="text/javascript">
+
+$(function(){ 
+	setInterval(function() { recalc() }, 333)
+})
+
+function recalc() { 
+  var a = +$("#50th").val();
+  var b = +$("#75th").val();
+
+  var span = b - a
+
+  var c = a + 1.6 * span
+  var d = a + 2.0 * span
+  console.log("Calculating")
+
+  $("#90th").val(c);
+  $("#100th").val(d);
+} 
+</script>
+
+
+</body>
+</html>	
