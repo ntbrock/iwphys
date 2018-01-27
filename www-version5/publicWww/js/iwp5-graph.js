@@ -18,18 +18,38 @@ var graphYScale = d3.scaleLinear()
     .domain([-10, 10])
     .range([100, -100]);
 
-var path = d3.path();
+var path1 = d3.path();
+var path2 = d3.path();
+var path3 = d3.path();
 
 var visualPath = null;
+
+var xGrid = d3.axisTop(graphXScale).ticks(10).tickSize(1000);
+var yGrid = d3.axisRight(graphYScale).ticks(10).tickSize(1000);
+var xAxis = d3.axisBottom(graphXScale).ticks(10);
+var yAxis = d3.axisLeft(graphYScale).ticks(10);
 
 function graphInit() {
 
   var svg = d3.select('#graph');
-  console.log("iwp5-graph.js:15 found svg: " , svg)
-	visualPath = svg.append('path')
-								   .classed("iwp-graph-line", true)
-									 .attr("d", path )
-	path.moveTo(0, 0)
+  console.log("iwp5-graph.js:15 found svg: " , svg);
+	xGrid(svg.append("g").classed("grid", true).attr("transform", "translate(0, 100)"));
+	yGrid(svg.append("g").classed("grid", true).attr("transform", "translate(-100, 0)"));
+	xAxis(svg.append("g").classed("iwp-graph-x-axis",true));
+	yAxis(svg.append("g").classed("iwp-graph-y-axis",true));
+	visualPath1 = svg.append('path')
+								   .classed("iwp-graph-line-red", true)
+									 .attr("d", path1 )
+	path1.moveTo(0, 0)
+	visualPath2 = svg.append('path')
+								   .classed("iwp-graph-line-green", true)
+									 .attr("d", path2 )
+	path2.moveTo(0, 0)
+	visualPath3 = svg.append('path')
+								   .classed("iwp-graph-line-blue", true)
+									 .attr("d", path3 )
+	path3.moveTo(0, 0)
+
 }
 
 /**
@@ -45,12 +65,17 @@ function graphStep(step, vars) {
 
 
 	var svg = d3.select('#graph');
-	console.log("iwp5-graph:48> currentT, currentY: ", vars.t, vars.y)
-	console.log("iwp5-graph:49> lastT, lastY: ", lastStep.t, lastStep.y)
-	path.moveTo(graphXScale(lastStep.t), graphYScale(lastStep.y))
-	path.lineTo(graphXScale(vars.t), graphYScale(vars.y))
-	//path.moveTo(graphXScale(vars.t), graphYScale(vars.y))
-	visualPath.attr("d", path)
+	console.log("iwp5-graph:48> currentStep: ", vars)
+	console.log("iwp5-graph:49> lastStep: ", lastStep)
+	path1.moveTo(graphXScale(lastStep.t), graphYScale(lastStep.object.ypos))
+	path1.lineTo(graphXScale(vars.t), graphYScale(vars.object.ypos))
+	visualPath1.attr("d", path1)
+	path2.moveTo(graphXScale(lastStep.t), graphYScale(lastStep.object.yvel))
+	path2.lineTo(graphXScale(vars.t), graphYScale(vars.object.yvel))
+	visualPath2.attr("d", path2)
+	path3.moveTo(graphXScale(lastStep.t), graphYScale(lastStep.object.yaccel))
+	path3.lineTo(graphXScale(vars.t), graphYScale(vars.object.yaccel))
+	visualPath3.attr("d", path3)
    /*svg.append('circle')
 //      .classed("iwp-axis-line", true)
       .attr("cx", graphXScale(vars.t))

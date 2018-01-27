@@ -1,4 +1,4 @@
-/** 
+/**
  * Interactive Web Physics 5 - Javascript SVG Animation Implementation
  * Ryan Steed, Taylor Brockman 2016 - Version 5.0 Initial Port to HTML + SVG
  * Matthew Mims, Taylor Brockman 2018  - Version 5.1 Added Graphing and D3
@@ -33,11 +33,11 @@ var varsAtStep = [];
 var currentStep = 0;
 var changeStep = 0; 	// -1 = backwards, 0 = stopped, 1 = forwards.
 
-function masterResetSteps() { 
+function masterResetSteps() {
 	currentStep = 0;
 	changeStep = 0;
 	varsAtStep = [];
-  
+
 
   // We also need to clear out previous parameteric displacements used for instant velecioty calculations.
   $.each( solids, function( index, solid ) {
@@ -76,13 +76,13 @@ function setStepDirection(newDirection) {
 	changeStep = newDirection;
 }
 
-function stepForwardAndPause() { 
+function stepForwardAndPause() {
 	setStepDirection(1);
 	handleStep();
 	setStepDirection(0);
 }
 
-function stepBackwardAndPause() { 
+function stepBackwardAndPause() {
 	setStepDirection(-1);
 	handleStep();
 	setStepDirection(0);
@@ -93,21 +93,21 @@ function stepBackwardAndPause() {
 
 
 /**
- * Major function - called every time the animation time changes 
+ * Major function - called every time the animation time changes
  */
-function handleStep() { 
+function handleStep() {
 
 	//console.log("handleStep:87> current: " , currentStep, "  change: ", changeStep );
 	// apply the time change.
 	var newStep = currentStep + changeStep;
 
 	// handle time horizons
-	if ( newStep < 0 ) { 
+	if ( newStep < 0 ) {
 		changeStep = 0;
 		newStep = 0;
-	} 
+	}
 	// TODO - end of time.
-  /*time = { 
+  /*time = {
     start : parseFloat(inTime.start),
     stop : parseFloat(inTime.stop),
     change : parseFloat(inTime.change),
@@ -115,28 +115,27 @@ function handleStep() {
    };*/
   //console.log("stop step", queryTimeStopInputDouble() / queryTimeStepInputDouble())
   //console.log('current step', newStep)
-  if (newStep == ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {   
+  if (newStep == ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
     console.log("stop time reached")
     handleStopClick()
   }
 	//console.log("handleStep:61> newStep: " + newStep)
 
-	if ( newStep != currentStep ) { 
+	if ( newStep != currentStep ) {
 
     // Back button poerformance - Let's look at the historical array of variables, if we have it, reload
     // to avoid doing a recalcaultion
-    if ( varsAtStep[newStep] != undefined ) { 
+    if ( varsAtStep[newStep] != undefined ) {
       //console.log("[iwp5.js:118] Step " + newStep + " already exist, reloading for history.")
       repaintStep(newStep);
 
-    } else { 
+    } else {
   		// UI rendering is handled by the calculate as a side effect
 	 	  var vars = calculateVarsAtStep(newStep);
   		archiveVarsAtStep( newStep, vars );
 
       // iwp5.1 - Adding Hook into the graph capabilties
       graphStep(newStep, vars);
-
     }
 
 	}
@@ -151,9 +150,9 @@ function archiveVarsAtStep( step, vars ) {
   varsAtStep[step] = {};
 	$.extend(varsAtStep[step], vars)
 }
-  
 
-function calculateOutputAtStep(output, step, vars, verbose) { 
+
+function calculateOutputAtStep(output, step, vars, verbose) {
     var newValue = evaluateCalculator( output.name+".out", output.calculator, vars, verbose ).value;
     vars[output.name] = newValue;
     //console.log("newValue for",output.name,evaluateCalculator( output.name+".out", output.calculator, vars, verbose ))
@@ -163,21 +162,21 @@ function calculateOutputAtStep(output, step, vars, verbose) {
 }
 
 
-function calculateSolidAtStep(solid, step, vars, verbose) { 
+function calculateSolidAtStep(solid, step, vars, verbose) {
 
     // TODO - Derive Velocity and Acceleration!
- 
 
-    if ( solid.name == "P" ) { 
+
+    if ( solid.name == "P" ) {
       var breaker = 1
-    } 
+    }
 
     var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
     var x = xComplex.value
 
  //----------------------------------------
  /// 2016-Dec-07 attempt to alleivate circular dependency.
- var calcX = { 
+ var calcX = {
       x: x,
       xdisp: x,
       xpos: x,
@@ -186,10 +185,10 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     }
 
   // Hande Complex return types from Euler Calculator
-    if ( xComplex.velocity != undefined ) { 
+    if ( xComplex.velocity != undefined ) {
       calcX.xvel = xComplex.velocity
     }
-    if ( xComplex.acceleration != undefined ) { 
+    if ( xComplex.acceleration != undefined ) {
       calcX.xaccel = xComplex.acceleration
     }
 
@@ -203,7 +202,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
 
  // Handle Complex return types from Euler Calculator
-     var calcY = { 
+     var calcY = {
       y: y,
       ydisp: y,
       ypos: y,
@@ -212,20 +211,20 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     }
 
 
-    if ( yComplex.velocity != undefined ) { 
+    if ( yComplex.velocity != undefined ) {
       calcY.yvel = yComplex.velocity
     }
-    if ( yComplex.acceleration != undefined ) { 
+    if ( yComplex.acceleration != undefined ) {
       calcY.yaccel = yComplex.acceleration
     }
 
-  if ( xComplex.acceleration == null ) { 
+  if ( xComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
      xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
      x = xComplex.value
   }
-  if ( yComplex.acceleration == null ) { 
+  if ( yComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
      yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose )
@@ -233,7 +232,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
   }
 
   //-------------------------------------
-    var calc = { 
+    var calc = {
       x: x,
       xdisp: x,
       xpos: x,
@@ -259,34 +258,34 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       calc.points.push(point);
       });
       console.log("just calced!",calc)
-      
+
         //i.xpath = evaluateCalculator(solid.name+".x"+toString(counter), i.xpath.calculator, vars).value
         //i.ypath = evaluateCalculator(solid.name+".x"+toString(counter), i.ypath.calculator, vars).value
-        //console.log("i after",i)      
+        //console.log("i after",i)
     }
     if ( solid.shape.angle ) {
       console.log("solid.shape",solid.shape)
-      calc["angle"] = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, vars).value  
+      calc["angle"] = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, vars).value
     }
 
     // For objects with a value beyond x , y, w , h
-    // BOOK 2 
-    if ( solid.value != null && solid.value.calculator != null ) { 
-      calc.objectValue = evaluateCalculator( solid.name+".objectValue", solid.value.calculator, vars ).value   
+    // BOOK 2
+    if ( solid.value != null && solid.value.calculator != null ) {
+      calc.objectValue = evaluateCalculator( solid.name+".objectValue", solid.value.calculator, vars ).value
     }
-     
+
 
     // Hande Complex return types from Euler Calculator
-    if ( xComplex.velocity != undefined ) { 
+    if ( xComplex.velocity != undefined ) {
       calc.xvel = xComplex.velocity
     }
-    if ( xComplex.acceleration != undefined ) { 
+    if ( xComplex.acceleration != undefined ) {
       calc.xaccel = xComplex.acceleration
     }
-    if ( yComplex.velocity != undefined ) { 
+    if ( yComplex.velocity != undefined ) {
       calc.yvel = yComplex.velocity
     }
-    if ( yComplex.acceleration != undefined ) { 
+    if ( yComplex.acceleration != undefined ) {
       calc.yaccel = yComplex.acceleration
     }
     vars[solid.name] = calc
@@ -306,16 +305,16 @@ var CONFIG_clone_step_from_previous = false;
 //  updateUserFormOutputDouble(output, newValue);
 //  updateSolidSvgPathAndShape(solid, calc)
 
-/** 
+/**
  * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
  */
-function repaintStep(step) { 
+function repaintStep(step) {
   var vars = varsAtStep[step];
-  if ( vars == undefined ) { 
+  if ( vars == undefined ) {
     throw "No previous calculations available at step: " + step;
-  } else { 
+  } else {
 
-    updateTimeDisplay(vars.t);  
+    updateTimeDisplay(vars.t);
 
    $.each( outputs, function( index, output ) {
       updateUserFormOutputDouble(output, vars[output.name]);
@@ -333,25 +332,25 @@ function repaintStep(step) {
 
 var CONFIG_throw_solid_calculation_exceptions = false;
 
-function calculateVarsAtStep(step) { 
+function calculateVarsAtStep(step) {
 
   // vars should be a map of string to double, including the mathematical / physical constants.
   var vars = { step: step}
   $.extend(vars, varsConstants);
 
   // EXPERIMENTAL: Pull the previous variables in from last step?
-  if ( CONFIG_clone_step_from_previous ) { 
-  try { 
+  if ( CONFIG_clone_step_from_previous ) {
+  try {
     $.extend(vars, varsAtStep[step-1])
     //console.log("calculateVarsATStep:195> Cloned vars from past Step-1: " + (step-1) + " => ", JSON.stringify(varsAtStep) )
-  } catch(err) { 
+  } catch(err) {
     console.log("calculateVarsAtStep:198> Exception when mirring past vars into current vars:", err)
   }
   }
 	// Eveything begins with time, populate t.
 	vars.t = queryTimeStartInputDouble() + step * time.change;
-  vars.tDelta = time.change 
-  vars.delta_t = vars.tDelta 
+  vars.tDelta = time.change
+  vars.delta_t = vars.tDelta
   vars.tDel = vars.tDelta
   vars.deltaTime = time.change
 	updateTimeDisplay(vars.t);
@@ -376,7 +375,7 @@ function calculateVarsAtStep(step) {
   for each output perform the calculator
 */
   $.each( outputs, function( index, output ) {
-    try { 
+    try {
       var newValue = calculateOutputAtStep(output, step, vars, false );
       //console.log("newValue",newValue)
       if ( isNaN(newValue) ) {
@@ -387,27 +386,27 @@ function calculateVarsAtStep(step) {
       }
       vars[output.name] = newValue;
       //console.log("added new variable:",output.name,vars[output.name])
-    } catch ( err ) { 
+    } catch ( err ) {
       //console.log("Failed Output:", output)
       failedOutputs.push(output);
       //console.log("FailedOutputs",failedOutputs)
-    }   
+    }
   });
 
 	/* for each solid
-		sequence of the solids does matter in the problem file. 
+		sequence of the solids does matter in the problem file.
 	*/
 	$.each( solids, function( index, solid ) {
 		/*
-		for x, y, h, w , perform the calculator 
+		for x, y, h, w , perform the calculator
 		*/
 
-    try { 
+    try {
      calculateSolidAtStep(solid, step, vars, true );
         //  -> update the DOM with theose new results
-    } catch ( err ) { 
+    } catch ( err ) {
         //console.log(":231 caught a faailed solid exception: ", err);
-          if ( CONFIG_throw_solid_calculation_exceptions ) { 
+          if ( CONFIG_throw_solid_calculation_exceptions ) {
          throw err;
          }
 
@@ -416,16 +415,16 @@ function calculateVarsAtStep(step) {
 
     $.each( objects, function( index, object )  {
     /*
-    for x, y, h, w , perform the calculator 
+    for x, y, h, w , perform the calculator
     */
 
-    try { 
+    try {
      calculateSolidAtStep(object, step, vars, true );
         //  -> update the DOM with theose new results
-  
-    } catch ( err ) { 
+
+    } catch ( err ) {
         //console.log(":231 caught a faailed solid exception: ", err);
-          if ( CONFIG_throw_solid_calculation_exceptions ) { 
+          if ( CONFIG_throw_solid_calculation_exceptions ) {
          throw err;
          }
       }
@@ -439,7 +438,7 @@ function calculateVarsAtStep(step) {
   var fatalSolids = failedSolids;
   var fatalReplayAttemptsRemaining = 3;
 
-  while ( fatalReplayAttemptsRemaining > 0 ) { 
+  while ( fatalReplayAttemptsRemaining > 0 ) {
     fatalReplayAttemptsRemaining -= 1;
     var replayOutputs = fatalOutputs;
     var replaySolids = fatalSolids;
@@ -450,19 +449,19 @@ function calculateVarsAtStep(step) {
     // REPLAY FAILURES within a resonable maximum number of attempts.
      $.each( replayOutputs, function( index, output ) {
       //console.log("Trying again",output)
-      try { 
+      try {
         var newValue = calculateOutputAtStep(output, step, vars, false );
         vars[output.name] = newValue
-      } catch ( err ) { 
+      } catch ( err ) {
         fatalOutputs.push(output);
-      }   
+      }
     });
-    $.each( replaySolids, function( index, solid ) {  
-      try { 
-       calculateSolidAtStep(solid, step, vars, true );  
-      } catch ( err ) { 
+    $.each( replaySolids, function( index, solid ) {
+      try {
+       calculateSolidAtStep(solid, step, vars, true );
+      } catch ( err ) {
         console.log(err)
-       fatalSolids.push(solid);  
+       fatalSolids.push(solid);
       }
     if (fatalReplayAttemptsRemaining == 1) {
       CONFIG_throw_acceleration_calculation_exceptions = false;
@@ -471,10 +470,10 @@ function calculateVarsAtStep(step) {
 
   }
 
-  if ( fatalOutputs.length > 0 ) { 
+  if ( fatalOutputs.length > 0 ) {
     console.log(":238 Giving Up on Recursive Circular Calc - FATALOutputs: ", fatalOutputs);
   }
-  if ( fatalSolids.length > 0 ) { 
+  if ( fatalSolids.length > 0 ) {
     console.log(":239 Giving Up on Recursive Circular Calc - FATALSolids: ", fatalSolids);
   }
 
@@ -492,9 +491,9 @@ function calculateVarsAtStep(step) {
 // Parsing Section
 
 // "time": { "start": "0.0", "stop": "5.0", "change": "0.02",  "fps": "25.0" },
-function setTime(inTime) { 
+function setTime(inTime) {
    //console.log("time :", inTime);
-   time = { 
+   time = {
    	start : parseFloat(inTime.start),
    	stop : parseFloat(inTime.stop),
    	change : parseFloat(inTime.change),
@@ -502,14 +501,14 @@ function setTime(inTime) {
    };
 }
 
-// "description": { "text": "A ball is attached to a horizontal spring (not shown) which causes the ball to oscillate about the origin. Run the animation until it stops. Click on Show graph. \n\nWhich graph represents position vs. time?  How do you know?\nWhich graph represents velocity vs. time?  How do you know?\nWhich graph represents acceleration vs. time?  How do you know?\n\nWhat would a graph of net force on the ball vs. time look like?  Why?" 
-function setDescription(inDescription) { 
+// "description": { "text": "A ball is attached to a horizontal spring (not shown) which causes the ball to oscillate about the origin. Run the animation until it stops. Click on Show graph. \n\nWhich graph represents position vs. time?  How do you know?\nWhich graph represents velocity vs. time?  How do you know?\nWhich graph represents acceleration vs. time?  How do you know?\n\nWhat would a graph of net force on the ball vs. time look like?  Why?"
+function setDescription(inDescription) {
   //console.log("description :", inDescription);
    description = inDescription;
 }
 
 // "window": { "xmin": "-10.0", "xmax": "10.0", "ymin": "-10.0", "ymax": "10.0", "xgrid": "2.0", "ygrid": "1.0", "xunit": "meters", "yunit": "meters"
-function setWindow(inWindow) { 
+function setWindow(inWindow) {
   //console.log("window :", inWindow);
   iwindow = inWindow;
 }
@@ -521,22 +520,22 @@ function setGraphWindow(inGraphWindow) {
   graphWindow = inGraphWindow;
 }
 
-function addInput(input) { 
+function addInput(input) {
   //console.log("addInput: ", input );
   inputs.push( input );
-  // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"} 
+  // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"}
   // 07 Oct 2016 Honoring hidden flag
   var style = "";
-  if ( input.hidden == "1" ) { 
+  if ( input.hidden == "1" ) {
     style = "display:none;"
   }
   htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
 }
 
-function addOutput(output) { 
+function addOutput(output) {
   //console.log("addOutput ", output );
 
-  var compiledOutput = { 
+  var compiledOutput = {
   	name: output.name,
   	text: output.text,
   	units: output.units,
@@ -547,28 +546,28 @@ function addOutput(output) {
   outputs.push( compiledOutput );
   // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { "@attributes": { "type": "parametric" }, "value": "Red.xaccel" } }
   var style = ""
-  if ( output.hidden == "1" ) { 
+  if ( output.hidden == "1" ) {
     style = "display:none;'"
   }
   htmlOutputs.push( "<tr style='" + style +"' id='output_" + output.name + "' class='iwp-output-row'><td>"+ output.text +"</td><td><input id='" + output.name + "' type='text' value='-999'> " + output.units + "</td></tr>");
 }
 
 /**
- * 2016-Nov-09 - Reset the instantanous velcity calculations on reset 
+ * 2016-Nov-09 - Reset the instantanous velcity calculations on reset
 */
-function resetSolidCalculators(solid) { 
-  if ( solid.xpath && solid.xpath.calculator ) { 
+function resetSolidCalculators(solid) {
+  if ( solid.xpath && solid.xpath.calculator ) {
       solid.xpath.calculator.latestValue = undefined;
   }
-  if ( solid.ypath && solid.ypath.calculator ) { 
+  if ( solid.ypath && solid.ypath.calculator ) {
       solid.ypath.calculator.latestValue = undefined;
   }
   /** We are not using velocity on height + width calcs */
   /*
-  if ( solid.xpath && solid.xpath.calculator ) { 
+  if ( solid.xpath && solid.xpath.calculator ) {
       solid.width.calculator.latestValue = null;
   }
-  if ( solid.ypath && solid.ypath.calculator ) { 
+  if ( solid.ypath && solid.ypath.calculator ) {
       solid.height.calculator.latestValue = null;
   }
   */
@@ -576,15 +575,15 @@ function resetSolidCalculators(solid) {
 }
 
 
-function addSolid(solid) { 
+function addSolid(solid) {
   //console.log("solid: ", solid );
   // console.log("addSolid width: ", solid.shape.width.calculator.value);
 
   // In Memory - PreParse Equations with math.js
 
-  var compiledSolid = { 
+  var compiledSolid = {
   	name: solid.name,
-  	color: { 
+  	color: {
   		red: parseFloat(solid.color.red),
 		green: parseFloat(solid.color.green),
   		blue: parseFloat(solid.color.blue),
@@ -594,26 +593,26 @@ function addSolid(solid) {
   		drawTrails: solid.shape["@attributes"].drawTrails,
   		drawVectors: solid.shape["@attributes"].drawVectors,
   		graphOptions: solid.graphOptions,
-  		width: { 
+  		width: {
   			calculator: compileCalculator(solid.shape.width.calculator)
   		},
-  		height: { 
+  		height: {
   			calculator: compileCalculator(solid.shape.height.calculator)
   		},
   	},
-  	xpath: { 
+  	xpath: {
   		calculator : compileCalculator(solid.xpath.calculator)
   	},
-	ypath: { 
+	ypath: {
   		calculator : compileCalculator(solid.ypath.calculator)
   	}
   };
 
   // Ifthe problem iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
-  // hard to do as part of the initialization because it is a dynamic list. 
-  // Add points here..? 
+  // hard to do as part of the initialization because it is a dynamic list.
+  // Add points here..?
   if ( compiledSolid.shape.type == "polygon" ) {
-    //console.log(solid.shape.points.point) 
+    //console.log(solid.shape.points.point)
     //$.each( problem.objects.input, function( index, input ) {
     compiledSolid["points"] = []
     $.each( solid.shape.points.point, function( index, i) {
@@ -637,7 +636,7 @@ function addSolid(solid) {
   solids.push(compiledSolid);
 
 
-  //HTML 
+  //HTML
   if (compiledSolid.shape.type == "circle") {
     //console.log("it's a circle");
     svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(solid.shape.width.calculator.value)+ " ry=" +yHeight(solid.shape.height.calculator.value)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
@@ -651,15 +650,15 @@ function addSolid(solid) {
     svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
   else if (compiledSolid.shape.type == "vector") {
-    svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");  
+    svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
   }
   else if (compiledSolid.shape.type == "polygon") {
     //console.log("it's a polygon:", solid.name);
-    svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");  
+    svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");
   }
   else if (compiledSolid.shape.type == "Bitmap") {
     //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+compiledSolid.fileUri+"'><title>"+solid.name+"</title></image>");
-    svgSolids.push("Bitmap "+compiledSolid.fileUri);    
+    svgSolids.push("Bitmap "+compiledSolid.fileUri);
   }
   else {
     return;
@@ -678,7 +677,7 @@ function addObject(object) {
     name: object.name,
     shape: {
       type: object["@attributes"].class,
-      height: 1, 
+      height: 1,
       width: 1,
     },
     text: object.text,
@@ -688,10 +687,10 @@ function addObject(object) {
       calculator: compileCalculator(object.value.calculator)
     },
     fontSize: object.fontSize,
-    xpath: { 
+    xpath: {
       calculator : compileCalculator(object.xpath.calculator)
     },
-    ypath: { 
+    ypath: {
       calculator : compileCalculator(object.ypath.calculator)
     }
   }
@@ -705,9 +704,9 @@ function addObject(object) {
 
 };
 //-----------------------------------------------------------------------
-// Calculation Section 
+// Calculation Section
 
-function compileCalculator(iwpCalculator) { 
+function compileCalculator(iwpCalculator) {
 
 	var incomingType = iwpCalculator["@attributes"].type
 	if ( incomingType == "parametric" ) {
@@ -720,7 +719,7 @@ function compileCalculator(iwpCalculator) {
 
     var e = migrateLegacyEquation(iwpCalculator.value);
 
-		var c = { 
+		var c = {
 			type: "mathjs",
 			compiled: math.compile( e ),
 			equation: e
@@ -729,18 +728,18 @@ function compileCalculator(iwpCalculator) {
     return c;
 
 	} else if ( incomingType == "euler") {
-    
+
 
     var a = migrateLegacyEquation(iwpCalculator.acceleration);
     var v = migrateLegacyEquation(iwpCalculator.velocity);
     var d = migrateLegacyEquation(iwpCalculator.displacement);
 
-    var c =  { 
+    var c =  {
       type: "euler-mathjs",
       initialDisplacementCompiled: math.compile( d ),
       initialVelocityCompiled: math.compile( v ),
       accelerationCompiled: math.compile( a ),
-      equation: { 
+      equation: {
         acceleration : a,
         velocity : v,
         displacement : d
@@ -753,11 +752,11 @@ function compileCalculator(iwpCalculator) {
           <velocity>initxvel</velocity>
           <acceleration>-5*t</acceleration>
         </calculator>
-      
+
     */
 
   }
-  else { 
+  else {
 		console.log("DEBUG ERROR: Only parametric and Euler supported in the August 2016 version, unable to handle: ", incomingType);
 		return {type:"unsupported", "incomingType": incomingType, "iwpCalculator": iwpCalculator };
 	}
@@ -772,14 +771,14 @@ function migrateLegacyEquation(toMigrate) {
  * Remind Taylor about this if you have questions.
  */
 
-function evaluateCompiledMath( compiled, vars ) { 
+function evaluateCompiledMath( compiled, vars ) {
 
   var newValue = compiled.eval(vars)
   if ( $.isNumeric(newValue)) {
     return newValue;
-  } else if ( newValue["value"] != undefined ) { 
+  } else if ( newValue["value"] != undefined ) {
      return newValue.value;
-  } else { 
+  } else {
      throw("Unable to process compiled, not numeric, doesn't have value property: ", newValue)
   }
 }
@@ -789,7 +788,7 @@ var CONFIG_throw_acceleration_calculation_exceptions = true;
 
 function evaluateCalculator( resultVariable, calculator, vars, verbose ) {
 
-  if ( calculator == null ) { 
+  if ( calculator == null ) {
     //console.log("iwp5:688: Warning Null Clculaor for: ", resultVariable)
 
     return { value: 0 }
@@ -798,7 +797,7 @@ function evaluateCalculator( resultVariable, calculator, vars, verbose ) {
 		/*
 			{type : mathjs, compiled: Object}
 		*/
-		try { 
+		try {
 // Next Step: 2016Sep23 - Figure out why scientific notation is causing the mathjs eqn parsing exception:
 /*
 evaluateCalculator:364> Unable to evaluate calculator:  Error: Undefined symbol k(…)
@@ -816,9 +815,9 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
         throw "compiled vars are not finite"
       }
 
-      if ( calculator.latestValue == undefined ) { 
+      if ( calculator.latestValue == undefined ) {
         calculator.previousValue = result;
-      } else { 
+      } else {
         calculator.previousValue = calculator.latestValue;
       }
       calculator.latestValue = result;
@@ -828,9 +827,9 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       //console.log("evaluateCalculator:509> " + resultVariable + "> Calculated Velicoty: "  + calculator.velocity + " (previous: " + calculator.previousValue + " latest: "+ calculator.latestValue + ")")
 
       // Instanteous Acceleration Calcualtor
-      if ( calculator.latestVelocity == undefined ) { 
+      if ( calculator.latestVelocity == undefined ) {
         calculator.previousVelocity = calculator.velocity
-      } else { 
+      } else {
         calculator.previousVelocity = calculator.latestVelocity;
       }
 
@@ -839,25 +838,25 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       if (resultVariable.slice(resultVariable.length-4) == ".out") {
         //console.log("it's an output")
       }
-      return { value: result, 
+      return { value: result,
         displacement: result,
-        velocity: calculator.velocity, 
+        velocity: calculator.velocity,
         acceleration: calculator.acceleration };
-		} 
-    catch ( err ) { 
-      if ( verbose ) { 
+		}
+    catch ( err ) {
+      if ( verbose ) {
 			console.log("evaluateCalculator:450> " + resultVariable + "> Unable to evaluate calculator: ", err );
       console.log("evaluateCalculator:450> " + resultVariable + "> Equation: ", calculator.equation );
       console.log("evaluateCalculator:450> " + resultVariable + "> Vars: ", vars);
       }
 			// return { value: undefined };  // was -1
       throw err;
-		} 
+		}
 	} else if ( calculator.type == "euler-mathjs" ) {
     try {
-      
-     
-      
+
+
+
       // 2016-Sep-23 For Euler V5, store the cache of current displacement and velocity IN calculator.
       // An enhancement would be to expose these values out as complex return ttypes of this function,
       // so that they could he historically archived in the variable step array.
@@ -867,26 +866,26 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
       var dt = vars["delta_t"]
 
-      if ( calculator["initialDisplacement"] == undefined ) { 
+      if ( calculator["initialDisplacement"] == undefined ) {
         calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
         calculator.currentDisplacement = calculator.initialDisplacement
         //console.log("iwp5:380> calculating initial displacement to: ", calculator.initialDisplacement )
       }
 
-      if ( calculator["initialVelocity"] == undefined ) { 
+      if ( calculator["initialVelocity"] == undefined ) {
         calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
         calculator.currentVelocity = calculator.initialVelocity * dt;
         //console.log("iwp5:405> calculating initial velocity to: ", calculator.initialVelocity )
       }
 
 
-      if ( verbose ) { 
+      if ( verbose ) {
         console.log("iwp5:661>", resultVariable, "BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", JSON.stringify(vars) )
 
           }
 
       var acceleration = null;
-      try { 
+      try {
         // then calculate the acceleratiion
        acceleration = calculator.accelerationCompiled.eval(vars) * dt;
        if (!isFinite(acceleration)) {
@@ -898,52 +897,52 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
        }
       } catch ( err ) {
         console.log("evaluateCalculator:881> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
-        if ( CONFIG_throw_acceleration_calculation_exceptions ) { 
+        if ( CONFIG_throw_acceleration_calculation_exceptions ) {
          throw err;
          }
       }
 
-      if ( currentStep == 0 ) { 
+      if ( currentStep == 0 ) {
           calculator.currentVelocity = calculator.initialVelocity;
-          if ( acceleration != null ) { 
+          if ( acceleration != null ) {
             calculator.currentVelocity += acceleration * 0.5;
           }
 
           calculator.currentDisplacement = calculator.initialDisplacement; // no t adjustment
 
-      } else if ( changeStep > 0 ) { 
-        if ( acceleration != null ) { 
+      } else if ( changeStep > 0 ) {
+        if ( acceleration != null ) {
           // Positive direction calcuation
           calculator.currentVelocity += acceleration;
           calculator.currentDisplacement += calculator.currentVelocity * dt;
             }
 
-      } else if ( changeStep < 0 ) { 
-          if ( acceleration != null ) { 
+      } else if ( changeStep < 0 ) {
+          if ( acceleration != null ) {
           calculator.currentVelocity -= acceleration;
           calculator.currentDisplacement -= calculator.currentVelocity * dt;
         }
-      } else { 
+      } else {
         // No step direction
       }
 
       //Return only value if just an output?
-      
+
       return { value: calculator.currentDisplacement,
         displacement: calculator.currentDisplacement,
         velocity: calculator.currentVelocity,
         acceleration: acceleration }
 
-      // return displacement.value; 
+      // return displacement.value;
     } catch ( err ) {
-      if ( verbose ) { 
+      if ( verbose ) {
       console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, dt);
     }
       throw err;
       //return { value: undefined }; // was -1
     }
   }
-  else { 
+  else {
     if ( verbose ) {
 		console.log("DEVELOPER: Unsupported calculator type : ", calculator);
 		throw err;
@@ -957,7 +956,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
 
 
-function parseProblemToMemory( problem ) { 
+function parseProblemToMemory( problem ) {
 
   $("#authorUsername").html( problem.author.username );
 
@@ -975,7 +974,7 @@ function parseProblemToMemory( problem ) {
 
 
   // Inputs - These could be an array OR a single item.
-  if ( $.type ( problem.objects.input ) == 'array' ) { 
+  if ( $.type ( problem.objects.input ) == 'array' ) {
     $.each( problem.objects.input, function( index, input ) {
       addInput(input);
     });
@@ -983,47 +982,47 @@ function parseProblemToMemory( problem ) {
     addInput(problem.objects.input);
   } else if ($.type ( problem.objects.input ) == 'object') {
     addInput(problem.objects.input);
-  
-  } 
+
+  }
 
 
-  else { 
+  else {
     console.log("iwp5:954> Unable to handle input: ", $.type ( problem.objects.input ))
   }
 
   // Output - These could be an array OR a single item.
-  if ( $.type ( problem.objects.output ) == 'array' ) { 
+  if ( $.type ( problem.objects.output ) == 'array' ) {
     $.each( problem.objects.output, function( index, output ) {
       addOutput(output);
     });
-  } else  if ( $.type ( problem.objects.output ) == 'item'){ 
+  } else  if ( $.type ( problem.objects.output ) == 'item'){
     addOutput(problem.objects.output);
   } else if ($.type ( problem.objects.output ) == 'object') {
     addInput(problem.objects.output);
-  
+
   } else {
     null;
   }
 
   // Solids - These could be an array OR a single item.
-  if ( $.type ( problem.objects.solid ) == 'array' ) { 
+  if ( $.type ( problem.objects.solid ) == 'array' ) {
     $.each( problem.objects.solid, function( index, solid ) {
     addSolid(solid);
     });
-  } else if ( problem.objects.solid != null ) { 
+  } else if ( problem.objects.solid != null ) {
     // Workaround becaue the php xml to json for single solids, would an object.
       addSolid(problem.objects.solid);
-    
+
   }
   // Objects
   if ( $.type (problem.objects.object) == 'array' ) {
     $.each( problem.objects.object, function( index, object) {
       addObject(object);
     });
-  } else if ( problem.objects.object != null ) { 
- 
+  } else if ( problem.objects.object != null ) {
+
     addObject(problem.objects.object);
-  
+
   }
 }
 
@@ -1049,14 +1048,14 @@ function yCanvas(y) {
 
 function xCanvas(x) {
   var xDomain = iwindow.xmax - iwindow.xmin;
-  var sum = - iwindow.xmin / xDomain; 
+  var sum = - iwindow.xmin / xDomain;
   var xProportion = x / xDomain;
   var xCorrected = xProportion + sum;
   var cDomain = canvasBox.maxX - canvasBox.minX;
   var cProportion = xCorrected * cDomain;
   return cProportion;
-/* the proportional entry point in from window.xmin -> window.xmax needs to be interpolated into the 
-// propotional exit point between viewbox.minX -> viewbox.maxX 
+/* the proportional entry point in from window.xmin -> window.xmax needs to be interpolated into the
+// propotional exit point between viewbox.minX -> viewbox.maxX
 */
 };
 function xCanvasGridlines(x) {
@@ -1075,21 +1074,21 @@ function yCanvasGridlines(y) {
   var cProportion = yCorrected * cDomain;
   return cProportion;
 };
-/* the proportional entry point in from window.xmin -> window.xmax needs to be interpolated into the 
-// propotional exit point between viewbox.minX -> viewbox.maxX 
+/* the proportional entry point in from window.xmin -> window.xmax needs to be interpolated into the
+// propotional exit point between viewbox.minX -> viewbox.maxX
 */
 
 function xWidth(size) {
   var xDomain = iwindow.xmax - iwindow.xmin;
   var cDomain = canvasBox.maxX - canvasBox.minX;
-  var proportion = cDomain/xDomain; 
+  var proportion = cDomain/xDomain;
   return size*proportion;
 };
 
 function yHeight(size) {
   var yDomain = iwindow.ymax - iwindow.ymin;
   var cDomain = canvasBox.maxY - canvasBox.minY;
-  var proportion = cDomain/yDomain; 
+  var proportion = cDomain/yDomain;
   return size*proportion;
 };
 
@@ -1097,7 +1096,7 @@ function yHeight(size) {
 //--------------------------------------------------------------------------------
 // DOM Manipulation
 
-function renderProblemFromMemory() { 
+function renderProblemFromMemory() {
   // Render from memory into page
   $("#itime").html( time.start.toString() );
   $("#itime_change").val(time.change.toString());
@@ -1150,10 +1149,10 @@ function renderProblemFromMemory() {
     $("#inputTable").css('display','none');
     $("#it").css('display','none');
   }
-  
+
   /* Debugging 07 Oct 2016 Ryan Steed
   //$("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>"+htmlOutputs);
-  */ 
+  */
   //Moved to addSolidsToCanvas, 8 Aug 2016
   //$("#solids").html( solids.join(" ") );
 
@@ -1225,12 +1224,12 @@ function addSolidsToCanvas(solids) {
   $("#canvasDiv").html($("#canvasDiv").html());
 }
 
-function renderCanvasFromMemory() { 
+function renderCanvasFromMemory() {
   var c = $("#canvas");
   // Parse viewbox attributes from canvas to override defaults.
   var canvasBoxAttrs = c[0].getAttribute("viewBox").split(" ");
   canvasBox= { minX: parseFloat(canvasBoxAttrs[0]), minY: parseFloat(canvasBoxAttrs[1]), maxX: parseFloat(canvasBoxAttrs[2]), maxY: parseFloat(canvasBoxAttrs[3]) };
-  // To Render the window is that we start at the Xmin, and draw full vertial lines, 
+  // To Render the window is that we start at the Xmin, and draw full vertial lines,
   // increment by xgrid,
   // stopping at xmax
   // Add X gridlines -- TODO CONVERT TO A FOR LOOP
@@ -1244,7 +1243,7 @@ function renderCanvasFromMemory() {
   c.append( "<path d='M " + xCanvas(6) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
   c.append( "<path d='M " + xCanvas(8) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
   */
-  
+
   var xGridlines = (iwindow.xmax - iwindow.xmin)/iwindow.xgrid;
   for ( var interval = 1; interval < xGridlines; interval ++ ) {
     var xGridPosition = (interval - xGridlines/2)*iwindow.xgrid;
@@ -1288,26 +1287,26 @@ function queryUserFormInputDouble(input) {
 	var doubleValue = parseFloat(readValue);
 	//console.log("queryUserDefinedInput: for input: ", input, " readValue: ", readValue,  "  doubleValue: ", doubleValue );
 	// TODO if readValue doesn't make sense, then default back to input.initialValue;
-	
+
 	return doubleValue;
 }
 
-function updateUserFormOutputDouble(output, newValue) { 
+function updateUserFormOutputDouble(output, newValue) {
 	var readValue = $("#" + output.name).val(newValue.toPrecision(5));
 }
 
-function updateTimeDisplay(t) { 
+function updateTimeDisplay(t) {
 
   var timeToDisplay = t.toPrecision(5);
-  if ( timeToDisplay == 0 ) { 
-    timeToDisplay = t; // Handle very small numbers. 
+  if ( timeToDisplay == 0 ) {
+    timeToDisplay = t; // Handle very small numbers.
   }
 	$("#itime").html(timeToDisplay);
   //console.log("t = "+t);
 }
 
-function updateSolidSvgPathAndShape(solid, pathAndShape) { 
-	
+function updateSolidSvgPathAndShape(solid, pathAndShape) {
+
 	var svgSolid = $("#solid_" + solid.name);
   var svgTrail = $("#solid_" + solid.name + "_trail")
 	//console.log("updateSolidSvgPathAndShape: ", solid, svgSolid, pathAndShape);
@@ -1371,19 +1370,19 @@ if (solid.shape.type == "circle") {
     svgSolid.attr("points",point1+point2+arrow1+point2+arrow2)
   }
   else if (solid.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
-    
+
     //console.log("it's an object with propertieS: ", solid)
 
-    
+
     var safeText = solid.text
     if ( solid.text == null || solid.text instanceof Object ) { safeText = ""; }
 
     var safeUnits = solid.units
     if ( solid.units == null || solid.units instanceof Object ) { safeUnits = ""; }
-        
+
 
     var newLabel = safeText
-     if ( solid.showValue ) { 
+     if ( solid.showValue ) {
        newLabel = safeText + " " + pathAndShape.objectValue + " " + safeUnits
      }
     svgSolid.attr("x",xCanvas(pathAndShape.x))
@@ -1406,7 +1405,7 @@ if (solid.shape.type == "circle") {
   }
   else {
   	//Debugging 25 Jan 2017
-    //throw "Object in problem"; 
+    //throw "Object in problem";
     console.log("!! Unidentified shape:550> solid = ", solid.shape.type);
     return;
   };
@@ -1416,7 +1415,7 @@ if (solid.shape.type == "circle") {
   if (solid.shape.drawTrails == "true") {
     var points = []
     var pointsAttr = ""
-    for (i in varsAtStep) {      
+    for (i in varsAtStep) {
       var currentState = varsAtStep[i][solid.name]
       //console.log("currentState",currentState)
       pair = {x: currentState.x, y: currentState.y }
@@ -1456,7 +1455,7 @@ function handleGoClick() {
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleStopClick()");
 	$("#startStopIcon").attr("class", "fa fa-pause fa-lg");
 }
-//Stops motion.					
+//Stops motion.
 function handleStopClick() {
 //Stop move and time functions.
 	clearInterval(stepTrigger);
@@ -1488,7 +1487,7 @@ function handleForwardClick() {
 };
 
 function handleInputChange() {
-  $("*").change( function () {   
+  $("*").change( function () {
                   handleResetClick();
                 });
 }

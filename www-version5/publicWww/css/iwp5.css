@@ -14,7 +14,7 @@ table {
 
 
 
-.iwp-animation-container { 
+.iwp-animation-container {
 	width: 100%;
 	min-width: 1150px;
 }
@@ -31,7 +31,7 @@ table {
 
 /** Major layout into left and right halfs of the screen */
 
-.iwp-left-container { 
+.iwp-left-container {
 	width: 500px;
 
 	display: inline-block;
@@ -41,7 +41,7 @@ table {
 	margin-right: 25px;
 }
 
-.iwp-right-container { 
+.iwp-right-container {
 	width: 600px;
 
 	display: inline-block;
@@ -51,7 +51,7 @@ table {
 }
 
 
-.iwp-control-container { 
+.iwp-control-container {
 	width: 100%;
 	min-height: 70px;
 	margin-bottom: 5px;
@@ -103,13 +103,13 @@ table {
 
 
 
-#inputTable { 
+#inputTable {
 	margin-top: 10px;
 }
 
 th, td {
 	padding: 11px;
-	text-align:     center ;	
+	text-align:     center ;
 	vertical-align: center ;
 }
 .bottomBorder {
@@ -155,14 +155,14 @@ th, td {
 }
 
 
-/** 
+/**
  * 2018 Animations
  */
 
 .iwp-animation-canvas-container {
 	display: inline-block;
 	width: 500px;
-	z-index: -1; 
+	z-index: -1;
 
 }
 
@@ -175,7 +175,7 @@ th, td {
  * 2018 Graphing
  */
 
-.iwp-graph { 
+.iwp-graph {
 	width: 500px;
 	height: 500px;
 	border: solid #ccc 1px;
@@ -186,22 +186,37 @@ th, td {
 	stroke-width: 0.1;
 }
 
-.iwp-graph-line { 
+.iwp-graph-line-red {
 	stroke:rgb(255,0,0);
 	stroke-width: 0.3;
 }
 
-.iwp-graph-axis line { 
+.iwp-graph-line-green {
+	stroke:rgb(0, 255,0);
+	stroke-width: 0.3;
+}
+
+.iwp-graph-line-blue {
+	stroke:rgb(0,0,255);
+	stroke-width: 0.3;
+}
+
+.iwp-graph-axis line {
 	stroke: rgb(150,150,150);
 	stroke-width: 0.2;
 }
 
-.iwp-graph-axis path { 
+.iwp-graph-axis path {
 	stroke: rgb(150,150,150);
 	stroke-width: 0.2;
 }
 
-.iwp-graph-axis text { 
+.iwp-graph-axis text {
 	fill: rgb(150,150,150);
 	font-size: 6px;
+}
+
+.grid line {
+	stroke: lightgrey;
+	stroke-width: 0.3;
 }
