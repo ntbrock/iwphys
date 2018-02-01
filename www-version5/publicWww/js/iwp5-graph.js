@@ -190,48 +190,19 @@ function graphStep(step, vars) {
 
 		console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
 
-
-		var paths = graphObject.paths
-
-		paths.xPos.moveTo ( 
-
+		graphObject.paths.xPos.moveTo ( 
 			graphXScale(lastStep.t),
 			graphYScale(lastStep.object.ypos)
-
 		)
 
-		path1.moveTo(graphXScale(lastStep.t), graphYScale(lastStep.object.ypos))
-	path1.lineTo(graphXScale(vars.t), graphYScale(vars.object.ypos))
-	visualPath1.attr("d", path1)
+		graphObject.paths.xPos.lineTo ( 
+			graphXScale(vars.t),
+			graphYScale(vars.object.ypos)
+		)
 
-
+		graphObject.pathsSvg.xPos.attr("d", graphObject.paths.xPos)
 
 	});
 
-
-
-
 }
 
-
-	/*
-	path1.moveTo(graphXScale(lastStep.t), graphYScale(lastStep.object.ypos))
-	path1.lineTo(graphXScale(vars.t), graphYScale(vars.object.ypos))
-	visualPath1.attr("d", path1)
-	path2.moveTo(graphXScale(lastStep.t), graphYScale(lastStep.object.yvel))
-	path2.lineTo(graphXScale(vars.t), graphYScale(vars.object.yvel))
-	visualPath2.attr("d", path2)
-	path3.moveTo(graphXScale(lastStep.t), graphYScale(lastStep.object.yaccel))
-	path3.lineTo(graphXScale(vars.t), graphYScale(vars.object.yaccel))
-	visualPath3.attr("d", path3)
-	*/
-
-/*
-   $.each( outputs, function( index, output ) {
-      updateUserFormOutputDouble(output, vars[output.name]);
-   });
-
-   $.each( solids, function( index, solid ) {
-      updateSolidSvgPathAndShape(solid, vars[solid.name])
-   });
-*/
