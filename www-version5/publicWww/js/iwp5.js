@@ -532,7 +532,7 @@ function addInput(input) {
   if ( input.hidden == "1" ) {
     style = "display:none;"
   }
-  htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td>"+ input.text +"</td><td><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
+  htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td class='iwp-input-label'>"+ input.text +"</td><td class='iwp-input-value'><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
 }
 
 function addOutput(output) {
@@ -552,7 +552,7 @@ function addOutput(output) {
   if ( output.hidden == "1" ) {
     style = "display:none;'"
   }
-  htmlOutputs.push( "<tr style='" + style +"' id='output_" + output.name + "' class='iwp-output-row'><td>"+ output.text +"</td><td><input id='" + output.name + "' type='text' value='-999'> " + output.units + "</td></tr>");
+  htmlOutputs.push( "<tr style='" + style +"' id='output_" + output.name + "' class='iwp-output-row'><td class='iwp-output-label'>"+ output.text +"</td><td class='iwp-output-value'><input id='" + output.name + "' type='text' value='-999' disabled> " + output.units + "</td></tr>");
 }
 
 /**
@@ -1144,16 +1144,20 @@ function renderProblemFromMemory() {
     $("#inputTable").append(input);
   })
   if ( outputTitle ) {
-    $("#inputTable").append("<tr><th colspan='2'>Outputs</th></tr>");
+    $("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>");
   }
   $.each(htmlOutputs, function( index, output ) {
-    $("#inputTable").append(output);
+    $("#outputTable").append(output);
   })
-  if (!inputTitle && !outputTitle) {
-    timeTabOn();
+
+  // 2018Feb01 - Keep the title + description, just hide all inputs.
+  if (!inputTitle) { 
     $("#inputTable").css('display','none');
-    $("#it").css('display','none');
   }
+  if ( !outputTitle) { 
+    $("#outputTable").css('display','none');
+  }
+
 
   /* Debugging 07 Oct 2016 Ryan Steed
   //$("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>"+htmlOutputs);
@@ -1197,7 +1201,7 @@ function fitText(input) {
   };
 
 function addSolidsToCanvas(solids) {
-  console.log("solids: ", solids);
+  //  console.log("solids: ", solids);
   for (i in solids) {
     if (solids[i].includes("Bitmap")) {
       console.log(solids[i])
