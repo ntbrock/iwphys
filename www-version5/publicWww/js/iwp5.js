@@ -46,6 +46,9 @@ function masterResetSteps() {
 
   var vars0 = calculateVarsAtStep(0);
 
+  // 2018Feb01 Graphing Reset hookin
+  graphResetZero(0, vars = vars0, solids = solids );
+
   archiveVarsAtStep( currentStep, vars0 ); // Boot up the environment
 }
 
@@ -592,7 +595,9 @@ function addSolid(solid) {
   		type: solid.shape["@attributes"].type,
   		drawTrails: solid.shape["@attributes"].drawTrails,
   		drawVectors: solid.shape["@attributes"].drawVectors,
-  		graphOptions: solid.graphOptions,
+  		graphOptions: 
+        Object.assign( solid.shape.graphOptions["@attributes"], 
+                      { initiallyOn: solid.shape.graphOptions.initiallyOn["@attributes"] } ),
   		width: {
   			calculator: compileCalculator(solid.shape.width.calculator)
   		},

@@ -8,6 +8,10 @@ $(function() {
 	graphInit();
 })
 
+// Global container, re-populated on initialization with every object, the plotting series 
+// are then derived from here as well
+var iwpGraphObjects = {}
+var iwpGraphSeries = {}
 
 
 var graphXScale = d3.scaleLinear()
@@ -31,11 +35,11 @@ var yAxis = d3.axisLeft(graphYScale).ticks(10).tickSize(0);
 
 function graphInit() {
 
-  var svg = d3.select('#graph');
+	var svg = d3.select('#graph');
 
 
-  // Step 1 Build Grid And Axes
-  console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
+	// Step 1 Build Grid And Axes
+	console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
 
 	xGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(0, 100)"));
 	yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100, 0)"));
@@ -43,9 +47,14 @@ function graphInit() {
 	xAxis(svg.append("g").classed("iwp-graph-axis",true));
 	yAxis(svg.append("g").classed("iwp-graph-axis",true));
 
+	
+
+	/*
 	visualPath1 = svg.append('path')
-								   .classed("iwp-graph-line-red", true)
-									 .attr("d", path1 )
+		.classed("iwp-graph-line-red", true)
+		.attr("d", path1 )
+
+
 	path1.moveTo(0, 0)
 	visualPath2 = svg.append('path')
 								   .classed("iwp-graph-line-green", true)
@@ -55,24 +64,118 @@ function graphInit() {
 								   .classed("iwp-graph-line-blue", true)
 									 .attr("d", path3 )
 	path3.moveTo(0, 0)
+	*/
+}
+
+
+
+
+function graphResetZero(step, vars, solids ) { 
+	var svg = d3.select('#graph');
+
+	console.log("iwp-graph:69> graphResetZero, vars: ", vars)
+
+	// Step 2 - Populate Memory for each object that's graphable, plus all of it's visibility
+	$.each(solids,function(index, solid) { 
+		//console.log("iwp-graph:69> graphResetZero, solid: ", solid)	
+		var graphOptions = solid.shape.graphOptions
+		//console.log("iwp-graph:69> graphResetZero, solid graphOptions: ", graphOptions)	
+
+		iwpGraphObjects[solid.name] = { solid: solid,
+			graphOptions: graphOptions,
+			color: solid.color,
+			objectVisible: graphOptions.graphVisible == "true",
+			paths: {
+				xPos: d3.path(),
+				yPos: d3.path(),
+				xVel: d3.path(),
+				yVel: d3.path(),
+				xAccel: d3.path(),
+				yAccel: d3.path()
+			},
+			pathsVisible: {
+				xPos: graphOptions.initiallyOn != null && graphOptions.initiallyOn.xPos == "true",
+				yPos: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yPos == "true",
+				xVel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.xVel == "true",
+				yVel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yVel == "true",
+				xAccel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.xAccel == "true",
+				yAccel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yAccel == "true"
+			}
+		}
+	})
+
+	// TODO Add each graph path to the svg and associate stroke color.
+
+	// Remove all existing?
+
+
+
+	$.each(iwpGraphObjects,function(name, graphObject) { 
+
+		console.log("iwp5graph:115> Reset: name: ", name, "  graphObject: ", graphObject)
+
+		var g = svg.append("g").classed("iwp-graph-object", true)
+
+		var stroke = "stroke: rgba("+graphObject.color.red+","+graphObject.color.green+","+graphObject.color.blue+",1);"
+
+		g.append('path').classed('iwp-graph-object-xpos',true).attr("style", stroke).attr("d", graphObject.paths.xPos)
+		g.append('path').classed('iwp-graph-object-ypos',true).attr("style", stroke).attr("d", graphObject.paths.yPos)
+
+		g.append('path').classed('iwp-graph-object-xvel',true).attr("style", stroke).attr("d", graphObject.paths.xVel)
+		g.append('path').classed('iwp-graph-object-yvel',true).attr("style", stroke).attr("d", graphObject.paths.yVel)
+
+		g.append('path').classed('iwp-graph-object-xaccel',true).attr("style", stroke).attr("d", graphObject.paths.xAccel)
+		g.append('path').classed('iwp-graph-object-yaccel',true).attr("style", stroke).attr("d", graphObject.paths.yAccel)
+
+	});
+
+
+/*
+
+
+					visualPath1 = svg.append('path')
+		.classed("iwp-graph-line-red", true)
+		.attr("d", path1 )
+
+
+			} }*/
+
+
+
+
+	console.log("iwp5graph:94> Initialized all Graph Objects: ", iwpGraphObjects)
 
 }
+
+
 
 /**
  * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
  */
 function graphStep(step, vars) {
 
-	var lastStep = varsAtStep[step-1]
-  //var vars = varsAtStep[step];
-  if ( vars == undefined ) {
-    throw "No previous calculations available at step: " + step;
-  } else {
-
-
 	var svg = d3.select('#graph');
+	var lastStep = varsAtStep[step-1]
+
+	//var vars = varsAtStep[step];
+	if ( vars == undefined ) {
+		throw "No previous calculations available at step: " + step;
+	}
+
+
 	console.log("iwp5-graph:48> currentStep: ", vars)
 	console.log("iwp5-graph:49> lastStep: ", lastStep)
+
+	// During each loop, iterate over all the solids that are graphable, and update paths based
+	// on incoming vars at step.
+
+
+
+
+}
+
+
+	/*
 	path1.moveTo(graphXScale(lastStep.t), graphYScale(lastStep.object.ypos))
 	path1.lineTo(graphXScale(vars.t), graphYScale(vars.object.ypos))
 	visualPath1.attr("d", path1)
@@ -82,11 +185,6 @@ function graphStep(step, vars) {
 	path3.moveTo(graphXScale(lastStep.t), graphYScale(lastStep.object.yaccel))
 	path3.lineTo(graphXScale(vars.t), graphYScale(vars.object.yaccel))
 	visualPath3.attr("d", path3)
-   /*svg.append('circle')
-//      .classed("iwp-axis-line", true)
-      .attr("cx", graphXScale(vars.t))
-      .attr("cy", graphYScale(vars.y))
-      .attr("r", graphXScale(0.1))
 	*/
 
 /*
@@ -98,6 +196,3 @@ function graphStep(step, vars) {
       updateSolidSvgPathAndShape(solid, vars[solid.name])
    });
 */
-
-  }
-}
