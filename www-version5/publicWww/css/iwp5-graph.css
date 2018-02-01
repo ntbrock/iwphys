@@ -18,21 +18,6 @@
 	stroke-width: 0.1;
 }
 
-.iwp-graph-line-red {
-	stroke:rgb(255,0,0);
-	stroke-width: 0.3;
-}
-
-.iwp-graph-line-green {
-	stroke:rgb(0, 255,0);
-	stroke-width: 0.3;
-}
-
-.iwp-graph-line-blue {
-	stroke:rgb(0,0,255);
-	stroke-width: 0.3;
-}
-
 .iwp-graph-axis line {
 	stroke: rgb(150,150,150);
 	stroke-width: 0.2;
@@ -54,6 +39,6 @@
 }
 
 /** This hides a dark black bar at the edge of display */
-.iwp-graph-grid path { 
+.iwp-graph-grid path {
 	display: none;
 }
