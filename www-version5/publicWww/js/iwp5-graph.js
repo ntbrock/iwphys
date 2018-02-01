@@ -100,15 +100,21 @@ function graphResetZero(step, vars, solids ) {
 				yVel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yVel == "true",
 				xAccel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.xAccel == "true",
 				yAccel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yAccel == "true"
+			},
+			pathsSvg: { 
+				xPos: null,
+				yPos: null,
+				xVel: null,
+				yVel: null,
+				xAccel: null,
+				yAccel: null
 			}
 		}
 	})
 
-	// TODO Add each graph path to the svg and associate stroke color.
 
-	// Remove all existing?
-
-
+	// Step 3 Add each graph path to the svg and associate stroke color.
+	// Hang onto the svg Memory refernces for good luck.
 
 	$.each(iwpGraphObjects,function(name, graphObject) { 
 
@@ -118,14 +124,23 @@ function graphResetZero(step, vars, solids ) {
 
 		var stroke = "stroke: rgba("+graphObject.color.red+","+graphObject.color.green+","+graphObject.color.blue+",1);"
 
-		g.append('path').classed('iwp-graph-object-xpos',true).attr("style", stroke).attr("d", graphObject.paths.xPos)
-		g.append('path').classed('iwp-graph-object-ypos',true).attr("style", stroke).attr("d", graphObject.paths.yPos)
+		graphObject.pathsSvg.xPos =
+			g.append('path').classed('iwp-graph-object-xpos',true).attr("style", stroke).attr("d", graphObject.paths.xPos)
 
-		g.append('path').classed('iwp-graph-object-xvel',true).attr("style", stroke).attr("d", graphObject.paths.xVel)
-		g.append('path').classed('iwp-graph-object-yvel',true).attr("style", stroke).attr("d", graphObject.paths.yVel)
+		graphObject.pathsSvg.yPos =
+			g.append('path').classed('iwp-graph-object-ypos',true).attr("style", stroke).attr("d", graphObject.paths.yPos)
 
-		g.append('path').classed('iwp-graph-object-xaccel',true).attr("style", stroke).attr("d", graphObject.paths.xAccel)
-		g.append('path').classed('iwp-graph-object-yaccel',true).attr("style", stroke).attr("d", graphObject.paths.yAccel)
+		graphObject.pathsSvg.xVel =
+			g.append('path').classed('iwp-graph-object-xvel',true).attr("style", stroke).attr("d", graphObject.paths.xVel)
+
+		graphObject.pathsSvg.yVel =
+			g.append('path').classed('iwp-graph-object-yvel',true).attr("style", stroke).attr("d", graphObject.paths.yVel)
+
+		graphObject.pathsSvg.xAccel =
+			g.append('path').classed('iwp-graph-object-xaccel',true).attr("style", stroke).attr("d", graphObject.paths.xAccel)
+		
+		graphObject.pathsSvg.yAccel =
+			g.append('path').classed('iwp-graph-object-yaccel',true).attr("style", stroke).attr("d", graphObject.paths.yAccel)
 
 	});
 
@@ -168,6 +183,27 @@ function graphStep(step, vars) {
 
 	// During each loop, iterate over all the solids that are graphable, and update paths based
 	// on incoming vars at step.
+
+
+
+	$.each(iwpGraphObjects,function(name, graphObject) { 
+
+		console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
+
+		var g = svg.append("g").classed("iwp-graph-object", true)
+
+		var stroke = "stroke: rgba("+graphObject.color.red+","+graphObject.color.green+","+graphObject.color.blue+",1);"
+
+		g.append('path').classed('iwp-graph-object-xpos',true).attr("style", stroke).attr("d", graphObject.paths.xPos)
+		g.append('path').classed('iwp-graph-object-ypos',true).attr("style", stroke).attr("d", graphObject.paths.yPos)
+
+		g.append('path').classed('iwp-graph-object-xvel',true).attr("style", stroke).attr("d", graphObject.paths.xVel)
+		g.append('path').classed('iwp-graph-object-yvel',true).attr("style", stroke).attr("d", graphObject.paths.yVel)
+
+		g.append('path').classed('iwp-graph-object-xaccel',true).attr("style", stroke).attr("d", graphObject.paths.xAccel)
+		g.append('path').classed('iwp-graph-object-yaccel',true).attr("style", stroke).attr("d", graphObject.paths.yAccel)
+
+	});
 
 
 
