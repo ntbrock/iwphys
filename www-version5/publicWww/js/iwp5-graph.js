@@ -83,7 +83,7 @@ function graphResetZero(step, vars, solids ) {
 
 		var visible = graphOptions.graphVisible == "true"
 
-		if ( visible ) { 
+		if ( visible ) {
 
 		iwpGraphObjects[solid.name] = { solid: solid,
 			graphOptions: graphOptions,
@@ -128,24 +128,25 @@ function graphResetZero(step, vars, solids ) {
 		var g = svg.append("g").classed("iwp-graph-object", true).attr("iwp-solid-name",name)
 
 		var stroke = "stroke: rgba("+graphObject.color.red+","+graphObject.color.green+","+graphObject.color.blue+",1);"
+		var hide = "display: none;"
 
 		graphObject.pathsSvg.xPos =
-			g.append('path').attr("iwp-measure", "xPos").attr("style", stroke).attr("d", graphObject.paths.xPos)
+			g.append('path').attr("iwp-measure", "xPos").attr("style", stroke+(graphObject.pathsVisible.xPos ? '' : hide)).attr("d", graphObject.paths.xPos)
 
 		graphObject.pathsSvg.yPos =
-			g.append('path').attr("iwp-measure", "yPos").attr("style", stroke).attr("d", graphObject.paths.yPos)
+			g.append('path').attr("iwp-measure", "yPos").attr("style", stroke+(graphObject.pathsVisible.yPos ? '' : hide)).attr("d", graphObject.paths.yPos)
 
 		graphObject.pathsSvg.xVel =
-			g.append('path').attr("iwp-measure", "xVel").attr("style", stroke).attr("d", graphObject.paths.xVel)
+			g.append('path').attr("iwp-measure", "xVel").attr("style", stroke+(graphObject.pathsVisible.xVel ? '' : hide)).attr("d", graphObject.paths.xVel)
 
 		graphObject.pathsSvg.yVel =
-			g.append('path').attr("iwp-measure", "yVel").attr("style", stroke).attr("d", graphObject.paths.yVel)
+			g.append('path').attr("iwp-measure", "yVel").attr("style", stroke+(graphObject.pathsVisible.yVel ? '' : hide)).attr("d", graphObject.paths.yVel)
 
 		graphObject.pathsSvg.xAccel =
-			g.append('path').attr("iwp-measure", "xAccel").attr("style", stroke).attr("d", graphObject.paths.xAccel)
+			g.append('path').attr("iwp-measure", "xAccel").attr("style", stroke+(graphObject.pathsVisible.xAccel ? '' : hide)).attr("d", graphObject.paths.xAccel)
 
 		graphObject.pathsSvg.yAccel =
-			g.append('path').attr("iwp-measure", "yAccel").attr("style", stroke).attr("d", graphObject.paths.yAccel)
+			g.append('path').attr("iwp-measure", "yAccel").attr("style", stroke+(graphObject.pathsVisible.yAccel ? '' : hide)).attr("d", graphObject.paths.yAccel)
 
 	});
 
@@ -154,24 +155,21 @@ function graphResetZero(step, vars, solids ) {
 
 
 
+	$(".iwp-graph-controls").html("")
 
 	$.each(iwpGraphObjects,function(name, graphObject) {
-		
+
 		console.log("iwp5-graph:153> add buttons for: "+ name + "   visible? " + graphObject.visible)
 
-		if ( graphObject.visible ) { 
+		if ( graphObject.visible ) {
 
 			$(".iwp-graph-controls").append("<h4>" +name+"</h4>")
 
-			$.each(graphMeasures, function(i, measure) { 
+			$.each(graphMeasures, function(i, measure) {
 
 				$(".iwp-graph-controls").append("<button onclick='graphMeasureClick(this);' iwp-solid-name='"+name+"' iwp-measure='"+measure+"'>" +measure+"</button>")
 
 			});
-
-
-
-
 
 		}
 	});
@@ -184,7 +182,7 @@ function graphResetZero(step, vars, solids ) {
 
 
 
-function graphMeasureClick(button) { 
+function graphMeasureClick(button) {
 
 	var dom = $(button);
 
@@ -194,7 +192,7 @@ function graphMeasureClick(button) {
 
 	console.log("graphMeasureClick:191> I was just clicked, toggle this: " + solidName + " " + measure )
 
-	
+
 	$("g[iwp-solid-name='" + solidName +"'] path[iwp-measure='" + measure +"']").toggle();
 
 //	$("g[iwp-solid-name=Redball] path[iwp-measure=xVel]").toggle();
