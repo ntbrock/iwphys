@@ -1,0 +1,382 @@
+<html><head>
+    <title>TEST_eulers</title>
+    <script src="math.js" type="text/javascript"></script>
+    <script src="jquery-1.12.2.min.js" type="text/javascript"></script>
+    <script src="d3.v4.min.js" type="text/javascript"></script>
+
+    <style>
+
+
+      .iwp-axis-line {
+
+        stroke-width: 0.1;
+      }
+
+      .grid line {
+        stroke: lightgrey;
+        stroke-width: 0.3;
+      }
+
+      .iwp-pos-path {
+        stroke:rgb(255,0,0);
+        stroke-width: 0.3;
+      }
+
+      .iwp-vel-path {
+        stroke:rgb(0,255,0);
+        stroke-width: 0.3;
+      }
+
+      .iwp-acc-path {
+        stroke:rgb(0,0,255);
+        stroke-width: 0.3;
+      }
+
+      .iwp-graph-axis line {
+        stroke: rgb(150,150,150);
+        stroke-width: 0.2;
+      }
+
+      .iwp-graph-axis path {
+        stroke: rgb(150,150,150);
+        stroke-width: 0.2;
+      }
+
+      .iwp-graph-axis text {
+        fill: rgb(150,150,150);
+        font-size: 6px;
+      }
+
+
+    </style>
+
+
+</head>
+<body>
+<h1>TEST_eulers</h1>
+<a href="https://css-tricks.com/how-to-make-charts-with-svg/">CSS Tricks - How To make charts with SVG<a><br>
+<a href="https://www.dashingd3js.com/svg-paths-and-d3js">SVG Paths and d3</a><br>
+
+
+<h3>Matt's Euler's method unit test</h3>
+
+  <div id="controls">
+    <button onclick="iwpReset(this);">Reset</button>
+
+    <button onclick="iwpStepForward(this);">Step Forward</button>
+
+    <button onclick="iwpPlay(this);">Play</button>
+
+    <button onclick="iwpPause(this);">Pause</button>
+
+    <button onclick="togglePos();">Position</button>
+
+    <button onclick="toggleVel();">Velocity</button>
+
+    <button onclick="toggleAcc();">Acceleration</button>
+
+  </div>
+
+  <h3>T = <span id="currentT"></span>  Tick =  <span id="tick"></span></h3>
+
+  <div style="border-style: solid; display: inline-block;">
+
+  <svg class="chart" style="width: 400px; height: 400px;" viewBox="-100 -100 200 200">
+
+  </svg>
+
+
+</div>
+
+
+
+<script type="text/javascript">
+
+var tick = 0
+var currentT = 0.0
+var deltaT = 0.01
+var animateT = false
+var maxT = 3
+var ticks = []
+
+/*function calculatePos(t) {
+  // TODO replace with math.js
+  return 8*math.sin(t); // math.random()
+}
+
+function calculateVel(t) {
+  // TODO replace with math.js
+  return 8*math.cos(t); // math.random()
+}
+
+function calculateAcc(t) {
+  // TODO replace with math.js
+  return -8*math.sin(t); // math.random()
+}*/
+
+function calculatePos(lastPos, lastVel, tstep) {
+  // TODO replace with math.js
+  return lastPos + lastVel*tstep
+}
+
+function calculateVel(lastVel, lastAcc, tstep) {
+  // TODO replace with math.js
+  return lastVel + lastAcc*tstep
+}
+
+function calculateAcc(t) {
+  return math.e**t
+}
+
+function togglePos() {
+  $(".iwp-pos-path").toggle()
+}
+
+function toggleVel() {
+  $(".iwp-vel-path").toggle()
+}
+
+function toggleAcc() {
+  $(".iwp-acc-path").toggle()
+}
+
+function iwpStepForward(button) {
+  iwpAddData(button);
+}
+
+function iwpPlay(button) {
+  animateT = true;
+}
+
+function iwpPause(button) {
+  animateT = false;
+}
+
+function iwpAnimatorThreadStart() {
+  setInterval(function() {
+
+    if ( currentT > maxT ) {
+      animateT = false;
+    }
+
+    if ( animateT ) {
+      iwpAddData();
+    }
+  }, 250)
+}
+
+
+function iwpReset(button) {
+
+  tick = 0;
+  animateT = false;
+
+  // Reset our time ticker
+  currentT = tick * deltaT;
+  $("#currentT").html(currentT);
+  $("#tick").html(tick);
+
+  // t=0 calculation to initalize historical memory array
+  ticks[tick] = { x: currentT, y: calculateT(currentT) }
+
+
+  /*
+  var canvas = d3.select('body').append('svg')
+                                  .attr('width', 700)
+                                  .attr('height', 400);
+var path = canvas.append('polyline')
+                     .attr('points', data)
+                     .attr('style', "fill:none;stroke:red;stroke-width:3")
+
+
+                    */
+
+}
+
+
+function iwpAddData(button) {
+
+
+  // Increment time by one delta.
+  tick = tick + 1
+  currentT = tick * deltaT;
+  $("#currentT").html(currentT);
+  $("#tick").html(tick);
+   // Historical record in memory of past calculations
+
+  var lastX = 0
+  var lastYpos = 1
+  var lastYvel = 1
+  var lastYacc = 1
+
+  if ( tick > 1 ) {
+    // console.log("canvasGraphTB3:110> Ticks: ", ticks)
+    var lastX = ticks[tick-1].x
+    var lastYpos = ticks[tick-1].pos
+    var lastYvel = ticks[tick-1].vel
+    var lastYacc = ticks[tick-1].acc
+  }
+
+  var thisX = currentT;
+  var thisYpos = calculatePos(lastYpos, lastYvel, deltaT);
+  var thisYvel = calculateVel(lastYvel, lastYacc, deltaT);
+  var thisYacc = calculateAcc(currentT);
+  console.log('tick: ', tick, '\n pos: ', thisYpos, '\n vel: ', thisYvel, '\n acc: ', thisYacc)
+
+  ticks[tick] = { x: thisX, pos: thisYpos, vel: thisYvel, acc: thisYacc }
+
+
+  // TODO IMPLEMENT POINT ADD
+
+  iwpCanvasAddLine(lastX,thisX,lastYpos,thisYpos,lastYvel,thisYvel,lastYacc,thisYacc)
+
+  // console.log("easelGraphTB3:99> Adding Data Point: ", [ lastX,lastY,thisX, thisY ])
+
+
+}
+
+</script>
+
+
+
+<script type="text/javascript">
+
+  var svg = d3.select('svg');
+
+  var xScale = d3.scaleLinear()
+    .domain([-3, 3])
+    .range([-100, 100]);
+
+  var yScale = d3.scaleLinear()
+    .domain([-10, 10])
+    .range([100, -100]);
+
+  var posPath = d3.path()
+  var velPath = d3.path()
+  var accPath = d3.path()
+
+  // initialize canvas here.
+
+  function iwpCanvasInit() {
+
+   console.log("svgGraphTB4:246> svg: " , svg )
+
+
+   var manualAxisCreation = false
+
+   if ( manualAxisCreation ) {
+
+   svg.append('line')
+      .classed("iwp-axis-line", true)
+      .attr("x1", xScale(0))
+      .attr("y1", yScale(-1000))
+      .attr("x2", xScale(0))
+      .attr("y2", yScale(1000))
+
+    svg.append('line')
+        .classed("iwp-axis-line", true)
+        .attr("x1", xScale(-1000))
+        .attr("y1", yScale(0))
+        .attr("x2", xScale(1000))
+        .attr("y2", yScale(0))
+    } else {
+
+      var xGrid = d3.axisTop(xScale).ticks(10).tickSize(1000)
+      xGrid(svg.append("g").classed("grid", true).attr("transform", "translate(0, 100)"))
+
+      var yGrid = d3.axisRight(yScale).ticks(10).tickSize(1000)
+      yGrid(svg.append("g").classed("grid", true).attr("transform", "translate(-100, 0)"))
+
+      var xAxis = d3.axisBottom(xScale).ticks(10)
+      xAxis(svg.append("g").classed("iwp-graph-x-axis",true))
+
+      var yAxis = d3.axisLeft(yScale).ticks(10)
+      yAxis(svg.append("g").classed("iwp-graph-y-axis",true))
+//      var yAxis = d3.axisLeft(yScale).ticks(1);
+//      svg.call(yAxis)
+
+    }
+
+    redPath = svg.append('path')
+              .classed("iwp-pos-path", true)
+              .attr("d", posPath )
+    greenPath = svg.append('path')
+              .classed("iwp-vel-path", true)
+              .attr("d", velPath )
+    bluePath = svg.append('path')
+              .classed("iwp-acc-path", true)
+              .attr("d", accPath )
+
+  }
+
+
+
+
+  function iwpCanvasAddLine(x1,x2,pos1,pos2,vel1,vel2,acc1,acc2) {
+
+    var start = 0;
+    var stop = 0;
+
+    // 1. Add a line segment
+    // Comprable, but more objects.
+
+    var lineSegments = false
+
+    if ( lineSegments ) {
+
+      svg.append('line')
+        .classed("iwp-graph-line", true)
+        .attr("x1", xScale(x1) )
+        .attr("y1", yScale(y1))
+        .attr("x2", xScale(x2) )
+        .attr("y2", yScale(y2) )
+
+    } else {
+
+      // Method 2 -- Managing a line path in memory and manipulating it, and rerawing it.
+      posPath.moveTo( xScale(x1), yScale(pos1) );
+      posPath.lineTo( xScale(x2), yScale(pos2) );
+      redPath.attr("d", posPath)
+      velPath.moveTo( xScale(x1), yScale(vel1) );
+      velPath.lineTo( xScale(x2), yScale(vel2) );
+      greenPath.attr("d", velPath)
+      accPath.moveTo( xScale(x1), yScale(acc1) );
+      accPath.lineTo( xScale(x2), yScale(acc2) );
+      bluePath.attr("d", accPath)
+
+    }
+    /*
+    svg.selectAll('path').remove();
+    svg.append('path')
+      .classed("iwp-graph-line", true)
+      .attr("d", path )
+*/
+
+
+
+  }
+
+</script>
+
+
+<!-- On Start -->
+<script type="text/javascript">
+
+// Begin the animation thread after page load
+$(function() {
+
+  iwpCanvasInit();
+
+  setInterval(function(){
+    iwpAnimatorThreadStart();
+  }, 20);
+});
+
+
+</script>
+
+
+
+
+</body>
+</html>
