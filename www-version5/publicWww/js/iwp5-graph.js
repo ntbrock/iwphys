@@ -11,8 +11,8 @@ $(function() {
 // Global container, re-populated on initialization with every object, the plotting series
 // are then derived from here as well
 var iwpGraphObjects = {}
-var iwpGraphSeries = {}
 
+var graphMeasures = ['xPos', 'yPos', 'xVel', 'yVel', 'xAccel', 'yAccel']
 
 var graphXScale = d3.scaleLinear()
     .domain([-10, 10])
@@ -81,10 +81,14 @@ function graphResetZero(step, vars, solids ) {
 		var graphOptions = solid.shape.graphOptions
 		//console.log("iwp-graph:69> graphResetZero, solid graphOptions: ", graphOptions)
 
+		var visible = graphOptions.graphVisible == "true"
+
+		if ( visible ) { 
+
 		iwpGraphObjects[solid.name] = { solid: solid,
 			graphOptions: graphOptions,
 			color: solid.color,
-			objectVisible: graphOptions.graphVisible == "true",
+			visible: true,
 			paths: {
 				xPos: d3.path(),
 				yPos: d3.path(),
@@ -109,6 +113,7 @@ function graphResetZero(step, vars, solids ) {
 				xAccel: null,
 				yAccel: null
 			}
+			}
 		}
 	})
 
@@ -125,42 +130,79 @@ function graphResetZero(step, vars, solids ) {
 		var stroke = "stroke: rgba("+graphObject.color.red+","+graphObject.color.green+","+graphObject.color.blue+",1);"
 
 		graphObject.pathsSvg.xPos =
-			g.append('path').classed('iwp-graph-object-xpos',true).attr("style", stroke).attr("d", graphObject.paths.xPos)
+			g.append('path').attr("iwp-measure", "xPos").attr("style", stroke).attr("d", graphObject.paths.xPos)
 
 		graphObject.pathsSvg.yPos =
-			g.append('path').classed('iwp-graph-object-ypos',true).attr("style", stroke).attr("d", graphObject.paths.yPos)
+			g.append('path').attr("iwp-measure", "yPos").attr("style", stroke).attr("d", graphObject.paths.yPos)
 
 		graphObject.pathsSvg.xVel =
-			g.append('path').classed('iwp-graph-object-xvel',true).attr("style", stroke).attr("d", graphObject.paths.xVel)
+			g.append('path').attr("iwp-measure", "xVel").attr("style", stroke).attr("d", graphObject.paths.xVel)
 
 		graphObject.pathsSvg.yVel =
-			g.append('path').classed('iwp-graph-object-yvel',true).attr("style", stroke).attr("d", graphObject.paths.yVel)
+			g.append('path').attr("iwp-measure", "yVel").attr("style", stroke).attr("d", graphObject.paths.yVel)
 
 		graphObject.pathsSvg.xAccel =
-			g.append('path').classed('iwp-graph-object-xaccel',true).attr("style", stroke).attr("d", graphObject.paths.xAccel)
+			g.append('path').attr("iwp-measure", "xAccel").attr("style", stroke).attr("d", graphObject.paths.xAccel)
 
 		graphObject.pathsSvg.yAccel =
-			g.append('path').classed('iwp-graph-object-yaccel',true).attr("style", stroke).attr("d", graphObject.paths.yAccel)
+			g.append('path').attr("iwp-measure", "yAccel").attr("style", stroke).attr("d", graphObject.paths.yAccel)
 
 	});
 
 
-/*
+	// Step 4- Dynamically add buttons for graph toggle on / off
 
 
-					visualPath1 = svg.append('path')
-		.classed("iwp-graph-line-red", true)
-		.attr("d", path1 )
 
 
-			} }*/
+	$.each(iwpGraphObjects,function(name, graphObject) {
+		
+		console.log("iwp5-graph:153> add buttons for: "+ name + "   visible? " + graphObject.visible)
 
+		if ( graphObject.visible ) { 
+
+			$(".iwp-graph-controls").append("<h4>" +name+"</h4>")
+
+			$.each(graphMeasures, function(i, measure) { 
+
+				$(".iwp-graph-controls").append("<button onclick='graphMeasureClick(this);' iwp-solid-name='"+name+"' iwp-measure='"+measure+"'>" +measure+"</button>")
+
+			});
+
+
+
+
+
+		}
+	});
 
 
 
 	console.log("iwp5graph:94> Initialized all Graph Objects: ", iwpGraphObjects)
 
 }
+
+
+
+function graphMeasureClick(button) { 
+
+	var dom = $(button);
+
+	var solidName = dom.attr("iwp-solid-name");
+	var measure = dom.attr("iwp-measure");
+
+
+	console.log("graphMeasureClick:191> I was just clicked, toggle this: " + solidName + " " + measure )
+
+	
+	$("g[iwp-solid-name='" + solidName +"'] path[iwp-measure='" + measure +"']").toggle();
+
+//	$("g[iwp-solid-name=Redball] path[iwp-measure=xVel]").toggle();
+
+
+	return false; // Do not submit the form or refresh the page.
+}
+
 
 
 
@@ -192,17 +234,16 @@ function graphStep(step, vars) {
 
 		paths = graphObject.paths
 		pathsSvg = graphObject.pathsSvg
-		m = ['xPos', 'yPos', 'xVel', 'yVel', 'xAccel', 'yAccel']
-		$.each(m, function(i, measure) {
+		$.each(graphMeasures, function(i, measure) {
 			var lcMeasure = measure.toLowerCase()
 			paths[measure].moveTo (
 				graphXScale(lastStep.t),
-				graphYScale(lastStep.object[lcMeasure])
+				graphYScale(lastStep[name][lcMeasure])
 			)
 
 			paths[measure].lineTo (
 				graphXScale(vars.t),
-				graphYScale(vars.object[lcMeasure])
+				graphYScale(vars[name][lcMeasure])
 			)
 
 			pathsSvg[measure].attr("d", paths[measure])

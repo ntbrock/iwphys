@@ -105,6 +105,9 @@ header('Content-Type: text/html');
       <!-- 2018 Graph Table now contains an SVG canvas for the graph -->
       <div id="graphTab" class="iwp-tab" style="display:inline;"> <!-- For easier debugging, starting w/ graph tab on -->
         <svg id="graph" class="iwp-graph" viewBox="-100 -100 200 200">    
+
+        <div id="graphControls" class="iwp-graph-controls"></div> <!-- Written by iwp5-graph.js -->
+
       </div>
 
 

@@ -59,7 +59,7 @@
 			<text>Position</text>
 			<units>m</units>
 			<calculator type="parametric">
-				<value>object.ypos</value>
+				<value>Redball.ypos</value>
 			</calculator>
 		</output>
 		<output>
@@ -71,7 +71,7 @@
 			</calculator>
 		</output>
 		<solid>
-			<name>object</name>
+			<name>Redball</name>
 			<shape type="circle" drawTrails="true" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
@@ -129,12 +129,12 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>object.xpos-1</value>
+					<value>Redball.xpos-1</value>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>object.ypos-(b+c*t)</value>
+					<value>Redball.ypos-(b+c*t)</value>
 				</calculator>
 			</ypath>
 		</solid>

@@ -42,3 +42,20 @@
 .iwp-graph-grid path {
 	display: none;
 }
+
+/** 
+ * Graph control buttons to turn series on/off */
+
+.iwp-graph-controls {
+	float: right;
+	width: 100px;
+}
+
+.iwp-graph-controls button { 
+	width: 100%;
+}
+
+
+
+
+
