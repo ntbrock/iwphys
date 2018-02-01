@@ -190,18 +190,21 @@ function graphStep(step, vars) {
 
 		console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
 
-		var g = svg.append("g").classed("iwp-graph-object", true)
 
-		var stroke = "stroke: rgba("+graphObject.color.red+","+graphObject.color.green+","+graphObject.color.blue+",1);"
+		var paths = graphObject.paths
 
-		g.append('path').classed('iwp-graph-object-xpos',true).attr("style", stroke).attr("d", graphObject.paths.xPos)
-		g.append('path').classed('iwp-graph-object-ypos',true).attr("style", stroke).attr("d", graphObject.paths.yPos)
+		paths.xPos.moveTo ( 
 
-		g.append('path').classed('iwp-graph-object-xvel',true).attr("style", stroke).attr("d", graphObject.paths.xVel)
-		g.append('path').classed('iwp-graph-object-yvel',true).attr("style", stroke).attr("d", graphObject.paths.yVel)
+			graphXScale(lastStep.t),
+			graphYScale(lastStep.object.ypos)
 
-		g.append('path').classed('iwp-graph-object-xaccel',true).attr("style", stroke).attr("d", graphObject.paths.xAccel)
-		g.append('path').classed('iwp-graph-object-yaccel',true).attr("style", stroke).attr("d", graphObject.paths.yAccel)
+		)
+
+		path1.moveTo(graphXScale(lastStep.t), graphYScale(lastStep.object.ypos))
+	path1.lineTo(graphXScale(vars.t), graphYScale(vars.object.ypos))
+	visualPath1.attr("d", path1)
+
+
 
 	});
 
