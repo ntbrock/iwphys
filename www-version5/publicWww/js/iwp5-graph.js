@@ -26,17 +26,23 @@ var visualPath = null;
 
 var xGrid = d3.axisTop(graphXScale).ticks(10).tickSize(1000);
 var yGrid = d3.axisRight(graphYScale).ticks(10).tickSize(1000);
-var xAxis = d3.axisBottom(graphXScale).ticks(10);
-var yAxis = d3.axisLeft(graphYScale).ticks(10);
+var xAxis = d3.axisBottom(graphXScale).ticks(10).tickSize(0);
+var yAxis = d3.axisLeft(graphYScale).ticks(10).tickSize(0);
 
 function graphInit() {
 
   var svg = d3.select('#graph');
-  console.log("iwp5-graph.js:15 found svg: " , svg);
-	xGrid(svg.append("g").classed("grid", true).attr("transform", "translate(0, 100)"));
-	yGrid(svg.append("g").classed("grid", true).attr("transform", "translate(-100, 0)"));
-	xAxis(svg.append("g").classed("iwp-graph-x-axis",true));
-	yAxis(svg.append("g").classed("iwp-graph-y-axis",true));
+
+
+  // Step 1 Build Grid And Axes
+  console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
+
+	xGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(0, 100)"));
+	yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100, 0)"));
+	
+	xAxis(svg.append("g").classed("iwp-graph-axis",true));
+	yAxis(svg.append("g").classed("iwp-graph-axis",true));
+
 	visualPath1 = svg.append('path')
 								   .classed("iwp-graph-line-red", true)
 									 .attr("d", path1 )
