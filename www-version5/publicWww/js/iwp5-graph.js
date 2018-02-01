@@ -120,7 +120,7 @@ function graphResetZero(step, vars, solids ) {
 
 		console.log("iwp5graph:115> Reset: name: ", name, "  graphObject: ", graphObject)
 
-		var g = svg.append("g").classed("iwp-graph-object", true)
+		var g = svg.append("g").classed("iwp-graph-object", true).attr("iwp-solid-name",name)
 
 		var stroke = "stroke: rgba("+graphObject.color.red+","+graphObject.color.green+","+graphObject.color.blue+",1);"
 
