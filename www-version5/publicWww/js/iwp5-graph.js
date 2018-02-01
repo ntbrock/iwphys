@@ -8,7 +8,7 @@ $(function() {
 	graphInit();
 })
 
-// Global container, re-populated on initialization with every object, the plotting series 
+// Global container, re-populated on initialization with every object, the plotting series
 // are then derived from here as well
 var iwpGraphObjects = {}
 var iwpGraphSeries = {}
@@ -43,11 +43,11 @@ function graphInit() {
 
 	xGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(0, 100)"));
 	yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100, 0)"));
-	
+
 	xAxis(svg.append("g").classed("iwp-graph-axis",true));
 	yAxis(svg.append("g").classed("iwp-graph-axis",true));
 
-	
+
 
 	/*
 	visualPath1 = svg.append('path')
@@ -70,16 +70,16 @@ function graphInit() {
 
 
 
-function graphResetZero(step, vars, solids ) { 
+function graphResetZero(step, vars, solids ) {
 	var svg = d3.select('#graph');
 
 	console.log("iwp-graph:69> graphResetZero, vars: ", vars)
 
 	// Step 2 - Populate Memory for each object that's graphable, plus all of it's visibility
-	$.each(solids,function(index, solid) { 
-		//console.log("iwp-graph:69> graphResetZero, solid: ", solid)	
+	$.each(solids,function(index, solid) {
+		//console.log("iwp-graph:69> graphResetZero, solid: ", solid)
 		var graphOptions = solid.shape.graphOptions
-		//console.log("iwp-graph:69> graphResetZero, solid graphOptions: ", graphOptions)	
+		//console.log("iwp-graph:69> graphResetZero, solid graphOptions: ", graphOptions)
 
 		iwpGraphObjects[solid.name] = { solid: solid,
 			graphOptions: graphOptions,
@@ -101,7 +101,7 @@ function graphResetZero(step, vars, solids ) {
 				xAccel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.xAccel == "true",
 				yAccel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yAccel == "true"
 			},
-			pathsSvg: { 
+			pathsSvg: {
 				xPos: null,
 				yPos: null,
 				xVel: null,
@@ -116,7 +116,7 @@ function graphResetZero(step, vars, solids ) {
 	// Step 3 Add each graph path to the svg and associate stroke color.
 	// Hang onto the svg Memory refernces for good luck.
 
-	$.each(iwpGraphObjects,function(name, graphObject) { 
+	$.each(iwpGraphObjects,function(name, graphObject) {
 
 		console.log("iwp5graph:115> Reset: name: ", name, "  graphObject: ", graphObject)
 
@@ -138,7 +138,7 @@ function graphResetZero(step, vars, solids ) {
 
 		graphObject.pathsSvg.xAccel =
 			g.append('path').classed('iwp-graph-object-xaccel',true).attr("style", stroke).attr("d", graphObject.paths.xAccel)
-		
+
 		graphObject.pathsSvg.yAccel =
 			g.append('path').classed('iwp-graph-object-yaccel',true).attr("style", stroke).attr("d", graphObject.paths.yAccel)
 
@@ -186,23 +186,28 @@ function graphStep(step, vars) {
 
 
 
-	$.each(iwpGraphObjects,function(name, graphObject) { 
+	$.each(iwpGraphObjects,function(name, graphObject) {
 
 		console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
 
-		graphObject.paths.xPos.moveTo ( 
-			graphXScale(lastStep.t),
-			graphYScale(lastStep.object.ypos)
-		)
+		paths = graphObject.paths
+		pathsSvg = graphObject.pathsSvg
+		m = ['xPos', 'yPos', 'xVel', 'yVel', 'xAccel', 'yAccel']
+		$.each(m, function(i, measure) {
+			var lcMeasure = measure.toLowerCase()
+			paths[measure].moveTo (
+				graphXScale(lastStep.t),
+				graphYScale(lastStep.object[lcMeasure])
+			)
 
-		graphObject.paths.xPos.lineTo ( 
-			graphXScale(vars.t),
-			graphYScale(vars.object.ypos)
-		)
+			paths[measure].lineTo (
+				graphXScale(vars.t),
+				graphYScale(vars.object[lcMeasure])
+			)
 
-		graphObject.pathsSvg.xPos.attr("d", graphObject.paths.xPos)
+			pathsSvg[measure].attr("d", paths[measure])
 
+		});
 	});
 
 }
-
