@@ -88,7 +88,7 @@ header('Content-Type: text/html');
     <div class="iwp-tab-container">
 
       <!-- 2018 Animation Table now contains description and some re-imagined inputs -->
-      <div class="iwp-tab" id="animationTab"> <!-- when dev complete, turn this tab back on by default  style="display:inline;" -->
+      <div class="iwp-tab" id="animationTab"  style="display:inline;"> 
 
         <div id="animationTitle">
             <h3><?= str_replace(".iwp","",end(explode('/', $animateFile))); ?></h3>
@@ -103,7 +103,7 @@ header('Content-Type: text/html');
 
 
       <!-- 2018 Graph Table now contains an SVG canvas for the graph -->
-      <div id="graphTab" class="iwp-tab" style="display:inline;"> <!-- For easier debugging, starting w/ graph tab on -->
+      <div id="graphTab" class="iwp-tab"> <!-- For easier debugging, starting w/ graph tab on -->
         <svg id="graph" class="iwp-graph" viewBox="-100 -100 200 200">    
 
         <div id="graphControls" class="iwp-graph-controls"></div> <!-- Written by iwp5-graph.js -->
