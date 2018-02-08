@@ -76,7 +76,7 @@ function graphResetZero(step, vars, solids ) {
 	console.log("iwp-graph:69> graphResetZero, vars: ", vars)
 
 	svg.select(".iwp-graph-object").remove();
-	
+
 
 
 
@@ -221,39 +221,35 @@ function graphStepForward(step, vars) {
 	if ( vars == undefined ) {
 		console.log("graphStepForward:217> Warning: Vars undefined at step: " + step);
 	} else { 
+		// console.log("iwp5-graph:221> graphStepForward: ", step)
+		// console.log("iwp5-graph:223> thisStep Vars: ", vars)
+		// console.log("iwp5-graph:223> lastStep Vars: ", lastStep)
 
+		// During each loop, iterate over all the solids that are graphable, and update paths based
+		// on incoming vars at step.
 
-/*
-	console.log("iwp5-graph:221> graphStepForward: ", step)
-	console.log("iwp5-graph:223> thisStep Vars: ", vars)
-	console.log("iwp5-graph:223> lastStep Vars: ", lastStep)
-*/
+		$.each(iwpGraphObjects,function(name, graphObject) {
 
-	// During each loop, iterate over all the solids that are graphable, and update paths based
-	// on incoming vars at step.
+			// console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
 
-	$.each(iwpGraphObjects,function(name, graphObject) {
+			paths = graphObject.paths
+			pathsSvg = graphObject.pathsSvg
+			$.each(graphMeasures, function(i, measure) {
+				var lcMeasure = measure.toLowerCase()
+				paths[measure].moveTo (
+					graphXScale(lastStep.t),
+					graphYScale(lastStep[name][lcMeasure])
+				)
 
-		console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
+				paths[measure].lineTo (
+					graphXScale(vars.t),
+					graphYScale(vars[name][lcMeasure])
+				)
 
-		paths = graphObject.paths
-		pathsSvg = graphObject.pathsSvg
-		$.each(graphMeasures, function(i, measure) {
-			var lcMeasure = measure.toLowerCase()
-			paths[measure].moveTo (
-				graphXScale(lastStep.t),
-				graphYScale(lastStep[name][lcMeasure])
-			)
+				pathsSvg[measure].attr("d", paths[measure])
 
-			paths[measure].lineTo (
-				graphXScale(vars.t),
-				graphYScale(vars[name][lcMeasure])
-			)
-
-			pathsSvg[measure].attr("d", paths[measure])
-
+			});
 		});
-	});
 
 	}
 }
@@ -262,7 +258,62 @@ function graphStepForward(step, vars) {
 
 function graphStepBackward(step, vars) {
 
-	console.log("iwp5-graph:256> graphStepBackward: ", step)
+	//console.log("iwp5-graph:256> graphStepBackward: ", step)
 	
+	$.each(iwpGraphObjects,function(name, graphObject) {
+
+		// paths = graphObject.paths
+		// pathsSvg = graphObject.pathsSvg
+		
+		$.each(graphMeasures, function(i, measure) {
+
+			//console.log("iwp5-graph.graphStepBackward:270> paths[" + measure + "] = ", paths[measure])
+
+
+			// Rebuild the memory path from the beginning of time.
+			// This is like the opening scene of the 5th element
+
+			var lastStep = null;
+			for( rebuildStep = 0 ; rebuildStep <= step; rebuildStep++ ) { 
+				var lcMeasure = measure.toLowerCase();
+				var vars = varsAtStep[rebuildStep];
+
+
+				if ( rebuildStep == 0 ) { 
+					// Erase everything
+					graphObject.paths[measure] = d3.path()
+					// Move to Zero Time, it's not necessarily the origin
+					graphObject.paths[measure].moveTo (
+						graphXScale(vars.t),
+						graphYScale(vars[name][lcMeasure])
+					)
+
+				} else { 
+
+					// Move to a real point in time.
+					graphObject.paths[measure].moveTo (
+						graphXScale(lastStep.t),
+						graphYScale(lastStep[name][lcMeasure])
+					)
+
+					graphObject.paths[measure].lineTo (
+						graphXScale(vars.t),
+						graphYScale(vars[name][lcMeasure])
+					)
+
+				}
+
+				lastStep = vars;
+			}
+
+
+			// Repaint screen w/ new reconstructed path
+			// console.log("iwp5-graph:313> Replacing d on : ", graphObject.pathsSvg[measure] )
+			graphObject.pathsSvg[measure].attr("d", graphObject.paths[measure])
+		});
+	});
+
+
+
 }
 
