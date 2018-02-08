@@ -219,11 +219,15 @@ function graphMeasureClick(button) {
 	var measure = dom.attr("iwp-measure");
 
 
-	console.log("graphMeasureClick:191> I was just clicked, toggle this: " + solidName + " " + measure )
+	// console.log("graphMeasureClick:191> I was just clicked, toggle this: " + solidName + " " + measure )
 
+	// Step 1 - Turn off everything
+	$("g.iwp-graph-object path").hide();
+	$(".iwp-graph-control-buttons button").removeClass("active")
+
+	// Step 2 - Turn on the one that's just been selected.
 	$("g.iwp-graph-object path[iwp-measure='" + measure +"']").toggle();
-
-//	$("g[iwp-solid-name=Redball] path[iwp-measure=xVel]").toggle();
+	$(".iwp-graph-control-buttons button[iwp-measure='"+measure+"']").addClass("active")
 
 
 	return false; // Do not submit the form or refresh the page.

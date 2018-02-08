@@ -69,7 +69,9 @@ div.iwp-graph-control-buttons {
 	background: orange !important;
 }
 
-
+.iwp-graph-control-legend label { 
+	vertical-align: top;
+}
 
 .iwp-graph-legend-square { 
 	width: 20px;
