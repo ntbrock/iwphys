@@ -60,6 +60,17 @@ div.iwp-graph-control-buttons {
 	margin-bottom: 2em;
 }
 
+.iwp-graph-control-buttons button { 
+	margin-bottom: 2px;
+	background: white;
+}
+
+.iwp-graph-control-buttons button.active { 
+	background: orange !important;
+}
+
+
+
 .iwp-graph-legend-square { 
 	width: 20px;
 	height: 20px;

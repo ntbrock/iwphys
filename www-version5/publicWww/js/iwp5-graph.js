@@ -166,9 +166,7 @@ function graphResetZero(step, vars, solids ) {
 	/** Build the control buttons */
 	$(".iwp-graph-controls").append("<div class='iwp-graph-control-buttons'></div>")
 	$.each(graphMeasures, function(i, measure) {
-
 		$(".iwp-graph-control-buttons").append("<button onclick='graphMeasureClick(this);' iwp-measure='"+measure+"'>" +measure+"</button>")
-
 	});
 	
 
@@ -184,10 +182,21 @@ function graphResetZero(step, vars, solids ) {
 			// Add the color style
 			$("div[iwp-solid-name='"+name+"'] .iwp-graph-legend-square").css("background-color", rgbColor(graphObject.color));
 
-
-			console.log("iwp5-graph:181> The graphOobject is: ", graphObject)
-
 		}
+
+		// Which series are intiially turned on?
+		$.each(graphMeasures, function(i, measure) {
+
+			if ( graphObject.pathsVisible[measure] ) {
+
+				console.log("iwp5-graph:195> This is visible: graphObject: ", graphObject, "measure", measure)
+
+				$(".iwp-graph-control-buttons button[iwp-measure='"+measure+"']").addClass("active")
+
+			}
+		});
+
+
 	});
 	$(".iwp-graph-controls").append("</div>")
 
