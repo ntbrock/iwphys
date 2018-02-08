@@ -162,29 +162,44 @@ function graphResetZero(step, vars, solids ) {
 
 	$(".iwp-graph-controls").html("")
 
+
+	/** Build the control buttons */
+	$(".iwp-graph-controls").append("<div class='iwp-graph-control-buttons'></div>")
+	$.each(graphMeasures, function(i, measure) {
+
+		$(".iwp-graph-control-buttons").append("<button onclick='graphMeasureClick(this);' iwp-measure='"+measure+"'>" +measure+"</button>")
+
+	});
+	
+
+	/** Buil the legend */
+	$(".iwp-graph-controls").append("<div class='iwp-graph-control-legend'></div>")	
 	$.each(iwpGraphObjects,function(name, graphObject) {
 
 		console.log("iwp5-graph:153> add buttons for: "+ name + "   visible? " + graphObject.visible)
 
 		if ( graphObject.visible ) {
 
-			$(".iwp-graph-controls").append("<h4>" +name+"</h4>")
+			$(".iwp-graph-control-legend").append("<div iwp-solid-name="+name+"><span class='iwp-graph-legend-square'></span> &nbsp; <label>" +name+"</label></div>")
+			// Add the color style
+			$("div[iwp-solid-name='"+name+"'] .iwp-graph-legend-square").css("background-color", rgbColor(graphObject.color));
 
-			$.each(graphMeasures, function(i, measure) {
 
-				$(".iwp-graph-controls").append("<button onclick='graphMeasureClick(this);' iwp-solid-name='"+name+"' iwp-measure='"+measure+"'>" +measure+"</button>")
-
-			});
+			console.log("iwp5-graph:181> The graphOobject is: ", graphObject)
 
 		}
 	});
-
+	$(".iwp-graph-controls").append("</div>")
 
 
 	console.log("iwp5graph:94> Initialized all Graph Objects: ", iwpGraphObjects)
 
 }
 
+
+function rgbColor(o) { 
+	return "rgb("+o.red+","+o.green+","+o.blue+")"
+}
 
 
 function graphMeasureClick(button) {
@@ -197,8 +212,7 @@ function graphMeasureClick(button) {
 
 	console.log("graphMeasureClick:191> I was just clicked, toggle this: " + solidName + " " + measure )
 
-
-	$("g[iwp-solid-name='" + solidName +"'] path[iwp-measure='" + measure +"']").toggle();
+	$("g.iwp-graph-object path[iwp-measure='" + measure +"']").toggle();
 
 //	$("g[iwp-solid-name=Redball] path[iwp-measure=xVel]").toggle();
 

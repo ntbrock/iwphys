@@ -48,14 +48,24 @@
 
 .iwp-graph-controls {
 	float: right;
-	width: 100px;
+	width: 90px;
+	margin-left: 4px;
 }
 
 .iwp-graph-controls button { 
 	width: 100%;
 }
 
+div.iwp-graph-control-buttons { 
+	margin-bottom: 2em;
+}
 
+.iwp-graph-legend-square { 
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	border: solid black 1px;
+}
 
 
 
