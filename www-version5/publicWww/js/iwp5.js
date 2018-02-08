@@ -50,6 +50,8 @@ function masterResetSteps() {
   graphResetZero(0, vars = vars0, solids = solids );
 
   archiveVarsAtStep( currentStep, vars0 ); // Boot up the environment
+
+  return vars0;
 }
 
 
@@ -128,17 +130,22 @@ function handleStep() {
 
     // Back button poerformance - Let's look at the historical array of variables, if we have it, reload
     // to avoid doing a recalcaultion
-    if ( varsAtStep[newStep] != undefined ) {
+
+    var vars = varsAtStep[newStep];
+    if ( vars != undefined ) {
       //console.log("[iwp5.js:118] Step " + newStep + " already exist, reloading for history.")
       repaintStep(newStep);
-
     } else {
   		// UI rendering is handled by the calculate as a side effect
-	 	  var vars = calculateVarsAtStep(newStep);
+	 	  vars = calculateVarsAtStep(newStep);
   		archiveVarsAtStep( newStep, vars );
+    }
 
-      // iwp5.1 - Adding Hook into the graph capabilties
-      graphStep(newStep, vars);
+    // iwp5.1 - Adding Hook into the graph capabilties
+    if ( changeStep > 0 ) { 
+      graphStepForward(newStep, vars);
+    } else if ( changeStep < 0 ) { 
+      graphStepBackward(newStep, vars);
     }
 
 	}
@@ -1301,7 +1308,9 @@ function queryUserFormInputDouble(input) {
 }
 
 function updateUserFormOutputDouble(output, newValue) {
-	var readValue = $("#" + output.name).val(newValue.toPrecision(5));
+  if ( typeof(output) != "undefined" ) { 
+  	var readValue = $("#" + output.name).val(newValue.toPrecision(5));
+  }
 }
 
 function updateTimeDisplay(t) {
@@ -1476,8 +1485,9 @@ function handleStopClick() {
 function handleResetClick() {
 	updateTimeDisplay(0);
   handleStopClick();
-	masterResetSteps();
+	var vars0 = masterResetSteps();
   updateUserFormOutputDouble();
+  graphResetZero(0, vars = vars0, solids = solids );
 	//document.getElementById(buttonIds.startStop).setAttribute("class", "Start");
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleStartClick()");
 }

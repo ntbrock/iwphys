@@ -75,6 +75,11 @@ function graphResetZero(step, vars, solids ) {
 
 	console.log("iwp-graph:69> graphResetZero, vars: ", vars)
 
+	svg.select(".iwp-graph-object").remove();
+	
+
+
+
 	// Step 2 - Populate Memory for each object that's graphable, plus all of it's visibility
 	$.each(solids,function(index, solid) {
 		//console.log("iwp-graph:69> graphResetZero, solid: ", solid)
@@ -207,24 +212,25 @@ function graphMeasureClick(button) {
 /**
  * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
  */
-function graphStep(step, vars) {
+function graphStepForward(step, vars) {
 
 	var svg = d3.select('#graph');
 	var lastStep = varsAtStep[step-1]
 
 	//var vars = varsAtStep[step];
 	if ( vars == undefined ) {
-		throw "No previous calculations available at step: " + step;
-	}
+		console.log("graphStepForward:217> Warning: Vars undefined at step: " + step);
+	} else { 
 
 
-	console.log("iwp5-graph:48> currentStep: ", vars)
-	console.log("iwp5-graph:49> lastStep: ", lastStep)
+/*
+	console.log("iwp5-graph:221> graphStepForward: ", step)
+	console.log("iwp5-graph:223> thisStep Vars: ", vars)
+	console.log("iwp5-graph:223> lastStep Vars: ", lastStep)
+*/
 
 	// During each loop, iterate over all the solids that are graphable, and update paths based
 	// on incoming vars at step.
-
-
 
 	$.each(iwpGraphObjects,function(name, graphObject) {
 
@@ -249,4 +255,14 @@ function graphStep(step, vars) {
 		});
 	});
 
+	}
 }
+
+
+
+function graphStepBackward(step, vars) {
+
+	console.log("iwp5-graph:256> graphStepBackward: ", step)
+	
+}
+
