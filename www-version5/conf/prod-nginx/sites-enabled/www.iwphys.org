@@ -20,11 +20,9 @@ server {
 	index index.php index.html index.htm;
 
 	ssl on;
-	# ssl_certificate /etc/ssl/www.iwphys.org.pem;
-
-	# Updated 2015-Jun-19 With Refreshed 1 year cert
-	ssl_certificate /etc/ssl/www.iwphys.org.crt;
-	ssl_certificate_key /etc/ssl/www.iwphys.org.key;
+	# Updated 2018-Mar-01 With Refreshed namecheap cert
+        ssl_certificate /etc/ssl/iwphys-org-namecheap-2018Mar/www.iwphys.org-2018Mar_CertWithBundle.crt;
+        ssl_certificate_key /etc/ssl/iwphys-org-namecheap-2018Mar/www.iwphys.org-2018Mar.key;
 
 	ssl_session_timeout 5m;
 
@@ -37,7 +35,7 @@ server {
 
 	# 2017-Feb-28 Webassign legacy URL Support
 	location ~ /pps/webInterface.php/Users/winters@ncssm.edu/(.*) { 
- 	    return 301 http://$server_name/5/animate.php/ftemo/$1;
+ 	    return 301 http://$server_name/5/animate.php/winters-ncssm-2009/$1;
 	}
 
 	location / {
