@@ -283,7 +283,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       // console.log("iwp5:277> Evaluated calculator for Solid.shape.angle: ", solid.shape.angle, " to :", calc.angle  )
     }
 
-    // For objects with a value beyond x , y, w , h
+    // For objects with a value beyond x , y, w , h -- This is used for the floatingText Value
     if ( solid.value != null && solid.value.calculator != null ) {
       calc.objectValue = evaluateCalculator( solid.name+".objectValue", solid.value.calculator, vars ).value
     }
@@ -730,7 +730,6 @@ function addObject(object) {
 
 
   if (object["@attributes"].class == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
-    //console.log("it's a circle");
     svgObjects.push( "<text id='solid_" +object.name+ "' x='" + xCanvas(object.xpath.calculator.value) + "' y='"+yCanvas(object.ypath.calculator.value)+"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
   }
 
@@ -1390,7 +1389,7 @@ if (solid.shape.type == "circle") {
   }
   else if (solid.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
 
-    //console.log("it's an object with propertieS: ", solid)
+    console.log("iwp5:1392> Floating Text Calculation: name: ", solid.name, "  objectValue: ", pathAndShape.objectValue );
 
 
     var safeText = solid.text
@@ -1399,15 +1398,19 @@ if (solid.shape.type == "circle") {
     var safeUnits = solid.units
     if ( solid.units == null || solid.units instanceof Object ) { safeUnits = ""; }
 
-
     var newLabel = safeText
-     if ( solid.showValue ) {
-       newLabel = safeText + " " + pathAndShape.objectValue + " " + safeUnits
-     }
+
+    if ( solid.showValue ) {
+        var formatValue =  parseFloat(Math.round(pathAndShape.objectValue * 100) / 100).toFixed(2);
+        newLabel = safeText + " " + formatValue + " " + safeUnits
+    }
+
+
     svgSolid.attr("x",xCanvas(pathAndShape.x))
     .attr("y",yCanvas(pathAndShape.y))
     .html(newLabel)
   }
+
   else if (solid.shape.type == "Bitmap" || solid.shape.type == "bitmap") {
 
     // console.log("iwp5:1414> Bitmap type! solid: " , solid,  "  pathAndShape: " , pathAndShape )
