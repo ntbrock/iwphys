@@ -636,12 +636,12 @@ function addSolid(solid) {
     console.log("compiled polygon",compiledSolid)
   }
   if ( compiledSolid.shape.type == "Bitmap") {
-    console.log("it's a bitmap")
+    console.log("iwp5:649> Solid is a Bitmap type, building angle: " , solid.shape.angle )
     if (solid.shape.angle) {
       compiledSolid["angle"] = {calculator: compileCalculator(solid.shape.angle.calculator)}
     }
     compiledSolid.fileUri = "../../images/"+solid.shape.file["@attributes"].image.split("/images/")[1]
-    console.log("fileUri:",compiledSolid.fileUri)
+    // console.log("fileUri:",compiledSolid.fileUri)
   }
 
   solids.push(compiledSolid);
@@ -669,7 +669,18 @@ function addSolid(solid) {
   }
   else if (compiledSolid.shape.type == "Bitmap") {
     //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+compiledSolid.fileUri+"'><title>"+solid.name+"</title></image>");
-    svgSolids.push("Bitmap "+compiledSolid.fileUri);
+
+    // 2018Mar01 Brockman - Refactoring the bitmap code here.
+    // https://stackoverflow.com/questions/10261731/can-not-add-image-inside-svg-via-jquery-image-tag-becomes-img
+
+    var id = "solid_"+solid.name;
+
+    var img = document.createElementNS('http://www.w3.org/2000/svg','image');
+    img.setAttributeNS(null,'id',id)
+    img.setAttributeNS('http://www.w3.org/1999/xlink','href',compiledSolid.fileUri);
+    img.setAttributeNS(null, 'visibility', 'visible');
+
+    svgSolids.push(img);
   }
   else {
     return;
@@ -1207,33 +1218,11 @@ function fitText(input) {
   };
 
 function addSolidsToCanvas(solids) {
-  //  console.log("solids: ", solids);
-  for (i in solids) {
-    if (solids[i].includes("Bitmap")) {
-      console.log(solids[i])
-      solidUri = solids[i].replace("Bitmap ","")
-      console.log(solidUri);
-      var idArray = solidUri.split("/")
-      var id = "solid_"+idArray[idArray.length-1].split(".")[0] // Get solid name back; temporary fix.
-      var img = document.createElementNS('http://www.w3.org/2000/svg', 'image')
-      img.setAttributeNS(null,'id',id)
-      $("svg").append(img)
-      $("#"+id).attr("xlink:href",solidUri)
-      delete solids[i]
 
-      /*
-      var img = document.createElementNS('http://www.w3.org/2000/svg','image');
-      img.setAttributeNS(null,'height','536');
-      img.setAttributeNS(null,'width','536');
-      img.setAttributeNS('http://www.w3.org/1999/xlink','href','https://upload.wikimedia.org/wikipedia/commons/2/22/SVG_Simple_Logo.svg');
-      img.setAttributeNS(null,'x','10');
-      img.setAttributeNS(null,'y','10');
-      img.setAttributeNS(null, 'visibility', 'visible');
-      $('svg').append(img);
-      */
-    }
+  for (i in solids) {
     $("#canvas").append(solids[i]);
   }
+
   //$("#canvas").append(solids);
   //Blitting effect
   $("#canvasDiv").html($("#canvasDiv").html());
@@ -1406,12 +1395,21 @@ if (solid.shape.type == "circle") {
     .attr("y",yCanvas(pathAndShape.y))
     .html(newLabel)
   }
-  else if (solid.shape.type == "Bitmap") {
-    console.log(solid.name.toLowerCase())
+  else if (solid.shape.type == "Bitmap" || solid.shape.type == "bitmap") {
+
+//    console.log("iwp5:1411> Bitmap type! solid: " , solid,  "  pathAndShape: " , pathAndShape )
+
     var angle = pathAndShape.angle*-180/Math.PI
     var xTran = xCanvas(pathAndShape.x)+xWidth(pathAndShape.width*2)/2
     var yTran = yCanvas(pathAndShape.y)//yHeight(pathAndShape.height*2)/2//-yHeight(pathAndShape.height)
-    $("#solid_"+solid.name.toLowerCase()).attr("x",xCanvas(pathAndShape.x))
+
+    var domId = "#solid_"+solid.name.toLowerCase();
+    var solidSvg = $(domId);
+
+    console.log("iwp5:1411> Bitmap type, xTran: ", xTran, " yTran: ", yTran, "  id: ", domId, "  solidSvg: ", solidSvg);
+
+
+    solidSvg.attr("x",xCanvas(pathAndShape.x))
     .attr("y",yCanvas(pathAndShape.y))
     .attr("preserveAspectRatio","none")
     .attr("width",xWidth(pathAndShape.width*2))
@@ -1419,6 +1417,9 @@ if (solid.shape.type == "circle") {
     if (solid.shape.angle) {
       svgSolid.attr("transform","rotate("+angle+" "+xTran+" "+yTran+")");
     }
+
+
+
   }
   else {
   	//Debugging 25 Jan 2017
@@ -1436,8 +1437,7 @@ if (solid.shape.type == "circle") {
 
       // 2018Mar01 - Limit rendering up to current step
       if ( i <= currentStep ) {
-          console.log("iwp5.js:1437> Building Trail Points: solid.name: " , solid.name, " i: ", i, "  currentStep: " , currentStep, " currentState: " , currentState );
-
+          // console.log("iwp5.js:1437> Building Trail Points: solid.name: " , solid.name, " i: ", i, "  currentStep: " , currentStep, " currentState: " , currentState );
           var currentState = varsAtStep[i][solid.name]
           //console.log("currentState",currentState)
           pair = {x: currentState.x, y: currentState.y }

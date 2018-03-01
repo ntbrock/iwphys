@@ -1,3 +1,4 @@
+
 /**
  * Interactive Web Physics 5 - Javascript SVG Animation Implementation
  * Ryan Steed, Taylor Brockman 2016 - Version 5.0 Initial Port to HTML + SVG
@@ -39,7 +40,7 @@ function graphInit() {
 
 
 	// Step 1 Build Grid And Axes
-	console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
+	// console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
 
 	xGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(0, 100)"));
 	yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100, 0)"));
@@ -73,7 +74,7 @@ function graphInit() {
 function graphResetZero(step, vars, solids ) {
 	var svg = d3.select('#graph');
 
-	console.log("iwp-graph:69> graphResetZero, vars: ", vars)
+	// console.log("iwp-graph:69> graphResetZero, vars: ", vars)
 
 	svg.select(".iwp-graph-object").remove();
 
@@ -128,7 +129,7 @@ function graphResetZero(step, vars, solids ) {
 
 	$.each(iwpGraphObjects,function(name, graphObject) {
 
-		console.log("iwp5graph:115> Reset: name: ", name, "  graphObject: ", graphObject)
+		// console.log("iwp5graph:115> Reset: name: ", name, "  graphObject: ", graphObject)
 
 		var g = svg.append("g").classed("iwp-graph-object", true).attr("iwp-solid-name",name)
 
@@ -174,7 +175,7 @@ function graphResetZero(step, vars, solids ) {
 	$(".iwp-graph-controls").append("<div class='iwp-graph-control-legend'></div>")	
 	$.each(iwpGraphObjects,function(name, graphObject) {
 
-		console.log("iwp5-graph:153> add buttons for: "+ name + "   visible? " + graphObject.visible)
+		// console.log("iwp5-graph:153> add buttons for: "+ name + "   visible? " + graphObject.visible)
 
 		if ( graphObject.visible ) {
 
@@ -189,7 +190,7 @@ function graphResetZero(step, vars, solids ) {
 
 			if ( graphObject.pathsVisible[measure] ) {
 
-				console.log("iwp5-graph:195> This is visible: graphObject: ", graphObject, "measure", measure)
+				// console.log("iwp5-graph:195> This is visible: graphObject: ", graphObject, "measure", measure)
 
 				$(".iwp-graph-control-buttons button[iwp-measure='"+measure+"']").addClass("active")
 
@@ -201,7 +202,7 @@ function graphResetZero(step, vars, solids ) {
 	$(".iwp-graph-controls").append("</div>")
 
 
-	console.log("iwp5graph:94> Initialized all Graph Objects: ", iwpGraphObjects)
+	// console.log("iwp5graph:94> Initialized all Graph Objects: ", iwpGraphObjects)
 
 }
 
