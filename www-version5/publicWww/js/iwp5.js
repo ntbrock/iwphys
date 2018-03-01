@@ -255,7 +255,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       yaccel: 0,
       height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars ).value,
       width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value,
-    } //BOOK
+    }
     if ( solid.shape.type == "polygon" ) {
       //console.log(solid)
       calc["points"] = []
@@ -279,7 +279,6 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     }
 
     // For objects with a value beyond x , y, w , h
-    // BOOK 2
     if ( solid.value != null && solid.value.calculator != null ) {
       calc.objectValue = evaluateCalculator( solid.name+".objectValue", solid.value.calculator, vars ).value
     }
@@ -1326,7 +1325,7 @@ function updateTimeDisplay(t) {
 function updateSolidSvgPathAndShape(solid, pathAndShape) {
 
 	var svgSolid = $("#solid_" + solid.name);
-  var svgTrail = $("#solid_" + solid.name + "_trail")
+    var svgTrail = $("#solid_" + solid.name + "_trail")
 	//console.log("updateSolidSvgPathAndShape: ", solid, svgSolid, pathAndShape);
 	// translate from math to visual.
 	/* pathAndShape: { height: 1, width: 1, x: 9, xdisp: 9, y: 0, ydisp: 0 }*/
@@ -1434,15 +1433,21 @@ if (solid.shape.type == "circle") {
     var points = []
     var pointsAttr = ""
     for (i in varsAtStep) {
-      var currentState = varsAtStep[i][solid.name]
-      //console.log("currentState",currentState)
-      pair = {x: currentState.x, y: currentState.y }
-      points.push(pair)
+
+      // 2018Mar01 - Limit rendering up to current step
+      if ( i <= currentStep ) {
+          console.log("iwp5.js:1437> Building Trail Points: solid.name: " , solid.name, " i: ", i, "  currentStep: " , currentStep, " currentState: " , currentState );
+
+          var currentState = varsAtStep[i][solid.name]
+          //console.log("currentState",currentState)
+          pair = {x: currentState.x, y: currentState.y }
+          points.push(pair)
+      }
     }
     $.each( points, function( index, i ) {
-      //console.log(i)
       pointsAttr += xCanvas(points[index].x)+","+yCanvas(points[index].y)+" "
-      //console.log(pointsAttr)
+      // console.log("iwp5.js:1443> Drawing Trail Points attr: ", pointsAttr );
+
     });
     svgTrail.attr("points", pointsAttr)
   }
