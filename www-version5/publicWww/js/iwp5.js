@@ -78,6 +78,12 @@ varsConstants = {
  }
 
 
+// Global Number Formatting routine.
+function printDecimal( incomingNumber, incomingPlaces ) {
+    console.log("iwp5:83> printDecimal: ", incomingNumber, " places: " , incomingPlaces );
+    return parseFloat(Math.round(incomingNumber * Math.pow(10,incomingPlaces)) / Math.pow(10,incomingPlaces)).toFixed(incomingPlaces);
+}
+
 function setStepDirection(newDirection) {
 	changeStep = newDirection;
 }
@@ -914,9 +920,8 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
 
       if ( verbose ) {
-        console.log("iwp5:661>", resultVariable, "BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", JSON.stringify(vars) )
-
-          }
+        // console.log("iwp5:661>", resultVariable, "BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", JSON.stringify(vars) )
+      }
 
       var acceleration = null;
       try {
@@ -1389,8 +1394,7 @@ if (solid.shape.type == "circle") {
   }
   else if (solid.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
 
-    console.log("iwp5:1392> Floating Text Calculation: name: ", solid.name, "  objectValue: ", pathAndShape.objectValue );
-
+    // console.log("iwp5:1392> Floating Text Calculation: name: ", solid.name, "  objectValue: ", pathAndShape.objectValue );
 
     var safeText = solid.text
     if ( solid.text == null || solid.text instanceof Object ) { safeText = ""; }
@@ -1401,10 +1405,11 @@ if (solid.shape.type == "circle") {
     var newLabel = safeText
 
     if ( solid.showValue ) {
-        var formatValue =  parseFloat(Math.round(pathAndShape.objectValue * 100) / 100).toFixed(2);
-        newLabel = safeText + " " + formatValue + " " + safeUnits
+        // console.log("iwp5:1411> Printing Decimal for : ", incomingNumber );
+        var formatted = printDecimal( pathAndShape.objectValue , 2 )
+        //var formatted = pathAndShape.objectValue
+        newLabel = safeText + " " + formatted + " " + safeUnits
     }
-
 
     svgSolid.attr("x",xCanvas(pathAndShape.x))
     .attr("y",yCanvas(pathAndShape.y))
