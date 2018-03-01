@@ -20,7 +20,7 @@ var objects = [];
 var htmlInputs = [];
 var htmlOutputs = [];
 var svgSolids = [];
-var svgObjects =[];
+var svgObjects = [];
 
 
 // What is a step? An interation that is a multiple of t delta.   Current T =   T0 + step * Tdelta
@@ -67,14 +67,15 @@ function masterResetSteps() {
 
 // Provide a historical variable set at each tick (for trails, graphing).
 
-// Monkey Patch the Match space to extend in our own functions.
+// 2018Mar01 Found that monkeypatching mathjs was non-reliable so now including in the vars scope.
 // Converts from degrees to radians. this makes the 'toRadians(..)' function available in the Calculator space.
-math.toRadians = function(degrees) { return degrees * Math.PI / 180; };
- // Converts from radians to degrees.
-math.toDegrees = function(radians) { return radians * 180 / Math.PI; };
-
 // Likely the are are other physical constants that we'll need to load as well.
-varsConstants = { G : -9.8, step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } },}
+varsConstants = {
+ G : -9.8,
+ step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } },
+ toRadians : function(degrees) { return degrees * Math.PI / 180; },
+ toDegrees : function(radians) { return radians * 180 / Math.PI; }
+ }
 
 
 function setStepDirection(newDirection) {
@@ -255,7 +256,10 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       yaccel: 0,
       height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars ).value,
       width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value,
+      angle: 0
     }
+
+
     if ( solid.shape.type == "polygon" ) {
       //console.log(solid)
       calc["points"] = []
@@ -267,15 +271,16 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       };
       calc.points.push(point);
       });
-      console.log("just calced!",calc)
+      console.log("iwp5:270> Polygon, just calced: ",calc)
 
         //i.xpath = evaluateCalculator(solid.name+".x"+toString(counter), i.xpath.calculator, vars).value
         //i.ypath = evaluateCalculator(solid.name+".x"+toString(counter), i.ypath.calculator, vars).value
         //console.log("i after",i)
     }
+
     if ( solid.shape.angle ) {
-      console.log("solid.shape",solid.shape)
-      calc["angle"] = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, vars).value
+      calc.angle = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, vars).value
+      // console.log("iwp5:277> Evaluated calculator for Solid.shape.angle: ", solid.shape.angle, " to :", calc.angle  )
     }
 
     // For objects with a value beyond x , y, w , h
@@ -610,6 +615,11 @@ function addSolid(solid) {
   		height: {
   			calculator: compileCalculator(solid.shape.height.calculator)
   		},
+  		// 2018Mar01 Introduce Angle for Bitmap rotation
+        angle: {
+            calculator: compileCalculator(solid.shape.angle.calculator)
+        }
+
   	},
   	xpath: {
   		calculator : compileCalculator(solid.xpath.calculator)
@@ -636,7 +646,7 @@ function addSolid(solid) {
     console.log("compiled polygon",compiledSolid)
   }
   if ( compiledSolid.shape.type == "Bitmap") {
-    console.log("iwp5:649> Solid is a Bitmap type, building angle: " , solid.shape.angle )
+    // console.log("iwp5:649> Solid is a Bitmap type, building angle: " , solid.shape.angle )
     if (solid.shape.angle) {
       compiledSolid["angle"] = {calculator: compileCalculator(solid.shape.angle.calculator)}
     }
@@ -700,7 +710,7 @@ function addObject(object) {
     shape: {
       type: object["@attributes"].class,
       height: 1,
-      width: 1,
+      width: 1
     },
     text: object.text,
     units: object.units,
@@ -733,49 +743,50 @@ function compileCalculator(iwpCalculator) {
 	var incomingType = iwpCalculator["@attributes"].type
 	if ( incomingType == "parametric" ) {
 
-		/**
-			<calculator type="parametric">
-					<value>ar.value*cos((kr.value/mr.value)^.5*t+toRadians(pr.value)*1)</value>
-				</calculator>
+		/*
+        <calculator type="parametric">
+            <value>ar.value*cos((kr.value/mr.value)^.5*t+toRadians(pr.value)*1)</value>
+        </calculator>
 		*/
 
-    var e = migrateLegacyEquation(iwpCalculator.value);
+        var e = migrateLegacyEquation(iwpCalculator.value);
 
 		var c = {
 			type: "mathjs",
 			compiled: math.compile( e ),
 			equation: e
 		}
-		// console.log("compileCalculator:171> value : ", iwpCalculator.value, " compiledTo: ", c)
-    return c;
+
+		// console.log("iwp5:760> Compiled: ", iwpCalculator.value, " compiledTo: ", c)
+        return c;
+
 
 	} else if ( incomingType == "euler") {
-
-
-    var a = migrateLegacyEquation(iwpCalculator.acceleration);
-    var v = migrateLegacyEquation(iwpCalculator.velocity);
-    var d = migrateLegacyEquation(iwpCalculator.displacement);
-
-    var c =  {
-      type: "euler-mathjs",
-      initialDisplacementCompiled: math.compile( d ),
-      initialVelocityCompiled: math.compile( v ),
-      accelerationCompiled: math.compile( a ),
-      equation: {
-        acceleration : a,
-        velocity : v,
-        displacement : d
-      }
-    }
-    return c;
-    /*
+        /*
         <calculator type="euler">
           <displacement>initxdisp</displacement>
           <velocity>initxvel</velocity>
           <acceleration>-5*t</acceleration>
         </calculator>
+        */
 
-    */
+        var a = migrateLegacyEquation(iwpCalculator.acceleration);
+        var v = migrateLegacyEquation(iwpCalculator.velocity);
+        var d = migrateLegacyEquation(iwpCalculator.displacement);
+
+        var c =  {
+          type: "euler-mathjs",
+          initialDisplacementCompiled: math.compile( d ),
+          initialVelocityCompiled: math.compile( v ),
+          accelerationCompiled: math.compile( a ),
+          equation: {
+            acceleration : a,
+            velocity : v,
+            displacement : d
+          }
+        }
+        return c;
+
 
   }
   else {
@@ -831,10 +842,12 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 //vars.F = 0.005125000000000001
 
       // 2016Oct11 -- Parameteric Calculators need to calculate their own instantaneous velocity.
+      // console.log("iwp5:846> Running vars with our custom functions: ", vars, "  to this calculator: " , calculator );
 
-			var result = calculator.compiled.eval(vars);
+	  var result = calculator.compiled.eval(vars);
+
       if ( !isFinite(result) ) {
-        throw "compiled vars are not finite"
+        throw "iwp5:851 Compiled vars are not finite"
       }
 
       if ( calculator.latestValue == undefined ) {
@@ -1397,7 +1410,7 @@ if (solid.shape.type == "circle") {
   }
   else if (solid.shape.type == "Bitmap" || solid.shape.type == "bitmap") {
 
-//    console.log("iwp5:1411> Bitmap type! solid: " , solid,  "  pathAndShape: " , pathAndShape )
+    // console.log("iwp5:1414> Bitmap type! solid: " , solid,  "  pathAndShape: " , pathAndShape )
 
     var angle = pathAndShape.angle*-180/Math.PI
     var xTran = xCanvas(pathAndShape.x)+xWidth(pathAndShape.width*2)/2
@@ -1406,7 +1419,7 @@ if (solid.shape.type == "circle") {
     var domId = "#solid_"+solid.name.toLowerCase();
     var solidSvg = $(domId);
 
-    console.log("iwp5:1411> Bitmap type, xTran: ", xTran, " yTran: ", yTran, "  id: ", domId, "  solidSvg: ", solidSvg);
+    // console.log("iwp5:1423> Bitmap type,  id: ", domId, " xTran: ", xTran, " yTran: ", yTran, "  Angle: ", pathAndShape.angle, "  solidSvg: ", solidSvg);
 
 
     solidSvg.attr("x",xCanvas(pathAndShape.x))
@@ -1414,7 +1427,9 @@ if (solid.shape.type == "circle") {
     .attr("preserveAspectRatio","none")
     .attr("width",xWidth(pathAndShape.width*2))
     .attr("height",yHeight(pathAndShape.height*2))
-    if (solid.shape.angle) {
+    if (angle) {
+
+
       svgSolid.attr("transform","rotate("+angle+" "+xTran+" "+yTran+")");
     }
 
