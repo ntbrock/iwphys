@@ -80,7 +80,7 @@ varsConstants = {
 
 // Global Number Formatting routine.
 function printDecimal( incomingNumber, incomingPlaces ) {
-    console.log("iwp5:83> printDecimal: ", incomingNumber, " places: " , incomingPlaces );
+    // console.log("iwp5:83> printDecimal: ", incomingNumber, " places: " , incomingPlaces );
     return parseFloat(Math.round(incomingNumber * Math.pow(10,incomingPlaces)) / Math.pow(10,incomingPlaces)).toFixed(incomingPlaces);
 }
 
@@ -309,10 +309,12 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       calc.yaccel = yComplex.acceleration
     }
     vars[solid.name] = calc
+
     // WARNING: updating svg display deep inside the calc route.
+    // console.log("iwp5:314> Warning: Invoking updateSolidSvgPathAndShape deep in recalc: ", solid.name);
+
     updateSolidSvgPathAndShape(solid, calc)
 
-    //console.log("iwp:178: Wrote solid: ", solid.name, " to SVG & vars: ", vars )
 
 }
 
@@ -327,6 +329,7 @@ var CONFIG_clone_step_from_previous = false;
 
 /**
  * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
+ * This is used mostly for the backwards step.
  */
 function repaintStep(step) {
   var vars = varsAtStep[step];
@@ -340,9 +343,19 @@ function repaintStep(step) {
       updateUserFormOutputDouble(output, vars[output.name]);
    });
 
-  $.each( solids, function( index, solid ) {
+   // console.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, solids: ", solids );
+
+   $.each( solids, function( index, solid ) {
       updateSolidSvgPathAndShape(solid, vars[solid.name])
    });
+
+   // console.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, objects: ", objects );
+
+   $.each( objects, function( index, object ) {
+      updateSolidSvgPathAndShape(object, vars[object.name])
+   });
+
+
   }
 }
 
@@ -698,7 +711,12 @@ function addSolid(solid) {
 
     svgSolids.push(img);
   }
+
+
+
   else {
+
+    console.log("iwp5:712> ERROR: Unrecognized Solid Shape Type: ", compiledSolid.shape.type)
     return;
   };
   if (solid.shape["@attributes"].drawTrails == "true") {
@@ -1330,6 +1348,9 @@ function updateTimeDisplay(t) {
 
 function updateSolidSvgPathAndShape(solid, pathAndShape) {
 
+    console.log("iwp5:1333> updateSolidSvgPathAndShape: ", solid )
+
+
 	var svgSolid = $("#solid_" + solid.name);
     var svgTrail = $("#solid_" + solid.name + "_trail")
 	//console.log("updateSolidSvgPathAndShape: ", solid, svgSolid, pathAndShape);
@@ -1410,6 +1431,8 @@ if (solid.shape.type == "circle") {
         //var formatted = pathAndShape.objectValue
         newLabel = safeText + " " + formatted + " " + safeUnits
     }
+
+    console.log("iwp5:1414> Solid Reversal motion, x: ", xCanvas(pathAndShape.x), " y: ", yCanvas(pathAndShape.y))
 
     svgSolid.attr("x",xCanvas(pathAndShape.x))
     .attr("y",yCanvas(pathAndShape.y))
