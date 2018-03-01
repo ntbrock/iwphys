@@ -74,7 +74,8 @@ varsConstants = {
  G : -9.8,
  step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } },
  toRadians : function(degrees) { return degrees * Math.PI / 180; },
- toDegrees : function(radians) { return radians * 180 / Math.PI; }
+ toDegrees : function(radians) { return radians * 180 / Math.PI; },
+ sign: function(input) { if ( input < 0 ) { return -1 } else { return 1 } }
  }
 
 
@@ -562,7 +563,12 @@ function addInput(input) {
   if ( input.hidden == "1" ) {
     style = "display:none;"
   }
-  htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td class='iwp-input-label'>"+ input.text +"</td><td class='iwp-input-value'><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + input.units + "</td></tr>");
+
+    // 2018Mar01 Fix for empty unit labels
+  var unitLabel = "";
+  if ( typeof(input.units)=="string" ) { unitLabel = input.units; }
+
+  htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td class='iwp-input-label'>"+ input.text +"</td><td class='iwp-input-value'><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + unitLabel + "</td></tr>");
 }
 
 function addOutput(output) {
@@ -633,12 +639,7 @@ function addSolid(solid) {
   		},
   		height: {
   			calculator: compileCalculator(solid.shape.height.calculator)
-  		},
-  		// 2018Mar01 Introduce Angle for Bitmap rotation
-        angle: {
-            calculator: compileCalculator(solid.shape.angle.calculator)
-        }
-
+  		}
   	},
   	xpath: {
   		calculator : compileCalculator(solid.xpath.calculator)
@@ -648,7 +649,7 @@ function addSolid(solid) {
   	}
   };
 
-  // Ifthe problem iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
+  // If the problem iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
   // hard to do as part of the initialization because it is a dynamic list.
   // Add points here..?
   if ( compiledSolid.shape.type == "polygon" ) {
@@ -664,10 +665,13 @@ function addSolid(solid) {
     });
     console.log("compiled polygon",compiledSolid)
   }
+
   if ( compiledSolid.shape.type == "Bitmap") {
     // console.log("iwp5:649> Solid is a Bitmap type, building angle: " , solid.shape.angle )
     if (solid.shape.angle) {
-      compiledSolid["angle"] = {calculator: compileCalculator(solid.shape.angle.calculator)}
+
+
+      compiledSolid.shape.angle = {calculator: compileCalculator(solid.shape.angle.calculator)}
     }
     compiledSolid.fileUri = "../../images/"+solid.shape.file["@attributes"].image.split("/images/")[1]
     // console.log("fileUri:",compiledSolid.fileUri)
