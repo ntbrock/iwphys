@@ -7,6 +7,7 @@ import javax.inject._
 import edu.ncssm.iwp.math.designers.MCalculator_Abstract_subDesigner
 import edu.ncssm.iwp.math.{MCalculator, MCalculator_Parametric, MDataHistory, MVariables}
 import edu.ncssm.iwp.objects.{DObject_Solid, DObject_Time}
+import edu.ncssm.iwp.plugin.IWPAnimated
 import edu.ncssm.iwp.problemdb.{DProblemManager, DProblemState}
 import play.api._
 import play.api.libs.json.{JsNumber, JsObject, JsString, Json}
@@ -79,23 +80,54 @@ class DProblemController @Inject()(cc: ControllerComponents) extends AbstractCon
 
     val time = p.getTimeObject
 
-    val frames = mutable.Queue[(Double, String)]()
+    val frames = mutable.Queue[(Double, JsObject)]()
 
     while (time.getTime < time.getStopTime ) {
 
       time.tick(ps)
-
       val t = time.getTime
 
-      frames.enqueue((t, s"Time ${t}\n"))
+      // Now tick everything else in teh animation
 
-      Logger.info(s"DProblemConroller:88> Time: ${time.getTime}")
+      val i = p.getObjectsForTicking.iterator
+      while ( {
+        i.hasNext
+      }) {
+        val o = i.next.asInstanceOf[Any]
+        if (o.isInstanceOf[IWPAnimated] && ! o.isInstanceOf[DObject_Time]  ) { // don't do time twice.
+          val animated = o.asInstanceOf[IWPAnimated]
+          animated.tick(ps)
+        }
+      }
+
+
+      // Render the current variables as a map
+
+      val varMap = new mutable.HashMap[String,Double]
+
+
+      val vars = ps.vars.getCurrentTickVars
+      val varKeyi = vars.iterator()
+      while ( {varKeyi.hasNext}) {
+        val key = varKeyi.next().asInstanceOf[String]
+        val value = vars.get(key)
+
+        varMap.put(key,value)
+        //Logger.info(s"DProblemController:110> ${key} = ${value}")
+      }
+
+      val jsonMap = JsObject(varMap.toMap.map{ case(k,v) => k -> JsNumber(v) })
+
+
+      frames.enqueue((t, jsonMap))
+
+      Logger.info(s"DProblemConroller:88> Time: ${time.getTime}  VarMap: ${varMap.toMap}")
       ps.tickStepForward()
 
     }
 
 
-    Ok(s"View: ${path},  frames: ${frames},  p : ${p}")
+    Ok(s"View: ${path}\n\nframes:\n${frames}\n\np : ${p}")
 
   }
 
