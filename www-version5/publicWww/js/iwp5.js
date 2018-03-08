@@ -550,8 +550,12 @@ function setWindow(inWindow) {
 
 // "GraphWindow": { "xmin": "0.0", "xmax": "5.0", "ymin": "-50.0", "ymax": "50.0", "xgrid": "0.5", "ygrid": "10.0"
 function setGraphWindow(inGraphWindow) {
-  //console.log("graphWindow :", inGraphWindow);
+  // console.log("iwp5:553> graphWindow :", inGraphWindow);
   graphWindow = inGraphWindow;
+
+  // Hook into new iwp5-graph to redraw axes.
+  graphSetWindowFromAnimation(graphWindow);
+
 }
 
 function addInput(input) {
@@ -1031,7 +1035,7 @@ function parseProblemToMemory( problem ) {
   setWindow(problem.objects.window);
 
   // GraphWindow
-  setGraphWindow(problem.objects.graphWindow);
+  setGraphWindow(problem.objects.GraphWindow);
 
 
   // Inputs - These could be an array OR a single item.
@@ -1542,7 +1546,7 @@ function handleResetClick() {
   handleStopClick();
 	var vars0 = masterResetSteps();
   updateUserFormOutputDouble();
-  graphResetZero(0, vars = vars0, solids = solids );
+  graphResetZero(0, vars = vars0, solids = solids, graphWindow );
 	//document.getElementById(buttonIds.startStop).setAttribute("class", "Start");
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleStartClick()");
 }

@@ -50,6 +50,8 @@ var yAxis = d3.axisLeft(graphYScale).ticks(10).tickSize(0);
 
 function graphInit() {
 
+    console.log("iwp5-graph:53> graphInit");
+
 	var svg = d3.select('#graph');
 
 
@@ -82,9 +84,13 @@ function graphInit() {
 }
 
 
+function graphSetWindowFromAnimation(graphWindow) {
+
+    console.log("iwp5-graph:87> graphSetWindow: " , graphWindow )
+}
 
 
-function graphResetZero(step, vars, solids ) {
+function graphResetZero(step, vars, solids, graphWindow ) {
 	var svg = d3.select('#graph');
 
 	// console.log("iwp-graph:69> graphResetZero, vars: ", vars)
