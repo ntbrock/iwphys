@@ -204,6 +204,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
   // Hande Complex return types from Euler Calculator
     if ( xComplex.velocity != undefined ) {
+
       calcX.xvel = xComplex.velocity
     }
     if ( xComplex.acceleration != undefined ) {
@@ -298,7 +299,13 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
     // Hande Complex return types from Euler Calculator
     if ( xComplex.velocity != undefined ) {
+
+
+        // 2018Mar08 Confirmed this line is where xvelocity is assigned to graph.
       calc.xvel = xComplex.velocity
+
+        console.log("iwp5:306> step: ", step, "  calc.xvel: " , calc.xvel)
+
     }
     if ( xComplex.acceleration != undefined ) {
       calc.xaccel = xComplex.acceleration

@@ -87,13 +87,23 @@ function graphInit() {
 function graphSetWindowFromAnimation(graphWindow) {
 
     console.log("iwp5-graph:87> graphSetWindow: " , graphWindow )
+
+    // TODO
+    //  2018Mar08 Matt Start here to connect the graph extents to the d3 svg.
+
+
 }
 
 
 function graphResetZero(step, vars, solids, graphWindow ) {
 	var svg = d3.select('#graph');
 
-	// console.log("iwp-graph:69> graphResetZero, vars: ", vars)
+	// console.log("iwp-graph:101> graphResetZero, vars: ", vars)
+	console.log("iwp-graph:102> graphResetZero, solids: ", solids)
+
+
+
+
 
 	svg.select(".iwp-graph-object").remove();
 

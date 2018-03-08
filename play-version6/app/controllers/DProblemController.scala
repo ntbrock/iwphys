@@ -43,7 +43,7 @@ class DProblemController @Inject()(cc: ControllerComponents) extends AbstractCon
 
     val vars = ps.vars()
 
-    vars.setAtCurrentTick("tbwashere", 1.0)
+    vars.setAtCurrentTick("tbwashere", 999999.0)
     vars.setAtCurrentTick("delta_t", 1.0)
 
 
@@ -80,9 +80,11 @@ class DProblemController @Inject()(cc: ControllerComponents) extends AbstractCon
 
     val time = p.getTimeObject
 
-    val frames = mutable.Queue[JsObject]()
 
-    while (time.getTime < time.getStopTime ) {
+    val frames = mutable.Queue[JsObject]()
+    val maxFrame = 1000
+
+    while (time.getTime < time.getStopTime && frames.size < maxFrame ) {
       Logger.info(s"DProblemController:86> time: ${time.getTime}")
       time.tick(ps)
       val t = time.getTime
