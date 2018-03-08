@@ -33,6 +33,11 @@
 	font-size: 6px;
 }
 
+.iwp-graph-axis-label {
+	fill: rgb(150,150,150);
+	font-size: 6px;e
+}
+
 .iwp-graph-grid line {
 	stroke: lightgrey;
 	stroke-width: 0.3;
@@ -43,7 +48,7 @@
 	display: none;
 }
 
-/** 
+/**
  * Graph control buttons to turn series on/off */
 
 .iwp-graph-controls {
@@ -52,33 +57,30 @@
 	margin-left: 4px;
 }
 
-.iwp-graph-controls button { 
+.iwp-graph-controls button {
 	width: 100%;
 }
 
-div.iwp-graph-control-buttons { 
+div.iwp-graph-control-buttons {
 	margin-bottom: 2em;
 }
 
-.iwp-graph-control-buttons button { 
+.iwp-graph-control-buttons button {
 	margin-bottom: 2px;
 	background: white;
 }
 
-.iwp-graph-control-buttons button.active { 
+.iwp-graph-control-buttons button.active {
 	background: orange !important;
 }
 
-.iwp-graph-control-legend label { 
+.iwp-graph-control-legend label {
 	vertical-align: top;
 }
 
-.iwp-graph-legend-square { 
+.iwp-graph-legend-square {
 	width: 20px;
 	height: 20px;
 	display: inline-block;
 	border: solid black 1px;
 }
-
-
-

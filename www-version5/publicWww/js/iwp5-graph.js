@@ -16,7 +16,7 @@ var iwpGraphObjects = {}
 var graphMeasures = ['xPos', 'yPos', 'xVel', 'yVel', 'xAccel', 'yAccel']
 
 var graphXScale = d3.scaleLinear()
-    .domain([-10, 10])
+    .domain([-1, 10])
     .range([-100, 100]);
 
 var graphYScale = d3.scaleLinear()
@@ -46,9 +46,8 @@ function graphInit() {
 	yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100, 0)"));
 
 	xAxis(svg.append("g").classed("iwp-graph-axis",true));
-	yAxis(svg.append("g").classed("iwp-graph-axis",true));
-
-
+	svg.append("text").attr("x", 60).attr("y", 15).classed("iwp-graph-axis-label", "true").text("Time (s)");
+	yAxis(svg.append("g").classed("iwp-graph-axis",true).attr("transform", "translate("+ graphXScale(0) +", 0)"));
 
 	/*
 	visualPath1 = svg.append('path')
@@ -169,10 +168,10 @@ function graphResetZero(step, vars, solids ) {
 	$.each(graphMeasures, function(i, measure) {
 		$(".iwp-graph-control-buttons").append("<button onclick='graphMeasureClick(this);' iwp-measure='"+measure+"'>" +measure+"</button>")
 	});
-	
+
 
 	/** Buil the legend */
-	$(".iwp-graph-controls").append("<div class='iwp-graph-control-legend'></div>")	
+	$(".iwp-graph-controls").append("<div class='iwp-graph-control-legend'></div>")
 	$.each(iwpGraphObjects,function(name, graphObject) {
 
 		// console.log("iwp5-graph:153> add buttons for: "+ name + "   visible? " + graphObject.visible)
@@ -207,7 +206,7 @@ function graphResetZero(step, vars, solids ) {
 }
 
 
-function rgbColor(o) { 
+function rgbColor(o) {
 	return "rgb("+o.red+","+o.green+","+o.blue+")"
 }
 
@@ -248,7 +247,7 @@ function graphStepForward(step, vars) {
 	//var vars = varsAtStep[step];
 	if ( vars == undefined ) {
 		console.log("graphStepForward:217> Warning: Vars undefined at step: " + step);
-	} else { 
+	} else {
 		// console.log("iwp5-graph:221> graphStepForward: ", step)
 		// console.log("iwp5-graph:223> thisStep Vars: ", vars)
 		// console.log("iwp5-graph:223> lastStep Vars: ", lastStep)
@@ -287,12 +286,12 @@ function graphStepForward(step, vars) {
 function graphStepBackward(step, vars) {
 
 	//console.log("iwp5-graph:256> graphStepBackward: ", step)
-	
+
 	$.each(iwpGraphObjects,function(name, graphObject) {
 
 		// paths = graphObject.paths
 		// pathsSvg = graphObject.pathsSvg
-		
+
 		$.each(graphMeasures, function(i, measure) {
 
 			//console.log("iwp5-graph.graphStepBackward:270> paths[" + measure + "] = ", paths[measure])
@@ -302,12 +301,12 @@ function graphStepBackward(step, vars) {
 			// This is like the opening scene of the 5th element
 
 			var lastStep = null;
-			for( rebuildStep = 0 ; rebuildStep <= step; rebuildStep++ ) { 
+			for( rebuildStep = 0 ; rebuildStep <= step; rebuildStep++ ) {
 				var lcMeasure = measure.toLowerCase();
 				var vars = varsAtStep[rebuildStep];
 
 
-				if ( rebuildStep == 0 ) { 
+				if ( rebuildStep == 0 ) {
 					// Erase everything
 					graphObject.paths[measure] = d3.path()
 					// Move to Zero Time, it's not necessarily the origin
@@ -316,7 +315,7 @@ function graphStepBackward(step, vars) {
 						graphYScale(vars[name][lcMeasure])
 					)
 
-				} else { 
+				} else {
 
 					// Move to a real point in time.
 					graphObject.paths[measure].moveTo (
@@ -344,4 +343,3 @@ function graphStepBackward(step, vars) {
 
 
 }
-
