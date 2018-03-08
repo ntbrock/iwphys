@@ -1,0 +1,52 @@
+2018Feb01 NCSSM IWP5
+
+- Accept grid + axis + multi-series additions to iwp5-graph.js,
+
+- Connect the Solids from the animation memory into the graph 
+
+- Handle the ‘reverse time’ removal of items off of the graph + animation. 
+
+
+
+ I’ll likely have time on Friday to pull your code and do my tasks.
+
+
+Matt
+L24> Finished Euler's Test
+
+
+Taylor
+L24> Hooked in graph intiailization, applied styling to the grid + axes.  
+	In process: solids's from memory, dynamically update the paths in memory.
+	(Pair)
+
+	Goal: Get it working the Velocity01b, 
+	then it shoudl work one of the other animations that has graphing.
+
+
+(Pair)
+= Taylor> Draw the toggle on/off buttons to make series show + hide on teh graph.
+
+
+
+Taylor
+N> Back button removing paths
+
+Matt
+N> Colorize the Buttons if they're on or not.
+
+
+
+https://www.iwphys.org/master/animate.php/summer-physics/velocity01b.iwp
+
+https://www.iwphys.org/master/animate.php/winters-ncssm-2009/collision-inelastic-06.iwp
+
+https://www.iwphys.org/master/animate.php/winters-ncssm-2009/auto-impulse-3.iwp
+
+https://www.iwphys.org/master/animate.php/winters-ncssm-2009/collision-01.iwp
+
+
+
+
+
+

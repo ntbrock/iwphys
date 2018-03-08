@@ -1,0 +1,50 @@
+2018Feb08 IWP5 
+
+Jon
+L> Finished going thru all animations in use last year, found the remaining bugs that need to fixed, have a list to upload.  Tested the 4 demos with the new graphing features, look good!
+N> Need tasks!
+
+Taylor
+L> Graphing - now goes backwards. Call w/ Ryan Steed this morning talking about summer plans!
+N> Graphing - Should honor the scale set by the animation file.
+
+Matt
+L> Finals + Finishing College stuff. 
+N> Pair at end of meeting today to colorize the button toggles.
+
+
+* Taylor> Back button should reverse the object trails on the aniumation as well.
+
+* Matt+Taylor> Illuminate the graph series toggle buttons.
+
++> Use a radio selector to only allow a certain measure to be plotted on the graph at one time.
+	Quick to toggle between them.
+
++> Possibly using a huge or an opacity to help differentiate the measure.
+
++> Show the units in the button labels themselves, : xPos (m),  xVel (m/s)  xAccel (m/s^2)
+
++> Relocate the origin of the graph because negative times are not used in our current animations.
+
++> Add a label on the time axis with units of seconds.
+
++> Inititalize solid with initial velocity, so that we don't that sharp vertical line at the beginning of the graph.
+https://www.iwphys.org/master/animate.php/winters-ncssm-2009/collision-inelastic-06.iwp
+
+
+
+16:59 New things on the testing list:
+
+1. 1/2 of things were more animations that needed graphing features to work 5-6 of those.
+
+2. Couple more with Floating hands that are supposed to be pushing objects around - don't move like they're supposed to.
+
+3. A animation where nothing happened: 
+
+4. A couple where you needed to pudate an input (initial velocity, but when you change number, didn't update animation)
+
+
+
+
+
+

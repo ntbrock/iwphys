@@ -1,0 +1,53 @@
+2018Jan18 IWP5 
+
+Matt
+L> Axis grid lines working, got 3 graphs showing up on the svg canvas.
+N> Now - Review toggle buttons in unit test.  Wire the graph so that its generalized for any input / driven off the data tables arriving memory. 
+
+
+Jon
+L> Research on other animation to see how they organize the information and accept user input / changes. Have ideas for new IWP layout! 
+N> By February 8 - Go through the remaining animations to find any new glitches.
+
+
+Taylor
+L> Great pair programming session to make progress on the unit test.  Created a master testing site, verified good by Jon.  Restructrud the CSS and the HTML moved the boxes on the page for initial wireframe setup.  Wired up the animation tick from iwp5 to a graph canvas.
+N> Matt and Taylor re-connect -- ready to implement real axis and series display onto real IWP software. Show at least 3 of the Trello cards work for graphing.
+
+
+Agenda: 
+
+- Jon> Wireframe ideas
+
+	Looked at demo wireframe for new IWP. Moved around some of the feature, example, title of the animation and description is now at bottom, was at top. 
+
+	At the top w/ the purple task bar, may be able to save some space - on one of teh other animation sites, just had an Icon for their system, and if you hovered over it, would get the task bar options. (Collabpson)
+		Help, submit an issue, go back to homepage. 
+		Seems like it 'spills over', can't see teh graph and animation buttons and the desription of what the animation is about.
+
+	1) Collapsable Primary Navigation
+
+	2) Single Page App - Dont' want to need to scroll around to see information. All visible at once.
+
+	3) The forwards, backwards VCR buttons. When you hit the back button doesn't take away the trail.
+
+	4) Tested gridline settings, axis limits, didn't seem to work.
+
+
+	Relocate metadata about the problem down to the lower right,  
+
+
+
+- Matt> Graph Toggle Buttons
+
+	Added gridlines to canvas - with another set of axes way off the cnavas screen, set the tick mark width to be cavnas, Gray lines that strect over the lines from teh main axes.
+
+	When you play it, shows 3 graphs now instead of 8 
+
+
+- Taylor> Demo the new master site
+
+	https://www.iwphys.org/master/animate.php/summer-physics/velocity01b.iwp
+
+- Taylor> Demo the new animation hook from iwp5.
+
