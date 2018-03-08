@@ -293,6 +293,7 @@ public class GWindow_Animator implements WindowListener, ActionListener,
             // IWP3:re-order all of the problem objects based on the
             // new interface plugin.IWPCalculated.
 
+            // 2018Mar07 - This logic needs to be ported to IWP5
             problem.reorderProblemObjectsBySymbolicDependency();
 
             // zero all the objects in the problem.
