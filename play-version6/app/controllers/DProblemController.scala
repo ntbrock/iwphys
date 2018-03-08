@@ -16,10 +16,12 @@ import play.api.mvc._
 @Singleton
 class DProblemController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
 
+  // Tests to see if we can initialize old java code.
+  val dpm = new DProblemManager()
+
+
   def index() = Action { implicit request: Request[AnyContent] =>
 
-    // Tests to see if we can initialize old java code.
-    val dpm = new DProblemManager()
 
     val dp = dpm.getEmptyProblem
 
@@ -42,7 +44,7 @@ class DProblemController @Inject()(cc: ControllerComponents) extends AbstractCon
     vars.setAtCurrentTick("delta_t", 1.0)
 
 
-    val calcResult = calc.calculate(vars);
+    val calcResult = calc.calculate(vars)
 
     val js = JsObject(Seq(
       "calcResult"->JsNumber(calcResult),
@@ -52,4 +54,15 @@ class DProblemController @Inject()(cc: ControllerComponents) extends AbstractCon
 
     Ok(Json.stringify(js)).as("application/json")
   }
+
+
+  def view(path: String) = Action { implicit request =>
+
+    val p = dpm.loadFile(path)
+
+    Ok(s"View: ${path},  p : ${p}")
+
+  }
+
+
 }
