@@ -10,7 +10,7 @@ import edu.ncssm.iwp.objects.{DObject_Solid, DObject_Time}
 import edu.ncssm.iwp.plugin.IWPAnimated
 import edu.ncssm.iwp.problemdb.{DProblemManager, DProblemState}
 import play.api._
-import play.api.libs.json.{JsNumber, JsObject, JsString, Json}
+import play.api.libs.json._
 import play.api.mvc._
 
 import scala.collection.mutable
@@ -80,10 +80,10 @@ class DProblemController @Inject()(cc: ControllerComponents) extends AbstractCon
 
     val time = p.getTimeObject
 
-    val frames = mutable.Queue[(Double, JsObject)]()
+    val frames = mutable.Queue[JsObject]()
 
     while (time.getTime < time.getStopTime ) {
-
+      Logger.info(s"DProblemController:86> time: ${time.getTime}")
       time.tick(ps)
       val t = time.getTime
 
@@ -116,10 +116,10 @@ class DProblemController @Inject()(cc: ControllerComponents) extends AbstractCon
         //Logger.info(s"DProblemController:110> ${key} = ${value}")
       }
 
-      val jsonMap = JsObject(varMap.toMap.map{ case(k,v) => k -> JsNumber(v) })
+      val jsonFrame = JsObject(varMap.toMap.map{ case(k,v) => k -> JsNumber(v) })
 
 
-      frames.enqueue((t, jsonMap))
+      frames.enqueue(jsonFrame)
 
       Logger.info(s"DProblemConroller:88> Time: ${time.getTime}  VarMap: ${varMap.toMap}")
       ps.tickStepForward()
@@ -127,7 +127,14 @@ class DProblemController @Inject()(cc: ControllerComponents) extends AbstractCon
     }
 
 
-    Ok(s"View: ${path}\n\nframes:\n${frames}\n\np : ${p}")
+    Logger.info(s"DProblemController:130> Ok, Complete")
+
+
+    Ok(Json.stringify(JsArray(frames))).as("application/json")
+
+
+
+    // Ok(s"View: ${path}\n\nframes:\n${frames}\n\np : ${p}")
 
   }
 
