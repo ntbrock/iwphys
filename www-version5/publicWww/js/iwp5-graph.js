@@ -16,12 +16,26 @@ var iwpGraphObjects = {}
 var graphMeasures = ['xPos', 'yPos', 'xVel', 'yVel', 'xAccel', 'yAccel']
 
 var graphXScale = d3.scaleLinear()
-    .domain([-1, 10])
-    .range([-100, 100]);
+		.domain([10, -1])
+		.range([100, -100]);
 
 var graphYScale = d3.scaleLinear()
-    .domain([-10, 10])
-    .range([100, -100]);
+		.domain([10, -10])
+		.range([-100, 100]);
+
+/*var graphXScale = null
+
+var graphYScale = null
+
+function scaleAxes(graphParameters) {
+	graphXScale = d3.scaleLinear()
+	    .domain([graphParameters.xmax, graphParameters.xmin])
+	    .range([-100, 100]);
+
+	graphYScale = d3.scaleLinear()
+	    .domain([graphParameters.ymax, graphParameters.ymin])
+	    .range([100, -100]);
+}*/
 
 var path1 = d3.path();
 var path2 = d3.path();
