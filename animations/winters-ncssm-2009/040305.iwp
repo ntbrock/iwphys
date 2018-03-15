@@ -37,53 +37,53 @@
 		<description>
 			<text>A cannonball is launched from a cannon on a cliff. What must the launch velocity be for the ball to hit the moving target? How does this depend on the launch angle?</text>
 		</description>
-		<input>
+		<input calculationOrder="1">
 			<name>gunangle</name>
 			<text>Launch angle</text>
 			<initialValue>0.0</initialValue>
 			<units>deg</units>
 		</input>
-		<input>
+		<input calculationOrder="2">
 			<name>targetx</name>
 			<text>Target X-position</text>
 			<initialValue>0.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="3">
 			<name>gunheight</name>
 			<text>Launch altitude</text>
 			<initialValue>100.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="4">
 			<name>gunspeed</name>
 			<text>Launch velocity</text>
 			<initialValue>10.0</initialValue>
 			<units>m/s</units>
 		</input>
-		<input>
+		<input calculationOrder="5">
 			<name>targetvo</name>
 			<text>Target velocity</text>
 			<initialValue>25.0</initialValue>
 			<units>m/s</units>
 		</input>
-		<input>
+		<input calculationOrder="6">
 			<name>targeta</name>
 			<text>Target acceleration</text>
 			<initialValue>0.0</initialValue>
 			<units>m/ss</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="7">
 			<name>gf</name>
 			<text>Grav. field, g</text>
 			<initialValue>9.8</initialValue>
 			<units>N/kg</units>
 			<hidden>1</hidden>
 		</input>
-		<solid>
+		<solid calculationOrder="8">
 			<name>Floor</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -122,7 +122,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="9">
 			<name>GunBase</name>
 			<shape type="circle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -161,7 +161,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="10">
 			<name>GunBarrel</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -200,7 +200,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="11">
 			<name>Ball</name>
 			<shape type="circle" drawTrails="true" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -239,7 +239,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="12">
 			<name>Target</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -278,7 +278,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="13">
 			<name>LeftWall</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -317,7 +317,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<output>
+		<output calculationOrder="14">
 			<name>ballx</name>
 			<text>Ball X-position</text>
 			<units>m</units>
@@ -325,7 +325,7 @@
 				<value>Ball.xpos</value>
 			</calculator>
 		</output>
-		<output>
+		<output calculationOrder="15">
 			<name>bally</name>
 			<text>Ball Y-position</text>
 			<units>m</units>
@@ -333,8 +333,8 @@
 				<value>Ball.ypos</value>
 			</calculator>
 		</output>
-		<output>
-			<name>targetx</name>
+		<output calculationOrder="16">
+			<name>targetxout</name>
 			<text>Target X-position</text>
 			<units>m</units>
 			<calculator type="parametric">

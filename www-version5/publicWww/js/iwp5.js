@@ -299,12 +299,10 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
     // Hande Complex return types from Euler Calculator
     if ( xComplex.velocity != undefined ) {
-
-
-        // 2018Mar08 Confirmed this line is where xvelocity is assigned to graph.
+      // 2018Mar08 Confirmed this line is where xvelocity is assigned to graph.
       calc.xvel = xComplex.velocity
 
-        console.log("iwp5:306> step: ", step, "  calc.xvel: " , calc.xvel)
+      // console.log("iwp5:306> step: ", step, "  calc.xvel: " , calc.xvel)
 
     }
     if ( xComplex.acceleration != undefined ) {
@@ -400,6 +398,8 @@ function calculateVarsAtStep(step) {
 	for each input
 		query the dom by input_$id to get the value from the user form
 	*/
+
+
 	$.each( inputs, function( index, input ) {
 		// next load in variables for all of the inputs.
     //vars[input.name] = { value: queryUserFormInputDouble(input) };
@@ -409,13 +409,77 @@ function calculateVarsAtStep(step) {
 
 
 
+
+  //2018Mar14 - ordering by calculation order, if exists
+  //BOOK
+
+  var unorderedSolids = [];
+  var unorderedOutputs = [];
+  var orderedObjects = [];
+  $.each(outputs, function(index,output) {
+    if (output.calculationOrder != null) { 
+      orderedObjects[output.calculationOrder] = output;
+    } else { 
+      unorderedOutputs.push(output);
+    }
+  });
+  $.each(solids, function(index,solid) {
+    if (solid.calculationOrder != null) { 
+      orderedObjects[solid.calculationOrder] = solid;
+    } else { 
+      unorderedSolids.push(solid);
+    }
+  });
+  //console.log("iwp5:434> orderedObjects: ", orderedObjects);
+  //console.log("iwp5:434> unorderedSolids: ", unorderedSolids);
+  //console.log("iwp5:434> unorderedOutputs: ", unorderedOutputs);
+
+
   var failedOutputs = [];
   var failedSolids = [];
 
+
+
+  /**
+   * 2018Mar15 Perform the animation calculationOrder First
+   */
+
+  $.each( orderedObjects, function(index, object) { 
+    if(object != null ) { // orderedObjects can be sparseArray
+    if(object.objectType=="solid") {
+      try { 
+
+        calculateSolidAtStep(object, step, vars, true );
+
+      } catch ( err ) {
+        console.log("iwp5:457> failed calculationOrder err: " , err, " Solid:", object)
+        failedOutputs.push(object);
+      }
+    } else if(object.objectType=="output") { 
+      try { 
+      
+        var newValue = calculateOutputAtStep(object, step, vars, false );
+        if ( isNaN(newValue) ) { throw "not a number" };
+        if ( !isFinite(newValue) ) { throw "not finite" }
+        vars[object.name] = newValue;
+
+      } catch ( err ) {
+        console.log("iwp5:466> failed calculationOrder err: " , err, " Output:", object)
+        failedOutputs.push(object);
+      }
+
+    } else { 
+      throw "Unknown objectType: " + object.objectType;
+    }  
+    }  
+  });
+
+
   /*
+  * Legacy path to support 4_1_2 animations with no CalculationOrder in iwp file.
   for each output perform the calculator
-*/
-  $.each( outputs, function( index, output ) {
+  */
+  $.each( unorderedOutputs, function( index, output ) {
     try {
       var newValue = calculateOutputAtStep(output, step, vars, false );
       //console.log("newValue",newValue)
@@ -437,7 +501,7 @@ function calculateVarsAtStep(step) {
 	/* for each solid
 		sequence of the solids does matter in the problem file.
 	*/
-	$.each( solids, function( index, solid ) {
+	$.each( unorderedSolids, function( index, solid ) {
 		/*
 		for x, y, h, w , perform the calculator
 		*/
@@ -566,6 +630,14 @@ function setGraphWindow(inGraphWindow) {
 }
 
 function addInput(input) {
+  input.objectType = 'input'
+
+  // 2018MAr15 Some re-processed problems have calculation order to fix circular dependency
+  if ( input["@attributes"] != null && input["@attributes"]["calculationOrder"] != null  ) {
+    input.calculationOrder = +input["@attributes"]["calculationOrder"];
+    //console.log("iwp5:586> Imported iwp450 calculation order: ", input.calculationOrder )
+  }
+
   //console.log("addInput: ", input );
   inputs.push( input );
   // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"}
@@ -586,11 +658,18 @@ function addOutput(output) {
   //console.log("addOutput ", output );
 
   var compiledOutput = {
+    objectType: 'output',
   	name: output.name,
   	text: output.text,
   	units: output.units,
   	calculator: compileCalculator(output.calculator),
     hidden: output.hidden //Hidden flag still needed - be careful about cutting off attributes here.
+  }
+
+  // 2018MAr15 Some re-processed problems have calculation order to fix circular dependency
+  if ( output["@attributes"] != null && output["@attributes"]["calculationOrder"] != null  ) {
+    compiledOutput.calculationOrder = +output["@attributes"]["calculationOrder"];
+    // console.log("iwp5:678> Imported iwp450 calculation order: ", compiledOutput.calculationOrder )
   }
 
   outputs.push( compiledOutput );
@@ -632,6 +711,7 @@ function addSolid(solid) {
   // In Memory - PreParse Equations with math.js
 
   var compiledSolid = {
+    objectType: 'solid',
   	name: solid.name,
   	color: {
   		red: parseFloat(solid.color.red),
@@ -655,10 +735,17 @@ function addSolid(solid) {
   	xpath: {
   		calculator : compileCalculator(solid.xpath.calculator)
   	},
-	ypath: {
+	  ypath: {
   		calculator : compileCalculator(solid.ypath.calculator)
   	}
   };
+
+  // 2018Mar15 Some re-processed problems have calculation order to fix circular dependency
+  if ( solid["@attributes"] != null && solid["@attributes"]["calculationOrder"] != null  ) {
+    compiledSolid.calculationOrder = +solid["@attributes"]["calculationOrder"];
+    // console.log("iwp5:678> Imported iwp450 calculation order: ", compiledSolid.calculationOrder )
+  }
+
 
   // If the problem iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
   // hard to do as part of the initialization because it is a dynamic list.
@@ -745,6 +832,7 @@ function addObject(object) {
 //console.log("iwp5.js:593> addOBject: ", object)
 
   var compiledObject = {
+    objectType: 'object',
     name: object.name,
     shape: {
       type: object["@attributes"].class,
@@ -1363,7 +1451,7 @@ function updateTimeDisplay(t) {
 
 function updateSolidSvgPathAndShape(solid, pathAndShape) {
 
-    console.log("iwp5:1333> updateSolidSvgPathAndShape: ", solid )
+  // console.log("iwp5:1333> updateSolidSvgPathAndShape: ", solid )
 
 
 	var svgSolid = $("#solid_" + solid.name);
