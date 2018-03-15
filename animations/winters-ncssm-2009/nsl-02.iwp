@@ -216,7 +216,7 @@
 			</color>
 			<xpath>
 				<calculator type="euler">
-					<displacement>6.9</displacement>
+					<displacement>8.9</displacement>
 					<velocity>0</velocity>
 					<acceleration>-P/(m1+m2)</acceleration>
 				</calculator>
