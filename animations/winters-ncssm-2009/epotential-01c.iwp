@@ -43,47 +43,47 @@ The potential difference may be reversed by making the potential of the left pla
 
 The bar graphs in the yellow window show the electrical potential energy and the work done by the electric field on the particle as it moves.</text>
 		</description>
-		<input>
+		<input calculationOrder="1">
 			<name>q</name>
 			<text>Charge</text>
 			<initialValue>1.0</initialValue>
 			<units>e</units>
 		</input>
-		<input>
+		<input calculationOrder="2">
 			<name>qe</name>
 			<text>Elementary charge</text>
 			<initialValue>1.6E-19</initialValue>
 			<units>C</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="3">
 			<name>mi</name>
 			<text>Mass</text>
 			<initialValue>1.0</initialValue>
 			<units>u</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="4">
 			<name>mu</name>
 			<text>Mass unit</text>
 			<initialValue>1.66E-27</initialValue>
 			<units>kg</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="5">
 			<name>V</name>
 			<text>Potential of left plate</text>
 			<initialValue>200.0</initialValue>
 			<units>V</units>
 		</input>
-		<input>
+		<input calculationOrder="6">
 			<name>R</name>
 			<text>Charge-to-mass conversion</text>
 			<initialValue>9.64E7</initialValue>
 			<units>C/kg</units>
 			<hidden>1</hidden>
 		</input>
-		<output>
+		<output calculationOrder="7">
 			<name>EF</name>
 			<text>Electric Field</text>
 			<units>V/m</units>
@@ -92,7 +92,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="22">
 			<name>Fe</name>
 			<text>Electric Force</text>
 			<units>N</units>
@@ -101,7 +101,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="40">
 			<name>a</name>
 			<text>Acceleration</text>
 			<units>m/ss</units>
@@ -110,7 +110,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="8">
 			<name>SF</name>
 			<text>Scale factor</text>
 			<units></units>
@@ -119,7 +119,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="23">
 			<name>m</name>
 			<text>Mass of particle</text>
 			<units>u</units>
@@ -127,7 +127,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				<value>mi</value>
 			</calculator>
 		</output>
-		<solid>
+		<solid calculationOrder="9">
 			<name>Background</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -166,7 +166,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="24">
 			<name>Field_vector</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -205,7 +205,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="25">
 			<name>Force_vector</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -352,7 +352,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</xpath>
 		</object>
-		<solid>
+		<solid calculationOrder="41">
 			<name>Pred</name>
 			<shape type="circle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -393,7 +393,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="42">
 			<name>Pblue</name>
 			<shape type="circle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -434,7 +434,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<output>
+		<output calculationOrder="43">
 			<name>Vx</name>
 			<text>V(x)</text>
 			<units>V</units>
@@ -442,7 +442,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				<value>(V+EF*(-0.1-0.01*Pred.xpos))*step(sign(10-Pred.xpos))</value>
 			</calculator>
 		</output>
-		<output>
+		<output calculationOrder="44">
 			<name>W</name>
 			<text>Work done by field</text>
 			<units>J</units>
@@ -451,7 +451,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<solid>
+		<solid calculationOrder="26">
 			<name>Plate_left_red</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -490,7 +490,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="27">
 			<name>Plate_right_blue</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -529,7 +529,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="28">
 			<name>Plate_left_blue</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -568,7 +568,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="29">
 			<name>Plate_right_red</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -607,7 +607,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="30">
 			<name>Field_line_1</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -646,7 +646,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="31">
 			<name>Field_line_2</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -685,7 +685,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="32">
 			<name>Field_line_3</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -724,7 +724,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="33">
 			<name>Field_line_4</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -763,7 +763,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="34">
 			<name>Field_line_5</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -802,7 +802,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="35">
 			<name>Field_line_6</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -841,7 +841,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="36">
 			<name>Field_line_7</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -880,7 +880,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="37">
 			<name>Field_line_8</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -919,7 +919,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="38">
 			<name>Field_line_9</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -958,7 +958,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="10">
 			<name>window</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -997,7 +997,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="11">
 			<name>PEbar</name>
 			<shape type="polygon" drawTrails="false" drawVectors="false">
 				<points>
@@ -1081,7 +1081,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="12">
 			<name>Wbar</name>
 			<shape type="polygon" drawTrails="false" drawVectors="false">
 				<points>
@@ -1165,7 +1165,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="39">
 			<name>line</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1312,7 +1312,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</xpath>
 		</object>
-		<solid>
+		<solid calculationOrder="13">
 			<name>epot_1</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1351,7 +1351,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="14">
 			<name>epot_2</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1390,7 +1390,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="15">
 			<name>epot_3</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1429,7 +1429,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="16">
 			<name>epot_4</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1468,7 +1468,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="17">
 			<name>epot_5</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1507,7 +1507,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="18">
 			<name>epot_6</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1546,7 +1546,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="19">
 			<name>epot_7</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1585,7 +1585,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="20">
 			<name>epot_8</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1624,7 +1624,7 @@ The bar graphs in the yellow window show the electrical potential energy and the
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="21">
 			<name>epot_9</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>

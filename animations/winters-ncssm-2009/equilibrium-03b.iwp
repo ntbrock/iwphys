@@ -10,7 +10,7 @@
 	<objects>
 		<time>
 			<start>0.0</start>
-			<stop>8.0</stop>
+			<stop>7.0</stop>
 			<change>1.0</change>
 			<fps>10.0</fps>
 		</time>
@@ -31,87 +31,89 @@
 			<ygrid>1.0</ygrid>
 			<xunit>meters</xunit>
 			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
 			<text>A ball is suspended by strong wires from two posts. The tension forces and weight are shown. Step through the animation using the >> button to see how the forces change for different horizontal positions of the ball.</text>
 		</description>
-		<input>
+		<input calculationOrder="1">
 			<name>m</name>
 			<text>Mass of Ball</text>
 			<initialValue>1.0</initialValue>
 			<units>kg</units>
 		</input>
-		<input>
+		<input calculationOrder="2">
 			<name>xo</name>
 			<text>Initial Ball X-coordinate</text>
 			<initialValue>0.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="3">
 			<name>yo</name>
 			<text>Initial Ball Y-coordinate</text>
 			<initialValue>4.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="4">
 			<name>xinc</name>
 			<text>X-increment</text>
 			<initialValue>1.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="5">
 			<name>yinc</name>
 			<text>Y-increment</text>
 			<initialValue>0.25</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="6">
 			<name>g</name>
 			<text>Gravitational field</text>
 			<initialValue>9.8</initialValue>
 			<units>m/s^2</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="7">
 			<name>xmotion</name>
 			<text>Horizontal Motion (-1,0,1)</text>
 			<initialValue>1.0</initialValue>
 			<units></units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="8">
 			<name>ymotion</name>
 			<text>Vertical Motion (-1,0,1)</text>
 			<initialValue>0.0</initialValue>
 			<units></units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="9">
 			<name>postx</name>
 			<text>Post x-coordinate</text>
 			<initialValue>8.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="10">
 			<name>posty</name>
 			<text>Post  y-coordinate</text>
 			<initialValue>4.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="11">
 			<name>sf</name>
 			<text>Scale Factor</text>
 			<initialValue>0.3</initialValue>
 			<units></units>
 			<hidden>1</hidden>
 		</input>
-		<solid>
+		<solid calculationOrder="12">
 			<name>ground</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -125,6 +127,11 @@
 						<value>.5</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -145,7 +152,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="13">
 			<name>Postleft</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -159,6 +166,11 @@
 						<value>2*posty</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -179,7 +191,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="14">
 			<name>Postright</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -193,6 +205,11 @@
 						<value>2*posty</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -213,7 +230,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="27">
 			<name>Stringright</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -227,6 +244,11 @@
 						<value>2*posty-Ball.ypos</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -247,7 +269,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="28">
 			<name>Stringleft</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -261,6 +283,11 @@
 						<value>2*posty-Ball.ypos</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -281,7 +308,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="23">
 			<name>Ball</name>
 			<shape type="circle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -295,6 +322,11 @@
 						<value>1</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -315,7 +347,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<output>
+		<output calculationOrder="15">
 			<name>x</name>
 			<text>X-coordinate of Ball</text>
 			<units>m</units>
@@ -323,7 +355,7 @@
 				<value>xo+xinc*t*xmotion</value>
 			</calculator>
 		</output>
-		<output>
+		<output calculationOrder="16">
 			<name>y</name>
 			<text>Y-coordinate of Ball</text>
 			<units>m</units>
@@ -331,7 +363,7 @@
 				<value>yo+yinc*t*ymotion</value>
 			</calculator>
 		</output>
-		<output>
+		<output calculationOrder="17">
 			<name>sloperight</name>
 			<text>Slope of right string</text>
 			<units></units>
@@ -340,7 +372,7 @@
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="18">
 			<name>ar</name>
 			<text>Angle of right string</text>
 			<units></units>
@@ -349,7 +381,7 @@
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="19">
 			<name>slopeleft</name>
 			<text>Slope of left string</text>
 			<units></units>
@@ -358,7 +390,7 @@
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="20">
 			<name>al</name>
 			<text>Angle of left string</text>
 			<units></units>
@@ -367,7 +399,7 @@
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="21">
 			<name>tension_right</name>
 			<text>Tension in right string</text>
 			<units>N</units>
@@ -376,7 +408,7 @@
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="22">
 			<name>tension_left</name>
 			<text>Tension in left string</text>
 			<units>N</units>
@@ -385,7 +417,7 @@
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<solid>
+		<solid calculationOrder="24">
 			<name>weight</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -399,6 +431,11 @@
 						<value>-sf*m*g</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -419,7 +456,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="25">
 			<name>tensionright</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -433,6 +470,11 @@
 						<value>sf*tension_right*sin(ar)</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -453,7 +495,7 @@
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="26">
 			<name>tensionrightleft</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -467,6 +509,11 @@
 						<value>sf*tension_left*sin(al)</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>

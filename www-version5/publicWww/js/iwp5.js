@@ -128,9 +128,9 @@ function handleStep() {
    };*/
   //console.log("stop step", queryTimeStopInputDouble() / queryTimeStepInputDouble())
   //console.log('current step', newStep)
-  if (newStep == ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
-    console.log("stop time reached")
+  if (newStep > ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
     handleStopClick()
+    return;
   }
 	//console.log("handleStep:61> newStep: " + newStep)
 
@@ -171,7 +171,7 @@ function archiveVarsAtStep( step, vars ) {
 
 
 function calculateOutputAtStep(output, step, vars, verbose) {
-    var newValue = evaluateCalculator( output.name+".out", output.calculator, vars, verbose ).value;
+    var newValue = evaluateCalculator( output.name+".out", output.calculator, vars, verbose, output.name ).value;
     vars[output.name] = newValue;
     //console.log("newValue for",output.name,evaluateCalculator( output.name+".out", output.calculator, vars, verbose ))
     // -> update the DOM with the new reuslts.
@@ -186,10 +186,12 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
 
     if ( solid.name == "P" ) {
-      var breaker = 1
+      // Debugging point for http://localhost:8080/master/animate.php/ftemo/em-ratio-1d.iwp
+      // console.log("iwp5.calculateSolidAtStep:186> P vars: ", vars)
+      // var breaker = 1;
     }
 
-    var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
+    var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose, solid.name )
     var x = xComplex.value
 
  //----------------------------------------
@@ -214,7 +216,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
  vars[solid.name] = calcX;
  //----------------------------------------
 
-    var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars )
+    var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose, solid.name )
     var y = yComplex.value
 
   //----- MORE TEST CODE
@@ -240,13 +242,13 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
   if ( xComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
-     xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
+     xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose, solid.name )
      x = xComplex.value
   }
   if ( yComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
-     yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose )
+     yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose, solid.name )
      y = yComplex.value
   }
 
@@ -262,8 +264,8 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       ypos: y,
       yvel: 0,
       yaccel: 0,
-      height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars ).value,
-      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars ).value,
+      height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars, verbose, solid.name ).value,
+      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars, verbose, solid.name ).value,
       angle: 0
     }
 
@@ -274,8 +276,8 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       $.each( solid.points, function( index, i) {
       //console.log(i)
       point = {
-        x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, vars).value,
-        y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, vars).value
+        x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, vars, verbose, solid.name ).value,
+        y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, vars, verbose, solid.name ).value
       };
       calc.points.push(point);
       });
@@ -287,13 +289,13 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     }
 
     if ( solid.shape.angle ) {
-      calc.angle = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, vars).value
+      calc.angle = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, vars, verbose, solid.name ).value
       // console.log("iwp5:277> Evaluated calculator for Solid.shape.angle: ", solid.shape.angle, " to :", calc.angle  )
     }
 
     // For objects with a value beyond x , y, w , h -- This is used for the floatingText Value
     if ( solid.value != null && solid.value.calculator != null ) {
-      calc.objectValue = evaluateCalculator( solid.name+".objectValue", solid.value.calculator, vars ).value
+      calc.objectValue = evaluateCalculator( solid.name+".objectValue", solid.value.calculator, vars, verbose, solid.name ).value
     }
 
 
@@ -411,8 +413,6 @@ function calculateVarsAtStep(step) {
 
 
   //2018Mar14 - ordering by calculation order, if exists
-  //BOOK
-
   var unorderedSolids = [];
   var unorderedOutputs = [];
   var orderedObjects = [];
@@ -945,7 +945,8 @@ function evaluateCompiledMath( compiled, vars ) {
 // Config flag for develoeprs to enable debugging of euler acceleration calculations - have fun!
 var CONFIG_throw_acceleration_calculation_exceptions = true;
 
-function evaluateCalculator( resultVariable, calculator, vars, verbose ) {
+function evaluateCalculator( resultVariable, calculator, vars, verbose, objectName ) {
+  // ResultVariable is solidname.x or solidName.y
 
   if ( calculator == null ) {
     //console.log("iwp5:688: Warning Null Clculaor for: ", resultVariable)
@@ -1015,9 +1016,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 		}
 	} else if ( calculator.type == "euler-mathjs" ) {
     try {
-
-
-
+      var breaker = 1;
       // 2016-Sep-23 For Euler V5, store the cache of current displacement and velocity IN calculator.
       // An enhancement would be to expose these values out as complex return ttypes of this function,
       // so that they could he historically archived in the variable step array.
@@ -1040,6 +1039,25 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       }
 
 
+      // 2018Mar15 Special new code to look backwards
+      var previousVars = varsAtStep[currentStep-1];
+      if ( previousVars ) { 
+        // copy everything with this name into current step, which gets all dimensions
+        //BOOK
+        vars[objectName] = previousVars[objectName]
+        // console.log("iwp5:1050> Copied past variable forward: vars["+objectName+"] = ", vars[objectName])
+      }
+
+
+      // 2018Mar15 - Write our displacement values, etc ino current vars.
+      // Mimick IWP4 Behavior, set current velocity + displacement into curent vars
+      //vars[resultVariable+"disp"] = calculator.currentDisplacement;
+      //vars[resultVariable+"pos"] = calculator.currentDisplacement;
+      //vars[resultVariable+"vel"] = calculator.currentVelocity;
+      // console.log("iwp5:1047> For Step: " + currentStep + " resultVariable: " + resultVariable + " disp: " + calculator.currentDisplacement  + "  vel: " + calculator.currentVelocity);
+
+
+
       if ( verbose ) {
         // console.log("iwp5:661>", resultVariable, "BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", JSON.stringify(vars) )
       }
@@ -1056,7 +1074,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
         throw "for resultVariable acceleration is NaN with vars "+vars
        }
       } catch ( err ) {
-        console.log("evaluateCalculator:881> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
+        console.log("evaluateCalculator:1067> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
         if ( CONFIG_throw_acceleration_calculation_exceptions ) {
          throw err;
          }
@@ -1535,7 +1553,7 @@ if (solid.shape.type == "circle") {
         newLabel = safeText + " " + formatted + " " + safeUnits
     }
 
-    console.log("iwp5:1414> Solid Reversal motion, x: ", xCanvas(pathAndShape.x), " y: ", yCanvas(pathAndShape.y))
+    // console.log("iwp5:1414> Solid Reversal motion, x: ", xCanvas(pathAndShape.x), " y: ", yCanvas(pathAndShape.y))
 
     svgSolid.attr("x",xCanvas(pathAndShape.x))
     .attr("y",yCanvas(pathAndShape.y))
