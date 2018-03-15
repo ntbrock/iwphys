@@ -62,14 +62,19 @@ function graphInit() {
 
 	// Step 1 Build Grid And Axes
 	// console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
-
-	xGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(0, 100)"));
-	yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100, 0)"));
-
-	xAxis(svg.append("g").classed("iwp-graph-axis",true));
-	svg.append("text").attr("x", 60).attr("y", 15).classed("iwp-graph-axis-label", "true").text("Time (s)");
-	yAxis(svg.append("g").classed("iwp-graph-axis",true).attr("transform", "translate("+ graphXScale(0) +", 0)"));
-
+	if ( xGrid != null ) { 
+		xGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(0, 100)"));
+	}
+	if ( yGrid != null ) {
+		yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100, 0)"));
+	}
+	if ( xAxis != null ) { 
+		xAxis(svg.append("g").classed("iwp-graph-axis",true));
+		svg.append("text").attr("x", 60).attr("y", 15).classed("iwp-graph-axis-label", "true").text("Time (s)");
+	}
+	if ( yAxis != null ) {
+		yAxis(svg.append("g").classed("iwp-graph-axis",true).attr("transform", "translate("+ graphXScale(0) +", 0)"));
+	}
 	/*
 	visualPath1 = svg.append('path')
 		.classed("iwp-graph-line-red", true)
