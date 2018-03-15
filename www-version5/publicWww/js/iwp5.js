@@ -186,7 +186,9 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
 
     if ( solid.name == "P" ) {
-      var breaker = 1
+        //BOOK
+      console.log("iwp5.calculateSolidAtStep:186> P vars: ", vars)
+      var breaker = 1;
     }
 
     var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose )
@@ -411,8 +413,6 @@ function calculateVarsAtStep(step) {
 
 
   //2018Mar14 - ordering by calculation order, if exists
-  //BOOK
-
   var unorderedSolids = [];
   var unorderedOutputs = [];
   var orderedObjects = [];
@@ -946,6 +946,7 @@ function evaluateCompiledMath( compiled, vars ) {
 var CONFIG_throw_acceleration_calculation_exceptions = true;
 
 function evaluateCalculator( resultVariable, calculator, vars, verbose ) {
+  // ResultVariable is solidname.x or solidName.y
 
   if ( calculator == null ) {
     //console.log("iwp5:688: Warning Null Clculaor for: ", resultVariable)
@@ -1015,9 +1016,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 		}
 	} else if ( calculator.type == "euler-mathjs" ) {
     try {
-
-
-
+      var breaker = 1;
       // 2016-Sep-23 For Euler V5, store the cache of current displacement and velocity IN calculator.
       // An enhancement would be to expose these values out as complex return ttypes of this function,
       // so that they could he historically archived in the variable step array.
@@ -1038,6 +1037,15 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
         calculator.currentVelocity = calculator.initialVelocity * dt;
         //console.log("iwp5:405> calculating initial velocity to: ", calculator.initialVelocity )
       }
+
+
+      // 2018Mar15 - Write our displacement values, etc ino current vars.
+      // Mimick IWP4 Behavior, set current velocity + displacement into curent vars
+      vars[resultVariable+"disp"] = calculator.currentDisplacement;
+      vars[resultVariable+"pos"] = calculator.currentDisplacement;
+      vars[resultVariable+"vel"] = calculator.currentVelocity;
+      console.log("iwp5:1047> set resultVariable: " + resultVariable + " disp: " + calculator.currentDisplacement  + "  vel: " + calculator.currentVelocity);
+
 
 
       if ( verbose ) {
