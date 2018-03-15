@@ -1535,7 +1535,7 @@ if (solid.shape.type == "circle") {
         newLabel = safeText + " " + formatted + " " + safeUnits
     }
 
-    console.log("iwp5:1414> Solid Reversal motion, x: ", xCanvas(pathAndShape.x), " y: ", yCanvas(pathAndShape.y))
+    // console.log("iwp5:1414> Solid Reversal motion, x: ", xCanvas(pathAndShape.x), " y: ", yCanvas(pathAndShape.y))
 
     svgSolid.attr("x",xCanvas(pathAndShape.x))
     .attr("y",yCanvas(pathAndShape.y))

@@ -10,7 +10,7 @@
 	<objects>
 		<time>
 			<start>0.0</start>
-			<stop>8.0</stop>
+			<stop>7.0</stop>
 			<change>1.0</change>
 			<fps>10.0</fps>
 		</time>
