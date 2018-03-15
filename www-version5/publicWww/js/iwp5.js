@@ -128,9 +128,9 @@ function handleStep() {
    };*/
   //console.log("stop step", queryTimeStopInputDouble() / queryTimeStepInputDouble())
   //console.log('current step', newStep)
-  if (newStep == ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
-    console.log("stop time reached")
+  if (newStep > ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
     handleStopClick()
+    return;
   }
 	//console.log("handleStep:61> newStep: " + newStep)
 
