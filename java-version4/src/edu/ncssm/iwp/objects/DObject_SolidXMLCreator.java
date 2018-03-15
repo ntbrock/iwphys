@@ -32,6 +32,7 @@ public class DObject_SolidXMLCreator implements IWPObjectXmlCreator
 
 
 		XMLElement elem = new XMLElement ( "solid" );
+		elem.addAttribute ( "calculationOrder", object.getCalculatorOrder()+"" );
 
 		// name 
 		elem.addElement ( new XMLElement ( "name", object.getName() ));

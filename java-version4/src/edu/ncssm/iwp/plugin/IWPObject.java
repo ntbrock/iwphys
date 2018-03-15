@@ -14,5 +14,5 @@ public interface IWPObject
      * Every object must have a name. This is what's referred to in the variables and xml
      */
 	public String getName();
-	
+
 }

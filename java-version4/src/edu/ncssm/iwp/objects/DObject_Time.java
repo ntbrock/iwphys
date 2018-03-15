@@ -45,6 +45,10 @@ import edu.ncssm.iwp.ui.GAccessor_designer;
 
 public class DObject_Time implements IWPXmlable, IWPObject, IWPCalculated, IWPAnimated, IWPDesigned
 {
+    // IWP 4.5 - Each solid has a calculation order
+    int calculationOrder = -1;
+    public int getCalculatorOrder() { return calculationOrder; }
+    public void setCalculatorOrder(int order) { this.calculationOrder = order; }
 
 
     public String getIconFilename()

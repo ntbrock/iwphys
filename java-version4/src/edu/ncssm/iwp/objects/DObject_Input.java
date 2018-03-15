@@ -11,13 +11,7 @@ import java.util.Collection;
 
 import edu.ncssm.iwp.exceptions.InvalidEquationException;
 import edu.ncssm.iwp.exceptions.InvalidObjectNameX;
-import edu.ncssm.iwp.plugin.IWPAnimated;
-import edu.ncssm.iwp.plugin.IWPCalculated;
-import edu.ncssm.iwp.plugin.IWPDesigned;
-import edu.ncssm.iwp.plugin.IWPObject;
-import edu.ncssm.iwp.plugin.IWPObjectXmlCreator;
-import edu.ncssm.iwp.plugin.IWPObjectXmlHandler;
-import edu.ncssm.iwp.plugin.IWPXmlable;
+import edu.ncssm.iwp.plugin.*;
 import edu.ncssm.iwp.problemdb.DProblem;
 import edu.ncssm.iwp.problemdb.DProblemState;
 import edu.ncssm.iwp.ui.GAccessor_designer;
@@ -30,8 +24,12 @@ import edu.ncssm.iwp.ui.GAccessor_designer;
  */
 
 public class DObject_Input
-	implements IWPObject, IWPAnimated, IWPCalculated, IWPXmlable, IWPDesigned
+	implements IWPObject, IWPAnimated, IWPCalculated, IWPXmlable, IWPDesigned, IWPCalculationOrder
 {
+	// IWP 4.5 - Each solid has a calculation order
+	int calculationOrder = -1;
+	public int getCalculatorOrder() { return calculationOrder; }
+	public void setCalculatorOrder(int order) { this.calculationOrder = order; }
 
 
 	public String getIconFilename()

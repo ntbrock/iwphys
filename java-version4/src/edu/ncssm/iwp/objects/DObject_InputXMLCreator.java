@@ -21,6 +21,7 @@ public class DObject_InputXMLCreator implements IWPObjectXmlCreator
 	public XMLElement getElement ( ) 
 	{
 		XMLElement elem = new XMLElement ( "input" );
+		elem.addAttribute ( "calculationOrder", object.getCalculatorOrder()+"" );
 
 		elem.addElement ( new XMLElement ( "name", object.getName() ));
 		elem.addElement ( new XMLElement ( "text", object.getText() ));

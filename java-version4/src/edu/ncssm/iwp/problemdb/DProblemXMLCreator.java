@@ -25,6 +25,8 @@ public class DProblemXMLCreator
 		XMLElement objects = new XMLElement ( "objects" );
 		elem.addElement ( objects );
 
+		// 2018Mar14 - Added the calculationOrder attribute to every object
+
 		Collection objs = problem.getObjectsForDrawing();
 		Iterator i = objs.iterator();
 

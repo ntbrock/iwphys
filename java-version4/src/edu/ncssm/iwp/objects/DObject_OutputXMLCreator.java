@@ -23,6 +23,7 @@ public class DObject_OutputXMLCreator implements IWPObjectXmlCreator
 	    MCalculatorXMLCreator calcCreator = new MCalculatorXMLCreator(object.getCalculator());
 	    
 	    XMLElement elem = new XMLElement ( "output" );
+		elem.addAttribute ( "calculationOrder", object.getCalculatorOrder()+"" );
 
 		elem.addElement ( new XMLElement ( "name", "" + object.getName() ));
 		elem.addElement ( new XMLElement ( "text", "" + object.getText() ));

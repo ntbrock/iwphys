@@ -24,7 +24,10 @@ package edu.ncssm.iwp.bin;
 
 //import iwp.*;
 
+import edu.ncssm.iwp.exceptions.CircularDependencyException;
 import edu.ncssm.iwp.exceptions.DataStoreException;
+import edu.ncssm.iwp.exceptions.InvalidEquationException;
+import edu.ncssm.iwp.exceptions.UnknownVariableException;
 import edu.ncssm.iwp.problemdb.DProblem;
 import edu.ncssm.iwp.problemdb.DProblemManager;
 import edu.ncssm.iwp.ui.GWindow_Animator;
@@ -48,22 +51,30 @@ public class IWP5_Rewriter
 
 		IWPLog.debug("---[IWP5_Rewriter]-----(Loading)-------------------------------");
 
-		try { 
-			if ( args.length < 1 ) {
+		try {
+			if (args.length < 1) {
 				System.err.println("Usage: IWP5_Rewriter <animation.iwp>");
 				System.exit(-1);
 
 			} else {
 
 				filename = args[0];
-				problem = probManager.loadFile ( args[0] );
+				problem = probManager.loadFile(args[0]);
 
-
+				problem.reorderProblemObjectsBySymbolicDependency();
 
 
 				probManager.saveFile(filename, problem);
 			}
 
+		} catch ( UnknownVariableException x ) {
+			IWPLog.x( "Unknown Variable in file: " + args[0], x );
+
+		} catch ( InvalidEquationException x ) {
+			IWPLog.x( "Invalid Equation: in file: " + args[0], x );
+
+		} catch ( CircularDependencyException x ) {
+			IWPLog.x( "Circular Dependency in file: " + args[0], x );
 
 		} catch ( DataStoreException e ) { 
 			IWPLog.x( "Unable to load file: " + args[0], e );

@@ -15,12 +15,14 @@ import edu.ncssm.iwp.exceptions.*;
 import edu.ncssm.iwp.plugin.*;
 import edu.ncssm.iwp.ui.*;
 
-
-
-
 public class DObject_Output
-	implements IWPObject, IWPAnimated, IWPCalculated, IWPXmlable, IWPDesigned
+	implements IWPObject, IWPAnimated, IWPCalculated, IWPXmlable, IWPDesigned, IWPCalculationOrder
 {
+	// IWP 4.5 - Each solid has a calculation order
+	int calculationOrder = -1;
+	public int getCalculatorOrder() { return calculationOrder; }
+	public void setCalculatorOrder(int order) { this.calculationOrder = order; }
+
 
 	public String getIconFilename()
 	{

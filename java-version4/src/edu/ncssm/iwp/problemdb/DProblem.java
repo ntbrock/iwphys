@@ -15,6 +15,7 @@ import edu.ncssm.iwp.exceptions.InvalidEquationException;
 import edu.ncssm.iwp.exceptions.UnknownVariableException;
 import edu.ncssm.iwp.objects.*;
 import edu.ncssm.iwp.plugin.IWPCalculated;
+import edu.ncssm.iwp.plugin.IWPCalculationOrder;
 import edu.ncssm.iwp.plugin.IWPObject;
 
 import java.util.*;
@@ -559,7 +560,21 @@ public class DProblem extends DEntity
     	orderedObjects.addAll(objectsForTheMiddle);
     	orderedObjects.addAll(objectsForTheEnd);    	
     	this.fullOrderedObjectReset(orderedObjects);
-    	
+
+    	// Iwp 4.5 - Store the order back into the claculated objects
+
+        int newWorldOrder = 1;
+        for ( Iterator i = orderedObjects.iterator(); i.hasNext(); ) {
+            Object o = (Object) i.next();
+            if (!(o instanceof IWPCalculationOrder)) {
+                IWPLog.error(this, "ERROR Object Class: " + o.getClass().getName() + " is not a type of IWPCalculationOrder.");
+                objectsForTheEnd.add(o);
+                continue;
+            }
+            IWPCalculationOrder objectCalc = (IWPCalculationOrder) o;
+            objectCalc.setCalculatorOrder(newWorldOrder++);
+        }
+
     	IWPLog.debug(this, "Done ordering " + objectsInDrawOrder.size() + " objects");    	
     }
 
