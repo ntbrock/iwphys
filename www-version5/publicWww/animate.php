@@ -61,6 +61,7 @@ header('Content-Type: text/html');
     <!-- Canvas -->
     <div id="canvasDiv" class="iwp-animation-canvas-container">
       <svg id="canvas" class="iwp-animation-canvas" viewbox="0 0 1000 1000" preserveAspectRatio="xMinYMin meet" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+        <g id="gridlines"></g>
       </svg>
     </div>
 

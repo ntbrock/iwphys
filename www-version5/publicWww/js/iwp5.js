@@ -351,7 +351,7 @@ function repaintStep(step) {
       updateUserFormOutputDouble(output, vars[output.name]);
    });
 
-   // console.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, solids: ", solids );
+   // le.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, solids: ", solids );
 
    $.each( solids, function( index, solid ) {
       updateSolidSvgPathAndShape(solid, vars[solid.name])
@@ -1293,7 +1293,7 @@ function renderProblemFromMemory() {
   $("#iwindow_ygrid").val( iwindow.ygrid );
   $("#iwindow_yunit").val( iwindow.yunit );
 
-  // GraphWindow is a TODO feature for now.
+    // GraphWindow is a TODO feature for now.
   // $("#graphWindow").html( graphWindow );
   inputTitle = 0;
   outputTitle = 0;
@@ -1331,15 +1331,14 @@ function renderProblemFromMemory() {
     $("#outputTable").css('display','none');
   }
 
-
+  fitText("#inputTable");
   /* Debugging 07 Oct 2016 Ryan Steed
   //$("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>"+htmlOutputs);
   */
   //Moved to addSolidsToCanvas, 8 Aug 2016
   //$("#solids").html( solids.join(" ") );
 
-  fitText("#inputTable");
-  renderCanvasFromMemory();
+  renderCanvas();
   addSolidsToCanvas(svgSolids);
   addSolidsToCanvas(svgObjects);
 };
@@ -1384,32 +1383,30 @@ function addSolidsToCanvas(solids) {
   $("#canvasDiv").html($("#canvasDiv").html());
 }
 
-function renderCanvasFromMemory() {
-  var c = $("#canvas");
+function renderCanvas() {
+  var c = $("#canvas")
+  var g = $("#gridlines")
   // Parse viewbox attributes from canvas to override defaults.
   var canvasBoxAttrs = c[0].getAttribute("viewBox").split(" ");
-  canvasBox= { minX: parseFloat(canvasBoxAttrs[0]), minY: parseFloat(canvasBoxAttrs[1]), maxX: parseFloat(canvasBoxAttrs[2]), maxY: parseFloat(canvasBoxAttrs[3]) };
+  canvasBox = { minX: parseFloat(canvasBoxAttrs[0]), minY: parseFloat(canvasBoxAttrs[1]), maxX: parseFloat(canvasBoxAttrs[2]), maxY: parseFloat(canvasBoxAttrs[3]) };
   // To Render the window is that we start at the Xmin, and draw full vertial lines,
   // increment by xgrid,
   // stopping at xmax
   // Add X gridlines -- TODO CONVERT TO A FOR LOOP
-  /*Shifted to for loop, 7 Aug 2016:c.append( "<path d='M " + xCanvas(-8) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(-6) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(-4) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(-2) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(2) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(4) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(6) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(8) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  */
+
+  //Update window settings with user form data
+  $.each(iwindow, function(index, val) {
+    iwindow[index] = queryUserFormWindowDouble(index);
+  })
+  $(".gridline").remove();
+
 
   var xGridlines = (iwindow.xmax - iwindow.xmin)/iwindow.xgrid;
   for ( var interval = 1; interval < xGridlines; interval ++ ) {
     var xGridPosition = (interval - xGridlines/2)*iwindow.xgrid;
     //console.log("whatItShouldBe: "+xCanvas(xGridPosition*iwindow.xgrid)+", coordinates: "+coordinates);
-    c.append( "<path d='M " + xCanvasGridlines(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-    c.append( "<path d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" );
+    g.append( "<path class='gridline' d='M " + xCanvasGridlines(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" )
+    g.append( "<path class='gridline' d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" )
     };
 
   // Add Y gridlines
@@ -1418,8 +1415,8 @@ function renderCanvasFromMemory() {
   //console.log("yGridlines: "+yGridlines);
   for ( var interval = 1; interval <= yGridlines-1; interval ++ ) {
     var yGridPosition = (interval - yGridlines/2)*iwindow.ygrid;
-    c.append( "<path d='M 0 " + yCanvasGridlines(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" );
-    c.append( "<path d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" );
+    g.append( "<path class='gridline' d='M 0 " + yCanvasGridlines(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" )
+    g.append( "<path class='gridline' d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" )
   };
 
   // Blitting / Double buffering approach
@@ -1440,7 +1437,6 @@ function queryTimeStopInputDouble() {
   time.stop = parseFloat($("#itime_stop").val());
   return time.stop;
 }
-
 function queryUserFormInputDouble(input) {
 
 	var readValue = $("#" + input.name).val();
@@ -1449,6 +1445,14 @@ function queryUserFormInputDouble(input) {
 	// TODO if readValue doesn't make sense, then default back to input.initialValue;
 
 	return doubleValue;
+}
+function queryUserFormWindowDouble(index) {
+  var readValue = $("#iwindow_" + index).val();
+  var doubleValue = parseFloat(readValue);
+  //console.log("queryUserDefinedInput: for input: ", input, " readValue: ", readValue,  "  doubleValue: ", doubleValue );
+  // TODO if readValue doesn't make sense, then default back to input.initialValue;
+
+  return doubleValue;
 }
 
 function updateUserFormOutputDouble(output, newValue) {
@@ -1655,10 +1659,10 @@ function handleStopClick() {
 };
 //Resets simulation.
 function handleResetClick() {
-	updateTimeDisplay(0);
+  renderCanvas();
+  updateTimeDisplay(0);
   handleStopClick();
 	var vars0 = masterResetSteps();
-  updateUserFormOutputDouble();
   graphResetZero(0, vars = vars0, solids = solids, graphWindow );
 	//document.getElementById(buttonIds.startStop).setAttribute("class", "Start");
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleStartClick()");
