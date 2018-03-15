@@ -18,7 +18,7 @@ public class IWPLog
 	public static boolean SWITCH_ERROR 		= true;  // Print errors
 	public static boolean SWITCH_WARN 		= true;  // Print warnings
 	public static boolean SWITCH_INFO 		= true;  // Print Info's
-	public static boolean SWITCH_DEBUG 		= false; // Print Debugs.
+	public static boolean SWITCH_DEBUG 		= true; // Print Debugs.
 	
 
 

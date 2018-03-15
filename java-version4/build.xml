@@ -23,8 +23,8 @@
         <property name="keyalias"     value="brockman" />
         <property name="keypass"      value="hwRAAAAAAA" />
 
-	<property name="jarfile"  value="iwp-4_1_2.jar" />
-	<property name="jarfileStudent"  value="iwp-applet-4_1_2.jar" />
+	<property name="jarfile"  value="iwp-4_5_0.jar" />
+	<property name="jarfileStudent"  value="iwp-applet-4_5_0.jar" />
 
 
 	<path id="build.classpath">

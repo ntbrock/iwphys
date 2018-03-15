@@ -1,0 +1,23 @@
+2018Mar08
+Matt
+L> Reviewed Trello tasks from board, Got through most.  Need to learn how to import graph window parameters in.  Everything else is good. 
+N> Four things in the Matt List in Trello to do!
+
+Taylor
+L> Focused on the circular reference and eulers. Bolted the iwp4 calculator into a web service. Designed how I want to put that into iwp5.
+N> Write comparison tests to compare v4 -vs- v5. Create a new javascript to be able to switch between both of them.   Success is reviewing step by step (tick by tick) that all the variables are equals. 
+
+
+After - Deploy to master, demo
+
+After - Pair on importing graph properties from Animation file.
+
+After - Show the design / architecture of what Taylor has built
+
+	how to import the graph options from iwp file into graph options.
+
+After - Show a demo of the v4 calculations being plumbed via javascript.
+
+After - Review Trello board to Find new items for Matt.
+
+

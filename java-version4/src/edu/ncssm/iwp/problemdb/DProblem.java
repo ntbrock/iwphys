@@ -434,6 +434,8 @@ public class DProblem extends DEntity
     		IWPCalculated objectCalc = (IWPCalculated) o;
     		
     		// Go ahead and cache the provides - even if it doesnt' depend on anything.
+            // The possibilities here are solid.xpos, solid.xdisp, solid.xvel, solid.xaccel, object.value
+            // time.curtime, time, start, end, stop, delta.
     		Collection providedSymbols = objectCalc.getProvidedSymbols();
     		if ( providedSymbols != null ) {
     			providesCache.put(objectCalc,providedSymbols);
