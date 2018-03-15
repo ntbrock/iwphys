@@ -315,10 +315,10 @@ function graphStepForward(step, vars) {
 			pathsSvg = graphObject.pathsSvg
 			$.each(graphMeasures, function(i, measure) {
 				var graphThisStep = true
-				if (measure == ('xVel' || 'yVel') && vars.t < 2*vars.delta_t) {
+				if ((measure == 'xVel' || measure == 'yVel') && vars.t < 2*vars.delta_t) {
 					graphThisStep = false
 				}
-				if (measure == ('xAccel' || 'yAccel') && vars.t < 3*vars.delta_t) {
+				if ((measure == 'xAccel' || measure == 'yAccel') && vars.t < 3*vars.delta_t) {
 					graphThisStep = false
 				}
 				if (graphThisStep) {
@@ -377,10 +377,10 @@ function graphStepBackward(step, vars) {
 
 				} else {
 					var graphThisStep = true
-					if (measure == ('xVel' || 'yVel') && vars.t < 2*vars.delta_t) {
+					if ((measure == 'xVel' || measure == 'yVel') && vars.t < 2*vars.delta_t) {
 						graphThisStep = false
 					}
-					if (measure == ('xAccel' || 'yAccel') && vars.t < 3*vars.delta_t) {
+					if ((measure == 'xAccel' || measure == 'yAccel') && vars.t < 3*vars.delta_t) {
 						graphThisStep = false
 					}
 					if (graphThisStep) {
