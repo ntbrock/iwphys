@@ -114,7 +114,7 @@ header('Content-Type: text/html');
       <!-- Window Settings -->
       <div id="iwindowTab" class="iwp-tab">
         <table class="trim">
-          <tr><th colspan="3">Window Settings</th></tr>
+          <tr><th colspan="3">Animation Window Settings</th></tr>
           <tr>
             <td style="width:33%"></td>
             <td style="width:33%">X</td>
