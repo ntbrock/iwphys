@@ -43,10 +43,15 @@ var path3 = d3.path();
 
 var visualPath = null;
 
-var xGrid = d3.axisTop(graphXScale).ticks(10).tickSize(1000);
-var yGrid = d3.axisRight(graphYScale).ticks(10).tickSize(1000);
-var xAxis = d3.axisBottom(graphXScale).ticks(10).tickSize(0);
-var yAxis = d3.axisLeft(graphYScale).ticks(10).tickSize(0);
+//var xGrid = d3.axisTop(graphXScale).ticks(10).tickSize(1000);
+//var yGrid = d3.axisRight(graphYScale).ticks(10).tickSize(1000);
+//var xAxis = d3.axisBottom(graphXScale).ticks(10).tickSize(0);
+//var yAxis = d3.axisLeft(graphYScale).ticks(10).tickSize(0);
+
+var xGrid = null
+var yGrid = null
+var xAxis = null
+var yAxis = null
 
 function graphInit() {
 
@@ -57,14 +62,19 @@ function graphInit() {
 
 	// Step 1 Build Grid And Axes
 	// console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
-
-	xGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(0, 100)"));
-	yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100, 0)"));
-
-	xAxis(svg.append("g").classed("iwp-graph-axis",true));
-	svg.append("text").attr("x", 60).attr("y", 15).classed("iwp-graph-axis-label", "true").text("Time (s)");
-	yAxis(svg.append("g").classed("iwp-graph-axis",true).attr("transform", "translate("+ graphXScale(0) +", 0)"));
-
+	if ( xGrid != null ) { 
+		xGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(0, 100)"));
+	}
+	if ( yGrid != null ) {
+		yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100, 0)"));
+	}
+	if ( xAxis != null ) { 
+		xAxis(svg.append("g").classed("iwp-graph-axis",true));
+		svg.append("text").attr("x", 60).attr("y", 15).classed("iwp-graph-axis-label", "true").text("Time (s)");
+	}
+	if ( yAxis != null ) {
+		yAxis(svg.append("g").classed("iwp-graph-axis",true).attr("transform", "translate("+ graphXScale(0) +", 0)"));
+	}
 	/*
 	visualPath1 = svg.append('path')
 		.classed("iwp-graph-line-red", true)
@@ -86,12 +96,24 @@ function graphInit() {
 
 function graphSetWindowFromAnimation(graphWindow) {
 
-    console.log("iwp5-graph:87> graphSetWindow: " , graphWindow )
+    //console.log("iwp5-graph:87> graphSetWindow: " , graphWindow )
 
-    // TODO
-    //  2018Mar08 Matt Start here to connect the graph extents to the d3 svg.
+    graphXScale = d3.scaleLinear()
+				.domain([graphWindow.xmax, graphWindow.xmin])
+				.range([100, -100]);
+		graphYScale = d3.scaleLinear()
+				.domain([graphWindow.ymin, graphWindow.ymax])
+				.range([100, -100]);
 
+		var xTicks = (graphWindow.xmax - graphWindow.xmin) / graphWindow.xgrid
+		var yTicks = (graphWindow.ymax - graphWindow.ymin) / graphWindow.ygrid
 
+		xGrid = d3.axisTop(graphXScale).ticks(xTicks).tickSize(1000);
+		yGrid = d3.axisRight(graphYScale).ticks(yTicks).tickSize(1000);
+		xAxis = d3.axisBottom(graphXScale).ticks(10).tickSize(0);
+		yAxis = d3.axisRight(graphYScale).ticks(10).tickSize(0);
+
+		graphInit();
 }
 
 
@@ -287,24 +309,32 @@ function graphStepForward(step, vars) {
 
 		$.each(iwpGraphObjects,function(name, graphObject) {
 
-			// console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
-
+			console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
+			console.log("iwp5graph:308> vars: ", vars)
 			paths = graphObject.paths
 			pathsSvg = graphObject.pathsSvg
 			$.each(graphMeasures, function(i, measure) {
-				var lcMeasure = measure.toLowerCase()
-				paths[measure].moveTo (
-					graphXScale(lastStep.t),
-					graphYScale(lastStep[name][lcMeasure])
-				)
+				var graphThisStep = true
+				if ((measure == 'xVel' || measure == 'yVel') && vars.t < 2*vars.delta_t) {
+					graphThisStep = false
+				}
+				if ((measure == 'xAccel' || measure == 'yAccel') && vars.t < 3*vars.delta_t) {
+					graphThisStep = false
+				}
+				if (graphThisStep) {
+					var lcMeasure = measure.toLowerCase()
+					paths[measure].moveTo (
+						graphXScale(lastStep.t),
+						graphYScale(lastStep[name][lcMeasure])
+					)
 
-				paths[measure].lineTo (
-					graphXScale(vars.t),
-					graphYScale(vars[name][lcMeasure])
-				)
+					paths[measure].lineTo (
+						graphXScale(vars.t),
+						graphYScale(vars[name][lcMeasure])
+					)
 
-				pathsSvg[measure].attr("d", paths[measure])
-
+					pathsSvg[measure].attr("d", paths[measure])
+				}
 			});
 		});
 
@@ -346,18 +376,25 @@ function graphStepBackward(step, vars) {
 					)
 
 				} else {
+					var graphThisStep = true
+					if ((measure == 'xVel' || measure == 'yVel') && vars.t < 2*vars.delta_t) {
+						graphThisStep = false
+					}
+					if ((measure == 'xAccel' || measure == 'yAccel') && vars.t < 3*vars.delta_t) {
+						graphThisStep = false
+					}
+					if (graphThisStep) {
+						// Move to a real point in time.
+						graphObject.paths[measure].moveTo (
+							graphXScale(lastStep.t),
+							graphYScale(lastStep[name][lcMeasure])
+						)
 
-					// Move to a real point in time.
-					graphObject.paths[measure].moveTo (
-						graphXScale(lastStep.t),
-						graphYScale(lastStep[name][lcMeasure])
-					)
-
-					graphObject.paths[measure].lineTo (
-						graphXScale(vars.t),
-						graphYScale(vars[name][lcMeasure])
-					)
-
+						graphObject.paths[measure].lineTo (
+							graphXScale(vars.t),
+							graphYScale(vars[name][lcMeasure])
+						)
+					}
 				}
 
 				lastStep = vars;

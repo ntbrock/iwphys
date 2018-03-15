@@ -94,7 +94,7 @@
 						<value>0</value>
 					</calculator>
 				</angle>
-				<graphOptions graphVisible="false">
+				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="true" yPos="false" xPos="false"/>
 				</graphOptions>
 			</shape>
@@ -133,7 +133,7 @@
 						<value>0</value>
 					</calculator>
 				</angle>
-				<graphOptions graphVisible="false">
+				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="true" yPos="false" xPos="false"/>
 				</graphOptions>
 			</shape>
