@@ -208,7 +208,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
     
 
-    console.log("iwp5:222> yComplex for solid.name: " + solid.name + " : ", yComplex )
+    // console.log("iwp5:222> yComplex for solid.name: " + solid.name + " : ", yComplex )
 
 
     var y = yComplex.value
@@ -295,11 +295,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
     // Hande Complex return types from Euler Calculator
     if ( xComplex.velocity != undefined ) {
-      // 2018Mar08 Confirmed this line is where xvelocity is assigned to graph.
       calc.xvel = xComplex.velocity
-
-      // console.log("iwp5:306> step: ", step, "  calc.xvel: " , calc.xvel)
-
     }
     if ( xComplex.acceleration != undefined ) {
       calc.xaccel = xComplex.acceleration
@@ -319,9 +315,6 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
 
 }
-
-// This was needed for self-referential euler's animations. like em-ratio-2d.iwp.
-var CONFIG_clone_step_from_previous = false;
 
 
 // RENDERING steps:
@@ -373,15 +366,7 @@ function calculateVarsAtStep(step) {
   var vars = { step: step}
   $.extend(vars, varsConstants);
 
-  // EXPERIMENTAL: Pull the previous variables in from last step?
-  if ( CONFIG_clone_step_from_previous ) {
-  try {
-    $.extend(vars, varsAtStep[step-1])
-    //console.log("calculateVarsATStep:195> Cloned vars from past Step-1: " + (step-1) + " => ", JSON.stringify(varsAtStep) )
-  } catch(err) {
-    console.log("calculateVarsAtStep:198> Exception when mirring past vars into current vars:", err)
-  }
-  }
+
 	// Eveything begins with time, populate t.
 	vars.t = queryTimeStartInputDouble() + step * time.change;
   vars.tDelta = time.change
@@ -389,12 +374,10 @@ function calculateVarsAtStep(step) {
   vars.tDel = vars.tDelta
   vars.deltaTime = time.change
 	updateTimeDisplay(vars.t);
-	/*
-  for each calulation, query dom for time step
-	for each input
-		query the dom by input_$id to get the value from the user form
-	*/
 
+
+
+  // Collect user Inputs! These are polled from the DOM every step.
 
 	$.each( inputs, function( index, input ) {
 		// next load in variables for all of the inputs.
@@ -404,7 +387,59 @@ function calculateVarsAtStep(step) {
     //console.log("iwp5:410> calculateVarsAtStep("+step+")  Assigned Input: " , input.name, "  A value of: " ,vars[input.name] )
 
     //vars[input.name]["value"] = vars[input.name];
-    });
+  });
+
+
+
+  //-----------------------------------------------------------
+  // EULER INITIALIZATION 
+  // 2018Mar22 - Euler's Self-referential Fix, we need to pull velocities and displacements for
+  // every Solid w/ Euler's and pre-write them into the vars space.
+  $.each(solids, function(index,solid) {
+
+    // Initialize if necessary
+    if ( vars[solid.name] == null ) { vars[solid.name] = {} }
+
+    if ( solid.xpath.calculator.type == "euler-mathjs" ) { 
+
+      var calculator = solid.xpath.calculator
+      // Initialization -- If currentDisplacement or currentVelocity is empty!
+      if (calculator.currentDisplacement == null) {       
+        console.log("iwp5:409> X Euler Pre-calc for solid: " + solid.name + " solid.xpath.calc: " , solid.xpath.calculator)
+        calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
+        calculator.currentDisplacement = calculator.initialDisplacement
+      }
+      if (calculator.currentVelocity == null) {       
+        calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
+        calculator.currentVelocity = calculator.initialVelocity;
+      }
+      vars[solid.name].x = solid.xpath.calculator.currentDisplacement
+      vars[solid.name].xpos = solid.xpath.calculator.currentDisplacement
+      vars[solid.name].xdisp = solid.xpath.calculator.currentDisplacement
+      vars[solid.name].xvel = solid.xpath.calculator.currentVelocity      
+    }
+
+    if ( solid.ypath.calculator.type == "euler-mathjs" ) { 
+      var calculator = solid.ypath.calculator
+      // Initialization -- If currentDisplacement or currentVelocity is empty!
+      if (calculator.currentDisplacement == null) {       
+        console.log("iwp5:426> Y Euler Pre-calc for solid: " + solid.name + " solid.ypath.calc: " , solid.ypath.calculator)
+        calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
+        calculator.currentDisplacement = calculator.initialDisplacement
+      }
+      if (calculator.currentVelocity == null) {       
+        calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
+        calculator.currentVelocity = calculator.initialVelocity * time.change;
+      }
+      vars[solid.name].y = solid.ypath.calculator.currentDisplacement
+      vars[solid.name].ypos = solid.ypath.calculator.currentDisplacement
+      vars[solid.name].ydisp = solid.ypath.calculator.currentDisplacement
+      vars[solid.name].yvel = solid.ypath.calculator.currentVelocity
+    }
+
+   
+    //BOOK
+  });
 
 
 
@@ -1040,14 +1075,14 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       }
 
 
-      // 2018Mar15 Special new code to look backwards
-      var previousVars = varsAtStep[calculateStep-1];
-      if ( previousVars ) { 
+      // 2018Mar15 Special new code to look backwards -- THIS MAY BE ABLE TO GO AWAY AFTER the Mar22 Fix.
+      //var previousVars = varsAtStep[calculateStep-1];
+      //if ( previousVars ) { 
         // copy everything with this name into current step, which gets all dimensions
         //BOOK
-        vars[objectName] = previousVars[objectName]
+      //  vars[objectName] = previousVars[objectName]
         // console.log("iwp5:1050> Copied past variable forward: vars["+objectName+"] = ", vars[objectName])
-      }
+      //}
 
 
       // 2018Mar15 - Write our displacement values, etc ino current vars.
@@ -1058,28 +1093,27 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       // console.log("iwp5:1047> For Step: " + calculateStep + " resultVariable: " + resultVariable + " disp: " + calculator.currentDisplacement  + "  vel: " + calculator.currentVelocity);
 
 
-
-      if ( verbose ) {
-        // console.log("iwp5:661>", resultVariable, "BEFORE STEP: ", calculateStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", JSON.stringify(vars) )
-      }
-
       var acceleration = null;
       try {
         // then calculate the acceleratiion
         // 2018Mar22 Fix to only apply the acceleration time component to the change in velocity.
-       acceleration = calculator.accelerationCompiled.eval(vars);
-       if (!isFinite(acceleration)) {
-        throw "acceleration is not finite"
-       }
-       if ( isNaN(acceleration) ) {
-        console.log("calculatorObject",calculator,"with dt of",dt)
-        throw "for resultVariable acceleration is NaN with vars "+vars
-       }
+
+        // console.log("iwp5:1088> Calculating acceleration via calculator: ", calculator, " for vars: ", vars )
+        acceleration = calculator.accelerationCompiled.eval(vars);
+
+
+        if ( !isFinite(acceleration) ) {
+          throw "Calculator.accelerationCompiled result is not finite, is: " + acceleration
+        }
+        if ( isNaN(acceleration) ) {
+          throw "Calculator.accelerationCompiled result is NaN"
+        }
+
       } catch ( err ) {
-        console.log("evaluateCalculator:1067> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
+        console.log("evaluateCalculator:1095> ERROR " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
         if ( CONFIG_throw_acceleration_calculation_exceptions ) {
-         throw err;
-         }
+          throw err;
+        }
       }
 
 
@@ -1101,7 +1135,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
           
           }
           calculator.currentDisplacement += calculator.currentVelocity * dt;
-            }
+        }
 
       } else if ( changeStep < 0 ) {
           // Negative direction calculation
@@ -1115,10 +1149,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       }
 
 
-      console.log("iwp5:1095 evaluateCalculator calculateStep: "+ calculateStep + "  changeStep: " + changeStep + " calculator.currentVelocity: " + calculator.currentVelocity + " calculator.currentDisplacement: " + calculator.currentDisplacement )
-
-
-
+      // console.log("iwp5:1152> evaluateCalculator calculateStep: "+ calculateStep + "  changeStep: " + changeStep + " calculator.currentVelocity: " + calculator.currentVelocity + " calculator.currentDisplacement: " + calculator.currentDisplacement )
       //Return only value if just an output?
 
       return { step: calculateStep, 
@@ -1130,10 +1161,9 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       // return displacement.value;
     } catch ( err ) {
       if ( verbose ) {
-      console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, dt);
-    }
+        console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, dt);
+      }
       throw err;
-      //return { value: undefined }; // was -1
     }
   }
   else {
