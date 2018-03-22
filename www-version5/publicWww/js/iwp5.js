@@ -429,7 +429,7 @@ function calculateVarsAtStep(step) {
       }
       if (calculator.currentVelocity == null) {       
         calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
-        calculator.currentVelocity = calculator.initialVelocity * time.change;
+        calculator.currentVelocity = calculator.initialVelocity;
       }
       vars[solid.name].y = solid.ypath.calculator.currentDisplacement
       vars[solid.name].ypos = solid.ypath.calculator.currentDisplacement
@@ -476,11 +476,15 @@ function calculateVarsAtStep(step) {
    * 2018Mar15 Perform the animation calculationOrder First
    */
 
+  var calculationsPerformed = 0;
+
   $.each( orderedObjects, function(index, object) { 
     if(object != null ) { // orderedObjects can be sparseArray
     if(object.objectType=="solid") {
       try { 
 
+        console.log("iwp5:494> [Calculations Peformed " + calculationsPerformed + "] Calculating Solid: " + object.name )
+        calculationsPerformed++
         calculateSolidAtStep(object, step, vars, true );
 
       } catch ( err ) {
@@ -489,11 +493,15 @@ function calculateVarsAtStep(step) {
       }
     } else if(object.objectType=="output") { 
       try { 
-      
+
         var newValue = calculateOutputAtStep(object, step, vars, false );
         if ( isNaN(newValue) ) { throw "not a number" };
         if ( !isFinite(newValue) ) { throw "not finite" }
         vars[object.name] = newValue;
+
+        console.log("iwp5:494> [Calculations Peformed " + calculationsPerformed + "] Calculated Output: " + object.name + " New Value: " + newValue )
+        calculationsPerformed++
+
 
       } catch ( err ) {
         console.log("iwp5:466> failed calculationOrder err: " , err, " Output:", object)
@@ -511,6 +519,28 @@ function calculateVarsAtStep(step) {
   * Legacy path to support 4_1_2 animations with no CalculationOrder in iwp file.
   for each output perform the calculator
   */
+
+	/* for each solid
+		sequence of the solids does matter in the problem file.
+	*/
+	$.each( unorderedSolids, function( index, solid ) {
+		/*
+		for x, y, h, w , perform the calculator
+		*/
+
+    try {
+     calculateSolidAtStep(solid, step, vars, true );
+        //  -> update the DOM with theose new results
+    } catch ( err ) {
+        //console.log(":231 caught a faailed solid exception: ", err);
+      if ( CONFIG_throw_solid_calculation_exceptions ) {
+      throw err;
+    }
+
+    failedSolids.push(solid);
+  }});
+
+
   $.each( unorderedOutputs, function( index, output ) {
     try {
       var newValue = calculateOutputAtStep(output, step, vars, false );
@@ -529,43 +559,6 @@ function calculateVarsAtStep(step) {
       //console.log("FailedOutputs",failedOutputs)
     }
   });
-
-	/* for each solid
-		sequence of the solids does matter in the problem file.
-	*/
-	$.each( unorderedSolids, function( index, solid ) {
-		/*
-		for x, y, h, w , perform the calculator
-		*/
-
-    try {
-     calculateSolidAtStep(solid, step, vars, true );
-        //  -> update the DOM with theose new results
-    } catch ( err ) {
-        //console.log(":231 caught a faailed solid exception: ", err);
-          if ( CONFIG_throw_solid_calculation_exceptions ) {
-         throw err;
-         }
-
-      failedSolids.push(solid);
-  }});
-
-    $.each( objects, function( index, object )  {
-    /*
-    for x, y, h, w , perform the calculator
-    */
-
-    try {
-     calculateSolidAtStep(object, step, vars, true );
-        //  -> update the DOM with theose new results
-
-    } catch ( err ) {
-        //console.log(":231 caught a faailed solid exception: ", err);
-          if ( CONFIG_throw_solid_calculation_exceptions ) {
-         throw err;
-         }
-      }
-});
 
 
   // console.log(":238 failedOutputs: ", failedOutputs);
@@ -1062,45 +1055,28 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
       var dt = vars["delta_t"]
 
+      /*
+      // This is handled in the master calculate step now  2018Mar22
       if ( calculator["initialDisplacement"] == undefined ) {
         calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
         calculator.currentDisplacement = calculator.initialDisplacement
-        //console.log("iwp5:380> calculating initial displacement to: ", calculator.initialDisplacement )
+        console.log("iwp5:380> calculating initial displacement to: ", calculator.initialDisplacement )
       }
 
       if ( calculator["initialVelocity"] == undefined ) {
         calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
         calculator.currentVelocity = calculator.initialVelocity * dt;
-        //console.log("iwp5:405> calculating initial velocity to: ", calculator.initialVelocity )
+        console.log("iwp5:405> calculating initial velocity to: ", calculator.initialVelocity )
       }
-
-
-      // 2018Mar15 Special new code to look backwards -- THIS MAY BE ABLE TO GO AWAY AFTER the Mar22 Fix.
-      //var previousVars = varsAtStep[calculateStep-1];
-      //if ( previousVars ) { 
-        // copy everything with this name into current step, which gets all dimensions
-        //BOOK
-      //  vars[objectName] = previousVars[objectName]
-        // console.log("iwp5:1050> Copied past variable forward: vars["+objectName+"] = ", vars[objectName])
-      //}
-
-
-      // 2018Mar15 - Write our displacement values, etc ino current vars.
-      // Mimick IWP4 Behavior, set current velocity + displacement into curent vars
-      //vars[resultVariable+"disp"] = calculator.currentDisplacement;
-      //vars[resultVariable+"pos"] = calculator.currentDisplacement;
-      //vars[resultVariable+"vel"] = calculator.currentVelocity;
-      // console.log("iwp5:1047> For Step: " + calculateStep + " resultVariable: " + resultVariable + " disp: " + calculator.currentDisplacement  + "  vel: " + calculator.currentVelocity);
-
+      */
 
       var acceleration = null;
       try {
         // then calculate the acceleratiion
         // 2018Mar22 Fix to only apply the acceleration time component to the change in velocity.
 
-        // console.log("iwp5:1088> Calculating acceleration via calculator: ", calculator, " for vars: ", vars )
+        console.log("iwp5:1088> Calculating acceleration via calculator: ", calculator, " at calcStep: " + calculateStep + " for vars: ", vars )
         acceleration = calculator.accelerationCompiled.eval(vars);
-
 
         if ( !isFinite(acceleration) ) {
           throw "Calculator.accelerationCompiled result is not finite, is: " + acceleration

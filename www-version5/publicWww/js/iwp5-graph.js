@@ -301,8 +301,8 @@ function graphStepForward(step, vars) {
 
 		$.each(iwpGraphObjects,function(name, graphObject) {
 
-			console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
-			console.log("iwp5graph:308> vars: ", vars)
+			// console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
+			// console.log("iwp5graph:308> vars: ", vars)
 			paths = graphObject.paths
 			pathsSvg = graphObject.pathsSvg
 			$.each(graphMeasures, function(i, measure) {
