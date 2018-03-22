@@ -390,6 +390,33 @@ function calculateVarsAtStep(step) {
   });
 
 
+  //-----------------------------------
+  // Make the first pass thru outputs
+
+  $.each( outputs, function( index, output ) {
+    try {
+      var newValue = calculateOutputAtStep(output, step, vars, false );
+      //console.log("newValue",newValue)
+      if ( isNaN(newValue) ) {
+        throw "not a number"
+      };
+      if ( !isFinite(newValue) ) {
+        throw "not finite"
+      }
+      vars[output.name] = newValue;
+      console.log("iwp5:409> First Ouputs Pass, added new variable: "+ output.name + " = " + vars[output.name])
+    } catch ( err ) {
+
+      console.log("iwp5:409> First Outputs Pass, ERROR Calculating: "+ output.name + " > " + err );
+
+      //console.log("Failed Output:", output)
+      //failedOutputs.push(output);
+      //console.log("FailedOutputs",failedOutputs)
+    }
+  });
+
+
+
 
   //-----------------------------------------------------------
   // EULER INITIALIZATION 
@@ -520,14 +547,11 @@ function calculateVarsAtStep(step) {
   for each output perform the calculator
   */
 
-	/* for each solid
-		sequence of the solids does matter in the problem file.
-	*/
-	$.each( unorderedSolids, function( index, solid ) {
-		/*
-		for x, y, h, w , perform the calculator
-		*/
 
+  $.each( unorderedSolids, function( index, solid ) {
+    /*
+    for x, y, h, w , perform the calculator
+    */
     try {
      calculateSolidAtStep(solid, step, vars, true );
         //  -> update the DOM with theose new results
@@ -539,6 +563,8 @@ function calculateVarsAtStep(step) {
 
     failedSolids.push(solid);
   }});
+
+  
 
 
   $.each( unorderedOutputs, function( index, output ) {
@@ -559,6 +585,7 @@ function calculateVarsAtStep(step) {
       //console.log("FailedOutputs",failedOutputs)
     }
   });
+
 
 
   // console.log(":238 failedOutputs: ", failedOutputs);
