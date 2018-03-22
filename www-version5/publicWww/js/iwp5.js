@@ -110,7 +110,7 @@ function stepBackwardAndPause() {
  */
 function handleStep() {
 
-	//console.log("handleStep:87> current: " , currentStep, "  change: ", changeStep );
+	console.log("handleStep:113> current: " , currentStep, "  change: ", changeStep );
 	// apply the time change.
 	var newStep = currentStep + changeStep;
 
@@ -171,10 +171,8 @@ function archiveVarsAtStep( step, vars ) {
 
 
 function calculateOutputAtStep(output, step, vars, verbose) {
-    var newValue = evaluateCalculator( output.name+".out", output.calculator, vars, verbose, output.name ).value;
+    var newValue = evaluateCalculator( output.name+".out", output.calculator, step, vars, verbose, output.name ).value;
     vars[output.name] = newValue;
-    //console.log("newValue for",output.name,evaluateCalculator( output.name+".out", output.calculator, vars, verbose ))
-    // -> update the DOM with the new reuslts.
     updateUserFormOutputDouble(output, newValue);
     return newValue
 }
@@ -182,16 +180,7 @@ function calculateOutputAtStep(output, step, vars, verbose) {
 
 function calculateSolidAtStep(solid, step, vars, verbose) {
 
-    // TODO - Derive Velocity and Acceleration!
-
-
-    if ( solid.name == "P" ) {
-      // Debugging point for http://localhost:8080/master/animate.php/ftemo/em-ratio-1d.iwp
-      // console.log("iwp5.calculateSolidAtStep:186> P vars: ", vars)
-      // var breaker = 1;
-    }
-
-    var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose, solid.name )
+    var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, step, vars, verbose, solid.name )
     var x = xComplex.value
 
  //----------------------------------------
@@ -216,7 +205,12 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
  vars[solid.name] = calcX;
  //----------------------------------------
 
-    var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose, solid.name )
+    var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
+    
+
+    console.log("iwp5:222> yComplex for solid.name: " + solid.name + " : ", yComplex )
+
+
     var y = yComplex.value
 
   //----- MORE TEST CODE
@@ -242,13 +236,13 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
   if ( xComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
-     xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose, solid.name )
+     xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, step, vars, verbose, solid.name )
      x = xComplex.value
   }
   if ( yComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
-     yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose, solid.name )
+     yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
      y = yComplex.value
   }
 
@@ -264,8 +258,8 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       ypos: y,
       yvel: 0,
       yaccel: 0,
-      height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars, verbose, solid.name ).value,
-      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars, verbose, solid.name ).value,
+      height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, step, vars, verbose, solid.name ).value,
+      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, step, vars, verbose, solid.name ).value,
       angle: 0
     }
 
@@ -276,8 +270,8 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       $.each( solid.points, function( index, i) {
       //console.log(i)
       point = {
-        x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, vars, verbose, solid.name ).value,
-        y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, vars, verbose, solid.name ).value
+        x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, step, vars, verbose, solid.name ).value,
+        y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, step, vars, verbose, solid.name ).value
       };
       calc.points.push(point);
       });
@@ -289,13 +283,13 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     }
 
     if ( solid.shape.angle ) {
-      calc.angle = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, vars, verbose, solid.name ).value
+      calc.angle = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, step, vars, verbose, solid.name ).value
       // console.log("iwp5:277> Evaluated calculator for Solid.shape.angle: ", solid.shape.angle, " to :", calc.angle  )
     }
 
     // For objects with a value beyond x , y, w , h -- This is used for the floatingText Value
     if ( solid.value != null && solid.value.calculator != null ) {
-      calc.objectValue = evaluateCalculator( solid.name+".objectValue", solid.value.calculator, vars, verbose, solid.name ).value
+      calc.objectValue = evaluateCalculator( solid.name+".objectValue", solid.value.calculator, step, vars, verbose, solid.name ).value
     }
 
 
@@ -406,6 +400,9 @@ function calculateVarsAtStep(step) {
 		// next load in variables for all of the inputs.
     //vars[input.name] = { value: queryUserFormInputDouble(input) };
     vars[input.name] = queryUserFormInputDouble(input);
+
+    //console.log("iwp5:410> calculateVarsAtStep("+step+")  Assigned Input: " , input.name, "  A value of: " ,vars[input.name] )
+
     //vars[input.name]["value"] = vars[input.name];
     });
 
@@ -945,11 +942,15 @@ function evaluateCompiledMath( compiled, vars ) {
 // Config flag for develoeprs to enable debugging of euler acceleration calculations - have fun!
 var CONFIG_throw_acceleration_calculation_exceptions = true;
 
-function evaluateCalculator( resultVariable, calculator, vars, verbose, objectName ) {
+
+/** 2018Mar22 Bugfix, use the argument 'calculateStep' instead of reaching out to global */
+
+function evaluateCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
   // ResultVariable is solidname.x or solidName.y
 
+
   if ( calculator == null ) {
-    //console.log("iwp5:688: Warning Null Clculaor for: ", resultVariable)
+    //console.log("iwp5:688: Warning Null Calculaor for: ", resultVariable)
 
     return { value: 0 }
   }
@@ -1040,7 +1041,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
 
       // 2018Mar15 Special new code to look backwards
-      var previousVars = varsAtStep[currentStep-1];
+      var previousVars = varsAtStep[calculateStep-1];
       if ( previousVars ) { 
         // copy everything with this name into current step, which gets all dimensions
         //BOOK
@@ -1054,18 +1055,19 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       //vars[resultVariable+"disp"] = calculator.currentDisplacement;
       //vars[resultVariable+"pos"] = calculator.currentDisplacement;
       //vars[resultVariable+"vel"] = calculator.currentVelocity;
-      // console.log("iwp5:1047> For Step: " + currentStep + " resultVariable: " + resultVariable + " disp: " + calculator.currentDisplacement  + "  vel: " + calculator.currentVelocity);
+      // console.log("iwp5:1047> For Step: " + calculateStep + " resultVariable: " + resultVariable + " disp: " + calculator.currentDisplacement  + "  vel: " + calculator.currentVelocity);
 
 
 
       if ( verbose ) {
-        // console.log("iwp5:661>", resultVariable, "BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", JSON.stringify(vars) )
+        // console.log("iwp5:661>", resultVariable, "BEFORE STEP: ", calculateStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", JSON.stringify(vars) )
       }
 
       var acceleration = null;
       try {
         // then calculate the acceleratiion
-       acceleration = calculator.accelerationCompiled.eval(vars) * dt;
+        // 2018Mar22 Fix to only apply the acceleration time component to the change in velocity.
+       acceleration = calculator.accelerationCompiled.eval(vars);
        if (!isFinite(acceleration)) {
         throw "acceleration is not finite"
        }
@@ -1080,33 +1082,47 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
          }
       }
 
-      if ( currentStep == 0 ) {
-          calculator.currentVelocity = calculator.initialVelocity;
-          if ( acceleration != null ) {
-            calculator.currentVelocity += acceleration * 0.5;
-          }
 
-          calculator.currentDisplacement = calculator.initialDisplacement; // no t adjustment
+
+      if ( calculateStep == 0 ) {
+          calculator.currentVelocity = calculator.initialVelocity;
+          calculator.currentDisplacement = calculator.initialDisplacement; // no adjustment
 
       } else if ( changeStep > 0 ) {
+
         if ( acceleration != null ) {
+
           // Positive direction calcuation
-          calculator.currentVelocity += acceleration;
+          if ( calculateStep == 1 ) { 
+            // Special first frame consideration
+            calculator.currentVelocity += acceleration * dt * 0.5;
+          } else { 
+            calculator.currentVelocity += acceleration * dt;
+          
+          }
           calculator.currentDisplacement += calculator.currentVelocity * dt;
             }
 
       } else if ( changeStep < 0 ) {
+          // Negative direction calculation
           if ( acceleration != null ) {
-          calculator.currentVelocity -= acceleration;
+          calculator.currentVelocity -= acceleration * dt;
           calculator.currentDisplacement -= calculator.currentVelocity * dt;
         }
+
       } else {
         // No step direction
       }
 
+
+      console.log("iwp5:1095 evaluateCalculator calculateStep: "+ calculateStep + "  changeStep: " + changeStep + " calculator.currentVelocity: " + calculator.currentVelocity + " calculator.currentDisplacement: " + calculator.currentDisplacement )
+
+
+
       //Return only value if just an output?
 
-      return { value: calculator.currentDisplacement,
+      return { step: calculateStep, 
+        value: calculator.currentDisplacement,
         displacement: calculator.currentDisplacement,
         velocity: calculator.currentVelocity,
         acceleration: acceleration }
