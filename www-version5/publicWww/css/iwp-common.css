@@ -11,13 +11,31 @@
 	/* background-color: #8A2BE2; */ 
 }
 
-a.navbar-brand { 
+
+.navbar-inverse a.navbar-brand { 
       color: #fff !important;
 }
 
-.navbar-nav li a { 
+.navbar-inverse .navbar-nav li a { 
       color: #eee !important;
 }
+
+
+
+.navbar-minimal { 
+
+	/*
+	Production Blue
+	*/
+	color: #336699 !important; 
+	margin-bottom: 0px;
+	/**
+	Development Purple
+	*/
+	/* background-color: #8A2BE2; */ 
+}
+
+
 
 .thumbnail { 
 /*	   height: 300px; */

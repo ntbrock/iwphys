@@ -29,7 +29,7 @@ header('Content-Type: text/html');
 
 <body>
 
-<?php include_once("iwp-nav.php") ?>
+<?php include_once("iwp-nav-minimal.php") ?>
 
 <!-- Json IWP Content controls -->
 <div id="problem" problem-uri="<?= $xtojUrl ?>"></div>
