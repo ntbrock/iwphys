@@ -247,6 +247,14 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
   }
 
   //-------------------------------------
+  // Height and width
+
+  var height = evaluateCalculator( solid.name+".h", solid.shape.height.calculator, step, vars, verbose, solid.name ).value
+  var width = evaluateCalculator( solid.name+".w", solid.shape.width.calculator, step, vars, verbose, solid.name ).value
+
+  // console.log("iwp5:259> Solid: " + solid.name + " height + width calculation: width: " , width, " height: ", height)
+
+  //-------------------------------------
     var calc = {
       x: x,
       xdisp: x,
@@ -258,8 +266,8 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       ypos: y,
       yvel: 0,
       yaccel: 0,
-      height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, step, vars, verbose, solid.name ).value,
-      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, step, vars, verbose, solid.name ).value,
+      height: height,
+      width: width,
       angle: 0
     }
 
@@ -404,11 +412,10 @@ function calculateVarsAtStep(step) {
         throw "not finite"
       }
       vars[output.name] = newValue;
-      console.log("iwp5:409> First Ouputs Pass, added new variable: "+ output.name + " = " + vars[output.name])
+      // console.log("iwp5:409> First Ouputs Pass, added new variable: "+ output.name + " = " + vars[output.name])
     } catch ( err ) {
 
       console.log("iwp5:409> First Outputs Pass, ERROR Calculating: "+ output.name + " > " + err );
-
       //console.log("Failed Output:", output)
       //failedOutputs.push(output);
       //console.log("FailedOutputs",failedOutputs)
@@ -431,12 +438,12 @@ function calculateVarsAtStep(step) {
 
       var calculator = solid.xpath.calculator
       // Initialization -- If currentDisplacement or currentVelocity is empty!
-      if (calculator.currentDisplacement == null) {       
-        console.log("iwp5:409> X Euler Pre-calc for solid: " + solid.name + " solid.xpath.calc: " , solid.xpath.calculator)
+      if (step == 0 || calculator.currentDisplacement == null) {       
+        // console.log("iwp5:409> X Euler Pre-calc for solid: " + solid.name + " solid.xpath.calc: " , solid.xpath.calculator)
         calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
         calculator.currentDisplacement = calculator.initialDisplacement
       }
-      if (calculator.currentVelocity == null) {       
+      if (step == 0 || calculator.currentVelocity == null) {       
         calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
         calculator.currentVelocity = calculator.initialVelocity;
       }
@@ -449,12 +456,12 @@ function calculateVarsAtStep(step) {
     if ( solid.ypath.calculator.type == "euler-mathjs" ) { 
       var calculator = solid.ypath.calculator
       // Initialization -- If currentDisplacement or currentVelocity is empty!
-      if (calculator.currentDisplacement == null) {       
-        console.log("iwp5:426> Y Euler Pre-calc for solid: " + solid.name + " solid.ypath.calc: " , solid.ypath.calculator)
+      if (step == 0 || calculator.currentDisplacement == null) {       
+        //console.log("iwp5:426> Y Euler Pre-calc for solid: " + solid.name + " solid.ypath.calc: " , solid.ypath.calculator)
         calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
         calculator.currentDisplacement = calculator.initialDisplacement
       }
-      if (calculator.currentVelocity == null) {       
+      if (step == 0 || calculator.currentVelocity == null) {       
         calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
         calculator.currentVelocity = calculator.initialVelocity;
       }
@@ -464,8 +471,6 @@ function calculateVarsAtStep(step) {
       vars[solid.name].yvel = solid.ypath.calculator.currentVelocity
     }
 
-   
-    //BOOK
   });
 
 
@@ -735,15 +740,28 @@ function addOutput(output) {
 
 /**
  * 2016-Nov-09 - Reset the instantanous velcity calculations on reset
-*/
+ * 2018Mar23 - Erase all internal state, including intialVelocities inside Euler.
+ */
 function resetSolidCalculators(solid) {
+
+  // console.log("iwp5:753> resetSolidCalculators: " , solid )
+
   if ( solid.xpath && solid.xpath.calculator ) {
       solid.xpath.calculator.latestValue = undefined;
+      solid.xpath.calculator.currentVelocity = undefined;
+      solid.xpath.calculator.initialVelocity = undefined;
+      solid.xpath.calculator.currentDisplacement = undefined;
+      solid.xpath.calculator.initialDisplacement = undefined;
   }
   if ( solid.ypath && solid.ypath.calculator ) {
       solid.ypath.calculator.latestValue = undefined;
+      solid.ypath.calculator.currentVelocity = undefined;
+      solid.ypath.calculator.initialVelocity = undefined;
+      solid.ypath.calculator.currentDisplacement = undefined;
+      solid.ypath.calculator.initialDisplacement = undefined;
   }
-  /** We are not using velocity on height + width calcs */
+
+  /** IWP5 is not yet using velocity on height + width calcs */
   /*
   if ( solid.xpath && solid.xpath.calculator ) {
       solid.width.calculator.latestValue = null;
@@ -1072,7 +1090,6 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 		}
 	} else if ( calculator.type == "euler-mathjs" ) {
     try {
-      var breaker = 1;
       // 2016-Sep-23 For Euler V5, store the cache of current displacement and velocity IN calculator.
       // An enhancement would be to expose these values out as complex return ttypes of this function,
       // so that they could he historically archived in the variable step array.
@@ -1102,7 +1119,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
         // then calculate the acceleratiion
         // 2018Mar22 Fix to only apply the acceleration time component to the change in velocity.
 
-        console.log("iwp5:1088> Calculating acceleration via calculator: ", calculator, " at calcStep: " + calculateStep + " for vars: ", vars )
+        // console.log("iwp5:1088> Calculating acceleration via calculator: ", calculator, " at calcStep: " + calculateStep + " for vars: ", vars )
         acceleration = calculator.accelerationCompiled.eval(vars);
 
         if ( !isFinite(acceleration) ) {
@@ -1566,11 +1583,16 @@ if (solid.shape.type == "circle") {
     svgSolid.attr("points", pointsAttr)
   }
   else if (solid.shape.type == "vector") {
+
+
     //http://stackoverflow.com/questions/10316180/how-to-calculate-the-coordinates-of-a-arrowhead-based-on-the-arrow
     var x1 = xCanvas(pathAndShape.x)
     var x2 = xCanvas(pathAndShape.x + pathAndShape.width)
     var y1 = yCanvas(pathAndShape.y)
     var y2 = yCanvas(pathAndShape.y + pathAndShape.height)
+
+    // console.log("iwp5:1570> Vector draw for : " + solid.name + " x1: " + x1 + " x2: " + x2 + " y1: " + y1 + " y2: " + y2)
+
     var point1 = "" + x1 + "," + y1 + " "
     var point2 = "" + x2 + "," + y2 + " "
     var dx = x1 - x2
