@@ -16,6 +16,7 @@ var inputs = [];
 var outputs = [];
 var solids = [];
 var objects = [];
+var texts = [];
 
 var htmlInputs = [];
 var htmlOutputs = [];
@@ -319,6 +320,26 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 }
 
 
+
+
+function calculateTextAtStep(text, step, vars, verbose) {
+
+  console.log("iwp5:327> calculateTextAtStep: " + text.name, text )
+
+  var xComplex = evaluateCalculator( text.name+".x", text.xpath.calculator, step, vars, verbose, text.name )
+  var x = xComplex.value
+
+  var yComplex = evaluateCalculator( text.name+".y", text.ypath.calculator, step, vars, verbose, text.name )
+  var y = yComplex.value
+
+  // Dont' need to write texts back to variables.
+  // vars[solid.name] = calc
+  updateTextSvgPathAndShape(text, {x: x, y: y})
+
+}
+
+
+
 // RENDERING steps:
 //  updateTimeDisplay(vars.t);
 //  updateUserFormOutputDouble(output, newValue);
@@ -473,6 +494,8 @@ function calculateVarsAtStep(step) {
   //2018Mar14 - ordering by calculation order, if exists
   var unorderedSolids = [];
   var unorderedOutputs = [];
+  var unorderedTexts = [];
+
   var orderedObjects = [];
   $.each(outputs, function(index,output) {
     if (output.calculationOrder != null) { 
@@ -488,6 +511,18 @@ function calculateVarsAtStep(step) {
       unorderedSolids.push(solid);
     }
   });
+  $.each(texts, function(index,text) {
+
+
+    if (text.calculationOrder != null) { 
+      orderedObjects[text.calculationOrder] = text;
+    } else { 
+
+      console.log("iwp5:496> Adding Unordered Text: " + text.name, text )
+
+      unorderedTexts.push(text);
+    }
+  });
   //console.log("iwp5:434> orderedObjects: ", orderedObjects);
   //console.log("iwp5:434> unorderedSolids: ", unorderedSolids);
   //console.log("iwp5:434> unorderedOutputs: ", unorderedOutputs);
@@ -495,17 +530,24 @@ function calculateVarsAtStep(step) {
 
   var failedOutputs = [];
   var failedSolids = [];
-
+  var failedTexts = [];
 
 
   /**
    * 2018Mar15 Perform the animation calculationOrder First
    */
 
+
   var calculationsPerformed = 0;
 
   $.each( orderedObjects, function(index, object) { 
+
+
+
     if(object != null ) { // orderedObjects can be sparseArray
+
+    // console.log("iwp5:515> [Calculations Peformed " + calculationsPerformed + "] Calculating Object: " + object.name )
+
     if(object.objectType=="solid") {
       try { 
 
@@ -533,6 +575,10 @@ function calculateVarsAtStep(step) {
         console.log("iwp5:466> failed calculationOrder err: " , err, " Output:", object)
         failedOutputs.push(object);
       }
+    } else if ( object.objectType=="object" ) { 
+
+      console.log("iwp5:548> TODO Animate the text: object.name: " + object.name, object )
+
 
     } else { 
       throw "Unknown objectType: " + object.objectType;
@@ -627,17 +673,38 @@ function calculateVarsAtStep(step) {
   }
 
   if ( fatalOutputs.length > 0 ) {
-    console.log(":238 Giving Up on Recursive Circular Calc - FATALOutputs: ", fatalOutputs);
+    console.log("iwp5:673> ERROR Giving Up on Recursive Circular Calc - FATALOutputs: ", fatalOutputs);
     $.each( fatalOutputs, function( index, output ) {
       output.calculationError = step;
     });
   }
   if ( fatalSolids.length > 0 ) {
-    console.log(":239 Giving Up on Recursive Circular Calc - FATALSolids: ", fatalSolids);
+    console.log("iwp5:679> ERROR Giving Up on Recursive Circular Calc - FATALSolids: ", fatalSolids);
     $.each( fatalSolids, function( index, solid ) {
       solid.calculationError = step;
-      //BOOK - make it vanish?
-      $("solid_"+solid.name).css("display: none;");
+    });
+  }
+
+
+  // FINALLY, Text calculation at very end
+  $.each( unorderedTexts, function( index, text ) {
+   
+    try {
+     calculateTextAtStep(text, step, vars, true );
+        //  -> update the DOM with theose new results
+    } catch ( err ) {
+        //console.log(":231 caught a faailed solid exception: ", err);
+      if ( CONFIG_throw_solid_calculation_exceptions ) {
+      throw err;
+    }
+
+    failedTexts.push(text);
+  }});
+
+  if ( failedTexts.length > 0 ) {
+    console.log("iwp5:685> ERROR Giving Up on Recursive Circular Calc - FAILEDTexts: ", failedTexts);
+    $.each( failedTexts, function( index, text ) {
+      text.calculationError = step;
     });
   }
 
@@ -929,7 +996,15 @@ function addObject(object) {
 
 
   if (object["@attributes"].class == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
-    svgObjects.push( "<text id='solid_" +object.name+ "' x='" + xCanvas(object.xpath.calculator.value) + "' y='"+yCanvas(object.ypath.calculator.value)+"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
+
+    // console.log("iwp5:933> FloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
+    /// Initilization fix - the calclulators hven't been run yet, so we just place the text on page at 0,0 and it's moveed with first redraw.
+    var x = 0; // xCanvas(object.xpath.calculator.value)
+    var y = 0; // yCanvas(object.ypath.calculator.value)
+
+    svgObjects.push( "<text id='text_" +object.name+ "' x='" + x + "' y='"+ y +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
+  
+    texts.push( compiledObject );
   }
 
 };
@@ -1258,17 +1333,19 @@ function parseProblemToMemory( problem ) {
   } else if ( problem.objects.solid != null ) {
     // Workaround becaue the php xml to json for single solids, would an object.
       addSolid(problem.objects.solid);
-
   }
-  // Objects
+
+  
+
+
+
+  // Objects - Also detect the floatign texts, which are not relaly solids.
   if ( $.type (problem.objects.object) == 'array' ) {
     $.each( problem.objects.object, function( index, object) {
       addObject(object);
     });
   } else if ( problem.objects.object != null ) {
-
-    addObject(problem.objects.object);
-
+     addObject(problem.objects.object);
   }
 }
 
@@ -1541,8 +1618,7 @@ function updateTimeDisplay(t) {
 
 function updateSolidSvgPathAndShape(solid, pathAndShape) {
 
-  // console.log("iwp5:1333> updateSolidSvgPathAndShape: ", solid )
-
+  // console.log("iwp5:1550> updateSolidSvgPathAndShape: solid : " + solid.name + "  solid: " , solid )
 
 	var svgSolid = $("#solid_" + solid.name);
     var svgTrail = $("#solid_" + solid.name + "_trail")
@@ -1608,32 +1684,9 @@ if (solid.shape.type == "circle") {
     var arrow1 = "" + (x2 + 30 * ax) + "," + (y2 + 30 * ay) + " "
     var arrow2 = "" + (x2 + 30 * bx) + "," + (y2 + 30 * by) + " "
 
+    //console.log("iwp:1617> Polyline: " + solid.name + " setting points to: ", (point1+point2+arrow1+point2+arrow2) )
+
     svgSolid.attr("points",point1+point2+arrow1+point2+arrow2)
-  }
-  else if (solid.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
-
-    // console.log("iwp5:1392> Floating Text Calculation: name: ", solid.name, "  objectValue: ", pathAndShape.objectValue );
-
-    var safeText = solid.text
-    if ( solid.text == null || solid.text instanceof Object ) { safeText = ""; }
-
-    var safeUnits = solid.units
-    if ( solid.units == null || solid.units instanceof Object ) { safeUnits = ""; }
-
-    var newLabel = safeText
-
-    if ( solid.showValue ) {
-        // console.log("iwp5:1411> Printing Decimal for : ", incomingNumber );
-        var formatted = printDecimal( pathAndShape.objectValue , 2 )
-        //var formatted = pathAndShape.objectValue
-        newLabel = safeText + " " + formatted + " " + safeUnits
-    }
-
-    // console.log("iwp5:1414> Solid Reversal motion, x: ", xCanvas(pathAndShape.x), " y: ", yCanvas(pathAndShape.y))
-
-    svgSolid.attr("x",xCanvas(pathAndShape.x))
-    .attr("y",yCanvas(pathAndShape.y))
-    .html(newLabel)
   }
 
   else if (solid.shape.type == "Bitmap" || solid.shape.type == "bitmap") {
@@ -1701,6 +1754,46 @@ if (solid.shape.type == "circle") {
 for line
 		lineData -> linear interpolation*/
 }
+
+
+function updateTextSvgPathAndShape(text, pathAndShape) {
+
+//BOOK
+  var svgText = $("#text_" + text.name);
+
+  if (text.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
+
+    console.log("iwp5:1698> Floating Text Calculation: name: ", text.name, "  pathAndShape: ", pathAndShape );
+
+    var safeText = text.text
+    if ( text.text == null || text.text instanceof Object ) { safeText = ""; }
+
+    var safeUnits = text.units
+    if ( text.units == null || text.units instanceof Object ) { safeUnits = ""; }
+
+    var newLabel = safeText
+
+    if ( text.showValue ) {
+        // console.log("iwp5:1411> Printing Decimal for : ", incomingNumber );
+        var formatted = printDecimal( pathAndShape.objectValue , 2 )
+        //var formatted = pathAndShape.objectValue
+        newLabel = safeText + " " + formatted + " " + safeUnits
+    }
+
+    var x = xCanvas(pathAndShape.x)
+    var y = xCanvas(pathAndShape.y)
+    
+    console.log("iwp5:1638> Floating Text Animation, x: " + x +  " y: " + y + " moving svgText: " , svgText)
+
+    svgText.attr("x",x).attr("y",y).html(newLabel)
+
+  }
+
+}
+
+
+
+
 
 
 
