@@ -1,0 +1,23 @@
+<html>
+<head>
+  <title>TEST4_mathjs</title>
+  <script src="math.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+</head>
+
+<body>
+  <h3>Test 4 - Euler's Complex Object P</h3>
+
+  <p>eqn = P.yvel</p>
+
+  <p>result: <span id="result">Calculating...</span></p>
+  <p>expected: 10.0</p>
+
+  <script type="text/javascript">
+    var eq = math.compile("P.yvel");
+    var scope = { G: -9.8, P: {x: 0, xdisp: 0, xpos: 0, xvel: 10, xaccel: 10, ydisp: 0, ypos: 0, yvel: 10, yaccel: 10 }, deltaTime: 0.2, vo: 10 }
+
+    $("#result").html(eq.eval(scope))
+  </script>
+</body>
+</html>
