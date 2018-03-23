@@ -39,40 +39,40 @@
 
 The problem is to find the relative indices of refraction n1:n2:n3.  That is, find the ratios n2/n1 and n3/n2.  For good results, measure angles to the nearest tenth of a degree.</text>
 		</description>
-		<input>
+		<input calculationOrder="1">
 			<name>angle</name>
 			<text>Initial angle of incidence</text>
 			<initialValue>30.0</initialValue>
 			<units>deg</units>
 		</input>
-		<input>
+		<input calculationOrder="2">
 			<name>s</name>
 			<text>Angle increment</text>
 			<initialValue>1.0</initialValue>
 			<units>deg</units>
 		</input>
-		<input>
+		<input calculationOrder="3">
 			<name>n1</name>
 			<text>Index of refraction 1</text>
 			<initialValue>1.6</initialValue>
 			<units></units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="4">
 			<name>n2</name>
 			<text>Index of refraction 2</text>
 			<initialValue>1.2</initialValue>
 			<units></units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="5">
 			<name>n3</name>
 			<text>Index of refraction 3</text>
 			<initialValue>1.0</initialValue>
 			<units></units>
 			<hidden>1</hidden>
 		</input>
-		<output>
+		<output calculationOrder="12">
 			<name>i</name>
 			<text>Angle of incidence</text>
 			<units>deg</units>
@@ -80,7 +80,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				<value>angle+s*t</value>
 			</calculator>
 		</output>
-		<output>
+		<output calculationOrder="22">
 			<name>r</name>
 			<text>Angle of refraction 1</text>
 			<units>deg</units>
@@ -89,7 +89,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="23">
 			<name>r2</name>
 			<text>Angle of refraction 2</text>
 			<units>deg</units>
@@ -98,7 +98,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="13">
 			<name>n</name>
 			<text>n2/n1</text>
 			<units></units>
@@ -107,7 +107,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="14">
 			<name>m</name>
 			<text>n3/n2</text>
 			<units></units>
@@ -116,7 +116,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="15">
 			<name>ac</name>
 			<text>Critical angle 1</text>
 			<units>deg</units>
@@ -125,7 +125,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="16">
 			<name>ad</name>
 			<text>Critical angle 2</text>
 			<units>deg</units>
@@ -134,7 +134,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<solid>
+		<solid calculationOrder="6">
 			<name>incidentmed</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -173,7 +173,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="7">
 			<name>refmed1</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -212,7 +212,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="17">
 			<name>refractedray</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -251,7 +251,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="8">
 			<name>refmed2</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -290,7 +290,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="24">
 			<name>refractedray2</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -329,7 +329,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="9">
 			<name>refmed1_clone</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -368,7 +368,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="18">
 			<name>incidentray</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -407,7 +407,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="10">
 			<name>refmed2_clone</name>
 			<shape type="polygon" drawTrails="false" drawVectors="false">
 				<points>
@@ -491,7 +491,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="19">
 			<name>incidentray_clone</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -530,7 +530,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="20">
 			<name>refractedray_clone</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -569,7 +569,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="21">
 			<name>incidentray_clone_2</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -608,7 +608,7 @@ The problem is to find the relative indices of refraction n1:n2:n3.  That is, fi
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="11">
 			<name>refmed2Clone</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>

@@ -202,18 +202,11 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       calcX.xaccel = xComplex.acceleration
     }
 
- vars[solid.name] = calcX;
+   vars[solid.name] = calcX;
  //----------------------------------------
 
     var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
-    
-
-    // console.log("iwp5:222> yComplex for solid.name: " + solid.name + " : ", yComplex )
-
-
     var y = yComplex.value
-
-  //----- MORE TEST CODE
 
 
  // Handle Complex return types from Euler Calculator
@@ -273,17 +266,18 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
 
     if ( solid.shape.type == "polygon" ) {
-      //console.log(solid)
+
+      console.log("iwp5:277> Recalculating Polygon: " + solid.name + " has Error? " + solid.calculationError );
+
       calc["points"] = []
       $.each( solid.points, function( index, i) {
-      //console.log(i)
-      point = {
-        x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, step, vars, verbose, solid.name ).value,
-        y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, step, vars, verbose, solid.name ).value
-      };
-      calc.points.push(point);
+        point = {
+          x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, step, vars, verbose, solid.name ).value,
+          y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, step, vars, verbose, solid.name ).value
+        };
+        calc.points.push(point);
       });
-      console.log("iwp5:270> Polygon, just calced: ",calc)
+      
 
         //i.xpath = evaluateCalculator(solid.name+".x"+toString(counter), i.xpath.calculator, vars).value
         //i.ypath = evaluateCalculator(solid.name+".x"+toString(counter), i.ypath.calculator, vars).value
@@ -634,9 +628,17 @@ function calculateVarsAtStep(step) {
 
   if ( fatalOutputs.length > 0 ) {
     console.log(":238 Giving Up on Recursive Circular Calc - FATALOutputs: ", fatalOutputs);
+    $.each( fatalOutputs, function( index, output ) {
+      output.calculationError = step;
+    });
   }
   if ( fatalSolids.length > 0 ) {
     console.log(":239 Giving Up on Recursive Circular Calc - FATALSolids: ", fatalSolids);
+    $.each( fatalSolids, function( index, solid ) {
+      solid.calculationError = step;
+      //BOOK - make it vanish?
+      $("solid_"+solid.name).css("display: none;");
+    });
   }
 
 	//console.log(" calculateVarsAtStep, vars = ", vars);
@@ -831,7 +833,7 @@ function addSolid(solid) {
       }
     compiledSolid.points.push(point)
     });
-    console.log("compiled polygon",compiledSolid)
+    console.log("iwp5: 834> Compiled polygon: ",compiledSolid)
   }
 
   if ( compiledSolid.shape.type == "Bitmap") {
@@ -1081,9 +1083,9 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 		}
     catch ( err ) {
       if ( verbose ) {
-			console.log("evaluateCalculator:450> " + resultVariable + "> Unable to evaluate calculator: ", err );
-      console.log("evaluateCalculator:450> " + resultVariable + "> Equation: ", calculator.equation );
-      console.log("evaluateCalculator:450> " + resultVariable + "> Vars: ", vars);
+			console.log("evaluateCalculator:450> ERROR: " + resultVariable + "> Unable to evaluate calculator: ", err );
+      console.log("evaluateCalculator:450> ERROR: " + resultVariable + "> Equation: ", calculator.equation );
+      console.log("evaluateCalculator:450> ERROR: " + resultVariable + "> Vars: ", vars);
       }
 			// return { value: undefined };  // was -1
       throw err;
@@ -1571,14 +1573,14 @@ if (solid.shape.type == "circle") {
     .attr("y2", yCanvas(pathAndShape.y + pathAndShape.height));
   }
   else if (solid.shape.type == "polygon") {
-    //console.log("number of points: ", solid.shape);
+    
+    console.log("iwp5:1581> Redrawing Polygon: " + solid.name + " has Error? " + solid.calculationError );
     var points = pathAndShape.points
     //console.log(points[1].x)
     pointsAttr = ""
     $.each( pathAndShape.points, function( index, i ) {
-      console.log(i)
       pointsAttr += xCanvas(points[index].x+pathAndShape.x)+","+yCanvas(points[index].y+pathAndShape.y)+" "
-      console.log(pointsAttr)
+      console.log("iwp5:1579> Polygon i: " + i + " points: " , pointsAttr)
     });
     svgSolid.attr("points", pointsAttr)
   }

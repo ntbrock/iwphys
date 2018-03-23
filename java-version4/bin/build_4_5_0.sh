@@ -14,7 +14,8 @@ JAR=./dist/iwp-4_5_0.jar
 #java -cp $JAR edu.ncssm.iwp.bin.IWP5_Rewriter ../animations/ftemo/em-ratio-1d.iwp
 
 # 2018Mar22 Another round of Animation Fixes
+# java -cp $JAR edu.ncssm.iwp.bin.IWP5_Rewriter ../animations/winters-ncssm-2009/velocity-selector-02.iwp
+java -cp $JAR edu.ncssm.iwp.bin.IWP5_Rewriter ../animations/winters-ncssm-2009/ray-refraction-4e.iwp
 
-java -cp $JAR edu.ncssm.iwp.bin.IWP5_Rewriter ../animations/winters-ncssm-2009/velocity-selector-02.iwp
 
 
