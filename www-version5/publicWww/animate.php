@@ -120,12 +120,12 @@ header('Content-Type: text/html');
             <td style="width:33%"></td>
             <td style="width:33%">X</td>
             <td style="width:33%">Y</td>
-          <tr class="bottomBorder">
+          <tr>
             <td>Min:</td>
             <td><input id="iwindow_xmin" type="text"></td>
             <td><input id="iwindow_ymin" type="text"></td>
           </tr>
-          <tr class="bottomBorder">
+          <tr>
             <td>Max:</td>
             <td><input id="iwindow_xmax" type="text"></td>
             <td><input id="iwindow_ymax" type="text"></td>
@@ -135,7 +135,7 @@ header('Content-Type: text/html');
             <td><input id="iwindow_xgrid" type="text"></td>
             <td><input id="iwindow_ygrid" type="text"></td>
           </tr>
-          <tr class="bottomBorder">
+          <tr>
             <td>Unit:</td>
             <td style="width: 100%;"><div id="iwindow_xunit"></td>
             <td style="width: 100%;"><div id="iwindow_yunit"></td>
@@ -149,9 +149,9 @@ header('Content-Type: text/html');
       <div id="timeTab" class="iwp-tab">
         <table class="trim">
           <tr>
-            <th colspan="2">Time Controls</th>
+            <th colspan="2">Animation Time Scale</th>
           </tr>
-          <tr class="bottomBorder">
+          <tr>
             <td>
                 <span>Time Step</span>
             </td>
@@ -159,11 +159,11 @@ header('Content-Type: text/html');
                 <span><input id="itime_change" type="text" value="--"/> seconds</span>
             </td>
           </tr>
-          <tr class="bottomBorder">
+          <tr>
             <td>Start Time</td>
             <td><span><input id="itime_start" type="text" value="--"/> seconds</span></td>
           </tr>
-          <tr class="bottomBorder">
+          <tr>
             <td>Stop Time</td>
             <td><span><input id="itime_stop" type="text" value="--"/> seconds</span></td>
           </tr>
