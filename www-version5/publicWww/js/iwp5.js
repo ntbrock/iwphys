@@ -324,7 +324,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
 function calculateTextAtStep(text, step, vars, verbose) {
 
-  console.log("iwp5:327> calculateTextAtStep: " + text.name, text )
+  // console.log("iwp5:327> calculateTextAtStep: " + text.name, text )
 
   var xComplex = evaluateCalculator( text.name+".x", text.xpath.calculator, step, vars, verbose, text.name )
   var x = xComplex.value
@@ -332,9 +332,14 @@ function calculateTextAtStep(text, step, vars, verbose) {
   var yComplex = evaluateCalculator( text.name+".y", text.ypath.calculator, step, vars, verbose, text.name )
   var y = yComplex.value
 
+  var vComplex = evaluateCalculator( text.name+".value", text.value.calculator, step, vars, verbose, text.name )
+  var v = vComplex.value
+
+
+
   // Dont' need to write texts back to variables.
   // vars[solid.name] = calc
-  updateTextSvgPathAndShape(text, {x: x, y: y})
+  updateTextSvgPathAndShape(text, {x: x, y: y, value: v})
 
 }
 
@@ -517,9 +522,7 @@ function calculateVarsAtStep(step) {
     if (text.calculationOrder != null) { 
       orderedObjects[text.calculationOrder] = text;
     } else { 
-
-      console.log("iwp5:496> Adding Unordered Text: " + text.name, text )
-
+      // console.log("iwp5:496> Adding Unordered Text: " + text.name, text )
       unorderedTexts.push(text);
     }
   });
@@ -1775,13 +1778,13 @@ function updateTextSvgPathAndShape(text, pathAndShape) {
 
     if ( text.showValue ) {
         // console.log("iwp5:1411> Printing Decimal for : ", incomingNumber );
-        var formatted = printDecimal( pathAndShape.objectValue , 2 )
+        var formatted = printDecimal( pathAndShape.value , 2 )
         //var formatted = pathAndShape.objectValue
         newLabel = safeText + " " + formatted + " " + safeUnits
     }
 
     var x = xCanvas(pathAndShape.x)
-    var y = xCanvas(pathAndShape.y)
+    var y = yCanvas(pathAndShape.y)
     
     console.log("iwp5:1638> Floating Text Animation, x: " + x +  " y: " + y + " moving svgText: " , svgText)
 
