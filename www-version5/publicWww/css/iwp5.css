@@ -93,6 +93,12 @@ table {
 	display: none; /** Start off invisible, then get turned on via Jquery */
 	table-layout: fixed;
 }
+
+.iwp-tab3column {
+	display: none; /** Start off invisible, then get turned on via Jquery */
+	table-layout: fixed;
+}
+
 .iwp-tab table tr {
 	width: 550px;
 	display: table;

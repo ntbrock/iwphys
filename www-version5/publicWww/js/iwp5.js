@@ -1432,14 +1432,15 @@ function renderProblemFromMemory() {
 
 //Debugging 29 Jul 2016
 //console.log("setting xmin val: ", iwindow.xmin );
+  // 2018Mar23 Units are not editable.
   $("#iwindow_xmin").val( iwindow.xmin );
   $("#iwindow_xmax").val( iwindow.xmax );
   $("#iwindow_xgrid").val( iwindow.xgrid );
-  $("#iwindow_xunit").val( iwindow.xunit );
+  $("#iwindow_xunit").html( iwindow.xunit );
   $("#iwindow_ymax").val( iwindow.ymax );
   $("#iwindow_ymin").val( iwindow.ymin );
   $("#iwindow_ygrid").val( iwindow.ygrid );
-  $("#iwindow_yunit").val( iwindow.yunit );
+  $("#iwindow_yunit").html( iwindow.yunit );
 
     // GraphWindow is a TODO feature for now.
   // $("#graphWindow").html( graphWindow );

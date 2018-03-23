@@ -75,13 +75,13 @@ header('Content-Type: text/html');
     <table class="iwp-tab-controls" class="tab">
       <tr>
         <td id="it" class="bottomBorder" onclick="animationTabOn()" iwp-tab="animationTab">
-          <i id="inputTableButton" class="fa fa-list fa-2x"></i> Animate</td>
+          <i id="inputTableButton" class="fa fa-list fa-2x"></i> <br/>Animate</td>
         <td id="gt" class="" onclick="graphTabOn()" iwp-tab="graphTab">
-          <i id="graphTableButton" class="fa fa-area-chart fa-2x"> </i> Graph</td>
+          <i id="graphTableButton" class="fa fa-area-chart fa-2x"> </i> <br/>Graph</td>
         <td id="oib" class="" onclick="timeTabOn()" iwp-tab="timeTab">
-          <i id="timeTabButton" class="fa fa-clock-o fa-2x"> </i> Time</td>
+          <i id="timeTabButton" class="fa fa-clock-o fa-2x"> </i> <br/>Time</td>
         <td id="ws" class=""  onclick="iwindowTabOn()" iwp-tab="iwindowTab">
-          <i id="windowSettings" class="fa fa-clone fa-2x"> </i> Window </td>
+          <i id="windowSettings" class="fa fa-clone fa-2x"> </i> <br/>Axes </td>
       </tr>
     </table>
     </div>
@@ -113,9 +113,9 @@ header('Content-Type: text/html');
 
 
       <!-- Window Settings -->
-      <div id="iwindowTab" class="iwp-tab">
+      <div id="iwindowTab" class="iwp-tab3column">
         <table class="trim">
-          <tr><th colspan="3">Animation Window Settings</th></tr>
+          <tr><th colspan="3">Animation Axes Settings</th></tr>
           <tr>
             <td style="width:33%"></td>
             <td style="width:33%">X</td>
@@ -137,8 +137,8 @@ header('Content-Type: text/html');
           </tr>
           <tr class="bottomBorder">
             <td>Unit:</td>
-            <td><input id="iwindow_xunit" type="text"></td>
-            <td><input id="iwindow_yunit" type="text"></td>
+            <td style="width: 100%;"><div id="iwindow_xunit"></td>
+            <td style="width: 100%;"><div id="iwindow_yunit"></td>
           </tr>
         </table>
       </div>
