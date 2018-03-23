@@ -267,7 +267,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
     if ( solid.shape.type == "polygon" ) {
 
-      console.log("iwp5:277> Recalculating Polygon: " + solid.name + " has Error? " + solid.calculationError );
+      // console.log("iwp5:277> Recalculating Polygon: " + solid.name + " has Error? " + solid.calculationError );
 
       calc["points"] = []
       $.each( solid.points, function( index, i) {
@@ -509,12 +509,12 @@ function calculateVarsAtStep(step) {
     if(object.objectType=="solid") {
       try { 
 
-        console.log("iwp5:494> [Calculations Peformed " + calculationsPerformed + "] Calculating Solid: " + object.name )
+        // console.log("iwp5:494> [Calculations Peformed " + calculationsPerformed + "] Calculating Solid: " + object.name )
         calculationsPerformed++
         calculateSolidAtStep(object, step, vars, true );
 
       } catch ( err ) {
-        console.log("iwp5:457> failed calculationOrder err: " , err, " Solid:", object)
+        console.log("iwp5:457> ERROR calculationOrder solid: " + object.name + " err: ", err )
         failedOutputs.push(object);
       }
     } else if(object.objectType=="output") { 
@@ -525,7 +525,7 @@ function calculateVarsAtStep(step) {
         if ( !isFinite(newValue) ) { throw "not finite" }
         vars[object.name] = newValue;
 
-        console.log("iwp5:494> [Calculations Peformed " + calculationsPerformed + "] Calculated Output: " + object.name + " New Value: " + newValue )
+        // console.log("iwp5:528> [Calculations Peformed " + calculationsPerformed + "] Calculated Output: " + object.name + " New Value: " + newValue )
         calculationsPerformed++
 
 
@@ -833,7 +833,7 @@ function addSolid(solid) {
       }
     compiledSolid.points.push(point)
     });
-    console.log("iwp5: 834> Compiled polygon: ",compiledSolid)
+    // console.log("iwp5:834> Compiled polygon: ",compiledSolid)
   }
 
   if ( compiledSolid.shape.type == "Bitmap") {
@@ -1574,13 +1574,12 @@ if (solid.shape.type == "circle") {
   }
   else if (solid.shape.type == "polygon") {
     
-    console.log("iwp5:1581> Redrawing Polygon: " + solid.name + " has Error? " + solid.calculationError );
+    // console.log("iwp5:1581> Redrawing Polygon: " + solid.name + " has Error? " + solid.calculationError );
     var points = pathAndShape.points
-    //console.log(points[1].x)
     pointsAttr = ""
     $.each( pathAndShape.points, function( index, i ) {
       pointsAttr += xCanvas(points[index].x+pathAndShape.x)+","+yCanvas(points[index].y+pathAndShape.y)+" "
-      console.log("iwp5:1579> Polygon i: " + i + " points: " , pointsAttr)
+      // console.log("iwp5:1579> Polygon i: " + i + " points: " , pointsAttr)
     });
     svgSolid.attr("points", pointsAttr)
   }
