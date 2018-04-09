@@ -31,88 +31,90 @@
 			<ygrid>1.0</ygrid>
 			<xunit>meters</xunit>
 			<yunit>meters</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
 			<text>Two blocks are connected by a massless, unstretchable string which passes over a frictionless, massless pulley. There is no friction between the red block and the plane. When the blue block is released, the system of the two blocks accelerates. The forces on the blocks are shown.
 
 Caution: Unphysical results may be obtained with certain combinations of masses and angle.</text>
 		</description>
-		<input>
+		<input calculationOrder="1">
 			<name>w</name>
 			<text>Block Width</text>
 			<initialValue>1.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="2">
 			<name>m1</name>
 			<text>Mass of Red Block</text>
 			<initialValue>2.0</initialValue>
 			<units>kg</units>
 		</input>
-		<input>
+		<input calculationOrder="3">
 			<name>m2</name>
 			<text>Mass of Blue Block</text>
 			<initialValue>1.8</initialValue>
 			<units>kg</units>
 		</input>
-		<input>
+		<input calculationOrder="4">
 			<name>xo</name>
 			<text>Initial X</text>
 			<initialValue>7.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="5">
 			<name>a</name>
 			<text>Inclination of plane</text>
 			<initialValue>30.0</initialValue>
 			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="6">
 			<name>run</name>
 			<text>Run of plane</text>
 			<initialValue>10.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="7">
 			<name>trim</name>
 			<text>X cutoff</text>
 			<initialValue>2.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="8">
 			<name>hb</name>
 			<text>Height boost</text>
 			<initialValue>2.0</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="9">
 			<name>g</name>
 			<text>Gravitational field</text>
 			<initialValue>9.8</initialValue>
 			<units>N/kg</units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="10">
 			<name>u</name>
 			<text>Coefficient of kinetic friction</text>
 			<initialValue>0.0</initialValue>
 			<units></units>
 			<hidden>1</hidden>
 		</input>
-		<input>
+		<input calculationOrder="11">
 			<name>sf</name>
 			<text>Scale Factor</text>
 			<initialValue>0.1</initialValue>
 			<units></units>
 			<hidden>1</hidden>
 		</input>
-		<solid>
+		<solid calculationOrder="12">
 			<name>background</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -126,6 +128,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>13</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -146,7 +153,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="29">
 			<name>pulley</name>
 			<shape type="circle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -160,6 +167,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>1.1</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -180,7 +192,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="13">
 			<name>wedge</name>
 			<shape type="polygon" drawTrails="false" drawVectors="false">
 				<points>
@@ -264,7 +276,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="16">
 			<name>base</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -278,6 +290,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>3</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -298,7 +315,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="30">
 			<name>vertical</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -312,6 +329,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>h+3+hb</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -332,7 +354,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="31">
 			<name>vertical2</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -346,6 +368,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>3+hb+trim*h/run</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -366,7 +393,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="32">
 			<name>plane</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -380,6 +407,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>-run*tan(ar)+trim*h/run</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -400,7 +432,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="33">
 			<name>string1</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -414,6 +446,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>cm.xpos*tan(ar)</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -434,7 +471,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="39">
 			<name>string2</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -448,6 +485,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>h+hb-blockb.ypos</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -468,7 +510,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="34">
 			<name>block</name>
 			<shape type="polygon" drawTrails="false" drawVectors="false">
 				<points>
@@ -556,7 +598,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="35">
 			<name>blockb</name>
 			<shape type="rectangle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -570,6 +612,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>.9</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -592,7 +639,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<output>
+		<output calculationOrder="17">
 			<name>ar</name>
 			<text>Angle in radians</text>
 			<units>rad</units>
@@ -601,7 +648,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="18">
 			<name>h</name>
 			<text>Height of plane</text>
 			<units>m</units>
@@ -610,7 +657,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="19">
 			<name>fk</name>
 			<text>Kinetic friction</text>
 			<units>N</units>
@@ -619,16 +666,16 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="20">
 			<name>ten</name>
 			<text>Tension</text>
 			<units>N</units>
 			<calculator type="parametric">
-				<value>m1*m2*g(1+sin(ar)+u*cos(ar))/(m1+m2)</value>
+				<value>m1*m2*g*(1+sin(ar)+u*cos(ar))/(m1+m2)</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<output>
+		<output calculationOrder="21">
 			<name>acc</name>
 			<text>Acceleration</text>
 			<units>m/s^2</units>
@@ -637,7 +684,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 			</calculator>
 			<hidden>1</hidden>
 		</output>
-		<solid>
+		<solid calculationOrder="22">
 			<name>cm</name>
 			<shape type="circle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -651,6 +698,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>.1</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -675,7 +727,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="36">
 			<name>point</name>
 			<shape type="circle" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -689,6 +741,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>.1</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -709,7 +766,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="23">
 			<name>normal</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -723,6 +780,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>sf*m1*g*cos(ar)*cos(ar)</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -743,7 +805,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="24">
 			<name>weight</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -757,6 +819,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>-sf*m1*g</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -777,7 +844,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="37">
 			<name>weightb</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -791,6 +858,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>-sf*m2*g</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -811,7 +883,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="25">
 			<name>tension</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -825,6 +897,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>sf*ten*sin(ar)</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -845,7 +922,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="38">
 			<name>tensionb</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -859,6 +936,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>sf*ten</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -879,7 +961,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="26">
 			<name>friction</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -893,6 +975,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>-sf*fk*sin(ar)</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -914,7 +1001,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 			</ypath>
 		</solid>
 		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
-			<name>Normal</name>
+			<name>NormalText</name>
 			<text>Normal</text>
 			<units></units>
 			<value>
@@ -1048,7 +1135,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</xpath>
 		</object>
-		<solid>
+		<solid calculationOrder="14">
 			<name>horizontal</name>
 			<shape type="line" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1062,6 +1149,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>0</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -1109,7 +1201,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</xpath>
 		</object>
-		<solid>
+		<solid calculationOrder="15">
 			<name>yaxis</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1123,6 +1215,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>-1</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -1170,7 +1267,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</xpath>
 		</object>
-		<solid>
+		<solid calculationOrder="27">
 			<name>peraxis</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1184,6 +1281,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>cos(ar)</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
@@ -1204,7 +1306,7 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 				</calculator>
 			</ypath>
 		</solid>
-		<solid>
+		<solid calculationOrder="28">
 			<name>paraxis</name>
 			<shape type="vector" drawTrails="false" drawVectors="false">
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
@@ -1218,6 +1320,11 @@ Caution: Unphysical results may be obtained with certain combinations of masses 
 						<value>sin(ar)</value>
 					</calculator>
 				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
 				<graphOptions graphVisible="false">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>

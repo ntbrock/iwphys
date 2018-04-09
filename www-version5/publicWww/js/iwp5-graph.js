@@ -55,7 +55,7 @@ var yAxis = null
 
 function graphInit() {
 
-    console.log("iwp5-graph:53> graphInit");
+    // console.log("iwp5-graph:53> graphInit");
 
 	var svg = d3.select('#graph');
 
@@ -121,16 +121,8 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 	var svg = d3.select('#graph');
 
 	// console.log("iwp-graph:101> graphResetZero, vars: ", vars)
-	console.log("iwp-graph:102> graphResetZero, solids: ", solids)
-
-
-
-
-
+	// console.log("iwp-graph:102> graphResetZero, solids: ", solids)
 	svg.select(".iwp-graph-object").remove();
-
-
-
 
 	// Step 2 - Populate Memory for each object that's graphable, plus all of it's visibility
 	$.each(solids,function(index, solid) {
@@ -309,8 +301,8 @@ function graphStepForward(step, vars) {
 
 		$.each(iwpGraphObjects,function(name, graphObject) {
 
-			console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
-			console.log("iwp5graph:308> vars: ", vars)
+			// console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
+			// console.log("iwp5graph:308> vars: ", vars)
 			paths = graphObject.paths
 			pathsSvg = graphObject.pathsSvg
 			$.each(graphMeasures, function(i, measure) {

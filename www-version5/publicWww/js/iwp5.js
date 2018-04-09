@@ -16,6 +16,7 @@ var inputs = [];
 var outputs = [];
 var solids = [];
 var objects = [];
+var texts = [];
 
 var htmlInputs = [];
 var htmlOutputs = [];
@@ -110,7 +111,7 @@ function stepBackwardAndPause() {
  */
 function handleStep() {
 
-	//console.log("handleStep:87> current: " , currentStep, "  change: ", changeStep );
+	console.log("handleStep:113> current: " , currentStep, "  change: ", changeStep );
 	// apply the time change.
 	var newStep = currentStep + changeStep;
 
@@ -171,10 +172,8 @@ function archiveVarsAtStep( step, vars ) {
 
 
 function calculateOutputAtStep(output, step, vars, verbose) {
-    var newValue = evaluateCalculator( output.name+".out", output.calculator, vars, verbose, output.name ).value;
+    var newValue = evaluateCalculator( output.name+".out", output.calculator, step, vars, verbose, output.name ).value;
     vars[output.name] = newValue;
-    //console.log("newValue for",output.name,evaluateCalculator( output.name+".out", output.calculator, vars, verbose ))
-    // -> update the DOM with the new reuslts.
     updateUserFormOutputDouble(output, newValue);
     return newValue
 }
@@ -182,16 +181,7 @@ function calculateOutputAtStep(output, step, vars, verbose) {
 
 function calculateSolidAtStep(solid, step, vars, verbose) {
 
-    // TODO - Derive Velocity and Acceleration!
-
-
-    if ( solid.name == "P" ) {
-      // Debugging point for http://localhost:8080/master/animate.php/ftemo/em-ratio-1d.iwp
-      // console.log("iwp5.calculateSolidAtStep:186> P vars: ", vars)
-      // var breaker = 1;
-    }
-
-    var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose, solid.name )
+    var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, step, vars, verbose, solid.name )
     var x = xComplex.value
 
  //----------------------------------------
@@ -213,13 +203,11 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       calcX.xaccel = xComplex.acceleration
     }
 
- vars[solid.name] = calcX;
+   vars[solid.name] = calcX;
  //----------------------------------------
 
-    var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose, solid.name )
+    var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
     var y = yComplex.value
-
-  //----- MORE TEST CODE
 
 
  // Handle Complex return types from Euler Calculator
@@ -242,15 +230,23 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
   if ( xComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
-     xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, vars, verbose, solid.name )
+     xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, step, vars, verbose, solid.name )
      x = xComplex.value
   }
   if ( yComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
     vars[solid.name] = $.extend(calcX,calcY);
-     yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, vars, verbose, solid.name )
+     yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
      y = yComplex.value
   }
+
+  //-------------------------------------
+  // Height and width
+
+  var height = evaluateCalculator( solid.name+".h", solid.shape.height.calculator, step, vars, verbose, solid.name ).value
+  var width = evaluateCalculator( solid.name+".w", solid.shape.width.calculator, step, vars, verbose, solid.name ).value
+
+  // console.log("iwp5:259> Solid: " + solid.name + " height + width calculation: width: " , width, " height: ", height)
 
   //-------------------------------------
     var calc = {
@@ -264,24 +260,25 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       ypos: y,
       yvel: 0,
       yaccel: 0,
-      height: evaluateCalculator( solid.name+".h", solid.shape.height.calculator, vars, verbose, solid.name ).value,
-      width: evaluateCalculator( solid.name+".w", solid.shape.width.calculator, vars, verbose, solid.name ).value,
+      height: height,
+      width: width,
       angle: 0
     }
 
 
     if ( solid.shape.type == "polygon" ) {
-      //console.log(solid)
+
+      // console.log("iwp5:277> Recalculating Polygon: " + solid.name + " has Error? " + solid.calculationError );
+
       calc["points"] = []
       $.each( solid.points, function( index, i) {
-      //console.log(i)
-      point = {
-        x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, vars, verbose, solid.name ).value,
-        y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, vars, verbose, solid.name ).value
-      };
-      calc.points.push(point);
+        point = {
+          x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, step, vars, verbose, solid.name ).value,
+          y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, step, vars, verbose, solid.name ).value
+        };
+        calc.points.push(point);
       });
-      console.log("iwp5:270> Polygon, just calced: ",calc)
+      
 
         //i.xpath = evaluateCalculator(solid.name+".x"+toString(counter), i.xpath.calculator, vars).value
         //i.ypath = evaluateCalculator(solid.name+".x"+toString(counter), i.ypath.calculator, vars).value
@@ -289,23 +286,19 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     }
 
     if ( solid.shape.angle ) {
-      calc.angle = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, vars, verbose, solid.name ).value
+      calc.angle = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, step, vars, verbose, solid.name ).value
       // console.log("iwp5:277> Evaluated calculator for Solid.shape.angle: ", solid.shape.angle, " to :", calc.angle  )
     }
 
     // For objects with a value beyond x , y, w , h -- This is used for the floatingText Value
     if ( solid.value != null && solid.value.calculator != null ) {
-      calc.objectValue = evaluateCalculator( solid.name+".objectValue", solid.value.calculator, vars, verbose, solid.name ).value
+      calc.objectValue = evaluateCalculator( solid.name+".objectValue", solid.value.calculator, step, vars, verbose, solid.name ).value
     }
 
 
     // Hande Complex return types from Euler Calculator
     if ( xComplex.velocity != undefined ) {
-      // 2018Mar08 Confirmed this line is where xvelocity is assigned to graph.
       calc.xvel = xComplex.velocity
-
-      // console.log("iwp5:306> step: ", step, "  calc.xvel: " , calc.xvel)
-
     }
     if ( xComplex.acceleration != undefined ) {
       calc.xaccel = xComplex.acceleration
@@ -326,8 +319,30 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
 }
 
-// This was needed for self-referential euler's animations. like em-ratio-2d.iwp.
-var CONFIG_clone_step_from_previous = false;
+
+
+
+function calculateTextAtStep(text, step, vars, verbose) {
+
+  // console.log("iwp5:327> calculateTextAtStep: " + text.name, text )
+
+  var xComplex = evaluateCalculator( text.name+".x", text.xpath.calculator, step, vars, verbose, text.name )
+  var x = xComplex.value
+
+  var yComplex = evaluateCalculator( text.name+".y", text.ypath.calculator, step, vars, verbose, text.name )
+  var y = yComplex.value
+
+  var vComplex = evaluateCalculator( text.name+".value", text.value.calculator, step, vars, verbose, text.name )
+  var v = vComplex.value
+
+
+
+  // Dont' need to write texts back to variables.
+  // vars[solid.name] = calc
+  updateTextSvgPathAndShape(text, {x: x, y: y, value: v})
+
+}
+
 
 
 // RENDERING steps:
@@ -351,7 +366,7 @@ function repaintStep(step) {
       updateUserFormOutputDouble(output, vars[output.name]);
    });
 
-   // console.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, solids: ", solids );
+   // le.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, solids: ", solids );
 
    $.each( solids, function( index, solid ) {
       updateSolidSvgPathAndShape(solid, vars[solid.name])
@@ -379,15 +394,7 @@ function calculateVarsAtStep(step) {
   var vars = { step: step}
   $.extend(vars, varsConstants);
 
-  // EXPERIMENTAL: Pull the previous variables in from last step?
-  if ( CONFIG_clone_step_from_previous ) {
-  try {
-    $.extend(vars, varsAtStep[step-1])
-    //console.log("calculateVarsATStep:195> Cloned vars from past Step-1: " + (step-1) + " => ", JSON.stringify(varsAtStep) )
-  } catch(err) {
-    console.log("calculateVarsAtStep:198> Exception when mirring past vars into current vars:", err)
-  }
-  }
+
 	// Eveything begins with time, populate t.
 	vars.t = queryTimeStartInputDouble() + step * time.change;
   vars.tDelta = time.change
@@ -395,19 +402,96 @@ function calculateVarsAtStep(step) {
   vars.tDel = vars.tDelta
   vars.deltaTime = time.change
 	updateTimeDisplay(vars.t);
-	/*
-  for each calulation, query dom for time step
-	for each input
-		query the dom by input_$id to get the value from the user form
-	*/
 
+
+
+  // Collect user Inputs! These are polled from the DOM every step.
 
 	$.each( inputs, function( index, input ) {
 		// next load in variables for all of the inputs.
     //vars[input.name] = { value: queryUserFormInputDouble(input) };
     vars[input.name] = queryUserFormInputDouble(input);
+
+    //console.log("iwp5:410> calculateVarsAtStep("+step+")  Assigned Input: " , input.name, "  A value of: " ,vars[input.name] )
+
     //vars[input.name]["value"] = vars[input.name];
-    });
+  });
+
+
+  //-----------------------------------
+  // Make the first pass thru outputs
+
+  $.each( outputs, function( index, output ) {
+    try {
+      var newValue = calculateOutputAtStep(output, step, vars, false );
+      //console.log("newValue",newValue)
+      if ( isNaN(newValue) ) {
+        throw "not a number"
+      };
+      if ( !isFinite(newValue) ) {
+        throw "not finite"
+      }
+      vars[output.name] = newValue;
+      // console.log("iwp5:409> First Ouputs Pass, added new variable: "+ output.name + " = " + vars[output.name])
+    } catch ( err ) {
+
+      console.log("iwp5:409> First Outputs Pass, ERROR Calculating: "+ output.name + " > " + err );
+      //console.log("Failed Output:", output)
+      //failedOutputs.push(output);
+      //console.log("FailedOutputs",failedOutputs)
+    }
+  });
+
+
+
+
+  //-----------------------------------------------------------
+  // EULER INITIALIZATION 
+  // 2018Mar22 - Euler's Self-referential Fix, we need to pull velocities and displacements for
+  // every Solid w/ Euler's and pre-write them into the vars space.
+  $.each(solids, function(index,solid) {
+
+    // Initialize if necessary
+    if ( vars[solid.name] == null ) { vars[solid.name] = {} }
+
+    if ( solid.xpath.calculator.type == "euler-mathjs" ) { 
+
+      var calculator = solid.xpath.calculator
+      // Initialization -- If currentDisplacement or currentVelocity is empty!
+      if (step == 0 || calculator.currentDisplacement == null) {       
+        // console.log("iwp5:409> X Euler Pre-calc for solid: " + solid.name + " solid.xpath.calc: " , solid.xpath.calculator)
+        calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
+        calculator.currentDisplacement = calculator.initialDisplacement
+      }
+      if (step == 0 || calculator.currentVelocity == null) {       
+        calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
+        calculator.currentVelocity = calculator.initialVelocity;
+      }
+      vars[solid.name].x = solid.xpath.calculator.currentDisplacement
+      vars[solid.name].xpos = solid.xpath.calculator.currentDisplacement
+      vars[solid.name].xdisp = solid.xpath.calculator.currentDisplacement
+      vars[solid.name].xvel = solid.xpath.calculator.currentVelocity      
+    }
+
+    if ( solid.ypath.calculator.type == "euler-mathjs" ) { 
+      var calculator = solid.ypath.calculator
+      // Initialization -- If currentDisplacement or currentVelocity is empty!
+      if (step == 0 || calculator.currentDisplacement == null) {       
+        //console.log("iwp5:426> Y Euler Pre-calc for solid: " + solid.name + " solid.ypath.calc: " , solid.ypath.calculator)
+        calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
+        calculator.currentDisplacement = calculator.initialDisplacement
+      }
+      if (step == 0 || calculator.currentVelocity == null) {       
+        calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
+        calculator.currentVelocity = calculator.initialVelocity;
+      }
+      vars[solid.name].y = solid.ypath.calculator.currentDisplacement
+      vars[solid.name].ypos = solid.ypath.calculator.currentDisplacement
+      vars[solid.name].ydisp = solid.ypath.calculator.currentDisplacement
+      vars[solid.name].yvel = solid.ypath.calculator.currentVelocity
+    }
+
+  });
 
 
 
@@ -415,6 +499,8 @@ function calculateVarsAtStep(step) {
   //2018Mar14 - ordering by calculation order, if exists
   var unorderedSolids = [];
   var unorderedOutputs = [];
+  var unorderedTexts = [];
+
   var orderedObjects = [];
   $.each(outputs, function(index,output) {
     if (output.calculationOrder != null) {
@@ -430,6 +516,16 @@ function calculateVarsAtStep(step) {
       unorderedSolids.push(solid);
     }
   });
+  $.each(texts, function(index,text) {
+
+
+    if (text.calculationOrder != null) { 
+      orderedObjects[text.calculationOrder] = text;
+    } else { 
+      // console.log("iwp5:496> Adding Unordered Text: " + text.name, text )
+      unorderedTexts.push(text);
+    }
+  });
   //console.log("iwp5:434> orderedObjects: ", orderedObjects);
   //console.log("iwp5:434> unorderedSolids: ", unorderedSolids);
   //console.log("iwp5:434> unorderedOutputs: ", unorderedOutputs);
@@ -437,36 +533,64 @@ function calculateVarsAtStep(step) {
 
   var failedOutputs = [];
   var failedSolids = [];
-
+  var failedTexts = [];
 
 
   /**
    * 2018Mar15 Perform the animation calculationOrder First
    */
 
+<<<<<<< HEAD
   $.each( orderedObjects, function(index, object) {
+=======
+
+  var calculationsPerformed = 0;
+
+  $.each( orderedObjects, function(index, object) { 
+
+
+
+>>>>>>> cba710ae66d991d398931f93037c64b91a8f3cad
     if(object != null ) { // orderedObjects can be sparseArray
+
+    // console.log("iwp5:515> [Calculations Peformed " + calculationsPerformed + "] Calculating Object: " + object.name )
+
     if(object.objectType=="solid") {
       try {
 
+        // console.log("iwp5:494> [Calculations Peformed " + calculationsPerformed + "] Calculating Solid: " + object.name )
+        calculationsPerformed++
         calculateSolidAtStep(object, step, vars, true );
 
       } catch ( err ) {
-        console.log("iwp5:457> failed calculationOrder err: " , err, " Solid:", object)
+        console.log("iwp5:457> ERROR calculationOrder solid: " + object.name + " err: ", err )
         failedOutputs.push(object);
       }
+<<<<<<< HEAD
     } else if(object.objectType=="output") {
       try {
+=======
+    } else if(object.objectType=="output") { 
+      try { 
+>>>>>>> cba710ae66d991d398931f93037c64b91a8f3cad
 
         var newValue = calculateOutputAtStep(object, step, vars, false );
         if ( isNaN(newValue) ) { throw "not a number" };
         if ( !isFinite(newValue) ) { throw "not finite" }
         vars[object.name] = newValue;
 
+        // console.log("iwp5:528> [Calculations Peformed " + calculationsPerformed + "] Calculated Output: " + object.name + " New Value: " + newValue )
+        calculationsPerformed++
+
+
       } catch ( err ) {
         console.log("iwp5:466> failed calculationOrder err: " , err, " Output:", object)
         failedOutputs.push(object);
       }
+    } else if ( object.objectType=="object" ) { 
+
+      console.log("iwp5:548> TODO Animate the text: object.name: " + object.name, object )
+
 
     } else {
       throw "Unknown objectType: " + object.objectType;
@@ -479,6 +603,27 @@ function calculateVarsAtStep(step) {
   * Legacy path to support 4_1_2 animations with no CalculationOrder in iwp file.
   for each output perform the calculator
   */
+
+
+  $.each( unorderedSolids, function( index, solid ) {
+    /*
+    for x, y, h, w , perform the calculator
+    */
+    try {
+     calculateSolidAtStep(solid, step, vars, true );
+        //  -> update the DOM with theose new results
+    } catch ( err ) {
+        //console.log(":231 caught a faailed solid exception: ", err);
+      if ( CONFIG_throw_solid_calculation_exceptions ) {
+      throw err;
+    }
+
+    failedSolids.push(solid);
+  }});
+
+  
+
+
   $.each( unorderedOutputs, function( index, output ) {
     try {
       var newValue = calculateOutputAtStep(output, step, vars, false );
@@ -498,42 +643,6 @@ function calculateVarsAtStep(step) {
     }
   });
 
-	/* for each solid
-		sequence of the solids does matter in the problem file.
-	*/
-	$.each( unorderedSolids, function( index, solid ) {
-		/*
-		for x, y, h, w , perform the calculator
-		*/
-
-    try {
-     calculateSolidAtStep(solid, step, vars, true );
-        //  -> update the DOM with theose new results
-    } catch ( err ) {
-        //console.log(":231 caught a faailed solid exception: ", err);
-          if ( CONFIG_throw_solid_calculation_exceptions ) {
-         throw err;
-         }
-
-      failedSolids.push(solid);
-  }});
-
-    $.each( objects, function( index, object )  {
-    /*
-    for x, y, h, w , perform the calculator
-    */
-
-    try {
-     calculateSolidAtStep(object, step, vars, true );
-        //  -> update the DOM with theose new results
-
-    } catch ( err ) {
-        //console.log(":231 caught a faailed solid exception: ", err);
-          if ( CONFIG_throw_solid_calculation_exceptions ) {
-         throw err;
-         }
-      }
-});
 
 
   // console.log(":238 failedOutputs: ", failedOutputs);
@@ -576,10 +685,39 @@ function calculateVarsAtStep(step) {
   }
 
   if ( fatalOutputs.length > 0 ) {
-    console.log(":238 Giving Up on Recursive Circular Calc - FATALOutputs: ", fatalOutputs);
+    console.log("iwp5:673> ERROR Giving Up on Recursive Circular Calc - FATALOutputs: ", fatalOutputs);
+    $.each( fatalOutputs, function( index, output ) {
+      output.calculationError = step;
+    });
   }
   if ( fatalSolids.length > 0 ) {
-    console.log(":239 Giving Up on Recursive Circular Calc - FATALSolids: ", fatalSolids);
+    console.log("iwp5:679> ERROR Giving Up on Recursive Circular Calc - FATALSolids: ", fatalSolids);
+    $.each( fatalSolids, function( index, solid ) {
+      solid.calculationError = step;
+    });
+  }
+
+
+  // FINALLY, Text calculation at very end
+  $.each( unorderedTexts, function( index, text ) {
+   
+    try {
+     calculateTextAtStep(text, step, vars, true );
+        //  -> update the DOM with theose new results
+    } catch ( err ) {
+        //console.log(":231 caught a faailed solid exception: ", err);
+      if ( CONFIG_throw_solid_calculation_exceptions ) {
+      throw err;
+    }
+
+    failedTexts.push(text);
+  }});
+
+  if ( failedTexts.length > 0 ) {
+    console.log("iwp5:685> ERROR Giving Up on Recursive Circular Calc - FAILEDTexts: ", failedTexts);
+    $.each( failedTexts, function( index, text ) {
+      text.calculationError = step;
+    });
   }
 
 	//console.log(" calculateVarsAtStep, vars = ", vars);
@@ -683,15 +821,28 @@ function addOutput(output) {
 
 /**
  * 2016-Nov-09 - Reset the instantanous velcity calculations on reset
-*/
+ * 2018Mar23 - Erase all internal state, including intialVelocities inside Euler.
+ */
 function resetSolidCalculators(solid) {
+
+  // console.log("iwp5:753> resetSolidCalculators: " , solid )
+
   if ( solid.xpath && solid.xpath.calculator ) {
       solid.xpath.calculator.latestValue = undefined;
+      solid.xpath.calculator.currentVelocity = undefined;
+      solid.xpath.calculator.initialVelocity = undefined;
+      solid.xpath.calculator.currentDisplacement = undefined;
+      solid.xpath.calculator.initialDisplacement = undefined;
   }
   if ( solid.ypath && solid.ypath.calculator ) {
       solid.ypath.calculator.latestValue = undefined;
+      solid.ypath.calculator.currentVelocity = undefined;
+      solid.ypath.calculator.initialVelocity = undefined;
+      solid.ypath.calculator.currentDisplacement = undefined;
+      solid.ypath.calculator.initialDisplacement = undefined;
   }
-  /** We are not using velocity on height + width calcs */
+
+  /** IWP5 is not yet using velocity on height + width calcs */
   /*
   if ( solid.xpath && solid.xpath.calculator ) {
       solid.width.calculator.latestValue = null;
@@ -761,7 +912,7 @@ function addSolid(solid) {
       }
     compiledSolid.points.push(point)
     });
-    console.log("compiled polygon",compiledSolid)
+    // console.log("iwp5:834> Compiled polygon: ",compiledSolid)
   }
 
   if ( compiledSolid.shape.type == "Bitmap") {
@@ -857,7 +1008,15 @@ function addObject(object) {
 
 
   if (object["@attributes"].class == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
-    svgObjects.push( "<text id='solid_" +object.name+ "' x='" + xCanvas(object.xpath.calculator.value) + "' y='"+yCanvas(object.ypath.calculator.value)+"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
+
+    // console.log("iwp5:933> FloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
+    /// Initilization fix - the calclulators hven't been run yet, so we just place the text on page at 0,0 and it's moveed with first redraw.
+    var x = 0; // xCanvas(object.xpath.calculator.value)
+    var y = 0; // yCanvas(object.ypath.calculator.value)
+
+    svgObjects.push( "<text id='text_" +object.name+ "' x='" + x + "' y='"+ y +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
+  
+    texts.push( compiledObject );
   }
 
 };
@@ -945,11 +1104,15 @@ function evaluateCompiledMath( compiled, vars ) {
 // Config flag for develoeprs to enable debugging of euler acceleration calculations - have fun!
 var CONFIG_throw_acceleration_calculation_exceptions = true;
 
-function evaluateCalculator( resultVariable, calculator, vars, verbose, objectName ) {
+
+/** 2018Mar22 Bugfix, use the argument 'calculateStep' instead of reaching out to global */
+
+function evaluateCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
   // ResultVariable is solidname.x or solidName.y
 
+
   if ( calculator == null ) {
-    //console.log("iwp5:688: Warning Null Clculaor for: ", resultVariable)
+    //console.log("iwp5:688: Warning Null Calculaor for: ", resultVariable)
 
     return { value: 0 }
   }
@@ -1007,16 +1170,15 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 		}
     catch ( err ) {
       if ( verbose ) {
-			console.log("evaluateCalculator:450> " + resultVariable + "> Unable to evaluate calculator: ", err );
-      console.log("evaluateCalculator:450> " + resultVariable + "> Equation: ", calculator.equation );
-      console.log("evaluateCalculator:450> " + resultVariable + "> Vars: ", vars);
+			console.log("evaluateCalculator:450> ERROR: " + resultVariable + "> Unable to evaluate calculator: ", err );
+      console.log("evaluateCalculator:450> ERROR: " + resultVariable + "> Equation: ", calculator.equation );
+      console.log("evaluateCalculator:450> ERROR: " + resultVariable + "> Vars: ", vars);
       }
 			// return { value: undefined };  // was -1
       throw err;
 		}
 	} else if ( calculator.type == "euler-mathjs" ) {
     try {
-      var breaker = 1;
       // 2016-Sep-23 For Euler V5, store the cache of current displacement and velocity IN calculator.
       // An enhancement would be to expose these values out as complex return ttypes of this function,
       // so that they could he historically archived in the variable step array.
@@ -1026,15 +1188,18 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
       var dt = vars["delta_t"]
 
+      /*
+      // This is handled in the master calculate step now  2018Mar22
       if ( calculator["initialDisplacement"] == undefined ) {
         calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
         calculator.currentDisplacement = calculator.initialDisplacement
-        //console.log("iwp5:380> calculating initial displacement to: ", calculator.initialDisplacement )
+        console.log("iwp5:380> calculating initial displacement to: ", calculator.initialDisplacement )
       }
 
       if ( calculator["initialVelocity"] == undefined ) {
         calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
         calculator.currentVelocity = calculator.initialVelocity * dt;
+<<<<<<< HEAD
         //console.log("iwp5:405> calculating initial velocity to: ", calculator.initialVelocity )
       }
 
@@ -1060,53 +1225,72 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
       if ( verbose ) {
         // console.log("iwp5:661>", resultVariable, "BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", JSON.stringify(vars) )
+=======
+        console.log("iwp5:405> calculating initial velocity to: ", calculator.initialVelocity )
+>>>>>>> cba710ae66d991d398931f93037c64b91a8f3cad
       }
+      */
 
       var acceleration = null;
       try {
         // then calculate the acceleratiion
-       acceleration = calculator.accelerationCompiled.eval(vars) * dt;
-       if (!isFinite(acceleration)) {
-        throw "acceleration is not finite"
-       }
-       if ( isNaN(acceleration) ) {
-        console.log("calculatorObject",calculator,"with dt of",dt)
-        throw "for resultVariable acceleration is NaN with vars "+vars
-       }
+        // 2018Mar22 Fix to only apply the acceleration time component to the change in velocity.
+
+        // console.log("iwp5:1088> Calculating acceleration via calculator: ", calculator, " at calcStep: " + calculateStep + " for vars: ", vars )
+        acceleration = calculator.accelerationCompiled.eval(vars);
+
+        if ( !isFinite(acceleration) ) {
+          throw "Calculator.accelerationCompiled result is not finite, is: " + acceleration
+        }
+        if ( isNaN(acceleration) ) {
+          throw "Calculator.accelerationCompiled result is NaN"
+        }
+
       } catch ( err ) {
-        console.log("evaluateCalculator:1067> " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
+        console.log("evaluateCalculator:1095> ERROR " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
         if ( CONFIG_throw_acceleration_calculation_exceptions ) {
-         throw err;
-         }
+          throw err;
+        }
       }
 
-      if ( currentStep == 0 ) {
-          calculator.currentVelocity = calculator.initialVelocity;
-          if ( acceleration != null ) {
-            calculator.currentVelocity += acceleration * 0.5;
-          }
 
-          calculator.currentDisplacement = calculator.initialDisplacement; // no t adjustment
+
+      if ( calculateStep == 0 ) {
+          calculator.currentVelocity = calculator.initialVelocity;
+          calculator.currentDisplacement = calculator.initialDisplacement; // no adjustment
 
       } else if ( changeStep > 0 ) {
+
         if ( acceleration != null ) {
+
           // Positive direction calcuation
-          calculator.currentVelocity += acceleration;
+          if ( calculateStep == 1 ) { 
+            // Special first frame consideration
+            calculator.currentVelocity += acceleration * dt * 0.5;
+          } else { 
+            calculator.currentVelocity += acceleration * dt;
+          
+          }
           calculator.currentDisplacement += calculator.currentVelocity * dt;
-            }
+        }
 
       } else if ( changeStep < 0 ) {
+          // Negative direction calculation
           if ( acceleration != null ) {
-          calculator.currentVelocity -= acceleration;
+          calculator.currentVelocity -= acceleration * dt;
           calculator.currentDisplacement -= calculator.currentVelocity * dt;
         }
+
       } else {
         // No step direction
       }
 
+
+      // console.log("iwp5:1152> evaluateCalculator calculateStep: "+ calculateStep + "  changeStep: " + changeStep + " calculator.currentVelocity: " + calculator.currentVelocity + " calculator.currentDisplacement: " + calculator.currentDisplacement )
       //Return only value if just an output?
 
-      return { value: calculator.currentDisplacement,
+      return { step: calculateStep, 
+        value: calculator.currentDisplacement,
         displacement: calculator.currentDisplacement,
         velocity: calculator.currentVelocity,
         acceleration: acceleration }
@@ -1114,10 +1298,9 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       // return displacement.value;
     } catch ( err ) {
       if ( verbose ) {
-      console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, dt);
-    }
+        console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, dt);
+      }
       throw err;
-      //return { value: undefined }; // was -1
     }
   }
   else {
@@ -1190,17 +1373,19 @@ function parseProblemToMemory( problem ) {
   } else if ( problem.objects.solid != null ) {
     // Workaround becaue the php xml to json for single solids, would an object.
       addSolid(problem.objects.solid);
-
   }
-  // Objects
+
+  
+
+
+
+  // Objects - Also detect the floatign texts, which are not relaly solids.
   if ( $.type (problem.objects.object) == 'array' ) {
     $.each( problem.objects.object, function( index, object) {
       addObject(object);
     });
   } else if ( problem.objects.object != null ) {
-
-    addObject(problem.objects.object);
-
+     addObject(problem.objects.object);
   }
 }
 
@@ -1284,16 +1469,17 @@ function renderProblemFromMemory() {
 
 //Debugging 29 Jul 2016
 //console.log("setting xmin val: ", iwindow.xmin );
+  // 2018Mar23 Units are not editable.
   $("#iwindow_xmin").val( iwindow.xmin );
   $("#iwindow_xmax").val( iwindow.xmax );
   $("#iwindow_xgrid").val( iwindow.xgrid );
-  $("#iwindow_xunit").val( iwindow.xunit );
+  $("#iwindow_xunit").html( iwindow.xunit );
   $("#iwindow_ymax").val( iwindow.ymax );
   $("#iwindow_ymin").val( iwindow.ymin );
   $("#iwindow_ygrid").val( iwindow.ygrid );
-  $("#iwindow_yunit").val( iwindow.yunit );
+  $("#iwindow_yunit").html( iwindow.yunit );
 
-  // GraphWindow is a TODO feature for now.
+    // GraphWindow is a TODO feature for now.
   // $("#graphWindow").html( graphWindow );
   inputTitle = 0;
   outputTitle = 0;
@@ -1331,15 +1517,14 @@ function renderProblemFromMemory() {
     $("#outputTable").css('display','none');
   }
 
-
+  fitText("#inputTable");
   /* Debugging 07 Oct 2016 Ryan Steed
   //$("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>"+htmlOutputs);
   */
   //Moved to addSolidsToCanvas, 8 Aug 2016
   //$("#solids").html( solids.join(" ") );
 
-  fitText("#inputTable");
-  renderCanvasFromMemory();
+  renderCanvas();
   addSolidsToCanvas(svgSolids);
   addSolidsToCanvas(svgObjects);
 };
@@ -1384,32 +1569,30 @@ function addSolidsToCanvas(solids) {
   $("#canvasDiv").html($("#canvasDiv").html());
 }
 
-function renderCanvasFromMemory() {
-  var c = $("#canvas");
+function renderCanvas() {
+  var c = $("#canvas")
+  var g = $("#gridlines")
   // Parse viewbox attributes from canvas to override defaults.
   var canvasBoxAttrs = c[0].getAttribute("viewBox").split(" ");
-  canvasBox= { minX: parseFloat(canvasBoxAttrs[0]), minY: parseFloat(canvasBoxAttrs[1]), maxX: parseFloat(canvasBoxAttrs[2]), maxY: parseFloat(canvasBoxAttrs[3]) };
+  canvasBox = { minX: parseFloat(canvasBoxAttrs[0]), minY: parseFloat(canvasBoxAttrs[1]), maxX: parseFloat(canvasBoxAttrs[2]), maxY: parseFloat(canvasBoxAttrs[3]) };
   // To Render the window is that we start at the Xmin, and draw full vertial lines,
   // increment by xgrid,
   // stopping at xmax
   // Add X gridlines -- TODO CONVERT TO A FOR LOOP
-  /*Shifted to for loop, 7 Aug 2016:c.append( "<path d='M " + xCanvas(-8) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(-6) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(-4) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(-2) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(2) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(4) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(6) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  c.append( "<path d='M " + xCanvas(8) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-  */
+
+  //Update window settings with user form data
+  $.each(iwindow, function(index, val) {
+    iwindow[index] = queryUserFormWindowDouble(index);
+  })
+  $(".gridline").remove();
+
 
   var xGridlines = (iwindow.xmax - iwindow.xmin)/iwindow.xgrid;
   for ( var interval = 1; interval < xGridlines; interval ++ ) {
     var xGridPosition = (interval - xGridlines/2)*iwindow.xgrid;
     //console.log("whatItShouldBe: "+xCanvas(xGridPosition*iwindow.xgrid)+", coordinates: "+coordinates);
-    c.append( "<path d='M " + xCanvasGridlines(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" );
-    c.append( "<path d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" );
+    g.append( "<path class='gridline' d='M " + xCanvasGridlines(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" )
+    g.append( "<path class='gridline' d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" )
     };
 
   // Add Y gridlines
@@ -1418,8 +1601,8 @@ function renderCanvasFromMemory() {
   //console.log("yGridlines: "+yGridlines);
   for ( var interval = 1; interval <= yGridlines-1; interval ++ ) {
     var yGridPosition = (interval - yGridlines/2)*iwindow.ygrid;
-    c.append( "<path d='M 0 " + yCanvasGridlines(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" );
-    c.append( "<path d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" );
+    g.append( "<path class='gridline' d='M 0 " + yCanvasGridlines(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" )
+    g.append( "<path class='gridline' d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" )
   };
 
   // Blitting / Double buffering approach
@@ -1440,7 +1623,6 @@ function queryTimeStopInputDouble() {
   time.stop = parseFloat($("#itime_stop").val());
   return time.stop;
 }
-
 function queryUserFormInputDouble(input) {
 
 	var readValue = $("#" + input.name).val();
@@ -1449,6 +1631,14 @@ function queryUserFormInputDouble(input) {
 	// TODO if readValue doesn't make sense, then default back to input.initialValue;
 
 	return doubleValue;
+}
+function queryUserFormWindowDouble(index) {
+  var readValue = $("#iwindow_" + index).val();
+  var doubleValue = parseFloat(readValue);
+  //console.log("queryUserDefinedInput: for input: ", input, " readValue: ", readValue,  "  doubleValue: ", doubleValue );
+  // TODO if readValue doesn't make sense, then default back to input.initialValue;
+
+  return doubleValue;
 }
 
 function updateUserFormOutputDouble(output, newValue) {
@@ -1469,8 +1659,7 @@ function updateTimeDisplay(t) {
 
 function updateSolidSvgPathAndShape(solid, pathAndShape) {
 
-  // console.log("iwp5:1333> updateSolidSvgPathAndShape: ", solid )
-
+  // console.log("iwp5:1550> updateSolidSvgPathAndShape: solid : " + solid.name + "  solid: " , solid )
 
 	var svgSolid = $("#solid_" + solid.name);
     var svgTrail = $("#solid_" + solid.name + "_trail")
@@ -1501,23 +1690,27 @@ if (solid.shape.type == "circle") {
     .attr("y2", yCanvas(pathAndShape.y + pathAndShape.height));
   }
   else if (solid.shape.type == "polygon") {
-    //console.log("number of points: ", solid.shape);
+    
+    // console.log("iwp5:1581> Redrawing Polygon: " + solid.name + " has Error? " + solid.calculationError );
     var points = pathAndShape.points
-    //console.log(points[1].x)
     pointsAttr = ""
     $.each( pathAndShape.points, function( index, i ) {
-      console.log(i)
       pointsAttr += xCanvas(points[index].x+pathAndShape.x)+","+yCanvas(points[index].y+pathAndShape.y)+" "
-      console.log(pointsAttr)
+      // console.log("iwp5:1579> Polygon i: " + i + " points: " , pointsAttr)
     });
     svgSolid.attr("points", pointsAttr)
   }
   else if (solid.shape.type == "vector") {
+
+
     //http://stackoverflow.com/questions/10316180/how-to-calculate-the-coordinates-of-a-arrowhead-based-on-the-arrow
     var x1 = xCanvas(pathAndShape.x)
     var x2 = xCanvas(pathAndShape.x + pathAndShape.width)
     var y1 = yCanvas(pathAndShape.y)
     var y2 = yCanvas(pathAndShape.y + pathAndShape.height)
+
+    // console.log("iwp5:1570> Vector draw for : " + solid.name + " x1: " + x1 + " x2: " + x2 + " y1: " + y1 + " y2: " + y2)
+
     var point1 = "" + x1 + "," + y1 + " "
     var point2 = "" + x2 + "," + y2 + " "
     var dx = x1 - x2
@@ -1532,32 +1725,9 @@ if (solid.shape.type == "circle") {
     var arrow1 = "" + (x2 + 30 * ax) + "," + (y2 + 30 * ay) + " "
     var arrow2 = "" + (x2 + 30 * bx) + "," + (y2 + 30 * by) + " "
 
+    //console.log("iwp:1617> Polyline: " + solid.name + " setting points to: ", (point1+point2+arrow1+point2+arrow2) )
+
     svgSolid.attr("points",point1+point2+arrow1+point2+arrow2)
-  }
-  else if (solid.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
-
-    // console.log("iwp5:1392> Floating Text Calculation: name: ", solid.name, "  objectValue: ", pathAndShape.objectValue );
-
-    var safeText = solid.text
-    if ( solid.text == null || solid.text instanceof Object ) { safeText = ""; }
-
-    var safeUnits = solid.units
-    if ( solid.units == null || solid.units instanceof Object ) { safeUnits = ""; }
-
-    var newLabel = safeText
-
-    if ( solid.showValue ) {
-        // console.log("iwp5:1411> Printing Decimal for : ", incomingNumber );
-        var formatted = printDecimal( pathAndShape.objectValue , 2 )
-        //var formatted = pathAndShape.objectValue
-        newLabel = safeText + " " + formatted + " " + safeUnits
-    }
-
-    // console.log("iwp5:1414> Solid Reversal motion, x: ", xCanvas(pathAndShape.x), " y: ", yCanvas(pathAndShape.y))
-
-    svgSolid.attr("x",xCanvas(pathAndShape.x))
-    .attr("y",yCanvas(pathAndShape.y))
-    .html(newLabel)
   }
 
   else if (solid.shape.type == "Bitmap" || solid.shape.type == "bitmap") {
@@ -1627,6 +1797,46 @@ for line
 }
 
 
+function updateTextSvgPathAndShape(text, pathAndShape) {
+
+//BOOK
+  var svgText = $("#text_" + text.name);
+
+  if (text.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
+
+    console.log("iwp5:1698> Floating Text Calculation: name: ", text.name, "  pathAndShape: ", pathAndShape );
+
+    var safeText = text.text
+    if ( text.text == null || text.text instanceof Object ) { safeText = ""; }
+
+    var safeUnits = text.units
+    if ( text.units == null || text.units instanceof Object ) { safeUnits = ""; }
+
+    var newLabel = safeText
+
+    if ( text.showValue ) {
+        // console.log("iwp5:1411> Printing Decimal for : ", incomingNumber );
+        var formatted = printDecimal( pathAndShape.value , 2 )
+        //var formatted = pathAndShape.objectValue
+        newLabel = safeText + " " + formatted + " " + safeUnits
+    }
+
+    var x = xCanvas(pathAndShape.x)
+    var y = yCanvas(pathAndShape.y)
+    
+    console.log("iwp5:1638> Floating Text Animation, x: " + x +  " y: " + y + " moving svgText: " , svgText)
+
+    svgText.attr("x",x).attr("y",y).html(newLabel)
+
+  }
+
+}
+
+
+
+
+
+
 
 //Click handles.
 function handleStartClick() {
@@ -1655,10 +1865,10 @@ function handleStopClick() {
 };
 //Resets simulation.
 function handleResetClick() {
-	updateTimeDisplay(0);
+  renderCanvas();
+  updateTimeDisplay(0);
   handleStopClick();
 	var vars0 = masterResetSteps();
-  updateUserFormOutputDouble();
   graphResetZero(0, vars = vars0, solids = solids, graphWindow );
 	//document.getElementById(buttonIds.startStop).setAttribute("class", "Start");
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleStartClick()");

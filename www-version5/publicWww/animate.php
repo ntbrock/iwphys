@@ -29,7 +29,7 @@ header('Content-Type: text/html');
 
 <body>
 
-<?php include_once("iwp-nav.php") ?>
+<?php include_once("iwp-nav-minimal.php") ?>
 
 <!-- Json IWP Content controls -->
 <div id="problem" problem-uri="<?= $xtojUrl ?>"></div>
@@ -61,6 +61,7 @@ header('Content-Type: text/html');
     <!-- Canvas -->
     <div id="canvasDiv" class="iwp-animation-canvas-container">
       <svg id="canvas" class="iwp-animation-canvas" viewbox="0 0 1000 1000" preserveAspectRatio="xMinYMin meet" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+        <g id="gridlines"></g>
       </svg>
     </div>
 
@@ -74,13 +75,13 @@ header('Content-Type: text/html');
     <table class="iwp-tab-controls" class="tab">
       <tr>
         <td id="it" class="bottomBorder" onclick="animationTabOn()" iwp-tab="animationTab">
-          <i id="inputTableButton" class="fa fa-list fa-2x"></i> Animate</td>
+          <i id="inputTableButton" class="fa fa-list fa-2x"></i> <br/>Animate</td>
         <td id="gt" class="" onclick="graphTabOn()" iwp-tab="graphTab">
-          <i id="graphTableButton" class="fa fa-area-chart fa-2x"> </i> Graph</td>
+          <i id="graphTableButton" class="fa fa-area-chart fa-2x"> </i> <br/>Graph</td>
         <td id="oib" class="" onclick="timeTabOn()" iwp-tab="timeTab">
-          <i id="timeTabButton" class="fa fa-clock-o fa-2x"> </i> Time</td>
+          <i id="timeTabButton" class="fa fa-clock-o fa-2x"> </i> <br/>Time</td>
         <td id="ws" class=""  onclick="iwindowTabOn()" iwp-tab="iwindowTab">
-          <i id="windowSettings" class="fa fa-clone fa-2x"> </i> Window </td>
+          <i id="windowSettings" class="fa fa-clone fa-2x"> </i> <br/>Axes </td>
       </tr>
     </table>
     </div>
@@ -112,19 +113,19 @@ header('Content-Type: text/html');
 
 
       <!-- Window Settings -->
-      <div id="iwindowTab" class="iwp-tab">
+      <div id="iwindowTab" class="iwp-tab3column">
         <table class="trim">
-          <tr><th colspan="3">Animation Window Settings</th></tr>
+          <tr><th colspan="3">Animation Axes Scale</th></tr>
           <tr>
             <td style="width:33%"></td>
             <td style="width:33%">X</td>
             <td style="width:33%">Y</td>
-          <tr class="bottomBorder">
+          <tr>
             <td>Min:</td>
             <td><input id="iwindow_xmin" type="text"></td>
             <td><input id="iwindow_ymin" type="text"></td>
           </tr>
-          <tr class="bottomBorder">
+          <tr>
             <td>Max:</td>
             <td><input id="iwindow_xmax" type="text"></td>
             <td><input id="iwindow_ymax" type="text"></td>
@@ -134,10 +135,10 @@ header('Content-Type: text/html');
             <td><input id="iwindow_xgrid" type="text"></td>
             <td><input id="iwindow_ygrid" type="text"></td>
           </tr>
-          <tr class="bottomBorder">
+          <tr>
             <td>Unit:</td>
-            <td><input id="iwindow_xunit" type="text"></td>
-            <td><input id="iwindow_yunit" type="text"></td>
+            <td style="width: 100%;"><div id="iwindow_xunit"></td>
+            <td style="width: 100%;"><div id="iwindow_yunit"></td>
           </tr>
         </table>
       </div>
@@ -148,9 +149,9 @@ header('Content-Type: text/html');
       <div id="timeTab" class="iwp-tab">
         <table class="trim">
           <tr>
-            <th colspan="2">Time Controls</th>
+            <th colspan="2">Animation Time Scale</th>
           </tr>
-          <tr class="bottomBorder">
+          <tr>
             <td>
                 <span>Time Step</span>
             </td>
@@ -158,11 +159,11 @@ header('Content-Type: text/html');
                 <span><input id="itime_change" type="text" value="--"/> seconds</span>
             </td>
           </tr>
-          <tr class="bottomBorder">
+          <tr>
             <td>Start Time</td>
             <td><span><input id="itime_start" type="text" value="--"/> seconds</span></td>
           </tr>
-          <tr class="bottomBorder">
+          <tr>
             <td>Stop Time</td>
             <td><span><input id="itime_stop" type="text" value="--"/> seconds</span></td>
           </tr>

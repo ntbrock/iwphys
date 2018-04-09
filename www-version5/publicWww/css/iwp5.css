@@ -76,8 +76,8 @@ table {
 
 /** Controls the tab button widths */
 .iwp-tab-controls td {
-	padding-left: 45px;
-	padding-right: 45px;
+	padding-left: 55px;
+	padding-right: 55px;
 }
 
 
@@ -93,6 +93,12 @@ table {
 	display: none; /** Start off invisible, then get turned on via Jquery */
 	table-layout: fixed;
 }
+
+.iwp-tab3column {
+	display: none; /** Start off invisible, then get turned on via Jquery */
+	table-layout: fixed;
+}
+
 .iwp-tab table tr {
 	width: 550px;
 	display: table;
