@@ -150,9 +150,9 @@ function handleStep() {
     }
 
     // iwp5.1 - Adding Hook into the graph capabilties
-    if ( changeStep > 0 ) { 
+    if ( changeStep > 0 ) {
       graphStepForward(newStep, vars);
-    } else if ( changeStep < 0 ) { 
+    } else if ( changeStep < 0 ) {
       graphStepBackward(newStep, vars);
     }
 
@@ -417,16 +417,16 @@ function calculateVarsAtStep(step) {
   var unorderedOutputs = [];
   var orderedObjects = [];
   $.each(outputs, function(index,output) {
-    if (output.calculationOrder != null) { 
+    if (output.calculationOrder != null) {
       orderedObjects[output.calculationOrder] = output;
-    } else { 
+    } else {
       unorderedOutputs.push(output);
     }
   });
   $.each(solids, function(index,solid) {
-    if (solid.calculationOrder != null) { 
+    if (solid.calculationOrder != null) {
       orderedObjects[solid.calculationOrder] = solid;
-    } else { 
+    } else {
       unorderedSolids.push(solid);
     }
   });
@@ -444,10 +444,10 @@ function calculateVarsAtStep(step) {
    * 2018Mar15 Perform the animation calculationOrder First
    */
 
-  $.each( orderedObjects, function(index, object) { 
+  $.each( orderedObjects, function(index, object) {
     if(object != null ) { // orderedObjects can be sparseArray
     if(object.objectType=="solid") {
-      try { 
+      try {
 
         calculateSolidAtStep(object, step, vars, true );
 
@@ -455,9 +455,9 @@ function calculateVarsAtStep(step) {
         console.log("iwp5:457> failed calculationOrder err: " , err, " Solid:", object)
         failedOutputs.push(object);
       }
-    } else if(object.objectType=="output") { 
-      try { 
-      
+    } else if(object.objectType=="output") {
+      try {
+
         var newValue = calculateOutputAtStep(object, step, vars, false );
         if ( isNaN(newValue) ) { throw "not a number" };
         if ( !isFinite(newValue) ) { throw "not finite" }
@@ -468,10 +468,10 @@ function calculateVarsAtStep(step) {
         failedOutputs.push(object);
       }
 
-    } else { 
+    } else {
       throw "Unknown objectType: " + object.objectType;
-    }  
-    }  
+    }
+    }
   });
 
 
@@ -722,8 +722,8 @@ function addSolid(solid) {
   		type: solid.shape["@attributes"].type,
   		drawTrails: solid.shape["@attributes"].drawTrails,
   		drawVectors: solid.shape["@attributes"].drawVectors,
-  		graphOptions: 
-        Object.assign( solid.shape.graphOptions["@attributes"], 
+  		graphOptions:
+        Object.assign( solid.shape.graphOptions["@attributes"],
                       { initiallyOn: solid.shape.graphOptions.initiallyOn["@attributes"] } ),
   		width: {
   			calculator: compileCalculator(solid.shape.width.calculator)
@@ -1041,7 +1041,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
       // 2018Mar15 Special new code to look backwards
       var previousVars = varsAtStep[currentStep-1];
-      if ( previousVars ) { 
+      if ( previousVars ) {
         // copy everything with this name into current step, which gets all dimensions
         //BOOK
         vars[objectName] = previousVars[objectName]
@@ -1324,10 +1324,10 @@ function renderProblemFromMemory() {
   })
 
   // 2018Feb01 - Keep the title + description, just hide all inputs.
-  if (!inputTitle) { 
+  if (!inputTitle) {
     $("#inputTable").css('display','none');
   }
-  if ( !outputTitle) { 
+  if ( !outputTitle) {
     $("#outputTable").css('display','none');
   }
 
@@ -1452,7 +1452,7 @@ function queryUserFormInputDouble(input) {
 }
 
 function updateUserFormOutputDouble(output, newValue) {
-  if ( typeof(output) != "undefined" ) { 
+  if ( typeof(output) != "undefined" ) {
   	var readValue = $("#" + output.name).val(newValue.toPrecision(5));
   }
 }
@@ -1563,10 +1563,10 @@ if (solid.shape.type == "circle") {
   else if (solid.shape.type == "Bitmap" || solid.shape.type == "bitmap") {
 
     // console.log("iwp5:1414> Bitmap type! solid: " , solid,  "  pathAndShape: " , pathAndShape )
-
+		//TODO: try changing animation from bitmap to rectangle to see calculation differences
     var angle = pathAndShape.angle*-180/Math.PI
-    var xTran = xCanvas(pathAndShape.x)+xWidth(pathAndShape.width*2)/2
-    var yTran = yCanvas(pathAndShape.y)//yHeight(pathAndShape.height*2)/2//-yHeight(pathAndShape.height)
+    var xTran = xCanvas(pathAndShape.x)//+xWidth(pathAndShape.width*2)/2
+    var yTran = yCanvas(pathAndShape.y)+yHeight(pathAndShape.height*2)/2
 
     var domId = "#solid_"+solid.name.toLowerCase();
     var solidSvg = $(domId);
