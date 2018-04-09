@@ -540,17 +540,10 @@ function calculateVarsAtStep(step) {
    * 2018Mar15 Perform the animation calculationOrder First
    */
 
-<<<<<<< HEAD
-  $.each( orderedObjects, function(index, object) {
-=======
-
   var calculationsPerformed = 0;
 
   $.each( orderedObjects, function(index, object) { 
 
-
-
->>>>>>> cba710ae66d991d398931f93037c64b91a8f3cad
     if(object != null ) { // orderedObjects can be sparseArray
 
     // console.log("iwp5:515> [Calculations Peformed " + calculationsPerformed + "] Calculating Object: " + object.name )
@@ -566,13 +559,8 @@ function calculateVarsAtStep(step) {
         console.log("iwp5:457> ERROR calculationOrder solid: " + object.name + " err: ", err )
         failedOutputs.push(object);
       }
-<<<<<<< HEAD
     } else if(object.objectType=="output") {
       try {
-=======
-    } else if(object.objectType=="output") { 
-      try { 
->>>>>>> cba710ae66d991d398931f93037c64b91a8f3cad
 
         var newValue = calculateOutputAtStep(object, step, vars, false );
         if ( isNaN(newValue) ) { throw "not a number" };
@@ -1225,9 +1213,6 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
       if ( verbose ) {
         // console.log("iwp5:661>", resultVariable, "BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", JSON.stringify(vars) )
-=======
-        console.log("iwp5:405> calculating initial velocity to: ", calculator.initialVelocity )
->>>>>>> cba710ae66d991d398931f93037c64b91a8f3cad
       }
       */
 
