@@ -1717,7 +1717,7 @@ if (solid.shape.type == "circle") {
 
   else if (solid.shape.type == "Bitmap" || solid.shape.type == "bitmap") {
 
-    // console.log("iwp5:1414> Bitmap type! solid: " , solid,  "  pathAndShape: " , pathAndShape )
+    console.log("iwp5:1720> Bitmap type! solid: " , solid,  "  pathAndShape: " , pathAndShape )
 		//TODO: try changing animation from bitmap to rectangle to see calculation differences
     var angle = pathAndShape.angle*-180/Math.PI
     var xTran = xCanvas(pathAndShape.x)//+xWidth(pathAndShape.width*2)/2
@@ -1737,10 +1737,10 @@ if (solid.shape.type == "circle") {
     .attr("width",xWidth(pathAndShape.width*2))
     .attr("height",yHeight(pathAndShape.height*2))
     if (angle) {
-
-
       svgSolid.attr("transform","rotate("+angle+" "+xTran+" "+yTran+") translate("+xTran2+" "+yTran2+")");
-    }
+    } else {
+			svgSolid.attr("transform","translate("+xTran2+" "+yTran2+")");
+		}
 
 
 
