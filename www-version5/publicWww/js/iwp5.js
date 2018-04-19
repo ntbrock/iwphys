@@ -278,7 +278,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
         };
         calc.points.push(point);
       });
-      
+
 
         //i.xpath = evaluateCalculator(solid.name+".x"+toString(counter), i.xpath.calculator, vars).value
         //i.ypath = evaluateCalculator(solid.name+".x"+toString(counter), i.ypath.calculator, vars).value
@@ -446,7 +446,7 @@ function calculateVarsAtStep(step) {
 
 
   //-----------------------------------------------------------
-  // EULER INITIALIZATION 
+  // EULER INITIALIZATION
   // 2018Mar22 - Euler's Self-referential Fix, we need to pull velocities and displacements for
   // every Solid w/ Euler's and pre-write them into the vars space.
   $.each(solids, function(index,solid) {
@@ -454,34 +454,34 @@ function calculateVarsAtStep(step) {
     // Initialize if necessary
     if ( vars[solid.name] == null ) { vars[solid.name] = {} }
 
-    if ( solid.xpath.calculator.type == "euler-mathjs" ) { 
+    if ( solid.xpath.calculator.type == "euler-mathjs" ) {
 
       var calculator = solid.xpath.calculator
       // Initialization -- If currentDisplacement or currentVelocity is empty!
-      if (step == 0 || calculator.currentDisplacement == null) {       
+      if (step == 0 || calculator.currentDisplacement == null) {
         // console.log("iwp5:409> X Euler Pre-calc for solid: " + solid.name + " solid.xpath.calc: " , solid.xpath.calculator)
         calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
         calculator.currentDisplacement = calculator.initialDisplacement
       }
-      if (step == 0 || calculator.currentVelocity == null) {       
+      if (step == 0 || calculator.currentVelocity == null) {
         calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
         calculator.currentVelocity = calculator.initialVelocity;
       }
       vars[solid.name].x = solid.xpath.calculator.currentDisplacement
       vars[solid.name].xpos = solid.xpath.calculator.currentDisplacement
       vars[solid.name].xdisp = solid.xpath.calculator.currentDisplacement
-      vars[solid.name].xvel = solid.xpath.calculator.currentVelocity      
+      vars[solid.name].xvel = solid.xpath.calculator.currentVelocity
     }
 
-    if ( solid.ypath.calculator.type == "euler-mathjs" ) { 
+    if ( solid.ypath.calculator.type == "euler-mathjs" ) {
       var calculator = solid.ypath.calculator
       // Initialization -- If currentDisplacement or currentVelocity is empty!
-      if (step == 0 || calculator.currentDisplacement == null) {       
+      if (step == 0 || calculator.currentDisplacement == null) {
         //console.log("iwp5:426> Y Euler Pre-calc for solid: " + solid.name + " solid.ypath.calc: " , solid.ypath.calculator)
         calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
         calculator.currentDisplacement = calculator.initialDisplacement
       }
-      if (step == 0 || calculator.currentVelocity == null) {       
+      if (step == 0 || calculator.currentVelocity == null) {
         calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
         calculator.currentVelocity = calculator.initialVelocity;
       }
@@ -519,9 +519,9 @@ function calculateVarsAtStep(step) {
   $.each(texts, function(index,text) {
 
 
-    if (text.calculationOrder != null) { 
+    if (text.calculationOrder != null) {
       orderedObjects[text.calculationOrder] = text;
-    } else { 
+    } else {
       // console.log("iwp5:496> Adding Unordered Text: " + text.name, text )
       unorderedTexts.push(text);
     }
@@ -542,7 +542,7 @@ function calculateVarsAtStep(step) {
 
   var calculationsPerformed = 0;
 
-  $.each( orderedObjects, function(index, object) { 
+  $.each( orderedObjects, function(index, object) {
 
     if(object != null ) { // orderedObjects can be sparseArray
 
@@ -575,7 +575,7 @@ function calculateVarsAtStep(step) {
         console.log("iwp5:466> failed calculationOrder err: " , err, " Output:", object)
         failedOutputs.push(object);
       }
-    } else if ( object.objectType=="object" ) { 
+    } else if ( object.objectType=="object" ) {
 
       console.log("iwp5:548> TODO Animate the text: object.name: " + object.name, object )
 
@@ -609,7 +609,7 @@ function calculateVarsAtStep(step) {
     failedSolids.push(solid);
   }});
 
-  
+
 
 
   $.each( unorderedOutputs, function( index, output ) {
@@ -688,7 +688,7 @@ function calculateVarsAtStep(step) {
 
   // FINALLY, Text calculation at very end
   $.each( unorderedTexts, function( index, text ) {
-   
+
     try {
      calculateTextAtStep(text, step, vars, true );
         //  -> update the DOM with theose new results
@@ -1003,7 +1003,7 @@ function addObject(object) {
     var y = 0; // yCanvas(object.ypath.calculator.value)
 
     svgObjects.push( "<text id='text_" +object.name+ "' x='" + x + "' y='"+ y +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
-  
+
     texts.push( compiledObject );
   }
 
@@ -1249,12 +1249,12 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
         if ( acceleration != null ) {
 
           // Positive direction calcuation
-          if ( calculateStep == 1 ) { 
+          if ( calculateStep == 1 ) {
             // Special first frame consideration
             calculator.currentVelocity += acceleration * dt * 0.5;
-          } else { 
+          } else {
             calculator.currentVelocity += acceleration * dt;
-          
+
           }
           calculator.currentDisplacement += calculator.currentVelocity * dt;
         }
@@ -1274,7 +1274,7 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
       // console.log("iwp5:1152> evaluateCalculator calculateStep: "+ calculateStep + "  changeStep: " + changeStep + " calculator.currentVelocity: " + calculator.currentVelocity + " calculator.currentDisplacement: " + calculator.currentDisplacement )
       //Return only value if just an output?
 
-      return { step: calculateStep, 
+      return { step: calculateStep,
         value: calculator.currentDisplacement,
         displacement: calculator.currentDisplacement,
         velocity: calculator.currentVelocity,
@@ -1360,7 +1360,7 @@ function parseProblemToMemory( problem ) {
       addSolid(problem.objects.solid);
   }
 
-  
+
 
 
 
@@ -1675,7 +1675,7 @@ if (solid.shape.type == "circle") {
     .attr("y2", yCanvas(pathAndShape.y + pathAndShape.height));
   }
   else if (solid.shape.type == "polygon") {
-    
+
     // console.log("iwp5:1581> Redrawing Polygon: " + solid.name + " has Error? " + solid.calculationError );
     var points = pathAndShape.points
     pointsAttr = ""
@@ -1721,7 +1721,9 @@ if (solid.shape.type == "circle") {
 		//TODO: try changing animation from bitmap to rectangle to see calculation differences
     var angle = pathAndShape.angle*-180/Math.PI
     var xTran = xCanvas(pathAndShape.x)//+xWidth(pathAndShape.width*2)/2
-    var yTran = yCanvas(pathAndShape.y)+yHeight(pathAndShape.height*2)/2
+    var yTran = yCanvas(pathAndShape.y)//+yHeight(pathAndShape.height*2)/2
+		var xTran2 = -xWidth(pathAndShape.width*2)/2
+		var yTran2 = -yHeight(pathAndShape.height*2)/2
 
     var domId = "#solid_"+solid.name.toLowerCase();
     var solidSvg = $(domId);
@@ -1737,7 +1739,7 @@ if (solid.shape.type == "circle") {
     if (angle) {
 
 
-      svgSolid.attr("transform","rotate("+angle+" "+xTran+" "+yTran+")");
+      svgSolid.attr("transform","rotate("+angle+" "+xTran+" "+yTran+") translate("+xTran2+" "+yTran2+")");
     }
 
 
@@ -1808,7 +1810,7 @@ function updateTextSvgPathAndShape(text, pathAndShape) {
 
     var x = xCanvas(pathAndShape.x)
     var y = yCanvas(pathAndShape.y)
-    
+
     console.log("iwp5:1638> Floating Text Animation, x: " + x +  " y: " + y + " moving svgText: " , svgText)
 
     svgText.attr("x",x).attr("y",y).html(newLabel)
