@@ -157,6 +157,7 @@ td.iwp-input-value, td.iwp-output-value {
     padding: 20px;
 }
 #buttonControls {
+	width: 270px;
 	padding-bottom: 0px	;
 	padding-top: 0px ;
 	padding-left: 20px;
