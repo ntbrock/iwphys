@@ -1,0 +1,43 @@
+2018Mar22 IWP5 Pre-go live
+
+Matt
+L> Tried to get image alignment, struggles with CSS positioning. 
+N> Learn more CSS for hand positioning. 
+
+ 
+Taylor
+L> Euler's Unit Tests pass!  Reviewed the google doc, great testing! My list is down to a vector redraw issue on initialization: http://localhost:8080/master/animate.php/winters-ncssm-2009/velocity-selector-02.iwp
+N> Vector input change fix, High priority. Tomorrow likely.
+
+Jon
+L> Went back thru and checked every animation, created google doc, know the current status of everything, Have a student view for webassign. Think it will be transparent to the student of what to do - Animation buttons. 
+N> 
+
+
+Arushi
+
+After - BEFORE student testing, Do a Code Deployment, Check basic sanity of math routines.
+
+
+Angle of Initial velocity -> 45, 
+
+
+cp-mfield-02.iwp
+
+
+on Monday, Juniors get email for Summer Physics Webassign opportunity, if they want to do it, they will email to request access. Student who want to go into AP Physics C.  A different teacher will be sending the class key in webassign, and start doing any of the assignments.
+
+As early as next Monday or Tuesday.
+
+Taylor to re-enable master purple after deployment.
+
+
+
+www-version5/publicWww/animate.php             |  2 +-
+ www-version5/publicWww/css/heroic-features.css |  2 +-
+ www-version5/publicWww/css/iwp-common.css      | 22 ++++++++++++++++++++--
+ www-version5/publicWww/iwp-nav-minimal.php   
+
+ 
+
+

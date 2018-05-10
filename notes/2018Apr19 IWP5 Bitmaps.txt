@@ -1,0 +1,38 @@
+2018Apr19 IWP5 Bitmaps
+
+Taylor
+L> IWP master setup, changed color back to purple
+N> Campus visit Wednesday Afternoon.
+
+
+Agenda:
+
+= Any students interested in joining the project in 2018-2019 year (Jon)
+	Yes, we have two candidates.  Experienced programmer, both excellent physics students
+
+= Progress on the Bitmap Fix (Matt)
+
+~ Progress on the Windows Developer Getting Started Guide (Matt)
+	Took note of the different packages, will try it on a new computer to try it out. 
+	* Taylor> Provision a new EC2 windows cloud instance w/ remote access.
+
+= Master Site Demo (Taylor)
+
+= Research Symposium Planning (All)
+	Let's Meet the new students next wed 4/25  4PM or later after Symposium.
+	w/ a special guest!
+
+Academic Year Wrap up - May 26th
+
+	May 14th is the realistic end of project.
+
+	Realistically one more working session to walk thru the developer notes.
+
+
+Next time: Pin down final meeting date.
+
+
+
+
+
+

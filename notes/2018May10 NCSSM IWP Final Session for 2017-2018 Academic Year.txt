@@ -1,0 +1,123 @@
+2018May10 NCSSM IWP Final Session 
+
+Attendees:
+- Will, Albert, Niall, Taylor, Dr. Bennett
+
+Agenda
+- Windows dev environment setup (Matt) / Shutdown
+
+- Create plan for 2018-2019 Academic year (Dr. Bennett)
+
+
+
+	L inux 
+	A pache
+	M ysql
+	P hp
+
+	L inux
+	N ginx  (Webserver)
+	  No Database
+	P hp    (Application Server)
+
+
+# Step 1 Install Nginx
+
+## MacOS 
+
+https://medium.com/@ThomasTan/installing-nginx-in-mac-os-x-maverick-with-homebrew-d8867b7e8a5a
+
+brew install nginx
+
+## Linux: Ubuntu 16.04 
+
+https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04
+
+sudo apt-get update
+sudo apt-get install nginx
+
+
+/usr/share/nginx/html
+
+
+## Windows
+
+Cygwin
+https://www.cygwin.com/setup-x86_64.exe
+
+
+# Step 2 Github Connectivity
+
+
+next topic:  github.
+
+ssh-keygen
+
+cat ~/.ssh/id_rsa.pub
+
+
+git clone git@github.com:ntbrock/hello-iwp5-2018May10.git
+
+
+
+# Step 3 Is PHP
+
+## Linux
+apt install php
+
+## Mac
+brew install php71
+
+## Windows
+Avoid installing apache anything, pure php
+
+
+
+
+i> Summer Physics is happening now, feel good about the animation content in iwp5.  If there are any remaining glitches, we need to support them + fix them.
+
+
+
+## Goals for Fall 2018
+
+
+New course in the fall trimester.   That uses some parts of IWP, new animations we'll need to create or look through existing library contents.
+
+May need to port over and test out new animations for new course.
+
+
+Over the summer take some time to review libraries and figure out which animations can be reused or need to be authored. And make a list of items to fix.
+
+Dr. Bennett - Create a list of Animations to use for the fall course, and test + fix them together as a team.
+
+
+## Goals for Spring 2019 
+
+
+Create an animation designer in HTML 5 / web browser.
+
+
+
+## In Parallel
+
+WebAssign and Textbook problems, which ones are linked?
+
+The textbook publisher / webassign licensing is changing on June 1st.  
+
+We may need to re-write / re-author animation content to be compliant with new licensing.
+
+Need to assess the scope of the problem - How many animations from iwp are associated with textbook problems?
+
+
+## New Animations?!
+
+A lot of wave situations.  Reflection / Refraction.  How much wave interferrence?
+Beats 
+Doppler Effect
+Harmonics
+Showing wave additions
+
+
+
+
+

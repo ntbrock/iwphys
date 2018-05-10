@@ -1,0 +1,60 @@
+2018Apr09 IWP5.2 Planning Agenda
+
+1. Any students enrolled in Summer Physics?
+	5 students rising Seniors, who want to go onto AP Physics
+	The admissions process is ongoing to find rising Juniors, end of April ETA.  Open it up April 26th.
+	So far so good /w Webassign
+	Brent Kitchen, Alum - C/o 2008, now here as instructor.
+	Setting up webassign, and running communication w/ students.
+	For the first year, see how we've set it up before, see how it goes, learn the system.
+	Not yet any need for animation or content changes, just see how it goes.
+	Loop Brent into the planning exercise next fall, 2018.
+
+2. Create the next Wishlist of features for next Academic year / Programmer guides
+
+	Jason Cockrill wrote the IWP user guide. Worth re-reviewing, like a guide for the users.
+	* Jon, send the email. 
+	Steps the user thru the designer on how to create a simple problem step by step.
+	Has screenshots, etc.
+
+	* Jon, Identify a student (or two?) who could carry the torch.
+
+	i> Taylor will be on Campus April 27.
+	Matt could begin the software getting started guide, envrionment.
+
+
+	i> Long term for next year - Webassign = When a teacher wants to use webassign, and want to use problems from a textbook, the publisher has tot give a license to webassign to use te problems from that book. Publisher has revoked the license effective June 1.  Snuck in by 1 day.  What are we going to do next year?
+
+	There are many other non-animated problems, will need to rewrite some of these problems.
+	is this a good opportunity for new animations or existing animations to associate them?
+	Will need a solution.
+
+	2nd student, curating the new content.  Would the content be re-usable for other institutions?  If we were to develop this new course, what license would we release it under? Desire is to keep the MIT license in place.
+
+2.2 > Awareness Campaign
+	
+	Meeting every summer, Summer 2019.
+	Taylor's notion of 'small touches'.  First piece: the Summer Physics program and how we're using IWP5 to make that successful this summer.  There's a fall meeting of NC section of educators, in October, a place to start forming the message with existing content.  Also a Spring meeting.
+
+
+3. Developer getting started guide would be all about getting the local Windows development environment setup. (Could write Windows guide).
+
+
+4. Progress on the Bitmap Fix (Matt)
+
+
+
+5. Master Site Re-setup (Taylor)
+
+
+
+Matt Mimms>
+
+
+Dr. Bennett> 
+Talk to students about project
+
+
+
+
+
