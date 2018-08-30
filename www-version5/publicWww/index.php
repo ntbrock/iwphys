@@ -30,7 +30,7 @@ include_once('iwp-config.php');
             <div class="col-lg-12">
         <header class="jumbotron hero-spacer">
 
-		<p> In Version 5.0, Animations play natively using all major web browsers and tablets using HTML <i class="fa fa-html5"></i></p>
+		<p> In Version 5.2, Animations play natively using all major web browsers and tablets using HTML <i class="fa fa-html5"></i></p>
 		<p>When you find something that can be improved, please <a href="https://github.com/ntbrock/iwphys/issues">open a new github issue.</a></p>
 </header>
             </div>
