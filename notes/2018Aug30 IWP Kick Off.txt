@@ -1,0 +1,80 @@
+2018Aug30 IWP Kick Off
+
+Agenda
+
+- Goals and Objectives for the Year
+	May meeting, Matt Mimms was working w/ us last year.  Biggest accomplishment was converting a large number of animations from IWP4 which requires java to IWP5 whcih is html5.
+
+	Coursework migrated, as well as summer physics webassign to take AP physics, based IWP animations.
+
+	Theme 1 -- Animation Review + Fixing 
+
+	Teaching new course, uses other anuimations which do not yet exist in iwp5 ( do exist in older version ) or tried a few and exist, but have bugs in iwp5. 
+
+		i> We are going to run the summer physics course next summer.  Want to be sure they work when we need them, Mar, Apr, May. 
+
+	Theme 2 -- Moving the design to HTML5 to match the animator.
+
+	Today, we have to still use the iwp4 desktop edition. 
+
+	Theme 3 -- Webassign announcement from april 2018, no longer supporting the textbook in use.As of now, still online. may not be a concern.
+
+	Theme 4 -- Outreach, Getting more people aware of this project. Conferences? 
+	Would agree that the designer is a crtiical component, want to get 50% thru dev. 
+	Target meeting of NC APT. March / Apr.
+		Short demos, end user HOWTO's document, simple thoughout examples.
+
+Albert> Increase familiarity, and code structure.  Happy to work on anything!  Animator interesting, and helping w/ summer courses and new classes.
+
+Niall> Want to see how code is creating animations. How they're served to a web page. Able to work on anything!
+
+Will> Work on anything!
+
+
+- Development Environments
+	MacOS, Linux Ubuntu.
+	Is windows in scope for devs!?  NO
+
+	Stable
+	Master
+
+https://www.iwphys.org/master/
+
+	Taylor will do deployments to master.  
+	ssh'ing out to the production server, and doing a pull.
+
+? Any setup for getting local envs ready
+
+
+- Trello Access
+	Make some Cards
+
+	Control + Command + Shift + 4     "CLAW"
+
+	Draw a box, copy the screenshot in clipboard.
+
+- Schedule Recurring Development Team Meeting
+
+	Are Thursdays @ 4:30 Good?   Not great for Will
+
+	Fridays open for everybody.  start at 4:30PM.
+
+	Beware of some extendeds.
+
+	Not everybody for every session.
+
+
+	Propose September 7 4:30PM Code Walkthru for devs.
+
+
+
+- End of Session:
+
+	+ Code Walkthrough - 
+
+	+ List of Animations to have fixed have 1 or two to look at in real time today.
+
+	+ Nominate someone to do master deployments on iwphys.org!
+
+
+

@@ -1,0 +1,93 @@
+2018Sep07 IWP5 Code Walkthrough
+
+Next session: Write unit tests and do some pair programming.
+
+## URLs
+
+https://github.com/ntbrock/iwphys
+
+https://www.iwphys.org/master/
+
+## Root Folders
+
+animations
+java-version4
+notes
+play-version6
+sbt-version4
+test-version5
+www-version4
+www-version5
+
+## Animation XML
+
+collision-inelastic-02a.iwp
+
+"Principle of Least Surprise"
+
+https://www.iwphys.org/master/animate.php/winters-ncssm-2009/collision-inelastic-02a.iwp
+
+
+xtoj.php -> Dynamically translates xml to json to bridge version 4 -> version 5.
+
+Example url:
+https://www.iwphys.org/master/xtoj.php/winters-ncssm-2009/collision-inelastic-02a.iwp
+
+
+https://github.com/ntbrock/iwphys/blob/master/www-version5/publicWww/xtoj.php
+
+https://github.com/ntbrock/iwphys/search?q=readIwpFileJson&unscoped_q=readIwpFileJson
+
+
+
+## Java Version 4
+
+mvn (maven)
+sbt (simple build tool)
+
+.java -> javac -> .class -> jar -> .jar  (.zip)
+
+
+sbt-version/
+
+java -jar iwp4-dist-jar_2.12.jar
+
+
+## Sample Animation to Get working
+
+https://trello.com/c/TJwdVYYw/156-pulse-compare-02-animation-does-not-start
+
+winters-ncssm-2009/pulse-compare-02.iwp
+
+
+
+## PHP / HTML5 Version 5
+
+Practical Coding!!
+
+iwp5.js
+
+Propose new functionality:  iwp5-designer.js
+
+
+## MEquations
+
+- Unit Tests 
+
+? Where is the step() function defined?
+
+iwp5.js
+
+// 2018Mar01 Found that monkeypatching mathjs was non-reliable so now including in the vars scope.
+// Converts from degrees to radians. this makes the 'toRadians(..)' function available in the Calculator space.
+// Likely the are are other physical constants that we'll need to load as well.
+varsConstants = {
+ G : -9.8,
+ step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } },
+ toRadians : function(degrees) { return degrees * Math.PI / 180; },
+ toDegrees : function(radians) { return radians * 180 / Math.PI; },
+ sign: function(input) { if ( input < 0 ) { return -1 } else { return 1 } }
+ }
+
+
+
