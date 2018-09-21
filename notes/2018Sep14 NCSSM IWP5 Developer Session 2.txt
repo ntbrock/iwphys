@@ -1,0 +1,48 @@
+2018Sep14 NCSSM IWP5 Developer Session 2
+
+Agenda
+
+- Run the IWP 4 Designer and Animator
+
+- IWP 5 Unit Tests for Math.js on Localhosts!
+
+
+From Nial to Everyone: (04:29 PM)
+ I am here, but I can't talk I'm good to use mine if you want so much better than having to type in password every single time :) 
+From Nial to Everyone: (04:35 PM)
+ Is there a specific version we need? I have 1.8.0_181 
+From Me to Everyone: (04:37 PM)
+ Anything 1.8.x 
+From Nial to Everyone: (04:37 PM)
+ cool! got the animator up and running with a project loaded 
+From Me to Everyone: (04:37 PM)
+ very cool brew install nginx https://medium.com/@ThomasTan/installing-nginx-in-mac-os-x-maverick-with-homebrew-d8867b7e8a5a 
+From Me to Everyone: (04:45 PM)
+ /usr/local/etc/nginx/nginx.conf 
+From Nial to Everyone: (04:47 PM)
+ woooooo! terminal vim is the best mine doesn't seem to have anything in it and I'm not sure if nginx is working, but it is installed as far as I can tell 
+From Me to Everyone: (04:49 PM)
+ https://gist.github.com/ntbrock/f0c6dd536df3c56694bc24457c365b01 
+From Nial to Everyone: (04:49 PM)
+ mine doesn't seem to have anything in it and I'm not sure if nginx is working, but it is installed as far as I can tell 
+From Me to Everyone: (04:54 PM)
+ /usr/local/html/ 
+From Nial to Everyone: (04:58 PM)
+ I can't get nginx to work it says it is active and running, but I can't connect in my browser ok sounds good 
+From Me to Everyone: (04:59 PM)
+ <?= phpinfo(); ?> 
+From Me to Everyone: (05:03 PM)
+ /usr/local/var/log/nginx 
+From Nial to Everyone: (05:04 PM)
+ okay, I was able to get it working. my conf file was in a different place and it was by default on port 80 
+From Me to Everyone: (05:05 PM)
+ https://stackoverflow.com/questions/40059745/nginx-connect-to-unix-var-run-php7-0-fpm-sock-failed-2-no-such-file-or-dir brew services start php71 
+From Me to Everyone: (05:11 PM)
+ /usr/local/var/run/php7-fpm.sock 
+From Me to Everyone: (05:16 PM)
+ /usr/local/etc/php/7.1/ listen = /usr/local/var/run/php7-fpm.sock /usr/local/var/run 
+
+https://stackoverflow.com/questions/23443398/nginx-error-connect-to-php5-fpm-sock-failed-13-permission-denied 
+From Me to Everyone: (05:21 PM)
+ listen.owner = www-data listen.group = www-data listen.mode = 0660 
+
