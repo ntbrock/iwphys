@@ -1,0 +1,198 @@
+2018Sep21 IWP5 
+
+
+Trimester 1 Exams - Oct 30, 2018
+
+Trimester 2 Begins - Nov 7, 2018
+
+Trimester 2 Exams - Feb 6, 2019
+
+Trimester 3 Begins - Feb 26, 2019
+
+Trimester 3 Ends - May 21, 2019
+
+Last Day of School - May 26, 2019
+
+i> Taylor on Campus October 3 for Bowman-Brockman project recruiting
+
+
+
+Last Week:
+
+Albert> Set up the environment on Mac. All good.
+
+Niall> Everything should be working!
+
+
+
+i> Had to add the PATH_INFO and SCRIPT_FILENAME lines to fix the Path_info issue.
+
+air-brockman-2013:nginx brockman$ diff fastcgi_params fastcgi_params.default
+1c1
+< # 2018Jan18 Tbrockman
+---
+>
+7d6
+< fastcgi_param  SCRIPT_FILENAME    $request_filename;
+9d7
+< fastcgi_param  PATH_INFO          $fastcgi_path_info;
+26,27d23
+< fastcgi_param  HTTPS              $https if_not_empty;
+<
+air-brockman-2013:nginx brockman$ fg
+-bash: fg: current: no such job
+air-brockman-2013:nginx brockman$ [pwd
+-bash: [pwd: command not found
+air-brockman-2013:nginx brockman$ pwd
+/usr/local/etc/nginx
+
+
+
+
+
+Agenda
+- At this point, developers should be up to speed and ready to start contributing fixes to IWP5 Codebase
+
+- Review the List of Animations to fix
+
+- Initial Requirements and Design for : GraphBox and Designer
+
+
+GraphBox
+
+ <object class="edu.ncssm.iwp.objects.grapher.DObject_Grapher">
+                        <name>Pulse_1</name>
+                        <equation>5*(0.5/3.14)/((x-2*y+5)^2+0.5^2)</equation>
+                        <boxX>0.0</boxX>
+                        <boxY>5.0</boxY>
+                        <boxW>20.0</boxW>
+                        <boxH>10.0</boxH>
+                        <res>200</res>
+                        <stroke>2</stroke>
+                        <showBounding>true</showBounding>
+                        <transformCoords>true</transformCoords>
+                        <color>
+                                <red>0</red>
+                                <green>0</green>
+                                <blue>204</blue>
+                        </color>
+                </object>
+
+
+res - What would this do?
+
+
+ // Drawable
+        public void iwpDraw(IWPDrawer drawer, DProblemState state)
+                throws UnknownVariableException, UnknownTickException, InvalidEquationException
+        {
+
+                MathExpression evaluator = new MathExpression(equation);
+
+                double stepsize = BoxW / Res;
+
+                double bx=0,by=0;
+
+                if(transformCoords) {
+                        bx = BoxX;
+                        by = BoxY;
+                }
+                for(double x=(BoxX - BoxW/2)-bx; x<BoxX+BoxW/2-bx; x+=stepsize) {
+                        double y1 = evaluator.value(x,state.vars().getCurrentTime());
+                        double y2 = evaluator.value(x+stepsize,state.vars().getCurrentTime());
+                        drawer.drawLine(x+bx, y1+by, x+stepsize+bx, y2+by , Stroke);
+                }
+
+                if(showBounding) {
+                        drawer.drawRect(BoxX-BoxW/2, BoxY+BoxH/2, BoxW, BoxH);
+                }
+
+
+                //Here's the Current Time!
+                //state.vars().getCurrentTime();
+
+        }
+
+
+
+- Unit Test:  Plotting a generic equation on to a canvas.  (d3)
+
+- Unit Test:  Change stroke widths
+
+- Unit Test:  Change Resolutions
+
+- Unit Test:  Replicate all the logic from a staticially defined json object:
+
+- Design: is xtoj.php creating proper json?
+
+- Task: Why is Albert's opendir() animations exception?
+
+
+
+
+
+
+
+## Testing
+
+Goal: Start sharing the iwp-packaged Animations beyond NCSSM.
+
+For each animation:
+
+- Does the animation load and start playing?
+
+- Does the description make sense?
+
+- Do the Graphing Features Work?
+
+- Does it change the animation when you change the input?
+
+- Do the outputs make sense?
+
+- Do the results match IWP Version 4, frame by frame?
+
+- Do any of these animations need the graph box?
+
+- What browers play the animation: Chrome, Firefox, Safai, IE 11+, Bonus: Tablet + Smartphone.
+
+
+* Taylor> Create 18 tickets for each of these animations.
+
+Next friday = Extended.
+
+
+IWP Package / Electrostatics  8x  - Albert
+
+IWP Package / Magnetism 1x - Albert
+
+
+IWP Package / Gravitation 2x - Niall
+
+IWP Package / Optics, Physical 7x - Niall
+
+
+* Taylor> Schedule October 5th.
+
+
+4:30PM on Wed Oct 3rd  Bowman - Brockman
+
+
+
+
+
+
+
+
+Goal: Condense the animations into topics that are logical, organized, and present well to new audiences modernize it for 2019.
+
+
+
+
+
+
+
+
+
+
+
+
