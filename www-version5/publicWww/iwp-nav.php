@@ -20,9 +20,6 @@
                     <li>
                         <a href="http://github.com/ntbrock/iwphys"><i class="fa fa-git"></i> Open Source on Github</a>
                     </li>
-		    <li>
-		      <a href="https://github.com/ntbrock/iwphys/issues"><i class="fa fa-bug"></i> Github Issues</a>
-		    </li>
                     <li>
 		       <a href="http://www.iwphys.org/">Web Browser Animations for Physics Students and Educators</a>
                     </li>

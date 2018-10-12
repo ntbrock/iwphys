@@ -972,8 +972,12 @@ function addSolid(solid) {
 function addObject(object) {
 
 
-//console.log("iwp5.js:593> addOBject: ", object)
-
+  //2018Oct12 - Detect the WaveBox
+  if ( object["@attributes"] && object["@attributes"]["class"] == "edu.ncssm.iwp.objects.grapher.DObject_Grapher" ) { 
+    alert("This Animation Contains a GraphBox, Not yet implented in IWP5");
+    return;
+  }
+  
   var compiledObject = {
     objectType: 'object',
     name: object.name,
