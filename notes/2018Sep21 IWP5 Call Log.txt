@@ -145,7 +145,7 @@ For each animation:
 
 - Do the Graphing Features Work?
 
-- Does it change the animation when you change the input?
+- Does changing the input values change the animation?
 
 - Do the outputs make sense?
 
