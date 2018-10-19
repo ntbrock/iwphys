@@ -147,7 +147,7 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 				 graphOptions.initiallyOn.xAccel == "false" && 
 				 graphOptions.initiallyOn.yAccel == "false" ) {
 
-				console.log("iwp-graph:149> Because none of the graphoption are initially, on, we're hiding the object");
+				//console.log("iwp-graph:149> Because none of the graphoption are initially, on, we're hiding the object");
 				visible = false
 			}
 		}
