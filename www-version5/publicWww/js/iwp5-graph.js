@@ -126,11 +126,32 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 
 	// Step 2 - Populate Memory for each object that's graphable, plus all of it's visibility
 	$.each(solids,function(index, solid) {
-		//console.log("iwp-graph:69> graphResetZero, solid: ", solid)
+		
+
+		// console.log("iwp-graph:69> graphResetZero, solid: ", solid)
+		
+
 		var graphOptions = solid.shape.graphOptions
-		//console.log("iwp-graph:69> graphResetZero, solid graphOptions: ", graphOptions)
+		// console.log("iwp-graph:69> graphResetZero, solid graphOptions: ", graphOptions)
+
 
 		var visible = graphOptions.graphVisible == "true"
+
+		// 2018Oct19 Ported a piece of IWP4 logic
+		if ( visible ) { 
+
+			if ( graphOptions.initiallyOn.xPos == "false" && 
+				 graphOptions.initiallyOn.yPos == "false" && 
+				 graphOptions.initiallyOn.xVel == "false" && 
+				 graphOptions.initiallyOn.yVel == "false" && 
+				 graphOptions.initiallyOn.xAccel == "false" && 
+				 graphOptions.initiallyOn.yAccel == "false" ) {
+
+				console.log("iwp-graph:149> Because none of the graphoption are initially, on, we're hiding the object");
+				visible = false
+			}
+		}
+
 
 		if ( visible ) {
 
