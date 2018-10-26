@@ -80,6 +80,9 @@ table {
 	padding-right: 55px;
 }
 
+/* #gt {
+	color: red;
+} */
 
 .iwp-tab-container {
 	overflow: visible;
@@ -120,12 +123,12 @@ th, td {
 	vertical-align: center ;
 }
 
-td.iwp-input-label, td.iwp-output-label { 
+td.iwp-input-label, td.iwp-output-label {
 	text-align:right;
 }
 
 
-td.iwp-input-value, td.iwp-output-value { 
+td.iwp-input-value, td.iwp-output-value {
 	text-align:left;
 }
 
@@ -188,4 +191,3 @@ td.iwp-input-value, td.iwp-output-value {
 .iwp-animation-canvas {
 	border: solid #ccc 1px;
 }
-

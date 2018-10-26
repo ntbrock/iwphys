@@ -62,13 +62,13 @@ function graphInit() {
 
 	// Step 1 Build Grid And Axes
 	// console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
-	if ( xGrid != null ) { 
+	if ( xGrid != null ) {
 		xGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(0, 100)"));
 	}
 	if ( yGrid != null ) {
 		yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100, 0)"));
 	}
-	if ( xAxis != null ) { 
+	if ( xAxis != null ) {
 		xAxis(svg.append("g").classed("iwp-graph-axis",true));
 		svg.append("text").attr("x", 60).attr("y", 15).classed("iwp-graph-axis-label", "true").text("Time (s)");
 	}
@@ -124,12 +124,26 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 	// console.log("iwp-graph:102> graphResetZero, solids: ", solids)
 	svg.select(".iwp-graph-object").remove();
 
+	// 2018Oct25 Gray-out graph button if nothing to be graphed
+	graphAny = false;
+	for (var i = 0; i < solids.length; i++) {
+		graphVisible = solids[i].shape.graphOptions.graphVisible;
+		if (graphVisible == "true") {
+			graphAny = true;
+		}
+	}
+	// console.log("iwp-graph:138>", graphAny);
+	if (!graphAny) {
+		 document.getElementById("gt").style.color = "#bfbfbf";
+		 document.getElementById("gt").onclick = null;
+	}
+
 	// Step 2 - Populate Memory for each object that's graphable, plus all of it's visibility
 	$.each(solids,function(index, solid) {
-		
+
 
 		// console.log("iwp-graph:69> graphResetZero, solid: ", solid)
-		
+
 
 		var graphOptions = solid.shape.graphOptions
 		// console.log("iwp-graph:69> graphResetZero, solid graphOptions: ", graphOptions)
@@ -138,13 +152,13 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 		var visible = graphOptions.graphVisible == "true"
 
 		// 2018Oct19 Ported a piece of IWP4 logic
-		if ( visible ) { 
+		if ( visible ) {
 
-			if ( graphOptions.initiallyOn.xPos == "false" && 
-				 graphOptions.initiallyOn.yPos == "false" && 
-				 graphOptions.initiallyOn.xVel == "false" && 
-				 graphOptions.initiallyOn.yVel == "false" && 
-				 graphOptions.initiallyOn.xAccel == "false" && 
+			if ( graphOptions.initiallyOn.xPos == "false" &&
+				 graphOptions.initiallyOn.yPos == "false" &&
+				 graphOptions.initiallyOn.xVel == "false" &&
+				 graphOptions.initiallyOn.yVel == "false" &&
+				 graphOptions.initiallyOn.xAccel == "false" &&
 				 graphOptions.initiallyOn.yAccel == "false" ) {
 
 				//console.log("iwp-graph:149> Because none of the graphoption are initially, on, we're hiding the object");
