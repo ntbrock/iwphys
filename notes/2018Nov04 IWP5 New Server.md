@@ -36,9 +36,9 @@
 
 ## Information Sharing on the Modern Web
 
-Sites for easily editing, saving, and distributing hosted web content have proliferated. JS Fiddle, Geojson.io, Github Gists, D3 Blocks, and Scala.js are favorite examplels.
+Sites for easily editing, saving, and distributing hosted web content have proliferated. JS Fiddle, Geojson.io, Github Gists, D3 Blocks, and Scala.js are Taylor's favorite examples.
 
-Examples:
+Demonstrations:
 
 https://beta.observablehq.com/@mbostock/d3-sankey-diagram
 
@@ -60,7 +60,7 @@ https://scalafiddle.io/sf/1xV3xo8/0
 
 - IWP5 could provide our packaged animations as base Examples, so that any author could clone any one of our animations for their own use. We wouldn't want to auto pubish these in our public directory. Power users could request their content for review (pull request) to be added to the public site.  By keeping new user animation clones private, we could help insulate our .org www presence from improper user submitted content.
 
-- Would this content editing be example by example or entire repo?   Example by example.
+- Would this content cloning mechanism be bulk, or example by example?  Prefer Example by example, so that only creating 1 animation doesn't copy 100's of others.
 
 - So far in 2018, we have defined (in trello) an effective process for testing content. Albert and Niall have been moving quickly through the packaged content, originally authored by Loren Winters. We are quantifying which animations test good, which need content / clarification updates, and which have display/rendering artifacts in the new iwp5.js animator and will require code fixes.  Example of recent fixes were tightening up the graph controls to better match IWP4 visibility and user multi selection options.
 
@@ -197,4 +197,4 @@ https://scalafiddle.io/sf/1xV3xo8/0
 
 ## Future Ideas
 
-	- Begin to enable new animation content types - Arbitrary images?  Arbitrary js animation object framework?
+- Begin to enable new animation content types - Arbitrary images?  Arbitrary js animation object framework?
