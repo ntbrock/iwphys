@@ -13,6 +13,25 @@
 
 - Professional teams around me have had success with Play Framework, a modern model view controller package that runs in JVM, great for destkop development, plus easy server side / cloud deployment.  I personally have a lot of experience with play scala and java, and my development speed would be great.  Knowledge transfer of play framework to new developers is straightfoard, lots of public + personal resources available.
 
+## User Experience Epic
+
+- A new author hears about IWP at a conference, on a mailing list, or web HOWTO video
+
+- Author goes to our website, tries some sample Animations in our directory
+
+- Author clicks 'clone' on any animation, creates a private url and an editing experience.
+
+- Author understands how to return and update their content in the future, understanding that Cookies may be used to identify and crediential them.
+
+- Authors are authoriezd to only edit their Animations, BUT are empowered to clone any other Animations hosted by IWP, published by IWP or created by other Authors.
+
+- Enable a web based Designer experience to edit all existing equations, colors, paths, etc, plus create new objects, solids, inputs, outputs, and more.
+
+- Author can rapidly test, Animate, and perfect the animation to customize it for their cirriculum.
+
+- Author has a permanent deep URL to post into other web applications and course material.
+
+- Each year with student developers, envrionment setup is a 1 week task.
 
 
 ## Information Sharing on the Modern Web
@@ -62,7 +81,7 @@ https://scalafiddle.io/sf/1xV3xo8/0
 
 - Enable user editing / submission of the json directly or restrict access to posting content to only what's created by the designer UI? "View Source".
 
-- Should we pick a tool like couchbase that woudl do it's own authentication / silo'ing directly communicating XHR to the browser?  This would save us from having to write a plumbing layer at all.  Or go 'classic auth' with a single application account?
+- Should we pick a tool like couchbase that would do it's own authentication / silo'ing directly communicating XHR to the browser?  This would save us from having to write a plumbing layer at all.  Or go 'classic auth' with a single application account?
 
 - Would be great to be able to auto-generate the screenshots, even initial SVG animation images, to show automated previews of any user animation in directory views for quickly finding the time=0 image of the animation you want to play.
 
