@@ -37,9 +37,11 @@ https://scalafiddle.io/sf/1xV3xo8/0
 
 ### Considerations
 
-- We have to make a decision on the centralization -vs- distribution of the Animation content.  Should we host an animation repository on behalf of our users, letting anyone or registered users, submit content at will?  Or do we require authors to provide their own web hosting, dropox, github, etc and we just refer to their 3rd party content?  Could we make this a dynamic choice?
+- We have to make a decision on the centralization -vs- distribution of the Animation content.  Should we host an animation repository on behalf of our users? Should we enable anyone anonymous, or only registered users, to submit content at will?  Or do we require or enable authors to provide their own web hosting, s3, dropox, github, etc and we just refer to their 3rd party content?  Could we make this a dynamic choice?
 
-- IWP5 could provide our packaged animations as base EXAMPLES so that any user could clone any one of our animations for their own used, likely not published in our public directory, or could be requested to be added to the public site.  By keeping new user animation clones private, we could help insulate our .org www presence from improper user submitted content.
+- IWP5 could provide our packaged animations as base Examples, so that any author could clone any one of our animations for their own use. We wouldn't want to auto pubish these in our public directory. Power users could request their content for review (pull request) to be added to the public site.  By keeping new user animation clones private, we could help insulate our .org www presence from improper user submitted content.
+
+- Would this content editing be example by example or entire repo?   Example by example.
 
 - So far in 2018, we have defined (in trello) an effective process for testing content. Albert and Niall have been moving quickly through the packaged content, originally authored by Loren Winters. We are quantifying which animations test good, which need content / clarification updates, and which have display/rendering artifacts in the new iwp5.js animator and will require code fixes.  Example of recent fixes were tightening up the graph controls to better match IWP4 visibility and user multi selection options.
 
