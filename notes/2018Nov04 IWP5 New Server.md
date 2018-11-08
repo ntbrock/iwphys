@@ -15,23 +15,23 @@
 
 ## User Experience Epic
 
-- A new author hears about IWP at a conference, on a mailing list, or web HOWTO video
+1. A new author hears about IWP at a conference, on a mailing list, or web HOWTO video
 
-- Author goes to our website, tries some sample Animations in our directory
+1. Author goes to our website, tries some sample Animations in our directory
 
-- Author clicks 'clone' on any animation, creates a private url and an editing experience.
+1. Author clicks 'clone' on any animation, creates a private url and an editing experience.
 
-- Author understands how to return and update their content in the future, understanding that Cookies may be used to identify and crediential them.
+1. Author understands how to return and update their content in the future, understanding that Cookies may be used to identify and crediential them.
 
-- Authors are authoriezd to only edit their Animations, BUT are empowered to clone any other Animations hosted by IWP, published by IWP or created by other Authors.
+1. Authors are authoriezd to only edit their Animations, BUT are empowered to clone any other Animations hosted by IWP, published by IWP or created by other Authors.
 
-- Enable a web based Designer experience to edit all existing equations, colors, paths, etc, plus create new objects, solids, inputs, outputs, and more.
+1. Enable a web based Designer experience to edit all existing equations, colors, paths, etc, plus create new objects, solids, inputs, outputs, and more.
 
-- Author can rapidly test, Animate, and perfect the animation to customize it for their cirriculum.
+1. Author can rapidly test, Animate, and perfect the animation to customize it for their cirriculum.
 
-- Author has a permanent deep URL to post into other web applications and course material.
+1. Author has a permanent deep URL to post into other web applications and course material.
 
-- Each year with student developers, envrionment setup is a 1 week task.
+1. Each year with student developers, envrionment setup is a 1 week task.
 
 
 ## Information Sharing on the Modern Web
