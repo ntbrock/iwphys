@@ -1,6 +1,6 @@
 # IWP5 New Server Concept 
 
-## 2018Nov08 Brockman
+2018Nov08 Taylor Brockman
 
 "IWP5 New Server Concept" describes the motivations, considerations for, information modeling, and scope of tasks that would be involved with the Interactive Web Physics team replacing the Version 3 PHP hosting infrastructure with a modern alternative model view controller implementation.
 
@@ -17,23 +17,25 @@
 
 ## Information Sharing on the Modern Web
 
-- Sites for easily editing, saving, and distributing hosted web content have proliferated. JS Fiddle, Geojson.io, Github Gists, D3 Blocks, and Scala.js are favorite examplels.
+Sites for easily editing, saving, and distributing hosted web content have proliferated. JS Fiddle, Geojson.io, Github Gists, D3 Blocks, and Scala.js are favorite examplels.
 
 Examples:
-	https://beta.observablehq.com/@mbostock/d3-sankey-diagram
-	
-	https://scalafiddle.io/sf/1xV3xo8/0
-	
-Key features include:
 
-	- Cloning or forking existing content from other users
+https://beta.observablehq.com/@mbostock/d3-sankey-diagram
 
-	- Permalinks (aka canonical urls) become semi-permanent on the web and easily dirstirbuted or plugged into other applciations (WebAssign)
+https://scalafiddle.io/sf/1xV3xo8/0
 
-	- In browser compile checking
+### Key features include:
 
-	- Instant animation or content preview. Make a change, hit run, test it, repeat.
+- Cloning or forking existing content from other users
 
+- Permalinks (aka canonical urls) become semi-permanent on the web and easily dirstirbuted or plugged into other applciations (WebAssign)
+
+- In browser compile checking
+
+- Instant animation or content preview. Make a change, hit run, test it, repeat.
+
+### Considerations
 
 - We have to make a decision on the centralization -vs- distribution of the Animation content.  Should we host an animation repository on behalf of our users, letting anyone or registered users, submit content at will?  Or do we require authors to provide their own web hosting, dropox, github, etc and we just refer to their 3rd party content?  Could we make this a dynamic choice?
 
