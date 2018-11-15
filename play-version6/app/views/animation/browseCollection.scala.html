@@ -5,5 +5,15 @@
 
   <h3>@animations.size Animations</h3>
 
+
+  @animations.map{ animation =>
+
+    <li>
+      <a href="@controllers.routes.AnimationController.getAnimation(collection,animation.filename.get)">@{animation.filename.get} HTML</a> &middot;
+      <a href="@controllers.routes.AnimationController.getAnimationJson(collection,animation.filename.get)">JSON</a>
+    </li>
+
+
+  }
 }
 
