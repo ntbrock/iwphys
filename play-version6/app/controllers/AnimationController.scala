@@ -1,0 +1,69 @@
+package controllers
+
+import javax.inject._
+import models.IwpAnimation
+import play.api.mvc._
+import services.IwpMongoClient
+import org.mongodb.scala.model.Filters._
+import play.api.Logger
+import play.api.libs.json.Json
+
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+
+/**
+ * This controller creates an `Action` to handle HTTP requests to the
+ * application's home page.
+ */
+@Singleton
+class AnimationController @Inject()(cc: ControllerComponents, mongo: IwpMongoClient) extends AbstractController(cc) {
+
+
+  def browseCollection(collection: String) = Action.async { implicit request: Request[AnyContent] =>
+
+    mongo.animationCollection(collection).find().toFuture() map { animations =>
+      Ok(views.html.animation.browseCollection(collection, animations))
+    }
+
+  }
+
+
+  def getAnimation(collection: String, filename: String) = Action.async { implicit request: Request[AnyContent] =>
+
+    mongo.animationCollection(collection).find(equal("filename", filename)).toFuture() map { animations =>
+
+      animations.headOption match {
+        case None => NotFound(Json.obj("error"->true, "message"-> "Animation not found"))
+        case Some(animation) =>
+
+          Ok(views.html.animation.animation(collection, filename, animation))
+      }
+    }
+
+  }
+
+  def postAnimation(collection: String, filename: String) = Action.async { implicit request: Request[AnyContent] =>
+
+    request.body.asJson match {
+      case None => Future.successful(BadRequest(Json.obj("error"->true, "message"-> "POST body was not json")))
+      case Some(jsv) =>
+
+        val iwpAnimation = Json.fromJson[IwpAnimation](jsv)
+
+        Logger.info(s"AnimationController:49> Received: $iwpAnimation")
+
+        // Todo write to DB
+        mongo.animationCollection(collection).find(equal("filename", filename)).toFuture() map { animations =>
+
+          Ok(jsv)
+        }
+
+
+    }
+
+
+  }
+
+
+
+}

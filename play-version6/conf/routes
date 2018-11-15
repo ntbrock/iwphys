@@ -11,7 +11,9 @@ GET     /DProblem/:path             controllers.DProblemController.view(path: St
 
 
 # First Rudimentary Data Browser
-GET     /browse/:collection         controllers.BrowseController.browse(collection: String)
+GET     /animations/:collection         controllers.AnimationController.browseCollection(collection: String)
+GET     /animations/:collection/:filename     controllers.AnimationController.getAnimation(collection: String, filename:String)
+POST    /animations/:collection/:filename     controllers.AnimationController.postAnimation(collection: String, filename:String)
 
 
 # Map static resources from the /public folder to the /assets URL path
