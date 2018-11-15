@@ -1,0 +1,40 @@
+2018Oct12 IWP5 Development
+
+Taylor
+L> Address my 2 trello isses!  Removing verbiage from index.php + navigation.  Pulose-compare - why that wans't working, added a error message, because those contain a graph box.
+N> Need more work!  (Avaialble)
+
+Niall
+L> Focued on the figuring out why coloumbs-law-01 units were [object object], found code location in iwp5.js. 
+N> Get the object object wokring, move on to the 2nd issue: Graying out graph tab if graphable tag isn't there.
+
+Albert
+L> Blocked - nginx envrionment issue, possible MacOS update, re-following notes from a couple weeks ago. 
+N> Get unblocked nginx, then get started on fixing the bugs in trello tickets.
+
+Dr. Bennett
+L> Spent time going thru IWP packaged, the other folders in there. Tried random animations to see if they worked.  The ones that are high est priority:  Oscillations and geometric objects.  Recommend choosing  folder and doing another test review for those folders, with existing testing list. 
+N> Are there animations already noted need something fix, ready for QA review.
+
+= After - Create the Trello tickets for Oscillations and Geometric iwp packaged testing.
+
+= After - Pair on the [object object] / Resttarting nginx.
+
+~ After - Pair on Mac nginx environment. (Albert)
+
+	Open /usr/local/var/run/nginx.pid
+
+After - Taylor's tasks next week??
+
+
+## MacOS 
+
+tail -f /usr/local/var/log/nginx/error.log
+
+sudo nginx -s stop
+
+/usr/local/etc/nginx/nginx.conf
+
+
+
+

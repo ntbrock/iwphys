@@ -1,0 +1,190 @@
+2018Nov09 IWP5 Call Log
+
+Jon
+L> Solo task, tested a bunch of the greyed out graph feature on various animations. Worked fine for every one tested, When there is a solid, it's graphable. When no solid graphable, it greys out.   Find some new animations that broke, will file as trello tickets.
+N> Could use some more tasks. 
+
+Albert
+L> Working on spring animation, still digging through all error codes. Started drawing the dependecy graph, there are so many different variabels, still working thru it.
+N> Keep on working on dependency graph for the spring animation.
+
+Niall
+2L> Worked on getting the manual selection of different plots working, works now. moved to ready for demo column in trello w/ an animation showing that's it's working.
+N> Available!
+
+Taylor
+L> Research + brainstorming about the new Designer experience, write up and tasking. Checked in.
+N> Decide on if we're going to begin?  Start on Milestone 0 or 1? Available to code.
+
+
+
+After - Demo the manual selection. (Niall).  Deploy to Master site for Dr. Bennett to verify fix.
+
+	Peek - gifs or mp4 screen captures.
+
+After - Dependency graph for bulk quality check. (Albert + Taylor)
+	It is:  Listed all teh different variables to draw arrows how each.  When we display the animations, we ahve an equation for each. The inputs and how they're related to the other variables.  Flowchart!  Detect circular dependncies.
+
+	Looking thru error logs, since everything happens during initialization, some of the values are finite, and it trickles down to the other ones.   When we made some values unhidden, when we start they are really big numbers.  The initial number is not correct.
+
+	All happen during the first pass. 
+
+	No obvious circular dependencies,
+	The issue is related to the variable, d2, qr. Starting to narrow it down to once section of the.
+
+	Would it be helpful to print out the table of variables from iwpv4?
+
+	
+	* Albert> create an aniamtion that's as small as possible that exhibits the issue.
+
+	Looking thru iwp5.js file, really long, getting a grasp of it. --> Milestone 0.
+
+
+After - Talk thru the proposal, some obvious tasks, balance against backlog (Taylor)
+
+
+Niall - Excited about the spring motion - why are the two objects not in sync?  But they are in java land.
+
+	1) Figure out the bug
+
+	2) Generalized way to detect it
+
+	3) Build a new validator 
+
+	4) work w/ Albert + Taylor to mass test all the animations to see if they suffer from the issue.
+
+
+
+Milestone 0 success:   Automated testing of hundreds of animations!
+
+
+Albert
+N> Continue Coulombs Law 3, why is the initial frame broken?   Get more familiar with iwp5.js file, knowing that we want to split it apart soon.  Interesting to start the self validation framework.
+
+	? Since it's automatically testing things?
+		Test 1 - Initial Frame
+		Test 2- Objects becoming disconncted.
+
+
+Niall
+N> Have figured out the origin of the disconncting bug, then start thinking about ways we could test it / auto detect it.
+
+
+Bennett
+N> Verify the multi-graph toggle off / on on the master write.  Add the animations that we found more testing + reporting more issues.  A whole set of packaged ones we haven't looked at before. Will give us some other common bugs that we can figure out the origin of and put in to our testing package.
+
+
+Taylor
+N> * Taylor> Bring the table out of iwp4, provide to Albert, for coulmobs law 3.  Bulk convert all of the XML files over to Json files so that they're in proper format.  Select a json validation tool, write a json schema.
+
+
+Logistics: Thanksgivign break week after next, students have to move out of dorms next Friday.
+What does 4:30PM next friday look like?  Not available.
+
+
+
+Empowering creative people to 
+echo back their personal goals
+in their own words and methods
+to ensure their weekly tasks
+get done on time and on quality.
+
+
+68.183.111.167
+
+-- table out of iwp4.
+
+http://localhost:8470/DProblem/animations%2Fwinters-ncssm-2009%2Fcp-efield-02.iwp
+
+
+http://localhost:8470/DProblem/animations%2Fwinters-ncssm-2009%2Fcoulombslaw03.iwp
+
+-- Schema Validator 
+https://github.com/eclipsesource/play-json-schema-validator
+
+-- Bulk Conversion
+
+
+
+-- Datastore?
+
+Let's try mongo v4!
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+
+Installed, now enable auth
+
+https://docs.mongodb.com/manual/tutorial/enable-authentication/
+
+db.createUser({
+  user: "root",
+  pwd: "2018NovxWaa6ae2tX7J55p",
+  roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+  }
+);
+
+2018NovxWaa6ae2tX7J55p
+
+use iwp6-master;
+
+db.createUser(
+  {
+    user: "iwp6-play",
+    pwd: "2018NovAjWvaxdV65WnZCP",
+    roles: [ { role: "readWrite", db: "iwp6-master" } ]
+  }
+);
+
+
+Each collection = "User" path / name?
+
+Currently modeled with folders
+
+animations/winters-ncssm-2009/cp-efield-02.iwp
+
+Works: mongo -u iwp6-play -p 2018NovAjWvaxdV65WnZCP --authenticationDatabase iwp6-master
+
+
+
+
+-- Play application 
+
+Ubuntu 18.04 x64
+ubuntu-s-1vcpu-1gb-nyc1-01 provision droplet
+
+Droplet Name: ubuntu-s-1vcpu-1gb-nyc1-01
+
+Added ssh keys
+
+setup hostname
+
+installing oracle ppa
+
+https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04
+
+sudo apt update ; sudo apt upgrade -y
+
+reboot
+
+sudo apt autoremove
+
+install sbt
+
+https://gist.github.com/wandersoncferreira/ce6315cee2c5bd1867f992ffc46ecbf6
+
+git clone iwphys
+
+version6 sbt run
+
+
+iwphys.org DNS chagned over to amazon route53
+
+iwp6.iwphys.org A 68.183.111.167
+
+coulombslaw03.iwp
+
+deployed!
+
+http://iwp6.iwphys.org:8470/DProblem/animations%2Fwinters-ncssm-2009%2Fcoulombslaw03.iwp
+
+
+

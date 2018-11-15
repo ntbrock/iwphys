@@ -1,0 +1,29 @@
+2018Oct19 IWP 5 Call Log
+
+Taylor
+L> Thought about a new server-side environment that would do away with the PHP/Nginx Setup, Thought about - enabling the designer thru this conversion. Filesystem -> Database.
+N> Need a task!
+
+Bennett
+L> Need a task! 
+N> Would like to, once we get fixes ready for demo, then want to verify.
+
+Niall
+L> Working on College applications. Started on honoring the graphable, where would this be handled? Not much success, 
+N> Graphable Flag, get started on testing the 23x Packaged anuimations.
+
+ALbert
+L> Got the environment setup on ubuntu!  Looking thru fixing the trello tickets from last week.  Tested the new animations that Dr. Bennett found last week. Learned a lot about how nginx works.
+N> Get more familimar w/ actual code, begin the debugging / testing cycle process. Go deeper in to the actual iwp application.
+
+
+= After - Review testing results in Trello.
+
+= After - Tasking for Taylor + Dr. Bennett
+
+After - Graphable Flag Code Review - apparent-depth-6
+
+
+Hard stop @ 5:15PM.
+
+

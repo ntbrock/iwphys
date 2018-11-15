@@ -1,0 +1,25 @@
+
+
+Niall
+L> Looked thru all Oscillations IWPhys animations.  Haven't yet looked at greying out graph window, found a lot of potential improvemtns.
+N> Need prioritization descision.  Oscillations -vs- greay 
+
+Albert
+L> Worked on the greying out the button, I think I got it to work, test more, ready to put it to master. 
+N> Need prioriziaton.
+
+Bennett
+L> Holding mode, wwaiting for things to be ready to test. 
+N> Available to test!
+
+Taylor
+L> No IWP5, two releases, for two companies, a couple of 2am nights.
+N> Estimate, taskout, conversion of server side from php -> play framework.  To store animations more gracefully. Talk thru the proposal.
+
+
+= After - Oscilattions
+
+After - Demo of grey,  deployment to master.
+
+
+ Niall - Need pointer on how to make the 

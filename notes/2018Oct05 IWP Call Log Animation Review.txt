@@ -1,0 +1,28 @@
+2018Oct05 IWP Call Log 
+
+Niall
+L> Reinstalled a couple things (nginx), and apache. Have the PHP installed, not configured yet.   Went thru trello tickets assigned, went thru and saw that all were working except graphing was weird.
+N> Finish PHP Install.
+
+Albert
+
+L> Made a spreadsheet of all the animations, took notes on functionality.  Similar obsv, most graphs don't really graph anything. Tried to check the Java version not able to get graphs workingin Java version. Conceptual stuff: Animations, the PHysics didn't make sense. 
+N> Plan on reviewing how to get nginx started and need tasks.
+
+Dr. Bennett
+L> Not active on IWP. If it would be helpful to any of us,  could create trello tickets or share a google doc for what the particular four animations.
+N> Create Trello tickets for the four issues. (In addtionl to what we're already looking at).
+
+Taylor
+L> Travel to Campus!  Bowman-Brockman presentation. No activity on IWP.
+N> Traveling back to Cary, NC a keynote presntation.  Need a task!
+
+
+After - Graphing Weird: Xvel, Yvel not sure if it made too much sense in the text.
+
+thin-film-optics.
+
+After - Reproduce graphing in Java version.
+
+After - 
+
