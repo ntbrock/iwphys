@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject._
-import models.IwpAnimation
+import models.Iwp5Animation
 import play.api.mvc._
 import services.IwpMongoClient
 import org.mongodb.scala.model.Filters._
@@ -45,17 +45,23 @@ class AnimationController @Inject()(cc: ControllerComponents, mongo: IwpMongoCli
   def postAnimation(collection: String, filename: String) = Action.async { implicit request: Request[AnyContent] =>
 
     request.body.asJson match {
-      case None => Future.successful(BadRequest(Json.obj("error"->true, "message"-> "POST body was not json")))
+      case None => Future.successful(BadRequest(Json.obj("error" -> true, "message" -> "POST body was not json")))
       case Some(jsv) =>
 
-        val iwpAnimation = Json.fromJson[IwpAnimation](jsv)
+        Logger.info(s"AnimationController:49> Received: $jsv")
 
-        Logger.info(s"AnimationController:49> Received: $iwpAnimation")
 
-        // Todo write to DB
-        mongo.animationCollection(collection).find(equal("filename", filename)).toFuture() map { animations =>
+        Json.fromJson[Iwp5Animation](jsv).asEither match {
+          case Left(x) =>
+            Future.successful(BadRequest(s"Json schema error: ${x}"))
+          case Right(iwpAnimation) =>
 
-          Ok(jsv)
+            // Todo write to DB
+            mongo.animationCollection(collection).find(equal("filename", filename)).toFuture() map { animations =>
+
+
+              Ok(s"Parsed Json: $iwpAnimation")
+            }
         }
 
 

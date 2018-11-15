@@ -9,7 +9,7 @@ import play.api.Configuration
 import ch.rasc.bsoncodec.math.BigDecimalStringCodec
 import ch.rasc.bsoncodec.time.{LocalDateDateCodec, LocalDateTimeDateCodec}
 
-import models.IwpAnimation
+import models.Iwp5Animation
 import org.mongodb.scala._
 import play.api.Configuration
 import org.mongodb.scala.bson.codecs.Macros._
@@ -49,7 +49,7 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
     new BigDecimalStringCodec())
 
   // Enable each app to register its own codecs
-  private var applicationCodecs =  fromProviders(classOf[IwpAnimation])
+  private var applicationCodecs =  fromProviders(classOf[Iwp5Animation])
 
   def registerApplicationCodecs(applicationRegistry: CodecRegistry): Unit = {
     applicationCodecs = applicationRegistry
@@ -80,7 +80,7 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
     Seq("winters-ncssm-2009", "iwp-packaged")
   }
 
-  def animationCollection(collectionName: String) : MongoCollection[IwpAnimation] = {
+  def animationCollection(collectionName: String) : MongoCollection[Iwp5Animation] = {
     environmentCollection("iwp6", collectionName)
   }
 

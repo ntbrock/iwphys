@@ -146,11 +146,11 @@ Works: mongo -u iwp6-play -p 2018NovAjWvaxdV65WnZCP --authenticationDatabase iwp
 
 ~ Build the POST endpoint
 
-	Test :
+	= Unit Test :
 	https://www.iwphys.org/xtoj.php/winters-ncssm-2009/coulombslaw03.iwp
 
+	~ Implemebt hte Model!! Create a schema from model?
 	
-
 	to write to db
 - script to iterate over xml and post all to make the winters-ncssm-2019
 
