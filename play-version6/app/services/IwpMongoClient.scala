@@ -30,15 +30,16 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
     }
   }
 
-  lazy val uri: String = requireConfig("iwp.mongodb.uri")
-
-  lazy val mongoClient: MongoClient = {
-    MongoClient(uri)
-  }
+  lazy val env: String = requireConfig("iwp.env")
 
 
+  lazy val url: String = requireConfig("iwp.mongodb.url")
 
-  //===== Codecs for All Identityship models  =====================================================
+  lazy val mongoClient: MongoClient = { MongoClient(url) }
+
+
+
+  //===== Codecs for All Iwp models  =====================================================
 
   // http://www.jannikarndt.de/blog/2017/08/writing_case_classes_to_mongodb_in_scala/
   // https://github.com/ralscha/bsoncodec
@@ -59,5 +60,28 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
     fromRegistries(applicationCodecs, javaCodecs, DEFAULT_CODEC_REGISTRY)
   }
 
+  // ====== Generalized Functions to get any database with any collection
+  private def exactCollection[A:ClassTag](databaseName: String, collectionName: String) : MongoCollection[A] = {
+
+    val database = mongoClient.getDatabase(databaseName).withCodecRegistry(codecRegistry)
+    database.getCollection[A](collectionName)
+  }
+
+  // Grab a collection that's environment specific
+  protected def environmentCollection[A:ClassTag]( databasePrefix: String, collectionName: String ) : MongoCollection[A] = {
+    exactCollection[A](s"$databasePrefix-$env", collectionName)
+  }
+
+
+  // ====== IWP Bindings =======================
+
+  def animationCollectionNames() : Seq[String] = {
+    // Hardcoded for now, don't expose community content yet.
+    Seq("winters-ncssm-2009", "iwp-packaged")
+  }
+
+  def animationCollection(collectionName: String) : MongoCollection[IwpAnimation] = {
+    exactCollection("iwp6", collectionName)
+  }
 
 }
