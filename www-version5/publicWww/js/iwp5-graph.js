@@ -127,9 +127,9 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 	// 2018Oct25 Gray-out graph button if nothing to be graphed
 	graphAny = false;
 	for (var i = 0; i < solids.length; i++) {
-		graphVisible = solids[i].shape.graphOptions.graphVisible;
-		if (graphVisible == "true") {
+		if (solids[i].shape.graphOptions.graphVisible == "true") {
 			graphAny = true;
+            break;
 		}
 	}
 	// console.log("iwp-graph:138>", graphAny);
@@ -263,7 +263,7 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 
 		}
 
-		// Which series are intiially turned on?
+		// Which series are intially turned on?
 		$.each(graphMeasures, function(i, measure) {
 
 			if ( graphObject.pathsVisible[measure] ) {
@@ -296,17 +296,22 @@ function graphMeasureClick(button) {
 
 	var solidName = dom.attr("iwp-solid-name");
 	var measure = dom.attr("iwp-measure");
+    var active = dom.attr("class"); 
 
 
 	// console.log("graphMeasureClick:191> I was just clicked, toggle this: " + solidName + " " + measure )
+	// console.log("graphMeasureClick:191> I was just clicked, my state is: " + active)
 
-	// Step 1 - Turn off everything
-	$("g.iwp-graph-object path").hide();
-	$(".iwp-graph-control-buttons button").removeClass("active")
-
-	// Step 2 - Turn on the one that's just been selected.
-	$("g.iwp-graph-object path[iwp-measure='" + measure +"']").toggle();
-	$(".iwp-graph-control-buttons button[iwp-measure='"+measure+"']").addClass("active")
+    // Step 1 - Make inactive and hide path if active
+    if(active == "active") {
+        $(".iwp-graph-control-buttons button[iwp-measure='"+measure+"']").removeClass("active")
+        $("g.iwp-graph-object path[iwp-measure='"+measure+"']").hide();
+    }
+    // Step 2 - Make active and add graph if inactive
+    else {
+        $("g.iwp-graph-object path[iwp-measure='" + measure +"']").toggle();
+        $(".iwp-graph-control-buttons button[iwp-measure='"+measure+"']").addClass("active")
+    }
 
 
 	return false; // Do not submit the form or refresh the page.
