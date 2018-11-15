@@ -20,23 +20,23 @@ case class Iwp5Window ( xgrid: String,
                         yunit: String )
 
 
-case class Iwp5Calculator ( `@attributes` : Map[String,String],
+case class Iwp5Calculator ( attributes : Map[String,String],
                             value: String )
 
 
 case class Iwp5Path ( calculator: Iwp5Calculator )
 
-case class Iwp5Vectors ( `@attributes` : Map[String,String] )
+case class Iwp5Vectors ( attributes : Map[String,String] )
 
 case class Iwp5Length ( calculator: Iwp5Calculator )
 
 
-case class Iwp5InitiallyOn (`@attributes` : Map[String,String] )
+case class Iwp5InitiallyOn (attributes : Map[String,String] )
 
-case class Iwp5GraphOptions (`@attributes` : Map[String,String],
+case class Iwp5GraphOptions (attributes : Map[String,String],
                              initiallyOn: Iwp5InitiallyOn )
 
-case class Iwp5Shape (`@attributes` : Map[String,String],
+case class Iwp5Shape (attributes : Map[String,String],
                       graphOptions: Iwp5GraphOptions,
                       height: Iwp5Length,
                       vectors: Iwp5Vectors,
@@ -105,22 +105,16 @@ case class Iwp5Animation(filename: Option[String],
 object Iwp5Animation {
 
   implicit val iwp5Calculator = Json.format[Iwp5Calculator]
-
   implicit val iwp5InitiallyOn = Json.format[Iwp5InitiallyOn]
-
   implicit val iwp5GraphOptions = Json.format[Iwp5GraphOptions]
-
-
   implicit val iwp5Path = Json.format[Iwp5Path]
   implicit val iwp5Vectors = Json.format[Iwp5Vectors]
   implicit val iwp5Length = Json.format[Iwp5Length]
-
   implicit val iwp5Time = Json.format[Iwp5Time]
   implicit val iwp5Window = Json.format[Iwp5Window]
   implicit val iwp5Color = Json.format[Iwp5Color]
   implicit val iwp5Shape = Json.format[Iwp5Shape]
   implicit val iwp5Solid = Json.format[Iwp5Solid]
-
   implicit val iwp5Output = Json.format[Iwp5Output]
   implicit val iwp5Input = Json.format[Iwp5Input]
   implicit val iwp5Description = Json.format[Iwp5Description]
@@ -128,5 +122,7 @@ object Iwp5Animation {
   implicit val iwp5Objects = Json.format[Iwp5Objects]
   implicit val iwp5AuthorFormat = Json.format[Iwp5Author]
   implicit val iwp5AnimationFormat = Json.format[Iwp5Animation]
+
+
 }
 

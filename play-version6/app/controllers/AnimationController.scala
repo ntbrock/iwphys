@@ -46,7 +46,13 @@ class AnimationController @Inject()(cc: ControllerComponents, mongo: IwpMongoCli
 
     request.body.asJson match {
       case None => Future.successful(BadRequest(Json.obj("error" -> true, "message" -> "POST body was not json")))
-      case Some(jsv) =>
+      case Some(jsvPlay) =>
+
+        // Special Raw string conversions for the xtoj weirdness
+        val raw = Json.asciiStringify(jsvPlay)
+        val clean = raw.replaceAll("@attributes", "attributes")
+        val jsv = Json.parse(clean)
+
 
         Logger.info(s"AnimationController:49> Received: $jsv")
 
@@ -56,12 +62,13 @@ class AnimationController @Inject()(cc: ControllerComponents, mongo: IwpMongoCli
             Future.successful(BadRequest(s"Json schema error: ${x}"))
           case Right(iwpAnimation) =>
 
-            // Todo write to DB
-            mongo.animationCollection(collection).find(equal("filename", filename)).toFuture() map { animations =>
+            // Write to DB
 
+            mongo.animationCollection(collection).insertOne(iwpAnimation.copy(filename=Some(filename))).toFuture() map { result =>
 
-              Ok(s"Parsed Json: $iwpAnimation")
+              Ok(s"Inserted Animation: $iwpAnimation")
             }
+
         }
 
 

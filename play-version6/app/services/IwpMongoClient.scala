@@ -8,13 +8,13 @@ import org.mongodb.scala.bson.codecs.DEFAULT_CODEC_REGISTRY
 import play.api.Configuration
 import ch.rasc.bsoncodec.math.BigDecimalStringCodec
 import ch.rasc.bsoncodec.time.{LocalDateDateCodec, LocalDateTimeDateCodec}
-
-import models.Iwp5Animation
+import models._
 import org.mongodb.scala._
 import play.api.Configuration
 import org.mongodb.scala.bson.codecs.Macros._
 import org.mongodb.scala.bson.codecs.DEFAULT_CODEC_REGISTRY
 import org.bson.codecs.configuration.CodecRegistries.{fromProviders, fromRegistries}
+import play.api.libs.json.Json
 
 import scala.reflect.ClassTag
 // Get your learn on:
@@ -49,7 +49,27 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
     new BigDecimalStringCodec())
 
   // Enable each app to register its own codecs
-  private var applicationCodecs =  fromProviders(classOf[Iwp5Animation])
+  private var applicationCodecs =
+    fromProviders(
+      classOf[Iwp5Calculator],
+      classOf[Iwp5InitiallyOn],
+      classOf[Iwp5GraphOptions],
+      classOf[Iwp5Path],
+      classOf[Iwp5Vectors],
+      classOf[Iwp5Length],
+      classOf[Iwp5Time],
+      classOf[Iwp5Window],
+      classOf[Iwp5Color],
+      classOf[Iwp5Shape],
+      classOf[Iwp5Solid],
+      classOf[Iwp5Output],
+      classOf[Iwp5Input],
+      classOf[Iwp5Description],
+      classOf[Iwp5GraphWindow],
+      classOf[Iwp5Objects],
+      classOf[Iwp5Author],
+      classOf[Iwp5Animation]
+    )
 
   def registerApplicationCodecs(applicationRegistry: CodecRegistry): Unit = {
     applicationCodecs = applicationRegistry
