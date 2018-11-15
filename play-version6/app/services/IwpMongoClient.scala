@@ -81,7 +81,7 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
   }
 
   def animationCollection(collectionName: String) : MongoCollection[IwpAnimation] = {
-    exactCollection("iwp6", collectionName)
+    environmentCollection("iwp6", collectionName)
   }
 
 }
