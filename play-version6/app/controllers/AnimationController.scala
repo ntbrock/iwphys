@@ -42,6 +42,24 @@ class AnimationController @Inject()(cc: ControllerComponents, mongo: IwpMongoCli
 
   }
 
+
+
+  def getAnimationJson(collection: String, filename: String) = Action.async { implicit request: Request[AnyContent] =>
+
+    mongo.animationCollection(collection).find(equal("filename", filename)).toFuture() map { animations =>
+
+      animations.headOption match {
+        case None => NotFound(Json.obj("error"->true, "message"-> "Animation not found"))
+        case Some(animation) =>
+          Ok(Json.toJson(animation))
+      }
+    }
+
+  }
+
+
+
+
   def postAnimation(collection: String, filename: String) = Action.async { implicit request: Request[AnyContent] =>
 
     request.body.asJson match {
