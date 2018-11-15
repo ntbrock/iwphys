@@ -61,8 +61,8 @@ case class Iwp5Output ( calculator: Option[Iwp5Calculator],
                         hidden: Option[String],
                        name: String,
                        text: String,
-                       // units: Option[String]  // ISSUE! Sometimes {}, Sometimes: ""
-  )
+                       units: String )
+
 
 case class Iwp5Input ( hidden: Option[String],
                         initialValue: String,
@@ -88,9 +88,9 @@ case class Iwp5Objects( GraphWindow: Iwp5GraphWindow,
                         time: Iwp5Time,
                         window: Iwp5Window )
 
-case class Iwp5Author(email: Map[String,String],
-                      name: Map[String,String],
-                      organization: Map[String,String],
+case class Iwp5Author(email: String,
+                      name: String,
+                      organization: String,
                       username: String )
 
 

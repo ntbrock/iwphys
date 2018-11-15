@@ -50,7 +50,9 @@ class AnimationController @Inject()(cc: ControllerComponents, mongo: IwpMongoCli
 
         // Special Raw string conversions for the xtoj weirdness
         val raw = Json.asciiStringify(jsvPlay)
-        val clean = raw.replaceAll("@attributes", "attributes")
+        val clean = raw
+          .replaceAll("@attributes", "attributes")
+          .replaceAll("\\{\\}", "\"\"")
         val jsv = Json.parse(clean)
 
 
