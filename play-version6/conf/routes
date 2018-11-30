@@ -16,6 +16,10 @@ GET     /animations/:collection/:filename.json    controllers.AnimationControlle
 GET     /animations/:collection/:filename     controllers.AnimationController.getAnimation(collection: String, filename:String)
 POST    /animations/:collection/:filename     controllers.AnimationController.postAnimation(collection: String, filename:String)
 
+# Integration tests for Nashorn Javascript Excution
+GET     /test/nashorn/test1            controllers.NashornTestController.nashornTest1()
+GET     /test/nashorn/test2            controllers.NashornTestController.nashornTest2()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
