@@ -22,10 +22,11 @@ import javax.script.{Invocable, ScriptEngine, ScriptEngineManager}
 class NashornTestController @Inject()(cc: ControllerComponents, mongo: IwpMongoClient) extends AbstractController(cc) {
 
 
-  val engine = new ScriptEngineManager().getEngineByName("nashorn")
 
   def nashornTest1() = Action { implicit request: Request[AnyContent] =>
 
+
+    val engine = new ScriptEngineManager().getEngineByName("nashorn")
 
     val js = "1+1;"
 
@@ -40,6 +41,7 @@ class NashornTestController @Inject()(cc: ControllerComponents, mongo: IwpMongoC
 
   def nashornTest2() = Action { implicit request: Request[AnyContent] =>
 
+    val engine = new ScriptEngineManager().getEngineByName("nashorn")
 
     val fr = new FileReader("public/javascripts/test/nashorn/nashornTest2.js")
 
@@ -54,6 +56,61 @@ class NashornTestController @Inject()(cc: ControllerComponents, mongo: IwpMongoC
     Ok(s"Nashorn Test 2: result: ${eval},  function call to nashhornTest2js: ${r} ")
 
   }
+
+
+
+
+
+  // Math.js
+
+  def nashornTest3() = Action { implicit request: Request[AnyContent] =>
+
+    val engine = new ScriptEngineManager().getEngineByName("nashorn")
+
+
+    val fr1 = new FileReader("public/javascripts/math.min.js")
+    val eval1 = engine.eval(fr1)
+
+    val fr2 = new FileReader("public/javascripts/test/nashorn/nashornTest3.js")
+    val eval2 = engine.eval(fr2)
+
+
+    val invokable = engine.asInstanceOf[Invocable]
+
+    Logger.info(s"NashornTestController:51> invokable: ${invokable}")
+
+    val r = invokable.invokeFunction("sqrt", "5")
+
+
+    //val r = None
+    Ok(s"Nashorn Test 4: Math.js result: ${eval2},  function call to math.sqrt: ${r} ")
+
+  }
+
+
+  // Execute the iwp5, and jquery animator javascript
+
+  def nashornTest4() = Action { implicit request: Request[AnyContent] =>
+
+    val engine = new ScriptEngineManager().getEngineByName("nashorn")
+
+
+    val jqFilereader = new FileReader("public/javascripts/jquery-3.2.1.min.js")
+    val jqEval = engine.eval(jqFilereader)
+
+    val iwpFilereader = new FileReader("public/javascripts/iwp/iwp5.js")
+    val iwpEval = engine.eval(iwpFilereader)
+
+
+    val invokable = engine.asInstanceOf[Invocable]
+
+    Logger.info(s"NashornTestController:51> invokable: ${invokable}")
+    val r = invokable.invokeFunction("nashhornTest3js", "argument")
+
+    Ok(s"Nashorn Test 3: result: ${iwpEval},  function call to nashhornTest2js: ${r} ")
+
+  }
+
 
 
 }
