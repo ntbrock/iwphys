@@ -1,5 +1,7 @@
 package controllers
 
+import java.net.URLDecoder
+
 import javax.inject._
 import org.mongodb.scala.model.Filters._
 import play.api.Logger
@@ -21,7 +23,11 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
 
 
-  def browseCollection(collection: String) = Action { implicit request: Request[AnyContent] =>
+  def browseCollection(collectionEncoded: String) = Action { implicit request: Request[AnyContent] =>
+
+    val collection = URLDecoder.decode(collectionEncoded, "UTF-8")
+
+    Logger.info(s"AnimationFilesystemController:26> collection: ${collection}")
 
     val dirs = iwpDirectoryBrowserService.findFolders(collection)
     val animations = iwpDirectoryBrowserService.findAnimations(collection)
@@ -29,6 +35,7 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
     Ok(views.html.animation.browseCollection(collection, dirs, animations))
 
   }
+
 
 
   def getAnimation(collection: String, filename: String) = Action { implicit request: Request[AnyContent] =>
