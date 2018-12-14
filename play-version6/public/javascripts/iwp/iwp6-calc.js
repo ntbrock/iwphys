@@ -226,22 +226,32 @@ function calculateOutputAtStep(output, step, vars, verbose) {
 }
 
 
+/**
+ * 2018Dec14 Note! This is now pass by value, manipulating vars does no good,
+ * The caller is resposible for assigning back to vars
+ */
 function calculateSolidAtStep(solid, step, vars, verbose) {
 
+    console.log("iwp6-calc:233> calculateSolidAtStep step: " + step + " solid: " + JSON.stringify(solid));
+
     var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, step, vars, verbose, solid.name )
+
+    console.log("iwp6-calc:233> calculateSolidAtStep xComplex: "+ JSON.stringify(xComplex));
+
+
     var x = xComplex.value
 
- //----------------------------------------
- /// 2016-Dec-07 attempt to alleivate circular dependency.
- var calcX = {
-      x: x,
-      xdisp: x,
-      xpos: x,
-      xvel: 0,
-      xaccel: 0
+    //----------------------------------------
+    /// 2016-Dec-07 attempt to alleivate circular dependency.
+    var calcX = {
+        x: x,
+        xdisp: x,
+        xpos: x,
+        xvel: 0,
+        xaccel: 0
     }
 
-  // Hande Complex return types from Euler Calculator
+    // Hande Complex return types from Euler Calculator
     if ( xComplex.velocity != undefined ) {
 
       calcX.xvel = xComplex.velocity
@@ -250,20 +260,23 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       calcX.xaccel = xComplex.acceleration
     }
 
-   vars[solid.name] = calcX;
- //----------------------------------------
+    vars[solid.name] = calcX;
+   //----------------------------------------
 
     var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
     var y = yComplex.value
 
+    console.log("iwp6-calc:265> calculateSolidAtStep yComplex: "+ JSON.stringify(yComplex));
 
- // Handle Complex return types from Euler Calculator
-     var calcY = {
-      y: y,
-      ydisp: y,
-      ypos: y,
-      yvel: 0,  // fold in w/ terinary
-      yaccel: 0
+
+
+    // Handle Complex return types from Euler Calculator
+    var calcY = {
+        y: y,
+        ydisp: y,
+        ypos: y,
+        yvel: 0,
+        yaccel: 0
     }
 
 
@@ -274,18 +287,19 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       calcY.yaccel = yComplex.acceleration
     }
 
-  if ( xComplex.acceleration == null ) {
+    if ( xComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
-    vars[solid.name] = deepExtend(calcX,calcY);
-     xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, step, vars, verbose, solid.name )
-     x = xComplex.value
-  }
-  if ( yComplex.acceleration == null ) {
+      vars[solid.name] = deepExtend(calcX,calcY);
+      xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, step, vars, verbose, solid.name )
+      x = xComplex.value
+    }
+    if ( yComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
-    vars[solid.name] = deepExtend(calcX,calcY);
-     yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
-     y = yComplex.value
-  }
+      vars[solid.name] = deepExtend(calcX,calcY);
+      yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
+      y = yComplex.value
+    }
+
 
   //-------------------------------------
   // Height and width
@@ -356,14 +370,19 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     if ( yComplex.acceleration != undefined ) {
       calc.yaccel = yComplex.acceleration
     }
+
+    //BOOK 1256
+    console.log("iwp6-calc:373> Completed Solid calculation, writing back to vars: " + solid.name + "   calc: " + JSON.stringify(calc));
     vars[solid.name] = calc
 
+
     // WARNING: updating svg display deep inside the calc route.
-    // console.log("iwp5:314> Warning: Invoking updateSolidSvgPathAndShape deep in recalc: ", solid.name);
+    // Run in headless mode
+    if ( typeof updateSolidSvgPathAndShape === "function" ) {
+        updateSolidSvgPathAndShape(solid, calc)
+    }
 
-    updateSolidSvgPathAndShape(solid, calc)
-
-
+    return calc;
 }
 
 
@@ -386,8 +405,10 @@ function calculateTextAtStep(text, step, vars, verbose) {
 
   // Dont' need to write texts back to variables.
   // vars[solid.name] = calc
-  updateTextSvgPathAndShape(text, {x: x, y: y, value: v})
 
+  if ( typeof updateTextSvgPathAndShape === "function" ) {
+    updateTextSvgPathAndShape(text, {x: x, y: y, value: v})
+  }
 }
 
 
@@ -400,7 +421,7 @@ function calculateTextAtStep(text, step, vars, verbose) {
 
 
 
-var CONFIG_throw_solid_calculation_exceptions = false;
+var CONFIG_throw_solid_calculation_exceptions = true;
 
 function calculateVarsAtStep(step) {
 
@@ -433,20 +454,18 @@ function calculateVarsAtStep(step) {
   // Collect user Inputs! These are polled from the DOM every step.
 
 
-  console.log("iwp6-calc:436> inputs: " , JSON.stringify(inputs) );
+  // console.log("iwp6-calc:436> inputs: " , JSON.stringify(inputs) );
 
   inputs.forEach( function( input, index ) {
 
-	console.log("iwp6-calc:437> input: " , input, "   index: " , index);
+	// console.log("iwp6-calc:437> input: " , input, "   index: " , index);
 
 	// next load in variables for all of the inputs.
 	// If we're running in calculator only mode, use default values
     if ( typeof queryUserFormInputDouble === "function" ) {
         vars[input.name] = queryUserFormInputDouble(input);
     } else {
-
-        console.log("iwp6-calc:442> Setting initial value for: " + input.name + "  value: " + input.initialValue );
-
+        console.log("iwp6-calc:442> Headless mode, setting initial value for: " + input.name + "  value: " + input.initialValue );
         vars[input.name] = +input.initialValue;
     }
 
@@ -471,10 +490,11 @@ function calculateVarsAtStep(step) {
         throw "not finite"
       }
       vars[output.name] = newValue;
-      // console.log("iwp5:409> First Ouputs Pass, added new variable: "+ output.name + " = " + vars[output.name])
+
     } catch ( err ) {
 
-      console.log("iwp5:409> First Outputs Pass, ERROR Calculating: "+ output.name + " > " + err );
+      // console.log("iwp5:409> First Outputs Pass, ERROR Calculating: "+ output.name + " > " + err );
+
       //console.log("Failed Output:", output)
       //failedOutputs.push(output);
       //console.log("FailedOutputs",failedOutputs)
@@ -550,9 +570,9 @@ function calculateVarsAtStep(step) {
   });
   solids.forEach(function(solid, index) {
     if (solid.calculationOrder != null) {
-      orderedObjects[solid.calculationOrder] = solid;
+        orderedObjects[solid.calculationOrder] = solid;
     } else {
-      unorderedSolids.push(solid);
+        unorderedSolids.push(solid);
     }
   });
   texts.forEach(function(text, index) {
@@ -561,10 +581,10 @@ function calculateVarsAtStep(step) {
     if (text.calculationOrder != null) {
       orderedObjects[text.calculationOrder] = text;
     } else {
-      // console.log("iwp5:496> Adding Unordered Text: " + text.name, text )
       unorderedTexts.push(text);
     }
   });
+
   //console.log("iwp5:434> orderedObjects: ", orderedObjects);
   //console.log("iwp5:434> unorderedSolids: ", unorderedSolids);
   //console.log("iwp5:434> unorderedOutputs: ", unorderedOutputs);
@@ -592,12 +612,15 @@ function calculateVarsAtStep(step) {
 
         // console.log("iwp5:494> [Calculations Peformed " + calculationsPerformed + "] Calculating Solid: " + object.name )
         calculationsPerformed++
-        calculateSolidAtStep(object, step, vars, true );
+        var newValue = calculateSolidAtStep(object, step, vars, true );
+        vars[solid.name] = newValue;
+        calculationsPerformed++;
 
       } catch ( err ) {
-        console.log("iwp5:457> ERROR calculationOrder solid: " + object.name + " err: ", err )
-        failedOutputs.push(object);
+        console.log("iwp6-calc:612> ERROR calculationOrder solid: " + object.name + " err: ", err )
+        failedSolids.push(object);
       }
+
     } else if(object.objectType=="output") {
       try {
 
@@ -635,19 +658,26 @@ function calculateVarsAtStep(step) {
     /*
     for x, y, h, w , perform the calculator
     */
+
     try {
-     calculateSolidAtStep(solid, step, vars, true );
-        //  -> update the DOM with theose new results
+        var newValue = calculateSolidAtStep(solid, step, vars, true );
+        vars[solid.name] = newValue;
+
+        console.log("iwp6-calc:656> Success calculating solid: " + JSON.stringify(solid))
+        console.log("iwp6-calc:656> Success calculating solid, vars now: " + JSON.stringify(vars))
+
+
     } catch ( err ) {
-        //console.log(":231 caught a faailed solid exception: ", err);
-      if ( CONFIG_throw_solid_calculation_exceptions ) {
-      throw err;
+        console.log("iwp6-calc:651> Failed solid calculation: " +  err);
+        if ( CONFIG_throw_solid_calculation_exceptions ) {
+            throw err;
+        } else {
+
+            failedSolids.push(solid);
+        }
     }
 
-    failedSolids.push(solid);
-  }});
-
-
+  });
 
 
   unorderedOutputs.forEach( function( output, index ) {
@@ -698,7 +728,10 @@ function calculateVarsAtStep(step) {
     });
     replaySolids.forEach(function( solid, index ) {
       try {
-       calculateSolidAtStep(solid, step, vars, true );
+       // 2018Dec14 Pass by valiue fix
+       var newValue = calculateSolidAtStep(solid, step, vars, true );
+       vars[solid.name] = newValue;
+
       } catch ( err ) {
         console.log(err)
        fatalSolids.push(solid);
@@ -711,13 +744,18 @@ function calculateVarsAtStep(step) {
   }
 
   if ( fatalOutputs.length > 0 ) {
-    console.log("iwp5:673> ERROR Giving Up on Recursive Circular Calc - FATALOutputs: ", fatalOutputs);
+
+    console.log("iwp6-calc:723> ERROR Giving Up on Recursive Circular Calc - FATALOutputs: ", JSON.stringify(fatalOutputs) );
+
+    console.log("iwp6-calc:723> Vars: " + JSON.stringify(vars) );
+
+
     fatalOutputs.forEach( function( output, index ) {
       output.calculationError = step;
     });
   }
   if ( fatalSolids.length > 0 ) {
-    console.log("iwp5:679> ERROR Giving Up on Recursive Circular Calc - FATALSolids: ", fatalSolids);
+    console.log("iwp6-calc:729> ERROR Giving Up on Recursive Circular Calc - FATALSolids: ", fatalSolids);
     fatalSolids.forEach( function( solid, index ) {
       solid.calculationError = step;
     });
@@ -1126,12 +1164,12 @@ function migrateLegacyEquation(toMigrate) {
 function evaluateCompiledMath( compiled, vars ) {
 
   var newValue = compiled.eval(vars)
-  if ( $.isNumeric(newValue)) {
+  if ( typeof newValue === "number" ) {
     return newValue;
-  } else if ( newValue["value"] != undefined ) {
+  } else if ( typeof newValue["value"] === "number" ) {
      return newValue.value;
   } else {
-     throw("Unable to process compiled, not numeric, doesn't have value property: ", newValue)
+     throw "iwp6-calc:1134> Unable to process compiled, not numeric and doesn't have value property: " + newValue
   }
 }
 
