@@ -8,7 +8,7 @@ import org.mongodb.scala.model.Filters._
 import play.api.Logger
 import play.api.libs.json.{JsArray, Json}
 import play.api.mvc._
-import services.{IwpMongoClient, IwpVersion4CalculatorService, IwpVersion6CalculatorService}
+import services.{IwpDifferenceCalculatorService, IwpMongoClient, IwpVersion4CalculatorService, IwpVersion6CalculatorService}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -22,7 +22,8 @@ import javax.script.{Invocable, ScriptEngine, ScriptEngineManager}
 class NashornTestController @Inject()(cc: ControllerComponents,
                                       mongo: IwpMongoClient,
                                       iwpVersion4CalculatorService: IwpVersion4CalculatorService,
-                                      iwpVersion6CalculatorService: IwpVersion6CalculatorService
+                                      iwpVersion6CalculatorService: IwpVersion6CalculatorService,
+                                      iwpDifferenceCalculatorService: IwpDifferenceCalculatorService
                                      ) extends AbstractController(cc) {
 
 
@@ -171,19 +172,19 @@ class NashornTestController @Inject()(cc: ControllerComponents,
 
 
 
-
-
-
-
   // Bring some calculations out!
 
   def nashornTest6_compareIwpSteps() = Action { implicit request: Request[AnyContent] =>
 
-    val v4 = iwpVersion4CalculatorService.animateToJsonFrames("animations/unit-test-2017/TEST_euler.iwp")
+    val path = "animations/unit-test-2017/TEST_euler.iwp"
 
-    val v6 = iwpVersion6CalculatorService.animateToJsonFrames("animations/unit-test-2017/TEST_euler.iwp.json")
+    val v4 = iwpVersion4CalculatorService.animateToJsonFrames(path)
 
-    Ok(s"nashornTest6 v4 Frames: ${v4.value.size}  v6 Frames: ${v6.value.size}")
+    val v6 = iwpVersion6CalculatorService.animateToJsonFrames(s"${path}.json")
+
+    val diffs = iwpDifferenceCalculatorService.diff( v4, v6 )
+
+    Ok(views.html.nashornTest.compareIwpSteps(path, diffs ))
 
   }
 

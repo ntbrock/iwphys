@@ -49,7 +49,7 @@ function playAnimationToEnd( animationString ) {
 
     var loop = true;
 
-    for ( var i = 0; i <= MAX_animationSteps && loop; i++ ) {
+    for ( var i = 0; i < MAX_animationSteps-1 && loop; i++ ) {
         var loop = handleStep() >= 0;
         // console.log("iwp6-read:50> Looping after step: " + i );
     }
