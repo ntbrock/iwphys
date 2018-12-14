@@ -1292,16 +1292,6 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
 
 
-function parseAnimationToMemory( animation ) {
-    console.log("iwp-calc:1286> Entry point for animation: ", animation );
-    if ( typeof animation === "object" ) {
-        parseProblemToMemory( animation );
-    } else {
-        throw "parseAnimationToMemory:1290> 1st Argument must be Javascript Object, was: "+(typeof animation)
-    }
-}
-
-
 function parseProblemToMemory( problem ) {
 
   $("#authorUsername").html( problem.author.username );

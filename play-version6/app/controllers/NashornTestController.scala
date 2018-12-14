@@ -98,16 +98,19 @@ class NashornTestController @Inject()(cc: ControllerComponents, mongo: IwpMongoC
     // val jqFilereader = new FileReader("public/javascripts/jquery-3.2.1.min.js")
     // val jqEval = engine.eval(jqFilereader)
 
-    val iwpFilereader = new FileReader("public/javascripts/iwp/iwp6-calc.js")
-    val iwpEval = engine.eval(iwpFilereader)
+    val iwpCalcReader = new FileReader("public/javascripts/iwp/iwp6-calc.js")
+    val iwpCalcEval = engine.eval(iwpCalcReader)
+
+    val iwpReadReader = new FileReader("public/javascripts/iwp/iwp6-read.js")
+    val iwpReadEval = engine.eval(iwpReadReader)
 
 
     val invokable = engine.asInstanceOf[Invocable]
 
     Logger.info(s"NashornTestController:51> invokable: ${invokable}")
-    val r = invokable.invokeFunction("parseAnimationToMemory", "NoSuchAnimation")
+    val r = invokable.invokeFunction("readAnimationObject", "NoSuchAnimation")
 
-    Ok(s"Nashorn Test 4: result: ${iwpEval},  function call to nashhornTest2js: ${r} ")
+    Ok(s"Nashorn Test 4: calcEval: ${iwpCalcEval},  readEval: ${iwpReadEval}  function call to readAnimationObject: ${r} ")
 
   }
 
