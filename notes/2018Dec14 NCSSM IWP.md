@@ -29,4 +29,6 @@ New:
 
 5. Browser that is driven off filesystem availbaility to run validation.
 
+6. Deploy to Droplet, DNS fix
+
 
