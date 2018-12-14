@@ -1,7 +1,21 @@
-@(collection: String, animations: Seq[Iwp5Animation])
+@(collection: String, collections: Seq[String], animations: Seq[Iwp6Animation])
 
 @main("Welcome to Play") {
   <h1>Animation Browser: @collection</h1>
+
+  @if(dirs.size> 0 ) {
+
+  <h3>@dirs.size Collections</h3>
+
+    @dirs.map{ dir =>
+
+    <li>
+      <a href="@controllers.routes.AnimationController.browseCollection(dir)">@{dir}</a> &middot;
+    </li>
+
+    }
+
+  }
 
   <h3>@animations.size Animations</h3>
 

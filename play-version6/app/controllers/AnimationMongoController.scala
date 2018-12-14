@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject._
-import models.Iwp5Animation
+import models.Iwp6Animation
 import play.api.mvc._
 import services.IwpMongoClient
 import org.mongodb.scala.model.Filters._
@@ -16,13 +16,13 @@ import scala.concurrent.Future
  * application's home page.
  */
 @Singleton
-class AnimationController @Inject()(cc: ControllerComponents, mongo: IwpMongoClient) extends AbstractController(cc) {
+class AnimationMongoController @Inject()(cc: ControllerComponents, mongo: IwpMongoClient) extends AbstractController(cc) {
 
 
   def browseCollection(collection: String) = Action.async { implicit request: Request[AnyContent] =>
 
     mongo.animationCollection(collection).find().toFuture() map { animations =>
-      Ok(views.html.animation.browseCollection(collection, animations))
+      Ok(views.html.animation.browseCollection(collection, Seq.empty,  animations))  // mongo has no subfolders
     }
 
   }
@@ -77,7 +77,7 @@ class AnimationController @Inject()(cc: ControllerComponents, mongo: IwpMongoCli
         Logger.info(s"AnimationController:49> Received: $jsv")
 
 
-        Json.fromJson[Iwp5Animation](jsv).asEither match {
+        Json.fromJson[Iwp6Animation](jsv).asEither match {
           case Left(x) =>
             Future.successful(BadRequest(s"Json schema error: ${x}"))
           case Right(iwpAnimation) =>

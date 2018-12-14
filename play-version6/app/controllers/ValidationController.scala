@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject._
-import models.Iwp5Animation
+import models.Iwp6Animation
 import org.mongodb.scala.model.Filters._
 import play.api.Logger
 import play.api.libs.json.Json

@@ -1,12 +1,25 @@
-@()
+@(collections: Seq[String])
 
 @main("Welcome to Play") {
   <h1>IWP play-version6</h1>
 
 
+<h2>Animation</h2>
 
 
-<h2>Validation Framework</h2>
+<ol>
+
+  @collections.map{collection=>
+  <li>
+    <a href="@controllers.routes.AnimationController.browseCollection(collection)">@collection</a>
+  </li>
+  }
+
+</ol>
+
+
+
+<h2>Validation</h2>
 
 
 <h4>Version 4 DProblem Calculator</h4>

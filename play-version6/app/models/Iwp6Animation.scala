@@ -4,13 +4,13 @@ import play.api.libs.json._
 
 
 
-case class Iwp5Time ( change: String,
+case class Iwp6Time ( change: String,
                       fps: String,
                       start: String,
                       stop: String )
 
 
-case class Iwp5Window ( xgrid: String,
+case class Iwp6Window ( xgrid: String,
                         xmax: String,
                         xmin: String,
                         xunit: String,
@@ -20,57 +20,57 @@ case class Iwp5Window ( xgrid: String,
                         yunit: String )
 
 
-case class Iwp5Calculator ( attributes : Map[String,String],
+case class Iwp6Calculator ( attributes : Map[String,String],
                             value: String )
 
 
-case class Iwp5Path ( calculator: Iwp5Calculator )
+case class Iwp6Path ( calculator: Iwp6Calculator )
 
-case class Iwp5Vectors ( attributes : Map[String,String] )
+case class Iwp6Vectors ( attributes : Map[String,String] )
 
-case class Iwp5Length ( calculator: Iwp5Calculator )
-
-
-case class Iwp5InitiallyOn (attributes : Map[String,String] )
-
-case class Iwp5GraphOptions (attributes : Map[String,String],
-                             initiallyOn: Iwp5InitiallyOn )
-
-case class Iwp5Shape (attributes : Map[String,String],
-                      graphOptions: Iwp5GraphOptions,
-                      height: Iwp5Length,
-                      vectors: Iwp5Vectors,
-                      width: Iwp5Length )
+case class Iwp6Length ( calculator: Iwp6Calculator )
 
 
+case class Iwp6InitiallyOn (attributes : Map[String,String] )
 
-case class Iwp5Color ( blue: String,
+case class Iwp6GraphOptions (attributes : Map[String,String],
+                             initiallyOn: Iwp6InitiallyOn )
+
+case class Iwp6Shape (attributes : Map[String,String],
+                      graphOptions: Iwp6GraphOptions,
+                      height: Iwp6Length,
+                      vectors: Iwp6Vectors,
+                      width: Iwp6Length )
+
+
+
+case class Iwp6Color ( blue: String,
                        green : String,
                        red: String )
 
 
-case class Iwp5Solid ( color: Iwp5Color,
+case class Iwp6Solid ( color: Iwp6Color,
                         name: String,
-                       shape: Iwp5Shape,
-                       xpath: Iwp5Path,
-                       ypath: Iwp5Path
+                       shape: Iwp6Shape,
+                       xpath: Iwp6Path,
+                       ypath: Iwp6Path
                       )
 
 
-case class Iwp5Output ( calculator: Option[Iwp5Calculator],
+case class Iwp6Output ( calculator: Option[Iwp6Calculator],
                         hidden: Option[String],
                        name: String,
                        text: String,
                        units: String )
 
 
-case class Iwp5Input ( hidden: Option[String],
+case class Iwp6Input ( hidden: Option[String],
                         initialValue: String,
                         name: String,
                         text: String,
                         units: String )
 
-case class Iwp5GraphWindow( xgrid: String,
+case class Iwp6GraphWindow( xgrid: String,
                             xmax: String,
                             xmin: String,
                             ygrid: String,
@@ -78,50 +78,50 @@ case class Iwp5GraphWindow( xgrid: String,
                             ymin: String )
 
 
-case class Iwp5Description( text: String )
+case class Iwp6Description( text: String )
 
-case class Iwp5Objects( GraphWindow: Iwp5GraphWindow,
-                        description: Iwp5Description,
-                        input: Seq[Iwp5Input],
-                        output: Seq[Iwp5Output],
-                        solid: Seq[Iwp5Solid],
-                        time: Iwp5Time,
-                        window: Iwp5Window )
+case class Iwp6Objects( GraphWindow: Iwp6GraphWindow,
+                        description: Iwp6Description,
+                        input: Seq[Iwp6Input],
+                        output: Seq[Iwp6Output],
+                        solid: Seq[Iwp6Solid],
+                        time: Iwp6Time,
+                        window: Iwp6Window )
 
-case class Iwp5Author(email: String,
+case class Iwp6Author(email: String,
                       name: String,
                       organization: String,
                       username: String )
 
 
-case class Iwp5Animation(filename: Option[String],
-                         author: Iwp5Author,
-                         objects: Iwp5Objects ) {
+case class Iwp6Animation(filename: Option[String],
+                         author: Iwp6Author,
+                         objects: Iwp6Objects ) {
 
 }
 
 
 
-object Iwp5Animation {
+object Iwp6Animation {
 
-  implicit val iwp5Calculator = Json.format[Iwp5Calculator]
-  implicit val iwp5InitiallyOn = Json.format[Iwp5InitiallyOn]
-  implicit val iwp5GraphOptions = Json.format[Iwp5GraphOptions]
-  implicit val iwp5Path = Json.format[Iwp5Path]
-  implicit val iwp5Vectors = Json.format[Iwp5Vectors]
-  implicit val iwp5Length = Json.format[Iwp5Length]
-  implicit val iwp5Time = Json.format[Iwp5Time]
-  implicit val iwp5Window = Json.format[Iwp5Window]
-  implicit val iwp5Color = Json.format[Iwp5Color]
-  implicit val iwp5Shape = Json.format[Iwp5Shape]
-  implicit val iwp5Solid = Json.format[Iwp5Solid]
-  implicit val iwp5Output = Json.format[Iwp5Output]
-  implicit val iwp5Input = Json.format[Iwp5Input]
-  implicit val iwp5Description = Json.format[Iwp5Description]
-  implicit val iwp5GraphWindow = Json.format[Iwp5GraphWindow]
-  implicit val iwp5Objects = Json.format[Iwp5Objects]
-  implicit val iwp5AuthorFormat = Json.format[Iwp5Author]
-  implicit val iwp5AnimationFormat = Json.format[Iwp5Animation]
+  implicit val Iwp6Calculator = Json.format[Iwp6Calculator]
+  implicit val Iwp6InitiallyOn = Json.format[Iwp6InitiallyOn]
+  implicit val Iwp6GraphOptions = Json.format[Iwp6GraphOptions]
+  implicit val Iwp6Path = Json.format[Iwp6Path]
+  implicit val Iwp6Vectors = Json.format[Iwp6Vectors]
+  implicit val Iwp6Length = Json.format[Iwp6Length]
+  implicit val Iwp6Time = Json.format[Iwp6Time]
+  implicit val Iwp6Window = Json.format[Iwp6Window]
+  implicit val Iwp6Color = Json.format[Iwp6Color]
+  implicit val Iwp6Shape = Json.format[Iwp6Shape]
+  implicit val Iwp6Solid = Json.format[Iwp6Solid]
+  implicit val Iwp6Output = Json.format[Iwp6Output]
+  implicit val Iwp6Input = Json.format[Iwp6Input]
+  implicit val Iwp6Description = Json.format[Iwp6Description]
+  implicit val Iwp6GraphWindow = Json.format[Iwp6GraphWindow]
+  implicit val Iwp6Objects = Json.format[Iwp6Objects]
+  implicit val Iwp6AuthorFormat = Json.format[Iwp6Author]
+  implicit val Iwp6AnimationFormat = Json.format[Iwp6Animation]
 
 
 }
