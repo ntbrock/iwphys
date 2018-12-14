@@ -19,11 +19,11 @@ case class Iwp6Time ( change: String,
 case class Iwp6Window ( xgrid: String,
                         xmax: String,
                         xmin: String,
-                        xunit: String,
+                        xunit: Option[String],
                         ygrid: String,
                         ymax: String,
                         ymin: String,
-                        yunit: String )
+                        yunit: Option[String] )
 
 
 case class Iwp6Calculator ( attributes : Map[String,String],
@@ -45,10 +45,10 @@ case class Iwp6InitiallyOn (attributes : Map[String,String] )
 case class Iwp6GraphOptions (attributes : Map[String,String],
                              initiallyOn: Iwp6InitiallyOn )
 
-case class Iwp6Shape (attributes : Map[String,String],
-                      graphOptions: Iwp6GraphOptions,
+case class Iwp6Shape (attributes : Map[String,String], // Not a huge fan of this.
+                      graphOptions: Option[Iwp6GraphOptions],
                       height: Iwp6Length,
-                      vectors: Iwp6Vectors,
+                      vectors: Option[Iwp6Vectors],
                       width: Iwp6Length )
 
 
@@ -69,15 +69,15 @@ case class Iwp6Solid ( color: Iwp6Color,
 case class Iwp6Output ( calculator: Option[Iwp6Calculator],
                         hidden: Option[String],
                        name: String,
-                       text: String,
-                       units: String )
+                       text: Option[String],
+                       units: Option[String] )
 
 
 case class Iwp6Input ( hidden: Option[String],
                         initialValue: String,
                         name: String,
-                        text: String,
-                        units: String )
+                        text: Option[String],
+                        units: Option[String] )
 
 case class Iwp6GraphWindow( xgrid: String,
                             xmax: String,
@@ -89,7 +89,7 @@ case class Iwp6GraphWindow( xgrid: String,
 
 case class Iwp6Description( text: Option[String] )
 
-case class Iwp6Objects( GraphWindow: Iwp6GraphWindow,
+case class Iwp6Objects( GraphWindow: Option[Iwp6GraphWindow],
                         description: Iwp6Description,
                         input: Seq[Iwp6Input],
                         output: Seq[Iwp6Output],
