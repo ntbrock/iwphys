@@ -6,4 +6,29 @@
 diffs: @diffs.size
 
 
+<table>
 
+    <tr>
+        <th>Step</th>
+        <th>NotEqual</th>
+        <th>Equal</th>
+        <th>V4 LeftEmpty</th>
+        <th>V4 LeftMissing</th>
+        <th>V6 RightEmpty</th>
+        <th>V6 RightMissing</th>
+    </tr>
+@diffs.map{ diff =>
+
+    <tr>
+        <td>@diff.step</td>
+        <td>@diff.notEqual</td>
+        <td>@diff.equal</td>
+        <td>@diff.leftEmpty</td>
+        <td>@diff.leftMissing</td>
+        <td>@diff.rightEmpty</td>
+        <td>@diff.rightMissing</td>
+
+    </tr>
+
+}
+</table>
