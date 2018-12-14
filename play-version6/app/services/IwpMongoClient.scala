@@ -51,24 +51,24 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
   // Enable each app to register its own codecs
   private var applicationCodecs =
     fromProviders(
-      classOf[Iwp5Calculator],
-      classOf[Iwp5InitiallyOn],
-      classOf[Iwp5GraphOptions],
-      classOf[Iwp5Path],
-      classOf[Iwp5Vectors],
-      classOf[Iwp5Length],
-      classOf[Iwp5Time],
-      classOf[Iwp5Window],
-      classOf[Iwp5Color],
-      classOf[Iwp5Shape],
-      classOf[Iwp5Solid],
-      classOf[Iwp5Output],
-      classOf[Iwp5Input],
-      classOf[Iwp5Description],
-      classOf[Iwp5GraphWindow],
-      classOf[Iwp5Objects],
-      classOf[Iwp5Author],
-      classOf[Iwp5Animation]
+      classOf[Iwp6Calculator],
+      classOf[Iwp6InitiallyOn],
+      classOf[Iwp6GraphOptions],
+      classOf[Iwp6Path],
+      classOf[Iwp6Vectors],
+      classOf[Iwp6Length],
+      classOf[Iwp6Time],
+      classOf[Iwp6Window],
+      classOf[Iwp6Color],
+      classOf[Iwp6Shape],
+      classOf[Iwp6Solid],
+      classOf[Iwp6Output],
+      classOf[Iwp6Input],
+      classOf[Iwp6Description],
+      classOf[Iwp6GraphWindow],
+      classOf[Iwp6Objects],
+      classOf[Iwp6Author],
+      classOf[Iwp6Animation]
     )
 
   def registerApplicationCodecs(applicationRegistry: CodecRegistry): Unit = {
@@ -100,7 +100,7 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
     Seq("winters-ncssm-2009", "iwp-packaged")
   }
 
-  def animationCollection(collectionName: String) : MongoCollection[Iwp5Animation] = {
+  def animationCollection(collectionName: String) : MongoCollection[Iwp6Animation] = {
     environmentCollection("iwp6", collectionName)
   }
 

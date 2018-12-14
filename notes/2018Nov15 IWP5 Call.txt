@@ -1,0 +1,158 @@
+2018Nov15 IWP5 Call
+
+Albert
+LL> Continue Coulombs Law 3, why is the initial frame broken?   Get more familiar with iwp5.js file, knowing that we want to split it apart soon.  Interesting to start the self validation framework.
+	? Since it's automatically testing things?
+		Test 1 - Initial Frame
+		Test 2- Objects becoming disconncted.
+
+	http://iwp6.iwphys.org:8470/DProblem/animations%2Fwinters-ncssm-2009%2Fcoulombslaw03.iwp
+L> Worked on the Coulombs law 3 and fixing the initial animation frame. Also did the iwp5.js file file and more familiar with it, one error where not sure the actual error.  It just console.logs calculations that iterative, needs review.   Thought about some validation steps we coudl do like : sqrt of negative number, calculate a bunch of values and make sure they're not wonky outputs. (Range input testing) for circular dependencies, we can parse thru all the variables and construct teh graph / tree of all, found an algorithm online to find a cycle within a graph. Ready for something new!
+
+
+Niall
+LL> Have figured out the origin of the disconncting bug, then start thinking about ways we could test it / auto detect it.
+L> Analyze the bug with the sping disconnecting, tried a few different things to narrow down where it's coming from:  make sure the issue still happening, in java -vs- iwp5, did work and wasnt disconnecting.  Tried changing the timestep on the graph to see if it affected the amount, significanly decreased.  Commented out two things, two console.logs, that further decreased the separation.  Could be a performance issue or an issue that doesn't make too much sense to happen, in chrome developer tools to look at performance rendering.
+
+Bennett
+LL> Verify the multi-graph toggle off / on on the master write.  Add the animations that we found more testing + reporting more issues.  A whole set of packaged ones we haven't looked at before. Will give us some other common bugs that we can figure out the origin of and put in to our testing package.
+L> Verified multigraph toggle on several animations, works well in master. Ready to deploy to production. Then, noted there were a couple of aniamtions that didn't run at all, created trellos for those, found 2. Looked at some others in iwp-packaged. 
+N> Available for testing.  Travel all of next week. back in touch Nov 26.
+
+
+Taylor
+LL> = Taylor> Bring the table out of iwp4, provide to Albert, for coulmobs law 3 -> for all .iwp files.  
+= Select a json validation tool, write a json schema for Iwp5 files as scala case classes. 
+~ Bulk convert all of the XML files over to Json files so that they're in proper format. 
+N> Continue: Bulk convert all existing animations, posted out to droplet mongo.
+
+Stretch: Server-side scala javascript execution environment to run the loader and validator.
+Compare verison 4-vs-5 files. Do some refactoring,  split iwp5.js -> iwp5-validation.js / iwp5-loading.js so that I can execute these server side.
+
+
+= After - Review Trello to triage the next two.
+	- NO graph window, moved to validation list.
+
+= After - Review of Albert's new animation issue, iteration.
+	coulombslaw03. d1 was 0.08, caused issued because when calculated the variables, gave sqrt of -1 changed zero and it fixed th einitialization problem.
+
+	Maybe iwp4 fails with a default value.
+	Look thru it frame by frame, on server thing.
+
+	- What's the code issue why 0.08 doesnt work in iwp5?
+	- Frame by frame analysis possible? 
+		- Action would be to update the javascript to output frame by frame.
+
+
+= After - Explore alternative methods to debugg the spring disconnect  Niall
+	Answer may be frame by frame comparison.
+	Expect it's a 1 frame lag.
+	http://68.183.111.167:8470/DProblem/animations%2Fiwp-packaged%2FOscillations%2Fspring-motion.iwp
+
+	Looking at line7.xdisp
+
+	Feels like it may be a calculation sequence issue.
+
+
+	How do we output the vars so that we can compare them frme by frame?
+
+
+
+The Next Validation Task:  Produce Mathemetical Debug information for every varaibel, for every frame in IWP5.  So that as a next step, we can compare that with IWP4 and flag the animations with differences.
+
+	Output an Json Array
+
+		That contains a sequence of dictionaries/Objects
+
+		That array index 0 is time step 0
+
+		And there is an array element for each of the time steps.
+
+
+	Leverage the internal memory structure of iwp5.json 
+
+		Because it's already close
+
+
+	Propose we output to a new textarea inside the animation that can be hidden with CSS.
+
+	Html
+		<textarea id="2018Nov15_1717"></textarea>
+
+	JS
+		$("#2018Nov15_1717").val("Taylor was here");
+
+		var v = $("#2018Nov15_1717").val();
+		$("#2018Nov15_1717").val("Back again: old: " + v);
+
+	CSS
+		#2018Nov15_1717 { 
+			display: none;
+		}
+
+
+	Alternative to writing to console.log
+
+	+Story> Run the animation to the end, then be ale to copy + paste the text area.
+	Then be able to do a frame comparison -vs- version 4.
+
+
+	Taylor wants to run this for every animation in the library to flag any difference in any frame.
+
+
+
+
+After - Demo IWP6 Droplet Digital Ocean TB
+	http://iwp6.iwphys.org:8470/
+
+After - JSON Schema Validation TB
+
+
+After - Validation Chain:
+
++F> Detect the initial frame has all finite numbers
+
+- Detect that each 
+
+
+
+After - Roadmap Progress TB
+
+## Milestone 0 - Solidify The Data Model
+
+~ Define a Json schema for IWP5.js with visualizations, examples - 6h
+
+~ Bulk convert packaged Xml Animations to their JSON counterparts, leverage php - 6h
+
+~ Choose and tool out a json schema validator application, run over packaged content, refine schema - 8h
+
+~ Refactor the iwp5.js code for Animation parsing out to a new iwp5-validation.js library - 4h
+
+- Implement a circular reference detector in iwp5-validation - 8h
+
+## Milestone 1 - New Web Host + Development Environment
+
+= Create Play project skeleton, CAST port - 2h
+
+- Provision developer laptops with new play skeleton - 2h
+
+~ Define Routes, Setup Layout, Welcome page - 4h Forklift as much as possible of the css / html / js from the PHP app, dont redevelop.
+
+Relocate the iwp5.js content from the php folders and place over into new play location - 2h
+
+= Choose, Provision, and Connect to Database Tech - 6h
+
+= Store our first IWP animation into database from Play - 4h
+
+~ Enable Listing + Browsing + Retrieval of Play Animations in web UI - 8h
+
+- Implement the Cover art capture routine, svg grabber - 8h
+
+~ Bulk import of all animations and directory information to new storage - 6h
+
+- Production Website Cutover and Deep link preservation testing - 8h
+
+
+
+
+

@@ -1,30 +1,107 @@
-@()
+@(topCollections: Seq[Iwp6Collection])
 
 @main("Welcome to Play") {
   <h1>IWP play-version6</h1>
 
+
+<h2>Animation</h2>
+
+
+<ol>
+
+  @topCollections.map{ collection=>
+  <li>
+    <a href="@controllers.routes.AnimationFilesystemController.browseCollection(collection.name)">@collection.name</a>
+  </li>
+  }
+
+</ol>
+
+
+
+<h2>Validation</h2>
+
+
+<h4>Version 4 DProblem Calculator</h4>
+<ol>
+
+  <li>
+    <a href="@controllers.routes.ValidationController.validateAnimation("unit-test-2017","TEST_euler.iwp")">Validate: unit-test-2017 / TEST_euler.iwp</a>
+  </li>
+
+</ol>
+
+
+
+
+<hr>
+  <h2>Unit Tests</h2>
+
+  <h4>Mongo Access Prototype</h4>
   <ol>
 
     <li>
-      <a href="@controllers.routes.AnimationController.browseCollection("winters-ncssm-2009")">Browse winters-ncssm-2009</a>
+      <a href="@controllers.routes.AnimationMongoController.browseCollection("winters-ncssm-2009")">Browse winters-ncssm-2009</a>
     </li>
 
     <li>
-      <a href="@controllers.routes.AnimationController.getAnimation("winters-ncssm-2009","coulombslaw03.iwp")">GET winters-ncssm-2009/coulombslaw03.iwp</a>
+      <a href="@controllers.routes.AnimationMongoController.getAnimation("winters-ncssm-2009","coulombslaw03.iwp")">GET winters-ncssm-2009/coulombslaw03.iwp</a>
 
     </li>
 
     <li>
-      <a href="@controllers.routes.AnimationController.getAnimationJson("winters-ncssm-2009","coulombslaw03.iwp")">GET winters-ncssm-2009/coulombslaw03.iwp.json</a>
+      <a href="@controllers.routes.AnimationMongoController.getAnimationJson("winters-ncssm-2009","coulombslaw03.iwp")">GET winters-ncssm-2009/coulombslaw03.iwp.json</a>
     </li>
+  </ol>
+
+
+
+  <h4>Version 4 DProblem Calculator version4-sbt</h4>
+    <ol>
 
     <li>
       <a href="@controllers.routes.DProblemController.index">DProblemController index - Basic Calculation Test</a>
     </li>
 
     <li>
-      <a href="@controllers.routes.DProblemController.view("animations/winters-ncssm-2009/cp-efield-02.iwp")">animations/winters-ncssm-2009/cp-efield-02.iwp</a>
+      <a href="@controllers.routes.DProblemController.view("animations/winters-ncssm-2009/cp-efield-02.iwp")">DProblemController: animations/winters-ncssm-2009/cp-efield-02.iwp</a>
     </li>
+
+      <li>
+        <a href="@controllers.routes.DProblemController.view("animations/unit-test-2017/TEST_euler.iwp")">DProblemController: animations/unit-test-2017/TEST_euler.iwp</a>
+      </li>
+
+  </ol>
+
+
+
+  <h4>Nashorn Javascript Evaluation Tests</h4>
+  <ol>
+
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest1_eval()">nashornTest1_eval</a>
+    </li>
+
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest2_file()">nashornTest2_file</a>
+    </li>
+
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest3_loadMathJs()">nashornTest3_loadMathJs</a>
+    </li>
+
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest4_loadIwpAnimation()">nashornTest4_loadIwpAnimation</a>
+    </li>
+
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest5_calcIwpSteps()">nashornTest5_calcIwpSteps</a>
+    </li>
+
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest6_compareIwpSteps()">nashornTest6_compareIwpSteps</a>
+    </li>
+
   </ol>
 
 
