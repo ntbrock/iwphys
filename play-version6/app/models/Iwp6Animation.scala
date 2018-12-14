@@ -87,7 +87,7 @@ case class Iwp6GraphWindow( xgrid: String,
                             ymin: String )
 
 
-case class Iwp6Description( text: String )
+case class Iwp6Description( text: Option[String] )
 
 case class Iwp6Objects( GraphWindow: Iwp6GraphWindow,
                         description: Iwp6Description,
@@ -110,6 +110,9 @@ case class Iwp6Animation(filename: Option[String],
 }
 
 
+/**
+  * Use this centralized parser!
+  */
 
 object Iwp6Animation extends BoilerplateIO {
 
@@ -200,7 +203,7 @@ object Iwp6Animation extends BoilerplateIO {
         throw new RuntimeException(s"Iwp Json Parse Error: ${file.getName}]\n${e})")
 
       case s: JsSuccess[Iwp6Animation] =>
-        Success(s.value)
+        Success(s.value.copy(filename = Some(file.getName().replaceAll(".json$", "")) ))
 
     }
 
