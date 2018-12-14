@@ -98,16 +98,16 @@ class NashornTestController @Inject()(cc: ControllerComponents, mongo: IwpMongoC
     // val jqFilereader = new FileReader("public/javascripts/jquery-3.2.1.min.js")
     // val jqEval = engine.eval(jqFilereader)
 
-    val iwpFilereader = new FileReader("public/javascripts/iwp/iwp6.js")
+    val iwpFilereader = new FileReader("public/javascripts/iwp/iwp6-calc.js")
     val iwpEval = engine.eval(iwpFilereader)
 
 
     val invokable = engine.asInstanceOf[Invocable]
 
     Logger.info(s"NashornTestController:51> invokable: ${invokable}")
-    val r = invokable.invokeFunction("nashhornTest3js", "argument")
+    val r = invokable.invokeFunction("masterResetSteps", "")
 
-    Ok(s"Nashorn Test 3: result: ${iwpEval},  function call to nashhornTest2js: ${r} ")
+    Ok(s"Nashorn Test 4: result: ${iwpEval},  function call to nashhornTest2js: ${r} ")
 
   }
 
