@@ -1,5 +1,7 @@
 package controllers
 
+import java.io.File
+
 import javax.inject._
 import models.Iwp6Animation
 import org.mongodb.scala.model.Filters._
@@ -36,4 +38,10 @@ class ValidationController @Inject()(cc: ControllerComponents,
     Ok(views.html.validation.compareIwpSteps(path, diffs))
 
   }
+
+
+  def validateSubAnimation(collection: String, subCollection: String, filename: String) =
+    validateAnimation(collection + File.separator + subCollection, filename )
+
+
 }
