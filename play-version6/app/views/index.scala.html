@@ -3,6 +3,9 @@
 @main("Welcome to Play") {
   <h1>IWP play-version6</h1>
 
+
+
+  <h2>General Unit Tests</h2>
   <ol>
 
     <li>
@@ -25,6 +28,34 @@
     <li>
       <a href="@controllers.routes.DProblemController.view("animations/winters-ncssm-2009/cp-efield-02.iwp")">animations/winters-ncssm-2009/cp-efield-02.iwp</a>
     </li>
+  </ol>
+
+
+
+  <h2>Nashorn Javascript Evaluation Tests</h2>
+  <ol>
+
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest1_eval()">nashornTest1_eval</a>
+    </li>
+
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest2_file()">nashornTest2_file</a>
+    </li>
+
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest3_loadMathJs()">nashornTest3_loadMathJs</a>
+    </li>
+
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest4_loadIwpAnimation()">nashornTest4_loadIwpAnimation</a>
+    </li>
+
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest5_calcIwpSteps()">nashornTest5_calcIwpSteps</a>
+    </li>
+
+
   </ol>
 
 
