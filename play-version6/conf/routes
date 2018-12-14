@@ -6,21 +6,35 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 
-GET     /DProblem                   controllers.DProblemController.index
-GET     /DProblem/:path             controllers.DProblemController.view(path: String)
+
+# Official Version4 Version6 Comparison Route
+GET     /valiation/:collection/:filename    controllers.ValidationController.validateAnimation(collection: String, filename: String)
+GET     /valiation/:collection/:subCollection/:filename    controllers.ValidationController.validateSubAnimation(collection: String, subCollection: String, filename: String)
 
 
-# First Rudimentary Data Browser
-GET     /animations/:collection         controllers.AnimationController.browseCollection(collection: String)
-GET     /animations/:collection/:filename.json    controllers.AnimationController.getAnimationJson(collection: String, filename:String)
-GET     /animations/:collection/:filename     controllers.AnimationController.getAnimation(collection: String, filename:String)
-POST    /animations/:collection/:filename     controllers.AnimationController.postAnimation(collection: String, filename:String)
+# Official filesystem Browser
+GET     /collection/*collection                controllers.AnimationFilesystemController.browseCollection(collection: String)
+GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
+GET     /animation/:collection/:filename.json  controllers.AnimationFilesystemController.getAnimationJson(collection: String, filename: String)
+
+
+# First Rudimentary Database Browser
+GET     /animation-db/:collection         controllers.AnimationMongoController.browseCollection(collection: String)
+GET     /animation-db/:collection/:filename.json    controllers.AnimationMongoController.getAnimationJson(collection: String, filename:String)
+GET     /animation-db/:collection/:filename     controllers.AnimationMongoController.getAnimation(collection: String, filename:String)
+POST    /animation-db/:collection/:filename     controllers.AnimationMongoController.postAnimation(collection: String, filename:String)
 
 # Integration tests for Nashorn Javascript Excution
-GET     /test/nashorn/test1            controllers.NashornTestController.nashornTest1()
-GET     /test/nashorn/test2            controllers.NashornTestController.nashornTest2()
-GET     /test/nashorn/test3            controllers.NashornTestController.nashornTest3()
-GET     /test/nashorn/test4            controllers.NashornTestController.nashornTest4()
+GET     /test/nashorn/test1            controllers.NashornTestController.nashornTest1_eval()
+GET     /test/nashorn/test2            controllers.NashornTestController.nashornTest2_file()
+GET     /test/nashorn/test3            controllers.NashornTestController.nashornTest3_loadMathJs()
+GET     /test/nashorn/test4            controllers.NashornTestController.nashornTest4_loadIwpAnimation()
+GET     /test/nashorn/test5            controllers.NashornTestController.nashornTest5_calcIwpSteps()
+GET     /test/nashorn/test6            controllers.NashornTestController.nashornTest6_compareIwpSteps()
+
+# Version 4 SBT Conversion testing
+GET     /DProblem                   controllers.DProblemController.index
+GET     /DProblem/:path             controllers.DProblemController.view(path: String)
 
 
 # Map static resources from the /public folder to the /assets URL path

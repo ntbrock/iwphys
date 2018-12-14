@@ -1,0 +1,173 @@
+2018Nov30 IWP 5
+
+Special Agenda
+•	Run the validation framework for all animations
+•	Initial Frame issue fixes
+•	Object detach fixed
+•	What else needs to be done to exit M0?
+
+Albert
+L> Computer crash, back to environment setup.
+N> Environment setup. Try the new play framework environment.
+
+Niall
+L> Working on getting the exporter data logging working. Putting it out to a text area, writing out the vars to the screen.  Trying to get the element to show up on the web page, put in the iwp5 file with css, with something writing to it every step of teh animation, didn't see th element show in Chrome dev tools.
+N> Proceed w/ the element logging, for teh verification.
+
+Taylor
+L> Frame comparison test. Xml -> Mongo json converter implemented for the bulk conversion, loaded 3 into my localenvironment. Play version 6, Nashhorn javascript engine, unit tests, but issues with loading Jquery.  Reviewing iwp5.js., see what jquery and math.js dependencies are.  Good news = math.js working inside of nashorn in the jvm. 
+N> Iwp5 javascript to parse the problem, load it into memory, and perform the full set of calculations, completely separate from UI and Jquery, but ok to use math.js.  Run the parser inside of Play Framework. Goal: Then compare frame by frame with the version 4 output.
+
+Dr. Bennett
+L> No activity.
+N> No activity.
+
+
+After - All - Project status report, of progress against M0 and M1.
+
+After - Niall - Chrome developer tool pre. Why the frames are not rendering??
+
+After - Taylor - Demo Nashorn math.js execution, talk about the javascript 'split'.
+
+After - Albert - Provosion the new iwp6 play environment on your laptop.
+
+
+Next week:
+
+Albert - Using play framework to create some html: Bring in the graphics, css, and replicate the index page in play framework   /demo  route.
+
+Niall - Prototype a javascript or scala routine that compares the variables of frames of pendulum 1 from version 4 -> version 5. Produce the report + the frames and what's different between time.  Will need to flatten the hashes to compare apples-vs-apples.
+
+Taylor - Refactor the IWP.js to not depend on Jquery for the initial animation loadign, have both the v4 and v5 frames side by side, ready to compare.
+
+
+TB on campus on Thursday around lunch or a little after, but not available on Friday @ 4:30.
+
+Thusday December 6.
+Lunch 12:15 - 12:55   Bryan Lobby.
+
+
+
+
+Milestone 0 - Solidify The Data Model
+
+= 100% Define a Json schema for IWP5.js with visualizations, examples - 6h
+
+~ 50%  Bulk convert packaged Xml Animations to their JSON counterparts, leverage php - 6h
+
+~ 75%  Choose and tool out a json schema validator application run over packaged content, refine schema - 8h
+
+~ 25%  Refactor the iwp5.js code for Animation parsing out to a new iwp5-validation.js library - 4h
+
+- 0%   Implement a circular reference detector in iwp5-validation - 8h
+
+Output: All Animations, know which ones have frame by frame / variable differences in bulk.
+
+
+
+
+
+
+100% Create Play project skeleton, CAST port - 2h
+
+0% Provision developer laptops with new play skeleton - 2h
+
+50% Define Routes, Setup Layout, Welcome page - 4h Forklift as much as possible of the css / html / js from the PHP app, dont redevelop.
+
+0% Relocate the iwp5.js content from the php folders and place over into new play location - 2h
+
+100% Choose, Provision, and Connect to Database Tech - 6h
+
+100% Store our first IWP animation into database from Play - 4h
+
+25% Enable Listing + Browsing + Retrieval of Play Animations in web UI - 8h
+
+0% Implement the Cover art capture routine, svg grabber - 8h
+
+25% Bulk import of all animations and directory information to new storage - 6h
+
+0% Production Website Cutover and Deep link preservation testing - 8h
+
+
+
+
+
+
+
+Raw Notes:
+
+Jquery Locations:
+
+
+$.type ( problem.objects.output ) == 'array' ) {
+
+ $.each( problem.objects.output, function( index, output ) {
+      addOutput(output);
+    });
+
+
+## Entrypoint 
+
+From HTML
+    // On Pageload, pull our hardcoded unit test.
+    $.getJSON( $('#problem').attr('problem-uri'), function(problem) {
+      parseProblemToMemory(problem);
+      renderProblemFromMemory();
+      // calculateVarsAtStep(0);
+      masterResetSteps();
+    });
+  </script>
+
+  http://youmightnotneedjquery.com/
+
+
+function calculateVarsAtStep(step) {
+
+
+typeof obj[key]
+
+
+/*
+
+var deepExtend = function(out) {
+  out = out || {};
+
+  for (var i = 1; i < arguments.length; i++) {
+    var obj = arguments[i];
+
+    if (!obj)
+      continue;
+
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        if (typeof obj[key] === 'object')
+          out[key] = deepExtend(out[key], obj[key]);
+        else
+          out[key] = obj[key];
+      }
+    }
+  }
+
+  return out;
+};
+
+deepExtend({}, objA, objB);
+
+*/
+
+
+
+
+## Relocate to iwp-animate.js
+
+
+function renderProblemFromMemory() {
+
+function fitText(input) {
+function renderCanvas() {
+
+
+How does the html hand the animation off to the loader?
+
+Can Nashorn jss make web requests?
+
