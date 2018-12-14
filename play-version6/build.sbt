@@ -25,3 +25,4 @@ libraryDependencies += "ch.rasc" % "bsoncodec" % "1.0.1",
 
 // Adds additional packages into conf/routes
 // play.sbt.routes.RoutesKeys.routesImport += "edu.ncssm.iwp.binders._"
+
