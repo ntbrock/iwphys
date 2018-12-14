@@ -5,6 +5,33 @@
  * Albert Gong, Nial Mullane, Taylor Brockman 2019 - Version 6.0 Migrated into Play Framework
  */
 
+
+// -----------------------------------------------
+// Sugar from http://youmightnotneedjquery.com/
+
+var deepExtend = function(out) {
+  out = out || {};
+
+  for (var i = 1; i < arguments.length; i++) {
+    var obj = arguments[i];
+
+    if (!obj)
+      continue;
+
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        if (typeof obj[key] === 'object')
+          out[key] = deepExtend(out[key], obj[key]);
+        else
+          out[key] = obj[key];
+      }
+    }
+  }
+
+  return out;
+};
+
+
 //-----------------------------------------------------------------------
 // Memory Intialization + Globals Section
 
@@ -42,14 +69,17 @@ function masterResetSteps() {
 
 
   // We also need to clear out previous parameteric displacements used for instant velecioty calculations.
-  $.each( solids, function( index, solid ) {
+  solids.forEach(function ( solid, index) {
     resetSolidCalculators(solid);
   });
+
 
   var vars0 = calculateVarsAtStep(0);
 
   // 2018Feb01 Graphing Reset hookin
-  graphResetZero(0, vars = vars0, solids = solids );
+  if ( typeof graphResetZero === "function" ) {
+    graphResetZero(0, vars = vars0, solids = solids );
+  }
 
   archiveVarsAtStep( currentStep, vars0 ); // Boot up the environment
 
@@ -168,7 +198,7 @@ function handleStep() {
 function archiveVarsAtStep( step, vars ) {
   // console.log("Archving vars at step: " + step );
   varsAtStep[step] = {};
-	$.extend(varsAtStep[step], vars)
+  deepExtend(varsAtStep[step], vars)
 }
 
 
@@ -230,13 +260,13 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
   if ( xComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
-    vars[solid.name] = $.extend(calcX,calcY);
+    vars[solid.name] = deepExtend(calcX,calcY);
      xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, step, vars, verbose, solid.name )
      x = xComplex.value
   }
   if ( yComplex.acceleration == null ) {
       //console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
-    vars[solid.name] = $.extend(calcX,calcY);
+    vars[solid.name] = deepExtend(calcX,calcY);
      yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
      y = yComplex.value
   }
@@ -272,7 +302,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       // console.log("iwp5:277> Recalculating Polygon: " + solid.name + " has Error? " + solid.calculationError );
 
       calc["points"] = []
-      $.each( solid.points, function( index, i) {
+      solid.points.forEach( function( i, index ) {
         point = {
           x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, step, vars, verbose, solid.name ).value,
           y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, step, vars, verbose, solid.name ).value
@@ -363,19 +393,19 @@ function repaintStep(step) {
 
     updateTimeDisplay(vars.t);
 
-   $.each( outputs, function( index, output ) {
+   outputs.forEach( function( output, index ) {
       updateUserFormOutputDouble(output, vars[output.name]);
    });
 
    // le.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, solids: ", solids );
 
-   $.each( solids, function( index, solid ) {
+   solids.forEach( function( solid, index ) {
       updateSolidSvgPathAndShape(solid, vars[solid.name])
    });
 
    // console.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, objects: ", objects );
 
-   $.each( objects, function( index, object ) {
+   objects.forEach( function( object, index ) {
       updateSolidSvgPathAndShape(object, vars[object.name])
    });
 
@@ -393,22 +423,33 @@ function calculateVarsAtStep(step) {
 
   // vars should be a map of string to double, including the mathematical / physical constants.
   var vars = { step: step}
-  $.extend(vars, varsConstants);
+  deepExtend(vars, varsConstants);
 
+  // optional UI
+  startTime = null;
+  if ( typeof queryTimeStartInputDouble === "function" ) {
+    startTime = queryTimeStartInputDouble()
+  } else {
+    startTime = time.start
+  }
 
-	// Eveything begins with time, populate t.
-	vars.t = queryTimeStartInputDouble() + step * time.change;
+   // Everything begins with time, populate t.
+  vars.t = startTime + step * time.change;
   vars.tDelta = time.change
   vars.delta_t = vars.tDelta
   vars.tDel = vars.tDelta
   vars.deltaTime = time.change
-	updateTimeDisplay(vars.t);
+
+
+  if ( typeof updateTimeDisplay === "function" ) {
+    updateTimeDisplay(vars.t);
+  }
 
 
 
   // Collect user Inputs! These are polled from the DOM every step.
 
-	$.each( inputs, function( index, input ) {
+  inputs.forEach( function( input, index ) {
 		// next load in variables for all of the inputs.
     //vars[input.name] = { value: queryUserFormInputDouble(input) };
     vars[input.name] = queryUserFormInputDouble(input);
@@ -422,7 +463,7 @@ function calculateVarsAtStep(step) {
   //-----------------------------------
   // Make the first pass thru outputs
 
-  $.each( outputs, function( index, output ) {
+  outputs.forEach( function( output, index ) {
     try {
       var newValue = calculateOutputAtStep(output, step, vars, false );
       //console.log("newValue",newValue)
@@ -450,7 +491,7 @@ function calculateVarsAtStep(step) {
   // EULER INITIALIZATION
   // 2018Mar22 - Euler's Self-referential Fix, we need to pull velocities and displacements for
   // every Solid w/ Euler's and pre-write them into the vars space.
-  $.each(solids, function(index,solid) {
+  solids.forEach(function(solid, index) {
 
     // Initialize if necessary
     if ( vars[solid.name] == null ) { vars[solid.name] = {} }
@@ -503,21 +544,21 @@ function calculateVarsAtStep(step) {
   var unorderedTexts = [];
 
   var orderedObjects = [];
-  $.each(outputs, function(index,output) {
+  outputs.forEach(function(output, index) {
     if (output.calculationOrder != null) {
       orderedObjects[output.calculationOrder] = output;
     } else {
       unorderedOutputs.push(output);
     }
   });
-  $.each(solids, function(index,solid) {
+  solids.forEach(function(solid, index) {
     if (solid.calculationOrder != null) {
       orderedObjects[solid.calculationOrder] = solid;
     } else {
       unorderedSolids.push(solid);
     }
   });
-  $.each(texts, function(index,text) {
+  texts.forEach(function(text, index) {
 
 
     if (text.calculationOrder != null) {
@@ -543,7 +584,7 @@ function calculateVarsAtStep(step) {
 
   var calculationsPerformed = 0;
 
-  $.each( orderedObjects, function(index, object) {
+  orderedObjects.forEach( function(object, index) {
 
     if(object != null ) { // orderedObjects can be sparseArray
 
@@ -593,8 +634,7 @@ function calculateVarsAtStep(step) {
   for each output perform the calculator
   */
 
-
-  $.each( unorderedSolids, function( index, solid ) {
+  unorderedSolids.forEach( function( solid, index ) {
     /*
     for x, y, h, w , perform the calculator
     */
@@ -613,7 +653,7 @@ function calculateVarsAtStep(step) {
 
 
 
-  $.each( unorderedOutputs, function( index, output ) {
+  unorderedOutputs.forEach( function( output, index ) {
     try {
       var newValue = calculateOutputAtStep(output, step, vars, false );
       //console.log("newValue",newValue)
@@ -650,7 +690,7 @@ function calculateVarsAtStep(step) {
     fatalSolids = [];
 
     // REPLAY FAILURES within a resonable maximum number of attempts.
-     $.each( replayOutputs, function( index, output ) {
+     replayOutputs.forEach( function( output, index ) {
       //console.log("Trying again",output)
       try {
         var newValue = calculateOutputAtStep(output, step, vars, false );
@@ -659,7 +699,7 @@ function calculateVarsAtStep(step) {
         fatalOutputs.push(output);
       }
     });
-    $.each( replaySolids, function( index, solid ) {
+    replaySolids.forEach(function( solid, index ) {
       try {
        calculateSolidAtStep(solid, step, vars, true );
       } catch ( err ) {
@@ -675,20 +715,20 @@ function calculateVarsAtStep(step) {
 
   if ( fatalOutputs.length > 0 ) {
     console.log("iwp5:673> ERROR Giving Up on Recursive Circular Calc - FATALOutputs: ", fatalOutputs);
-    $.each( fatalOutputs, function( index, output ) {
+    fatalOutputs.forEach( function( output, index ) {
       output.calculationError = step;
     });
   }
   if ( fatalSolids.length > 0 ) {
     console.log("iwp5:679> ERROR Giving Up on Recursive Circular Calc - FATALSolids: ", fatalSolids);
-    $.each( fatalSolids, function( index, solid ) {
+    fatalSolids.forEach( function( solid, index ) {
       solid.calculationError = step;
     });
   }
 
 
   // FINALLY, Text calculation at very end
-  $.each( unorderedTexts, function( index, text ) {
+  unorderedTexts.forEach( function( text, index ) {
 
     try {
      calculateTextAtStep(text, step, vars, true );
@@ -704,7 +744,7 @@ function calculateVarsAtStep(step) {
 
   if ( failedTexts.length > 0 ) {
     console.log("iwp5:685> ERROR Giving Up on Recursive Circular Calc - FAILEDTexts: ", failedTexts);
-    $.each( failedTexts, function( index, text ) {
+    failedTexts.forEach( function( text, index ) {
       text.calculationError = step;
     });
   }
@@ -776,7 +816,7 @@ function addInput(input) {
 
     // 2018Mar01 Fix for empty unit labels
   var unitLabel = "";
-  if ( typeof(input.units)=="string" ) { unitLabel = input.units; }
+  if ( typeof input.units ==="string" ) { unitLabel = input.units; }
 
   htmlInputs.push( "<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td class='iwp-input-label'>"+ input.text +"</td><td class='iwp-input-value'><input id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + unitLabel + "</td></tr>")
 }
@@ -807,7 +847,7 @@ function addOutput(output) {
     style = "display:none;'"
   }
   var unitLabelOutput = "";
-  if ( typeof(output.units)=="string" ) { unitLabelOutput = output.units; }
+  if ( typeof output.units === "string" ) { unitLabelOutput = output.units; }
 
   htmlOutputs.push( "<tr style='" + style +"' id='output_" + output.name + "' class='iwp-output-row'><td class='iwp-output-label'>"+ output.text +"</td><td class='iwp-output-value'><input id='" + output.name + "' type='text' value='-999' disabled> " + unitLabelOutput + "</td></tr>");
 }
@@ -895,10 +935,8 @@ function addSolid(solid) {
   // hard to do as part of the initialization because it is a dynamic list.
   // Add points here..?
   if ( compiledSolid.shape.type == "polygon" ) {
-    //console.log(solid.shape.points.point)
-    //$.each( problem.objects.input, function( index, input ) {
     compiledSolid["points"] = []
-    $.each( solid.shape.points.point, function( index, i) {
+    solid.shape.points.point.forEach ( function( i, index ) {
       var point = {
         xpath: {calculator: compileCalculator(i.xpath.calculator),},
         ypath: {calculator: compileCalculator(i.ypath.calculator),},
@@ -1330,7 +1368,7 @@ function parseProblemToMemory( problem ) {
 
   // Inputs - These could be an array OR a single item.
   if ( $.type ( problem.objects.input ) == 'array' ) {
-    $.each( problem.objects.input, function( index, input ) {
+    problem.objects.input.forEach( function( input, index ) {
       addInput(input);
     });
   } else if ($.type ( problem.objects.input ) == 'item') {
@@ -1347,7 +1385,7 @@ function parseProblemToMemory( problem ) {
 
   // Output - These could be an array OR a single item.
   if ( $.type ( problem.objects.output ) == 'array' ) {
-    $.each( problem.objects.output, function( index, output ) {
+    problem.objects.output.forEach( function( output, index ) {
       addOutput(output);
     });
   } else  if ( $.type ( problem.objects.output ) == 'item'){
@@ -1360,9 +1398,9 @@ function parseProblemToMemory( problem ) {
   }
 
   // Solids - These could be an array OR a single item.
-  if ( $.type ( problem.objects.solid ) == 'array' ) {
-    $.each( problem.objects.solid, function( index, solid ) {
-    addSolid(solid);
+  if ( typeof problem.objects.solid === 'array' ) {
+    problem.objects.solid.forEach( function( solid, index ) {
+        addSolid(solid);
     });
   } else if ( problem.objects.solid != null ) {
     // Workaround becaue the php xml to json for single solids, would an object.
@@ -1375,7 +1413,7 @@ function parseProblemToMemory( problem ) {
 
   // Objects - Also detect the floatign texts, which are not relaly solids.
   if ( $.type (problem.objects.object) == 'array' ) {
-    $.each( problem.objects.object, function( index, object) {
+    problem.objects.object.forEach( function( object, index ) {
       addObject(object);
     });
   } else if ( problem.objects.object != null ) {

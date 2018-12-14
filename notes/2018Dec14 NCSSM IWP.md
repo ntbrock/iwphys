@@ -8,6 +8,20 @@ Goal is to have a fuyll spreadsheet of all anumations and test results for each.
 
 1. Update iwp.js to be pure JS so it executes in scala runtime to load animations and calculate frames.
 
+Old:
+  $.each( solids, function( index, solid ) {
+    resetSolidCalculators(solid);
+  });
+
+New:
+  solids.forEach(function ( solid, index) {
+    resetSolidCalculators(solid);
+  });
+
+
+
+
+
 2. Build an animation specific comparator for V4 -vs- V5.
 
 3. 
