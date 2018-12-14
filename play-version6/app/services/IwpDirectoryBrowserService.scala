@@ -3,7 +3,7 @@ package services
 import java.io.File
 
 import javax.inject.Inject
-import models.Iwp6Animation
+import models.{Iwp6Animation, Iwp6Collection}
 import play.api.{Configuration, Logger}
 import play.api.libs.json.Json
 
@@ -13,19 +13,19 @@ class IwpDirectoryBrowserService @Inject()(configuration: Configuration) extends
   val rootO = configuration.getOptional[String]("iwp.filesystem.root")
 
 
-  def topCollections : Seq[String] = {
+  def topCollections : Seq[Iwp6Collection] = {
 
     findFolders("")
   }
 
-  def findFolders(path: String) : Seq[String] = {
+  def findFolders(path: String) : Seq[Iwp6Collection] = {
 
     rootO match {
       case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
       case Some(root) =>
 
         val pathFile = new File(root  + File.separator + path)
-        listDirectories(pathFile).map {_.getName}
+        listDirectories(pathFile).map { f => Iwp6Collection( f, f.getName ) }
     }
 
   }
@@ -42,7 +42,7 @@ class IwpDirectoryBrowserService @Inject()(configuration: Configuration) extends
 
         val files = listIwpJsonFiles(pathFile)
 
-        files.map { file =>
+        val out = files.map { file =>
 
           val jsonString = readFileCompletely(file)
 
@@ -55,7 +55,9 @@ class IwpDirectoryBrowserService @Inject()(configuration: Configuration) extends
           }
 
           obj
-        }.flatten
+        }
+
+        out.toSeq.flatten
 
     }
   }

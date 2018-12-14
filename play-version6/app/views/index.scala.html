@@ -1,4 +1,4 @@
-@(collections: Seq[String])
+@(topCollections: Seq[Iwp6Collection])
 
 @main("Welcome to Play") {
   <h1>IWP play-version6</h1>
@@ -9,9 +9,9 @@
 
 <ol>
 
-  @collections.map{collection=>
+  @topCollections.map{ collection=>
   <li>
-    <a href="@controllers.routes.AnimationController.browseCollection(collection)">@collection</a>
+    <a href="@controllers.routes.AnimationFilesystemController.browseCollection(collection.name)">@collection.name</a>
   </li>
   }
 
@@ -37,20 +37,20 @@
 <hr>
   <h2>Unit Tests</h2>
 
-  <h4>General Unit Tests</h4>
+  <h4>Mongo Access Prototype</h4>
   <ol>
 
     <li>
-      <a href="@controllers.routes.AnimationController.browseCollection("winters-ncssm-2009")">Browse winters-ncssm-2009</a>
+      <a href="@controllers.routes.AnimationMongoController.browseCollection("winters-ncssm-2009")">Browse winters-ncssm-2009</a>
     </li>
 
     <li>
-      <a href="@controllers.routes.AnimationController.getAnimation("winters-ncssm-2009","coulombslaw03.iwp")">GET winters-ncssm-2009/coulombslaw03.iwp</a>
+      <a href="@controllers.routes.AnimationMongoController.getAnimation("winters-ncssm-2009","coulombslaw03.iwp")">GET winters-ncssm-2009/coulombslaw03.iwp</a>
 
     </li>
 
     <li>
-      <a href="@controllers.routes.AnimationController.getAnimationJson("winters-ncssm-2009","coulombslaw03.iwp")">GET winters-ncssm-2009/coulombslaw03.iwp.json</a>
+      <a href="@controllers.routes.AnimationMongoController.getAnimationJson("winters-ncssm-2009","coulombslaw03.iwp")">GET winters-ncssm-2009/coulombslaw03.iwp.json</a>
     </li>
   </ol>
 

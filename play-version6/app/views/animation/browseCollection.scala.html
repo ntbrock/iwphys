@@ -1,16 +1,16 @@
-@(collection: String, collections: Seq[String], animations: Seq[Iwp6Animation])
+@(thisCollection: String, subCollections: Seq[Iwp6Collection], animations: Seq[Iwp6Animation])
 
 @main("Welcome to Play") {
-  <h1>Animation Browser: @collection</h1>
+  <h1>Animation Browser: @thisCollection</h1>
 
-  @if(dirs.size> 0 ) {
+  @if(subCollections.size> 0 ) {
 
-  <h3>@dirs.size Collections</h3>
+  <h3>@subCollections.size Collections</h3>
 
-    @dirs.map{ dir =>
+    @subCollections.map{ subCollection =>
 
     <li>
-      <a href="@controllers.routes.AnimationController.browseCollection(dir)">@{dir}</a> &middot;
+      <a href="@controllers.routes.AnimationFilesystemController.browseCollection(subCollection.relative(thisCollection))">@{subCollection.name}</a> &middot;
     </li>
 
     }
@@ -23,8 +23,8 @@
   @animations.map{ animation =>
 
     <li>
-      <a href="@controllers.routes.AnimationController.getAnimation(collection,animation.filename.get)">@{animation.filename.get} HTML</a> &middot;
-      <a href="@controllers.routes.AnimationController.getAnimationJson(collection,animation.filename.get)">JSON</a>
+      <a href="@controllers.routes.AnimationFilesystemController.getAnimation(thisCollection,animation.filename.get)">@{animation.filename.get} HTML</a> &middot;
+      <a href="@controllers.routes.AnimationFilesystemController.getAnimationJson(thisCollection,animation.filename.get)">JSON</a>
     </li>
 
 

@@ -11,7 +11,9 @@ GET     /                           controllers.HomeController.index
 GET     /valiation/:collection/:filename    controllers.ValidationController.validateAnimation(collection: String, filename: String)
 
 # Official filesystem Browser
-GET     /animation/:collection/:filename    controllers.AnimationBrowserController.validateAnimation(collection: String, filename: String)
+GET     /collection/*collection                controllers.AnimationFilesystemController.browseCollection(collection: String)
+GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
+GET     /animation/:collection/:filename.json  controllers.AnimationFilesystemController.getAnimationJson(collection: String, filename: String)
 
 
 # First Rudimentary Database Browser

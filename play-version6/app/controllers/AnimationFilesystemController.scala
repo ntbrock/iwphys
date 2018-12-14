@@ -22,10 +22,10 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
   def browseCollection(collection: String) = Action { implicit request: Request[AnyContent] =>
 
-    val dirs = iwpDirectoryBrowserService.findFolders(collection).map{ _.getName }
+    val dirs = iwpDirectoryBrowserService.findFolders(collection)
     val animations = iwpDirectoryBrowserService.findAnimations(collection)
 
-    Ok(views.html.animation.browseCollection(dirs, animations))
+    Ok(views.html.animation.browseCollection(collection, dirs, animations))
 
   }
 
@@ -35,6 +35,13 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
     throw new RuntimeException("Not implemented")
   }
+
+  def getAnimationJson(collection: String, filename: String) = Action.async { implicit request: Request[AnyContent] =>
+
+
+    throw new RuntimeException("Not implemented")
+  }
+
 
 
 
