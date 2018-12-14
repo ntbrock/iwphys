@@ -19,6 +19,8 @@ New:
   });
 
 
+2. How am I going to parse + pass the animation js to the new iwp6-calc?  Rest?
+
 
 
 

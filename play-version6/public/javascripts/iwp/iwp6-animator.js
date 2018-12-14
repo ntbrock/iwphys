@@ -6,6 +6,42 @@
  */
 
 
+
+/**
+ * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
+ * This is used mostly for the backwards step.
+ */
+function repaintStep(step) {
+  var vars = varsAtStep[step];
+  if ( vars == undefined ) {
+    throw "No previous calculations available at step: " + step;
+  } else {
+
+    updateTimeDisplay(vars.t);
+
+   outputs.forEach( function( output, index ) {
+      updateUserFormOutputDouble(output, vars[output.name]);
+   });
+
+   // le.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, solids: ", solids );
+
+   solids.forEach( function( solid, index ) {
+      updateSolidSvgPathAndShape(solid, vars[solid.name])
+   });
+
+   // console.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, objects: ", objects );
+
+   objects.forEach( function( object, index ) {
+      updateSolidSvgPathAndShape(object, vars[object.name])
+   });
+
+
+  }
+}
+
+
+
+
 //--------------------------------------------------------------------------------
 // DOM Manipulation
 

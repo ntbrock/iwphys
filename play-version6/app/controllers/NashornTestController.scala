@@ -105,7 +105,7 @@ class NashornTestController @Inject()(cc: ControllerComponents, mongo: IwpMongoC
     val invokable = engine.asInstanceOf[Invocable]
 
     Logger.info(s"NashornTestController:51> invokable: ${invokable}")
-    val r = invokable.invokeFunction("masterResetSteps", "")
+    val r = invokable.invokeFunction("parseAnimationToMemory", "NoSuchAnimation")
 
     Ok(s"Nashorn Test 4: result: ${iwpEval},  function call to nashhornTest2js: ${r} ")
 

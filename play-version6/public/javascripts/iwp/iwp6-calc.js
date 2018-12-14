@@ -31,6 +31,16 @@ var deepExtend = function(out) {
   return out;
 };
 
+// ------------------------------------------------
+// Sugar from https://www.n-k.de/riding-the-nashorn/
+
+var console = {};
+console.debug = print;
+console.log = print;
+console.warn = print;
+console.error = print;
+
+
 
 //-----------------------------------------------------------------------
 // Memory Intialization + Globals Section
@@ -152,43 +162,49 @@ function handleStep() {
 		newStep = 0;
 	}
 	// TODO - end of time.
-  /*time = {
+    /*time = {
     start : parseFloat(inTime.start),
     stop : parseFloat(inTime.stop),
     change : parseFloat(inTime.change),
     fps : parseFloat(inTime.fps)
    };*/
-  //console.log("stop step", queryTimeStopInputDouble() / queryTimeStepInputDouble())
-  //console.log('current step', newStep)
-  if (newStep > ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
-    handleStopClick()
-    return;
-  }
+    //console.log("stop step", queryTimeStopInputDouble() / queryTimeStepInputDouble())
+    //console.log('current step', newStep)
+    if (newStep > ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
+        handleStopClick()
+        return;
+    }
 	//console.log("handleStep:61> newStep: " + newStep)
 
-	if ( newStep != currentStep ) {
+    if ( newStep != currentStep ) {
 
-    // Back button poerformance - Let's look at the historical array of variables, if we have it, reload
-    // to avoid doing a recalcaultion
+        // Back button poerformance - Let's look at the historical array of variables, if we have it, reload
+        // to avoid doing a recalcaultion
 
-    var vars = varsAtStep[newStep];
-    if ( vars != undefined ) {
-      //console.log("[iwp5.js:118] Step " + newStep + " already exist, reloading for history.")
-      repaintStep(newStep);
-    } else {
-  		// UI rendering is handled by the calculate as a side effect
-	 	  vars = calculateVarsAtStep(newStep);
-  		archiveVarsAtStep( newStep, vars );
+        var vars = varsAtStep[newStep];
+        if ( vars != undefined ) {
+          //console.log("[iwp5.js:118] Step " + newStep + " already exist, reloading for history.")
+          if ( typeof repaintStep === "function") {
+            repaintStep(newStep);
+          }
+
+        } else {
+            // UI rendering is handled by the calculate as a side effect
+              vars = calculateVarsAtStep(newStep);
+            archiveVarsAtStep( newStep, vars );
+        }
+
+        // iwp5.1 - Adding Hook into the graph capabilties
+        if ( changeStep > 0 ) {
+            if (graphStepForward === "function" ) {
+                graphStepForward(newStep, vars);
+            }
+        } else if ( changeStep < 0 ) {
+            if (graphStepBackward === "function" ) {
+                graphStepBackward(newStep, vars);
+            }
+        }
     }
-
-    // iwp5.1 - Adding Hook into the graph capabilties
-    if ( changeStep > 0 ) {
-      graphStepForward(newStep, vars);
-    } else if ( changeStep < 0 ) {
-      graphStepBackward(newStep, vars);
-    }
-
-	}
 
 	currentStep = newStep;
 
@@ -380,39 +396,6 @@ function calculateTextAtStep(text, step, vars, verbose) {
 //  updateTimeDisplay(vars.t);
 //  updateUserFormOutputDouble(output, newValue);
 //  updateSolidSvgPathAndShape(solid, calc)
-
-/**
- * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
- * This is used mostly for the backwards step.
- */
-function repaintStep(step) {
-  var vars = varsAtStep[step];
-  if ( vars == undefined ) {
-    throw "No previous calculations available at step: " + step;
-  } else {
-
-    updateTimeDisplay(vars.t);
-
-   outputs.forEach( function( output, index ) {
-      updateUserFormOutputDouble(output, vars[output.name]);
-   });
-
-   // le.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, solids: ", solids );
-
-   solids.forEach( function( solid, index ) {
-      updateSolidSvgPathAndShape(solid, vars[solid.name])
-   });
-
-   // console.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, objects: ", objects );
-
-   objects.forEach( function( object, index ) {
-      updateSolidSvgPathAndShape(object, vars[object.name])
-   });
-
-
-  }
-}
-
 
 
 
@@ -1222,48 +1205,8 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
 
       var dt = vars["delta_t"]
-
-      /*
-      // This is handled in the master calculate step now  2018Mar22
-      if ( calculator["initialDisplacement"] == undefined ) {
-        calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
-        calculator.currentDisplacement = calculator.initialDisplacement
-        console.log("iwp5:380> calculating initial displacement to: ", calculator.initialDisplacement )
-      }
-
-      if ( calculator["initialVelocity"] == undefined ) {
-        calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
-        calculator.currentVelocity = calculator.initialVelocity * dt;
-<<<<<<< HEAD
-        //console.log("iwp5:405> calculating initial velocity to: ", calculator.initialVelocity )
-      }
-
-
-      // 2018Mar15 Special new code to look backwards
-      var previousVars = varsAtStep[currentStep-1];
-      if ( previousVars ) {
-        // copy everything with this name into current step, which gets all dimensions
-        //BOOK
-        vars[objectName] = previousVars[objectName]
-        // console.log("iwp5:1050> Copied past variable forward: vars["+objectName+"] = ", vars[objectName])
-      }
-
-
-      // 2018Mar15 - Write our displacement values, etc ino current vars.
-      // Mimick IWP4 Behavior, set current velocity + displacement into curent vars
-      //vars[resultVariable+"disp"] = calculator.currentDisplacement;
-      //vars[resultVariable+"pos"] = calculator.currentDisplacement;
-      //vars[resultVariable+"vel"] = calculator.currentVelocity;
-      // console.log("iwp5:1047> For Step: " + currentStep + " resultVariable: " + resultVariable + " disp: " + calculator.currentDisplacement  + "  vel: " + calculator.currentVelocity);
-
-
-
-      if ( verbose ) {
-        // console.log("iwp5:661>", resultVariable, "BEFORE STEP: ", currentStep, "/", changeStep, "  accelerationCompiled: ", calculator.accelerationCompiled,  "  vars: ", JSON.stringify(vars) )
-      }
-      */
-
       var acceleration = null;
+
       try {
         // then calculate the acceleratiion
         // 2018Mar22 Fix to only apply the acceleration time component to the change in velocity.
@@ -1347,6 +1290,16 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 }
 
 
+
+
+function parseAnimationToMemory( animation ) {
+    console.log("iwp-calc:1286> Entry point for animation: ", animation );
+    if ( typeof animation === "object" ) {
+        parseProblemToMemory( animation );
+    } else {
+        throw "parseAnimationToMemory:1290> 1st Argument must be Javascript Object, was: "+(typeof animation)
+    }
+}
 
 
 function parseProblemToMemory( problem ) {
