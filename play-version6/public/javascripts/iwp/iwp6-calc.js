@@ -68,6 +68,12 @@ var svgObjects = [];
 // The object for the step is exactly what is passed into the equation calculation.
 // Need to support complex variables in the equation like ball.x
 
+
+// Nashorn accessibility
+function varsAtStepJson(step) {
+    return JSON.stringify(varsAtStep[+step]);
+}
+
 var varsAtStep = [];
 var currentStep = 0;
 var changeStep = 0; 	// -1 = backwards, 0 = stopped, 1 = forwards.
@@ -236,12 +242,11 @@ function calculateOutputAtStep(output, step, vars, verbose) {
  */
 function calculateSolidAtStep(solid, step, vars, verbose) {
 
-    console.log("iwp6-calc:233> calculateSolidAtStep step: " + step + " solid: " + JSON.stringify(solid));
+    // console.log("iwp6-calc:233> calculateSolidAtStep step: " + step + " solid: " + JSON.stringify(solid));
 
     var xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, step, vars, verbose, solid.name )
 
-    console.log("iwp6-calc:233> calculateSolidAtStep xComplex: "+ JSON.stringify(xComplex));
-
+    // console.log("iwp6-calc:233> calculateSolidAtStep xComplex: "+ JSON.stringify(xComplex));
 
     var x = xComplex.value
 
@@ -270,9 +275,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     var yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
     var y = yComplex.value
 
-    console.log("iwp6-calc:265> calculateSolidAtStep yComplex: "+ JSON.stringify(yComplex));
-
-
+    // console.log("iwp6-calc:265> calculateSolidAtStep yComplex: "+ JSON.stringify(yComplex));
 
     // Handle Complex return types from Euler Calculator
     var calcY = {
@@ -375,10 +378,8 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       calc.yaccel = yComplex.acceleration
     }
 
-    //BOOK 1256
     console.log("iwp6-calc:373> Completed Solid calculation, writing back to vars: " + solid.name + "   calc: " + JSON.stringify(calc));
     vars[solid.name] = calc
-
 
     // WARNING: updating svg display deep inside the calc route.
     // Run in headless mode
@@ -427,10 +428,11 @@ function calculateTextAtStep(text, step, vars, verbose) {
 
 var CONFIG_throw_solid_calculation_exceptions = true;
 
+
 function calculateVarsAtStep(step) {
 
   // vars should be a map of string to double, including the mathematical / physical constants.
-  var vars = { step: step}
+  var vars = { step: step }
   deepExtend(vars, varsConstants);
 
   // optional UI
@@ -667,9 +669,8 @@ function calculateVarsAtStep(step) {
         var newValue = calculateSolidAtStep(solid, step, vars, true );
         vars[solid.name] = newValue;
 
-        console.log("iwp6-calc:656> Success calculating solid: " + JSON.stringify(solid))
-        console.log("iwp6-calc:656> Success calculating solid, vars now: " + JSON.stringify(vars))
-
+        // console.log("iwp6-calc:656> Success calculating solid: " + JSON.stringify(solid))
+        // console.log("iwp6-calc:656> Success calculating solid, vars now: " + JSON.stringify(vars))
 
     } catch ( err ) {
         console.log("iwp6-calc:651> Failed solid calculation: " +  err);
@@ -792,14 +793,9 @@ function calculateVarsAtStep(step) {
     });
   }
 
-	//console.log(" calculateVarsAtStep, vars = ", vars);
-
-
-  //FIX - Must use the return keyword
   return vars;
 }
 
-// After the problem parse, we want to call :   calculateVarsAtStep(currentStep = 0);
 
 
 //-----------------------------------------------------------------------
@@ -850,7 +846,8 @@ function addInput(input) {
     //console.log("iwp5:586> Imported iwp450 calculation order: ", input.calculationOrder )
   }
 
-  console.log("iwp6-calc:807> pushingInput: ", JSON.stringify(input) );
+  // console.log("iwp6-calc:807> pushingInput: ", JSON.stringify(input) );
+
   inputs.push( input );
   // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"}
   // 07 Oct 2016 Honoring hidden flag
@@ -1357,6 +1354,9 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
  * Important entry point!
  *
  * 2018Dec14 Converted to pure Js, the $.type interface is different than typeof, requires Array.isArray
+ *
+ * After the problem parse, outer layer must call :  masterResetSteps()  or   calculateVarsAtStep(currentStep = 0);
+ * The new iwp6-read does this.
  */
 
 function parseProblemToMemory( problem ) {

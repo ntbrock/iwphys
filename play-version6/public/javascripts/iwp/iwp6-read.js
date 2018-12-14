@@ -7,7 +7,7 @@
 
 
 function readAnimationObject( animation ) {
-    console.log("iwp6-read:1286> Entry point for animation: ", animation );
+    console.log("iwp6-read:10> Entry point for animation: ", animation );
     if ( typeof animation === "object" ) {
         var a =  parseProblemToMemory( animation );
         masterResetSteps();
@@ -22,7 +22,7 @@ function readAnimationString( animationString ) {
 
     var animation = JSON.parse(animationString);
 
-    console.log("iwp6-read:1286> Entry point for animationString: ", animation );
+    console.log("iwp6-read:10> Entry point for animationString: ", animation );
     if ( typeof animation === "object" ) {
         var a =  parseProblemToMemory( animation );
         masterResetSteps();
@@ -31,5 +31,7 @@ function readAnimationString( animationString ) {
         throw "parseAnimationToMemory:1290> 1st Argument must be Javascript Object, was: "+(typeof animation)
     }
 }
+
+
 
 true;

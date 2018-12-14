@@ -154,14 +154,12 @@ class NashornTestController @Inject()(cc: ControllerComponents, mongo: IwpMongoC
     Logger.info(s"NashornTestController:51> invokable: ${invokable}")
 
     //load animation
-    val r = invokable.invokeFunction("readAnimationString", unitTestAnimation )
+    val read = invokable.invokeFunction("readAnimationString", unitTestAnimation )
 
+    // Access frame 0
+    val step0 = invokable.invokeFunction("varsAtStepJson", "0" )
 
-    // reset to zero
-
-
-
-    Ok(s"Nashorn Test 5:  function call to readAnimationObject: ${r} ")
+    Ok(s"Nashorn Test 5:  function call to varsAtStep(0): ${step0} ")
 
   }
 
