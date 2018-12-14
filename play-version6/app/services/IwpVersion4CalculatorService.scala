@@ -42,7 +42,7 @@ class IwpVersion4CalculatorService {
       val maxFrame = 1000
 
       while (time.getTime < time.getStopTime && frames.size < maxFrame) {
-        Logger.info(s"DProblemController:86> time: ${time.getTime}")
+        // Logger.info(s"IwpVersion4CalculatorService:45> time: ${time.getTime}")
         time.tick(ps)
         val t = time.getTime
 
@@ -67,28 +67,67 @@ class IwpVersion4CalculatorService {
 
         val vars = ps.vars.getCurrentTickVars
         val varKeyi = vars.iterator()
+
+        var varJso = JsObject(Seq.empty)
+
+        val ignoreFields = Seq("Time.deltaTime", "Time.stopTime", "Time.startTime", "Time.curTime", "Time.endTime",
+        "startTime", "curTime", "endTime", "stopTime" )
+
+
         while ( {
           varKeyi.hasNext
         }) {
           val key = varKeyi.next().asInstanceOf[String]
           val value = vars.get(key)
 
-          varMap.put(key, value)
-          //Logger.info(s"DProblemController:110> ${key} = ${value}")
+
+          // Ignore the core objects like Time.
+          if ( ignoreFields.contains(key) ) { }
+
+          else {
+
+
+            //Logger.info(s"DProblemController:110> ${key} = ${value}")
+
+
+            //2018Dec14 Apples to Apples Conversion to match iwp5 nested format. Use a rolling Json DeepMerge
+
+            val keyPath = key.split("[.]")
+
+            if (keyPath.size == 2) {
+
+              // Flatten values
+              if ( keyPath(1) == "value" ) {
+                varJso = varJso.deepMerge(JsObject(Seq(keyPath(0) -> JsNumber(value))))
+
+              } else {
+                varJso = varJso.deepMerge(JsObject(Seq(keyPath(0) -> JsObject(Seq(keyPath(1) -> JsNumber(value))))))
+              }
+
+
+
+            } else if (keyPath.size == 1) {
+              varJso = varJso.deepMerge(JsObject(Seq(keyPath(0) -> JsNumber(value))))
+
+            } else {
+              throw new RuntimeException(s"IwpVersion4Calculator:89> Keypath of length ${keyPath.size} > 2 not supported by Taylor in 2018 for key : ${key}")
+            }
+
+          }
         }
 
-        val jsonFrame = JsObject(varMap.toMap.map { case (k, v) => k -> JsNumber(v) })
+        val jsonFrame = varJso // JsObject(varMap.toMap.map { case (k, v) => k -> JsNumber(v) })
 
 
         frames.enqueue(jsonFrame)
 
-        Logger.info(s"DProblemConroller:88> Time: ${time.getTime}  VarMap: ${varMap.toMap}")
+        // Logger.info(s"IwpVersion4CalculatorService:124> Time: ${time.getTime}  VarMap: ${varMap.toMap}")
         ps.tickStepForward()
 
       }
 
 
-      Logger.info(s"DProblemController:130> Ok, Complete")
+      // Logger.info(s"IwpVersion4CalculatorService:130> Ok, Complete")
 
       JsArray(frames)
     }
