@@ -1,7 +1,7 @@
 name := """iwp6-play"""
 organization := "edu.ncssm.iwp"
 
-version := "6.0.1-SNAPSHOT"
+version := "6.0.2-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
