@@ -53,15 +53,17 @@ Milestone 0 - Solidify The Data Model
 
 = 100% Define a Json schema for IWP5.js with visualizations, examples - 6h
 
-~ 50%  Bulk convert packaged Xml Animations to their JSON counterparts, leverage php - 6h
+= 100%  Bulk convert packaged Xml Animations to their JSON counterparts, leverage php - 6h
 
-~ 75%  Choose and tool out a json schema validator application run over packaged content, refine schema - 8h
+= 100%  Choose and tool out a json schema validator application run over packaged content, refine schema - 8h
 
-~ 25%  Refactor the iwp5.js code for Animation parsing out to a new iwp5-validation.js library - 4h
+- 100%  Refactor the iwp5.js code for Animation parsing out to a new iwp5-validation.js library - 4h
 
-- 0%   Implement a circular reference detector in iwp5-validation - 8h
+- 50%   Implement a circular reference detector in iwp5-validation - 8h
 
 Output: All Animations, know which ones have frame by frame / variable differences in bulk.
+
+
 
 
 

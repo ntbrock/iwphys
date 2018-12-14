@@ -1,6 +1,12 @@
 package models
 
+import java.io.File
+
+import play.api.Logger
 import play.api.libs.json._
+import services.BoilerplateIO
+
+import scala.util.{Success, Try}
 
 
 
@@ -13,15 +19,18 @@ case class Iwp6Time ( change: String,
 case class Iwp6Window ( xgrid: String,
                         xmax: String,
                         xmin: String,
-                        xunit: String,
+                        xunit: Option[String],
                         ygrid: String,
                         ymax: String,
                         ymin: String,
-                        yunit: String )
+                        yunit: Option[String] )
 
 
 case class Iwp6Calculator ( attributes : Map[String,String],
-                            value: String )
+                            displacement: Option[String],
+                            velocity: Option[String],
+                            acceleration: Option[String],
+                            value: Option[String] )
 
 
 case class Iwp6Path ( calculator: Iwp6Calculator )
@@ -36,10 +45,10 @@ case class Iwp6InitiallyOn (attributes : Map[String,String] )
 case class Iwp6GraphOptions (attributes : Map[String,String],
                              initiallyOn: Iwp6InitiallyOn )
 
-case class Iwp6Shape (attributes : Map[String,String],
-                      graphOptions: Iwp6GraphOptions,
+case class Iwp6Shape (attributes : Map[String,String], // Not a huge fan of this.
+                      graphOptions: Option[Iwp6GraphOptions],
                       height: Iwp6Length,
-                      vectors: Iwp6Vectors,
+                      vectors: Option[Iwp6Vectors],
                       width: Iwp6Length )
 
 
@@ -60,15 +69,15 @@ case class Iwp6Solid ( color: Iwp6Color,
 case class Iwp6Output ( calculator: Option[Iwp6Calculator],
                         hidden: Option[String],
                        name: String,
-                       text: String,
-                       units: String )
+                       text: Option[String],
+                       units: Option[String] )
 
 
 case class Iwp6Input ( hidden: Option[String],
                         initialValue: String,
                         name: String,
-                        text: String,
-                        units: String )
+                        text: Option[String],
+                        units: Option[String] )
 
 case class Iwp6GraphWindow( xgrid: String,
                             xmax: String,
@@ -78,9 +87,9 @@ case class Iwp6GraphWindow( xgrid: String,
                             ymin: String )
 
 
-case class Iwp6Description( text: String )
+case class Iwp6Description( text: Option[String] )
 
-case class Iwp6Objects( GraphWindow: Iwp6GraphWindow,
+case class Iwp6Objects( GraphWindow: Option[Iwp6GraphWindow],
                         description: Iwp6Description,
                         input: Seq[Iwp6Input],
                         output: Seq[Iwp6Output],
@@ -88,10 +97,10 @@ case class Iwp6Objects( GraphWindow: Iwp6GraphWindow,
                         time: Iwp6Time,
                         window: Iwp6Window )
 
-case class Iwp6Author(email: String,
-                      name: String,
-                      organization: String,
-                      username: String )
+case class Iwp6Author(email: Option[String],
+                      name: Option[String],
+                      organization: Option[String],
+                      username: Option[String] )
 
 
 case class Iwp6Animation(filename: Option[String],
@@ -101,8 +110,11 @@ case class Iwp6Animation(filename: Option[String],
 }
 
 
+/**
+  * Use this centralized parser!
+  */
 
-object Iwp6Animation {
+object Iwp6Animation extends BoilerplateIO {
 
   implicit val Iwp6Calculator = Json.format[Iwp6Calculator]
   implicit val Iwp6InitiallyOn = Json.format[Iwp6InitiallyOn]
@@ -124,5 +136,77 @@ object Iwp6Animation {
   implicit val Iwp6AnimationFormat = Json.format[Iwp6Animation]
 
 
+  /**
+    * Because of the weird php xml converter, single items are converted to objects
+    * @param jsLookupResult
+    * @return
+    */
+  private def toJsArray( jsLookupResult: JsLookupResult ) : JsArray = {
+
+    jsLookupResult.toOption.map { i =>
+
+      if ( i.isInstanceOf[JsArray] ) {
+        i.asInstanceOf[JsArray]
+      } else if ( i.isInstanceOf[JsObject] ) {
+        JsArray(Seq(i))
+      } else {
+        throw new RuntimeException(s"Invalid javascript format for input: ${i}")
+      }
+    }.getOrElse(JsArray(Seq()))
+  }
+
+
+  def fromFile(file: File) : Try[Iwp6Animation] = {
+
+    val jsonString = readFileCompletely(file)
+
+    // Because of our xml -> json evolution , there's some cruft we manually fix
+    val jsonMigrated1 = jsonString.replaceAll("@attributes", "attributes")
+    val jsonMigrated2 = jsonMigrated1.replaceAll("[{][}]", "null")
+
+    val json = Json.parse(jsonMigrated2)
+
+    // Ensure top levels are good.
+
+    val author = json \ "author"
+    val objects = json \ "objects"
+    val time = objects \ "time"
+    val graphWindow = objects \ "GraphWindow"
+    val window = objects \ "window"
+    val description = objects \ "description"
+    val input = toJsArray(objects \ "input")
+    val solid = toJsArray(objects \ "solid")
+    val output = toJsArray(objects \ "output")
+
+
+    var json2 =
+      Json.obj(
+        "author" -> author.toOption,
+        "objects" -> Json.obj(
+          "time" -> time.toOption,
+          "GraphWindow" -> graphWindow.toOption,
+          "window" -> window.toOption,
+          "description" -> description.toOption,
+          "input" -> input,
+          "solid" -> solid,
+          "output" -> output
+        )
+      )
+
+
+    val obj = Json.fromJson[Iwp6Animation](json2)
+
+    obj match {
+
+      case e: JsError =>
+        Logger.warn(s"IwpDirectoryBrowserService:56> Iwp Json Parse Error: ${file.getName} \n\n ${e})")
+        throw new RuntimeException(s"Iwp Json Parse Error: ${file.getName}]\n${e})")
+
+      case s: JsSuccess[Iwp6Animation] =>
+        Success(s.value.copy(filename = Some(file.getName().replaceAll(".json$", "")) ))
+
+    }
+
+  }
 }
 

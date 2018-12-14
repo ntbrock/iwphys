@@ -1,0 +1,91 @@
+body {
+	font-size:   20                ;
+	font-family: "PT Serif", serif ;
+	color:       #333              ;
+	position:    relative		   ;
+	width:       960px			   ;
+}
+svg {
+	margin-left: 20%;
+}
+table {
+	height:  auto              ;
+	display: inline-block     ;
+	border-collapse: collapse ;
+	background-color: #ddd    ;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+th, td {
+	padding:        15px            ;
+	text-align:     center          ;
+	vertical-align: center          ;
+}
+#variableTable {
+	padding: 5%;
+	background-color: #ddd;
+	margin-left: 10%;
+}
+.bottomBorder {
+	position: relative;
+	text-align: center;
+	border-bottom: 1px black solid;
+}
+/*.bottomBorder::after {
+	position: absolute;
+	left: 50%;
+	content: '';
+	display: block;
+	width: 0;
+	height: 1px;
+	background: #000; 
+}
+.bottomBorder:hover::after {
+	width: 100%;
+	margin-left: -50%;
+	transition: all .3s linear;
+}*/
+#reset {
+	visibility: hidden;
+}
+#addMe {
+	visibility: collapse;
+}
+
+/** Layout of whoole page view */
+.tableFormat {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 65%;
+	width: 40%;
+}
+#move {
+	position: absolute;
+	top: 0;
+	height: 90%;
+	width: 100%;
+	left: 300px;
+}
+#playBar {
+	position: absolute;
+	top: 91%;
+	height: auto;
+	width: 546px;
+	left: 46%;
+	background-color: #ddd;
+	padding: 1%;
+	padding-left: 10%;
+	margin-bottom: 5%;
+}
+.input-error { 
+	background-color: #fdd;
+}
+.input-ok { 
+	background-color: #dfd;
+}
+#ground {
+	z-index: 100;
+}
+#objectTrail {
+	z-index: 50;
+}
