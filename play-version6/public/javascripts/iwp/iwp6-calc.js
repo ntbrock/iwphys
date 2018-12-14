@@ -432,10 +432,24 @@ function calculateVarsAtStep(step) {
 
   // Collect user Inputs! These are polled from the DOM every step.
 
+
+  console.log("iwp6-calc:436> inputs: " , JSON.stringify(inputs) );
+
   inputs.forEach( function( input, index ) {
-		// next load in variables for all of the inputs.
-    //vars[input.name] = { value: queryUserFormInputDouble(input) };
-    vars[input.name] = queryUserFormInputDouble(input);
+
+	console.log("iwp6-calc:437> input: " , input, "   index: " , index);
+
+	// next load in variables for all of the inputs.
+	// If we're running in calculator only mode, use default values
+    if ( typeof queryUserFormInputDouble === "function" ) {
+        vars[input.name] = queryUserFormInputDouble(input);
+    } else {
+
+        console.log("iwp6-calc:442> Setting initial value for: " + input.name + "  value: " + input.initialValue );
+
+        vars[input.name] = +input.initialValue;
+    }
+
 
     //console.log("iwp5:410> calculateVarsAtStep("+step+")  Assigned Input: " , input.name, "  A value of: " ,vars[input.name] )
 
@@ -790,7 +804,7 @@ function addInput(input) {
     //console.log("iwp5:586> Imported iwp450 calculation order: ", input.calculationOrder )
   }
 
-  //console.log("addInput: ", input );
+  console.log("iwp6-calc:807> pushingInput: ", JSON.stringify(input) );
   inputs.push( input );
   // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"}
   // 07 Oct 2016 Honoring hidden flag
@@ -1295,6 +1309,8 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
 /**
  * Important entry point!
+ *
+ * 2018Dec14 Converted to pure Js, the $.type interface is different than typeof, requires Array.isArray
  */
 
 function parseProblemToMemory( problem ) {
@@ -1313,7 +1329,7 @@ function parseProblemToMemory( problem ) {
 
   }
 
-    // TODO more validation
+  // TODO more validation
 
 
 
@@ -1333,59 +1349,88 @@ function parseProblemToMemory( problem ) {
     setAuthorName(problem.author.username);
   }
 
+  // console.log("iwp6-calc:1350> Typeof input: " , typeof problem.objects.input)
+
   // Inputs - These could be an array OR a single item.
-  if ( typeof problem.objects.input === 'array' ) {
-    problem.objects.input.forEach( function( input, index ) {
-      addInput(input);
-    });
-  } else if ( typeof problem.objects.input === 'item') {
+  if ( typeof problem.objects.input === 'item') {
+
+    console.log("iwp6-calc:1354> Item iterator: " , JSON.stringify(problem.objects.input) );
     addInput(problem.objects.input);
+
   } else if ( typeof problem.objects.input === 'object') {
-    addInput(problem.objects.input);
 
-  }
-
-
-  else {
-    console.log("iwp5:954> Unable to handle input: ", typeof problem.objects.input )
-  }
-
-  // Output - These could be an array OR a single item.
-  if ( typeof problem.objects.output === 'array' ) {
-    problem.objects.output.forEach( function( output, index ) {
-      addOutput(output);
-    });
-  } else  if ( typeof problem.objects.output === 'item'){
-    addOutput(problem.objects.output);
-  } else if ( typeof problem.objects.output === 'object') {
-    addInput(problem.objects.output);
+    if ( Array.isArray(problem.objects.input ) ) {
+        problem.objects.input.forEach( function( input, index ) {
+            //console.log("iwp6-calc:1354> Array iterator: " , JSON.stringify(input) );
+            addInput(input);
+        });
+    } else {
+        //console.log("iwp6-calc:1354> Object iterator: " , JSON.stringify(problem.objects.input) );
+        addInput(problem.objects.input);
+    }
 
   } else {
-    null;
+    "iwp5:954> Unable to handle input with typeof: " + typeof problem.objects.input
   }
+
+
+
+  // Output - These could be an array OR a single item.
+  if ( typeof problem.objects.output === 'item'){
+    addOutput(problem.objects.output);
+  } else if ( typeof problem.objects.output === 'object') {
+
+    if ( Array.isArray(problem.objects.output)) {
+      problem.objects.output.forEach( function( output, index ) {
+        addOutput(output);
+      });
+
+    } else {
+      addOutput(problem.objects.output);
+    }
+
+  } else {
+       throw "iwp6:1387> Unable to handle output with typeof: "+ typeof problem.objects.output
+  }
+
+
 
   // Solids - These could be an array OR a single item.
-  if ( typeof problem.objects.solid === 'array' ) {
-    problem.objects.solid.forEach( function( solid, index ) {
-        addSolid(solid);
-    });
-  } else if ( problem.objects.solid != null ) {
-    // Workaround becaue the php xml to json for single solids, would an object.
-      addSolid(problem.objects.solid);
+  if ( typeof problem.objects.solid === 'object' ) {
+
+    if ( Array.isArray(problem.objects.solid)) {
+
+        problem.objects.solid.forEach( function( solid, index ) {
+            addSolid(solid);
+        });
+
+    } else  {
+        // Workaround becaue the php xml to json for single solids, would an object.
+        addSolid(problem.objects.solid);
+    }
+
+  } else {
+    throw "iwp6:1387> Unable to handle output with typeof: "+ typeof problem.objects.solid
   }
-
-
-
 
 
   // Objects - Also detect the floatign texts, which are not relaly solids.
-  if ( typeof problem.objects.object === 'array' ) {
-    problem.objects.object.forEach( function( object, index ) {
-      addObject(object);
-    });
+  if ( typeof problem.objects.object === 'object' ) {
+
+    if ( Array.isArray(problem.objects.object)) {
+
+        problem.objects.object.forEach( function( object, index ) {
+            addObject(object);
+        });
+
+    } else {
+        addObject(problem.objects.object);
+    }
   } else if ( problem.objects.object != null ) {
-     addObject(problem.objects.object);
+     throw "iwp6:1429> Unable to handle output with typeof: "+ typeof problem.objects.object
   }
+
+
 
   return {
     inputs: inputs,
