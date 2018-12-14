@@ -73,7 +73,8 @@ var svgObjects = [];
 
 // IWP6 - Nashorn accessibility with some javascript function overloading.
 function varsAtStepJson(step) {
-    if ( typeof step === "string" || typeof step === "number" ) {
+    if ( ( typeof step === "string" && step != "" ) ||
+         ( typeof step === "number" && step >= 0 ) ) {
         return JSON.stringify(varsAtStep[+step]);
     } else {
         return JSON.stringify(varsAtStep);

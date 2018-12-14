@@ -5,8 +5,7 @@
 
 Goal is to have a fuyll spreadsheet of all anumations and test results for each.
 
-
-1. Update iwp.js to be pure JS so it executes in scala runtime to load animations and calculate frames.
+= 1. Update iwp.js to be pure JS so it executes in scala runtime to load animations and calculate frames.
 
 Old:
   $.each( solids, function( index, solid ) {
@@ -19,12 +18,16 @@ New:
   });
 
 
-2. How am I going to parse + pass the animation js to the new iwp6-calc?  Rest?
+= 2. How am I going to parse + pass the animation js to the new iwp6-calc?  Made a new iwp6-read interface.
 
-
-
+1352> Reqady to do this now for the Euler Unit Test
 
 2. Build an animation specific comparator for V4 -vs- V5.
+
+
+
+
+
 
 3. 
 

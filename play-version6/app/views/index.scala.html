@@ -20,14 +20,25 @@
     <li>
       <a href="@controllers.routes.AnimationController.getAnimationJson("winters-ncssm-2009","coulombslaw03.iwp")">GET winters-ncssm-2009/coulombslaw03.iwp.json</a>
     </li>
+  </ol>
+
+
+
+  <h2>Version 4 DProblem Calculator</h2>
+    <ol>
 
     <li>
       <a href="@controllers.routes.DProblemController.index">DProblemController index - Basic Calculation Test</a>
     </li>
 
     <li>
-      <a href="@controllers.routes.DProblemController.view("animations/winters-ncssm-2009/cp-efield-02.iwp")">animations/winters-ncssm-2009/cp-efield-02.iwp</a>
+      <a href="@controllers.routes.DProblemController.view("animations/winters-ncssm-2009/cp-efield-02.iwp")">DProblemController: animations/winters-ncssm-2009/cp-efield-02.iwp</a>
     </li>
+
+      <li>
+        <a href="@controllers.routes.DProblemController.view("animations/unit-test-2017/TEST_euler.iwp")">DProblemController: animations/unit-test-2017/TEST_euler.iwp</a>
+      </li>
+
   </ol>
 
 
@@ -55,6 +66,9 @@
       <a href="@controllers.routes.NashornTestController.nashornTest5_calcIwpSteps()">nashornTest5_calcIwpSteps</a>
     </li>
 
+    <li>
+      <a href="@controllers.routes.NashornTestController.nashornTest6_compareIwpSteps()">nashornTest6_compareIwpSteps</a>
+    </li>
 
   </ol>
 
