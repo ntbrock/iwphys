@@ -22,12 +22,11 @@ New:
 
 1352> Reqady to do this now for the Euler Unit Test
 
-2. Build an animation specific comparator for V4 -vs- V5.
+= 3. Build an animation specific comparator for V4 -vs- V5.
 
 
+4. Convert all .iwp and create their JSOn counterpaerts.
 
+5. Browser that is driven off filesystem availbaility to run validation.
 
-
-
-3. 
 

@@ -24,6 +24,11 @@ GET     /test/nashorn/test4            controllers.NashornTestController.nashorn
 GET     /test/nashorn/test5            controllers.NashornTestController.nashornTest5_calcIwpSteps()
 GET     /test/nashorn/test6            controllers.NashornTestController.nashornTest6_compareIwpSteps()
 
+# Official Version4 Version6 Comparison Route
+GET     /valiation/:collection/:filename    controllers.ValidationController.validateAnimation(collection: String, filename: String)
+
+
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
