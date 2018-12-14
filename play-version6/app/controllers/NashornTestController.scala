@@ -94,11 +94,11 @@ class NashornTestController @Inject()(cc: ControllerComponents, mongo: IwpMongoC
 
     val engine = new ScriptEngineManager().getEngineByName("nashorn")
 
+    // Jquery 3 does not work in Nashorn: Cannot read property "createElement" from undefined in <eval> at line number 2]
+    // val jqFilereader = new FileReader("public/javascripts/jquery-3.2.1.min.js")
+    // val jqEval = engine.eval(jqFilereader)
 
-    val jqFilereader = new FileReader("public/javascripts/jquery-3.2.1.min.js")
-    val jqEval = engine.eval(jqFilereader)
-
-    val iwpFilereader = new FileReader("public/javascripts/iwp/iwp5.js")
+    val iwpFilereader = new FileReader("public/javascripts/iwp/iwp6.js")
     val iwpEval = engine.eval(iwpFilereader)
 
 
