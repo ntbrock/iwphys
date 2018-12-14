@@ -45,6 +45,8 @@ console.error = print;
 //-----------------------------------------------------------------------
 // Memory Intialization + Globals Section
 
+var parsedProblem = null;
+
 var time = {};
 var description = "";
 var iwindow = {};
@@ -164,7 +166,7 @@ function stepBackwardAndPause() {
  */
 function handleStep() {
 
-	console.log("iwp6-calc:167> HandleStep: current: " , currentStep, "  change: ", changeStep );
+	// console.log("iwp6-calc:167> HandleStep: current: " , currentStep, "  change: ", changeStep );
 	// apply the time change.
 	var newStep = currentStep + changeStep;
 
@@ -184,19 +186,24 @@ function handleStep() {
     //console.log('current step', newStep)
 
     // If we are beyond stop time dobn't do tanything.
-    if ( typeof queryTimeStopInputDouble === "function" && typeof queryTimeStepInputDouble === "function" ) {
+    if ( typeof queryTimeStopInputDouble === 'function' && typeof queryTimeStepInputDouble === 'function' ) {
         // Animation Mode
         if (newStep > ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
-            handleStopClick()
+
+            if ( typeof handleStopClick === 'function' ) {
+                handleStopClick();
+            }
             console.log("iwp6-calc:191> Animated end of time on step: " + newStep )
-            return - 1;
+            return -1;
         }
     } else {
         // Headless mode
         if (newStep > ( Math.round( +time.stop / +time.change ))) {
-            handleStopClick()
+            if ( typeof handleStopClick === 'function' ) {
+                handleStopClick();
+            }
             console.log("iwp6-calc:191> Animated end of time on step: " + newStep )
-            return - 1;
+            return -1;
         }
     }
 
@@ -399,7 +406,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
       calc.yaccel = yComplex.acceleration
     }
 
-    console.log("iwp6-calc:373> Completed Solid calculation, writing back to vars: " + solid.name + "   calc: " + JSON.stringify(calc));
+    // console.log("iwp6-calc:373> Completed Solid calculation, writing back to vars: " + solid.name + "   calc: " + JSON.stringify(calc));
     vars[solid.name] = calc
 
     // WARNING: updating svg display deep inside the calc route.
@@ -1497,6 +1504,8 @@ function parseProblemToMemory( problem ) {
      throw "iwp6:1429> Unable to handle output with typeof: "+ typeof problem.objects.object
   }
 
+
+  parsedProblem = problem;
 
 
   return {

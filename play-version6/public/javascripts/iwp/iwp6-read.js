@@ -13,7 +13,7 @@ function readAnimationObject( animation ) {
         masterResetSteps();
         return a;
     } else {
-        throw "parseAnimationToMemory:1290> 1st Argument must be Javascript Object, was: "+(typeof animation)
+        throw "iwp6-read:16> readAnimationObject 1st Argument must be Javascript Object, was: "+(typeof animation)
     }
 }
 
@@ -28,8 +28,29 @@ function readAnimationString( animationString ) {
         masterResetSteps();
         return a;
     } else {
-        throw "parseAnimationToMemory:1290> 1st Argument must be Javascript Object, was: "+(typeof animation)
+        throw "iwp6-read:31> readAnimationObject 1st Argument must be Javascript Object, was: "+(typeof animation)
     }
+}
+
+
+function playAnimationToEnd( animationString ) {
+
+    if ( parsedProblem == null ) {
+        throw "iwp6-read:39> playAnimationToEnd called without an Animation being read yet"
+    }
+
+    masterResetSteps();
+
+    setStepDirection(1);
+
+    var loop = true;
+
+    for ( var i = 0; i < 100000 && loop; i++ ) {
+        var loop = handleStep() >= 0;
+        // console.log("iwp6-read:50> Looping after step: " + i );
+    }
+
+    return currentStep;
 }
 
 
