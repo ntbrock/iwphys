@@ -1,0 +1,48 @@
+.navbar-inverse { 
+
+	/*
+	Production Blue
+	*/
+	/* background-color: #336699;  */
+
+	/**
+	Development Purple
+	*/
+	background-color: #8A2BE2;  
+}
+
+
+.navbar-inverse a.navbar-brand { 
+      color: #fff !important;
+}
+
+.navbar-inverse .navbar-nav li a { 
+      color: #eee !important;
+}
+
+
+
+.navbar-minimal { 
+
+	/*
+	Production Blue
+	*/
+	color: #336699 !important; 
+	margin-bottom: 0px;
+	/**
+	Development Purple
+	*/
+	/* background-color: #8A2BE2; */ 
+}
+
+
+
+.thumbnail { 
+/*	   height: 300px; */
+}
+
+.jumbotron { 
+/*	   background-color: rgba(251, 241, 173, 0.7 );  #fbf1ad; */
+	   background-color: #eee;
+	   margin-top: 2em;
+}

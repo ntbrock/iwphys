@@ -1,0 +1,86 @@
+/* 2018Jan31 Brockman - Graph specifi CSS styling */
+
+
+
+
+/**
+ * 2018 Graphing
+ */
+
+.iwp-graph {
+	width: 500px;
+	height: 500px;
+	border: solid #ccc 1px;
+}
+
+
+.iwp-axis-line {
+	stroke-width: 0.1;
+}
+
+.iwp-graph-axis line {
+	stroke: rgb(150,150,150);
+	stroke-width: 0.2;
+}
+
+.iwp-graph-axis path {
+	stroke: rgb(150,150,150);
+	stroke-width: 0.2;
+}
+
+.iwp-graph-axis text {
+	fill: rgb(150,150,150);
+	font-size: 6px;
+}
+
+.iwp-graph-axis-label {
+	fill: rgb(150,150,150);
+	font-size: 6px;e
+}
+
+.iwp-graph-grid line {
+	stroke: lightgrey;
+	stroke-width: 0.3;
+}
+
+/** This hides a dark black bar at the edge of display */
+.iwp-graph-grid path {
+	display: none;
+}
+
+/**
+ * Graph control buttons to turn series on/off */
+
+.iwp-graph-controls {
+	float: right;
+	width: 90px;
+	margin-left: 4px;
+}
+
+.iwp-graph-controls button {
+	width: 100%;
+}
+
+div.iwp-graph-control-buttons {
+	margin-bottom: 2em;
+}
+
+.iwp-graph-control-buttons button {
+	margin-bottom: 2px;
+	background: white;
+}
+
+.iwp-graph-control-buttons button.active {
+	background: orange !important;
+}
+
+.iwp-graph-control-legend label {
+	vertical-align: top;
+}
+
+.iwp-graph-legend-square {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	border: solid black 1px;
+}

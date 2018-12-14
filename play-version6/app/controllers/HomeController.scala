@@ -23,6 +23,8 @@ class HomeController @Inject()(cc: ControllerComponents, iwpDirectoryBrowserServ
 
    val topCollections = iwpDirectoryBrowserService.topCollections
 
+
+
     Ok(views.html.index(topCollections))
   }
 }
