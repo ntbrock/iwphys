@@ -221,8 +221,12 @@ function archiveVarsAtStep( step, vars ) {
 function calculateOutputAtStep(output, step, vars, verbose) {
     var newValue = evaluateCalculator( output.name+".out", output.calculator, step, vars, verbose, output.name ).value;
     vars[output.name] = newValue;
-    updateUserFormOutputDouble(output, newValue);
-    return newValue
+
+    if ( typeof updateUserFormOutputDouble === 'function' ) {
+        updateUserFormOutputDouble(output, newValue);
+    }
+
+    return newValue;
 }
 
 
@@ -709,6 +713,7 @@ function calculateVarsAtStep(step) {
   var fatalReplayAttemptsRemaining = 3;
 
   while ( fatalReplayAttemptsRemaining > 0 ) {
+
     fatalReplayAttemptsRemaining -= 1;
     var replayOutputs = fatalOutputs;
     var replaySolids = fatalSolids;
@@ -717,24 +722,27 @@ function calculateVarsAtStep(step) {
     fatalSolids = [];
 
     // REPLAY FAILURES within a resonable maximum number of attempts.
-     replayOutputs.forEach( function( output, index ) {
-      //console.log("Trying again",output)
-      try {
-        var newValue = calculateOutputAtStep(output, step, vars, false );
-        vars[output.name] = newValue
-      } catch ( err ) {
-        fatalOutputs.push(output);
-      }
+    replayOutputs.forEach( function( output, index ) {
+        //console.log("Trying again",output)
+        try {
+            var newValue = calculateOutputAtStep(output, step, vars, false );
+            vars[output.name] = newValue
+        } catch ( err ) {
+            console.log("iwp6-calc:728> Fatal Exception in calculating Output: " + output.name + " : " + err);
+            fatalOutputs.push(output);
+        }
     });
+
+
     replaySolids.forEach(function( solid, index ) {
       try {
-       // 2018Dec14 Pass by valiue fix
+       // 2018Dec14 Pass by value fix
        var newValue = calculateSolidAtStep(solid, step, vars, true );
        vars[solid.name] = newValue;
 
       } catch ( err ) {
-        console.log(err)
-       fatalSolids.push(solid);
+        console.log("iwp6-calc:728> Fatal Exception in calculating Solid: " + solid.name + " : " + err);
+        fatalSolids.push(solid);
       }
     if (fatalReplayAttemptsRemaining == 1) {
       CONFIG_throw_acceleration_calculation_exceptions = false;
