@@ -9,6 +9,7 @@ import services.{IwpDirectoryBrowserService, IwpMongoClient}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
+import scala.util.{Failure, Success}
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -30,19 +31,26 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
   }
 
 
-  def getAnimation(collection: String, filename: String) = Action.async { implicit request: Request[AnyContent] =>
+  def getAnimation(collection: String, filename: String) = Action { implicit request: Request[AnyContent] =>
 
+    iwpDirectoryBrowserService.getAnimation(collection, filename) match {
+      case Failure(x) =>
+        Logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
 
-    throw new RuntimeException("Not implemented")
+        NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
+      case Success(s) => Ok(views.html.animation.animation(collection,filename, s))
+    }
   }
 
-  def getAnimationJson(collection: String, filename: String) = Action.async { implicit request: Request[AnyContent] =>
+  def getAnimationJson(collection: String, filename: String) = Action { implicit request: Request[AnyContent] =>
 
-
-    throw new RuntimeException("Not implemented")
+    iwpDirectoryBrowserService.getAnimation(collection, filename) match {
+      case Failure(x) =>
+        Logger.error(s"AnimationFilesystemController:48> Failure: ${x}")
+        NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
+      case Success(s) => Ok(Json.prettyPrint(Json.toJson(s)))
+    }
   }
-
-
 
 
 }

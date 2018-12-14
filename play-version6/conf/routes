@@ -8,14 +8,14 @@ GET     /                           controllers.HomeController.index
 
 
 # Official Version4 Version6 Comparison Route
-GET     /valiation/:collection/:filename    controllers.ValidationController.validateAnimation(collection: String, filename: String)
-GET     /valiation/:collection/:subCollection/:filename    controllers.ValidationController.validateSubAnimation(collection: String, subCollection: String, filename: String)
+GET     /validation/:collection/:filename    controllers.ValidationController.validateAnimation(collection: String, filename: String)
+GET     /validation/:collection/:subCollection/:filename    controllers.ValidationController.validateSubAnimation(collection: String, subCollection: String, filename: String)
 
 
 # Official filesystem Browser
 GET     /collection/*collection                controllers.AnimationFilesystemController.browseCollection(collection: String)
-GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
 GET     /animation/:collection/:filename.json  controllers.AnimationFilesystemController.getAnimationJson(collection: String, filename: String)
+GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
 
 
 # First Rudimentary Database Browser

@@ -9,14 +9,18 @@ http://iwp6.iwphys.org:8470/valiation/unit-test-2017/TEST_euler.iwp
 
 Albert
 L> Iwp6 UI - Continued on creating the index page. Got most of the skeleton HTML, everything except for the animations.
-N> Focus Port the CSS, looking into less.  Copy bootstrap over into Public Folder.
-
+N> Focus Port the CSS, looking into less.  Copy bootstrap over into Public Folder.  In our pair time next week, we will connect the filesytem browser to the views.
 
 
 Niall
 L> Matching up the v4 -> v5 data arrays. Confused where we want the data interpretation to go.  Write into the hidden value?  Figure out the best way to manipulate data in javascript.
-N> Help TB fill out the master Excel sheet.
+N> Get oriented into app/controllers/ValidationController.scala, follow these code paths:
 
+	val v4 = iwpVersion4CalculatorService.animateToJsonFrames(path)
+	val v6 = iwpVersion6CalculatorService.animateToJsonFrames(s"${path}.json")
+	val diffs = iwpDifferenceCalculatorService.diff(v4, v6)
+
+In our pair time, help TB fill out the master Excel sheet.
 
 Taylor
 L> Lots of Development! Cloud deployment to iwp6. Bulk converted all animations to new json format. Filesystem controller browser. Validation difference comparator, Milestone 0 progress:  Valdiation tests, circlular refernecs, missing - bulk fill out the testing spreadsheet.
@@ -25,7 +29,7 @@ N> Automated fill out of testing sheet.  Enable Albert to continue IWP Animatjor
 
 Dr. Bennett
 L> Lots of work!  Waiting for results today.
-N> Need advice on role.
+
 
 ## After
 
