@@ -69,10 +69,16 @@ var svgObjects = [];
 // Need to support complex variables in the equation like ball.x
 
 
-// Nashorn accessibility
+// IWP6 - Nashorn accessibility with some javascript function overloading.
 function varsAtStepJson(step) {
-    return JSON.stringify(varsAtStep[+step]);
+    if ( typeof step === "string" || typeof step === "number" ) {
+        return JSON.stringify(varsAtStep[+step]);
+    } else {
+        return JSON.stringify(varsAtStep);
+    }
 }
+
+
 
 var varsAtStep = [];
 var currentStep = 0;
@@ -134,7 +140,7 @@ function printDecimal( incomingNumber, incomingPlaces ) {
 }
 
 function setStepDirection(newDirection) {
-	changeStep = newDirection;
+	changeStep = +newDirection;
 }
 
 function stepForwardAndPause() {
@@ -158,7 +164,7 @@ function stepBackwardAndPause() {
  */
 function handleStep() {
 
-	console.log("handleStep:113> current: " , currentStep, "  change: ", changeStep );
+	console.log("iwp6-calc:167> HandleStep: current: " , currentStep, "  change: ", changeStep );
 	// apply the time change.
 	var newStep = currentStep + changeStep;
 
@@ -176,10 +182,24 @@ function handleStep() {
    };*/
     //console.log("stop step", queryTimeStopInputDouble() / queryTimeStepInputDouble())
     //console.log('current step', newStep)
-    if (newStep > ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
-        handleStopClick()
-        return;
+
+    // If we are beyond stop time dobn't do tanything.
+    if ( typeof queryTimeStopInputDouble === "function" && typeof queryTimeStepInputDouble === "function" ) {
+        // Animation Mode
+        if (newStep > ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
+            handleStopClick()
+            console.log("iwp6-calc:191> Animated end of time on step: " + newStep )
+            return - 1;
+        }
+    } else {
+        // Headless mode
+        if (newStep > ( Math.round( +time.stop / +time.change ))) {
+            handleStopClick()
+            console.log("iwp6-calc:191> Animated end of time on step: " + newStep )
+            return - 1;
+        }
     }
+
 	//console.log("handleStep:61> newStep: " + newStep)
 
     if ( newStep != currentStep ) {
@@ -202,11 +222,11 @@ function handleStep() {
 
         // iwp5.1 - Adding Hook into the graph capabilties
         if ( changeStep > 0 ) {
-            if (graphStepForward === "function" ) {
+            if ( typeof graphStepForward === "function" ) {
                 graphStepForward(newStep, vars);
             }
         } else if ( changeStep < 0 ) {
-            if (graphStepBackward === "function" ) {
+            if ( typeof graphStepBackward === "function" ) {
                 graphStepBackward(newStep, vars);
             }
         }
@@ -214,6 +234,7 @@ function handleStep() {
 
 	currentStep = newStep;
 
+	return newStep;
 }
 
 
@@ -471,7 +492,7 @@ function calculateVarsAtStep(step) {
     if ( typeof queryUserFormInputDouble === "function" ) {
         vars[input.name] = queryUserFormInputDouble(input);
     } else {
-        console.log("iwp6-calc:442> Headless mode, setting initial value for: " + input.name + "  value: " + input.initialValue );
+        // console.log("iwp6-calc:442> Headless mode, setting initial value for: " + input.name + "  value: " + input.initialValue );
         vars[input.name] = +input.initialValue;
     }
 

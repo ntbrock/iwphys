@@ -156,10 +156,20 @@ class NashornTestController @Inject()(cc: ControllerComponents, mongo: IwpMongoC
     //load animation
     val read = invokable.invokeFunction("readAnimationString", unitTestAnimation )
 
-    // Access frame 0
-    val step0 = invokable.invokeFunction("varsAtStepJson", "0" )
 
-    Ok(s"Nashorn Test 5:  function call to varsAtStep(0): ${step0} ")
+    val play = invokable.invokeFunction("setStepDirection", "1" )
+
+    // Calculate a couple frames ahead
+    val step1 = invokable.invokeFunction("handleStep", "" )
+    val step2 = invokable.invokeFunction("handleStep", "" )
+    val step3 = invokable.invokeFunction("handleStep", "" )
+    val step4 = invokable.invokeFunction("handleStep", "" )
+
+
+    // Access frame 0
+    val varsAtStep = invokable.invokeFunction("varsAtStepJson", "" )
+
+    Ok(s"Nashorn Test 5:  function call to varsAtStep(0): ${varsAtStep} ")
 
   }
 
