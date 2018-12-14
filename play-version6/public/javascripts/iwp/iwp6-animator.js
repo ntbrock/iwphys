@@ -45,6 +45,11 @@ function repaintStep(step) {
 //--------------------------------------------------------------------------------
 // DOM Manipulation
 
+function setAuthorName(username) {
+  $("#authorUsername").html( username );
+}
+
+
 function renderProblemFromMemory() {
   // Render from memory into page
   $("#itime").html( time.start.toString() );

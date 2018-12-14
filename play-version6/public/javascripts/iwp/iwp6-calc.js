@@ -775,7 +775,9 @@ function setGraphWindow(inGraphWindow) {
   graphWindow = inGraphWindow;
 
   // Hook into new iwp5-graph to redraw axes.
-  graphSetWindowFromAnimation(graphWindow);
+  if ( typeof graphSetWindowFromAnimation === "object" ) {
+    graphSetWindowFromAnimation(graphWindow);
+  }
 
 }
 
@@ -890,7 +892,7 @@ function addSolid(solid) {
   		drawTrails: solid.shape["@attributes"].drawTrails,
   		drawVectors: solid.shape["@attributes"].drawVectors,
   		graphOptions:
-        Object.assign( solid.shape.graphOptions["@attributes"],
+        deepExtend( solid.shape.graphOptions["@attributes"],
                       { initiallyOn: solid.shape.graphOptions.initiallyOn["@attributes"] } ),
   		width: {
   			calculator: compileCalculator(solid.shape.width.calculator)
@@ -1291,10 +1293,29 @@ iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: 
 
 
 
+/**
+ * Important entry point!
+ */
 
 function parseProblemToMemory( problem ) {
 
-  $("#authorUsername").html( problem.author.username );
+  // D-fence
+
+  if ( typeof problem !== "object" ) {
+    throw "Animation Parameter was not an object, was: " + typeof problem
+  } else if ( typeof problem.objects !== "object" ) {
+    throw "Animation objects attribute was not an object, was: " + typeof problem.objects
+
+  } else if ( typeof problem.objects.time !== "object" ) {
+    throw "Animation objects.time attribute was not an object, was: " + typeof problem.objects.time
+  } else if ( typeof problem.objects.description !== "object" ) {
+    throw "Animation objects.description attribute was not an object, was: " + typeof problem.objects.description
+
+  }
+
+    // TODO more validation
+
+
 
   // Time
   setTime(problem.objects.time);
@@ -1308,32 +1329,35 @@ function parseProblemToMemory( problem ) {
   // GraphWindow
   setGraphWindow(problem.objects.GraphWindow);
 
+  if ( typeof setAuthorName === "function" ) {
+    setAuthorName(problem.author.username);
+  }
 
   // Inputs - These could be an array OR a single item.
-  if ( $.type ( problem.objects.input ) == 'array' ) {
+  if ( typeof problem.objects.input === 'array' ) {
     problem.objects.input.forEach( function( input, index ) {
       addInput(input);
     });
-  } else if ($.type ( problem.objects.input ) == 'item') {
+  } else if ( typeof problem.objects.input === 'item') {
     addInput(problem.objects.input);
-  } else if ($.type ( problem.objects.input ) == 'object') {
+  } else if ( typeof problem.objects.input === 'object') {
     addInput(problem.objects.input);
 
   }
 
 
   else {
-    console.log("iwp5:954> Unable to handle input: ", $.type ( problem.objects.input ))
+    console.log("iwp5:954> Unable to handle input: ", typeof problem.objects.input )
   }
 
   // Output - These could be an array OR a single item.
-  if ( $.type ( problem.objects.output ) == 'array' ) {
+  if ( typeof problem.objects.output === 'array' ) {
     problem.objects.output.forEach( function( output, index ) {
       addOutput(output);
     });
-  } else  if ( $.type ( problem.objects.output ) == 'item'){
+  } else  if ( typeof problem.objects.output === 'item'){
     addOutput(problem.objects.output);
-  } else if ($.type ( problem.objects.output ) == 'object') {
+  } else if ( typeof problem.objects.output === 'object') {
     addInput(problem.objects.output);
 
   } else {
@@ -1355,13 +1379,23 @@ function parseProblemToMemory( problem ) {
 
 
   // Objects - Also detect the floatign texts, which are not relaly solids.
-  if ( $.type (problem.objects.object) == 'array' ) {
+  if ( typeof problem.objects.object === 'array' ) {
     problem.objects.object.forEach( function( object, index ) {
       addObject(object);
     });
   } else if ( problem.objects.object != null ) {
      addObject(problem.objects.object);
   }
+
+  return {
+    inputs: inputs,
+    outputs: outputs,
+    solids: solids,
+    objects: objects,
+    texts: texts
+  };
+
+
 }
 
 
@@ -1430,3 +1464,4 @@ function yHeight(size) {
   return size*proportion;
 };
 
+true;
