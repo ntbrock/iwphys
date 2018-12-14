@@ -25,3 +25,6 @@ GET     /test/nashorn/test4            controllers.NashornTestController.nashorn
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+# Demo IWP homepage
+GET     /demo                       controllers.DemoController.index
