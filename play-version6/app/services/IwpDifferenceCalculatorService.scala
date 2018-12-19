@@ -111,21 +111,11 @@ class IwpDifferenceCalculatorService {
   }
 
 
-  def summarize( diffs: Seq[IwpStepDifference] ) : IwpStepDifferenceSummary = {
+  def summarize( path: String, diffs: Seq[IwpStepDifference] ) : IwpStepDifferenceSummary = {
 
-    val sum = IwpStepDifferenceSummary(0,0,0,0,0,0,0)
+    val sum = IwpStepDifferenceSummary(path, 0,0,0,0,0,0,0)
 
-    // TODO Loop over the diffs and begin to calculate.
-
-    /*
-    var totalFrames: Int,
-    var framesWithDifferences: Int,
-    var totalDifferences: Int,
-    var framesWithLeftMissing: Int,
-    var framesWithRightMissing: Int,
-    var totalLeftMissing: Int,
-    var totalRightMissing: Int
-     */
+    // Loop over the diffs and begin to calculate.
     diffs.map{ diff =>
 
       sum.totalFrames = sum.totalFrames + 1

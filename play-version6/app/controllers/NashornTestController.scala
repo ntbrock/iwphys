@@ -184,7 +184,7 @@ class NashornTestController @Inject()(cc: ControllerComponents,
 
     val diffs = iwpDifferenceCalculatorService.diff( v4, v6 )
 
-    val differenceSummary = iwpDifferenceCalculatorService.summarize( diffs )
+    val differenceSummary = iwpDifferenceCalculatorService.summarize( path, diffs )
 
     Ok(views.html.validation.compareIwpSteps(path, diffs, differenceSummary ))
 

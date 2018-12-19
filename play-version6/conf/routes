@@ -9,8 +9,8 @@ GET     /                           controllers.HomeController.index
 
 # Official Version4 Version6 Comparison Route
 # Sampl /validation/unit-test-2017/TEST_euler.iwp
-GET     /validation/:collection/:filename    controllers.ValidationController.validateAnimation(collection: String, filename: String)
-GET     /validation/:collection/:subCollection/:filename    controllers.ValidationController.validateSubAnimation(collection: String, subCollection: String, filename: String)
+GET     /validation/:collection/:filename    controllers.ValidationController.validateAnimation(collection: String, filename: String, format : Option[String] ?= None )
+GET     /validation/:collection/:subCollection/:filename    controllers.ValidationController.validateSubAnimation(collection: String, subCollection: String, filename: String, format : Option[String] ?= None )
 
 
 # Official filesystem Browser

@@ -25,7 +25,7 @@ class ValidationController @Inject()(cc: ControllerComponents,
                                     iwpDifferenceCalculatorService: IwpDifferenceCalculatorService) extends AbstractController(cc) {
 
 
-  def validateAnimation(collection: String, filename: String) = Action { implicit request: Request[AnyContent] =>
+  def validateAnimation(collection: String, filename: String, format: Option[String]) = Action { implicit request: Request[AnyContent] =>
 
     val path = s"animations/${collection}/${filename}"
 
@@ -35,15 +35,24 @@ class ValidationController @Inject()(cc: ControllerComponents,
 
     val diffs = iwpDifferenceCalculatorService.diff(v4, v6)
 
-    val differenceSummary = iwpDifferenceCalculatorService.summarize( diffs )
+    val differenceSummary = iwpDifferenceCalculatorService.summarize( path, diffs )
 
-    Ok(views.html.validation.compareIwpSteps(path, diffs, differenceSummary))
+    format match {
+      case Some("csv") =>
 
+        Ok(differenceSummary.csvHeader.mkString(",")+"\n"+
+          differenceSummary.csvValues.mkString(","))
+
+      case None =>
+
+        Ok(views.html.validation.compareIwpSteps(path, diffs, differenceSummary))
+
+    }
   }
 
 
-  def validateSubAnimation(collection: String, subCollection: String, filename: String) =
-    validateAnimation(collection + File.separator + subCollection, filename )
+  def validateSubAnimation(collection: String, subCollection: String, filename: String, format: Option[String]) =
+    validateAnimation(collection + File.separator + subCollection, filename, format )
 
 
 }
