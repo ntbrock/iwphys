@@ -1,11 +1,29 @@
-@(path: String, diffs:  Seq[IwpStepDifference] )
+@(path: String, diffs:  Seq[IwpStepDifference], summary: IwpStepDifferenceSummary )
 
 
 <h2>compareIwpSteps</h2>
 
+<h3>Summary</h3>
+
+<p>totalFrames: @summary.totalFrames</p>
+
+<p>framesWithDifferences: @summary.framesWithDifferences</p>
+
+<p>totalDifferences: @summary.totalDifferences</p>
+
+<p>framesWithLeftMissing: @summary.framesWithLeftMissing</p>
+
+<p>framesWithRightMissing: @summary.framesWithRightMissing</p>
+
+<p>totalLeftMissing: @summary.totalLeftMissing</p>
+
+<p>totalRightMissing: @summary.totalRightMissing</p>
+
 <p>path: @path</p>
 
 <p>diffs: @diffs.size</p>
+
+<h3>Detail</h3>
 
 <table style="border-width: 1px; border-color: #666;">
 

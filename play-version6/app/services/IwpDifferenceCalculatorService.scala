@@ -1,6 +1,6 @@
 package services
 
-import models.IwpStepDifference
+import models.{IwpStepDifference, IwpStepDifferenceSummary}
 import play.api.Logger
 import play.api.libs.json.{JsArray, JsNumber, JsObject}
 
@@ -110,6 +110,47 @@ class IwpDifferenceCalculatorService {
       diffs.toSeq
   }
 
+
+  def summarize( diffs: Seq[IwpStepDifference] ) : IwpStepDifferenceSummary = {
+
+    val sum = IwpStepDifferenceSummary(0,0,0,0,0,0,0)
+
+    // TODO Loop over the diffs and begin to calculate.
+
+    /*
+    var totalFrames: Int,
+    var framesWithDifferences: Int,
+    var totalDifferences: Int,
+    var framesWithLeftMissing: Int,
+    var framesWithRightMissing: Int,
+    var totalLeftMissing: Int,
+    var totalRightMissing: Int
+     */
+    diffs.map{ diff =>
+
+      sum.totalFrames = sum.totalFrames + 1
+
+      if ( diff.notEqual.size > 0 ) {
+        sum.framesWithDifferences += 1
+
+        sum.totalDifferences += diff.notEqual.size
+      }
+
+      if ( diff.leftEmpty ) {
+        sum.framesWithLeftMissing += 1
+      }
+
+      if ( diff.rightEmpty ) {
+        sum.framesWithRightMissing += 1
+      }
+
+      sum.totalLeftMissing += diff.leftMissing.size
+      sum.totalRightMissing += diff.rightMissing.size
+    }
+
+    sum
+
+  }
 
 
 }
