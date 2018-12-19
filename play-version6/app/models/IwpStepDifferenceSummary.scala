@@ -10,11 +10,11 @@ case class IwpStepDifferenceSummary( val path: String,
                                      var totalRightMissing: Int
                                    ) {
 
-  def csvHeader = Seq("path","totalFrames","framesWithDifferences", "totalDifferences",
+  def csvHeader = Seq("result","path","totalFrames","framesWithDifferences", "totalDifferences",
     "framesWithLeftMissing","framesWithRightMissing","totalLeftMissing","totalRightMissing")
     .map{ value => "\"" + value + "\"" }
 
-  def csvValues = Seq(path, totalFrames,framesWithDifferences,totalDifferences,
+  def csvValues = Seq("Complete", path, totalFrames,framesWithDifferences,totalDifferences,
     framesWithLeftMissing,framesWithRightMissing,totalLeftMissing,totalRightMissing)
     .map{ value => "\"" + value + "\"" }
 

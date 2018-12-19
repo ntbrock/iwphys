@@ -85,7 +85,10 @@ class IwpDifferenceCalculatorService {
                 val l = lO.get
                 val r = rO.get
 
-                if ( l == r ) {
+                // Surpress the slight java double differences (t,(0.3,0.30000000000000004))
+                val tol = 0.00001
+                if ( Math.abs((l - r).doubleValue()) < tol ) {
+
                   equal.enqueue((key, l))
                 } else {
                   notEqual.enqueue((key, (l,r)))

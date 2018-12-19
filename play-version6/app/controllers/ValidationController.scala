@@ -12,6 +12,7 @@ import services.{IwpDifferenceCalculatorService, IwpMongoClient, IwpVersion4Calc
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
+import scala.util.{Failure, Success, Try}
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -29,24 +30,42 @@ class ValidationController @Inject()(cc: ControllerComponents,
 
     val path = s"animations/${collection}/${filename}"
 
-    val v4 = iwpVersion4CalculatorService.animateToJsonFrames(path)
+    val diffT = Try {
 
-    val v6 = iwpVersion6CalculatorService.animateToJsonFrames(s"${path}.json")
+      val v4 = iwpVersion4CalculatorService.animateToJsonFrames(path)
 
-    val diffs = iwpDifferenceCalculatorService.diff(v4, v6)
+      val v6 = iwpVersion6CalculatorService.animateToJsonFrames(s"${path}.json")
 
-    val differenceSummary = iwpDifferenceCalculatorService.summarize( path, diffs )
+      val diffs = iwpDifferenceCalculatorService.diff(v4, v6)
+
+      val differenceSummary = iwpDifferenceCalculatorService.summarize(path, diffs)
+
+      (diffs, differenceSummary)
+    }
+
 
     format match {
       case Some("csv") =>
 
-        Ok(differenceSummary.csvHeader.mkString(",")+"\n"+
-          differenceSummary.csvValues.mkString(","))
+        diffT match {
+          case Success((diffs, differenceSummary)) =>
+            Ok(differenceSummary.csvHeader.mkString(",")+"\n"+
+              differenceSummary.csvValues.mkString(",")+"\n")
+
+          case Failure(x) =>
+            Ok( Seq("\"Exception\"", "\""+path+"\"" , "\""+x.getMessage+"\"").mkString(",")+"\n" )
+
+        }
+
 
       case None =>
 
-        Ok(views.html.validation.compareIwpSteps(path, diffs, differenceSummary))
+        diffT match {
+          case Success((diffs, differenceSummary)) =>
+            Ok(views.html.validation.compareIwpSteps(path, diffs, differenceSummary))
 
+          case Failure(x) => throw x
+        }
     }
   }
 
