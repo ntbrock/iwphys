@@ -17,7 +17,7 @@ class IwpDirectoryBrowserService @Inject()(configuration: Configuration) extends
   val rootO = configuration.getOptional[String]("iwp.filesystem.root")
 
 
-  def topCollections: Seq[Iwp6Collection] = {
+  def topCollections(): Seq[Iwp6Collection] = {
 
     findFolders("")
   }

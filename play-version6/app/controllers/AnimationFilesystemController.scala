@@ -23,6 +23,17 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
 
 
+
+  def browseCollections() = Action { implicit request: Request[AnyContent] =>
+
+    val topCollections = iwpDirectoryBrowserService.topCollections()
+
+    Ok(views.html.animation.topCollections(topCollections))
+
+  }
+
+
+
   def browseCollection(collectionEncoded: String) = Action { implicit request: Request[AnyContent] =>
 
     val collection = URLDecoder.decode(collectionEncoded, "UTF-8")

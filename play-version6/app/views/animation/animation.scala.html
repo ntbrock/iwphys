@@ -1,23 +1,15 @@
 @(collection: String, filename: String, animation: Iwp6Animation)
 
 @main("Animation") {
-  <h1>Animation Animator: @collection / @filename</h1>
 
-  <pre>
-    @animation
-  </pre>
+  @views.html.partial.nav()
 
-<pre>
-    @animation.toJson
-  </pre>
+<br>
+<br>
+<br>
+<br>
 
-
-
-
-<!-- Json IWP Content controls -->
-<div id="problem" problem-uri="<?= $xtojUrl ?>"></div>
-
-<div class="iwp-animation-container">
+<div class="container iwp-animation-container">
   <div class="iwp-animation">
 
     <!-- Left Hand Side -->

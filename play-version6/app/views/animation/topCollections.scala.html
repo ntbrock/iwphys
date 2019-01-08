@@ -1,0 +1,21 @@
+@(topCollections: Seq[Iwp6Collection])
+
+@main(s"Top Collections") {
+  <h1>Animation Browser: Top Collections</h1>
+
+  @if(topCollections.size> 0 ) {
+
+  <h3>@topCollections.size Collections</h3>
+
+    @topCollections.map{ collection =>
+
+    <li>
+      <a href="@controllers.routes.AnimationFilesystemController.browseCollection(collection.relative(""))">@{collection.name}</a> &middot;
+    </li>
+
+    }
+
+  }
+
+}
+

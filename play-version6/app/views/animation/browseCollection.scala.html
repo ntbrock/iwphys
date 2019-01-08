@@ -1,6 +1,6 @@
 @(thisCollection: String, subCollections: Seq[Iwp6Collection], animations: Seq[Iwp6Animation])
 
-@main("Welcome to Play") {
+@main(s"Browse Collection: $thisCollection") {
   <h1>Animation Browser: @thisCollection</h1>
 
   @if(subCollections.size> 0 ) {
