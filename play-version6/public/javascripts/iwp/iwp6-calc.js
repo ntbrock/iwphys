@@ -44,6 +44,14 @@ if ( typeof console === "undefined" ) {  // Prevent console redefinition
 }
 
 
+//------------------------------------------------------
+// IWP6 we migrated to the new non @ attributes, abandoning some quirks of automated xml to json conversion. (xtoj.php)
+
+// var attributesProperty = "@attributes";
+var attributesProperty = "attributes";
+
+
+
 
 //-----------------------------------------------------------------------
 // Memory Intialization + Globals Section
@@ -873,8 +881,8 @@ function addInput(input) {
   input.objectType = 'input'
 
   // 2018MAr15 Some re-processed problems have calculation order to fix circular dependency
-  if ( input["@attributes"] != null && input["@attributes"]["calculationOrder"] != null  ) {
-    input.calculationOrder = +input["@attributes"]["calculationOrder"];
+  if ( input[attributesProperty] != null && input[attributesProperty]["calculationOrder"] != null  ) {
+    input.calculationOrder = +input[attributesProperty]["calculationOrder"];
     //console.log("iwp5:586> Imported iwp450 calculation order: ", input.calculationOrder )
   }
 
@@ -909,13 +917,13 @@ function addOutput(output) {
   }
 
   // 2018MAr15 Some re-processed problems have calculation order to fix circular dependency
-  if ( output["@attributes"] != null && output["@attributes"]["calculationOrder"] != null  ) {
-    compiledOutput.calculationOrder = +output["@attributes"]["calculationOrder"];
+  if ( output[attributesProperty] != null && output[attributesProperty]["calculationOrder"] != null  ) {
+    compiledOutput.calculationOrder = +output[attributesProperty]["calculationOrder"];
     // console.log("iwp5:678> Imported iwp450 calculation order: ", compiledOutput.calculationOrder )
   }
 
   outputs.push( compiledOutput );
-  // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { "@attributes": { "type": "parametric" }, "value": "Red.xaccel" } }
+  // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { attributesProperty: { "type": "parametric" }, "value": "Red.xaccel" } }
   var style = ""
   if ( output.hidden == "1" ) {
     style = "display:none;'"
@@ -977,12 +985,12 @@ function addSolid(solid) {
   		blue: parseFloat(solid.color.blue),
   	},
   	shape: {
-  		type: solid.shape["@attributes"].type,
-  		drawTrails: solid.shape["@attributes"].drawTrails,
-  		drawVectors: solid.shape["@attributes"].drawVectors,
+  		type: solid.shape[attributesProperty].type,
+  		drawTrails: solid.shape[attributesProperty].drawTrails,
+  		drawVectors: solid.shape[attributesProperty].drawVectors,
   		graphOptions:
-        deepExtend( solid.shape.graphOptions["@attributes"],
-                      { initiallyOn: solid.shape.graphOptions.initiallyOn["@attributes"] } ),
+        deepExtend( solid.shape.graphOptions[attributesProperty],
+                      { initiallyOn: solid.shape.graphOptions.initiallyOn[attributesProperty] } ),
   		width: {
   			calculator: compileCalculator(solid.shape.width.calculator)
   		},
@@ -999,8 +1007,8 @@ function addSolid(solid) {
   };
 
   // 2018Mar15 Some re-processed problems have calculation order to fix circular dependency
-  if ( solid["@attributes"] != null && solid["@attributes"]["calculationOrder"] != null  ) {
-    compiledSolid.calculationOrder = +solid["@attributes"]["calculationOrder"];
+  if ( solid[attributesProperty] != null && solid[attributesProperty]["calculationOrder"] != null  ) {
+    compiledSolid.calculationOrder = +solid[attributesProperty]["calculationOrder"];
     // console.log("iwp5:678> Imported iwp450 calculation order: ", compiledSolid.calculationOrder )
   }
 
@@ -1027,7 +1035,7 @@ function addSolid(solid) {
 
       compiledSolid.shape.angle = {calculator: compileCalculator(solid.shape.angle.calculator)}
     }
-    compiledSolid.fileUri = "../../images/"+solid.shape.file["@attributes"].image.split("/images/")[1]
+    compiledSolid.fileUri = "../../images/"+solid.shape.file[attributesProperty].image.split("/images/")[1]
     // console.log("fileUri:",compiledSolid.fileUri)
   }
 
@@ -1077,7 +1085,7 @@ function addSolid(solid) {
     console.log("iwp5:712> ERROR: Unrecognized Solid Shape Type: ", compiledSolid.shape.type)
     return;
   };
-  if (solid.shape["@attributes"].drawTrails == "true") {
+  if (solid.shape[attributesProperty].drawTrails == "true") {
     svgSolids.push("<polyline id='solid_" +solid.name+ "_trail' points='20,20 50,50' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='1' fill='none'></polyline>");
   }
 }
@@ -1086,7 +1094,7 @@ function addObject(object) {
 
 
   //2018Oct12 - Detect the WaveBox
-  if ( object["@attributes"] && object["@attributes"]["class"] == "edu.ncssm.iwp.objects.grapher.DObject_Grapher" ) { 
+  if ( object[attributesProperty] && object[attributesProperty]["class"] == "edu.ncssm.iwp.objects.grapher.DObject_Grapher" ) { 
     alert("This Animation Contains a GraphBox, Not yet implented in IWP5");
     return;
   }
@@ -1095,7 +1103,7 @@ function addObject(object) {
     objectType: 'object',
     name: object.name,
     shape: {
-      type: object["@attributes"].class,
+      type: object[attributesProperty].class,
       height: 1,
       width: 1
     },
@@ -1116,7 +1124,7 @@ function addObject(object) {
   objects.push( compiledObject );
 
 
-  if (object["@attributes"].class == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
+  if (object[attributesProperty].class == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
 
     // console.log("iwp5:933> FloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
     /// Initilization fix - the calclulators hven't been run yet, so we just place the text on page at 0,0 and it's moveed with first redraw.
@@ -1134,7 +1142,7 @@ function addObject(object) {
 
 function compileCalculator(iwpCalculator) {
 
-	var incomingType = iwpCalculator["@attributes"].type
+	var incomingType = iwpCalculator[attributesProperty].type
 	if ( incomingType == "parametric" ) {
 
 		/*
