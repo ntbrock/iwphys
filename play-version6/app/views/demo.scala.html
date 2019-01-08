@@ -1,3 +1,5 @@
+@(popularCollection: String, popularAnimations: Seq[Iwp6Animation])
+
 
 @main("Demo IWP6") {
 <!--   <h1>Demo</h1> -->
@@ -33,7 +35,7 @@
         <!-- Page Features -->
         <div class="row text-center">
 
-	@views.html.partial.popular()
+        	@views.html.partial.popular(popularCollection, popularAnimations)
 
         </div>
         <!-- /.row -->

@@ -5,6 +5,10 @@ Tasks
 
 - Wire up the animation page. 
 
+- Remove the hardcoding of the animation in the popular
+
+- 
+
 
 
 

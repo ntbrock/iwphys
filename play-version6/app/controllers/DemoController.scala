@@ -3,13 +3,15 @@ package controllers
 import javax.inject._
 import play.api._
 import play.api.mvc._
+import services.IwpDirectoryBrowserService
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class DemoController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class DemoController @Inject()(cc: ControllerComponents,
+                               iwpDirectoryBrowserService: IwpDirectoryBrowserService) extends AbstractController(cc) {
 
   /**
    * Create an Action to render an HTML page.
@@ -19,9 +21,11 @@ class DemoController @Inject()(cc: ControllerComponents) extends AbstractControl
    * a path of `/`.
    */
   def index() = Action { implicit request: Request[AnyContent] =>
-    // val animations = Seq("red", "blue", "green")
-    // Ok(views.html.demo(animations))
-    Ok(views.html.demo())
-    
+
+    val popularCollection = "popular"
+
+    val popularAnimations = iwpDirectoryBrowserService.findAnimations(popularCollection)
+
+    Ok(views.html.demo(popularCollection, popularAnimations))
   }
 }
