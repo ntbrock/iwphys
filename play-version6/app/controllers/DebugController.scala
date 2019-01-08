@@ -10,7 +10,7 @@ import services.IwpDirectoryBrowserService
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents, iwpDirectoryBrowserService: IwpDirectoryBrowserService) extends AbstractController(cc) {
+class DebugController @Inject()(cc: ControllerComponents, iwpDirectoryBrowserService: IwpDirectoryBrowserService) extends AbstractController(cc) {
 
   /**
    * Create an Action to render an HTML page.

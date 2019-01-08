@@ -4,7 +4,8 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET     /debug                           controllers.DebugController.index
+GET     /                           controllers.IndexController.index
 
 
 # Official Version4 Version6 Comparison Route
@@ -44,4 +45,4 @@ GET     /DProblem/:path             controllers.DProblemController.view(path: St
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 # Demo IWP homepage
-GET     /demo                       controllers.DemoController.index
+# GET     /demo                       controllers.DemoController.index

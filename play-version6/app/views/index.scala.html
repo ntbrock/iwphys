@@ -1,109 +1,71 @@
-@(topCollections: Seq[Iwp6Collection])
-
-@main("Welcome to Play") {
-  <h1>IWP play-version6</h1>
+@(popularCollection: String, popularAnimations: Seq[Iwp6Animation])
 
 
-<h2>Animation</h2>
+@main("Demo IWP6") {
 
+@views.html.partial.nav()
 
-<ol>
+    <!-- Page Content -->
+    <div class="container">
 
-  @topCollections.map{ collection=>
-  <li>
-    <a href="@controllers.routes.AnimationFilesystemController.browseCollection(collection.name)">@collection.name</a>
-  </li>
-  }
+        <div class="row">
+            <div class="col-lg-12" style="margin-bottom: 0.5em;">
+	    	 <h1>Welcome the <b>Web</b> back to <b>Interactive Web Physics</b>!</h1>
+		<p style="font-size: 150%;"> In IWP Version 5, Animations play natively using all major web browsers and tablets using HTML <i class="fa fa-html5"></i></p>
+            </div>
+        </div>
+        <!-- /.row -->
 
-</ol>
+        <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12" style="margin-bottom: 0.5em;">
+                <h1>Featured Physics Animations for the Web Browser</h1>
+		
+            </div>
+        </div>
+	<!-- /.row -->
 
+        <!-- Page Features -->
+        <div class="row text-center">
 
+        	@views.html.partial.popular(popularCollection, popularAnimations)
 
-<h2>Validation</h2>
+        </div>
+        <!-- /.row -->
 
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+		    <p>
+		    IWP is made possible in part by these wonderful projects: 
+		    <a href="https://jquery.com/download/">Jquery 2</a> / 
+		    <a href="https://d3js.org/">D3 Data Driven Documents 4.2</a> / 
+		    <a href="http://fontawesome.io/">Font Awesome 4.6.3</a> / 
+		    <a href="https://startbootstrap.com/template-overviews/heroic-features/">HTML 5 Template is StartBootstrap.com, Heroic Features</a>
+		    </p>
+		    <p>Kudos to Dr. Jonathan Bennett, Dr. Loren Winters, and all past code contributors for inspiration and success of Interactive Web Physics.</p>
+                    <p>Copyright &copy; Taylor Brockman 1999 - 2016</p>
+                </div>
+            </div>
+        </footer>
 
-<h4>Version 4 DProblem Calculator</h4>
-<ol>
+    </div>
+    <!-- /.container -->
 
-  <li>
-    <a href="@controllers.routes.ValidationController.validateAnimation("unit-test-2017","TEST_euler.iwp")">Validate: unit-test-2017 / TEST_euler.iwp</a>
-  </li>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115827391-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-</ol>
+  gtag('config', 'UA-115827391-1');
+</script>
 
-
-
-
-<hr>
-  <h2>Unit Tests</h2>
-
-  <h4>Mongo Access Prototype</h4>
-  <ol>
-
-    <li>
-      <a href="@controllers.routes.AnimationMongoController.browseCollection("winters-ncssm-2009")">Browse winters-ncssm-2009</a>
-    </li>
-
-    <li>
-      <a href="@controllers.routes.AnimationMongoController.getAnimation("winters-ncssm-2009","coulombslaw03.iwp")">GET winters-ncssm-2009/coulombslaw03.iwp</a>
-
-    </li>
-
-    <li>
-      <a href="@controllers.routes.AnimationMongoController.getAnimationJson("winters-ncssm-2009","coulombslaw03.iwp")">GET winters-ncssm-2009/coulombslaw03.iwp.json</a>
-    </li>
-  </ol>
-
-
-
-  <h4>Version 4 DProblem Calculator version4-sbt</h4>
-    <ol>
-
-    <li>
-      <a href="@controllers.routes.DProblemController.index">DProblemController index - Basic Calculation Test</a>
-    </li>
-
-    <li>
-      <a href="@controllers.routes.DProblemController.view("animations/winters-ncssm-2009/cp-efield-02.iwp")">DProblemController: animations/winters-ncssm-2009/cp-efield-02.iwp</a>
-    </li>
-
-      <li>
-        <a href="@controllers.routes.DProblemController.view("animations/unit-test-2017/TEST_euler.iwp")">DProblemController: animations/unit-test-2017/TEST_euler.iwp</a>
-      </li>
-
-  </ol>
-
-
-
-  <h4>Nashorn Javascript Evaluation Tests</h4>
-  <ol>
-
-    <li>
-      <a href="@controllers.routes.NashornTestController.nashornTest1_eval()">nashornTest1_eval</a>
-    </li>
-
-    <li>
-      <a href="@controllers.routes.NashornTestController.nashornTest2_file()">nashornTest2_file</a>
-    </li>
-
-    <li>
-      <a href="@controllers.routes.NashornTestController.nashornTest3_loadMathJs()">nashornTest3_loadMathJs</a>
-    </li>
-
-    <li>
-      <a href="@controllers.routes.NashornTestController.nashornTest4_loadIwpAnimation()">nashornTest4_loadIwpAnimation</a>
-    </li>
-
-    <li>
-      <a href="@controllers.routes.NashornTestController.nashornTest5_calcIwpSteps()">nashornTest5_calcIwpSteps</a>
-    </li>
-
-    <li>
-      <a href="@controllers.routes.NashornTestController.nashornTest6_compareIwpSteps()">nashornTest6_compareIwpSteps</a>
-    </li>
-
-  </ol>
-
+</body>
 
 }
+
+
 
