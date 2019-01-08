@@ -1,0 +1,33 @@
+2019Jan08 Pair Programming on Milestone 1 – Play Web Interface
+Taylor + Albert
+
+Tasks
+
+- Wire up the animation page. 
+
+
+
+
+Milestone 1 - New Web Host + Development Environment
+
+= Create Play project skeleton, CAST port - 2h
+
+= Provision developer laptops with new play skeleton - 2h
+
+~ Define Routes, Setup Layout, Welcome page - 4h Forklift as much as possible of the css / html / js from the PHP app, dont redevelop.
+
+~ Relocate the iwp5.js content from the php folders and place over into new play location - 2h
+
+~ Choose, Provision, and Connect to Database Tech - 6h
+
+= Store our first IWP animation into database from Play - 4h
+
+~ Enable Listing + Browsing + Retrieval of Play Animations in web UI - 8h
+
+- Implement the Cover art capture routine, svg grabber - 8h
+
+~ Bulk import of all animations and directory information to new storage - 6h
+
+- Production Website Cutover and Deep link preservation testing - 8h
+
+
