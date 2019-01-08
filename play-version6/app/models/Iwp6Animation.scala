@@ -107,6 +107,9 @@ case class Iwp6Animation(filename: Option[String],
                          author: Iwp6Author,
                          objects: Iwp6Objects ) {
 
+  def toJson : JsValue = Iwp6Animation.toJson(this)
+
+  def toJsonString: String = Json.prettyPrint(toJson)
 }
 
 
@@ -208,5 +211,12 @@ object Iwp6Animation extends BoilerplateIO {
     }
 
   }
+
+  def toJson(animation: Iwp6Animation) : JsValue = {
+    import Iwp6Animation._
+    Json.toJson(animation)
+  }
+
+
 }
 
