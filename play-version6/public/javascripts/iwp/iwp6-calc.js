@@ -33,12 +33,15 @@ var deepExtend = function(out) {
 
 // ------------------------------------------------
 // Sugar from https://www.n-k.de/riding-the-nashorn/
+// Because iwp6-calc can execute in server side nashorn, I have to redeclare console there.
 
-var console = {};
-console.debug = print;
-console.log = print;
-console.warn = print;
-console.error = print;
+if ( typeof console === "undefined" ) {  // Prevent console redefinition
+    var console = {};
+    console.debug = print;
+    console.log = print;
+    console.warn = print;
+    console.error = print;
+}
 
 
 
