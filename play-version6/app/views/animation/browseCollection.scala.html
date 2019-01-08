@@ -1,33 +1,48 @@
 @(thisCollection: String, subCollections: Seq[Iwp6Collection], animations: Seq[Iwp6Animation])
 
 @main(s"Browse Collection: $thisCollection") {
+
+  @views.html.partial.nav()
+
   <h1>Animation Browser: @thisCollection</h1>
 
-  @if(subCollections.size> 0 ) {
+  <!--@if(subCollections.size> 0 ) {-->
+  <!--<h1>hello</h1>-->
 
-  <h3>@subCollections.size Collections</h3>
+  <!--<h3>@subCollections.size Collections</h3>-->
 
-    @subCollections.map{ subCollection =>
+    <!--@subCollections.map{ subCollection =>-->
 
-    <li>
-      <a href="@controllers.routes.AnimationFilesystemController.browseCollection(subCollection.relative(thisCollection))">@{subCollection.name}</a> &middot;
-    </li>
+    <!--<li>-->
+      <!--<a href="@controllers.routes.AnimationFilesystemController.browseCollection(subCollection.relative(thisCollection))">@{subCollection.name}</a> &middot;-->
+    <!--</li>-->
 
-    }
+    <!--}-->
 
-  }
+  <!--}-->
 
   <h3>@animations.size Animations</h3>
 
+  @animations.map { animation =>
+    <div class="col-md-4 col-sm-6 hero-feature">
+      <div class="thumbnail">
+        <h3>@animation.filename.get</i></h3> <!-- color: #FFD700; -->
+        <img src="@routes.Assets.versioned("images/screenshots/"+thisCollection+"/"+animation.filename.get)" alt="">
+        <div class="caption">
 
-  @animations.map{ animation =>
-
-    <li>
-      <a href="@controllers.routes.AnimationFilesystemController.getAnimation(thisCollection,animation.filename.get)">@{animation.filename.get} HTML</a> &middot;
-      <a href="@controllers.routes.AnimationFilesystemController.getAnimationJson(thisCollection,animation.filename.get)">JSON</a>
-    </li>
-
-
+          <a target="_anim" href="@controllers.routes.AnimationFilesystemController.getAnimation(thisCollection, animation.filename.get)" class="btn btn-default">Animate</a>
+          <p>
+            <i class="fa fa-star-o" style="color: #333;"></i>
+            <i class="fa fa-bug" style="color: #333;"></i>
+            <a target="_xtoj" href="@controllers.routes.AnimationFilesystemController.getAnimationJson(thisCollection,animation.filename.get)"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
+            <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/damped-1.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
+          </p>
+          <p>
+            @animation.objects.description.text
+          </p>
+        </div>
+      </div>
+    </div>
   }
 }
 

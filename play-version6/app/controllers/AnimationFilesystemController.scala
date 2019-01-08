@@ -48,7 +48,6 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
   }
 
 
-
   def getAnimation(collection: String, filename: String) = Action { implicit request: Request[AnyContent] =>
 
     iwpDirectoryBrowserService.getAnimation(collection, filename) match {
