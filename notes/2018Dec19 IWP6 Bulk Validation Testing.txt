@@ -1,0 +1,32 @@
+2018Dec19 IWP6 Bulk Validation Testing
+
+
+Goal: Produce a spreadsheet with test restuls of all animations.
+
+
+
+Taylor
+N> Run this csv generator for ALL anitmations and demo that to Dr. Bennett tomorrow PM
+
+Niall
+N> Install sbt, play framework, run the first validation tests. 
+
+1. Google:  install sbt on ubuntu.  
+
+2. Install version 4 jar:
+
+$ cd git/iwphys/sbt-version4
+$ ./publishLocal.sh
+
+3. Run Play Framework 
+
+$ cd git/iwphys/play-version6
+$ ./runPort8470.sh
+
+
+4. Access your first validation Test
+
+http://localhost:8470/validation/unit-test-2017/TEST_Euler_SelfReference.iwp
+
+
+
