@@ -4,6 +4,14 @@ Taylor + Albert
 Tasks
 
 - Wire up the animation page. 
+	= Demo Popular animations is now dynamic
+	= Forklift the iwp5 code
+
+	- Include the proper 
+
+
+	Note - the @animation -vs- animation difference may affect the valation.
+
 
 - Remove the hardcoding of the animation in the popular
 
