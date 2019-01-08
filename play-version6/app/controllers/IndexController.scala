@@ -26,6 +26,6 @@ class IndexController @Inject()(cc: ControllerComponents,
 
     val popularAnimations = iwpDirectoryBrowserService.findAnimations(popularCollection)
 
-    Ok(views.html.demo(popularCollection, popularAnimations))
+    Ok(views.html.index(popularCollection, popularAnimations))
   }
 }

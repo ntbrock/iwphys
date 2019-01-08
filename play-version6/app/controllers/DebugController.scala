@@ -23,8 +23,6 @@ class DebugController @Inject()(cc: ControllerComponents, iwpDirectoryBrowserSer
 
    val topCollections = iwpDirectoryBrowserService.topCollections
 
-
-
-    Ok(views.html.index(topCollections))
+    Ok(views.html.debug(topCollections))
   }
 }
