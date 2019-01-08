@@ -19,8 +19,9 @@ class DemoController @Inject()(cc: ControllerComponents) extends AbstractControl
    * a path of `/`.
    */
   def index() = Action { implicit request: Request[AnyContent] =>
-    val animations = Seq("red", "blue", "green")
-    Ok(views.html.demo(animations))
+    // val animations = Seq("red", "blue", "green")
+    // Ok(views.html.demo(animations))
+    Ok(views.html.demo())
     
   }
 }

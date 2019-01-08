@@ -1,19 +1,14 @@
-@(animations : Seq[String])
-<!-- Arguments, passed in by controller, i.e., DemoController.scala -->
 
-@main("Welcome to Play") {
+@main("Demo IWP6") {
 <!--   <h1>Demo</h1> -->
   
-<head>
-    @views.html.partial.head()
+<!--<head>-->
+    <!--@views.html.partial.head()-->
 
-</head>
+<!--</head>-->
     
 <body>
 @views.html.partial.nav()
-
-<!-- Iterate through animations -->
-@animations.map {animation => <li>@animation</li>}
 
     <!-- Page Content -->
     <div class="container">
@@ -63,11 +58,19 @@
     </div>
     <!-- /.container -->
 
-<!-- 
-    <?php include_once('iwp-foot.php'); ?>
- -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115827391-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115827391-1');
+</script>
+
+</body>
 
 }
 
-</body>
+
 
