@@ -7,14 +7,6 @@
     @animation
   </pre>
 
-  <!-- IWP5 Animation includes -->
-  <link href="<?= $baseUrl ?>css/iwp5.css" rel="stylesheet">
-  <link href="<?= $baseUrl ?>css/iwp5-graph.css" rel="stylesheet">
-  <!--<meta property="og:title" content="<?= str_replace(".iwp","",end(explode('/', $animateFile))); ?> - Interactive Web Physics"/>-->
-  <meta name="og:description" content="Click to play animation in your web browser."/>
-  <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5.js"></script>
-  <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5-ui.js"></script>
-  <script charset="utf-8" type="text/javascript" src="<?= $baseUrl ?>js/iwp5-graph.js"></script>
 
 
 <!-- Json IWP Content controls -->
@@ -163,6 +155,17 @@
 </div> <!-- end iwp-animation-container -->
 
 <script type="text/javascript">
+
+ console.log("animation:161> Loaded!");
+ /*
+
+  $(function() {
+
+
+  });
+*/
+
+  /*
     // On Pageload, pull our hardcoded unit test.
     $.getJSON( $('#problem').attr('problem-uri'), function(problem) {
       parseProblemToMemory(problem);
@@ -170,7 +173,8 @@
       // calculateVarsAtStep(0);
       masterResetSteps();
     });
-  </script>
+  */
+</script>
 
 
 }
