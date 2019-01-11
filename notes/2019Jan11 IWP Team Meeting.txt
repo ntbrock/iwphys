@@ -1,7 +1,56 @@
 2019Jan11 IWP Team Meeting
 
+Albert
+L> Worked w/ TB on Milestone 1, worked on the CSS and styling of website to incorporate the animations. 
+N> Ready for next task == SVG -> PNG. 
+
+Niall
+L> Recv results of the full validation report, comparing animations on iwp4 java -vs- new iwp6. Looking for those with 'all frames' different from java version. Work in progress.
+N> Set up local development environment to use the new valdiation tool.  Look specficially at the spring motion one: red ball lagging.  Where the manual testing == validation.
+
+Dr. Bennett
+L> Lots of other things!  
+N> No tasks
+
+Taylor
+L> Pair w/ Albert on M1 Play server. Milestone 0, released the master validation google doc, triaged the validation categories.  Organized trello, brought in the M2 Designer tasks.
+N> Milestone 0 valiation: figure out several of the plumbing issues.
 
 
+= After - Demo of the new Play UI  (Albert)
+
+= After - Demo google validation report. (Taylor)
+
+= After - Trello Board review.  Drag Spring Motion. (Taylor)
+
+= After - Next big date?  Trimester 3 Begins March 4.
+
+	+ 3 Weeks ==  Fri, Feb 1
+
+		Code Complete, Ready for a full site test
+		Do the deployment, respond to fixes, while we do the design tasks on M2.
+
+	How does Tuesday Feb 5th  Noon - 3PM.  Full Production deployment. 
+	* Taylor> Schedule onsite.
+
+	Miniterm plans?   Break Feb 15 -  Miniterm Starts Feb 21  ->  Mar 1
+
+	Albert - Not Traveling
+	Niall - History of computers + robotics.
+
+After - Javascript is now iwp6 in the play project. (NM+TB)
+
+After - W/ Niall be sure the side by side validator is running locally.  (NM+TB)
+
+
+
+* Taylor > Read how to write ROS code.  "The construct" - theconstructsim.com
+
+
+
+
+
+----------------------------
 
 Milestone 0 - Solidify The Data Model
 

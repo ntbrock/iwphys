@@ -47,8 +47,8 @@ if ( typeof console === "undefined" ) {  // Prevent console redefinition
 //------------------------------------------------------
 // IWP6 we migrated to the new non @ attributes, abandoning some quirks of automated xml to json conversion. (xtoj.php)
 
-// var attributesProperty = "@attributes";
-var attributesProperty = "attributes";
+var attributesProperty = "@attributes";
+//var attributesProperty = "attributes";
 
 
 
@@ -1488,7 +1488,7 @@ function parseProblemToMemory( problem ) {
 
 
 
-  // Output - These could be an array OR a single item.
+  // Output - These could be an array OR a single item. OR undefined for now outputs.
   if ( typeof problem.objects.output === 'item'){
     addOutput(problem.objects.output);
   } else if ( typeof problem.objects.output === 'object') {
@@ -1503,7 +1503,8 @@ function parseProblemToMemory( problem ) {
     }
 
   } else {
-       throw "iwp6:1387> Unable to handle output with typeof: "+ typeof problem.objects.output
+       // throw "iwp6:1506> Unable to handle Output with typeof: "+ typeof problem.objects.output
+       console.log("iwp6:1506> Warning, Zero outputs in this animation");
   }
 
 
@@ -1523,7 +1524,7 @@ function parseProblemToMemory( problem ) {
     }
 
   } else {
-    throw "iwp6:1387> Unable to handle output with typeof: "+ typeof problem.objects.solid
+    throw "iwp6:1526> Unable to handle Solid with typeof: "+ typeof problem.objects.solid
   }
 
 
@@ -1540,7 +1541,7 @@ function parseProblemToMemory( problem ) {
         addObject(problem.objects.object);
     }
   } else if ( problem.objects.object != null ) {
-     throw "iwp6:1429> Unable to handle output with typeof: "+ typeof problem.objects.object
+     throw "iwp6:1543> Unable to handle Output with typeof: "+ typeof problem.objects.object
   }
 
 
