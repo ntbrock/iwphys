@@ -1,0 +1,45 @@
+2019Jan11 IWP Team Meeting
+
+
+
+
+Milestone 0 - Solidify The Data Model
+
+= 100% Define a Json schema for IWP5.js with visualizations, examples - 6h
+
+= 100%  Bulk convert packaged Xml Animations to their JSON counterparts, leverage php - 6h
+
+= 100%  Choose and tool out a json schema validator application run over packaged content, refine schema - 8h
+
+= 100%  Refactor the iwp5.js code for Animation parsing out to a new iwp5-validation.js library - 4h -- Iwp6!
+
+- 50%   Implement a circular reference and other detectors in iwp5-validation - 8h
+
+= Output: All Animations, know which ones have frame by frame / variable differences in bulk.
+
+
+
+Milestone 1 - New Web Host + Development Environment
+
+= Create Play project skeleton, CAST port - 2h
+
+= Provision developer laptops with new play skeleton - 2h
+
+= Define Routes, Setup Layout, Welcome page - 4h Forklift as much as possible of the css / html / js from the PHP app, dont redevelop.
+
+= Relocate the iwp5.js content from the php folders and place over into new play location - 2h
+
+= Choose, Provision, and Connect to Database Tech - 6h
+
+= Store our first IWP animation into database from Play - 4h
+
+= Enable Listing + Browsing + Retrieval of Play Animations in web UI - 8h
+
+~ Implement the Cover art capture routine, svg grabber - 8h  (Albert)
+
+= Bulk import of all animations and directory information to new storage - 6h
+
+- Production Website Cutover and Deep link preservation testing - 8h
+
+
+

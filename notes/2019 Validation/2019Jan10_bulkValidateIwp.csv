@@ -1,3 +1,5 @@
+
+
 "Exception","animations/iwp-packaged/Charged Particle Motion/pitch1-para.iwp","Error: Undefined symbol ar in <eval> at line number 718 at column number 12"
 "result","path","totalFrames","framesWithDifferences","totalDifferences","framesWithLeftMissing","framesWithRightMissing","totalLeftMissing","totalRightMissing"
 "Complete","animations/iwp-packaged/Charged Particle Motion/em-ratio-1d.iwp","202","200","1120","1","1","2613","402"

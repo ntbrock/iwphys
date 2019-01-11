@@ -25,6 +25,19 @@ Tasks
 
 
 
+Find a library that will convert SVG -> PNG
+
+Create a very very simple SVG by hand
+
+Buld a Play contorller + route + view to prove that a simple converstion.
+
+Pair - Integrating into app so that it works for all animations.
+
+
+
+
+
+
 	Note - the @animation -vs- animation difference may affect the valation.
 
 
