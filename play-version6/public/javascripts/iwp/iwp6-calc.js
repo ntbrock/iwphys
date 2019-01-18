@@ -47,7 +47,10 @@ if ( typeof console === "undefined" ) {  // Prevent console redefinition
 //------------------------------------------------------
 // IWP6 we migrated to the new non @ attributes, abandoning some quirks of automated xml to json conversion. (xtoj.php)
 
+// VALIDATION MODE
 var attributesProperty = "@attributes";
+
+// ANIMATION MODE
 //var attributesProperty = "attributes";
 
 
@@ -393,9 +396,11 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
         //console.log("i after",i)
     }
 
+
+    // console.log("iwp6-calc:400> [" + step + "] Attempting to evaluate solid shape angle for solid.name: " + solid.name + "  shape.angle: " , solid.shape.angle );
     if ( solid.shape.angle ) {
       calc.angle = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, step, vars, verbose, solid.name ).value
-      // console.log("iwp5:277> Evaluated calculator for Solid.shape.angle: ", solid.shape.angle, " to :", calc.angle  )
+      // console.log("iwp6-calc:401> [" + step + "] Evaluated calculator for solid.name: " + solid.name + " .angle: ", solid.shape.angle, " to :", calc.angle  )
     }
 
     // For objects with a value beyond x , y, w , h -- This is used for the floatingText Value
@@ -1030,14 +1035,15 @@ function addSolid(solid) {
 
   if ( compiledSolid.shape.type == "Bitmap") {
     // console.log("iwp5:649> Solid is a Bitmap type, building angle: " , solid.shape.angle )
-    if (solid.shape.angle) {
-
-
-      compiledSolid.shape.angle = {calculator: compileCalculator(solid.shape.angle.calculator)}
-    }
     compiledSolid.fileUri = "../../images/"+solid.shape.file[attributesProperty].image.split("/images/")[1]
     // console.log("fileUri:",compiledSolid.fileUri)
   }
+
+  // 2019Jan18 Promoted Angle processing to a more common location
+  if ( typeof solid.shape.angle !== "undefined" ) {
+    compiledSolid.shape.angle = {calculator: compileCalculator(solid.shape.angle.calculator)}
+  }
+
 
   solids.push(compiledSolid);
 

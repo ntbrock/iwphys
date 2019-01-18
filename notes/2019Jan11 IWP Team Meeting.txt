@@ -38,9 +38,9 @@ N> Milestone 0 valiation: figure out several of the plumbing issues.
 	Albert - Not Traveling
 	Niall - History of computers + robotics.
 
-After - Javascript is now iwp6 in the play project. (NM+TB)
+= After - Javascript is now iwp6 in the play project. (NM+TB)
 
-After - W/ Niall be sure the side by side validator is running locally.  (NM+TB)
+= After - W/ Niall be sure the side by side validator is running locally.  (NM+TB)
 
 
 
