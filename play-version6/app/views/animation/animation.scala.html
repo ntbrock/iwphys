@@ -155,11 +155,11 @@
 
  $(function() {
 
-   console.log("animation:161> Loaded Page");
+   // console.log("animation:161> Loaded Page");
 
    var animation = @Html(animation.toJsonString);
 
-   console.log("animation:161> Loaded animation: " , animation );
+   // console.log("animation:161> Loaded animation: " , animation );
 
    parseProblemToMemory(animation);
    renderProblemFromMemory();
@@ -174,7 +174,7 @@
    $("#iwp-save-screenshot").click(function(e) {
 
      // Uncomment in order to save canvas as png to local computer
-     saveSvgAsPng(document.getElementById("canvas"), "test.png");
+     saveSvgAsPng(document.getElementById("canvas"), "@{filename}.png");
 
    });
 

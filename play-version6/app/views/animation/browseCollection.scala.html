@@ -43,7 +43,7 @@
     <div class="col-md-4 col-sm-6 hero-feature">
       <div class="thumbnail">
         <h3>@animation.filename.get</i></h3> <!-- color: #FFD700; -->
-        <img src="@routes.Assets.versioned("images/screenshots/"+thisCollection+"/"+animation.filename.get)" alt="">
+        <img src="@routes.Assets.versioned("screenshots/"+thisCollection+"/"+animation.filename.get + ".png" )" alt="">
         <div class="caption">
 
           <a target="_anim" href="@controllers.routes.AnimationFilesystemController.getAnimation(thisCollection.encoded, animation.filename.get)" class="btn btn-success btn-wide">Animate</a>
