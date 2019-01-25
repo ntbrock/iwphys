@@ -4,13 +4,16 @@
 
   @views.html.partial.nav()
 
-  <h1 style="margin-bottom: 1em;">Browsing Animations: @thisCollection.encoded</h1>
+<!-- Page Content -->
+<div class="container">
 
   <div class="row">
     <div class="col-lg-12">
       <h3><a href="..">Parent Folder</a></h3>
+      <h1 style="margin-bottom: 1em;">Browsing Animations: @thisCollection.encoded</h1>
     </div>
   </div>
+
 
   @if(subCollections.size> 0 ) {
 
@@ -30,7 +33,7 @@
 
   @if(animations.size > 0 ) {
 
-  <h3>@animations.size Animations</h3>
+  <h1>@animations.size Animations</h1>
 
   @animations.map { animation =>
     <div class="col-md-4 col-sm-6 hero-feature">
@@ -55,5 +58,7 @@
   }
 
   }
+
+</div>
 }
 
