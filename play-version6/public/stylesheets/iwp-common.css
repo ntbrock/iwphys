@@ -12,6 +12,10 @@
 }
 
 
+.navbar-header {
+    width: 100%;
+}
+
 .navbar-inverse a.navbar-brand { 
       color: #fff !important;
 }
@@ -50,4 +54,9 @@
 
 .btn-wide {
     width: 80% !important;
+}
+
+
+.iwp-save-screenshot {
+    margin-top: 1rem;
 }
