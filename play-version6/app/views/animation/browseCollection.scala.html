@@ -37,11 +37,13 @@
       <h1>@animations.size Animations</h1>
     </div>
 
-    <div class="row text-center">
 
-    @animations.map { animation =>
-
-      @views.html.partial.animationPreview(thisCollection, animation)
+    @animations.sliding(3).map { threeAnimations =>
+      <div class="row text-center">
+        @threeAnimations.map { animation =>
+          @views.html.partial.animationPreview(thisCollection, animation)
+        }
+      </div>
     }
 
   }
