@@ -11,7 +11,7 @@
     @subCollections.map{ subCollection =>
 
     <li>
-      <a href="@controllers.routes.AnimationFilesystemController.browseCollection(subCollection.relative(thisCollection))">@{subCollection.name}</a> &middot;
+      <a href="@controllers.routes.AnimationFilesystemController.browseCollection(subCollection.encoded))">@{subCollection.name}</a> &middot;
     </li>
 
     }

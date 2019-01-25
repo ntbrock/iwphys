@@ -48,10 +48,10 @@ if ( typeof console === "undefined" ) {  // Prevent console redefinition
 // IWP6 we migrated to the new non @ attributes, abandoning some quirks of automated xml to json conversion. (xtoj.php)
 
 // VALIDATION MODE
-var attributesProperty = "@attributes";
+// var attributesProperty = "@attributes";
 
 // ANIMATION MODE
-//var attributesProperty = "attributes";
+var attributesProperty = "attributes";
 
 
 

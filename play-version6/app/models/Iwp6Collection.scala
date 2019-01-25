@@ -2,11 +2,32 @@ package models
 
 import java.io.File
 
-case class Iwp6Collection (file: File,
-                           name: String )
+
+trait Iwp6Collection {
+
+  def name : String
+
+  def encoded : String
+}
+
+
+
+case class Iwp6FilesystemCollection (directory: File, root: File) extends Iwp6Collection
 {
 
-  def relative(parent: String) = {
-    parent + File.separator + name
+  def name : String = directory.getName
+
+  def encoded : String = {
+    directory.getCanonicalPath.replace( root.getCanonicalPath, "" ).stripPrefix("/")
   }
+
+  override def toString = encoded
+}
+
+
+case class Iwp6MongoCollection (collectionName: String) {
+
+  def name = collectionName
+
+  def encoded = collectionName
 }

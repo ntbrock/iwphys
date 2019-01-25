@@ -1,4 +1,4 @@
-@(popularCollection: String, popularAnimations: Seq[Iwp6Animation])
+@(popularCollection: Iwp6Collection, popularAnimations: Seq[Iwp6Animation])
 
 <!-- DEBUG: popularAnimations: @{popularAnimations.size}  -->
 
@@ -13,7 +13,7 @@
             <img src="@routes.Assets.versioned("images/screenshots/"+popularCollection+"/"+animation.filename.get)" alt="">
             <div class="caption">
 
-                <a target="_anim" href="@controllers.routes.AnimationFilesystemController.getAnimation(popularCollection, animation.filename.get)" class="btn btn-default">Animate</a>
+                <a target="_anim" href="@controllers.routes.AnimationFilesystemController.getAnimation(popularCollection.encoded, animation.filename.get)" class="btn btn-default">Animate</a>
                 <p>
                     <i class="fa fa-star-o" style="color: #333;"></i>
                     <i class="fa fa-bug" style="color: #333;"></i>

@@ -3,7 +3,7 @@ package controllers
 import javax.inject._
 import play.api._
 import play.api.mvc._
-import services.IwpDirectoryBrowserService
+import services.IwpFilesystemBrowserService
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -11,7 +11,7 @@ import services.IwpDirectoryBrowserService
  */
 @Singleton
 class IndexController @Inject()(cc: ControllerComponents,
-                                iwpDirectoryBrowserService: IwpDirectoryBrowserService) extends AbstractController(cc) {
+                                iwpDirectoryBrowserService: IwpFilesystemBrowserService) extends AbstractController(cc) {
 
   /**
    * Create an Action to render an HTML page.
@@ -22,10 +22,15 @@ class IndexController @Inject()(cc: ControllerComponents,
    */
   def index() = Action { implicit request: Request[AnyContent] =>
 
-    val popularCollection = "popular"
+    val popularName = "popular"
 
-    val popularAnimations = iwpDirectoryBrowserService.findAnimations(popularCollection)
+    iwpDirectoryBrowserService.getCollection(popularName) match {
 
-    Ok(views.html.index(popularCollection, popularAnimations))
+      case None => Ok(views.html.index(None, Seq()))
+
+      case Some(popularCollection) => Ok(views.html.index(Some(popularCollection), iwpDirectoryBrowserService.findAnimations(popularCollection)))
+
+    }
   }
+
 }
