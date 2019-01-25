@@ -22,7 +22,10 @@ class AnimationMongoController @Inject()(cc: ControllerComponents, mongo: IwpMon
   def browseCollection(collection: String) = Action.async { implicit request: Request[AnyContent] =>
 
     mongo.animationCollection(collection).find().toFuture() map { animations =>
-      Ok(views.html.animation.browseCollection(collection, Seq.empty,  animations))  // mongo has no subfolders
+
+      Ok("TODO Refactor Mongo Browser")
+
+      // Ok(views.html.animation.browseCollection(collection, Seq.empty,  animations))  // mongo has no subfolders
     }
 
   }
@@ -36,7 +39,9 @@ class AnimationMongoController @Inject()(cc: ControllerComponents, mongo: IwpMon
         case None => NotFound(Json.obj("error"->true, "message"-> "Animation not found"))
         case Some(animation) =>
 
-          Ok(views.html.animation.animation(collection, filename, animation))
+          Ok("TODO Refactor Mongo Browser")
+
+          // Ok(views.html.animation.animation(collection, filename, animation))
       }
     }
 

@@ -3,14 +3,14 @@ package controllers
 import javax.inject._
 import play.api._
 import play.api.mvc._
-import services.IwpDirectoryBrowserService
+import services.IwpFilesystemBrowserService
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class DebugController @Inject()(cc: ControllerComponents, iwpDirectoryBrowserService: IwpDirectoryBrowserService) extends AbstractController(cc) {
+class DebugController @Inject()(cc: ControllerComponents, iwpDirectoryBrowserService: IwpFilesystemBrowserService) extends AbstractController(cc) {
 
   /**
    * Create an Action to render an HTML page.

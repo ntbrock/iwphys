@@ -7,45 +7,28 @@
 <!-- Page Content -->
 <div class="container">
 
-  <!-- Page Features -->
-  <div class="row text-center">
 
-
-    <div class="row">
-      <div class="col-lg-12">
-        <h3><a href="..">Parent Folder</a></h3>
-      </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h3><a href="..">Parent Folder</a></h3>
+      <h1 style="margin-bottom: 1em;">Browsing Top Collections</h1>
     </div>
+  </div>
 
-    <h1 style="margin-bottom: 1em;">Browsing Animations</h1>
+
 
     @topCollections.map{ collection =>
 
       <!-- Sub Directory -->
       <div class="row">
         <div class="col-lg-12">
-          <h3><a href="@controllers.routes.AnimationFilesystemController.browseCollection(collection.relative(""))">@{collection.name}</a></h3>
+          <h3><a href="@controllers.routes.AnimationFilesystemController.browseCollection(collection.encoded)">@{collection.name}</a></h3>
         </div>
       </div>
 
     }
 
-    <!---->
-  <!--<h1>Animation Browser: Top Collections</h1>-->
+  @views.html.partial.footer()
 
-  <!--@if(topCollections.size> 0 ) {-->
-
-  <!--<h3>@topCollections.size Collections</h3>-->
-
-    <!--@topCollections.map{ collection =>-->
-
-    <!--<li>-->
-      <!--<a href="@controllers.routes.AnimationFilesystemController.browseCollection(collection.relative(""))">@{collection.name}</a> &middot;-->
-    <!--</li>-->
-
-    <!--}-->
-
-  <!--}-->
-
-}
+  }
 

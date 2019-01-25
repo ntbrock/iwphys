@@ -6,17 +6,39 @@ Tasks
 - Wire up the animation page. 
 	= Demo Popular animations is now dynamic
 	= Forklift the iwp5 code
+	= css/javascript/fontawesome
+	= Json handoff is now inline content render.
 
-	- Include the proper 
+
+	= The the / path can now be the 'demo' content.
+
+	- The directory browsing  needs styling.
+		- First look into version 5
+		- Change the links + html over to play framework syntax.
+
+
+
+	= The Animations don't play due to Javascript errors.
+		= TEst Euler matches
+		= Test Euler self -reference matches
+		- it's the iwpdamped-1.iwp that doesnt
+
+
+
+Find a library that will convert SVG -> PNG
+
+Create a very very simple SVG by hand
+
+Buld a Play contorller + route + view to prove that a simple converstion.
+
+Pair - Integrating into app so that it works for all animations.
+
+
+
+
 
 
 	Note - the @animation -vs- animation difference may affect the valation.
-
-
-- Remove the hardcoding of the animation in the popular
-
-- 
-
 
 
 

@@ -1,6 +1,8 @@
 package services
 import java.io.File
 
+import play.api.Logger
+
 
 /**
   * 2017-Jan-18 Updated to support ~ filtering to hide files.
@@ -38,6 +40,7 @@ trait BoilerplateIO {
 
   // Boilerplate IO
   def listDirectories(f: File): Array[File] = {
+    Logger.info(s"BoilerplateIo:41> ListDirectories: ${f}  (${f.exists})")
     listVisibleDirectories(f)
   }
 

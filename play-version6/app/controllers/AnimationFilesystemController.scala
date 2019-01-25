@@ -7,7 +7,7 @@ import org.mongodb.scala.model.Filters._
 import play.api.Logger
 import play.api.libs.json.Json
 import play.api.mvc._
-import services.{IwpDirectoryBrowserService, IwpMongoClient}
+import services.{IwpFilesystemBrowserService, IwpMongoClient}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -19,7 +19,7 @@ import scala.util.{Failure, Success}
  */
 @Singleton
 class AnimationFilesystemController @Inject()(cc: ControllerComponents,
-                                              iwpDirectoryBrowserService: IwpDirectoryBrowserService ) extends AbstractController(cc) {
+                                              iwpDirectoryBrowserService: IwpFilesystemBrowserService ) extends AbstractController(cc) {
 
 
 
@@ -36,40 +36,64 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
   def browseCollection(collectionEncoded: String) = Action { implicit request: Request[AnyContent] =>
 
-    val collection = URLDecoder.decode(collectionEncoded, "UTF-8")
+    val collectionName = URLDecoder.decode(collectionEncoded, "UTF-8")
 
-    Logger.info(s"AnimationFilesystemController:26> collection: ${collection}")
+    Logger.info(s"AnimationFilesystemController:26> collectionName: ${collectionName}")
 
-    val dirs = iwpDirectoryBrowserService.findFolders(collection)
-    val animations = iwpDirectoryBrowserService.findAnimations(collection)
+    iwpDirectoryBrowserService.getCollection(collectionEncoded) match {
 
-    Ok(views.html.animation.browseCollection(collection, dirs, animations))
+      case None => NotFound(s"No Such Collection Found:45 ${collectionEncoded}")
+
+      case Some(collection) =>
+        val dirs = iwpDirectoryBrowserService.findCollections(collection)
+        val animations = iwpDirectoryBrowserService.findAnimations(collection)
+
+        Ok(views.html.animation.browseCollection(collection, dirs, animations))
+    }
 
   }
 
 
-  def getAnimation(collection: String, filename: String) = Action { implicit request: Request[AnyContent] =>
+  def getAnimation(collectionEncoded: String, filename: String) = Action { implicit request: Request[AnyContent] =>
 
-    iwpDirectoryBrowserService.getAnimation(collection, filename) match {
-      case Failure(x) =>
-        Logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
+    iwpDirectoryBrowserService.getCollection(collectionEncoded) match {
 
-        NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
-      case Success(s) => Ok(views.html.animation.animation(collection,filename, s))
+      case None => NotFound(s"No Such Collection Found:61 ${collectionEncoded}")
+
+      case Some(collection) => {
+
+        iwpDirectoryBrowserService.getAnimation(collection, filename) match {
+          case Failure(x) =>
+            Logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
+
+            NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
+          case Success(s) => Ok(views.html.animation.animation(collection, filename, s))
+        }
+      }
     }
   }
 
 
 
-  def getAnimationJson(collection: String, filename: String) = Action { implicit request: Request[AnyContent] =>
+  def getAnimationJson(collectionEncoded: String, filename: String) = Action { implicit request: Request[AnyContent] =>
 
-    iwpDirectoryBrowserService.getAnimation(collection, filename) match {
-      case Failure(x) =>
-        Logger.error(s"AnimationFilesystemController:48> Failure: ${x}")
-        NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
-      case Success(s) => Ok(Json.prettyPrint(Json.toJson(s)))
+    iwpDirectoryBrowserService.getCollection(collectionEncoded) match {
+
+      case None => NotFound(s"No Such Collection Found: ${collectionEncoded}")
+
+      case Some(collection) => {
+
+        iwpDirectoryBrowserService.getAnimation(collection, filename) match {
+          case Failure(x) =>
+            Logger.error(s"AnimationFilesystemController:88> Failure: ${x}")
+
+            NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
+          case Success(s) => Ok(Json.prettyPrint(Json.toJson(s)))
+        }
+      }
     }
   }
+
 
 
 }

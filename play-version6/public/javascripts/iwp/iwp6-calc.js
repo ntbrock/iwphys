@@ -47,7 +47,10 @@ if ( typeof console === "undefined" ) {  // Prevent console redefinition
 //------------------------------------------------------
 // IWP6 we migrated to the new non @ attributes, abandoning some quirks of automated xml to json conversion. (xtoj.php)
 
+// VALIDATION MODE
 // var attributesProperty = "@attributes";
+
+// ANIMATION MODE
 var attributesProperty = "attributes";
 
 
@@ -278,7 +281,7 @@ function calculateOutputAtStep(output, step, vars, verbose) {
 
 /**
  * 2018Dec14 Note! This is now pass by value, manipulating vars does no good,
- * The caller is resposible for assigning back to vars
+ * The caller is responsible for assigning back to vars
  */
 function calculateSolidAtStep(solid, step, vars, verbose) {
 
@@ -335,13 +338,13 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     }
 
     if ( xComplex.acceleration == null ) {
-      //console.log("[iwp5.js:201> Recaclualting X because acceleration was null!")
+      console.log("iwp6-calc:338> Recaclulating X because acceleration was null!")
       vars[solid.name] = deepExtend(calcX,calcY);
       xComplex = evaluateCalculator( solid.name+".x", solid.xpath.calculator, step, vars, verbose, solid.name )
       x = xComplex.value
     }
     if ( yComplex.acceleration == null ) {
-      //console.log("[iwp5.js:201> Recaclualting y because acceleration was null!")
+      console.log("iwp6-calc:344> Recaclulating Y because acceleration was null!")
       vars[solid.name] = deepExtend(calcX,calcY);
       yComplex = evaluateCalculator( solid.name+".y", solid.ypath.calculator, step, vars, verbose, solid.name )
       y = yComplex.value
@@ -393,9 +396,11 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
         //console.log("i after",i)
     }
 
+
+    // console.log("iwp6-calc:400> [" + step + "] Attempting to evaluate solid shape angle for solid.name: " + solid.name + "  shape.angle: " , solid.shape.angle );
     if ( solid.shape.angle ) {
       calc.angle = evaluateCalculator( solid.name+".a", solid.shape.angle.calculator, step, vars, verbose, solid.name ).value
-      // console.log("iwp5:277> Evaluated calculator for Solid.shape.angle: ", solid.shape.angle, " to :", calc.angle  )
+      // console.log("iwp6-calc:401> [" + step + "] Evaluated calculator for solid.name: " + solid.name + " .angle: ", solid.shape.angle, " to :", calc.angle  )
     }
 
     // For objects with a value beyond x , y, w , h -- This is used for the floatingText Value
@@ -1030,14 +1035,15 @@ function addSolid(solid) {
 
   if ( compiledSolid.shape.type == "Bitmap") {
     // console.log("iwp5:649> Solid is a Bitmap type, building angle: " , solid.shape.angle )
-    if (solid.shape.angle) {
-
-
-      compiledSolid.shape.angle = {calculator: compileCalculator(solid.shape.angle.calculator)}
-    }
     compiledSolid.fileUri = "../../images/"+solid.shape.file[attributesProperty].image.split("/images/")[1]
     // console.log("fileUri:",compiledSolid.fileUri)
   }
+
+  // 2019Jan18 Promoted Angle processing to a more common location
+  if ( typeof solid.shape.angle !== "undefined" ) {
+    compiledSolid.shape.angle = {calculator: compileCalculator(solid.shape.angle.calculator)}
+  }
+
 
   solids.push(compiledSolid);
 
@@ -1223,170 +1229,197 @@ var CONFIG_throw_acceleration_calculation_exceptions = true;
 
 
 /** 2018Mar22 Bugfix, use the argument 'calculateStep' instead of reaching out to global */
+// ResultVariable is solidname.x or solidName.y
 
 function evaluateCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
-  // ResultVariable is solidname.x or solidName.y
+
+    if ( calculator == null ) {
+        //console.log("iwp5:688: Warning Null Calculaor for: ", resultVariable)
+        return { value: 0 }
+    }
+    else if ( calculator.type == "mathjs" )   {
+        return evaluateParametricCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
+    } else if ( calculator.type == "euler-mathjs" ) {
+        return evaluateEulerCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
+    }
+    else {
+        if ( verbose ) {
+            console.log("DEVELOPER: Unsupported calculator type : ", calculator);
+            throw err;
+        }
+        return { value: 0 }
+    }
+}
 
 
-  if ( calculator == null ) {
-    //console.log("iwp5:688: Warning Null Calculaor for: ", resultVariable)
 
-    return { value: 0 }
-  }
-	else if ( calculator.type == "mathjs" )   {
-		/*
-			{type : mathjs, compiled: Object}
-		*/
-		try {
-// Next Step: 2016Sep23 - Figure out why scientific notation is causing the mathjs eqn parsing exception:
-/*
-evaluateCalculator:364> Unable to evaluate calculator:  Error: Undefined symbol k(…)
-iwp5.js:415 evaluateCalculator:364> Equation:  k*(F^(-1.5)+G^(-1.5))
-iwp5.js:416 evaluateCalculator:364> Vars:  Object {step: 0, G: -9.8, t: -0.05, tDelta: 0.002, delta_t: 0.002…}
-iwp5.js:187 iwp:178: Wrote solid:  Bsum  to vars:  Object {step: 0, G: -9.8, t: -0.05, tDelta: 0.002, delta_t: 0.002…}
-*/
-//vars.k = 0.000000738528
-//vars.F = 0.005125000000000001
+/**
+ * 2019Jan08 For Readability, broke apart Parameteric -vs- Euler implementations
+ */
 
-      // 2016Oct11 -- Parameteric Calculators need to calculate their own instantaneous velocity.
-      // console.log("iwp5:846> Running vars with our custom functions: ", vars, "  to this calculator: " , calculator );
+function evaluateParametricCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
 
-	  var result = calculator.compiled.eval(vars);
-
-      if ( !isFinite(result) ) {
-        throw "iwp5:851 Compiled vars are not finite"
-      }
-
-      if ( calculator.latestValue == undefined ) {
-        calculator.previousValue = result;
-      } else {
-        calculator.previousValue = calculator.latestValue;
-      }
-      calculator.latestValue = result;
-
-      // Instaneous Velocity Calculation.
-      calculator.velocity = ( calculator.latestValue - calculator.previousValue ) / vars["delta_t"]
-      //console.log("evaluateCalculator:509> " + resultVariable + "> Calculated Velicoty: "  + calculator.velocity + " (previous: " + calculator.previousValue + " latest: "+ calculator.latestValue + ")")
-
-      // Instanteous Acceleration Calcualtor
-      if ( calculator.latestVelocity == undefined ) {
-        calculator.previousVelocity = calculator.velocity
-      } else {
-        calculator.previousVelocity = calculator.latestVelocity;
-      }
-
-      calculator.latestVelocity = calculator.velocity;
-      calculator.acceleration = ( calculator.latestVelocity - calculator.previousVelocity ) / vars["delta_t"]
-      if (resultVariable.slice(resultVariable.length-4) == ".out") {
-        //console.log("it's an output")
-      }
-      return { value: result,
-        displacement: result,
-        velocity: calculator.velocity,
-        acceleration: calculator.acceleration };
-		}
-    catch ( err ) {
-      if ( verbose ) {
-			console.log("evaluateCalculator:450> ERROR: " + resultVariable + "> Unable to evaluate calculator: ", err );
-      console.log("evaluateCalculator:450> ERROR: " + resultVariable + "> Equation: ", calculator.equation );
-      console.log("evaluateCalculator:450> ERROR: " + resultVariable + "> Vars: ", vars);
-      }
-			// return { value: undefined };  // was -1
-      throw err;
-		}
-	} else if ( calculator.type == "euler-mathjs" ) {
     try {
-      // 2016-Sep-23 For Euler V5, store the cache of current displacement and velocity IN calculator.
-      // An enhancement would be to expose these values out as complex return ttypes of this function,
-      // so that they could he historically archived in the variable step array.
-      //  IIRC, IWPv4, these were available as xdisp, xvel, xaccell on solids, for example.
-      // Today, in IWP5, our return structure out of thi sufnction is a single double value.
+        var result = calculator.compiled.eval(vars);
+
+        if ( !isFinite(result) ) {
+            throw "iwp6-calc:1260> Compiled vars are not finite"
+        }
+
+        if ( calculator.latestValue == undefined ) {
+            calculator.previousValue = result;
+        } else {
+            calculator.previousValue = calculator.latestValue;
+        }
+        calculator.latestValue = result;
+
+        // Instaneous Velocity Calculation.
+        calculator.velocity = ( calculator.latestValue - calculator.previousValue ) / vars["delta_t"]
+        //console.log("evaluateCalculator:509> " + resultVariable + "> Calculated Velicoty: "  + calculator.velocity + " (previous: " + calculator.previousValue + " latest: "+ calculator.latestValue + ")")
+
+        // Instanteous Acceleration Calcualtor
+        if ( calculator.latestVelocity == undefined ) {
+            calculator.previousVelocity = calculator.velocity
+        } else {
+            calculator.previousVelocity = calculator.latestVelocity;
+        }
+
+        calculator.latestVelocity = calculator.velocity;
+        calculator.acceleration = ( calculator.latestVelocity - calculator.previousVelocity ) / vars["delta_t"]
 
 
-      var dt = vars["delta_t"]
-      var acceleration = null;
+        return { value: result,
+            displacement: result,
+            velocity: calculator.velocity,
+            acceleration: calculator.acceleration };
+    }
+    catch ( err ) {
+        if ( verbose ) {
+            console.log("iwp6-calc:1292> evaluateParametricCalculator ERROR: " + resultVariable + "> Unable to evaluate calculator: ", err );
+            console.log("iwp6-calc:1293> evaluateParametricCalculator ERROR: " + resultVariable + "> Equation: ", calculator.equation );
+            console.log("iwp6-calc:1294> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars: ", vars);
+        }
+        throw err;
+    }
+};
 
-      try {
-        // then calculate the acceleratiion
+
+
+
+function evaluateEulerCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
+
+    try {
+
+    // 2019-Jan-08 Euler Self-referential, fixes for damped-1.iwp to prevent exceptions with new iwp6 javascript.
+
+
+
+    // 2016-Sep-23 For Euler V5, store the cache of current displacement and velocity IN calculator.
+    // An enhancement would be to expose these values out as complex return ttypes of this function,
+    // so that they could he historically archived in the variable step array.
+    //  IIRC, IWPv4, these were available as xdisp, xvel, xaccell on solids, for example.
+    // Today, in IWP5, our return structure out of thi sufnction is a single double value.
+
+
+    var dt = vars["delta_t"]
+    var acceleration = null;
+
+    // 2019Jan08 Taylor Addressing the Euler self-references, as exemplified in iwp-packaged / Oscillations / damped-1.iwp
+    // console.log("iwp6-calc:1317> acceleration resultVariable: ", resultVariable );
+    // console.log("iwp6-calc:1317> acceleration calculator: ", calculator );
+    // console.log("iwp6-calc:1317> acceleration BEFORE vars: ", vars );
+    // Enable the acceleration equations to self-reference our own ypos/yvel
+
+    if ( resultVariable.endsWith(".y") ) {
+
+        if ( typeof vars[ objectName ] !== "object" ) { vars[objectName] = {} }
+        vars[ objectName ][ "ypos" ] = calculator.currentDisplacement
+        vars[ objectName ][ "yvel" ] = calculator.currentVelocity
+
+    } else if ( resultVariable.endsWith(".x") ) {
+
+        if ( typeof vars[ objectName ] !== "object" ) { vars[objectName] = {} }
+        vars[ objectName ][ "xpos" ] = calculator.currentDisplacement
+        vars[ objectName ][ "xvel" ] = calculator.currentVelocity
+
+    } else {
+        console.log("iwp6-calc:1317> Unknown resultVariable endsWith: " , resultVariable );
+    }
+    // console.log("iwp6-calc:1346> acceleration AFTER vars: ", vars );
+
+
+
+
+    try {
+        // then calculate the acceleration
         // 2018Mar22 Fix to only apply the acceleration time component to the change in velocity.
 
         // console.log("iwp5:1088> Calculating acceleration via calculator: ", calculator, " at calcStep: " + calculateStep + " for vars: ", vars )
         acceleration = calculator.accelerationCompiled.eval(vars);
 
         if ( !isFinite(acceleration) ) {
-          throw "Calculator.accelerationCompiled result is not finite, is: " + acceleration
+            throw "Calculator.accelerationCompiled result is not finite, is: " + acceleration
         }
         if ( isNaN(acceleration) ) {
-          throw "Calculator.accelerationCompiled result is NaN"
+            throw "Calculator.accelerationCompiled result is NaN"
         }
 
-      } catch ( err ) {
+    } catch ( err ) {
         console.log("evaluateCalculator:1095> ERROR " + resultVariable + "> Unable to evaluate acceleration, setting to 0.  Calculator: ", err, calculator.equation, "Vars: ", JSON.stringify(vars) );
         if ( CONFIG_throw_acceleration_calculation_exceptions ) {
-          throw err;
+            throw err;
         }
-      }
+    }
 
 
 
-      if ( calculateStep == 0 ) {
-          calculator.currentVelocity = calculator.initialVelocity;
-          calculator.currentDisplacement = calculator.initialDisplacement; // no adjustment
+    if ( calculateStep == 0 ) {
+        calculator.currentVelocity = calculator.initialVelocity;
+        calculator.currentDisplacement = calculator.initialDisplacement; // no adjustment
 
-      } else if ( changeStep > 0 ) {
+    } else if ( changeStep > 0 ) {
 
         if ( acceleration != null ) {
-
-          // Positive direction calcuation
-          if ( calculateStep == 1 ) {
-            // Special first frame consideration
-            calculator.currentVelocity += acceleration * dt * 0.5;
-          } else {
-            calculator.currentVelocity += acceleration * dt;
-
-          }
-          calculator.currentDisplacement += calculator.currentVelocity * dt;
+            // Positive direction calcuation
+            if ( calculateStep == 1 ) {
+                // Special first frame consideration
+                calculator.currentVelocity += acceleration * dt * 0.5;
+            } else {
+              calculator.currentVelocity += acceleration * dt;
+            }
+            calculator.currentDisplacement += calculator.currentVelocity * dt;
         }
 
-      } else if ( changeStep < 0 ) {
-          // Negative direction calculation
-          if ( acceleration != null ) {
-          calculator.currentVelocity -= acceleration * dt;
-          calculator.currentDisplacement -= calculator.currentVelocity * dt;
+    } else if ( changeStep < 0 ) {
+        // Negative direction calculation
+        if ( acceleration != null ) {
+            calculator.currentVelocity -= acceleration * dt;
+            calculator.currentDisplacement -= calculator.currentVelocity * dt;
         }
-
-      } else {
+    } else {
         // No step direction
-      }
+    }
 
 
-      // console.log("iwp5:1152> evaluateCalculator calculateStep: "+ calculateStep + "  changeStep: " + changeStep + " calculator.currentVelocity: " + calculator.currentVelocity + " calculator.currentDisplacement: " + calculator.currentDisplacement )
-      //Return only value if just an output?
+    // console.log("iwp5:1152> evaluateCalculator calculateStep: "+ calculateStep + "  changeStep: " + changeStep + " calculator.currentVelocity: " + calculator.currentVelocity + " calculator.currentDisplacement: " + calculator.currentDisplacement )
+    //Return only value if just an output?
 
-      return { step: calculateStep,
+    return { step: calculateStep,
         value: calculator.currentDisplacement,
         displacement: calculator.currentDisplacement,
         velocity: calculator.currentVelocity,
         acceleration: acceleration }
 
-      // return displacement.value;
+    // return displacement.value;
     } catch ( err ) {
-      if ( verbose ) {
-        console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, dt);
-      }
-      throw err;
+        if ( verbose ) {
+            console.log("evaluateCalculator:375> Unable to evaluate calculator: ", err, calculator.equation, dt);
+        }
+        throw err;
     }
-  }
-  else {
-    if ( verbose ) {
-		console.log("DEVELOPER: Unsupported calculator type : ", calculator);
-		throw err;
-  }
-    //return { value: undefined }; // was -1
-	}
+};
 
 
-}
 
 
 
@@ -1461,7 +1494,7 @@ function parseProblemToMemory( problem ) {
 
 
 
-  // Output - These could be an array OR a single item.
+  // Output - These could be an array OR a single item. OR undefined for now outputs.
   if ( typeof problem.objects.output === 'item'){
     addOutput(problem.objects.output);
   } else if ( typeof problem.objects.output === 'object') {
@@ -1476,7 +1509,8 @@ function parseProblemToMemory( problem ) {
     }
 
   } else {
-       throw "iwp6:1387> Unable to handle output with typeof: "+ typeof problem.objects.output
+       // throw "iwp6:1506> Unable to handle Output with typeof: "+ typeof problem.objects.output
+       console.log("iwp6:1506> Warning, Zero outputs in this animation");
   }
 
 
@@ -1496,7 +1530,7 @@ function parseProblemToMemory( problem ) {
     }
 
   } else {
-    throw "iwp6:1387> Unable to handle output with typeof: "+ typeof problem.objects.solid
+    throw "iwp6:1526> Unable to handle Solid with typeof: "+ typeof problem.objects.solid
   }
 
 
@@ -1513,7 +1547,7 @@ function parseProblemToMemory( problem ) {
         addObject(problem.objects.object);
     }
   } else if ( problem.objects.object != null ) {
-     throw "iwp6:1429> Unable to handle output with typeof: "+ typeof problem.objects.object
+     throw "iwp6:1543> Unable to handle Output with typeof: "+ typeof problem.objects.object
   }
 
 
