@@ -33,38 +33,16 @@
 
   @if(animations.size > 0 ) {
 
-  <div>
-    <h1>@animations.size Animations</h1>
-  </div>
-
-  <div class="row text-center">
-
-  @animations.map { animation =>
-    <div class="col-md-4 col-sm-6 hero-feature">
-      <div class="thumbnail">
-        <h3>@animation.filename.get</i></h3> <!-- color: #FFD700; -->
-        <img src="@routes.Assets.versioned("screenshots/"+thisCollection+"/"+animation.filename.get + ".png" )" alt="">
-        <div class="caption">
-
-          <a target="_anim" href="@controllers.routes.AnimationFilesystemController.getAnimation(thisCollection.encoded, animation.filename.get)" class="btn btn-success btn-wide">Animate</a>
-          <br><br>
-
-<!--
-          <p>
-            <i class="fa fa-star-o" style="color: #333;"></i>
-            <i class="fa fa-bug" style="color: #333;"></i>
-            <a target="_xtoj" href="@controllers.routes.AnimationFilesystemController.getAnimationJson(thisCollection.encoded,animation.filename.get)"><i class="fa fa-file-code-o fa-1x" style="color: #333;"></i></a>
-            <a target="_applet" href="https://www.iwphys.org/pps/webInterface.php/packagedProblems//Oscillations/damped-1.iwp"><i class="fa fa-coffee fa-1x" style="color: #333;"></i></a>
-          </p>
-          -->
-
-          <p>
-            @animation.objects.description.text
-          </p>
-        </div>
-      </div>
+    <div>
+      <h1>@animations.size Animations</h1>
     </div>
-  }
+
+    <div class="row text-center">
+
+    @animations.map { animation =>
+
+      @views.html.partial.animationPreview(thisCollection, animation)
+    }
 
   }
   </div>
