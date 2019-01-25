@@ -1,0 +1,19 @@
+2019Jan25 IWP 6 Worklog - Prepping for production deploy
+
+= Directory browser w/ multiple container paths.
+
+= Check bootstrap container wrapper - no marg in pages
+
+= Alternate, 'slim' nav header on the animation page.
+
+~ Make blue-vs- purple header configurable
+
+- Prepare 
+
+- Validation -vs- execution @attribute fix.
+
+- Plumbing fixes for animation validation spreadsheet.
+
+
+
+
