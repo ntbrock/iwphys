@@ -38,7 +38,7 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
     val collectionName = URLDecoder.decode(collectionEncoded, "UTF-8")
 
-    Logger.info(s"AnimationFilesystemController:26> collectionName: ${collectionName}")
+    // Logger.info(s"AnimationFilesystemController:26> collectionName: ${collectionName}")
 
     iwpDirectoryBrowserService.getCollection(collectionEncoded) match {
 
