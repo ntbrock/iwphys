@@ -1,0 +1,67 @@
+{
+  "name": "save-svg-as-png",
+  "version": "1.4.7",
+  "description": "Convert a browser SVG to PNG or dataUri",
+  "main": "lib/saveSvgAsPng.js",
+  "scripts": {
+    "build": "babel src -d lib",
+    "prepublish": "npm run build",
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exupero/saveSvgAsPng.git"
+  },
+  "keywords": [
+    "svg",
+    "png",
+    "graphics",
+    "images"
+  ],
+  "author": {
+    "name": "Eric Shull"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/exupero/saveSvgAsPng/issues"
+  },
+  "homepage": "https://github.com/exupero/saveSvgAsPng",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "requirejs": "^2.3.5",
+    "tape": "^4.9.0"
+  },
+  "gitHead": "2204566d5475752da943f3e0a275a71602acb8e0",
+  "_id": "save-svg-as-png@1.4.7",
+  "_npmVersion": "6.5.0",
+  "_nodeVersion": "11.6.0",
+  "_npmUser": {
+    "name": "exupero",
+    "email": "eric@exupero.org"
+  },
+  "maintainers": [
+    {
+      "name": "exupero",
+      "email": "eric@exupero.org"
+    }
+  ],
+  "dist": {
+    "integrity": "sha512-UaUuJCga/UqcROCvWkHNqEsswOmhWRh/EkZ2Cui9FFPud5tp7t0U6u0JXOCEU+1oAlL9jDYF9zubp5VKq7aYEQ==",
+    "shasum": "1b54834321b37f80743a8dbd8310fede53619a2f",
+    "tarball": "https://registry.npmjs.org/save-svg-as-png/-/save-svg-as-png-1.4.7.tgz",
+    "fileCount": 17,
+    "unpackedSize": 245753,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJcQcrgCRA9TVsSAnZWagAA5VUP/0KAMODX+Ck7FZI34KCo\neSDUGd5d/uufi6KOGaIBVKiuP7obAgHSr2HXX2F/r1MB/OSyyjAWk2cON23f\nzGG14hhZ1eY+zaURtunM4AvpSTiAw4D1fbbw8q4+4IC86RMCdVgzadLtMBWw\nX7GtURMz9qEmBw2ZvywHIOMKgYCzKiFY6RBwQTW03oVLJfjguG7tWsVQQfli\n/aeDFlcmj4tA8ANuMtZShGHD7wOqEVcx/3OPzUBEVtSI4wCiiRnbqqfVLwIB\nVrWwP7PV7qWns6wZjvhYgKtNktvXTtxeJC3uEJvdlrra3iHd62LRP/NRaLDI\n8DS3Wbs7hdq64+lHHaT6hokpkUbykaSP6dWQjaCjj0zshQ/S3Ki9/IuFGPt4\n4Rmy5t4kDbtw22K+SNNXKNdlb5Anmiyz12D6m7h1zM6izJ0dW5zXkmf1KakK\nJszyXX1dxUbMV1ypyKfLQMuJbnUZKHTTZbeL6GOHNQZ/VifVOtEW7q/Sdwq9\neZGJ97b+zsMa1zkf7+xkvnpLH0S+neV9Lh9/Tno6UGiv7gDnn5IiMjYVIj6H\nkRPR8FYu+FK25ApHXfCy62LDEhkgx7n/30qlYtYk4NDu57hI6TdTcPxqKLbm\nttwVz4eDQskhWuSXtomu8IS9qNoCKUvTxYNDecIpwwvt1Gi+V7U9rfHpIgTr\nW8hd\r\n=rGSr\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "directories": {},
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/save-svg-as-png_1.4.7_1547815648077_0.9455420452547441"
+  },
+  "_hasShrinkwrap": false,
+  "_shasum": "1b54834321b37f80743a8dbd8310fede53619a2f",
+  "_resolved": "https://registry.npmjs.org/save-svg-as-png/-/save-svg-as-png-1.4.7.tgz",
+  "_from": "save-svg-as-png@latest",
+  "readme": "ERROR: No README data found!"
+}
