@@ -21,6 +21,12 @@ GET     /collection/*collection                controllers.AnimationFilesystemCo
 GET     /animation/:collection/:filename.json  controllers.AnimationFilesystemController.getAnimationJson(collection: String, filename: String)
 GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
 
+# Support LEgacy Path
+
+GET     /animate.php/:collection/:filename  controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
+GET     /animate.php/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
+
+
 
 # First Rudimentary Database Browser
 GET     /animation-db/:collection         controllers.AnimationMongoController.browseCollection(collection: String)

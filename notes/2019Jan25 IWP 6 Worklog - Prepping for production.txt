@@ -6,9 +6,9 @@
 
 = Alternate, 'slim' nav header on the animation page.
 
-~ Make blue-vs- purple header configurable
+- Make blue-vs- purple header configurable
 
-- Prepare 
+- Prepar for prod deploy. 
 
 - Validation -vs- execution @attribute fix.
 
