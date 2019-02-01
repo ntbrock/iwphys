@@ -20,6 +20,7 @@ GET     /collections                           controllers.AnimationFilesystemCo
 GET     /collection/*collection                controllers.AnimationFilesystemController.browseCollection(collection: String)
 GET     /animation/:collection/:filename.json  controllers.AnimationFilesystemController.getAnimationJson(collection: String, filename: String)
 GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
+GET     /animation/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
 
 # Support LEgacy Path
 
