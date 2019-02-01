@@ -473,7 +473,7 @@ function calculateTextAtStep(text, step, vars, verbose) {
 
 
 
-var CONFIG_throw_solid_calculation_exceptions = true;
+var CONFIG_throw_solid_calculation_exceptions = false;
 
 
 function calculateVarsAtStep(step) {
@@ -523,7 +523,7 @@ function calculateVarsAtStep(step) {
     }
 
 
-    //console.log("iwp5:410> calculateVarsAtStep("+step+")  Assigned Input: " , input.name, "  A value of: " ,vars[input.name] )
+    // console.log("iwp6-calc:526> calculateVarsAtStep("+step+")  Assigned Input: " , input.name, "  A value of: " ,vars[input.name] )
 
     //vars[input.name]["value"] = vars[input.name];
   });
@@ -542,11 +542,14 @@ function calculateVarsAtStep(step) {
       if ( !isFinite(newValue) ) {
         throw "not finite"
       }
+
+      // console.log("iwp6-calc:546> calculateVarsAtStep("+step+")  Set Output ", output.name, "  to newValue: " , newValue);
+
       vars[output.name] = newValue;
 
     } catch ( err ) {
 
-      // console.log("iwp5:409> First Outputs Pass, ERROR Calculating: "+ output.name + " > " + err );
+      // console.log("iwp6-calc:554> calculateVarsAtStep("+step+")  ERROR Output  Calculating: "+ output.name + " > " + err );
 
       //console.log("Failed Output:", output)
       //failedOutputs.push(output);
@@ -670,7 +673,7 @@ function calculateVarsAtStep(step) {
         calculationsPerformed++;
 
       } catch ( err ) {
-        console.log("iwp6-calc:612> ERROR calculationOrder solid: " + object.name + " err: ", err )
+        //console.log("iwp6-calc:612> ERROR calculationOrder solid: " + object.name + " err: ", err )
         failedSolids.push(object);
       }
 
@@ -743,7 +746,9 @@ function calculateVarsAtStep(step) {
         throw "not finite"
       }
       vars[output.name] = newValue;
-      //console.log("added new variable:",output.name,vars[output.name])
+
+      //console.log("iwp6-calc:750> calculateVarsAtStep("+step+")  Unordered Output Calculating: "+ output.name + " to newValue: " + newValue );
+
     } catch ( err ) {
       //console.log("Failed Output:", output)
       failedOutputs.push(output);
@@ -775,8 +780,11 @@ function calculateVarsAtStep(step) {
         try {
             var newValue = calculateOutputAtStep(output, step, vars, false );
             vars[output.name] = newValue
+
+            // console.log("iwp6-calc:783> calculateVarsAtStep("+step+")  Recovered Output Calculating: "+ output.name + " to newValue: " + err );
+
         } catch ( err ) {
-            console.log("iwp6-calc:728> Fatal Exception in calculating Output: " + output.name + " : " + err);
+            console.log("iwp6-calc:786> Fatal Exception in calculating Output: " + output.name + " : " + err);
             fatalOutputs.push(output);
         }
     });
@@ -801,9 +809,9 @@ function calculateVarsAtStep(step) {
 
   if ( fatalOutputs.length > 0 ) {
 
-    console.log("iwp6-calc:723> ERROR Giving Up on Recursive Circular Calc - FATALOutputs: ", JSON.stringify(fatalOutputs) );
+    console.log("iwp6-calc:807> ERROR Giving Up on Recursive Circular Calc - FATALOutputs: ", JSON.stringify(fatalOutputs) );
 
-    console.log("iwp6-calc:723> Vars: " + JSON.stringify(vars) );
+    console.log("iwp6-calc:809> Vars: " + JSON.stringify(vars) );
 
 
     fatalOutputs.forEach( function( output, index ) {
