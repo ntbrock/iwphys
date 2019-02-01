@@ -24,6 +24,9 @@ class IwpVersion6CalculatorService {
     val mathJsReader = new FileReader("public/javascripts/math.min.js")
     val mathJsEval = engine.eval(mathJsReader)
 
+
+    engine.eval("var CONFIG_attributesPropertyOverride = '@attributes';")
+
     val iwpCalcReader = new FileReader("public/javascripts/iwp/iwp6-calc.js")
     val iwpCalcEval = engine.eval(iwpCalcReader)
 

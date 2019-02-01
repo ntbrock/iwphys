@@ -47,12 +47,14 @@ if ( typeof console === "undefined" ) {  // Prevent console redefinition
 //------------------------------------------------------
 // IWP6 we migrated to the new non @ attributes, abandoning some quirks of automated xml to json conversion. (xtoj.php)
 
-// VALIDATION MODE
-// var attributesProperty = "@attributes";
-
 // ANIMATION MODE
 var attributesProperty = "attributes";
 
+// Quick override so that validation + animation and co-exist in the same deployment
+if ( typeof CONFIG_attributesPropertyOverride !== "undefined" ) {
+    // VALIDATION MODE
+    attributesProperty = "@attributes";
+}
 
 
 
