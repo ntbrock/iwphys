@@ -40,7 +40,25 @@
 
     <tr>
         <td>@diff.step</td>
-        <td>@diff.notEqual</td>
+        <td>
+            <table>
+                <tr>
+                    <th>var</th>
+                    <th>left</th>
+                    <th>right</th>
+                </tr>
+
+            @diff.notEqual.map { case(v,(l,r)) =>
+                <tr>
+                    <td>@v</td>
+                    <td>@l</td>
+                    <td>@r</td>
+                </tr>
+
+
+            }
+            </table>
+        </td>
         <td>@diff.equal</td>
         <td>@diff.leftEmpty</td>
         <td>@diff.leftMissing</td>
