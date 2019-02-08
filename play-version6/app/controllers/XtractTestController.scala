@@ -23,11 +23,12 @@ import cats.syntax.all._
 object XtractTest {
   implicit val reader: XmlReader[XtractTest] = (
     attribute[String]("hello"),
-    attribute[String]("extra").optional
+    attribute[String]("extra").optional,
+    (__).read[String].optional
     ).mapN(apply _)
 }
 
-case class XtractTest( hello: String, extra: Option[String] )
+case class XtractTest( hello: String, extra: Option[String], inner: Option[String] )
 
 
 
