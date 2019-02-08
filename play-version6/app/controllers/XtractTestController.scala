@@ -32,6 +32,34 @@ case class XtractTest( hello: String, extra: Option[String], inner: Option[Strin
 
 
 
+object IwpAuthorTest {
+  implicit val reader: XmlReader[IwpAuthorTest] = (
+    (__ \ "username").read[String],
+    (__ \ "name").read[String].optional,
+    (__ \ "organization").read[String].optional,
+    (__ \ "email").read[String].optional
+    ).mapN(apply _)
+}
+
+case class IwpAuthorTest( username: String,
+  name: Option[String],
+  organization: Option[String],
+  email: Option[String])
+
+
+object IwpAnimationTest {
+  implicit val reader: XmlReader[IwpAnimationTest] = (
+    (__ \ "author").read[IwpAuthorTest],
+    (__ \ "hey").read[String].optional
+  ).mapN(apply _)
+}
+
+
+case class IwpAnimationTest( author: IwpAuthorTest, hey: Option[String] )
+
+
+
+
 @Singleton
 class XtractTestController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
 
@@ -43,11 +71,22 @@ class XtractTestController @Inject()(cc: ControllerComponents) extends AbstractC
 
     val parsedTest = XmlReader.of[XtractTest].read(simpleXml)
 
-    Ok(s"simpleXml: ${parsedTest}")
-
-
+    Ok(s"parsedTest: ${parsedTest}")
 
   }
+
+
+  def xtractTest2_iwp() = Action { implicit request: Request[AnyContent] =>
+
+    val simpleXml = scala.xml.XML.loadString("<problem><author><username>username</username><name>name</name><organization>org</organization><email></email></author></problem>")
+
+    val parsedTest = XmlReader.of[IwpAnimationTest].read(simpleXml)
+
+    Ok(s"iwpAnimation: ${parsedTest}")
+
+  }
+
+
 
 
 }
