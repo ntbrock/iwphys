@@ -47,15 +47,32 @@ case class IwpAuthorTest( username: String,
   email: Option[String])
 
 
+
+// TODO - Figure out why mapN gets angry with only 1 attribute
+// Can we leave out the mapN, an d will it work?
+
+object IwpObjectTest {
+  implicit val reader: XmlReader[IwpObjectTest] = (
+    (__).read[String],
+    (__).read[String]
+  ).mapN(apply _)
+}
+
+case class IwpObjectTest( guts: String, guts2: String )
+
+
 object IwpAnimationTest {
   implicit val reader: XmlReader[IwpAnimationTest] = (
     (__ \ "author").read[IwpAuthorTest],
-    (__ \ "hey").read[String].optional
+    (__ \ "hey").read[String].optional,
+    (__ \ "objects").read(seq[IwpObjectTest])
   ).mapN(apply _)
 }
 
 
-case class IwpAnimationTest( author: IwpAuthorTest, hey: Option[String] )
+case class IwpAnimationTest( author: IwpAuthorTest,
+                             hey: Option[String],
+                             objects: Seq[IwpObjectTest] )
 
 
 
@@ -78,7 +95,7 @@ class XtractTestController @Inject()(cc: ControllerComponents) extends AbstractC
 
   def xtractTest2_iwp() = Action { implicit request: Request[AnyContent] =>
 
-    val simpleXml = scala.xml.XML.loadString("<problem><author><username>username</username><name>name</name><organization>org</organization><email></email></author></problem>")
+    val simpleXml = scala.xml.XML.loadString("<problem><author><username>username</username><name>name</name><organization>org</organization><email></email></author><objects><time>t1</time><window>w1</window><output>o1</output><output>o2</output><solid>s1</solid><output>o3</output></objects></problem>")
 
     val parsedTest = XmlReader.of[IwpAnimationTest].read(simpleXml)
 
