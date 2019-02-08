@@ -43,6 +43,10 @@ GET     /test/nashorn/test4            controllers.NashornTestController.nashorn
 GET     /test/nashorn/test5            controllers.NashornTestController.nashornTest5_calcIwpSteps()
 GET     /test/nashorn/test6            controllers.NashornTestController.nashornTest6_compareIwpSteps()
 
+# Integration Test for Xtract - Xml parsing
+GET     /test/xtract/test1              controllers.XtractTestController.xtractTest1_basic()
+
+
 # Version 4 SBT Conversion testing
 GET     /DProblem                   controllers.DProblemController.index
 GET     /DProblem/:path             controllers.DProblemController.view(path: String)
