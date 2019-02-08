@@ -54,9 +54,9 @@ case class IwpAuthorTest( username: String,
 object IwpObjectTest {
   implicit val reader: XmlReader[IwpObjectTest] = (
     (__).read[String]
-  ).mapN(apply _)
-}
+  ).map(apply _)
 
+}
 
 // Tasks -
 //  0. Finish Testing - How to read A seq of strongly typed sub nodes.
@@ -68,7 +68,7 @@ object IwpObjectTest {
 //  5. Rip out all circular dependence stuff, and just depend on object ordering.
 
 
-case class IwpObjectTest( guts: String, guts2: String )
+case class IwpObjectTest( guts: String )
 
 
 object IwpAnimationTest {
