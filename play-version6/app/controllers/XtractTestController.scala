@@ -49,14 +49,24 @@ case class IwpAuthorTest( username: String,
 
 
 // TODO - Figure out why mapN gets angry with only 1 attribute
-// Can we leave out the mapN, an d will it work?
+// Can we leave out the mapN, and will it work?
 
 object IwpObjectTest {
   implicit val reader: XmlReader[IwpObjectTest] = (
-    (__).read[String],
     (__).read[String]
   ).mapN(apply _)
 }
+
+
+// Tasks -
+//  0. Finish Testing - How to read A seq of strongly typed sub nodes.
+//        IwpTimeTest, IwpWindowTest, IwpOutputTest, IwpSolidTest
+//  1. Finish full Xml parser for Iwp objects to existing case classes
+//  2. Add object sequencing to json case classes
+//  3. Build a pure scala xml to json converter
+//  4. Upate the animator to use the new json that has the ordered objects
+//  5. Rip out all circular dependence stuff, and just depend on object ordering.
+
 
 case class IwpObjectTest( guts: String, guts2: String )
 
