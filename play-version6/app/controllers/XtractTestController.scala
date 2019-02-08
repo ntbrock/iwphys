@@ -39,7 +39,7 @@ class XtractTestController @Inject()(cc: ControllerComponents) extends AbstractC
 
   def xtractTest1_basic() = Action { implicit request: Request[AnyContent] =>
 
-    val simpleXml = scala.xml.XML.loadString("<xtractTest hello=\"Taylor\" extra=\"Niall\"/>")
+    val simpleXml = scala.xml.XML.loadString("<xtractTest hello=\"Taylor\" extra=\"Niall\"> 8/2/2019  </xtractTest>")
 
     val parsedTest = XmlReader.of[XtractTest].read(simpleXml)
 
