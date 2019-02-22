@@ -12,6 +12,8 @@
         @* Here's where we render the page title `String`. *@
         <title>@title</title>
 
+        <!--<script charset="utf-8" type="text/javascript" src="@routes.Assets.versioned("javascripts/require.js")"/></script>-->
+
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap-3.3.7.min.css")">
@@ -26,19 +28,21 @@
         <script src="@routes.Assets.versioned("javascripts/jquery-3.3.1.min.js")" type="text/javascript"></script>
 
         <script src="@routes.Assets.versioned("javascripts/save-svg-as-png/lib/saveSvgAsPng.js")" type="text/javascript" ></script>
+
+        <link rel="stylesheet" href="@routes.Assets.versioned("javascripts/node_modules/dragula/dist/dragula.css")">
+
     </head>
     <body>
+
+        <script charset="utf-8" type="text/javascript" src="@routes.Assets.versioned("javascripts/node_modules/dragula/dist/dragula.min.js")"/></script>
 
         @* And here's where we render the `Html` object containing
          * the page content. *@
 
         @content
 
-
-
         <script src="@routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
         <script src="@routes.Assets.versioned("javascripts/bootstrap-3.3.7.min.js")" type="text/javascript"></script>
-
 
         <script src="@routes.Assets.versioned("javascripts/d3.v4.min.js")" type="text/javascript"></script>
         <script src="@routes.Assets.versioned("javascripts/math.min.js")" type="text/javascript"></script>
@@ -48,5 +52,6 @@
         <script charset="utf-8" type="text/javascript" src="@routes.Assets.versioned("javascripts/iwp/iwp6-animator.js")"/></script>
         <script charset="utf-8" type="text/javascript" src="@routes.Assets.versioned("javascripts/iwp/iwp6-ui.js")"/></script>
         <script charset="utf-8" type="text/javascript" src="@routes.Assets.versioned("javascripts/iwp/iwp6-graph.js")"/></script>
+
     </body>
 </html>

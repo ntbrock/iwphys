@@ -1,0 +1,31 @@
+@()
+
+
+@main("Dragula Demo") {
+
+@views.html.partial.nav()
+
+<h1>Dragula Demo</h1>
+
+<!-- just need to containers with some elements in them like this: -->
+<h3>Top Container</h3>
+<div id="top">
+    <div><span>item1</span></div>
+    <div><span>item2</span></div>
+    <div><span>item3</span></div>
+    <div><span>item4</span></div>
+</div>
+
+<h3>Bottom Container</h3>
+<div id="bottom">
+    <div><span>item5</span></div>
+</div>
+
+
+<script>
+    dragula([document.getElementById("top"), document.getElementById("bottom")]);
+</script>
+
+@views.html.partial.footer()
+
+}

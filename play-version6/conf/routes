@@ -46,3 +46,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # Demo IWP homepage
 # GET     /demo                       controllers.DemoController.index
+
+# Dragula demo
+GET     /dragula                         controllers.DragulaController.index
