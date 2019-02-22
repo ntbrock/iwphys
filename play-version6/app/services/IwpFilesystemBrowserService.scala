@@ -54,11 +54,11 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
         }
 
 
-        Logger.info(s"IwpFilesystemBrowser:56> Decoded: ${decoded}")
+        // Logger.info(s"IwpFilesystemBrowser:56> Decoded: ${decoded}")
 
         val pathFile = new File(root + File.separator + decoded)
 
-        Logger.info(s"IwpFilesystemBrowser:56> Pathfile: ${pathFile}   exists: ${pathFile.exists}")
+        // Logger.info(s"IwpFilesystemBrowser:56> Pathfile: ${pathFile}   exists: ${pathFile.exists}")
 
         if (pathFile.exists) {
           Some( Iwp6FilesystemCollection(pathFile, root))

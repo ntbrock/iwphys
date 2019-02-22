@@ -40,7 +40,7 @@ trait BoilerplateIO {
 
   // Boilerplate IO
   def listDirectories(f: File): Array[File] = {
-    Logger.info(s"BoilerplateIo:41> ListDirectories: ${f}  (${f.exists})")
+    // Logger.info(s"BoilerplateIo:41> ListDirectories: ${f}  (${f.exists})")
     listVisibleDirectories(f)
   }
 

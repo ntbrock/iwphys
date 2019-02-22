@@ -17,7 +17,10 @@ libraryDependencies += "edu.ncssm" %% "iwp4-dist-jar" % "4.1.3"
 // 2018Nov15 - Mongo for animation storage
 libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.4.1"
 
-libraryDependencies += "ch.rasc" % "bsoncodec" % "1.0.1",
+libraryDependencies += "ch.rasc" % "bsoncodec" % "1.0.1"
+
+// 2019Feb08 - Xtract for Xml Parsing
+libraryDependencies += "com.lucidchart" %% "xtract" % "2.0.1"
 
 
 // Adds additional packages into Twirl

@@ -60,3 +60,11 @@
 .iwp-save-screenshot {
     margin-top: 1rem;
 }
+
+
+.iwp-packaged-collection-homepage-container a {
+    font-size: 120%;
+    padding: 1rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+}

@@ -38,7 +38,7 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
     val collectionName = URLDecoder.decode(collectionEncoded, "UTF-8")
 
-    Logger.info(s"AnimationFilesystemController:26> collectionName: ${collectionName}")
+    // Logger.info(s"AnimationFilesystemController:26> collectionName: ${collectionName}")
 
     iwpDirectoryBrowserService.getCollection(collectionEncoded) match {
 
@@ -72,6 +72,30 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
       }
     }
   }
+
+
+  /** quick fix to support legacy Urls*/
+  def getSubAnimation(collection: String, subCollection: String, filename: String) = Action { implicit request: Request[AnyContent] =>
+
+    val collectionEncoded = collection + "/" + subCollection
+
+    iwpDirectoryBrowserService.getCollection(collectionEncoded) match {
+
+      case None => NotFound(s"No Such Collection Found:61 ${collectionEncoded}")
+
+      case Some(collection) => {
+
+        iwpDirectoryBrowserService.getAnimation(collection, filename) match {
+          case Failure(x) =>
+            Logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
+
+            NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
+          case Success(s) => Ok(views.html.animation.animation(collection, filename, s))
+        }
+      }
+    }
+  }
+
 
 
 

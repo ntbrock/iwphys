@@ -110,7 +110,7 @@
 			</ypath>
 		</solid>
 		<output>
-			<name>p</name>
+			<name>pitch</name>
 			<text>Spring pitch</text>
 			<units>m</units>
 			<calculator type="parametric">
@@ -124,7 +124,7 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>p/2</value>
+						<value>pitch/2</value>
 					</calculator>
 				</width>
 				<height>
@@ -158,7 +158,7 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>p</value>
+						<value>pitch</value>
 					</calculator>
 				</width>
 				<height>
@@ -177,7 +177,7 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-.1+p/2</value>
+					<value>-.1+pitch/2</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -192,7 +192,7 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>p</value>
+						<value>pitch</value>
 					</calculator>
 				</width>
 				<height>
@@ -211,7 +211,7 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-.1+3*p/2</value>
+					<value>-.1+3*pitch/2</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -226,7 +226,7 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>p</value>
+						<value>pitch</value>
 					</calculator>
 				</width>
 				<height>
@@ -245,7 +245,7 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-.1+5*p/2</value>
+					<value>-.1+5*pitch/2</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -260,7 +260,7 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>p</value>
+						<value>pitch</value>
 					</calculator>
 				</width>
 				<height>
@@ -279,7 +279,7 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-.1+7*p/2</value>
+					<value>-.1+7*pitch/2</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -294,7 +294,7 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>p</value>
+						<value>pitch</value>
 					</calculator>
 				</width>
 				<height>
@@ -313,7 +313,7 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-.1+9*p/2</value>
+					<value>-.1+9*pitch/2</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -328,7 +328,7 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>p/2</value>
+						<value>pitch/2</value>
 					</calculator>
 				</width>
 				<height>
@@ -347,7 +347,7 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-.1+11*p/2</value>
+					<value>-.1+11*pitch/2</value>
 				</calculator>
 			</xpath>
 			<ypath>

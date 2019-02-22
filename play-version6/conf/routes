@@ -20,6 +20,13 @@ GET     /collections                           controllers.AnimationFilesystemCo
 GET     /collection/*collection                controllers.AnimationFilesystemController.browseCollection(collection: String)
 GET     /animation/:collection/:filename.json  controllers.AnimationFilesystemController.getAnimationJson(collection: String, filename: String)
 GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
+GET     /animation/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
+
+# Support LEgacy Path
+
+GET     /animate.php/:collection/:filename  controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
+GET     /animate.php/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
+
 
 
 # First Rudimentary Database Browser
@@ -35,6 +42,11 @@ GET     /test/nashorn/test3            controllers.NashornTestController.nashorn
 GET     /test/nashorn/test4            controllers.NashornTestController.nashornTest4_loadIwpAnimation()
 GET     /test/nashorn/test5            controllers.NashornTestController.nashornTest5_calcIwpSteps()
 GET     /test/nashorn/test6            controllers.NashornTestController.nashornTest6_compareIwpSteps()
+
+# Integration Test for Xtract - Xml parsing
+GET     /test/xtract/test1              controllers.XtractTestController.xtractTest1_basic()
+GET     /test/xtract/test2              controllers.XtractTestController.xtractTest2_iwp()
+
 
 # Version 4 SBT Conversion testing
 GET     /DProblem                   controllers.DProblemController.index
