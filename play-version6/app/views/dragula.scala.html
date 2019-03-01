@@ -1,29 +1,124 @@
 @()
 
-
 @main("Dragula Demo") {
 
 @views.html.partial.nav()
 
-<h1>Dragula Demo</h1>
+<section>
+    <div id="side-menu">
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">New Object</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#" onclick="addDraggableObject('input')">Input</a>
+                <a href="#" onclick="addDraggableObject('output')">Output</a>
+                <a href="#" onclick="addDraggableObject('solid')">Solid</a>
+            </div>
+        </div>
 
-<!-- just need to containers with some elements in them like this: -->
-<h3>Top Container</h3>
-<div id="top">
-    <div><span>item1</span></div>
-    <div><span>item2</span></div>
-    <div><span>item3</span></div>
-    <div><span>item4</span></div>
-</div>
+        <h3>Objects</h3>
+        <div id="objects">
+            <div class="draggable">Time</div>
+            <div class="draggable">Graph Window</div>
+            <div class="draggable">XY Window</div>
+            <div class="draggable">Description</div>
+        </div>
+    </div>
 
-<h3>Bottom Container</h3>
-<div id="bottom">
-    <div><span>item5</span></div>
-</div>
+    <div id="designer-panel">
+        <h1>Dragula Demo</h1>
+
+        <input type="text"><br>
+
+        <h3>Equations</h3>
+        X Path: <input type="text"><br>
+        Y Path: <input type="text"><br>
+
+        <h3>Properties</h3>
+        <select>
+            <option value="rectangle">Rectangle</option>
+            <option value="circle">Circle</option>
+            <option value="polygon">Polygon</option>
+            <option value="line">Line</option>
+            <option value="vector">Vector</option>
+            <option value="bitmap">Bitmap</option>
+        </select>
+        <br><br>
+
+        Width = <input type="text"><br>
+        Height = <input type="text"><br>
+        Theta = <input type="text"><br>
+
+        <h4>Draw Vectors</h4>
+        <form>
+            <input type="checkbox" value="xVel"> x Velocity
+            <input type="checkbox" value="yVel"> y Velocity
+            <input type="checkbox" value="xAccel"> x Acceleration
+            <input type="checkbox" value="yAccel"> y Acceleration
+            <br>
+        </form>
+
+        <h4>Graphable</h4>
+        <form>
+            <input type="checkbox" value="xPos"> x Position
+            <input type="checkbox" value="yPos"> y Position
+            <input type="checkbox" value="xVel"> x Velocity
+            <input type="checkbox" value="yVel"> y Velocity
+            <input type="checkbox" value="xAccel"> x Acceleration
+            <input type="checkbox" value="yAccel"> y Acceleration
+            <br>
+        </form>
+
+        <h1>Print Log</h1>
+        <div id="log"></div>
+
+    </div>
+</section>
 
 
 <script>
-    dragula([document.getElementById("top"), document.getElementById("bottom")]);
+
+var drake = dragula([document.getElementById("objects")]);
+
+drake.on("drop", function (el, target, source, sibling) {
+    // console.log(el, target, source, sibling);
+    var objects = document.getElementById("objects").children;
+
+    var print_str = "";
+    for (var i = 0; i < objects.length; i++) {
+        print_str += "<p>" + objects[i].textContent + "</p>";
+    }
+    document.getElementById("log").innerHTML = print_str;
+});
+
+// https://www.w3schools.com/howto/howto_js_dropdown.asp
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+var num_objects = 0;
+function addDraggableObject(type) {
+    num_objects ++;
+    console.log(type, num_objects);
+    $("#objects").append("<div class='draggable'>" + type + " " + num_objects + "</div>");
+}
+
 </script>
 
 @views.html.partial.footer()
