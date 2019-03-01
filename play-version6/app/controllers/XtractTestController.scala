@@ -19,6 +19,15 @@ import cats.syntax.all._
   * https://blog.knoldus.com/parsing-xml-into-scala-case-classes-using-xtract/
   */
 
+// Tasks -
+//  0. Finish Testing - How to read A seq of strongly typed sub nodes.
+//        IwpTimeTest, IwpWindowTest, IwpOutputTest, IwpSolidTest
+//  1. Finish full Xml parser for Iwp objects to existing case classes
+//  2. Add object sequencing to json case classes
+//  3. Build a pure scala xml to json converter
+//  4. Upate the animator to use the new json that has the ordered objects
+//  5. Rip out all circular dependence stuff, and just depend on object ordering.
+
 
 object XtractTest {
   implicit val reader: XmlReader[XtractTest] = (
@@ -48,41 +57,37 @@ case class IwpAuthorTest( username: String,
 
 
 
-// TODO - Figure out why mapN gets angry with only 1 attribute
-// Can we leave out the mapN, and will it work?
-
 object IwpObjectTest {
   implicit val reader: XmlReader[IwpObjectTest] = (
     (__).read[String]
-  ).map(apply _)
-
+    ).map{ x =>
+    println(s"XtractTestController:65> x: ${x}")
+    IwpObjectTest(x)
+  }
 }
 
-// Tasks -
-//  0. Finish Testing - How to read A seq of strongly typed sub nodes.
-//        IwpTimeTest, IwpWindowTest, IwpOutputTest, IwpSolidTest
-//  1. Finish full Xml parser for Iwp objects to existing case classes
-//  2. Add object sequencing to json case classes
-//  3. Build a pure scala xml to json converter
-//  4. Upate the animator to use the new json that has the ordered objects
-//  5. Rip out all circular dependence stuff, and just depend on object ordering.
-
-
 case class IwpObjectTest( guts: String )
+
+
+object IwpObjectSequenceTest {
+  implicit val reader: XmlReader[IwpObjectSequenceTest] = (
+    (__).read(seq[IwpObjectTest])
+    ).map(apply _)
+}
+
+case class IwpObjectSequenceTest( objects: Seq[IwpObjectTest] )
 
 
 object IwpAnimationTest {
   implicit val reader: XmlReader[IwpAnimationTest] = (
     (__ \ "author").read[IwpAuthorTest],
-    (__ \ "hey").read[String].optional,
-    (__ \ "objects").read(seq[IwpObjectTest])
+    (__ \ "objects" ).read[IwpObjectSequenceTest]
   ).mapN(apply _)
 }
 
 
 case class IwpAnimationTest( author: IwpAuthorTest,
-                             hey: Option[String],
-                             objects: Seq[IwpObjectTest] )
+                             objects: IwpObjectSequenceTest )
 
 
 
@@ -107,9 +112,23 @@ class XtractTestController @Inject()(cc: ControllerComponents) extends AbstractC
 
     val simpleXml = scala.xml.XML.loadString("<problem><author><username>username</username><name>name</name><organization>org</organization><email></email></author><objects><time>t1</time><window>w1</window><output>o1</output><output>o2</output><solid>s1</solid><output>o3</output></objects></problem>")
 
-    val parsedTest = XmlReader.of[IwpAnimationTest].read(simpleXml)
 
-    Ok(s"iwpAnimation: ${parsedTest}")
+
+    val objects = simpleXml \\ "problem" \\ "objects"
+
+    objects.map { node =>
+
+      node.child.map { child =>
+
+        Logger.info(s"XtractTestController:120> ${child}  label: ${child.label}")
+
+      }
+    }
+
+
+    // val parsedTest = XmlReader.of[IwpAnimationTest].read(simpleXml)
+
+    Ok(s"iwpAnimation: ${simpleXml \\ "problem" \\ "objects" }")
 
   }
 

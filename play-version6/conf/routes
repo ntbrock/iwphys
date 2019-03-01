@@ -47,6 +47,8 @@ GET     /test/nashorn/test6            controllers.NashornTestController.nashorn
 GET     /test/xtract/test1              controllers.XtractTestController.xtractTest1_basic()
 GET     /test/xtract/test2              controllers.XtractTestController.xtractTest2_iwp()
 
+GET     /test/xml/version4/read         controllers.XmlTestController.version4Read()
+
 
 # Version 4 SBT Conversion testing
 GET     /DProblem                   controllers.DProblemController.index
