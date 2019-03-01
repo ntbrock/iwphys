@@ -3,6 +3,7 @@ package services
 import java.io.File
 import java.net.URLDecoder
 
+import edu.ncssm.iwp.problemdb.{DProblem, DProblemXMLParser}
 import javax.inject.Inject
 import models.{Iwp6Animation, Iwp6Collection, Iwp6FilesystemCollection}
 import org.mongodb.scala.model.Filters.equal
@@ -129,5 +130,32 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
       }
     )
   }
+
+  /**
+    * IWP4 Adaptattion
+    * @param collection
+    * @param filename
+    * @return
+    */
+
+  def getVersion4Problem(collection: Iwp6Collection, filename: String) : Try[DProblem] = {
+
+    Try(
+      rootO match {
+        case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
+        case Some(root) =>
+
+          val pathFile = new File(root + File.separator + collection + File.separator + filename )// NOTE! These are .iwp files, not Json
+
+          val xmlString = readFileCompletely(pathFile)
+
+          val problem = DProblemXMLParser.load(xmlString)
+          problem.filename = filename
+
+          problem
+      }
+    )
+  }
+
 
 }

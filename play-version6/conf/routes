@@ -47,7 +47,8 @@ GET     /test/nashorn/test6            controllers.NashornTestController.nashorn
 GET     /test/xtract/test1              controllers.XtractTestController.xtractTest1_basic()
 GET     /test/xtract/test2              controllers.XtractTestController.xtractTest2_iwp()
 
-GET     /test/xml/version4/read         controllers.XmlTestController.version4Read()
+GET     /test/xml/version4/readString    controllers.XmlTestController.version4ReadString()
+GET    /test/xml/version4/readCollection/:collectionEncoded/:filename    controllers.XmlTestController.version4CollectionRead(collectionEncoded: String, filename:String)
 
 
 # Version 4 SBT Conversion testing

@@ -91,6 +91,9 @@ case class Iwp6Description( text: Option[String] )
 
 case class Iwp6Objects( GraphWindow: Option[Iwp6GraphWindow],
                         description: Iwp6Description,
+
+
+
                         input: Seq[Iwp6Input],
                         output: Seq[Iwp6Output],
                         solid: Seq[Iwp6Solid],

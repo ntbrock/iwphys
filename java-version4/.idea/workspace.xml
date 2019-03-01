@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9f553d3-1fdb-4854-9490-17b0d19d16f1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/java-version4.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sbt.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../play-version6/app/controllers/XmlTestController.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/XtractTestController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/XtractTestController.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/XmlTestController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/XmlTestController.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/models/Iwp6Animation.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/models/Iwp6Animation.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/services/IwpFilesystemBrowserService.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/services/IwpFilesystemBrowserService.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../play-version6/conf/routes" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/conf/routes" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,19 +33,54 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/problemdb/DProblemXMLParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+            <state relative-caret-position="400">
+              <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/problemdb/DProblem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="155">
+              <caret line="249" column="5" lean-forward="true" selection-start-line="249" selection-start-column="5" selection-end-line="249" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#19518#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Description.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#2196#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>objectsInTickOrder</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/edu/ncssm/iwp/problemdb/DProblem.java" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-240" />
@@ -99,6 +128,15 @@
               <item name="edu" type="462c0819:PsiDirectoryNode" />
               <item name="ncssm" type="462c0819:PsiDirectoryNode" />
               <item name="iwp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="java-version4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java-version4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="edu" type="462c0819:PsiDirectoryNode" />
+              <item name="ncssm" type="462c0819:PsiDirectoryNode" />
+              <item name="iwp" type="462c0819:PsiDirectoryNode" />
+              <item name="objects" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="java-version4" type="b2602c69:ProjectViewProjectNode" />
@@ -225,8 +263,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/problemdb/DProblemXMLParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+        <state relative-caret-position="400">
+          <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/problemdb/DProblem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="249" column="5" lean-forward="true" selection-start-line="249" selection-start-column="5" selection-end-line="249" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#19518#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Description.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#2196#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
