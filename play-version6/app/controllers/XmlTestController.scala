@@ -51,11 +51,13 @@ class XmlTestController @Inject()(cc: ControllerComponents,
   }
 
 
-  def version4CollectionRead(collectionEncoded: String, filename: String) = Action { request =>
 
 
-    iwpFilesystemBrowserService.getCollection(collectionEncoded) match {
-      case None => NotFound(s"No collection: ${collectionEncoded}")
+  def version4CollectionRead(collection: String, filename: String) = Action { request =>
+
+
+    iwpFilesystemBrowserService.getCollection(collection) match {
+      case None => NotFound(s"No collection: ${collection}")
       case Some(collection) =>
 
         iwpFilesystemBrowserService.getVersion4Problem(collection, filename) match {
@@ -82,6 +84,40 @@ class XmlTestController @Inject()(cc: ControllerComponents,
 
 
   }
+
+
+  def version4SubCollectionRead(collection: String, subCollection: String, filename: String) = Action { request =>
+
+
+    iwpFilesystemBrowserService.getCollection(s"${collection}/${subCollection}") match {
+      case None => NotFound(s"No collection: ${collection}")
+      case Some(collection) =>
+
+        iwpFilesystemBrowserService.getVersion4Problem(collection, filename) match {
+
+          case Failure(x) => BadRequest(s"Failure loading problem: ${x}")
+          case Success(dproblem) =>
+
+
+            val drawOrder = dproblem.getObjectsForDrawing.toArray.toSeq
+              .map{ ar => ar.asInstanceOf[IWPObject] }
+              .map{ o => s"name: ${o.getName} class: ${o.getClass.getName}" }
+              .mkString("\n")
+
+            val tickOrder = dproblem.getObjectsForTicking.toArray.toSeq.mkString("\n")
+
+
+            Ok(s"version4DirectoryRead to DProblem:\n\n${dproblem}\n\nDrawOrder: ${drawOrder}\n\nTickOrder: ${tickOrder}")
+
+
+        }
+
+
+    }
+
+
+  }
+
 
 
 }

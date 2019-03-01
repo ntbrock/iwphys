@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d9f553d3-1fdb-4854-9490-17b0d19d16f1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/XmlTestController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/XmlTestController.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/models/Iwp6Animation.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/models/Iwp6Animation.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/services/IwpFilesystemBrowserService.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/services/IwpFilesystemBrowserService.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../play-version6/conf/routes" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/conf/routes" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
