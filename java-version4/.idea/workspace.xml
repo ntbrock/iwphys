@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9f553d3-1fdb-4854-9490-17b0d19d16f1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../play-version6/app/models/Iwp6AnimationModels.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/AnimationFilesystemController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/AnimationFilesystemController.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/AnimationMongoController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/AnimationMongoController.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/XmlTestController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/XmlTestController.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/models/Iwp6Animation.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/models/Iwp6Animation.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/services/IwpMongoClient.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/services/IwpMongoClient.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/views/partial/animationPreview.scala.html" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/views/partial/animationPreview.scala.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../play-version6/conf/routes" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/conf/routes" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,14 +59,46 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Description.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="345">
+              <caret line="32" column="16" lean-forward="true" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
               <folding>
                 <element signature="e#0#2196#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/graphicsengine/GShape.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="316">
+              <caret line="271" column="9" lean-forward="true" selection-start-line="271" selection-start-column="9" selection-end-line="271" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#14719#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/math/MCalculator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+              <folding>
+                <element signature="e#0#2466#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/math/MCalculatorXMLHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-929" />
           </provider>
         </entry>
       </file>
@@ -68,6 +107,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>objectsInTickOrder</find>
+      <find>propSelector</find>
+      <find>getDisp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -134,6 +175,15 @@
               <item name="edu" type="462c0819:PsiDirectoryNode" />
               <item name="ncssm" type="462c0819:PsiDirectoryNode" />
               <item name="iwp" type="462c0819:PsiDirectoryNode" />
+              <item name="math" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="java-version4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java-version4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="edu" type="462c0819:PsiDirectoryNode" />
+              <item name="ncssm" type="462c0819:PsiDirectoryNode" />
+              <item name="iwp" type="462c0819:PsiDirectoryNode" />
               <item name="objects" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -169,6 +219,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551484161572" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -278,11 +329,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Description.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="345">
+          <caret line="32" column="16" lean-forward="true" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
           <folding>
             <element signature="e#0#2196#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/graphicsengine/GShape.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="271" column="9" lean-forward="true" selection-start-line="271" selection-start-column="9" selection-end-line="271" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#14719#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/math/MCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+          <folding>
+            <element signature="e#0#2466#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/math/MCalculatorXMLHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-929" />
       </provider>
     </entry>
   </component>

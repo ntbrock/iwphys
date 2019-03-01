@@ -66,7 +66,6 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
       classOf[Iwp6Input],
       classOf[Iwp6Description],
       classOf[Iwp6GraphWindow],
-      classOf[Iwp6Objects],
       classOf[Iwp6Author],
       classOf[Iwp6Animation]
     )

@@ -10,6 +10,7 @@ import play.api.libs.json.Json
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
+import scala.util.{Failure, Success}
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -56,7 +57,7 @@ class AnimationMongoController @Inject()(cc: ControllerComponents, mongo: IwpMon
       animations.headOption match {
         case None => NotFound(Json.obj("error"->true, "message"-> "Animation not found"))
         case Some(animation) =>
-          Ok(Json.toJson(animation))
+          Ok(Json.prettyPrint(Iwp6Animation.toJson(animation)))
       }
     }
 
@@ -82,10 +83,10 @@ class AnimationMongoController @Inject()(cc: ControllerComponents, mongo: IwpMon
         Logger.info(s"AnimationController:49> Received: $jsv")
 
 
-        Json.fromJson[Iwp6Animation](jsv).asEither match {
-          case Left(x) =>
+        Iwp6Animation.fromJson(jsv) match {
+          case Failure(x) =>
             Future.successful(BadRequest(s"Json schema error: ${x}"))
-          case Right(iwpAnimation) =>
+          case Success(iwpAnimation) =>
 
             // Write to DB
 

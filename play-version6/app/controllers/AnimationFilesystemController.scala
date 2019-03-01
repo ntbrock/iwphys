@@ -3,6 +3,7 @@ package controllers
 import java.net.URLDecoder
 
 import javax.inject._
+import models.Iwp6Animation
 import org.mongodb.scala.model.Filters._
 import play.api.Logger
 import play.api.libs.json.Json
@@ -112,7 +113,7 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
             Logger.error(s"AnimationFilesystemController:88> Failure: ${x}")
 
             NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
-          case Success(s) => Ok(Json.prettyPrint(Json.toJson(s)))
+          case Success(s) => Ok(Json.prettyPrint(Iwp6Animation.toJson(s)))
         }
       }
     }

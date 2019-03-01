@@ -50,6 +50,7 @@ GET     /test/xtract/test2              controllers.XtractTestController.xtractT
 GET     /test/xml/version4/readString    controllers.XmlTestController.version4ReadString()
 GET    /test/xml/version4/readCollection/:collection/:filename    controllers.XmlTestController.version4CollectionRead(collection: String, filename:String)
 GET    /test/xml/version4/readCollection/:collection/:subCollection/:filename    controllers.XmlTestController.version4SubCollectionRead(collection: String, subCollection: String, filename:String)
+GET    /test/xml/version4/convertCollection/:collection/:subCollection/:filename    controllers.XmlTestController.version4SubCollectionConvert(collection: String, subCollection: String, filename:String)
 
 
 # Version 4 SBT Conversion testing

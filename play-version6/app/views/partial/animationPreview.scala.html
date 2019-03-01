@@ -18,7 +18,7 @@
             <h3><a target="_anim" href="@url">@animation.filename.get</a></h3>
 
             <p>
-                @animation.objects.description.text
+                @animation.description.map(_.text)
             </p>
 
         </div>
