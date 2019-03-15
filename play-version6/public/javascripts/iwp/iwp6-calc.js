@@ -1444,16 +1444,41 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 
 function parseProblemToMemory( problem ) {
 
+    var animation = { loop: [] };
+
+    // 2019Mar13
+
+     problem.objects.forEach( function( object, index ) {
+        console.log("iwp6-calc:1451> parseProblemToMemory> Iterator: " + JSON.stringify(object) );
+
+        if ( object.objectType == "time" ) {
+            animation.time = object;
+        } else if ( object.objectType == "graphWindow" ) {
+            animation.graphWindow = object;
+        } else if ( object.objectType == "window" ) {
+            animation.window = object;
+        } else if ( object.objectType == "description" ) {
+            animation.description = object;
+
+        } else if ( object.objectType == "input" || object.objectType == "output" || object.objectType == "solid" ) {
+            animation.loop.push(object);
+
+        } else {
+            throw "Animation parseProblemToMemory unrecognized Object Type: " + object.objectType;
+        }
+
+     });
+
+
   // D-fence
 
-  if ( typeof problem !== "object" ) {
+  if ( typeof animation !== "object" ) {
     throw "Animation Parameter was not an object, was: " + typeof problem
-  } else if ( typeof problem.objects !== "object" ) {
-    throw "Animation objects attribute was not an object, was: " + typeof problem.objects
-
-  } else if ( typeof problem.objects.time !== "object" ) {
+  } else if ( typeof animation.loop !== "object" ) {
+    throw "Animation loop attribute was not an array, was: " + typeof problem.objects
+  } else if ( typeof animation.time !== "object" ) {
     throw "Animation objects.time attribute was not an object, was: " + typeof problem.objects.time
-  } else if ( typeof problem.objects.description !== "object" ) {
+  } else if ( typeof animation.description !== "object" ) {
     throw "Animation objects.description attribute was not an object, was: " + typeof problem.objects.description
 
   }
@@ -1461,6 +1486,7 @@ function parseProblemToMemory( problem ) {
   // TODO more validation
 
 
+throw "End of Dev Session 2019Mar13";
 
   // Time
   setTime(problem.objects.time);
