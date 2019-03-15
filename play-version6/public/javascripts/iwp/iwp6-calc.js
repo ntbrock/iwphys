@@ -1489,22 +1489,25 @@ function parseProblemToMemory( problem ) {
 throw "End of Dev Session 2019Mar13";
 
   // Time
-  setTime(problem.objects.time);
+  setTime(animation.objects.time);
 
   // Description
-  setDescription(problem.objects.description);
+  setDescription(animation.objects.description);
 
   // Window
-  setWindow(problem.objects.window);
+  setWindow(animation.objects.window);
 
   // GraphWindow
-  setGraphWindow(problem.objects.GraphWindow);
+  setGraphWindow(animation.objects.GraphWindow);
 
   if ( typeof setAuthorName === "function" ) {
-    setAuthorName(problem.author.username);
+    setAuthorName(animation.author.username);
   }
 
   // console.log("iwp6-calc:1350> Typeof input: " , typeof problem.objects.input)
+
+
+    // Do the conversion 2019Mar15
 
   // Inputs - These could be an array OR a single item.
   if ( typeof problem.objects.input === 'item') {
