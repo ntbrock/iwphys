@@ -65,4 +65,4 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # GET     /demo                       controllers.DemoController.index
 
 # Dragula demo
-GET     /dragula                         controllers.DragulaController.index
+GET     /designer                         controllers.DesignerController.index

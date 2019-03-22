@@ -1,0 +1,139 @@
+@()
+
+@main("Dragula Demo") {
+
+@views.html.partial.nav()
+
+<section>
+    <div id="side-menu">
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">New Object</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#" onclick="addDraggableObject('input')">Input</a>
+                <a href="#" onclick="addDraggableObject('output')">Output</a>
+                <a href="#" onclick="addDraggableObject('solid')">Solid</a>
+            </div>
+        </div>
+
+        <h3>Objects</h3>
+        <div id="objects">
+            <div class="draggable">Time</div>
+            <div class="draggable">Graph Window</div>
+            <div class="draggable">XY Window</div>
+            <div class="draggable">Description</div>
+        </div>
+    </div>
+
+    <div id="designer-panel">
+        Animation: <input type="text" id="animation_name"><br>
+
+        <h3>Equations</h3>
+        X Path: <input type="text" id="xpath"><br>
+        Y Path: <input type="text" id="ypath"><br>
+
+        <h3>Properties</h3>
+        <select id="shape">
+            <option value="rectangle">Rectangle</option>
+            <option value="circle">Circle</option>
+            <option value="polygon">Polygon</option>
+            <option value="line">Line</option>
+            <option value="vector">Vector</option>
+            <option value="bitmap">Bitmap</option>
+        </select>
+        <br><br>
+
+        Width = <input type="text" id="width"><br>
+        Height = <input type="text" id="height"><br>
+        Theta = <input type="text" id="theta"><br>
+
+        <h4>Draw Vectors</h4>
+        <input type="checkbox" value="xVel" class="draw_vectors"> x Velocity
+        <input type="checkbox" value="yVel" class="draw_vectors"> y Velocity
+        <input type="checkbox" value="xAccel" class="draw_vectors"> x Acceleration
+        <input type="checkbox" value="yAccel" class="draw_vectors"> y Acceleration
+        <br>
+
+        <h4>Graphable</h4>
+        <input type="checkbox" value="xPos" class="graphable"> x Position
+        <input type="checkbox" value="yPos" class="graphable"> y Position
+        <input type="checkbox" value="xVel" class="graphable"> x Velocity
+        <input type="checkbox" value="yVel" class="graphable"> y Velocity
+        <input type="checkbox" value="xAccel" class="graphable"> x Acceleration
+        <input type="checkbox" value="yAccel" class="graphable"> y Acceleration
+        <br>
+
+        <br>
+        <input type="button" id="save" value="Save">
+
+        <h1>Print Log</h1>
+        <div id="log"></div>
+
+    </div>
+</section>
+
+
+<script>
+
+var drake = dragula([document.getElementById("objects")]);
+var objects = []
+
+// https://www.w3schools.com/howto/howto_js_dropdown.asp
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+var num_objects = 0;
+function addDraggableObject(type) {
+    num_objects ++;
+    $("#objects").append("<div class='draggable'>" + type + " " + num_objects + "</div>");
+}
+
+$("#save").click(function() {
+    $("#log").html("")
+
+    $("#log").append("name " + $("#animation_name").val() + "<br>");
+
+    $("#log").append("xpath " + $("#xpath").val() + "<br>");
+    $("#log").append("ypath " + $("#ypath").val() + "<br>");
+
+    $("#log").append("shape " + $("#shape").val() + "<br>");
+
+    $("#log").append("width " + $("#width").val() + "<br>");
+    $("#log").append("height " + $("#height").val() + "<br>");
+    $("#log").append("theta " + $("#theta").val() + "<br>");
+
+    var draw_vectors = [];
+    $.each($(".draw_vectors:checked"), function(){
+        $("#log").append("draw vectors " + $(this).val() + "<br>");
+        draw_vectors.push($(this).val());
+    });
+
+    var graphable = [];
+    $.each($(".graphable:checked"), function(){
+        $("#log").append("graphable " + $(this).val() + "<br>");
+        graphable.push($(this).val());
+    });
+
+    $("#objects").children().each(function(i) {
+        $("#log").append(i + " " + $(this).text() + "<br>");
+    });
+});
+
+</script>
+
+@views.html.partial.footer()
+
+}

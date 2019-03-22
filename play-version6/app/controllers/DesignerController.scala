@@ -25,7 +25,7 @@ class DragulaController @Inject()(cc: ControllerComponents,
 
     iwpDirectoryBrowserService.getCollection(popularName) match {
 
-      case None => Ok(views.html.dragula())
+      case None => Ok(views.html.designer())
 
       case Some(popularCollection) => Ok(views.html.dragula())
 
