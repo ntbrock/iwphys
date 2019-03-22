@@ -9,7 +9,7 @@ import services.IwpFilesystemBrowserService
  * This controller is a demo for drag-and-drop using Dragula.
  */
 @Singleton
-class DragulaController @Inject()(cc: ControllerComponents,
+class DesignerController @Inject()(cc: ControllerComponents,
                                 iwpDirectoryBrowserService: IwpFilesystemBrowserService) extends AbstractController(cc) {
 
   /**
@@ -27,7 +27,7 @@ class DragulaController @Inject()(cc: ControllerComponents,
 
       case None => Ok(views.html.designer())
 
-      case Some(popularCollection) => Ok(views.html.dragula())
+      case Some(popularCollection) => Ok(views.html.designer())
 
     }
   }
