@@ -95,6 +95,10 @@ class NashornTestController @Inject()(cc: ControllerComponents,
 
   // Execute the iwp5, and jquery animator javascript
 
+  /**
+    * 2019Mar13 Pair w/ Niall - Test conversion to new iwp6 'flat' format
+    * @return
+    */
   def nashornTest4_loadIwpAnimation() = Action { implicit request: Request[AnyContent] =>
 
     val engine = new ScriptEngineManager().getEngineByName("nashorn")
@@ -117,9 +121,11 @@ class NashornTestController @Inject()(cc: ControllerComponents,
 
 
     // https://www.iwphys.org/xtoj.php/unit-test-2017/TEST_euler.iwp
-    val unitTestAnimation = "{\"author\":{\"username\":{},\"name\":{},\"organization\":{},\"email\":{}},\"objects\":{\"time\":{\"start\":\"0.0\",\"stop\":\"100.0\",\"change\":\"0.02\",\"fps\":\"15.0\"},\"GraphWindow\":{\"xmin\":\"-10.0\",\"xmax\":\"10.0\",\"ymin\":\"-10.0\",\"ymax\":\"10.0\",\"xgrid\":\"1.0\",\"ygrid\":\"1.0\"},\"window\":{\"xmin\":\"-10.0\",\"xmax\":\"10.0\",\"ymin\":\"-10.0\",\"ymax\":\"10.0\",\"xgrid\":\"1.0\",\"ygrid\":\"1.0\",\"xunit\":\"m\",\"yunit\":\"m\",\"showAllDataAvailable\":\"false\",\"drawGridNumbers\":\"true\"},\"description\":{\"text\":\"Very simple test for Euler calculations. It's important to remember that the Initial Displacement and Velocity can be dynamic equations and \\npossibly more complicated than just fixed numbers. This means they would be based on inputs values, which is illustrated here.\"},\"input\":[{\"name\":\"initxdisp\",\"text\":\"Initial X Displacement\",\"initialValue\":\"-10.0\",\"units\":\"m\"},{\"name\":\"initxvel\",\"text\":\"Initial X Velocity\",\"initialValue\":\"5.0\",\"units\":\"m\"}],\"solid\":{\"name\":\"EulerMover\",\"shape\":{\"@attributes\":{\"type\":\"circle\",\"drawTrails\":\"false\",\"drawVectors\":\"false\"},\"vectors\":{\"@attributes\":{\"yAccel\":\"false\",\"Vel\":\"false\",\"xAccel\":\"false\",\"yVel\":\"false\",\"xVel\":\"false\",\"Accel\":\"false\"}},\"width\":{\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"1\"}},\"height\":{\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"1\"}},\"angle\":{\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"0\"}},\"graphOptions\":{\"@attributes\":{\"graphVisible\":\"false\"},\"initiallyOn\":{\"@attributes\":{\"yAccel\":\"false\",\"yVel\":\"false\",\"xAccel\":\"false\",\"xVel\":\"false\",\"yPos\":\"false\",\"xPos\":\"false\"}}}},\"color\":{\"red\":\"255\",\"green\":\"0\",\"blue\":\"0\"},\"xpath\":{\"calculator\":{\"@attributes\":{\"type\":\"euler\"},\"displacement\":\"initxdisp\",\"velocity\":\"initxvel\",\"acceleration\":\"-5*t\"}},\"ypath\":{\"calculator\":{\"@attributes\":{\"type\":\"euler\"},\"displacement\":\"-10\",\"velocity\":\"0\",\"acceleration\":\"5\"}}},\"output\":[{\"name\":\"EulerXDispOutput\",\"text\":\"X Disp\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.xdisp\"}},{\"name\":\"EulerXVelOutput\",\"text\":\"X Vel\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.xvel\"}},{\"name\":\"EulerXAccelOutput\",\"text\":\"X Accel\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.xaccel\"}},{\"name\":\"EulerYVelOutput\",\"text\":\"Y Vel\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.yvel\"}},{\"name\":\"EulerYDispOutput\",\"text\":\"Y Disp\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.ydisp\"}},{\"name\":\"EulerYAccelOutput\",\"text\":\"Y Accel\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.yaccel\"}}]}}"
+    // val unitTestAnimation = "{\"author\":{\"username\":{},\"name\":{},\"organization\":{},\"email\":{}},\"objects\":{\"time\":{\"start\":\"0.0\",\"stop\":\"100.0\",\"change\":\"0.02\",\"fps\":\"15.0\"},\"GraphWindow\":{\"xmin\":\"-10.0\",\"xmax\":\"10.0\",\"ymin\":\"-10.0\",\"ymax\":\"10.0\",\"xgrid\":\"1.0\",\"ygrid\":\"1.0\"},\"window\":{\"xmin\":\"-10.0\",\"xmax\":\"10.0\",\"ymin\":\"-10.0\",\"ymax\":\"10.0\",\"xgrid\":\"1.0\",\"ygrid\":\"1.0\",\"xunit\":\"m\",\"yunit\":\"m\",\"showAllDataAvailable\":\"false\",\"drawGridNumbers\":\"true\"},\"description\":{\"text\":\"Very simple test for Euler calculations. It's important to remember that the Initial Displacement and Velocity can be dynamic equations and \\npossibly more complicated than just fixed numbers. This means they would be based on inputs values, which is illustrated here.\"},\"input\":[{\"name\":\"initxdisp\",\"text\":\"Initial X Displacement\",\"initialValue\":\"-10.0\",\"units\":\"m\"},{\"name\":\"initxvel\",\"text\":\"Initial X Velocity\",\"initialValue\":\"5.0\",\"units\":\"m\"}],\"solid\":{\"name\":\"EulerMover\",\"shape\":{\"@attributes\":{\"type\":\"circle\",\"drawTrails\":\"false\",\"drawVectors\":\"false\"},\"vectors\":{\"@attributes\":{\"yAccel\":\"false\",\"Vel\":\"false\",\"xAccel\":\"false\",\"yVel\":\"false\",\"xVel\":\"false\",\"Accel\":\"false\"}},\"width\":{\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"1\"}},\"height\":{\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"1\"}},\"angle\":{\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"0\"}},\"graphOptions\":{\"@attributes\":{\"graphVisible\":\"false\"},\"initiallyOn\":{\"@attributes\":{\"yAccel\":\"false\",\"yVel\":\"false\",\"xAccel\":\"false\",\"xVel\":\"false\",\"yPos\":\"false\",\"xPos\":\"false\"}}}},\"color\":{\"red\":\"255\",\"green\":\"0\",\"blue\":\"0\"},\"xpath\":{\"calculator\":{\"@attributes\":{\"type\":\"euler\"},\"displacement\":\"initxdisp\",\"velocity\":\"initxvel\",\"acceleration\":\"-5*t\"}},\"ypath\":{\"calculator\":{\"@attributes\":{\"type\":\"euler\"},\"displacement\":\"-10\",\"velocity\":\"0\",\"acceleration\":\"5\"}}},\"output\":[{\"name\":\"EulerXDispOutput\",\"text\":\"X Disp\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.xdisp\"}},{\"name\":\"EulerXVelOutput\",\"text\":\"X Vel\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.xvel\"}},{\"name\":\"EulerXAccelOutput\",\"text\":\"X Accel\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.xaccel\"}},{\"name\":\"EulerYVelOutput\",\"text\":\"Y Vel\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.yvel\"}},{\"name\":\"EulerYDispOutput\",\"text\":\"Y Disp\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.ydisp\"}},{\"name\":\"EulerYAccelOutput\",\"text\":\"Y Accel\",\"units\":\"m\",\"calculator\":{\"@attributes\":{\"type\":\"parametric\"},\"value\":\"EulerMover.yaccel\"}}]}}"
 
-    Logger.info(s"NashornTestController:51> invokable: ${invokable}")
+    val unitTestAnimation = NashhornTestControllerSampleAnimations.springMotionFlatObjectSequence
+
+    Logger.info(s"NashornTestController:128> invokable: ${invokable}")
     val r = invokable.invokeFunction("readAnimationString", unitTestAnimation )
 
     Ok(s"Nashorn Test 4: calcEval: ${iwpCalcEval},  readEval: ${iwpReadEval}  function call to readAnimationObject: ${r} ")
@@ -189,5 +195,583 @@ class NashornTestController @Inject()(cc: ControllerComponents,
     Ok(views.html.validation.compareIwpSteps(path, diffs, differenceSummary ))
 
   }
+
+
+
+
+}
+
+
+
+
+object NashhornTestControllerSampleAnimations {
+
+  val springMotionFlatObjectSequence = """{
+"author": {
+"email": "",
+"name": "",
+"organization": "",
+"username": "winters@ncssm.edu"
+},
+"objects": [
+{
+"start": 0,
+"stop": 100,
+"change": 0.05,
+"fps": 20,
+"objectType": "time"
+},
+{
+"xmin": 0,
+"xmax": 0.1,
+"ymin": -0.1,
+"ymax": 0.1,
+"xgrid": 0.01,
+"ygrid": 0.01,
+"objectType": "graphWindow"
+},
+{
+"xmin": -0.1,
+"xmax": 0.1,
+"ymin": -0.1,
+"ymax": 0.1,
+"xgrid": 0.02,
+"ygrid": 0.02,
+"xunit": "meters",
+"yunit": "meters",
+"objectType": "window"
+},
+{
+"text": "A red ball is connected to a spring which is fixed at the left side of the screen. ",
+"objectType": "description"
+},
+{
+"name": "m",
+"text": "Mass of ball",
+"initialValue": 0.5,
+"units": "kg",
+"hidden": false,
+"objectType": "input"
+},
+{
+"name": "k",
+"text": "Spring Constant",
+"initialValue": 10,
+"units": "N/m",
+"hidden": false,
+"objectType": "input"
+},
+{
+"name": "h",
+"text": "Spring height",
+"initialValue": 0.03,
+"units": "m",
+"hidden": true,
+"objectType": "input"
+},
+{
+"name": "a",
+"text": "Amplitude",
+"initialValue": 0.085,
+"units": "m",
+"hidden": false,
+"objectType": "input"
+},
+{
+"name": "p",
+"text": "Phase",
+"initialValue": 3.14,
+"units": "rad",
+"hidden": false,
+"objectType": "input"
+},
+{
+"name": "w",
+"text": "Angular speed",
+"units": "1/s",
+"calculator": {
+"calcType": "parametric",
+"value": "(k/m)^.5"
+},
+"hidden": true,
+"objectType": "output"
+},
+{
+"name": "ball",
+"shape": {
+"shapeType": "circle",
+"vectors": {
+"xVel": false,
+"yVel": false,
+"xAccel": false,
+"yAccel": false,
+"Vel": false,
+"Accel": false
+},
+"width": {
+"calculator": {
+"calcType": "parametric",
+"value": ".02"
+}
+},
+"height": {
+"calculator": {
+"calcType": "parametric",
+"value": ".02"
+}
+},
+"graphOptions": {
+"graphVisible": true,
+"initiallyOn": {
+"xPos": true,
+"xVel": true,
+"xAccel": true,
+"yPos": false,
+"yVel": false,
+"yAccel": false
+}
+},
+"isGraphable": true,
+"drawTrails": false,
+"drawVectors": false
+},
+"color": {
+"red": 255,
+"green": 0,
+"blue": 0
+},
+"xpath": {
+"calculator": {
+"calcType": "parametric",
+"value": "a*cos(w*t+p)"
+}
+},
+"ypath": {
+"calculator": {
+"calcType": "parametric",
+"value": "0"
+}
+},
+"objectType": "solid"
+},
+{
+"name": "pitch",
+"text": "Spring pitch",
+"units": "m",
+"calculator": {
+"calcType": "parametric",
+"value": "(ball.xpos+0.1)/6"
+},
+"hidden": true,
+"objectType": "output"
+},
+{
+"name": "line1",
+"shape": {
+"shapeType": "line",
+"vectors": {
+"xVel": false,
+"yVel": false,
+"xAccel": false,
+"yAccel": false,
+"Vel": false,
+"Accel": false
+},
+"width": {
+"calculator": {
+"calcType": "parametric",
+"value": "pitch/2"
+}
+},
+"height": {
+"calculator": {
+"calcType": "parametric",
+"value": "h/2"
+}
+},
+"graphOptions": {
+"graphVisible": false,
+"initiallyOn": {
+"xPos": false,
+"xVel": false,
+"xAccel": false,
+"yPos": false,
+"yVel": false,
+"yAccel": false
+}
+},
+"isGraphable": false,
+"drawTrails": false,
+"drawVectors": false
+},
+"color": {
+"red": 0,
+"green": 0,
+"blue": 0
+},
+"xpath": {
+"calculator": {
+"calcType": "parametric",
+"value": "-.1"
+}
+},
+"ypath": {
+"calculator": {
+"calcType": "parametric",
+"value": "0"
+}
+},
+"objectType": "solid"
+},
+{
+"name": "line2",
+"shape": {
+"shapeType": "line",
+"vectors": {
+"xVel": false,
+"yVel": false,
+"xAccel": false,
+"yAccel": false,
+"Vel": false,
+"Accel": false
+},
+"width": {
+"calculator": {
+"calcType": "parametric",
+"value": "pitch"
+}
+},
+"height": {
+"calculator": {
+"calcType": "parametric",
+"value": "-h"
+}
+},
+"graphOptions": {
+"graphVisible": false,
+"initiallyOn": {
+"xPos": false,
+"xVel": false,
+"xAccel": false,
+"yPos": false,
+"yVel": false,
+"yAccel": false
+}
+},
+"isGraphable": false,
+"drawTrails": false,
+"drawVectors": false
+},
+"color": {
+"red": 0,
+"green": 0,
+"blue": 0
+},
+"xpath": {
+"calculator": {
+"calcType": "parametric",
+"value": "-.1+pitch/2"
+}
+},
+"ypath": {
+"calculator": {
+"calcType": "parametric",
+"value": "0+h/2"
+}
+},
+"objectType": "solid"
+},
+{
+"name": "line3",
+"shape": {
+"shapeType": "line",
+"vectors": {
+"xVel": false,
+"yVel": false,
+"xAccel": false,
+"yAccel": false,
+"Vel": false,
+"Accel": false
+},
+"width": {
+"calculator": {
+"calcType": "parametric",
+"value": "pitch"
+}
+},
+"height": {
+"calculator": {
+"calcType": "parametric",
+"value": "h"
+}
+},
+"graphOptions": {
+"graphVisible": false,
+"initiallyOn": {
+"xPos": false,
+"xVel": false,
+"xAccel": false,
+"yPos": false,
+"yVel": false,
+"yAccel": false
+}
+},
+"isGraphable": false,
+"drawTrails": false,
+"drawVectors": false
+},
+"color": {
+"red": 0,
+"green": 0,
+"blue": 0
+},
+"xpath": {
+"calculator": {
+"calcType": "parametric",
+"value": "-.1+3*pitch/2"
+}
+},
+"ypath": {
+"calculator": {
+"calcType": "parametric",
+"value": "-h/2"
+}
+},
+"objectType": "solid"
+},
+{
+"name": "line4",
+"shape": {
+"shapeType": "line",
+"vectors": {
+"xVel": false,
+"yVel": false,
+"xAccel": false,
+"yAccel": false,
+"Vel": false,
+"Accel": false
+},
+"width": {
+"calculator": {
+"calcType": "parametric",
+"value": "pitch"
+}
+},
+"height": {
+"calculator": {
+"calcType": "parametric",
+"value": "-h"
+}
+},
+"graphOptions": {
+"graphVisible": false,
+"initiallyOn": {
+"xPos": false,
+"xVel": false,
+"xAccel": false,
+"yPos": false,
+"yVel": false,
+"yAccel": false
+}
+},
+"isGraphable": false,
+"drawTrails": false,
+"drawVectors": false
+},
+"color": {
+"red": 0,
+"green": 0,
+"blue": 0
+},
+"xpath": {
+"calculator": {
+"calcType": "parametric",
+"value": "-.1+5*pitch/2"
+}
+},
+"ypath": {
+"calculator": {
+"calcType": "parametric",
+"value": "h/2"
+}
+},
+"objectType": "solid"
+},
+{
+"name": "line5",
+"shape": {
+"shapeType": "line",
+"vectors": {
+"xVel": false,
+"yVel": false,
+"xAccel": false,
+"yAccel": false,
+"Vel": false,
+"Accel": false
+},
+"width": {
+"calculator": {
+"calcType": "parametric",
+"value": "pitch"
+}
+},
+"height": {
+"calculator": {
+"calcType": "parametric",
+"value": "h"
+}
+},
+"graphOptions": {
+"graphVisible": false,
+"initiallyOn": {
+"xPos": false,
+"xVel": false,
+"xAccel": false,
+"yPos": false,
+"yVel": false,
+"yAccel": false
+}
+},
+"isGraphable": false,
+"drawTrails": false,
+"drawVectors": false
+},
+"color": {
+"red": 0,
+"green": 0,
+"blue": 0
+},
+"xpath": {
+"calculator": {
+"calcType": "parametric",
+"value": "-.1+7*pitch/2"
+}
+},
+"ypath": {
+"calculator": {
+"calcType": "parametric",
+"value": "-h/2"
+}
+},
+"objectType": "solid"
+},
+{
+"name": "line6",
+"shape": {
+"shapeType": "line",
+"vectors": {
+"xVel": false,
+"yVel": false,
+"xAccel": false,
+"yAccel": false,
+"Vel": false,
+"Accel": false
+},
+"width": {
+"calculator": {
+"calcType": "parametric",
+"value": "pitch"
+}
+},
+"height": {
+"calculator": {
+"calcType": "parametric",
+"value": "-h"
+}
+},
+"graphOptions": {
+"graphVisible": false,
+"initiallyOn": {
+"xPos": false,
+"xVel": false,
+"xAccel": false,
+"yPos": false,
+"yVel": false,
+"yAccel": false
+}
+},
+"isGraphable": false,
+"drawTrails": false,
+"drawVectors": false
+},
+"color": {
+"red": 0,
+"green": 0,
+"blue": 0
+},
+"xpath": {
+"calculator": {
+"calcType": "parametric",
+"value": "-.1+9*pitch/2"
+}
+},
+"ypath": {
+"calculator": {
+"calcType": "parametric",
+"value": "h/2"
+}
+},
+"objectType": "solid"
+},
+{
+"name": "line7",
+"shape": {
+"shapeType": "line",
+"vectors": {
+"xVel": false,
+"yVel": false,
+"xAccel": false,
+"yAccel": false,
+"Vel": false,
+"Accel": false
+},
+"width": {
+"calculator": {
+"calcType": "parametric",
+"value": "pitch/2"
+}
+},
+"height": {
+"calculator": {
+"calcType": "parametric",
+"value": "h/2"
+}
+},
+"graphOptions": {
+"graphVisible": false,
+"initiallyOn": {
+"xPos": false,
+"xVel": false,
+"xAccel": false,
+"yPos": false,
+"yVel": false,
+"yAccel": false
+}
+},
+"isGraphable": false,
+"drawTrails": false,
+"drawVectors": false
+},
+"color": {
+"red": 0,
+"green": 0,
+"blue": 0
+},
+"xpath": {
+"calculator": {
+"calcType": "parametric",
+"value": "-.1+11*pitch/2"
+}
+},
+"ypath": {
+"calculator": {
+"calcType": "parametric",
+"value": "-h/2"
+}
+},
+"objectType": "solid"
+}
+]
+}"""
 
 }

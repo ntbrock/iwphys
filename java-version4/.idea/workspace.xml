@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d9f553d3-1fdb-4854-9490-17b0d19d16f1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../play-version6/app/models/Iwp6AnimationModels.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/AnimationFilesystemController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/AnimationFilesystemController.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/AnimationMongoController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/AnimationMongoController.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/XmlTestController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/XmlTestController.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/models/Iwp6Animation.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/models/Iwp6Animation.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/services/IwpMongoClient.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/services/IwpMongoClient.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/views/partial/animationPreview.scala.html" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/views/partial/animationPreview.scala.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/conf/routes" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/conf/routes" afterDir="false" />
-    </list>
+    <list default="true" id="d9f553d3-1fdb-4854-9490-17b0d19d16f1" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +88,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/math/MCalculatorXMLHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-929" />
+            <state relative-caret-position="351">
+              <caret line="71" column="28" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -219,7 +211,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551484161572" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551731838180" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -359,7 +351,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/math/MCalculatorXMLHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-929" />
+        <state relative-caret-position="351">
+          <caret line="71" column="28" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
+        </state>
       </provider>
     </entry>
   </component>
