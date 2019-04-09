@@ -25,45 +25,50 @@
     </div>
 
     <div id="designer-panel">
-        Animation: <input type="text" id="animation_name"><br>
+        <h3 id="designer-start-prompt">Please select an object</h3>
 
-        <h3>Equations</h3>
-        X Path: <input type="text" id="xpath"><br>
-        Y Path: <input type="text" id="ypath"><br>
+        <div id="designer-form" style="display:none;">
+            Animation: <input type="text" id="animation_name"><br>
 
-        <h3>Properties</h3>
-        <select id="shape">
-            <option value="rectangle">Rectangle</option>
-            <option value="circle">Circle</option>
-            <option value="polygon">Polygon</option>
-            <option value="line">Line</option>
-            <option value="vector">Vector</option>
-            <option value="bitmap">Bitmap</option>
-        </select>
-        <br><br>
+            <h3>Equations</h3>
+            X Path: <input type="text" id="xpath"><br>
+            Y Path: <input type="text" id="ypath"><br>
 
-        Width = <input type="text" id="width"><br>
-        Height = <input type="text" id="height"><br>
-        Theta = <input type="text" id="theta"><br>
+            <h3>Properties</h3>
+            <select id="shape">
+                <option value="rectangle">Rectangle</option>
+                <option value="circle">Circle</option>
+                <option value="polygon">Polygon</option>
+                <option value="line">Line</option>
+                <option value="vector">Vector</option>
+                <option value="bitmap">Bitmap</option>
+            </select>
+            <br><br>
 
-        <h4>Draw Vectors</h4>
-        <input type="checkbox" value="xVel" class="draw_vectors"> x Velocity
-        <input type="checkbox" value="yVel" class="draw_vectors"> y Velocity
-        <input type="checkbox" value="xAccel" class="draw_vectors"> x Acceleration
-        <input type="checkbox" value="yAccel" class="draw_vectors"> y Acceleration
-        <br>
+            Width = <input type="text" id="width"><br>
+            Height = <input type="text" id="height"><br>
+            Theta = <input type="text" id="theta"><br>
 
-        <h4>Graphable</h4>
-        <input type="checkbox" value="xPos" class="graphable"> x Position
-        <input type="checkbox" value="yPos" class="graphable"> y Position
-        <input type="checkbox" value="xVel" class="graphable"> x Velocity
-        <input type="checkbox" value="yVel" class="graphable"> y Velocity
-        <input type="checkbox" value="xAccel" class="graphable"> x Acceleration
-        <input type="checkbox" value="yAccel" class="graphable"> y Acceleration
-        <br>
+            <h4>Draw Vectors</h4>
+            <input type="checkbox" value="xVel" class="draw_vectors"> x Velocity
+            <input type="checkbox" value="yVel" class="draw_vectors"> y Velocity
+            <input type="checkbox" value="xAccel" class="draw_vectors"> x Acceleration
+            <input type="checkbox" value="yAccel" class="draw_vectors"> y Acceleration
+            <br>
 
-        <br>
-        <input type="button" id="save" value="Save">
+            <h4>Graphable</h4>
+            <input type="checkbox" value="xPos" class="graphable"> x Position
+            <input type="checkbox" value="yPos" class="graphable"> y Position
+            <input type="checkbox" value="xVel" class="graphable"> x Velocity
+            <input type="checkbox" value="yVel" class="graphable"> y Velocity
+            <input type="checkbox" value="xAccel" class="graphable"> x Acceleration
+            <input type="checkbox" value="yAccel" class="graphable"> y Acceleration
+            <br>
+
+            <br>
+            <input type="button" id="save" value="Save">
+
+        </div>
 
     </div>
 </section>

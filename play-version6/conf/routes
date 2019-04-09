@@ -22,7 +22,7 @@ GET     /animation/:collection/:filename.json  controllers.AnimationFilesystemCo
 GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
 GET     /animation/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
 
-# Support Legacy Paths from WebSssign
+# Support Legacy Paths from WebAssign
 
 GET     /animate.php/:collection/:filename  controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
 GET     /animate.php/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
@@ -66,5 +66,5 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # Demo IWP homepage
 # GET     /demo                       controllers.DemoController.index
 
-# Dragula demo
+# Designer demo
 GET     /designer                     controllers.DesignerController.index
