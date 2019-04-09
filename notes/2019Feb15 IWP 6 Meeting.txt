@@ -1,0 +1,22 @@
+2019Feb15 IWP 6 Meeting
+
+Albert
+L> UX Wireframes to lay out the web designer.
+N> Prototype The left hand object ordering using dragula.js. Have everything in the list be orderable.  Recommend building the prototype in the play-version6 as a unit test.
+
+Taylor
+L> Fix for object ordering: continued to explore the experimental library, starting to feel friction.  Didn't get it all the way working.
+N> Object Ordering Fix:  Explore grafting the IWP4 java code in: it already does the parsing!
+
+
+After - Object Ordering - It's complicated but I have a hunch it's going to fix most of our valiation issues.
+
+- XML parsing (In progress)
+- New JSON structure
+- Structural changes out to the animator
+- As quickly as possible, re-run validation framework to make sure this has the impact I want to it.
+- No UI changes
+- Designer: need ability to order objects
+
+
+

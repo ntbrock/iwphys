@@ -1,0 +1,32 @@
+2019Mar15 IWP Dev Meeting
+
+Albert
+L> Busy!  Have the overall HTML dynamically rendering the form based on the properties of the object + storing that in the json format.
+N> Next: Dynamically rendering the form and storing in JSon.
+
+Niall
+L> Work w/ TB on starting the new json structure and maintain the inherent ordering from old XML. Started a bit on the ordering the calculations and how we're loading this new format.
+N> Keep working on the ordering of the calculations.
+
+Taylor
+L> Sequence Animations: JSON structure w/ Niall: produced examples plus parsing the new structure
+N> Sequence Animations: Calculation ordering!
+
+After - Examples of new JSON seqence object format.
+
+http://localhost:8470/test/xml/version4/convertCollection/iwp-packaged/Oscillations/spring-motion.iwp
+
+Captured Example:
+https://gist.github.com/ntbrock/b9713d1399fd3e8898d2cf9b76cb0e6e
+
+
+After - Niall coordinate tasks on how to divide and conquer calculation tasks.
+
+At the end of the pair session, got the loading working.  
+
+End of Dev Session 2019Mar13
+
+Re-run Test:  http://localhost:8470/test/nashorn/test4
+
+
+

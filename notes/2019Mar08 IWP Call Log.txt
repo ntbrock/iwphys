@@ -1,0 +1,209 @@
+2019Mar08 IWP Call Log
+
+Albert
+L> Designer prototype, refining Dragula,  added inputs, and a save button, serialization test.  Compiling information.
+N> The page isnt' sepcific to certain objects, need the flipping of the 
+
+Dr. Bennett
+L> Tested out new animations, send suggestions for Navigation on the new site, new user orientation recommendations.  Lots of NaN errors in animation libraries during manual testing, others that wouldn't play when clicking play button, goes to last frame.  
+
+Exciting: Hosting a state physics teachers conference at ncssm in November. 3rd weekend of Month.  Whatever is ready to roll out and show people.
+
+Taylor
+L> Rebuilding the Animation schema - fundamental issue, losing the object ordering.  Connected in the original code, have examples of animations.  Rolled production back to version 5.
+
+N> Take that new animation schema, the samples -> get them playing in the iwp6 javascript. Goal: show the first aniamtion in version 6 working w/ the new structure.  Retain the natural ordering.
+
+ * Taylor > take the reported animation issues, check thost back against bulk animation testing.
+
+
+After - Demo of AWS / Route 53  - Taylor
+
+iwphys.org A recrod flip
+
+After - Physics Nov 2019 conference -- Dr. Bennett
+
+Exciting!  Audience of 100 guests, physics teachers,  come college some high school around NC. Also some students in attendance, groups.  Interested to see what we've developed!  Goal: get them to use it.
+
+Possibility - if enough developed, the designer. If that were working, we could reservce time on that Saturday afternoon for a couple hours of a workshop, let people design their own animations and update / review existing ones.
+
+If no designer, no workshop.  Just a presentation: Taylor Development ,  Jon instructor. Format of conference is all ay Saturday.  AM presentations different lenghts, typically 10 min.
+
+Business mtg @ lunch.  After lunch workshops, typically.  Co-hosting w/ Shodor org. Located in Durham. Non profit, mission = engage hight school and other students in computational science. Modeling with software packages like Stella, summer camps, weekend camps.  They're going to do a workshop on that PM for something coding or using simulations, modeling packages.  Methods / different ways to teach physics.
+
+Taylor's orbital story from Shodor.  Bob Panoff, physicist, 25 years ago, running ever since.
+
+After -  AP-C Class --  Rollback applied.  Support? Did check into webassign before and check one animation and now it works.  It's the same thing from a year ago.
+
+
+After - Pointers on how to flip frames - Albert + Taylor - 
+
+When you click an object, get deisgn panel to change. 
+
+There's an implemetnation to use on animation side.
+
+
+
+= +R> Prototype -  Javascript reading the values out of the form.
+
++R> Prototype - Dynamically build  a form based on a template from a object type.
+
+Option A: Javascript apprreach, build out each of the nodes in code:
+
+	Single stream expression:
+
+	$("#target").append("<div class='iwp-designer-solid' id="BlueBall"><form>...<input></form></div>");
+
+Option B: 
+
+	Separation of Concerns
+
+	designer.html
+
+	<div id="solid-template">
+		<form>
+			<input>
+		</form>
+	</div>
+
+
+	designer.js 
+
+	$("#target").append(  $("#solid-template").clone() );
+
+
+
+
+
+
++R> Each Object has it's own div,  and it's own <form>.  And they use id=".." property to be identifiable in the DOM.
+
++R> These forms will have <select> <input type="text">
+
+Option A:
+
++R> Long hand, manually write serializers to go from json -> form   /  form -> json
+
+Option B:
+
++R> Short hand, acombination jQuery.serialize ++  QueryParam -> json.
+https://api.jquery.com/serialize/
+
+
+
+
++R> When publishing back to server:   GET and POST payloads that are schema compliant and atomic.
+
+	Json format:   iwp.json.   Just always use this as your strucutre,   dont' subdivide or send partial pieces.  ( streaming + performance + large objects ).
+
+
+	GET https://www.iwphys.org/xtoj.php/winters-ncssm-2009/nsl-00.iwp
+
+{
+"author": {
+"username": {},
+"name": {},
+"organization": {},
+"email": {}
+},
+"objects": {
+"time": {
+"start": "0.0",
+"stop": "25.0",  <---   Changed stop time in the form from 5 to 25 seconds.
+"change": "0.05",
+"fps": "20.0"
+},
+"GraphWindow": {
+"xmin": "0.0",
+"xmax": "5.0",
+"ymin": "0.0",
+"ymax": "10.0",
+"xgrid": "1.0",
+"ygrid": "1.0"
+},
+"window": {
+"xmin": "0.0",
+"xmax": "10.0",
+"ymin": "0.0",
+"ymax": "10.0",
+"xgrid": "1.0",
+"ygrid": "1.0",
+"xunit": "meters",
+"yunit": "meters",
+"showAllDataAvailable": "false",
+"drawGridNumbers": "true"
+},
+
+
+
+
+	POST https://www.iwphys.org/xtoj.php/winters-ncssm-2009/nsl-00.iwp
+	<body>
+
+
+
+	style:  REST  - REpresentaational State Transfer.
+
+
+
+https://www.iwphys.org/xtoj.php/winters-ncssm-2009/nsl-00.iwp
+
+							   /:collection		  /:filename
+
+
++R> User must be authenticated to POST. Otherwise it will fail.
+
++R> Users can only overwrite the animations they own with POST. Otherwise it will fail.
+		(graffiti)
+
++R> Users can 'clone' the work of others.  I think users will do this heavily from packaged animations.
+
++R> The new designer UI needs to handles ajax failures gracefully.
+
+
+
+
+$.ajax({
+  method: "POST",
+  url: "/animation-db/" + designerCollection + "/" + designerFilename // set on load.
+  data: {
+"author": {
+"username": {},
+"name": {},
+"organization": {},
+"email": {}
+},
+"objects": {
+"time": {
+"start": "0.0",
+"stop": "25.0",
+....
+})
+  .complete(function( jqXHR, textStatus ) {
+    
+  	//error handling code
+
+  	if ( textStatus =="error" ) { 
+  		Show a big red message!!!
+  	} else { 
+  		Turn on my 'saving animation' and re-enable all user inputs.
+  	}
+
+  });
+
+
+How ajax works:  https://xhr.spec.whatwg.org/
+
+https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+
+
+
+
+
+
+
+
+
+
+
+

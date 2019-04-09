@@ -1,0 +1,107 @@
+2019Apr09 IWP 
+
+Niall
+L> Working on new Animation parsing, added more defensive/validation code. 
+N> Next step would be changing the animation loop.
+
+Albert
+L> Continued designer work, got it to dynamically fill in the form base on which object you clicked.  Tried the JSON posting , got some errors.
+N> JSON Posting.  Get simple objects working end to end:  Description, Window, Graph Window, Time. -- Completely well formatted, and posting over to the controller.
+Don't worry about mongo stuff.
+
+* Taylor> Enable a Json Parser,  Iwp6Animation:189> Temporarily disabled the fromJson reader
+
+
+After : Demo, Questions about errors.   Albert
+
+Albert class at 12:55PM.
+
+/designer route
+
+
+Next:
+* Taylor> Test with a Solid that has a 'class'  , is it the .class attribute?
+
+
+
+
+
+After : Pull Niall's latest changes, go thru animation loop and make those changes other
+
+Niall available until 2PM
+
+
+
+iwp6-calc:1161> Attempting to compile calculator: {"calcType":"parametric","value":"(k/m)^.5"}
+
+
+
+
+iwp6-calc:992> addSolid:  {
+  "name": "ball",
+  "shape": {
+    "shapeType": "circle",
+    "vectors": {
+      "xVel": false,
+      "yVel": false,
+      "xAccel": false,
+      "yAccel": false,
+      "Vel": false,
+      "Accel": false
+    },
+    "width": {
+      "calculator": {
+        "calcType": "parametric",
+        "value": ".02"
+      }
+    },
+    "height": {
+      "calculator": {
+        "calcType": "parametric",
+        "value": ".02"
+      }
+    },
+    "graphOptions": {
+      "graphVisible": true,
+      "initiallyOn": {
+        "xPos": true,
+        "xVel": true,
+        "xAccel": true,
+        "yPos": false,
+        "yVel": false,
+        "yAccel": false
+      }
+    },
+    "isGraphable": true,
+    "drawTrails": false,
+    "drawVectors": false
+  },
+  "color": {
+    "red": 255,
+    "green": 0,
+    "blue": 0
+  },
+  "xpath": {
+    "calculator": {
+      "calcType": "parametric",
+      "value": "a*cos(w*t+p)"
+    }
+  },
+  "ypath": {
+    "calculator": {
+      "calcType": "parametric",
+      "value": "0"
+    }
+  },
+  "objectType": "solid"
+}
+
+
+
+
+
+
+
+
+
+

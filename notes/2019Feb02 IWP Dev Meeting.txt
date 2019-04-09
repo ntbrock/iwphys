@@ -1,0 +1,38 @@
+2019Feb02 IWP Dev Meeting
+
+Niall
+L> Debugging spring motion, large # of issues - variable w/ correct value, but was changing in java never changed. One of the outputs was changing it. Circular dependcies. 
+N> Spring motion + circ depencies next week.
+
+Albert
+L> Pair w/ Taylor, worked on screenshot feature.
+N> Whatever needs to be done next!  Designer UI layout concepting!!
+
+Taylor
+L> Production Deployment! Screenshot work w/ Albert, Two corrections for plumbing issues from full validation report.
+N> Refresh 2019Jan10_IWP6 Full Validation Report, pick the next plumbing issue off the list.
+
+After - Dr. Benett's Email
+
+Hello Team,
+
+I played around with it a little bit and I think IWP6 looks awesome. Thank you for all your efforts. I guess the next step is to finish tracking down and fixing the sources of any frame-by-frame differences between IWP5 and IWP6 animations. What's our timeframe for that ?
+
+* Taylor> Run a new verification reprot, count the differences between Jan 10 -> Feb 1st.
+Get a velocity and a semi educated forecast.
+
+After - UX compoenents to model.
+
+	The Version 4 Java designer has thee fields, all the screens that you're going to need.  Just needs to run a in a web page.
+
+	$ java -jar iwp4-dist-jar_2.12.jar
+
+	Free tools: 
+	https://uxplanet.org/5-free-quick-wireframe-tools-for-ui-ux-designers-in-2017-189e6a594fda
+
+	Premium tools: Adobe Xd
+
+
+After - Circular dependency pair.
+
+

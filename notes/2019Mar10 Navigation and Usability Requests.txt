@@ -1,0 +1,29 @@
+
+
+
+1)  Some of the animation descriptions are very wordy. At some point we can go through and edit them to try to make them shorter. For now, though, a simple fix might be to only display the first sentence or two of each animation description, with ellipses (...) at the end and a "Read More" button that a user can click in order to read the full description. I don't know how hard it would be to implement these things but I think it would improve the user experience. 
+
+
+2) At the top of each collection of animations is a link to go "Back to Parent Collection iwp-Packaged." To me it would make more sense to take the user back to the homepage. The iwp-packaged page seems redundant and has a different look than the homepage. I think we should work towards retiring the iwp-packaged page.
+
+
+3) I would like to find a way to hide some directories that you can get to if you go to the iwp-packaged page (a page called "Browsing Top Collections" allows you to browse directories like "ftemo", "popular" and "winters-ncssm-2009.") Some of those directories may be obsolete now, or are only used by specific NCSSM users. If we are preparing the IWP site for public use, we should find a way to keep private directories separate (and invisible) from the public stuff. I'm not sure how to do that. Maybe we can discuss this topic at a future group meeting. 
+
+
+
+4) The total number of animations given at the top of each collection is generally incorrect. For example, the Forces collection says that there are 14 animations. I counted about 30 animations on that page. This issue may be related to another issue: within each collection, a given animation often appears multiple times. For example in Forces I found 3 different instances of hookeslaw03.iwp.
+
+
+1) When I am in WebAssign and click on the link to open an animation, I get an error page. Below is an example. A similar error page happened for every animation I tried.  
+
+
+
+
+https://www.iwphys.org/5/animate.php/winters-ncssm-20019/nsl-00.iwp
+
+
+
+
+2) I noticed some animations that aren't working in the "Summer Physics" directory that we use for the AP-C prep course, and have created new Trello cards for the problems I saw (I put them under "Animation Code Issues from Manual Testing."). I did not test every single animation, but included examples of the various types of problems I found in each Trello card. I also created Trello cards for some Geometric Optics and Physical Optics animations that had similar problems (but aren't used for the prep course so are not time-sensitive).
+
+

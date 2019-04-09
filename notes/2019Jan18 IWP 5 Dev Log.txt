@@ -1,0 +1,37 @@
+2019Jan18 IWP 5 
+
+Albert
+L> Converting SVG to PNG, got it to download a sreenshot of canvas to local. Need to render w/o opening the page.  Found a library save-svg-as-png. 
+N> Next step, downlading the image outside of the actual animation.
+
+Research these technologies:
+
+https://www.npmjs.com/package/convert-svg-to-png
+
+https://www.seleniumhq.org/
+
+Prefer to have an automated solution, but fall back is to manually convert them.
+
+
+
+Niall
+L> Started off looking at spring motion one. Talk thru today. Looking at side by side comparison, numbers are signficiantly different. Move onto projectile motion 040302 : Gun barrel angle not showing in new version, tracking down in code toRadians, but found other cases where it worked.
+N> Continue debugging.
+
+
+
+Taylor
+L> Busy professional week!  I owe you guys 3 hours.  magicnumberip.com/all
+N> 1/10> Full Validation: Fix the Plumbing / null loading issues.  
+
+After - Tuesday January 29th w/ Albert.  Bryan Lobby at noon.  Deployment of play to production!  
+
+After - 1st How to download the PNG's outside of the browser.
+	nodejs library.
+
+
+
+After - Niall - 040302, side by side with gunangle, going wrong.
+
+
+
