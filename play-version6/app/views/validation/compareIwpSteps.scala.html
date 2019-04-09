@@ -41,30 +41,44 @@
     <tr>
         <td>@diff.step</td>
         <td>
-            <table>
-                <tr>
-                    <th>var</th>
-                    <th>left</th>
-                    <th>right</th>
-                </tr>
 
-            @diff.notEqual.map { case(v,(l,r)) =>
-                <tr>
-                    <td>@v</td>
-                    <td>@l</td>
-                    <td>@r</td>
-                </tr>
+            @if(diff.notEqual.isEmpty) {
+                <i>None</i>
+            } else {
+                <table>
+                    <tr>
+                        <th>var</th>
+                        <th>left</th>
+                        <th>right</th>
+                    </tr>
 
-
+                    @diff.notEqual.map { case(v,(l,r)) =>
+                    <tr>
+                        <td>@v</td>
+                        <td>@l</td>
+                        <td>@r</td>
+                    </tr>
+                    }
+                </table>
             }
-            </table>
         </td>
         <td>@diff.equal</td>
         <td>@diff.leftEmpty</td>
-        <td>@diff.leftMissing</td>
+        <td>
+            @if(diff.leftMissing.isEmpty) {
+                <i>None</i>
+            } else {
+                @Html(diff.leftMissing.mkString("\n<br>\n"))
+            }
+        </td>
         <td>@diff.rightEmpty</td>
-        <td>@diff.rightMissing</td>
-
+        <td>
+            @if(diff.rightMissing.isEmpty) {
+            <i>None</i>
+            } else {
+                @Html(diff.rightMissing.mkString("\n<br>\n"))
+            }
+        </td>
     </tr>
 
 }
