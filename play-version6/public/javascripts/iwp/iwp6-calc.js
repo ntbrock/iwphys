@@ -44,20 +44,6 @@ if ( typeof console === "undefined" ) {  // Prevent console redefinition
 }
 
 
-//------------------------------------------------------
-// IWP6 we migrated to the new non @ attributes, abandoning some quirks of automated xml to json conversion. (xtoj.php)
-
-// ANIMATION MODE
-var attributesProperty = "attributes";
-
-// Quick override so that validation + animation and co-exist in the same deployment
-if ( typeof CONFIG_attributesPropertyOverride !== "undefined" ) {
-    // VALIDATION MODE
-    attributesProperty = "@attributes";
-}
-
-
-
 //-----------------------------------------------------------------------
 // Memory Intialization + Globals Section
 
@@ -895,11 +881,6 @@ function setGraphWindow(inGraphWindow) {
 function addInput(input) {
   input.objectType = 'input'
 
-  // 2018MAr15 Some re-processed problems have calculation order to fix circular dependency
-  if ( input[attributesProperty] != null && input[attributesProperty]["calculationOrder"] != null  ) {
-    input.calculationOrder = +input[attributesProperty]["calculationOrder"];
-    //console.log("iwp5:586> Imported iwp450 calculation order: ", input.calculationOrder )
-  }
 
   // console.log("iwp6-calc:807> pushingInput: ", JSON.stringify(input) );
 
@@ -931,11 +912,6 @@ function addOutput(output) {
     hidden: output.hidden //Hidden flag still needed - be careful about cutting off attributes here.
   }
 
-  // 2018MAr15 Some re-processed problems have calculation order to fix circular dependency
-  if ( output[attributesProperty] != null && output[attributesProperty]["calculationOrder"] != null  ) {
-    compiledOutput.calculationOrder = +output[attributesProperty]["calculationOrder"];
-    // console.log("iwp5:678> Imported iwp450 calculation order: ", compiledOutput.calculationOrder )
-  }
 
   outputs.push( compiledOutput );
   // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { attributesProperty: { "type": "parametric" }, "value": "Red.xaccel" } }
@@ -987,7 +963,8 @@ function resetSolidCalculators(solid) {
 
 function addSolid(solid) {
   //console.log("solid: ", solid );
-  // console.log("addSolid width: ", solid.shape.width.calculator.value);
+
+  console.log("iwp6-calc:992> addSolid: ", JSON.stringify(solid));
 
   // In Memory - PreParse Equations with math.js
 
@@ -1000,12 +977,12 @@ function addSolid(solid) {
   		blue: parseFloat(solid.color.blue),
   	},
   	shape: {
-  		type: solid.shape[attributesProperty].type,
-  		drawTrails: solid.shape[attributesProperty].drawTrails,
-  		drawVectors: solid.shape[attributesProperty].drawVectors,
+  		type: solid.shape.shapeType,
+  		drawTrails: solid.shape.drawTrails,
+  		drawVectors: solid.shape.drawVectors,
   		graphOptions:
-        deepExtend( solid.shape.graphOptions[attributesProperty],
-                      { initiallyOn: solid.shape.graphOptions.initiallyOn[attributesProperty] } ),
+        deepExtend( solid.shape.graphOptions,
+                      { initiallyOn: solid.shape.graphOptions.initiallyOn } ),
   		width: {
   			calculator: compileCalculator(solid.shape.width.calculator)
   		},
@@ -1020,12 +997,6 @@ function addSolid(solid) {
   		calculator : compileCalculator(solid.ypath.calculator)
   	}
   };
-
-  // 2018Mar15 Some re-processed problems have calculation order to fix circular dependency
-  if ( solid[attributesProperty] != null && solid[attributesProperty]["calculationOrder"] != null  ) {
-    compiledSolid.calculationOrder = +solid[attributesProperty]["calculationOrder"];
-    // console.log("iwp5:678> Imported iwp450 calculation order: ", compiledSolid.calculationOrder )
-  }
 
 
   // If the problem iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
@@ -1043,9 +1014,9 @@ function addSolid(solid) {
     // console.log("iwp5:834> Compiled polygon: ",compiledSolid)
   }
 
-  if ( compiledSolid.shape.type == "Bitmap") {
+  if ( compiledSolid.shape.shapeType == "Bitmap") {
     // console.log("iwp5:649> Solid is a Bitmap type, building angle: " , solid.shape.angle )
-    compiledSolid.fileUri = "../../images/"+solid.shape.file[attributesProperty].image.split("/images/")[1]
+    compiledSolid.fileUri = "../../images/"+solid.shape.file.image.split("/images/")[1]
     // console.log("fileUri:",compiledSolid.fileUri)
   }
 
@@ -1101,7 +1072,8 @@ function addSolid(solid) {
     console.log("iwp5:712> ERROR: Unrecognized Solid Shape Type: ", compiledSolid.shape.type)
     return;
   };
-  if (solid.shape[attributesProperty].drawTrails == "true") {
+
+  if (solid.shape.drawTrails == "true") {
     svgSolids.push("<polyline id='solid_" +solid.name+ "_trail' points='20,20 50,50' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='1' fill='none'></polyline>");
   }
 }
@@ -1110,7 +1082,7 @@ function addObject(object) {
 
 
   //2018Oct12 - Detect the WaveBox
-  if ( object[attributesProperty] && object[attributesProperty]["class"] == "edu.ncssm.iwp.objects.grapher.DObject_Grapher" ) { 
+  if ( object.objectType == "edu.ncssm.iwp.objects.grapher.DObject_Grapher" ) {
     alert("This Animation Contains a GraphBox, Not yet implented in IWP5");
     return;
   }
@@ -1119,7 +1091,7 @@ function addObject(object) {
     objectType: 'object',
     name: object.name,
     shape: {
-      type: object[attributesProperty].class,
+      type: object.class,
       height: 1,
       width: 1
     },
@@ -1140,7 +1112,7 @@ function addObject(object) {
   objects.push( compiledObject );
 
 
-  if (object[attributesProperty].class == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
+  if (object.class == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
 
     // console.log("iwp5:933> FloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
     /// Initilization fix - the calclulators hven't been run yet, so we just place the text on page at 0,0 and it's moveed with first redraw.
@@ -1158,7 +1130,10 @@ function addObject(object) {
 
 function compileCalculator(iwpCalculator) {
 
-	var incomingType = iwpCalculator[attributesProperty].type
+    // console.log("iwp6-calc:1161> Attempting to compile calculator: " + JSON.stringify(iwpCalculator));
+
+    var incomingType = iwpCalculator.calcType
+
 	if ( incomingType == "parametric" ) {
 
 		/*
@@ -1460,7 +1435,7 @@ function parseProblemToMemory( problem ) {
         } else if ( object.objectType == "description" ) {
             animation.description = object;
 
-        } else if ( object.objectType == "input" || object.objectType == "output" || object.objectType == "solid" ) {
+        } else if ( object.objectType == "input" || object.objectType == "output" || object.objectType == "solid"  || object.objectType == "object" ) {
             animation.loop.push(object);
 
         } else {
@@ -1486,24 +1461,17 @@ function parseProblemToMemory( problem ) {
     throw "Animation window attribute was not an object, was: " + typeof problem.objects.window
   }
   
-
-  // TODO more validation
-
-
-return animation;
-throw "End of Dev Session 2019Mar13";
-
   // Time
-  setTime(animation.objects.time);
+  setTime(animation.time);
 
   // Description
-  setDescription(animation.objects.description);
+  setDescription(animation.description);
 
   // Window
-  setWindow(animation.objects.window);
+  setWindow(animation.window);
 
   // GraphWindow
-  setGraphWindow(animation.objects.GraphWindow);
+  setGraphWindow(animation.GraphWindow);
 
   if ( typeof setAuthorName === "function" ) {
     setAuthorName(animation.author.username);
@@ -1511,108 +1479,23 @@ throw "End of Dev Session 2019Mar13";
 
   // console.log("iwp6-calc:1350> Typeof input: " , typeof problem.objects.input)
 
+  animation.loop.forEach( function( object, index ) {
 
-    // Do the conversion 2019Mar15
-
-  // Inputs - These could be an array OR a single item.
-  if ( typeof problem.objects.input === 'item') {
-
-    console.log("iwp6-calc:1354> Item iterator: " , JSON.stringify(problem.objects.input) );
-    addInput(problem.objects.input);
-
-  } else if ( typeof problem.objects.input === 'object') {
-
-    if ( Array.isArray(problem.objects.input ) ) {
-        problem.objects.input.forEach( function( input, index ) {
-            //console.log("iwp6-calc:1354> Array iterator: " , JSON.stringify(input) );
-            addInput(input);
-        });
-    } else {
-        //console.log("iwp6-calc:1354> Object iterator: " , JSON.stringify(problem.objects.input) );
-        addInput(problem.objects.input);
-    }
-
-  } else {
-    "iwp5:954> Unable to handle input with typeof: " + typeof problem.objects.input
-  }
-
-
-
-  // Output - These could be an array OR a single item. OR undefined for now outputs.
-  if ( typeof problem.objects.output === 'item'){
-    addOutput(problem.objects.output);
-  } else if ( typeof problem.objects.output === 'object') {
-
-    if ( Array.isArray(problem.objects.output)) {
-      problem.objects.output.forEach( function( output, index ) {
-        addOutput(output);
-      });
-
-    } else {
-      addOutput(problem.objects.output);
-    }
-
-  } else {
-       // throw "iwp6:1506> Unable to handle Output with typeof: "+ typeof problem.objects.output
-       console.log("iwp6:1506> Warning, Zero outputs in this animation");
-  }
-
-
-
-  // Solids - These could be an array OR a single item.
-  if ( typeof problem.objects.solid === 'object' ) {
-
-    if ( Array.isArray(problem.objects.solid)) {
-
-        problem.objects.solid.forEach( function( solid, index ) {
-            addSolid(solid);
-        });
-
-    } else  {
-        // Workaround becaue the php xml to json for single solids, would an object.
-        addSolid(problem.objects.solid);
-    }
-
-  } else {
-    throw "iwp6:1526> Unable to handle Solid with typeof: "+ typeof problem.objects.solid
-  }
-
-
-  // Objects - Also detect the floatign texts, which are not relaly solids.
-  if ( typeof problem.objects.object === 'object' ) {
-
-    if ( Array.isArray(problem.objects.object)) {
-
-        problem.objects.object.forEach( function( object, index ) {
-            addObject(object);
-        });
-
-    } else {
+    if ( object.objectType == 'input' ) {
+        addInput(object);
+    } else if ( object.objectType == 'output' ) {
+        addOutput(object);
+    } else if ( object.objectType == 'solid' ) {
+        addSolid(object);
+    } else if ( object.objectType == 'object' ) {
         addObject(problem.objects.object);
+    } else {
+      throw "Animation parseProblemToMemory unrecognized Object Type: " + object.objectType;
     }
-  } else if ( problem.objects.object != null ) {
-     throw "iwp6:1543> Unable to handle Output with typeof: "+ typeof problem.objects.object
-  }
+  } );
 
-
-  parsedProblem = problem;
-
-
-  return {
-    inputs: inputs,
-    outputs: outputs,
-    solids: solids,
-    objects: objects,
-    texts: texts
-  };
-
-
+  return animation;
 }
-
-
-
-
-
 
 
 //--------------------------------------------------------------------------------
