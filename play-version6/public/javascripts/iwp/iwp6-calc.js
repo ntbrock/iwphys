@@ -54,12 +54,10 @@ var description = "";
 var iwindow = {};
 var graphWindow = {};
 
-var inputs = [];
-var outputs = [];
-var solids = [];
-var objects = [];
-var texts = [];
+// IWP6 - Objects are now in a master loop, not separated by type.
+var compiledObjects = [];
 
+// User Interface Components, TODO Refactor our
 var htmlInputs = [];
 var htmlOutputs = [];
 var svgSolids = [];
@@ -96,8 +94,10 @@ function masterResetSteps() {
 
 
   // We also need to clear out previous parameteric displacements used for instant velecioty calculations.
-  solids.forEach(function ( solid, index) {
-    resetSolidCalculators(solid);
+  compiledObjects.forEach(function ( object, index) {
+    if(object.objectType=='solid') {
+        resetSolidCalculators(object);
+    }
   });
 
 
@@ -118,7 +118,7 @@ function masterResetSteps() {
 //-----------------------------------------------------------------------
 // Pseudocode for Mathematical Animation
 
-// Calculate Initial Variable Set from inputs.
+// Calculate Initial Variable Set from inputs
 
 // Calculate at initial step to render displays
 
@@ -178,17 +178,8 @@ function handleStep() {
 		changeStep = 0;
 		newStep = 0;
 	}
-	// TODO - end of time.
-    /*time = {
-    start : parseFloat(inTime.start),
-    stop : parseFloat(inTime.stop),
-    change : parseFloat(inTime.change),
-    fps : parseFloat(inTime.fps)
-   };*/
-    //console.log("stop step", queryTimeStopInputDouble() / queryTimeStepInputDouble())
-    //console.log('current step', newStep)
 
-    // If we are beyond stop time dobn't do tanything.
+    // If we are beyond stop time don't do tanything.
     if ( typeof queryTimeStopInputDouble === 'function' && typeof queryTimeStepInputDouble === 'function' ) {
         // Animation Mode
         if (newStep > ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
@@ -196,7 +187,7 @@ function handleStep() {
             if ( typeof handleStopClick === 'function' ) {
                 handleStopClick();
             }
-            console.log("iwp6-calc:191> Animated end of time on step: " + newStep )
+            // console.log("iwp6-calc:191> Animated end of time on step: " + newStep )
             return -1;
         }
     } else {
@@ -205,7 +196,7 @@ function handleStep() {
             if ( typeof handleStopClick === 'function' ) {
                 handleStopClick();
             }
-            console.log("iwp6-calc:191> Animated end of time on step: " + newStep )
+            //console.log("iwp6-calc:191> Animated end of time on step: " + newStep )
             return -1;
         }
     }
@@ -255,13 +246,34 @@ function archiveVarsAtStep( step, vars ) {
 }
 
 
+function calculateInputAtStep(input, step, vars, verbose ) {
+
+    // console.log("iwp6-calc:437> input: " , input, "   index: " , index);
+
+	// next load in variables for all of the inputs
+	// If we're running in calculator only mode, use default values
+    if ( typeof queryUserFormInputDouble === "function" ) {
+        return queryUserFormInputDouble(input);
+    } else {
+        // console.log("iwp6-calc:442> Headless mode, setting initial value for: " + input.name + "  value: " + input.initialValue );
+        return +input.initialValue;
+    }
+
+}
+
+/** BUGBUG - TODE Change this over to have no side effects, all vars writing should happen in parent stack */
 function calculateOutputAtStep(output, step, vars, verbose) {
+
+    // console.log("iwp6-calc:267> calculateOutputAtStep:267> vars: " + JSON.stringify(vars));
+
     var newValue = evaluateCalculator( output.name+".out", output.calculator, step, vars, verbose, output.name ).value;
     vars[output.name] = newValue;
 
     if ( typeof updateUserFormOutputDouble === 'function' ) {
         updateUserFormOutputDouble(output, newValue);
     }
+
+    // console.log("iwp6-calc:267> calculateOutputAtStep:267> newValue: " + newValue);
 
     return newValue;
 }
@@ -365,7 +377,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
     }
 
 
-    if ( solid.shape.type == "polygon" ) {
+    if ( solid.shape.shapeType == "polygon" ) {
 
       // console.log("iwp5:277> Recalculating Polygon: " + solid.name + " has Error? " + solid.calculationError );
 
@@ -462,7 +474,19 @@ function calculateTextAtStep(text, step, vars, verbose) {
 var CONFIG_throw_solid_calculation_exceptions = false;
 
 
+
+
+
+/**
+ * 2019Apr09 Restructured logic to go by object sequence for IWP6
+ */
+
 function calculateVarsAtStep(step) {
+
+  // D-Fence
+  if ( compiledObjects == null || compiledObjects.length <= 0 ) {
+    throw "calculateVarsAtStep("+step+") Empty compiledObjects array, has animation been initialized?"
+  }
 
   // vars should be a map of string to double, including the mathematical / physical constants.
   var vars = { step: step }
@@ -490,351 +514,78 @@ function calculateVarsAtStep(step) {
 
 
 
+
   // Collect user Inputs! These are polled from the DOM every step.
+  compiledObjects.forEach( function(object, index) {
 
+    // console.log("iwp6-calc:514> CalculationLoop for Object: " + JSON.stringify(object) );
 
-  // console.log("iwp6-calc:436> inputs: " , JSON.stringify(inputs) );
+    if ( object.objectType == 'input' ) {
 
-  inputs.forEach( function( input, index ) {
+       var newValue = calculateInputAtStep(object, step, vars, false );
+       vars[object.name] = newValue;
 
-	// console.log("iwp6-calc:437> input: " , input, "   index: " , index);
+       // console.log("iwp6-calc:521> Input name: " + object.name + "  newValue: "+ newValue );
 
-	// next load in variables for all of the inputs.
-	// If we're running in calculator only mode, use default values
-    if ( typeof queryUserFormInputDouble === "function" ) {
-        vars[input.name] = queryUserFormInputDouble(input);
-    } else {
-        // console.log("iwp6-calc:442> Headless mode, setting initial value for: " + input.name + "  value: " + input.initialValue );
-        vars[input.name] = +input.initialValue;
-    }
-
-
-    // console.log("iwp6-calc:526> calculateVarsAtStep("+step+")  Assigned Input: " , input.name, "  A value of: " ,vars[input.name] )
-
-    //vars[input.name]["value"] = vars[input.name];
-  });
-
-
-  //-----------------------------------
-  // Make the first pass thru outputs
-
-  outputs.forEach( function( output, index ) {
-    try {
-      var newValue = calculateOutputAtStep(output, step, vars, false );
-      //console.log("newValue",newValue)
-      if ( isNaN(newValue) ) {
-        throw "not a number"
-      };
-      if ( !isFinite(newValue) ) {
-        throw "not finite"
-      }
-
-      // console.log("iwp6-calc:546> calculateVarsAtStep("+step+")  Set Output ", output.name, "  to newValue: " , newValue);
-
-      vars[output.name] = newValue;
-
-    } catch ( err ) {
-
-      // console.log("iwp6-calc:554> calculateVarsAtStep("+step+")  ERROR Output  Calculating: "+ output.name + " > " + err );
-
-      //console.log("Failed Output:", output)
-      //failedOutputs.push(output);
-      //console.log("FailedOutputs",failedOutputs)
-    }
-  });
-
-
-
-
-  //-----------------------------------------------------------
-  // EULER INITIALIZATION
-  // 2018Mar22 - Euler's Self-referential Fix, we need to pull velocities and displacements for
-  // every Solid w/ Euler's and pre-write them into the vars space.
-  solids.forEach(function(solid, index) {
-
-    // Initialize if necessary
-    if ( vars[solid.name] == null ) { vars[solid.name] = {} }
-
-    if ( solid.xpath.calculator.type == "euler-mathjs" ) {
-
-      var calculator = solid.xpath.calculator
-      // Initialization -- If currentDisplacement or currentVelocity is empty!
-      if (step == 0 || calculator.currentDisplacement == null) {
-        // console.log("iwp5:409> X Euler Pre-calc for solid: " + solid.name + " solid.xpath.calc: " , solid.xpath.calculator)
-        calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
-        calculator.currentDisplacement = calculator.initialDisplacement
-      }
-      if (step == 0 || calculator.currentVelocity == null) {
-        calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
-        calculator.currentVelocity = calculator.initialVelocity;
-      }
-      vars[solid.name].x = solid.xpath.calculator.currentDisplacement
-      vars[solid.name].xpos = solid.xpath.calculator.currentDisplacement
-      vars[solid.name].xdisp = solid.xpath.calculator.currentDisplacement
-      vars[solid.name].xvel = solid.xpath.calculator.currentVelocity
-    }
-
-    if ( solid.ypath.calculator.type == "euler-mathjs" ) {
-      var calculator = solid.ypath.calculator
-      // Initialization -- If currentDisplacement or currentVelocity is empty!
-      if (step == 0 || calculator.currentDisplacement == null) {
-        //console.log("iwp5:426> Y Euler Pre-calc for solid: " + solid.name + " solid.ypath.calc: " , solid.ypath.calculator)
-        calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
-        calculator.currentDisplacement = calculator.initialDisplacement
-      }
-      if (step == 0 || calculator.currentVelocity == null) {
-        calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
-        calculator.currentVelocity = calculator.initialVelocity;
-      }
-      vars[solid.name].y = solid.ypath.calculator.currentDisplacement
-      vars[solid.name].ypos = solid.ypath.calculator.currentDisplacement
-      vars[solid.name].ydisp = solid.ypath.calculator.currentDisplacement
-      vars[solid.name].yvel = solid.ypath.calculator.currentVelocity
-    }
-
-  });
-
-
-
-
-  //2018Mar14 - ordering by calculation order, if exists
-  var unorderedSolids = [];
-  var unorderedOutputs = [];
-  var unorderedTexts = [];
-
-  var orderedObjects = [];
-  outputs.forEach(function(output, index) {
-    if (output.calculationOrder != null) {
-      orderedObjects[output.calculationOrder] = output;
-    } else {
-      unorderedOutputs.push(output);
-    }
-  });
-  solids.forEach(function(solid, index) {
-    if (solid.calculationOrder != null) {
-        orderedObjects[solid.calculationOrder] = solid;
-    } else {
-        unorderedSolids.push(solid);
-    }
-  });
-  texts.forEach(function(text, index) {
-
-
-    if (text.calculationOrder != null) {
-      orderedObjects[text.calculationOrder] = text;
-    } else {
-      unorderedTexts.push(text);
-    }
-  });
-
-  //console.log("iwp5:434> orderedObjects: ", orderedObjects);
-  //console.log("iwp5:434> unorderedSolids: ", unorderedSolids);
-  //console.log("iwp5:434> unorderedOutputs: ", unorderedOutputs);
-
-
-  var failedOutputs = [];
-  var failedSolids = [];
-  var failedTexts = [];
-
-
-  /**
-   * 2018Mar15 Perform the animation calculationOrder First
-   */
-
-  var calculationsPerformed = 0;
-
-  orderedObjects.forEach( function(object, index) {
-
-    if(object != null ) { // orderedObjects can be sparseArray
-
-    // console.log("iwp5:515> [Calculations Peformed " + calculationsPerformed + "] Calculating Object: " + object.name )
-
-    if(object.objectType=="solid") {
-      try {
-
-        // console.log("iwp5:494> [Calculations Peformed " + calculationsPerformed + "] Calculating Solid: " + object.name )
-        calculationsPerformed++
-        var newValue = calculateSolidAtStep(object, step, vars, true );
-        vars[solid.name] = newValue;
-        calculationsPerformed++;
-
-      } catch ( err ) {
-        //console.log("iwp6-calc:612> ERROR calculationOrder solid: " + object.name + " err: ", err )
-        failedSolids.push(object);
-      }
-
-    } else if(object.objectType=="output") {
-      try {
+    } else if ( object.objectType == 'output') {
 
         var newValue = calculateOutputAtStep(object, step, vars, false );
+
         if ( isNaN(newValue) ) { throw "not a number" };
-        if ( !isFinite(newValue) ) { throw "not finite" }
+        if ( !isFinite(newValue) ) { throw "not finite" };
+
         vars[object.name] = newValue;
 
-        // console.log("iwp5:528> [Calculations Peformed " + calculationsPerformed + "] Calculated Output: " + object.name + " New Value: " + newValue )
-        calculationsPerformed++
+        // console.log("iwp6-calc:536> Output name: " + object.name + "  newValue: "+ newValue );
 
+    } else if ( object.objectType == 'solid') {
 
-      } catch ( err ) {
-        console.log("iwp5:466> failed calculationOrder err: " , err, " Output:", object)
-        failedOutputs.push(object);
-      }
-    } else if ( object.objectType=="object" ) {
+        var solid = object;
 
-      console.log("iwp5:548> TODO Animate the text: object.name: " + object.name, object )
+        // Initialize Euler's each loop if necessary
+        if ( solid.xpath.calculator.calcType == "euler-mathjs" ) {
+            initializeEulerCalculator(solid, step, vars, "x", solid.xpath.calculator)
+        }
 
+        if ( solid.ypath.calculator.calcType == "euler-mathjs" ) {
+            initializeEulerCalculator(solid, step, vars, "y", solid.ypath.calculator)
+        }
 
-    } else {
-      throw "Unknown objectType: " + object.objectType;
-    }
-    }
-  });
-
-
-  /*
-  * Legacy path to support 4_1_2 animations with no CalculationOrder in iwp file.
-  for each output perform the calculator
-  */
-
-  unorderedSolids.forEach( function( solid, index ) {
-    /*
-    for x, y, h, w , perform the calculator
-    */
-
-    try {
-        var newValue = calculateSolidAtStep(solid, step, vars, true );
+        var newValue = calculateSolidAtStep(object, step, vars, true );
         vars[solid.name] = newValue;
 
-        // console.log("iwp6-calc:656> Success calculating solid: " + JSON.stringify(solid))
-        // console.log("iwp6-calc:656> Success calculating solid, vars now: " + JSON.stringify(vars))
+        // console.log("iwp6-calc:588> calculateSolidAtStep: " + object.name + "  newValue: " + newValue );
 
-    } catch ( err ) {
-        console.log("iwp6-calc:651> Failed solid calculation: " +  err);
-        if ( CONFIG_throw_solid_calculation_exceptions ) {
-            throw err;
-        } else {
+    } else if ( object.objectType == 'object') {
 
-            failedSolids.push(solid);
-        }
+        // TODO Animate the Text
+        console.log("iwp5:594> TODO Animate the text: object.name: " + object.name, object )
+
+    } else {
+        throw "iwp6-calc:599> Unrecognized Object type: " + object.objectType;
     }
 
   });
-
-
-  unorderedOutputs.forEach( function( output, index ) {
-    try {
-      var newValue = calculateOutputAtStep(output, step, vars, false );
-      //console.log("newValue",newValue)
-      if ( isNaN(newValue) ) {
-        throw "not a number"
-      };
-      if ( !isFinite(newValue) ) {
-        throw "not finite"
-      }
-      vars[output.name] = newValue;
-
-      //console.log("iwp6-calc:750> calculateVarsAtStep("+step+")  Unordered Output Calculating: "+ output.name + " to newValue: " + newValue );
-
-    } catch ( err ) {
-      //console.log("Failed Output:", output)
-      failedOutputs.push(output);
-      //console.log("FailedOutputs",failedOutputs)
-    }
-  });
-
-
-
-  // console.log(":238 failedOutputs: ", failedOutputs);
-  // console.log(":239 failedSolids: ", failedSolids);
-
-  var fatalOutputs = failedOutputs;
-  var fatalSolids = failedSolids;
-  var fatalReplayAttemptsRemaining = 3;
-
-  while ( fatalReplayAttemptsRemaining > 0 ) {
-
-    fatalReplayAttemptsRemaining -= 1;
-    var replayOutputs = fatalOutputs;
-    var replaySolids = fatalSolids;
-
-    fatalOutputs = [];
-    fatalSolids = [];
-
-    // REPLAY FAILURES within a resonable maximum number of attempts.
-    replayOutputs.forEach( function( output, index ) {
-        //console.log("Trying again",output)
-        try {
-            var newValue = calculateOutputAtStep(output, step, vars, false );
-            vars[output.name] = newValue
-
-            // console.log("iwp6-calc:783> calculateVarsAtStep("+step+")  Recovered Output Calculating: "+ output.name + " to newValue: " + err );
-
-        } catch ( err ) {
-            console.log("iwp6-calc:786> Fatal Exception in calculating Output: " + output.name + " : " + err);
-            fatalOutputs.push(output);
-        }
-    });
-
-
-    replaySolids.forEach(function( solid, index ) {
-      try {
-       // 2018Dec14 Pass by value fix
-       var newValue = calculateSolidAtStep(solid, step, vars, true );
-       vars[solid.name] = newValue;
-
-      } catch ( err ) {
-        console.log("iwp6-calc:728> Fatal Exception in calculating Solid: " + solid.name + " : " + err);
-        fatalSolids.push(solid);
-      }
-    if (fatalReplayAttemptsRemaining == 1) {
-      CONFIG_throw_acceleration_calculation_exceptions = false;
-    }
-   });
-
-  }
-
-  if ( fatalOutputs.length > 0 ) {
-
-    console.log("iwp6-calc:807> ERROR Giving Up on Recursive Circular Calc - FATALOutputs: ", JSON.stringify(fatalOutputs) );
-
-    console.log("iwp6-calc:809> Vars: " + JSON.stringify(vars) );
-
-
-    fatalOutputs.forEach( function( output, index ) {
-      output.calculationError = step;
-    });
-  }
-  if ( fatalSolids.length > 0 ) {
-    console.log("iwp6-calc:729> ERROR Giving Up on Recursive Circular Calc - FATALSolids: ", fatalSolids);
-    fatalSolids.forEach( function( solid, index ) {
-      solid.calculationError = step;
-    });
-  }
-
-
-  // FINALLY, Text calculation at very end
-  unorderedTexts.forEach( function( text, index ) {
-
-    try {
-     calculateTextAtStep(text, step, vars, true );
-        //  -> update the DOM with theose new results
-    } catch ( err ) {
-        //console.log(":231 caught a faailed solid exception: ", err);
-      if ( CONFIG_throw_solid_calculation_exceptions ) {
-      throw err;
-    }
-
-    failedTexts.push(text);
-  }});
-
-  if ( failedTexts.length > 0 ) {
-    console.log("iwp5:685> ERROR Giving Up on Recursive Circular Calc - FAILEDTexts: ", failedTexts);
-    failedTexts.forEach( function( text, index ) {
-      text.calculationError = step;
-    });
-  }
 
   return vars;
+}
+
+
+function initializeEulerCalculator(solid, step, vars, axis, calculator) {
+
+  // Initialization -- If currentDisplacement or currentVelocity is empty!
+  if (step == 0 || calculator.currentDisplacement == null) {
+    calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
+    calculator.currentDisplacement = calculator.initialDisplacement
+  }
+  if (step == 0 || calculator.currentVelocity == null) {
+    calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
+    calculator.currentVelocity = calculator.initialVelocity;
+  }
+  vars[solid.name][axis] = calculator.currentDisplacement
+  vars[solid.name][axis+"pos"] = calculator.currentDisplacement
+  vars[solid.name][axis+"disp"] = calculator.currentDisplacement
+  vars[solid.name][axis+"vel"] = calculator.currentVelocity
 }
 
 
@@ -884,7 +635,7 @@ function addInput(input) {
 
   // console.log("iwp6-calc:807> pushingInput: ", JSON.stringify(input) );
 
-  inputs.push( input );
+  compiledObjects.push( input );
   // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"}
   // 07 Oct 2016 Honoring hidden flag
   var style = "";
@@ -902,7 +653,6 @@ function addInput(input) {
 function addOutput(output) {
   //console.log("addOutput ", output );
 
-
   var compiledOutput = {
     objectType: 'output',
   	name: output.name,
@@ -912,8 +662,7 @@ function addOutput(output) {
     hidden: output.hidden //Hidden flag still needed - be careful about cutting off attributes here.
   }
 
-
-  outputs.push( compiledOutput );
+  compiledObjects.push( compiledOutput );
   // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { attributesProperty: { "type": "parametric" }, "value": "Red.xaccel" } }
   var style = ""
   if ( output.hidden == "1" ) {
@@ -964,7 +713,7 @@ function resetSolidCalculators(solid) {
 function addSolid(solid) {
   //console.log("solid: ", solid );
 
-  console.log("iwp6-calc:992> addSolid: ", JSON.stringify(solid));
+  // console.log("iwp6-calc:992> addSolid: ", JSON.stringify(solid));
 
   // In Memory - PreParse Equations with math.js
 
@@ -977,7 +726,7 @@ function addSolid(solid) {
   		blue: parseFloat(solid.color.blue),
   	},
   	shape: {
-  		type: solid.shape.shapeType,
+  		shapeType: solid.shape.shapeType,
   		drawTrails: solid.shape.drawTrails,
   		drawVectors: solid.shape.drawVectors,
   		graphOptions:
@@ -1002,7 +751,7 @@ function addSolid(solid) {
   // If the problem iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
   // hard to do as part of the initialization because it is a dynamic list.
   // Add points here..?
-  if ( compiledSolid.shape.type == "polygon" ) {
+  if ( compiledSolid.shape.shapeType == "polygon" ) {
     compiledSolid["points"] = []
     solid.shape.points.point.forEach ( function( i, index ) {
       var point = {
@@ -1026,30 +775,30 @@ function addSolid(solid) {
   }
 
 
-  solids.push(compiledSolid);
+  compiledObjects.push(compiledSolid);
 
 
   //HTML
-  if (compiledSolid.shape.type == "circle") {
+  if (compiledSolid.shape.shapeType == "circle") {
     //console.log("it's a circle");
     svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(solid.shape.width.calculator.value)+ " ry=" +yHeight(solid.shape.height.calculator.value)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
-  else if (compiledSolid.shape.type == "rectangle") {
+  else if (compiledSolid.shape.shapeType == "rectangle") {
     //console.log("it's a rectangle");
     svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
-  else if (compiledSolid.shape.type == "line") {
+  else if (compiledSolid.shape.shapeType == "line") {
     //console.log("it's a line")
     svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
-  else if (compiledSolid.shape.type == "vector") {
+  else if (compiledSolid.shape.shapeType == "vector") {
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
   }
-  else if (compiledSolid.shape.type == "polygon") {
+  else if (compiledSolid.shape.shapeType == "polygon") {
     //console.log("it's a polygon:", solid.name);
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");
   }
-  else if (compiledSolid.shape.type == "Bitmap") {
+  else if (compiledSolid.shape.shapeType == "Bitmap") {
     //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+compiledSolid.fileUri+"'><title>"+solid.name+"</title></image>");
 
     // 2018Mar01 Brockman - Refactoring the bitmap code here.
@@ -1069,7 +818,7 @@ function addSolid(solid) {
 
   else {
 
-    console.log("iwp5:712> ERROR: Unrecognized Solid Shape Type: ", compiledSolid.shape.type)
+    console.log("iwp5:821> ERROR: Unrecognized Solid Shape Type: ", compiledSolid.shape.shapeType)
     return;
   };
 
@@ -1091,7 +840,7 @@ function addObject(object) {
     objectType: 'object',
     name: object.name,
     shape: {
-      type: object.class,
+      shapeType: object.class,
       height: 1,
       width: 1
     },
@@ -1145,7 +894,7 @@ function compileCalculator(iwpCalculator) {
         var e = migrateLegacyEquation(iwpCalculator.value);
 
 		var c = {
-			type: "mathjs",
+			calcType: "mathjs",
 			compiled: math.compile( e ),
 			equation: e
 		}
@@ -1168,7 +917,7 @@ function compileCalculator(iwpCalculator) {
         var d = migrateLegacyEquation(iwpCalculator.displacement);
 
         var c =  {
-          type: "euler-mathjs",
+          calcType: "euler-mathjs",
           initialDisplacementCompiled: math.compile( d ),
           initialVelocityCompiled: math.compile( v ),
           accelerationCompiled: math.compile( a ),
@@ -1184,7 +933,7 @@ function compileCalculator(iwpCalculator) {
   }
   else {
 		console.log("DEBUG ERROR: Only parametric and Euler supported in the August 2016 version, unable to handle: ", incomingType);
-		return {type:"unsupported", "incomingType": incomingType, "iwpCalculator": iwpCalculator };
+		return {calcType:"unsupported", "incomingType": incomingType, "iwpCalculator": iwpCalculator };
 	}
 }
 
@@ -1219,20 +968,29 @@ var CONFIG_throw_acceleration_calculation_exceptions = true;
 function evaluateCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
 
     if ( calculator == null ) {
-        //console.log("iwp5:688: Warning Null Calculaor for: ", resultVariable)
+        console.log("iwp6-calc:970> Null Calculator for: ", resultVariable)
         return { value: 0 }
     }
-    else if ( calculator.type == "mathjs" )   {
-        return evaluateParametricCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
-    } else if ( calculator.type == "euler-mathjs" ) {
-        return evaluateEulerCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
+    else if ( calculator.calcType == "mathjs" )   {
+
+        try {
+            return evaluateParametricCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
+        } catch ( err ) {
+            console.log("iwp6-calc:980> Exception in evaluateParametricCalculator for " + resultVariable + ": " + err );
+            return { value: 0 }
+        }
+    } else if ( calculator.calcType == "euler-mathjs" ) {
+
+        try {
+            return evaluateEulerCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
+        } catch ( err ) {
+            console.log("iwp6-calc:980> Exception in evaluateEulerCalculator for " + resultVariable + ": " + err );
+            return { value: 0 }
+        }
+
     }
     else {
-        if ( verbose ) {
-            console.log("DEVELOPER: Unsupported calculator type : ", calculator);
-            throw err;
-        }
-        return { value: 0 }
+        throw "iwp6-calc:1264> Unsupported calculator type : " + JSON.stringify(calculator)
     }
 }
 
@@ -1411,7 +1169,7 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 /**
  * Important entry point!
  *
- * 2018Dec14 Converted to pure Js, the $.type interface is different than typeof, requires Array.isArray
+ * 2018Dec14 Converted to pure Js, the $.xxType interface is different than typeof, requires Array.isArray
  *
  * After the problem parse, outer layer must call :  masterResetSteps()  or   calculateVarsAtStep(currentStep = 0);
  * The new iwp6-read does this.
@@ -1424,7 +1182,7 @@ function parseProblemToMemory( problem ) {
     // 2019Mar13
 
      problem.objects.forEach( function( object, index ) {
-        console.log("iwp6-calc:1451> parseProblemToMemory> Iterator: " + JSON.stringify(object) );
+        // console.log("iwp6-calc:1451> parseProblemToMemory> Iterator: " + JSON.stringify(object) );
 
         if ( object.objectType == "time" ) {
             animation.time = object;

@@ -58,5 +58,4 @@ function playAnimationToEnd( animationString ) {
 }
 
 
-
 true;
