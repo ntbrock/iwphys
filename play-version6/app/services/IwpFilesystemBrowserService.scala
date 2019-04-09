@@ -106,7 +106,7 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
 
         val files = listIwpJsonFiles(collection.directory)
 
-        val out = files.map { file => Iwp6Animation.fromFile(file) }
+        val out = files.map { file => Iwp6Animation.fromJsonFile(file) }
 
         out.toSeq.map(_.toOption).flatten
 
@@ -123,7 +123,7 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
 
           val pathFile = new File(root + File.separator + collection + File.separator + filename + ".json")
 
-          Iwp6Animation.fromFile(pathFile) match {
+          Iwp6Animation.fromJsonFile(pathFile) match {
             case Failure(x) => throw x
             case Success(s) => s
           }

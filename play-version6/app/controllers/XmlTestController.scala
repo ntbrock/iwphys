@@ -110,12 +110,9 @@ class XmlTestController @Inject()(cc: ControllerComponents,
 
             Ok(s"version4DirectoryRead to DProblem:\n\n${dproblem}\n\nDrawOrder: ${drawOrder}\n\nTickOrder: ${tickOrder}")
 
-
         }
 
-
     }
-
 
   }
 
@@ -144,9 +141,6 @@ class XmlTestController @Inject()(cc: ControllerComponents,
 
               }
             }
-
-
-
 
             //Ok(s"version4SubCollectionConvert to Iwp6Animation: ${animation}");
 

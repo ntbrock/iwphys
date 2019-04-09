@@ -4,7 +4,8 @@ import java.io.File
 
 import edu.ncssm.iwp.math.{MCalculator, MCalculator_Diff, MCalculator_Parametric}
 import edu.ncssm.iwp.objects._
-import edu.ncssm.iwp.problemdb.DProblem
+import edu.ncssm.iwp.problemdb.{DProblem, DProblemXMLParser}
+import models.Iwp6Animation.fromXmlFile
 import play.api.Logger
 import play.api.libs.json._
 import services.BoilerplateIO
@@ -74,7 +75,7 @@ object Iwp6Animation extends BoilerplateIO {
   }
 
 
-  def fromFile(file: File) : Try[Iwp6Animation] = {
+  def fromJsonFile(file: File) : Try[Iwp6Animation] = {
 
     Try {
 
@@ -128,9 +129,31 @@ object Iwp6Animation extends BoilerplateIO {
   }
 
 
+  def fromFile(file: File) = {
+
+    if ( file.getName.endsWith("iwp") ) {
+      fromXmlFile(file)
+    } else if ( file.getName.endsWith("js") ) {
+      fromJsonFile(file)
+    } else {
+      throw new RuntimeException(s"Unknown File type by extension: ${file.getName}")
+    }
+
+  }
+
+
+
+  def fromXmlFile(xmlFile: File) = {
+
+    val xmlString = readFileCompletely(xmlFile)
+    val problem = DProblemXMLParser.load(xmlString)
+
+    problem.filename = xmlFile.getName
+    fromDProblem(problem)
+  }
+
 
   def fromDProblem(dp: DProblem) : Try[Iwp6Animation] = {
-
 
     Try {
 

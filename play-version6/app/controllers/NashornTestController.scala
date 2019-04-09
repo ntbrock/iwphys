@@ -188,7 +188,7 @@ class NashornTestController @Inject()(cc: ControllerComponents,
 
     val v4 = iwpVersion4CalculatorService.animateToJsonFrames(path)
 
-    val v6 = iwpVersion6CalculatorService.animateToJsonFrames(s"${path}.json")
+    val v6 = iwpVersion6CalculatorService.animateToJsonFrames(path)
 
     val diffs = iwpDifferenceCalculatorService.diff( v4, v6 )
 

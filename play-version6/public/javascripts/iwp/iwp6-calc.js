@@ -582,6 +582,9 @@ function initializeEulerCalculator(solid, step, vars, axis, calculator) {
     calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
     calculator.currentVelocity = calculator.initialVelocity;
   }
+  if ( typeof vars[solid.name] === "undefined" ) {
+    vars[solid.name] = {}
+  }
   vars[solid.name][axis] = calculator.currentDisplacement
   vars[solid.name][axis+"pos"] = calculator.currentDisplacement
   vars[solid.name][axis+"disp"] = calculator.currentDisplacement
@@ -903,7 +906,7 @@ function compileCalculator(iwpCalculator) {
         return c;
 
 
-	} else if ( incomingType == "euler") {
+	} else if ( incomingType == "euler" || incomingType == "MCalculator_Euler") {
         /*
         <calculator type="euler">
           <displacement>initxdisp</displacement>

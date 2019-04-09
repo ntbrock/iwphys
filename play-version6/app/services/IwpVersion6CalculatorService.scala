@@ -1,13 +1,15 @@
 package services
 
-import java.io.FileReader
+import java.io.{File, FileReader}
 
 import javax.inject.Singleton
 import javax.script.{Invocable, ScriptEngineManager}
+import models.Iwp6Animation
 import play.api.Logger
 import play.api.libs.json.{JsArray, Json}
 
 import scala.io.Source
+import scala.util.{Failure, Success}
 
 @Singleton
 class IwpVersion6CalculatorService {
@@ -41,26 +43,37 @@ class IwpVersion6CalculatorService {
 
 
 
-  def loadFile(path:String) =
-    Source.fromFile(path).getLines.toArray.mkString("\n")
+  def loadFile(path:String) = {
+    // Use the new converter
+    Iwp6Animation.fromFile(new File(path))
+
+  }
+
 
   def animateToJsonFrames(path: String): JsArray = {
 
     // Load the Javascript file
-    val iwpJs = loadFile(path)
+    loadFile(path) match {
 
-    val jse = spawnEngine
+      case Failure(x) => throw x
+      case Success(iwpAnimation) =>
 
-    //load animation
-    val read = jse.invokeFunction("readAnimationString", iwpJs )
+        val iwpJs = iwpAnimation.toJsonString
 
-    val play = jse.invokeFunction("playAnimationToEnd", "" )
 
-    // Access frame 0
-    val varsAtStep = jse.invokeFunction("varsAtStepJson", "" )
+        val jse = spawnEngine
 
-    Json.parse(varsAtStep.toString).as[JsArray]
+        //load animation
+        val read = jse.invokeFunction("readAnimationString", iwpJs)
 
+        val play = jse.invokeFunction("playAnimationToEnd", "")
+
+        // Access frame 0
+        val varsAtStep = jse.invokeFunction("varsAtStepJson", "")
+
+        Json.parse(varsAtStep.toString).as[JsArray]
+
+    }
   }
 
 
