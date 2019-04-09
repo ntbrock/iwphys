@@ -1480,12 +1480,17 @@ function parseProblemToMemory( problem ) {
     throw "Animation objects.time attribute was not an object, was: " + typeof problem.objects.time
   } else if ( typeof animation.description !== "object" ) {
     throw "Animation objects.description attribute was not an object, was: " + typeof problem.objects.description
-
+  } else if ( typeof animation.graphWindow !== "object" ) {
+    throw "Animation graphWindow attribute was not an object, was: " + typeof problem.objects.graphWindow
+  } else if ( typeof animation.window !== "object" ) {
+    throw "Animation window attribute was not an object, was: " + typeof problem.objects.window
   }
+  
 
   // TODO more validation
 
 
+return animation;
 throw "End of Dev Session 2019Mar13";
 
   // Time
