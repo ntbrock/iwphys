@@ -1497,7 +1497,7 @@ function parseProblemToMemory( problem ) {
   // 2019Apr09 store in global singleton
 
   parsedProblem = animation;
-  
+
   return animation;
 }
 

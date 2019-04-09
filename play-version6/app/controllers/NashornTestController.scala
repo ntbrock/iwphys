@@ -218,7 +218,7 @@ object NashhornTestControllerSampleAnimations {
 "objects": [
 {
 "start": 0,
-"stop": 100,
+"stop": 1,
 "change": 0.05,
 "fps": 20,
 "objectType": "time"
