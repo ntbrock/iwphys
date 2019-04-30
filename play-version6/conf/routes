@@ -22,9 +22,12 @@ GET     /animation/:collection/:filename.json  controllers.AnimationFilesystemCo
 GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
 
 # Support LEgacy Path
-
+# Support Legacy Paths from WebAssign
 GET     /animate.php/:collection/:filename  controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
 GET     /animate.php/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
+GET     /5/animate.php/:collection/:filename  controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
+GET     /5/animate.php/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
+
 
 
 
