@@ -47,7 +47,7 @@ if ( typeof console === "undefined" ) {  // Prevent console redefinition
 //-----------------------------------------------------------------------
 // Memory Intialization + Globals Section
 
-var parsedProblem = null;
+var parsedAnimation = null;
 
 var time = {};
 var description = "";
@@ -105,7 +105,7 @@ function masterResetSteps() {
 
   // 2018Feb01 Graphing Reset hookin
   if ( typeof graphResetZero === "function" ) {
-    graphResetZero(0, vars = vars0, solids = solids );
+    graphResetZero(0, vars = vars0, solids = allSolidObjectsInAnimation() );
   }
 
   archiveVarsAtStep( currentStep, vars0 ); // Boot up the environment
@@ -751,7 +751,7 @@ function addSolid(solid) {
   };
 
 
-  // If the problem iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
+  // If the animation iwp solid has a polygon shape, need to iterate over an initialize each of the calcualtors.
   // hard to do as part of the initialization because it is a dynamic list.
   // Add points here..?
   if ( compiledSolid.shape.shapeType == "polygon" ) {
@@ -830,8 +830,9 @@ function addSolid(solid) {
   }
 }
 
-function addObject(object) {
 
+
+function addObject(object) {
 
   //2018Oct12 - Detect the WaveBox
   if ( object.objectType == "edu.ncssm.iwp.objects.grapher.DObject_Grapher" ) {
@@ -1174,18 +1175,18 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
  *
  * 2018Dec14 Converted to pure Js, the $.xxType interface is different than typeof, requires Array.isArray
  *
- * After the problem parse, outer layer must call :  masterResetSteps()  or   calculateVarsAtStep(currentStep = 0);
+ * After the animation parse, outer layer must call :  masterResetSteps()  or   calculateVarsAtStep(currentStep = 0);
  * The new iwp6-read does this.
  */
 
-function parseProblemToMemory( problem ) {
+function parseAnimationToMemory( rawAnimation ) {
 
     var animation = { loop: [] };
 
     // 2019Mar13
 
-     problem.objects.forEach( function( object, index ) {
-        // console.log("iwp6-calc:1451> parseProblemToMemory> Iterator: " + JSON.stringify(object) );
+     rawAnimation.objects.forEach( function( object, index ) {
+        // console.log("iwp6-calc:1451> parseAnimationToMemory> Iterator: " + JSON.stringify(object) );
 
         if ( object.objectType == "time" ) {
             animation.time = object;
@@ -1200,7 +1201,7 @@ function parseProblemToMemory( problem ) {
             animation.loop.push(object);
 
         } else {
-            throw "Animation parseProblemToMemory unrecognized Object Type: " + object.objectType;
+            throw "Animation parseAnimationToMemory unrecognized Object Type: " + object.objectType;
         }
 
      });
@@ -1209,17 +1210,17 @@ function parseProblemToMemory( problem ) {
   // D-fence
 
   if ( typeof animation !== "object" ) {
-    throw "Animation Parameter was not an object, was: " + typeof problem
+    throw "Animation Parameter was not an object, was: " + typeof animation
   } else if ( typeof animation.loop !== "object" ) {
-    throw "Animation loop attribute was not an array, was: " + typeof problem.objects
+    throw "Animation loop attribute was not an array, was: " + typeof animation.loop
   } else if ( typeof animation.time !== "object" ) {
-    throw "Animation objects.time attribute was not an object, was: " + typeof problem.objects.time
+    throw "Animation objects.time attribute was not an object, was: " + typeof animation.time
   } else if ( typeof animation.description !== "object" ) {
-    throw "Animation objects.description attribute was not an object, was: " + typeof problem.objects.description
+    throw "Animation objects.description attribute was not an object, was: " + typeof animation.description
   } else if ( typeof animation.graphWindow !== "object" ) {
-    throw "Animation graphWindow attribute was not an object, was: " + typeof problem.objects.graphWindow
+    throw "Animation graphWindow attribute was not an object, was: " + typeof animation.graphWindow
   } else if ( typeof animation.window !== "object" ) {
-    throw "Animation window attribute was not an object, was: " + typeof problem.objects.window
+    throw "Animation window attribute was not an object, was: " + typeof animation.window
   }
   
   // Time
@@ -1234,11 +1235,13 @@ function parseProblemToMemory( problem ) {
   // GraphWindow
   setGraphWindow(animation.GraphWindow);
 
+
+  animation.author = rawAnimation.author;
   if ( typeof setAuthorName === "function" ) {
     setAuthorName(animation.author.username);
   }
 
-  // console.log("iwp6-calc:1350> Typeof input: " , typeof problem.objects.input)
+  // console.log("iwp6-calc:1350> Typeof input: " , typeof rawAnimation.objects.input)
 
   animation.loop.forEach( function( object, index ) {
 
@@ -1249,17 +1252,26 @@ function parseProblemToMemory( problem ) {
     } else if ( object.objectType == 'solid' ) {
         addSolid(object);
     } else if ( object.objectType == 'object' ) {
-        addObject(problem.objects.object);
+        addObject(rawAnimation.objects.object);
     } else {
-      throw "Animation parseProblemToMemory unrecognized Object Type: " + object.objectType;
+      throw "Animation parseAnimationToMemory unrecognized Object Type: " + object.objectType;
     }
   } );
 
   // 2019Apr09 store in global singleton
 
-  parsedProblem = animation;
+  parsedAnimation = animation;
 
   return animation;
+}
+
+
+function allSolidObjectsInAnimation() {
+    var out = [];
+    parsedAnimation.loop.forEach( function( object, index ) {
+        if ( object.objectType == 'solid' ) { out.push(object); }
+    });
+    return out;
 }
 
 

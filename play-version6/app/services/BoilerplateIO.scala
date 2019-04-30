@@ -11,6 +11,7 @@ import play.api.Logger
 
 trait BoilerplateIO {
 
+  val SUFFIX_IWP_XML = ".iwp"
   val SUFFIX_IWP_JSON = ".iwp.json"
   val SUFFIX_JSON = ".json"
 
@@ -70,6 +71,12 @@ trait BoilerplateIO {
     }
   }
 
+
+  def listIwpXmlFiles(f: File): Array[File] = {
+    listVisibleFiles(f).sorted.filter(!_.isDirectory).filter { file =>
+      file.getName.toLowerCase.endsWith(SUFFIX_IWP_XML)
+    }
+  }
 
   def listJsonFiles(f: File): Array[File] = {
     listVisibleFiles(f).sorted.filter(!_.isDirectory).filter { file =>

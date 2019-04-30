@@ -104,11 +104,20 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
       case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
       case Some(root) =>
 
-        val files = listIwpJsonFiles(collection.directory)
+        val jsonFiles = listIwpJsonFiles(collection.directory)
 
-        val out = files.map { file => Iwp6Animation.fromJsonFile(file) }
+        val jsons = jsonFiles.map { file => Iwp6Animation.fromJsonFile(file) }
 
-        out.toSeq.map(_.toOption).flatten
+        val xmlFiles = listIwpXmlFiles(collection.directory)
+
+        val xmls = xmlFiles.map { file => Iwp6Animation.fromXmlFile(file) }
+
+        val out = jsons ++ xmls
+
+        // Clear out any Issues and Sort by Filename
+
+        // TODO - Dedupe by filename?
+        out.toSeq.map(_.toOption).flatten.sortBy(_.filename)
 
     }
   }
@@ -121,12 +130,31 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
         case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
         case Some(root) =>
 
-          val pathFile = new File(root + File.separator + collection + File.separator + filename + ".json")
+          val filePath = root + File.separator + collection + File.separator + filename
 
-          Iwp6Animation.fromJsonFile(pathFile) match {
-            case Failure(x) => throw x
-            case Success(s) => s
+          // First try the Json, and if Fails, fallback to the Xml
+
+          val ( jsonFilename, xmlFilenameO) =
+            if ( filename.endsWith(".json") ) {
+            // Load Json Only
+            ( filePath, None )
+          } else {
+            ( filePath + ".json", Some( filePath ) )
           }
+
+          val jsonAnimationT = Iwp6Animation.fromJsonFile(new File(jsonFilename))
+
+
+          jsonAnimationT match {
+            case Success(jsonAnimation) => jsonAnimation
+            case Failure(x) =>
+
+              xmlFilenameO match {
+                case Some(xmlFilename) => Iwp6Animation.fromXmlFile(new File(xmlFilename)).get
+                case None => throw new RuntimeException(s"No xml file found: ${filePath}")
+              }
+          }
+
       }
     )
   }

@@ -75,12 +75,12 @@ function renderProblemFromMemory() {
   inputTitle = 0;
   outputTitle = 0;
 
-  $.each(inputs, function(index, input) {
+  $.each(htmlInputs, function(index, input) {
     if ( input.hidden != "1" ) {
       inputTitle = 1;
     }
   })
-  $.each(outputs, function(index, output) {
+  $.each(htmlOutputs, function(index, output) {
     if ( output.hidden != "1" ) {
       outputTitle = 1;
       //console.log("it's visible");

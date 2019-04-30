@@ -13,7 +13,7 @@ var MAX_animationSteps = 1000;
 function readAnimationObject( animation ) {
     console.log("iwp6-read:10> Entry point for animation: ", animation );
     if ( typeof animation === "object" ) {
-        var a =  parseProblemToMemory( animation );
+        var a =  parseAnimationToMemory( animation );
         masterResetSteps();
         return a;
     } else {
@@ -28,7 +28,7 @@ function readAnimationString( animationString ) {
 
     console.log("iwp6-read:10> Entry point for animationString: ", animation );
     if ( typeof animation === "object" ) {
-        var a =  parseProblemToMemory( animation );
+        var a =  parseAnimationToMemory( animation );
         masterResetSteps();
         return a;
     } else {
@@ -39,7 +39,7 @@ function readAnimationString( animationString ) {
 
 function playAnimationToEnd( animationString ) {
 
-    if ( parsedProblem == null ) {
+    if ( parsedAnimation == null ) {
         throw "iwp6-read:39> playAnimationToEnd called without an Animation being read yet"
     }
 

@@ -155,13 +155,14 @@
 
  $(function() {
 
-   // console.log("animation:161> Loaded Page");
+   console.log("animation:158> Loaded Page");
 
-   var animation = @Html(animation.toJsonString);
+   var animationJson = @Html(animation.toJsonString);
 
-   // console.log("animation:161> Loaded animation: " , animation );
+   console.log("animation:161> Loaded animation Json: " , animationJson );
 
-   parseProblemToMemory(animation);
+   parseAnimationToMemory(animationJson);
+
    renderProblemFromMemory();
 
    // calculateVarsAtStep(0);
