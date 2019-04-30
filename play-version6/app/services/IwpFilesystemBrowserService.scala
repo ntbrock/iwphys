@@ -123,14 +123,16 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
   }
 
 
-  def getAnimation(collection: Iwp6Collection, filename: String) : Try[Iwp6Animation] = {
+  def getAnimation(collection: Iwp6FilesystemCollection, filename: String) : Try[Iwp6Animation] = {
+
+    Logger.info(s"IwpFilesystemBrowserService:128> getAnimation: collection: ${collection.name}  parentO: ${collection.parent} filename: $filename")
 
     Try(
       rootO match {
         case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
         case Some(root) =>
 
-          val filePath = root + File.separator + collection + File.separator + filename
+          val filePath = root + File.separator + collection.directory + File.separator + filename
 
           // First try the Json, and if Fails, fallback to the Xml
 

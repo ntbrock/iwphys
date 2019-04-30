@@ -1,6 +1,6 @@
 package controllers
 
-import java.io.FileReader
+import java.io.{File, FileReader}
 
 import javax.inject._
 import models.Iwp6Animation
@@ -184,11 +184,12 @@ class NashornTestController @Inject()(cc: ControllerComponents,
 
   def nashornTest6_compareIwpSteps() = Action { implicit request: Request[AnyContent] =>
 
-    val path = "animations/unit-test-2017/TEST_euler.iwp"
+    val collection = "animations/unit-test-2017"
+    val path = "TEST_euler.iwp"
 
-    val v4 = iwpVersion4CalculatorService.animateToJsonFrames(path)
+    val v4 = iwpVersion4CalculatorService.animateToJsonFrames(collection + File.separator + path)
 
-    val v6 = iwpVersion6CalculatorService.animateToJsonFrames(path)
+    val v6 = iwpVersion6CalculatorService.animateToJsonFrames(collection, path)
 
     val diffs = iwpDifferenceCalculatorService.diff( v4, v6 )
 

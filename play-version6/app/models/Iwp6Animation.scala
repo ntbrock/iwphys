@@ -10,7 +10,8 @@ import play.api.Logger
 import play.api.libs.json._
 import services.BoilerplateIO
 
-import scala.util.{Success, Try}
+import scala.util.{Failure, Success, Try}
+import scala.io.Source
 
 
 
@@ -51,8 +52,9 @@ object Iwp6Animation extends BoilerplateIO {
   implicit val jsfIwp6Description = Json.format[Iwp6Description]
   implicit val jsfIwp6GraphWindow = Json.format[Iwp6GraphWindow]
   implicit val jsfIwp6AuthorFormat = Json.format[Iwp6Author]
-  // implicit val Iwp6Objects = Json.format[Iwp6Objects]
-  // implicit val Iwp6AnimationFormat = Json.format[Iwp6Animation]
+
+  // implicit val Iwp6Objects = Json.format[Seq[Iwp6Object]]
+  //implicit val Iwp6AnimationFormat = Json.format[Iwp6Animation]
 
 
   /**
@@ -79,18 +81,34 @@ object Iwp6Animation extends BoilerplateIO {
 
     Try {
 
-      throw new RuntimeException("Iwp6Animation:178> Temporarily disabled the fromFile reader")
+      // Read file
+
+      val jsonContents = Source.fromFile(file).getLines.mkString
+
+      val jsv = Json.parse(jsonContents)
+
+      fromJson(jsv) match {
+        case Success(a) => a
+        case Failure(x) => throw x
+      }
 
     }
 
   }
 
+  /**
+    * Slightly Custom Inhertitance router
+    */
 
   def fromJson(jsv: JsValue) : Try[Iwp6Animation] = {
 
     Try {
 
-      throw new RuntimeException("Iwp6Animation:189> Temporarily disabled the fromJson reader")
+      Logger.info(s"Iwp6Animation:107> jsv: ${jsv}")
+
+
+      throw new RuntimeException("Not Implemented")
+
 
     }
 
@@ -134,6 +152,8 @@ object Iwp6Animation extends BoilerplateIO {
     if ( file.getName.endsWith("iwp") ) {
       fromXmlFile(file)
     } else if ( file.getName.endsWith("js") ) {
+      fromJsonFile(file)
+    } else if ( file.getName.endsWith("json") ) {
       fromJsonFile(file)
     } else {
       throw new RuntimeException(s"Unknown File type by extension: ${file.getName}")

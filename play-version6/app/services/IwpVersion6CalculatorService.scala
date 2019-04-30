@@ -2,9 +2,10 @@ package services
 
 import java.io.{File, FileReader}
 
-import javax.inject.Singleton
+import controllers.AnimationFilesystemController
+import javax.inject.{Inject, Singleton}
 import javax.script.{Invocable, ScriptEngineManager}
-import models.Iwp6Animation
+import models.{Iwp6Animation, Iwp6FilesystemCollection}
 import play.api.Logger
 import play.api.libs.json.{JsArray, Json}
 
@@ -12,7 +13,7 @@ import scala.io.Source
 import scala.util.{Failure, Success}
 
 @Singleton
-class IwpVersion6CalculatorService {
+class IwpVersion6CalculatorService @Inject() ( animationFilesystem: IwpFilesystemBrowserService ) {
 
 
   def spawnEngine : Invocable = {
@@ -43,17 +44,28 @@ class IwpVersion6CalculatorService {
 
 
 
-  def loadFile(path:String) = {
+  def loadFile(collection:String, filename: String) = {
+
+    val root = animationFilesystem.rootO.getOrElse {
+      throw new RuntimeException("Root animation not found in configuration")
+
+    }
+
+    Logger.info(s"IwpVersion6CalculatorService:54> loadFile: collection: ${collection}  filename: ${filename}")
+
+    val breaker = 1
+    animationFilesystem.getAnimation(Iwp6FilesystemCollection( new File(collection), root), filename)
+
     // Use the new converter
-    Iwp6Animation.fromFile(new File(path))
+    // Iwp6Animation.fromFile(new File(path))
 
   }
 
 
-  def animateToJsonFrames(path: String): JsArray = {
+  def animateToJsonFrames(collection:String, path: String): JsArray = {
 
     // Load the Javascript file
-    loadFile(path) match {
+    loadFile(collection, path) match {
 
       case Failure(x) => throw x
       case Success(iwpAnimation) =>

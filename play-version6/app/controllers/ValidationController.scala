@@ -34,7 +34,7 @@ class ValidationController @Inject()(cc: ControllerComponents,
 
       val v4 = iwpVersion4CalculatorService.animateToJsonFrames(path)
 
-      val v6 = iwpVersion6CalculatorService.animateToJsonFrames(s"${path}.json")
+      val v6 = iwpVersion6CalculatorService.animateToJsonFrames(collection, filename)
 
       val diffs = iwpDifferenceCalculatorService.diff(v4, v6)
 
@@ -53,7 +53,9 @@ class ValidationController @Inject()(cc: ControllerComponents,
               differenceSummary.csvValues.mkString(",")+"\n")
 
           case Failure(x) =>
-            Ok( Seq("\"Exception\"", "\""+path+"\"" , "\""+x.getMessage+"\"").mkString(",")+"\n" )
+          throw x
+          //
+          // Ok( Seq("\"Exception\"", "\""+path+"\"" , "\""+x.getMessage+"\"").mkString(",")+"\n" )
 
         }
 
