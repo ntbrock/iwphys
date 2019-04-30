@@ -825,8 +825,9 @@ function addSolid(solid) {
     return;
   };
 
-  if (solid.shape.drawTrails == "true") {
-    svgSolids.push("<polyline id='solid_" +solid.name+ "_trail' points='20,20 50,50' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='1' fill='none'></polyline>");
+  /** 2019Apr30 Initial Trail is very empty, but filled in with each animation step in iwp6-animator.js */
+  if (solid.shape.drawTrails == true ) {
+    svgSolids.push("<polyline id='solid_" +solid.name+ "_trail' points='0,0 0,0' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='1' fill='none'></polyline>");
   }
 }
 
@@ -1286,6 +1287,32 @@ function decorateAnimationFunctions() {
       });
       return out;
   };
+
+  parsedAnimation.objects = function() {
+      var out = [];
+      parsedAnimation.loop.forEach( function( object, index ) {
+          if ( object.objectType == 'objects' ) { out.push(object); }
+      });
+      return out;
+  };
+
+
+  parsedAnimation.inputs = function() {
+      var out = [];
+      parsedAnimation.loop.forEach( function( object, index ) {
+          if ( object.objectType == 'input' ) { out.push(object); }
+      });
+      return out;
+  };
+
+  parsedAnimation.outputs = function() {
+      var out = [];
+      parsedAnimation.loop.forEach( function( object, index ) {
+          if ( object.objectType == 'output' ) { out.push(object); }
+      });
+      return out;
+  };
+
 
   return parsedAnimation;
 

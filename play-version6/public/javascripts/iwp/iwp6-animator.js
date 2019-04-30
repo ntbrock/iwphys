@@ -19,19 +19,19 @@ function repaintStep(step) {
 
     updateTimeDisplay(vars.t);
 
-   outputs.forEach( function( output, index ) {
+   parsedAnimation.outputs().forEach( function( output, index ) {
       updateUserFormOutputDouble(output, vars[output.name]);
    });
 
    // le.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, solids: ", solids );
 
-   solids.forEach( function( solid, index ) {
+   parsedAnimation.solids().forEach( function( solid, index ) {
       updateSolidSvgPathAndShape(solid, vars[solid.name])
    });
 
    // console.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, objects: ", objects );
 
-   objects.forEach( function( object, index ) {
+   parsedAnimation.objects().forEach( function( object, index ) {
       updateSolidSvgPathAndShape(object, vars[object.name])
    });
 
@@ -363,7 +363,7 @@ function updateSolidSvgPathAndShape(solid, pathAndShape) {
 
   //console.log("solid: ",solid)
   //console.log("currentStep:",currentStep)
-  if (solid.shape.drawTrails == "true") {
+  if (solid.shape.drawTrails) {
     var points = []
     var pointsAttr = ""
     for (i in varsAtStep) {
@@ -465,7 +465,7 @@ function handleResetClick() {
   updateTimeDisplay(0);
   handleStopClick();
 	var vars0 = masterResetSteps();
-  graphResetZero(0, vars = vars0, solids = solids, graphWindow );
+  graphResetZero(0, vars = vars0, solids = parsedAnimation.solids(), graphWindow );
 	//document.getElementById(buttonIds.startStop).setAttribute("class", "Start");
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleStartClick()");
 }
