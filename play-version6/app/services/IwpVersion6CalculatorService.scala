@@ -54,7 +54,7 @@ class IwpVersion6CalculatorService @Inject() ( animationFilesystem: IwpFilesyste
     Logger.info(s"IwpVersion6CalculatorService:54> loadFile: collection: ${collection}  filename: ${filename}")
 
     val breaker = 1
-    animationFilesystem.getAnimation(Iwp6FilesystemCollection( new File(collection), root), filename)
+    animationFilesystem.getAnimation(Iwp6FilesystemCollection( new File(root + File.separator + collection), root), filename)
 
     // Use the new converter
     // Iwp6Animation.fromFile(new File(path))

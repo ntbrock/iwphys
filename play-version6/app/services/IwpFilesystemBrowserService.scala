@@ -132,7 +132,7 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
         case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
         case Some(root) =>
 
-          val filePath = root + File.separator + collection.directory + File.separator + filename
+          val filePath = collection.directory + File.separator + filename
 
           // First try the Json, and if Fails, fallback to the Xml
 
