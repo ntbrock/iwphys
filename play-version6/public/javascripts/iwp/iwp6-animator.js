@@ -58,8 +58,6 @@ function renderProblemFromMemory() {
   $("#itime_stop").val(time.stop.toString());
   $("#description").html( description.text );
 
-//Debugging 29 Jul 2016
-//console.log("setting xmin val: ", animationWindow.xmin );
   // 2018Mar23 Units are not editable.
   $("#iwindow_xmin").val( animationWindow.xmin );
   $("#iwindow_xmax").val( animationWindow.xmax );
@@ -70,7 +68,7 @@ function renderProblemFromMemory() {
   $("#iwindow_ygrid").val( animationWindow.ygrid );
   $("#iwindow_yunit").html( animationWindow.yunit );
 
-    // GraphWindow is a TODO feature for now.
+
   // $("#graphWindow").html( graphWindow );
   inputTitle = 0;
   outputTitle = 0;

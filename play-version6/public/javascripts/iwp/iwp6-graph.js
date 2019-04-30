@@ -55,9 +55,9 @@ var yAxis = null
 
 function graphInit() {
 
-    console.log("iwp5-graph:53> graphInit");
-
 	var svg = d3.select('#graph');
+
+    console.log("iwp6-graph:58> graphInit, xGrid: " , xGrid,  "  svg: " , svg );
 
 	// Step 1 Build Grid And Axes
 	// console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);

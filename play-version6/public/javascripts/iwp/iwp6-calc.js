@@ -631,8 +631,10 @@ function setGraphWindow(inGraphWindow) {
   graphWindow = inGraphWindow;
 
   // Hook into new iwp5-graph to redraw axes.
-  if ( typeof graphSetWindowFromAnimation === "object" ) {
+  if ( typeof graphSetWindowFromAnimation === "function" ) {
     graphSetWindowFromAnimation(graphWindow);
+  } else {
+    console.log("iwp6-calc:637> Did not detect the Graphing Library available, graphZetWindowFromAnimation: ", typeof graphSetWindowFromAnimation );
   }
 
 }
