@@ -55,10 +55,9 @@ var yAxis = null
 
 function graphInit() {
 
-    // console.log("iwp5-graph:53> graphInit");
+    console.log("iwp5-graph:53> graphInit");
 
 	var svg = d3.select('#graph');
-
 
 	// Step 1 Build Grid And Axes
 	// console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
@@ -96,7 +95,7 @@ function graphInit() {
 
 function graphSetWindowFromAnimation(graphWindow) {
 
-    //console.log("iwp5-graph:87> graphSetWindow: " , graphWindow )
+    console.log("iwp6-graph:98> graphSetWindow: " , graphWindow )
 
     graphXScale = d3.scaleLinear()
 				.domain([graphWindow.xmax, graphWindow.xmin])
@@ -118,6 +117,7 @@ function graphSetWindowFromAnimation(graphWindow) {
 
 
 function graphResetZero(step, vars, solids, graphWindow ) {
+
 	var svg = d3.select('#graph');
 
 	// console.log("iwp-graph:101> graphResetZero, vars: ", vars)
@@ -126,8 +126,8 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 
 	// 2018Oct25 Gray-out graph button if nothing to be graphed
 	graphAny = false;
-	for (var i = 0; i < solids.length; i++) {
-		if (solids[i].shape.graphOptions.graphVisible == "true") {
+	for (var i = 0; i < parsedAnimation.solids().length; i++) {
+		if (solids[i].shape.graphOptions.graphVisible) {
 			graphAny = true;
             break;
 		}
@@ -139,7 +139,7 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 	}
 
 	// Step 2 - Populate Memory for each object that's graphable, plus all of it's visibility
-	$.each(solids,function(index, solid) {
+	$.each(parsedAnimation.solids(),function(index, solid) {
 
 
 		// console.log("iwp-graph:69> graphResetZero, solid: ", solid)
@@ -149,7 +149,7 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 		// console.log("iwp-graph:69> graphResetZero, solid graphOptions: ", graphOptions)
 
 
-		var visible = graphOptions.graphVisible == "true"
+		var visible = graphOptions.graphVisible == true
 
 		// 2018Oct19 Ported a piece of IWP4 logic
 		if ( visible ) {
@@ -182,12 +182,12 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 				yAccel: d3.path()
 			},
 			pathsVisible: {
-				xPos: graphOptions.initiallyOn != null && graphOptions.initiallyOn.xPos == "true",
-				yPos: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yPos == "true",
-				xVel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.xVel == "true",
-				yVel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yVel == "true",
-				xAccel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.xAccel == "true",
-				yAccel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yAccel == "true"
+				xPos: graphOptions.initiallyOn != null && graphOptions.initiallyOn.xPos === true,
+				yPos: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yPos === true,
+				xVel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.xVel === true,
+				yVel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yVel === true,
+				xAccel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.xAccel === true,
+				yAccel: graphOptions.initiallyOn != null && graphOptions.initiallyOn.yAccel === true
 			},
 			pathsSvg: {
 				xPos: null,

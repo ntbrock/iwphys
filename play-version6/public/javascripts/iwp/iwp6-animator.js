@@ -59,16 +59,16 @@ function renderProblemFromMemory() {
   $("#description").html( description.text );
 
 //Debugging 29 Jul 2016
-//console.log("setting xmin val: ", iwindow.xmin );
+//console.log("setting xmin val: ", animationWindow.xmin );
   // 2018Mar23 Units are not editable.
-  $("#iwindow_xmin").val( iwindow.xmin );
-  $("#iwindow_xmax").val( iwindow.xmax );
-  $("#iwindow_xgrid").val( iwindow.xgrid );
-  $("#iwindow_xunit").html( iwindow.xunit );
-  $("#iwindow_ymax").val( iwindow.ymax );
-  $("#iwindow_ymin").val( iwindow.ymin );
-  $("#iwindow_ygrid").val( iwindow.ygrid );
-  $("#iwindow_yunit").html( iwindow.yunit );
+  $("#iwindow_xmin").val( animationWindow.xmin );
+  $("#iwindow_xmax").val( animationWindow.xmax );
+  $("#iwindow_xgrid").val( animationWindow.xgrid );
+  $("#iwindow_xunit").html( animationWindow.xunit );
+  $("#iwindow_ymax").val( animationWindow.ymax );
+  $("#iwindow_ymin").val( animationWindow.ymin );
+  $("#iwindow_ygrid").val( animationWindow.ygrid );
+  $("#iwindow_yunit").html( animationWindow.yunit );
 
     // GraphWindow is a TODO feature for now.
   // $("#graphWindow").html( graphWindow );
@@ -172,26 +172,26 @@ function renderCanvas() {
   // Add X gridlines -- TODO CONVERT TO A FOR LOOP
 
   //Update window settings with user form data
-  $.each(iwindow, function(index, val) {
-    iwindow[index] = queryUserFormWindowDouble(index);
+  $.each(animationWindow, function(index, val) {
+    animationWindow[index] = queryUserFormWindowDouble(index);
   })
   $(".gridline").remove();
 
 
-  var xGridlines = (iwindow.xmax - iwindow.xmin)/iwindow.xgrid;
+  var xGridlines = (animationWindow.xmax - animationWindow.xmin)/animationWindow.xgrid;
   for ( var interval = 1; interval < xGridlines; interval ++ ) {
-    var xGridPosition = (interval - xGridlines/2)*iwindow.xgrid;
-    //console.log("whatItShouldBe: "+xCanvas(xGridPosition*iwindow.xgrid)+", coordinates: "+coordinates);
+    var xGridPosition = (interval - xGridlines/2)*animationWindow.xgrid;
+    //console.log("whatItShouldBe: "+xCanvas(xGridPosition*animationWindow.xgrid)+", coordinates: "+coordinates);
     g.append( "<path class='gridline' d='M " + xCanvasGridlines(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" )
     g.append( "<path class='gridline' d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" )
     };
 
   // Add Y gridlines
-  var yGridlines = (iwindow.ymax - iwindow.ymin)/iwindow.ygrid;
+  var yGridlines = (animationWindow.ymax - animationWindow.ymin)/animationWindow.ygrid;
   //Debugging 7 Aug 2016
   //console.log("yGridlines: "+yGridlines);
   for ( var interval = 1; interval <= yGridlines-1; interval ++ ) {
-    var yGridPosition = (interval - yGridlines/2)*iwindow.ygrid;
+    var yGridPosition = (interval - yGridlines/2)*animationWindow.ygrid;
     g.append( "<path class='gridline' d='M 0 " + yCanvasGridlines(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" )
     g.append( "<path class='gridline' d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" )
   };

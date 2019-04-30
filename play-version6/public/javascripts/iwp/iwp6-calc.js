@@ -51,7 +51,7 @@ var parsedAnimation = null;
 
 var time = {};
 var description = "";
-var iwindow = {};
+var animationWindow = {};
 var graphWindow = {};
 
 // IWP6 - Objects are now in a master loop, not separated by type.
@@ -608,21 +608,26 @@ function setTime(inTime) {
 }
 
 // "description": { "text": "A ball is attached to a horizontal spring (not shown) which causes the ball to oscillate about the origin. Run the animation until it stops. Click on Show graph. \n\nWhich graph represents position vs. time?  How do you know?\nWhich graph represents velocity vs. time?  How do you know?\nWhich graph represents acceleration vs. time?  How do you know?\n\nWhat would a graph of net force on the ball vs. time look like?  Why?"
+// No Real Operation
 function setDescription(inDescription) {
   //console.log("description :", inDescription);
-   description = inDescription;
+  // Global
+  description = inDescription;
 }
 
 // "window": { "xmin": "-10.0", "xmax": "10.0", "ymin": "-10.0", "ymax": "10.0", "xgrid": "2.0", "ygrid": "1.0", "xunit": "meters", "yunit": "meters"
+// No Real Operation
 function setWindow(inWindow) {
   //console.log("window :", inWindow);
-  iwindow = inWindow;
+  // Global
+  animationWindow = inWindow;
 }
 
 
 // "GraphWindow": { "xmin": "0.0", "xmax": "5.0", "ymin": "-50.0", "ymax": "50.0", "xgrid": "0.5", "ygrid": "10.0"
 function setGraphWindow(inGraphWindow) {
   // console.log("iwp5:553> graphWindow :", inGraphWindow);
+  // Global
   graphWindow = inGraphWindow;
 
   // Hook into new iwp5-graph to redraw axes.
@@ -851,7 +856,7 @@ function addObject(object) {
     },
     text: object.text,
     units: object.units,
-    showValue: ( object.showValue == "true" || false ),
+    showValue: ( object.showValue === true || false ),
     value: {
       calculator: compileCalculator(object.value.calculator)
     },
@@ -1182,6 +1187,9 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 
 function parseAnimationToMemory( rawAnimation ) {
 
+
+    console.log("iwp6-calc:1186> Parsing rawAnimation: ", rawAnimation);
+
     var animation = { loop: [] };
 
     // 2019Mar13
@@ -1234,7 +1242,10 @@ function parseAnimationToMemory( rawAnimation ) {
   setWindow(animation.window);
 
   // GraphWindow
-  setGraphWindow(animation.GraphWindow);
+
+  console.log("iwp6-calc:1238> Setting GraphWindow: " , animation.graphWindow)
+
+  setGraphWindow(animation.graphWindow);
 
 
   animation.author = rawAnimation.author;
@@ -1323,8 +1334,8 @@ function decorateAnimationFunctions() {
 
 var canvasBox = { minX: 0, minY: 0, maxX: 1000, maxY: 1000 };
 function yCanvas(y) {
-  var yDomain = iwindow.ymax - iwindow.ymin;
-  var sum = iwindow.ymax / yDomain;
+  var yDomain = animationWindow.ymax - animationWindow.ymin;
+  var sum = animationWindow.ymax / yDomain;
   var yProportion = - y / yDomain;
   var yCorrected = yProportion + sum;
   var cDomain = canvasBox.maxY - canvasBox.minY;
@@ -1333,8 +1344,8 @@ function yCanvas(y) {
 };
 
 function xCanvas(x) {
-  var xDomain = iwindow.xmax - iwindow.xmin;
-  var sum = - iwindow.xmin / xDomain;
+  var xDomain = animationWindow.xmax - animationWindow.xmin;
+  var sum = - animationWindow.xmin / xDomain;
   var xProportion = x / xDomain;
   var xCorrected = xProportion + sum;
   var cDomain = canvasBox.maxX - canvasBox.minX;
@@ -1345,7 +1356,7 @@ function xCanvas(x) {
 */
 };
 function xCanvasGridlines(x) {
-  var xDomain = iwindow.xmax - iwindow.xmin;
+  var xDomain = animationWindow.xmax - animationWindow.xmin;
   var xProportion = x / xDomain;
   var xCorrected = xProportion + 0.5;
   var cDomain = canvasBox.maxX - canvasBox.minX;
@@ -1353,7 +1364,7 @@ function xCanvasGridlines(x) {
   return cProportion;
 };
 function yCanvasGridlines(y) {
-  var yDomain = iwindow.ymax - iwindow.ymin;
+  var yDomain = animationWindow.ymax - animationWindow.ymin;
   var yProportion = y / yDomain;
   var yCorrected = yProportion + 0.5;
   var cDomain = canvasBox.maxY - canvasBox.minY;
@@ -1365,14 +1376,14 @@ function yCanvasGridlines(y) {
 */
 
 function xWidth(size) {
-  var xDomain = iwindow.xmax - iwindow.xmin;
+  var xDomain = animationWindow.xmax - animationWindow.xmin;
   var cDomain = canvasBox.maxX - canvasBox.minX;
   var proportion = cDomain/xDomain;
   return size*proportion;
 };
 
 function yHeight(size) {
-  var yDomain = iwindow.ymax - iwindow.ymin;
+  var yDomain = animationWindow.ymax - animationWindow.ymin;
   var cDomain = canvasBox.maxY - canvasBox.minY;
   var proportion = cDomain/yDomain;
   return size*proportion;
