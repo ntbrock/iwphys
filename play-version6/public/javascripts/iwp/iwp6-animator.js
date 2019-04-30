@@ -252,26 +252,29 @@ function updateSolidSvgPathAndShape(solid, pathAndShape) {
 
   // console.log("iwp5:1550> updateSolidSvgPathAndShape: solid : " + solid.name + "  solid: " , solid )
 
-	var svgSolid = $("#solid_" + solid.name);
-    var svgTrail = $("#solid_" + solid.name + "_trail")
+  var svgSolid = $("#solid_" + solid.name);
+  var svgTrail = $("#solid_" + solid.name + "_trail")
+
 	//console.log("updateSolidSvgPathAndShape: ", solid, svgSolid, pathAndShape);
 	// translate from math to visual.
-	/* pathAndShape: { height: 1, width: 1, x: 9, xdisp: 9, y: 0, ydisp: 0 }*/
+   /* pathAndShape: { height: 1, width: 1, x: 9, xdisp: 9, y: 0, ydisp: 0 }*/
 
-if (solid.shape.type == "circle") {
+  var shapeType = solid.shape.shapeType;
+
+  if (shapeType == "circle") {
     svgSolid.attr("cx", xCanvas(pathAndShape.x))
 		.attr("cy", yCanvas(pathAndShape.y))
 		.attr("rx", xWidth(pathAndShape.width/2))
 		.attr("ry", yHeight(pathAndShape.height/2));
     //console.log("rx: ", pathAndShape.width)
   }
-  else if (solid.shape.type == "rectangle") {
+  else if (shapeType == "rectangle") {
     svgSolid.attr("width", xWidth(pathAndShape.width))
 		.attr("height", yHeight(pathAndShape.height))
     .attr("x", xCanvas(pathAndShape.x - pathAndShape.width / 2))
     .attr("y", yCanvas(pathAndShape.y + pathAndShape.height / 2));
  }
-  else if (solid.shape.type == "line") {
+  else if (shapeType == "line") {
     // DEBUGGING RYAN STEED 21 SEP 2016
     /*console.log("y1: ", yCanvas(pathAndShape.y));
     console.log("y2: ", pathAndShape.y + pathAndShape.height);*/
@@ -280,7 +283,7 @@ if (solid.shape.type == "circle") {
     .attr("y1", yCanvas(pathAndShape.y))
     .attr("y2", yCanvas(pathAndShape.y + pathAndShape.height));
   }
-  else if (solid.shape.type == "polygon") {
+  else if (shapeType == "polygon") {
 
     // console.log("iwp5:1581> Redrawing Polygon: " + solid.name + " has Error? " + solid.calculationError );
     var points = pathAndShape.points
@@ -291,7 +294,7 @@ if (solid.shape.type == "circle") {
     });
     svgSolid.attr("points", pointsAttr)
   }
-  else if (solid.shape.type == "vector") {
+  else if (shapeType == "vector") {
 
 
     //http://stackoverflow.com/questions/10316180/how-to-calculate-the-coordinates-of-a-arrowhead-based-on-the-arrow
@@ -321,7 +324,7 @@ if (solid.shape.type == "circle") {
     svgSolid.attr("points",point1+point2+arrow1+point2+arrow2)
   }
 
-  else if (solid.shape.type == "Bitmap" || solid.shape.type == "bitmap") {
+  else if (shapeType == "Bitmap" || shapeType == "bitmap") {
 
     console.log("iwp5:1720> Bitmap type! solid: " , solid,  "  pathAndShape: " , pathAndShape )
 		//TODO: try changing animation from bitmap to rectangle to see calculation differences
@@ -354,7 +357,7 @@ if (solid.shape.type == "circle") {
   else {
   	//Debugging 25 Jan 2017
     //throw "Object in problem";
-    console.log("!! Unidentified shape:550> solid = ", solid.shape.type);
+    console.log("!! Unidentified shape:550> solid = ", solid);
     return;
   };
 

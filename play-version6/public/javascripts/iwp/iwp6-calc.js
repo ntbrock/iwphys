@@ -105,7 +105,7 @@ function masterResetSteps() {
 
   // 2018Feb01 Graphing Reset hookin
   if ( typeof graphResetZero === "function" ) {
-    graphResetZero(0, vars = vars0, solids = allSolidObjectsInAnimation() );
+    graphResetZero(0, vars = vars0, solids = parsedAnimation.solids() );
   }
 
   archiveVarsAtStep( currentStep, vars0 ); // Boot up the environment
@@ -1258,22 +1258,38 @@ function parseAnimationToMemory( rawAnimation ) {
     }
   } );
 
+  // Helper Functions that run filters.
+
+
+
+
   // 2019Apr09 store in global singleton
 
   parsedAnimation = animation;
+  decorateAnimationFunctions();
 
-  return animation;
+  return parsedAnimation;
 }
 
 
-function allSolidObjectsInAnimation() {
-    var out = [];
-    parsedAnimation.loop.forEach( function( object, index ) {
-        if ( object.objectType == 'solid' ) { out.push(object); }
-    });
-    return out;
-}
+/**
+ * Decrorate some helper functions onto the animation 'object'
+ */
+function decorateAnimationFunctions() {
 
+  if ( ! parsedAnimation ) { throw "Refusing to proceed with decoration since parsedAnimation is null" }
+
+  parsedAnimation.solids = function() {
+      var out = [];
+      parsedAnimation.loop.forEach( function( object, index ) {
+          if ( object.objectType == 'solid' ) { out.push(object); }
+      });
+      return out;
+  };
+
+  return parsedAnimation;
+
+}
 
 //--------------------------------------------------------------------------------
 // SVG ViewBox Scaling
