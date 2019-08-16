@@ -1,0 +1,80 @@
+2019Aug16 Interactive Web Physics
+
+Agenda
+
+- Three Months until NCS-AAPT Conference
+
+
+50-60 Teachers , Friday Evening, All Day Saturday.  Saturday is our workshop.
+Show: animation environments, new designers, the links need to work,  be intuitive.  Layout needs to be easy to follow for users. Cross checking and possibly re-thinking the old legacy links.  Reorganize folders of animations.   Willhave specific tasks, and ready for public consumption.  Want to take it a step further.
+
+At workshop, anticipating:  Designer and Lbiraries and how you use existing animations.  To teach different physics topics.  Audience engagement:  Review what already exists,  step through a tutorial,  then show them how to tmake their own animation with design. 
+
+Goal: Access to websiite, know how it's organized, and a sample tutoriial on how to make their own new animations.
+
+
+- Project Plan for New Website, New Designer, and Presentation Materials
+
+
+Aug 15 - Sep 15 : Milestone 1 - 
+	Effort A : New Website content,   Testing Animator,  Choosing the animations that are going to be on display at teh conference. Make sure they work 100%.
+
+	Effort B: Get code compelte on the designer.  We have complete wireframes, but now need to code it.
+
+
+Sep 15 - Oct 15 : Milestone 2 - Heavy testing on the new designer.  Software testing, feature testing, bug fixes, get it ready for end-user use.
+
+
+Oct 15 - Nov 15 : Milestone 3 -  Conference Material Preparation.   HOWTO's: Screenshots, step by step, on how to use Animator + Designer.  There's HOWTO Guides for animator and designer (Desktop) version.
+
+
+
+- Meeting Schedule – Fridays @ 4:30PM with exceptions of Extended Weekends + Events
+
+	Dev Meeting 8/16 4:30PM Friday
+
+	Dev Meeting 8/23 4:30PM Friday
+
+	August 30th Extended  - If needed.
+
+	Dev Meeting 9/6 4:30PM Friday
+
+	September 13 College Fair - Unlikely.
+
+	Milestone Meeting 9/18 Wednesday Afternoon. (Taylor in Person)  G block preferred.  
+		Potentially a 1PM meeting.  (TB note:  PA Luncheon early.)
+
+		* Taylor send full meeting schedule.
+
+
+= Trello Board Setup
+https://trello.com/b/kpJgBLK4/iwp5-2018-2019
+
+awaw6465@gmail.com
+
+= First Assignments for Andy and Ben – Testing Version 6 Website, Verbiage + Content 
+Edits.
+
+= Designer Assignment for Taylor 
+
+
+- In Person Meeting in Durham on Wednesday, September 18,   1:00PM.  45 minutes.
+
+	Format: 8-10 Minutes, and present / demonstrate our work, get feedback.
+
+	Layout the specifics tasks around Designer Testing for Milestone 2.
+
+	* Taylor> Send Calendar invite out!
+
+
+- Andy , look at git errors.
+- Ben, look at git errors.
+- Dr. Bennett - Thank you! This will be fun!  Will spending time.
+
+- Taylor - Agree, this will be fun.
+
+
+- Github + Development Environment Access
+
+
+

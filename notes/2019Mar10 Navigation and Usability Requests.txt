@@ -1,4 +1,4 @@
-
+IWP6 From Dr. Bennett
 
 
 1)  Some of the animation descriptions are very wordy. At some point we can go through and edit them to try to make them shorter. For now, though, a simple fix might be to only display the first sentence or two of each animation description, with ellipses (...) at the end and a "Read More" button that a user can click in order to read the full description. I don't know how hard it would be to implement these things but I think it would improve the user experience. 
