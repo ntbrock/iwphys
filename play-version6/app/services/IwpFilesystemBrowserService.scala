@@ -16,21 +16,23 @@ import scala.util.{Failure, Success, Try}
 class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extends BoilerplateIO {
 
 
-  val rootPathStringO = configuration.getOptional[String]("iwp.filesystem.root")
+  val rootPathStringO = configuration.getOptional[String]("iwp.animations.path")
 
-  def rootO: Option[File] = {
+  def animationDirectory: File = {
     rootPathStringO match {
-      case None => None
+      case None => throw new RuntimeException("Configuration file missing: iwp.animations.path")
       case Some(rootPath) =>
 
         val f = new File(rootPath)
 
         Logger.info(s"IwpFilesytemBrowserService:28> f: ${f}   f.exists? ${f.exists()}   f.isDirectory: ${f.isDirectory}")
 
-        if (f.exists() && f.isDirectory) {
-          Some(f)
+        if (!f.exists()) {
+          throw new RuntimeException(s"Configured Animations Path does not exist: iwp.animations.path = ${rootPath}")
+        } else if (!f.isDirectory) {
+          throw new RuntimeException(s"Configured Animations Path is not a Directory: iwp.animations.path = ${rootPath}")
         } else {
-          None
+          f
         }
     }
   }
@@ -43,125 +45,103 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
 
   def getCollection(collectionEncoded: String): Option[Iwp6FilesystemCollection] = {
 
-    rootO match {
-      case None => throw new RuntimeException(s"Configured Folder iwp.filesystem.root=${rootPathStringO} not found in filesystem.")
-      case Some(root) =>
+    val decoded = URLDecoder.decode(collectionEncoded, "UTF-8")
 
-        val decoded = URLDecoder.decode(collectionEncoded, "UTF-8")
+    if (decoded.startsWith("/")) {
+      throw new RuntimeException("Collection names starting with slash not permitted")
+    }
 
-        if ( decoded.startsWith("/") ) {
-          throw new RuntimeException("Collection names starting with slash not permitted")
-        }
-
-        if ( decoded.contains("..") ) {
-          throw new RuntimeException("Collection names with custom directory paths not permitted")
-        }
+    if (decoded.contains("..")) {
+      throw new RuntimeException("Collection names with custom directory paths not permitted")
+    }
 
 
-        // Logger.info(s"IwpFilesystemBrowser:56> Decoded: ${decoded}")
+    // Logger.info(s"IwpFilesystemBrowser:56> Decoded: ${decoded}")
 
-        val pathFile = new File(root + File.separator + decoded)
+    val pathFile = new File(animationDirectory + File.separator + decoded)
 
-        // Logger.info(s"IwpFilesystemBrowser:56> Pathfile: ${pathFile}   exists: ${pathFile.exists}")
+    // Logger.info(s"IwpFilesystemBrowser:56> Pathfile: ${pathFile}   exists: ${pathFile.exists}")
 
-        if (pathFile.exists) {
-          Some( Iwp6FilesystemCollection(pathFile, root))
-        } else {
+    if (pathFile.exists) {
+      Some(Iwp6FilesystemCollection(pathFile, animationDirectory))
+    } else {
 
-          None
-        }
+      None
     }
   }
+
 
 
 
   def topCollection : Iwp6Collection = {
-
-    rootO match {
-      case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
-      case Some(root) =>
-        Iwp6FilesystemCollection(root, root)
-    }
+    Iwp6FilesystemCollection(animationDirectory, animationDirectory)
   }
-
 
 
   def findCollections(collection: Iwp6Collection): Seq[Iwp6FilesystemCollection] = {
 
-    rootO match {
-      case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
-      case Some(root) =>
+    val pathFile = new File(animationDirectory + File.separator + collection.encoded)
+    //Logger.info(s"IwpDirectoryBrowserService:31> Scanning: ${pathFile}")
 
-        val pathFile = new File(root + File.separator + collection.encoded)
-        //Logger.info(s"IwpDirectoryBrowserService:31> Scanning: ${pathFile}")
-
-        listDirectories(pathFile).map { f => Iwp6FilesystemCollection(f, root) }
-    }
+    listDirectories(pathFile).map { f => Iwp6FilesystemCollection(f, animationDirectory) }
 
   }
 
 
   def findAnimations(collection: Iwp6FilesystemCollection): Seq[Iwp6Animation] = {
 
-    rootO match {
-      case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
-      case Some(root) =>
+    val jsonFiles = listIwpJsonFiles(collection.directory)
 
-        val jsonFiles = listIwpJsonFiles(collection.directory)
+    val jsons = jsonFiles.map { file => Iwp6Animation.fromJsonFile(file) }
 
-        val jsons = jsonFiles.map { file => Iwp6Animation.fromJsonFile(file) }
+    val xmlFiles = listIwpXmlFiles(collection.directory)
 
-        val xmlFiles = listIwpXmlFiles(collection.directory)
+    val xmls = xmlFiles.map { file => Iwp6Animation.fromXmlFile(file) }
 
-        val xmls = xmlFiles.map { file => Iwp6Animation.fromXmlFile(file) }
+    val out = jsons ++ xmls
 
-        val out = jsons ++ xmls
+    // Clear out any Issues and Sort by Filename
 
-        // Clear out any Issues and Sort by Filename
+    // TODO - Dedupe by filename?
+    out.toSeq.map(_.toOption).flatten.sortBy(_.filename)
 
-        // TODO - Dedupe by filename?
-        out.toSeq.map(_.toOption).flatten.sortBy(_.filename)
-
-    }
   }
+
 
 
   def getAnimation(collection: Iwp6FilesystemCollection, filename: String) : Try[Iwp6Animation] = {
 
     Logger.info(s"IwpFilesystemBrowserService:128> getAnimation: collection: ${collection.name}  parentO: ${collection.parent} filename: $filename")
 
-    Try(
-      rootO match {
-        case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
-        case Some(root) =>
+    Try {
 
-          val filePath = collection.directory + File.separator + filename
+      val filePath = collection.directory + File.separator + filename
 
-          // First try the Json, and if Fails, fallback to the Xml
+      // First try the Json, and if Fails, fallback to the Xml
 
-          val ( jsonFilename, xmlFilenameO) =
-            if ( filename.endsWith(".json") ) {
-            // Load Json Only
-            ( filePath, None )
-          } else {
-            ( filePath + ".json", Some( filePath ) )
+      val (jsonFilename, xmlFilenameO) =
+        if (filename.endsWith(".json")) {
+          // Load Json Only
+          (filePath, None)
+        } else {
+          (filePath + ".json", Some(filePath))
+        }
+
+      val jsonAnimationT = Iwp6Animation.fromJsonFile(new File(jsonFilename))
+
+
+      jsonAnimationT match {
+        case Success(jsonAnimation) => jsonAnimation
+        case Failure(x) =>
+
+          xmlFilenameO match {
+            case Some(xmlFilename) => Iwp6Animation.fromXmlFile(new File(xmlFilename)).get
+            case None => throw new RuntimeException(s"No xml file found: ${filePath}")
           }
-
-          val jsonAnimationT = Iwp6Animation.fromJsonFile(new File(jsonFilename))
-
-
-          jsonAnimationT match {
-            case Success(jsonAnimation) => jsonAnimation
-            case Failure(x) =>
-
-              xmlFilenameO match {
-                case Some(xmlFilename) => Iwp6Animation.fromXmlFile(new File(xmlFilename)).get
-                case None => throw new RuntimeException(s"No xml file found: ${filePath}")
-              }
-          }
-
       }
-    )
+
+
+    }
   }
 
   /**
@@ -173,21 +153,19 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
 
   def getVersion4Problem(collection: Iwp6Collection, filename: String) : Try[DProblem] = {
 
-    Try(
-      rootO match {
-        case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
-        case Some(root) =>
+    Try {
 
-          val pathFile = new File(root + File.separator + collection + File.separator + filename )// NOTE! These are .iwp files, not Json
 
-          val xmlString = readFileCompletely(pathFile)
+      val pathFile = new File(animationDirectory + File.separator + collection + File.separator + filename) // NOTE! These are .iwp files, not Json
 
-          val problem = DProblemXMLParser.load(xmlString)
-          problem.filename = filename
+      val xmlString = readFileCompletely(pathFile)
 
-          problem
-      }
-    )
+      val problem = DProblemXMLParser.load(xmlString)
+      problem.filename = filename
+
+      problem
+    }
+
   }
 
 

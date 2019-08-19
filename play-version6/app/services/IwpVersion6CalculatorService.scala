@@ -46,10 +46,7 @@ class IwpVersion6CalculatorService @Inject() ( animationFilesystem: IwpFilesyste
 
   def loadFile(collection:String, filename: String) = {
 
-    val root = animationFilesystem.rootO.getOrElse {
-      throw new RuntimeException("Root animation not found in configuration")
-
-    }
+    val root = animationFilesystem.animationDirectory
 
     Logger.info(s"IwpVersion6CalculatorService:54> loadFile: collection: ${collection}  filename: ${filename}")
 
