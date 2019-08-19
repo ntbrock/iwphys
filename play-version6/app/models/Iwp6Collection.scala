@@ -15,21 +15,28 @@ trait Iwp6Collection {
 }
 
 
-
+/**
+  * Note that the Filesystem Collections always use / as their separator, like WWW Uri's
+  * Windows specific backslashes are replaced in at a lower service level.
+  * @param directory
+  * @param root
+  */
 case class Iwp6FilesystemCollection (directory: File, root: File) extends Iwp6Collection
 {
+
+  val SEPARATOR = "/"
 
   def name : String = directory.getName
 
   def encoded : String = {
-    directory.getCanonicalPath.replace( root.getCanonicalPath, "" ).replaceAll("\\\\", "/").stripPrefix("/")
+    directory.getCanonicalPath.replace( root.getCanonicalPath, "" ).replaceAll("\\\\", SEPARATOR).stripPrefix(SEPARATOR)
   }
 
   def parent : Option[Iwp6Collection] = {
 
     Logger.info(s"Iwp6Collection:30> encoded: ${encoded}")
 
-    val parts = encoded.split(File.separator).toSeq
+    val parts = encoded.split(SEPARATOR).toSeq
 
     // Logger.info(s"Iwp6Collection:30> Parent Parts: ${parts}")
 
