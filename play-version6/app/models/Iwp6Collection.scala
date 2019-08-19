@@ -27,6 +27,8 @@ case class Iwp6FilesystemCollection (directory: File, root: File) extends Iwp6Co
 
   def parent : Option[Iwp6Collection] = {
 
+    Logger.info(s"Iwp6Collection:30> encoded: ${encoded}")
+
     val parts = encoded.split(File.separator).toSeq
 
     // Logger.info(s"Iwp6Collection:30> Parent Parts: ${parts}")
