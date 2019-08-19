@@ -25,7 +25,7 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
 
         val f = new File(rootPath)
 
-        Logger.info(s"IwpFilesytemBrowserService:28> f: ${f}   f.exists? ${f.exists()}   f.isDirectory: ${f.isDirectory}")
+        // Logger.info(s"IwpFilesytemBrowserService:28> f: ${f}   f.exists? ${f.exists()}   f.isDirectory: ${f.isDirectory}")
 
         if (!f.exists()) {
           throw new RuntimeException(s"Configured Animations Path does not exist: iwp.animations.path = ${rootPath}")
@@ -111,7 +111,7 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
 
   def getAnimation(collection: Iwp6FilesystemCollection, filename: String) : Try[Iwp6Animation] = {
 
-    Logger.info(s"IwpFilesystemBrowserService:128> getAnimation: collection: ${collection.name}  parentO: ${collection.parent} filename: $filename")
+    // Logger.debug(s"IwpFilesystemBrowserService:128> getAnimation: collection: ${collection.name}  parentO: ${collection.parent} filename: $filename")
 
     Try {
 
