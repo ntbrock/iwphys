@@ -41,7 +41,7 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
   def getCollection(collectionEncoded: String): Option[Iwp6FilesystemCollection] = {
 
     rootO match {
-      case None => throw new RuntimeException("Configuration iwp.filesystem.root not found")
+      case None => throw new RuntimeException(s"Configured Folder iwp.filesystem.root=${rootPathStringO} not found in filesystem.")
       case Some(root) =>
 
         val decoded = URLDecoder.decode(collectionEncoded, "UTF-8")
