@@ -24,6 +24,9 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
       case Some(rootPath) =>
 
         val f = new File(rootPath)
+
+        Logger.info(s"IwpFilesytemBrowserService:28> f: ${f}   f.exists? ${f.exists()}   f.isDirectory: ${f.isDirectory}")
+
         if (f.exists() && f.isDirectory) {
           Some(f)
         } else {
