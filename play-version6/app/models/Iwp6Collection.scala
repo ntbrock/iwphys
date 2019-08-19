@@ -22,7 +22,7 @@ case class Iwp6FilesystemCollection (directory: File, root: File) extends Iwp6Co
   def name : String = directory.getName
 
   def encoded : String = {
-    directory.getCanonicalPath.replace( root.getCanonicalPath, "" ).replaceAll("\\", "/").stripPrefix("/")
+    directory.getCanonicalPath.replace( root.getCanonicalPath, "" ).replaceAll("\\\\", "/").stripPrefix("/")
   }
 
   def parent : Option[Iwp6Collection] = {
