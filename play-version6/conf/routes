@@ -22,6 +22,7 @@ GET     /animation/:collection/:filename.json  controllers.AnimationFilesystemCo
 GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
 GET     /animation/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
 
+
 # Support Legacy Paths from WebAssign
 
 GET     /animate.php/:collection/:filename  controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
@@ -53,6 +54,10 @@ GET     /test/xml/version4/readString    controllers.XmlTestController.version4R
 GET    /test/xml/version4/readCollection/:collection/:filename    controllers.XmlTestController.version4CollectionRead(collection: String, filename:String)
 GET    /test/xml/version4/readCollection/:collection/:subCollection/:filename    controllers.XmlTestController.version4SubCollectionRead(collection: String, subCollection: String, filename:String)
 GET    /test/xml/version4/convertCollection/:collection/:subCollection/:filename    controllers.XmlTestController.version4SubCollectionConvert(collection: String, subCollection: String, filename:String)
+
+# Integration Tests for Designer Users
+GET    /test/designer/user/sample.json     controllers.DesignerTestController.userSample()
+
 
 
 # Version 4 SBT Conversion testing
