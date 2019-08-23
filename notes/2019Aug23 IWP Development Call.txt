@@ -1,0 +1,69 @@
+2019Aug23 IWP Development Call
+
+Taylor
+L> Code - Windows Workstation Fixes. Captured screenshots of windows environment setup.  Design -  The email authentication sign in Flow for designer.  Learned the new User Interface tech I'm goig to use: React.js.
+N> Support - Bulk validation run. Code - Build the Email sign in flow and connect Iwp6 to mongo Database. Use Sengrid to send emails with links. Continue with React learning.
+
+Andy
+L> Exploring Animations, wrote some informationo about how each copmonent of the animation works. Found the Iwp4 designer guide, applicable?  Comments about we can improve certain animations. 
+N> Waiting on Dr. Bennet?  Learn some coding, scala.  Build a new route, new controller, a new view with some placeholder screenshots + content for the user guide.
+
+Ben
+L> Explored animatinos. Looking for content thaat caught my eye, creative + instructive.  Have 6 that are cool, put onto trello board. Exploring variuos components: graphing, parameters. Comments.
+N> Focus - fixing what I found, learning more about Animation code and how to fix them.  Look at iwp6-animator.js in code.
+
+play-version6/public/javascripts/iwp/iwp6-animator.js
+
+Jon
+L> Went through webassign, which uses thes animatinos. have a complete list of hte URLs fro the ani's that are linked, in a google doc to share. THink there's duplication, some links on website that go to dead ends.  Started on the home page, going through collections: first button: Charged Particle motion, spent a lot of time, reviewed every single animation, a bunch of dupes to eliminate.  Some to archive, since not used in WebAssign. Thre are some that just don't work. Started a google doc, could break down into each collectionos, found 30-40 items in the one collection. started on the next one.
+N> Go through the collections, and look foor what we should archive, what's a duplicate, what needs fixed?  How to change what's displayed?  Easy: Eliminate or Archive animations.
+
+
+Ben - Roadblocks:  A lot of the animations weren't woorking or the units were messed up or labels all bunched together.
+
++Trello - Forces coumn has an error
+
++Trello - The graph labels are all bunched together.
+
+1) Triage: Compare IWP5 -vs- IWP6.
+
+2) Triage: Chrome Developer Tools
+
+
+= After - What Animations should be included in our New Animation Set?  That we will use to show off at the conference.
+
+
+= After - What should we call our new cleaned up animation set?  Filesystem notes about moving and archiving.  Continue to call it IWP6, hope is that word of mouth will spread awareness of oour product. It's NOT conference specific.   INclude NCSSM somewhere in the name or animation packages or leave it generics as IWPhys?
+
+
+- After - We should create a new IWP Web Animation User Guide.  Found the Old Designer guide.
+
+	Imagining a table of contents:
+		Animation
+		Graphing
+		Axes
+		Inputs
+		Time
+
+	How we organized, basic website animation.
+
+	PDF file or a help page?   If you're in an animation, then have a help button.
+
+	Have a more general descriptin on the main page.
+
+	+R> uor new Iwp6 user guide, shouodl be delivered as a web page and clickable from the top right of every animation.
+
+	* Dr. Bennett - Look for the Rsteed guide.
+
+	* Taylor> re-run full animation bulk testing.
+
+Calendar - Meeting next Friday?   
+
+After - Coding orientation, how to edit content in play views.
+
+
+After - Demo of Scala case class -> Json auto serialization.
+
+
+Git cheat sheet: https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf
+
