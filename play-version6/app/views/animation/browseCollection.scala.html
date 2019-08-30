@@ -42,7 +42,7 @@
   }
 
 
-  @if(subCollections.size> 0 ) {
+  @if(subCollections.size > 0 ) {
 
     @subCollections.map { subCollection =>
 
@@ -65,7 +65,7 @@
     </div>
 
 
-    @animations.sliding(3).map { threeAnimations =>
+    @animations.grouped(3).map { threeAnimations =>
       <div class="row text-center">
         @threeAnimations.map { animation =>
           @views.html.partial.animationPreview(thisCollection, animation)
