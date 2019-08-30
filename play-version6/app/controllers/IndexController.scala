@@ -3,7 +3,9 @@ package controllers
 import javax.inject._
 import play.api._
 import play.api.mvc._
-import services.IwpFilesystemBrowserService
+import services.{IwpEmailService, IwpFilesystemBrowserService}
+
+import scala.concurrent.{ExecutionContext, Future}
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -11,7 +13,8 @@ import services.IwpFilesystemBrowserService
  */
 @Singleton
 class IndexController @Inject()(cc: ControllerComponents,
-                                iwpDirectoryBrowserService: IwpFilesystemBrowserService) extends AbstractController(cc) {
+                                iwpDirectoryBrowserService: IwpFilesystemBrowserService,
+                                iwpEmailService: IwpEmailService)(implicit ec: ExecutionContext) extends IwpBaseController(cc, iwpEmailService) {
 
   /**
    * Create an Action to render an HTML page.
@@ -20,16 +23,23 @@ class IndexController @Inject()(cc: ControllerComponents,
    * will be called when the application receives a `GET` request with
    * a path of `/`.
    */
-  def index() = Action { implicit request: Request[AnyContent] =>
+  def index() = optAuthenticated { implicit request =>
 
-    val popularName = "popular"
 
-    iwpDirectoryBrowserService.getCollection(popularName) match {
+    Future.successful {
 
-      case None => Ok(views.html.index(None, Seq()))
 
-      case Some(popularCollection) => Ok(views.html.index(Some(popularCollection), iwpDirectoryBrowserService.findAnimations(popularCollection)))
+      implicit val userO = request.user
 
+      val popularName = "popular"
+
+      iwpDirectoryBrowserService.getCollection(popularName) match {
+
+        case None => Ok(views.html.index(None, Seq()))
+
+        case Some(popularCollection) => Ok(views.html.index(Some(popularCollection), iwpDirectoryBrowserService.findAnimations(popularCollection)))
+
+      }
     }
   }
 
