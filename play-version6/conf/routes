@@ -43,6 +43,8 @@ GET     /sign-in/email-form             controllers.EmailSignInController.signIn
 POST    /sign-in/email-send             controllers.EmailSignInController.signInEmailSend()
 GET     /sign-in/email-token            controllers.EmailSignInController.signInWithEmailToken(token: String)
 
+GET     /user/profile                   controllers.UserProfileController.userProfile()
+GET     /sign-out                       controllers.UserProfileController.signOut()
 
 
 
