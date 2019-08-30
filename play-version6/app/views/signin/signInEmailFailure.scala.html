@@ -1,0 +1,59 @@
+@(message: String)
+
+@main(s"Email Sign-In Failure") {
+
+@views.html.partial.nav()
+
+
+<style>
+.iwpSigninForm label {
+    font-size: 1.5rem;
+}
+
+.iwpSigninForm input[type=text] {
+    font-size: 1.5rem;
+    width: 50%;
+    padding: 1rem;
+}
+
+
+
+</style>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+
+            <h1>Sign In via Email Failure</h1>
+
+            <p>Something went wrong with your email sign in attempt!</p>
+
+            <br>
+            <br>
+
+            <h4>@message</h4>
+
+            <br><br>
+
+            <a class="btn btn-primary" href="@controllers.routes.EmailSignInController.signInEmailForm()">Click Here to Try Again</a>
+
+        </div>
+    </div>
+
+</div>
+
+@views.html.partial.footer()
+
+<script type="text/javascript">
+
+    $(function(){
+        $("#email").focus();
+    });
+
+</script>
+
+}
+

@@ -31,12 +31,20 @@ GET     /5/animate.php/:collection/:filename  controllers.AnimationFilesystemCon
 GET     /5/animate.php/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
 
 
-
 # First Rudimentary Database Browser
 GET     /animation-db/:collection         controllers.AnimationMongoController.browseCollection(collection: String)
 GET     /animation-db/:collection/:filename.json    controllers.AnimationMongoController.getAnimationJson(collection: String, filename:String)
 GET     /animation-db/:collection/:filename     controllers.AnimationMongoController.getAnimation(collection: String, filename:String)
 POST    /animation-db/:collection/:filename     controllers.AnimationMongoController.postAnimation(collection: String, filename:String)
+
+# Designer User Sign In
+
+GET     /sign-in/email-form             controllers.EmailSignInController.signInEmailForm()
+POST    /sign-in/email-send             controllers.EmailSignInController.signInEmailSend()
+GET     /sign-in/email-token            controllers.EmailSignInController.signInWithEmailToken(token: String)
+
+
+
 
 # Integration tests for Nashorn Javascript Excution
 GET     /test/nashorn/test1            controllers.NashornTestController.nashornTest1_eval()
