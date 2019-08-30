@@ -37,7 +37,11 @@ class IndexController @Inject()(cc: ControllerComponents,
 
         case None => Ok(views.html.index(None, Seq()))
 
-        case Some(popularCollection) => Ok(views.html.index(Some(popularCollection), iwpDirectoryBrowserService.findAnimations(popularCollection)))
+        case Some(popularCollection) =>
+
+          val success = iwpDirectoryBrowserService.findAnimationsWithFailures(popularCollection).filter { a => a.isSuccess }.map { a => a.get }
+
+          Ok(views.html.index(Some(popularCollection), success))
 
       }
     }

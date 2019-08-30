@@ -47,9 +47,14 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
       case Some(collection) =>
         val dirs = iwpDirectoryBrowserService.findCollections(collection)
-        val animations = iwpDirectoryBrowserService.findAnimations(collection)
+        val animations = iwpDirectoryBrowserService.findAnimationsWithFailures(collection)
 
-        Ok(views.html.animation.browseCollection(collection, dirs, animations))
+        // Split into successes and failures
+
+        val success = animations.filter { a => a.isSuccess }.map { a => a.get }
+        val failures = animations.filter { a => a.isFailure }
+
+        Ok(views.html.animation.browseCollection(collection, dirs, success, failures))
     }
 
   }

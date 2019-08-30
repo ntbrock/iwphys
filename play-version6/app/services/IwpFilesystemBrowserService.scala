@@ -88,7 +88,9 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
   }
 
 
-  def findAnimations(collection: Iwp6FilesystemCollection): Seq[Iwp6Animation] = {
+
+
+  def findAnimationsWithFailures(collection: Iwp6FilesystemCollection): Seq[Try[Iwp6Animation]] = {
 
     val jsonFiles = listIwpJsonFiles(collection.directory)
 
@@ -100,12 +102,15 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
 
     val out = jsons ++ xmls
 
+
     // Clear out any Issues and Sort by Filename
 
     // TODO - Dedupe by filename?
-    out.toSeq.map(_.toOption).flatten.sortBy(_.filename)
+    // out.toSeq.map(_.toOption).flatten.sortBy(_.filename)
 
+    out.toSeq
   }
+
 
 
 
