@@ -62,7 +62,7 @@ class EmailSignInController @Inject()(cc: ControllerComponents,
   def signInWithEmailToken(token: String) = Action { implicit request: Request[AnyContent] =>
 
 
-    iwpEmailService.decodeJwtClaimToken(token) match {
+    iwpEmailService.decodeJwtClaimJson(token) match {
       case Failure(x) =>
         Logger.error(s"Unable to decode email sign-in Token: ${x}", x)
         BadRequest(views.html.signin.signInEmailFailure(x.getMessage))

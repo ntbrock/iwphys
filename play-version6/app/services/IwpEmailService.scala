@@ -9,7 +9,7 @@ import play.api.Configuration
 
 import scala.concurrent.ExecutionContext
 import org.apache.commons.mail._
-import pdi.jwt.{JwtAlgorithm, JwtJson}
+import pdi.jwt.{JwtAlgorithm, JwtClaim, JwtJson}
 import play.api.libs.json.{JsObject, Json}
 
 import scala.util.Try
@@ -56,11 +56,14 @@ class IwpEmailService @Inject() (config: Configuration) (implicit ec: ExecutionC
     token
   }
 
-  def decodeJwtClaimToken(token: String) : Try[JsObject] = {
-
+  def decodeJwtClaimJson(token: String) : Try[JsObject] = {
     JwtJson.decodeJson(token, jwtSecretKey, Seq(jwtAlgo))
-
   }
+
+  def decodeJwtClaim(token: String) : Try[JwtClaim] = {
+    JwtJson.decode(token, jwtSecretKey, Seq(jwtAlgo))
+  }
+
 
   def sendSignInEmail(address: String, token: String) {
     val subject = "Sign In Link - Interactive Web Physics"
