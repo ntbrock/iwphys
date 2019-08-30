@@ -1,4 +1,4 @@
-@(thisCollection: Iwp6Collection, subCollections: Seq[Iwp6Collection], animations: Seq[Iwp6Animation], failureAnimations: Seq[scala.util.Try[Iwp6Animation]])
+@(thisCollection: Iwp6Collection, subCollections: Seq[Iwp6Collection], animations: Seq[Iwp6Animation], failureAnimations: Seq[Iwp6AnimationWithFailure])
 
 @main(s"Browse Collection: $thisCollection") {
 
@@ -28,9 +28,9 @@
       <h3 class="iwp-warning">Warning: Some Animations Failed to load:</h3>
 
       <ul>
-      @failureAnimations.map { t =>
+      @failureAnimations.map { fail =>
 
-        <li>@t</li>
+        <li>@fail.filename : @fail.message</li>
 
       }
       </ul>

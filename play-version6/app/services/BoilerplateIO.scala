@@ -159,7 +159,7 @@ trait BoilerplateIO {
 
   def readFileCompletely(f: File): String = {
 
-    Logger.debug(s"Boilerplate:162>  ReadFileCompletely:  ${f}")
+    // Logger.debug(s"Boilerplate:162>  ReadFileCompletely:  ${f}")
 
     val source = scala.io.Source.fromFile(f)(scala.io.Codec.ISO8859)
     val lines = try source.mkString finally source.close()
