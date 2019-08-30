@@ -22,6 +22,13 @@ libraryDependencies += "ch.rasc" % "bsoncodec" % "1.0.1"
 // 2019Feb08 - Xtract for Xml Parsing
 libraryDependencies += "com.lucidchart" %% "xtract" % "2.0.1"
 
+// Email Login and Invitation 3.8
+libraryDependencies += "org.apache.commons" % "commons-email" % "1.3.2"
+
+
+// JWT
+libraryDependencies ++= Seq( "com.pauldijou" %% "jwt-play-json" % "4.0.0" )
+
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "edu.ncssm.iwp.controllers._"
