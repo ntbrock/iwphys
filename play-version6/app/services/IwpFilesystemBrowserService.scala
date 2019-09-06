@@ -5,13 +5,16 @@ import java.net.URLDecoder
 
 import edu.ncssm.iwp.problemdb.{DProblem, DProblemXMLParser}
 import javax.inject.Inject
-import models.{Iwp6Animation, Iwp6Collection, Iwp6FilesystemCollection}
+import models.{Iwp6Animation, Iwp6AnimationWithFailure, Iwp6Collection, Iwp6FilesystemCollection}
 import org.mongodb.scala.model.Filters.equal
 import play.api.{Configuration, Logger}
 import play.api.libs.json.{JsError, JsSuccess, Json}
 import play.api.mvc.{AnyContent, Request}
 
+import scala.collection.mutable
 import scala.util.{Failure, Success, Try}
+
+
 
 class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extends BoilerplateIO {
 
@@ -88,24 +91,38 @@ class IwpFilesystemBrowserService @Inject()(configuration: Configuration) extend
   }
 
 
-  def findAnimations(collection: Iwp6FilesystemCollection): Seq[Iwp6Animation] = {
+
+
+  def findAnimationsWithFailures(collection: Iwp6FilesystemCollection): ( Seq[Iwp6Animation], Seq[Iwp6AnimationWithFailure] ) = {
 
     val jsonFiles = listIwpJsonFiles(collection.directory)
 
-    val jsons = jsonFiles.map { file => Iwp6Animation.fromJsonFile(file) }
+    val jsons = jsonFiles.map { file => (file, Iwp6Animation.fromJsonFile(file)) }
 
     val xmlFiles = listIwpXmlFiles(collection.directory)
 
-    val xmls = xmlFiles.map { file => Iwp6Animation.fromXmlFile(file) }
+    val xmls = xmlFiles.map { file => (file, Iwp6Animation.fromXmlFile(file)) }
 
     val out = jsons ++ xmls
 
-    // Clear out any Issues and Sort by Filename
 
-    // TODO - Dedupe by filename?
-    out.toSeq.map(_.toOption).flatten.sortBy(_.filename)
+    val successes = mutable.Queue[Iwp6Animation]()
+    val failures = mutable.Queue[Iwp6AnimationWithFailure]()
 
+    out.map { case(file, animationT) =>
+
+      animationT match {
+        case Success(animation) =>
+          successes.enqueue(animation)
+        case Failure(x) =>
+          failures.enqueue(Iwp6AnimationWithFailure(file.getName, x.getMessage, x))
+      }
+
+    }
+
+    ( successes.sortBy(_.filename), failures )
   }
+
 
 
 

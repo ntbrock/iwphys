@@ -163,13 +163,21 @@ object Iwp6Animation extends BoilerplateIO {
 
 
 
-  def fromXmlFile(xmlFile: File) = {
+  def fromXmlFile(xmlFile: File) : Try[Iwp6Animation] = {
 
     val xmlString = readFileCompletely(xmlFile)
-    val problem = DProblemXMLParser.load(xmlString)
 
-    problem.filename = xmlFile.getName
-    fromDProblem(problem)
+    Try {
+
+      val problem = DProblemXMLParser.load(xmlString)
+
+      problem.filename = xmlFile.getName
+      fromDProblem(problem)
+
+    }.flatten
+
+    //  Try[Try[T]]  =>  .flatten Try[T]
+
   }
 
 

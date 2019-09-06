@@ -1,3 +1,5 @@
+@()(implicit userO: Option[Iwp6DesignerUser] = None)
+
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -17,12 +19,29 @@
                 <li>
                     <a href="@controllers.routes.AnimationFilesystemController.browseCollections()"><i class="fa fa-play-circle"></i> Browse Animations</a>
                 </li>
+
+                <!--
                 <li>
                     <a href="http://github.com/ntbrock/iwphys"><i class="fa fa-git"></i> Open Source on Github</a>
                 </li>
                 <li>
-           <a href="http://www.iwphys.org/">Web Browser Animations for Physics Students and Educators</a>
+                       <a href="http://www.iwphys.org/">Web Browser Animations for Physics Students and Educators</a>
                 </li>
+                -->
+
+                <!-- User Sign In -->
+
+                @if(userO.isDefined) {
+                <li>
+                    <a href="@controllers.routes.UserProfileController.userProfile()"><i class="fa fa-user"></i> @userO.get.email</a>
+                </li>
+                } else {
+                <li>
+                    <a href="@controllers.routes.EmailSignInController.signInEmailForm()"><i class="fa fa-user"></i> Sign In</a>
+                </li>
+
+
+                }
 
             </ul>
         </div>

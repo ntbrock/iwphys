@@ -1,0 +1,69 @@
+2019Aug30 IWP6
+
+Ben
+L> Looking at code, especially iwp6-animator. No web changes yet, reviewed. 
+N> Get started on web edits.
+
+Andy
+L> Look at the scala + html files and routes files. Try and make a help page. 
+N> Do want to figure out if teh help opage is specific for each animation?
+After - Help Page Content.
+
+Dr. Bennett
+L> Found the last version of help guide for IWP5 Designer, originally written fro IWP4, then updated somewhat for 5, the deltas seem to be the sign in system wher epeople post their new aniamations to the server. Could be template for 6 designer. Screenshots woudl need to be replaced + text rewritten. 
+N> Working on adding to the google doc, shared at begining of week. Make a lsit of ones that don't work, duplicates. Miight be more efficient to pick 6 things and put everything else in an archivie or back up folder and after conference continue checking every animation for thing. 
+
+Taylor
+L> Designer: User Authentication, Email Sign in with Sendgrid! Demo!!
+N> Designer: Database/filesystem storage for user accounts / user created animations.
+
+Question - Last week, showed filesystem: If animation is in folder, then link shows in the right collection, folders = collections.  ? For almost all animations, there's multiple copies appear in iwp6.
+
+	Example?
+
+Critical Support - https://trello.com/c/wvXFCvhV/322-browsing-collections-animation-can-appear-double-or-triple-in-the-list-example-charged-particles-cp-mfield-02iwp
+
+= After - Review the Google doc of 6 animations per collection / prioritization - JB
+
+= Demo - User Sign In.
+
+= Blocker: Haven't run the bulk validation yet. - TB
+		BEFORE I LEAVE MY OFFICE TODAY and let it run over the weekend!!
+
+Blocker: Trouble including images in the HTML file for help page [After] - Andy
+	
+
+	http://localhost:9000/public/images/screenshots/iwp-packaged/Gravitation/planetary-system-retrograde.iwp.png
+
+http://localhost:9000/assets/images/screenshots/iwp-packaged/Gravitation/planetary-system-retrograde.iwp.png
+
+
+	<h3>Andy Was here</h3>
+
+	<img src="/assets/images/screenshots/iwp-packaged/Gravitation/planetary-system-retrograde.iwp.png"/>
+
+
+
+
+Fixes: 
+
+https://trello.com/c/wvXFCvhV/322-browsing-collections-animation-can-appear-double-or-triple-in-the-list-example-charged-particles-cp-mfield-02iwp
+
+https://trello.com/c/jcoH83tF/323-browsing-collections-many-will-not-load
+
+https://trello.com/c/RJSrlQPm/324-em-ratio-2-many-animations-are-running-backwards-in-time
+
+
+
+
+
+
+
+
+
+
+http://url128.iwphys.org/wf/click?upn=TQN-2BqUAXqkU-2FDJU-2F4OSE7LBTHDp9Mn6hOvYOdwC6xstfMJnHN7Qe-2B-2FnC4uEDYChcaoQKjXQjs3WGRAJBAqb2ECDIcRdrz4PzF1wmlvx-2FuwO0E3x0Hn0R5F6whl9MTpQE2rMpU4dtzo9tWSTcdYiJLqX1UKHVqwTJbhbHj67FSNG7zYyAZoVBIoSbF-2BgFstp6J8-2B64gNhmqIhJ6e44R5WzfIM43WD24ApVGCyd9ziEeuKx9Gzy4sOTe67bNiLh9shghSNOJnwCRh5XyzoWgn1n8LaOn524DO0IvZSvL0orJSpHpGLJXM-2Fvq2S5i85K6s-2BZxMyaCao2plHGzJ4GLTprLyqJ49I8w-2FB6ASuHl-2FQVGtJDsFt8A7wVdhwL7GJa4VVaXUte8RzDw6FpeRLeZVdlE-2B-2FMHSFgBZHFy9bqHTd4pw-3D_K-2FcwX5XzPKzu-2BtkaX5DiIq-2FMCJcw4v4PNdX8b0RAbc-2FVnP23H4R6o876aBKvu6kwisVnfF-2Baq250pAHLAtaaACqOBcXRrdlyiTIVfK6byjp9OJFFR7iqn9IG-2BIU4bGKwvnpajeafQXniVI78KdiIZeNWjb-2Fi1p4lhapRV9UAY8k7b7qvkXjCi95VZ0PM4hM-2Bo7Ysg8SaNrRWnXninnz4gfAQzZtIAuQnmwUX4brWs1A-3D
+
+
+https://iwp6.iwphys.org/sign-in/email-token?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRheWxvci5icm9ja21hbkBjYXJib25hZG8ubmV0IiwiaWF0IjoxNTY3MTk0MjU2ODQzLCJqdGkiOiJkYWRiYmQ3Zi02NGMwLTQ5MmUtYmNmYS00YmVjZWQ2ZDQwOTIiLCJleHAiOjE1NjcyMDg2NTY4NDN9.YPfdyLVcDAWkwqulfZBf6AxdFP08II5N4kc5dGDb7xo
+
