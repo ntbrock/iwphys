@@ -1,469 +1,470 @@
-"Exception","animations/iwp-packaged/Charged Particle Motion/pitch1-para.iwp","Error: Undefined symbol ar in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Charged Particle Motion/pitch1-para.iwp","Error: Undefined symbol ar in <eval> at line number 718 at column number 12"
-"Complete","animations/iwp-packaged/Charged Particle Motion/em-ratio-1d.iwp","202","200","1120","1","1","2613","402"
-"Exception","animations/iwp-packaged/Charged Particle Motion/em-ratio-3.iwp","null"
-"Complete","animations/iwp-packaged/Charged Particle Motion/em-ratio-2d.iwp","202","201","2836","1","1","4221","201"
-"Complete","animations/iwp-packaged/Charged Particle Motion/cpchall04.iwp","1001","805","805","1","1","5000","0"
-"Complete","animations/iwp-packaged/Charged Particle Motion/cp-efield-02.iwp","402","1","4","1","1","3609","1203"
-"Exception","animations/iwp-packaged/Charged Particle Motion/em-ratio-2c.iwp","null"
-"Complete","animations/iwp-packaged/Charged Particle Motion/cp-mfield-02.iwp","1001","834","1620","1","1","9000","3000"
-"Complete","animations/iwp-packaged/Charged Particle Motion/em-ratio-2.iwp","202","201","2836","1","1","4221","201"
-"Complete","animations/iwp-packaged/Charged Particle Motion/cpchall01.iwp","1001","805","805","1","1","5000","0"
-"Complete","animations/iwp-packaged/Charged Particle Motion/cp-efield.iwp","402","1","4","1","1","4411","1203"
-"Complete","animations/iwp-packaged/Charged Particle Motion/em-ratio-1c.iwp","202","188","305","1","1","1809","603"
-"Complete","animations/iwp-packaged/Charged Particle Motion/velocity-selector.iwp","402","304","586","1","1","8421","1203"
-"Complete","animations/iwp-packaged/Charged Particle Motion/cp-unknown-1.iwp","302","0","0","1","1","2709","903"
-"Complete","animations/iwp-packaged/Charged Particle Motion/cp-mfield.iwp","1001","834","1620","1","1","9000","3000"
-"Complete","animations/iwp-packaged/Charged Particle Motion/velocity-selector-02.iwp","402","304","586","1","1","3609","1203"
-"Complete","animations/iwp-packaged/Charged Particle Motion/cpchall03.iwp","1001","847","847","1","1","5000","0"
-"Complete","animations/iwp-packaged/Charged Particle Motion/em-ratio-2b.iwp","202","201","3784","1","1","3015","201"
-"Complete","animations/iwp-packaged/Charged Particle Motion/em-ratio-1.iwp","202","201","8824","1","1","4221","402"
-"Complete","animations/iwp-packaged/Charged Particle Motion/cp-template.iwp","1001","980","1833","1","1","5000","2000"
-"Complete","animations/iwp-packaged/Charged Particle Motion/em-ratio-1b.iwp","202","200","798","1","1","1809","402"
-"Complete","animations/iwp-packaged/Charged Particle Motion/cpchall02.iwp","1001","847","847","1","1","5000","0"
-"Exception","animations/iwp-packaged/Electrostatics/coulombslaw01.iwp","iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12"
-"Complete","animations/iwp-packaged/Electrostatics/efield-plot-02.iwp","102","1","4","1","1","1919","0"
-"Complete","animations/iwp-packaged/Electrostatics/efield-plot-02b.iwp","22","1","4","1","1","315","0"
-"Complete","animations/iwp-packaged/Electrostatics/efield-plot-02c.iwp","1001","1","4","1","1","15000","0"
-"Complete","animations/iwp-packaged/Electrostatics/efield-plot-02a.iwp","22","1","2","1","1","189","0"
-"Exception","animations/iwp-packaged/Electrostatics/coulombslaw03.iwp","Error: Undefined symbol d2 in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Electrostatics/coulombslaw02.iwp","Error: Undefined symbol d2 in <eval> at line number 718 at column number 12"
-"Complete","animations/iwp-packaged/Electrostatics/inverse-r-squared-test.iwp","12","1","6","1","1","121","0"
-"Complete","animations/iwp-packaged/Forces/leaf.iwp","502","0","0","1","1","2505","1002"
-"Exception","animations/iwp-packaged/Forces/stopblock01.iwp","Error: Undefined symbol tf in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Forces/fallcompare-template.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Complete","animations/iwp-packaged/Forces/turntable05.iwp","1001","1","2","1","524","5247","0"
-"Complete","animations/iwp-packaged/Forces/projectile-drag-lift-2.iwp","1001","997","997","1","1","5000","2000"
-"Exception","animations/iwp-packaged/Forces/projectile-drag-2.iwp","TypeError: Unexpected type of argument in function pow (expected: number or Complex or BigNumber or Fraction or Unit or Array or Matrix, actual: undefined, index: 0) in <eval> at line number 718 at column number 12"
-"Complete","animations/iwp-packaged/Forces/hookeslaw03.iwp","502","1","5","1","1","10521","0"
-"Exception","animations/iwp-packaged/Forces/fallcompare-simulation.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/iwp-packaged/Forces/incplane04.iwp","edu.ncssm.iwp.exceptions.XMLParserException: Invalid byte 2 of 2-byte UTF-8 sequence."
-"Exception","animations/iwp-packaged/Forces/mass-bppb-3.iwp","Error: Undefined symbol vtc in <eval> at line number 718 at column number 12"
-"Complete","animations/iwp-packaged/Forces/turntable04.iwp","1001","1","3","1","524","7155","0"
-"Exception","animations/iwp-packaged/Forces/incplane05.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":0},"1":{"x":10,"y":0},"2":{"x":0,"y":5.773502691896257}}"
-"Exception","animations/iwp-packaged/Forces/incplane-template.iwp","Unexpected Inner condition, was type: {"0":{"x":0.8660254037844387,"y":-0.49999999999999994},"1":{"x":1.3660254037844386,"y":0.36602540378443876},"2":{"x":0.49999999999999994,"y":0.8660254037844387},"3":{"x":0,"y":0}}"
-"Complete","animations/iwp-packaged/Forces/bppb6.iwp","1001","1","1","1","1","9000","0"
-"Exception","animations/iwp-packaged/Function Reference/TEST_mathFunctions.iwp","null"
-"Exception","animations/iwp-packaged/Function Reference/TEST_mathConstants.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4"
-"Complete","animations/iwp-packaged/Gravitation/planetary-system-02.iwp","1001","1","8","1","1","13000","0"
-"Complete","animations/iwp-packaged/Gravitation/planetary-system-retrograde.iwp","1001","1","6","1","1","11000","0"
-"Exception","animations/iwp-packaged/Kinematics 1D/dvat-02.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/Kinematics 1D/velocity03.iwp","202","1","4","1","1","1407","0"
-"Exception","animations/iwp-packaged/Kinematics 1D/dvat-01.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/Kinematics 1D/roadrage-bk.iwp","1001","0","0","1","1","7000","2000"
-"Complete","animations/iwp-packaged/Kinematics 1D/dvat-08.iwp","102","1","2","1","1","505","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/velocity01.iwp","52","1","4","1","1","357","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/velocity02b.iwp","52","1","4","1","1","357","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/window01.iwp","502","1","2","1","1","7515","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/dvat-10.iwp","102","1","2","1","1","505","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/dvat-07.iwp","102","1","2","1","1","505","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/kingraph1.iwp","252","1","2","1","1","1255","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/dvat-11.iwp","102","1","2","1","1","505","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/dvat-06.iwp","102","1","2","1","1","505","0"
-"Exception","animations/iwp-packaged/Kinematics 1D/dvat-04.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/Kinematics 1D/haretortoise2.iwp","252","1","6","1","1","2259","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/haretortoise.iwp","202","1","4","1","1","1407","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/kingraph2.iwp","402","1","2","1","1","2005","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/dvat-09.iwp","102","1","2","1","1","505","0"
-"Complete","animations/iwp-packaged/Kinematics 1D/velocity02.iwp","52","1","4","1","1","357","0"
-"Exception","animations/iwp-packaged/Kinematics 1D/dvat-template.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/Kinematics 1D/dvat-05.iwp","102","1","2","1","1","707","0"
-"Exception","animations/iwp-packaged/Kinematics 1D/dvat-03.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/Kinematics 1D/acceleration01.iwp","102","1","1","1","1","4343","0"
-"Exception","animations/iwp-packaged/Kinematics 2D/projectile-template.iwp","Unexpected Inner condition, was type: {"0":{"x":-15,"y":102.5},"1":{"x":0,"y":102.5},"2":{"x":0,"y":97.5},"3":{"x":-15,"y":97.5}}"
-"Exception","animations/iwp-packaged/Kinematics 2D/globalcrossing-bk.iwp","iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12"
-"Complete","animations/iwp-packaged/Kinematics 2D/race-template-2.iwp","202","1","4","1","1","1407","0"
-"Exception","animations/iwp-packaged/Kinematics 2D/projectile-template-2.iwp","Unexpected Inner condition, was type: {"0":{"x":-15,"y":102.5},"1":{"x":0,"y":102.5},"2":{"x":0,"y":97.5},"3":{"x":-15,"y":97.5}}"
-"Complete","animations/iwp-packaged/Kinematics 2D/ballcart02.iwp","202","1","3","1","1","1407","0"
-"Exception","animations/iwp-packaged/Kinematics 2D/clock-02.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/Kinematics 2D/vector01.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/Kinematics 2D/ballcart01.iwp","202","1","3","1","1","1407","0"
-"Complete","animations/iwp-packaged/Kinematics 2D/dartgun3.iwp","102","1","3","1","1","1313","0"
-"Complete","animations/iwp-packaged/Kinematics 2D/ballcart04.iwp","202","1","3","1","1","1407","0"
-"Complete","animations/iwp-packaged/Kinematics 2D/pursuit-template.iwp","202","1","2","1","1","1407","0"
-"Exception","animations/iwp-packaged/Kinematics 2D/mgr1-2.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/Magnetism/helmholtz-3.iwp","52","1","8","1","26","260","0"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-elastic-4.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Complete","animations/iwp-packaged/Momentum, Collisions, KE/finalke-03.iwp","402","1","12","1","1","11629","0"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-01b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-04a.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-symmetric.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-03a.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-02b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-03b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-elastic-3.iwp","Error: Undefined symbol vcm in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-01a.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-02a.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-elastic-2.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-04b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-template.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-05.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Optics, Geometric/refraction-in-box-2.iwp","iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Optics, Geometric/ray-refraction-4e.iwp","null"
-"Exception","animations/iwp-packaged/Optics, Geometric/ray-refraction-3c.iwp","null"
-"Exception","animations/iwp-packaged/Optics, Geometric/ray-refraction-3b.iwp","null"
-"Exception","animations/iwp-packaged/Optics, Geometric/prism-6.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":0},"1":{"x":0,"y":4},"2":{"x":3.464101615137755,"y":1.9999999999999998}}"
-"Exception","animations/iwp-packaged/Optics, Geometric/prism-3b.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":0},"1":{"x":0,"y":4},"2":{"x":2.309401076758503,"y":0}}"
-"Exception","animations/iwp-packaged/Optics, Geometric/ray-refraction-4g.iwp","null"
-"Exception","animations/iwp-packaged/Optics, Geometric/ray-refraction-3d.iwp","null"
-"Complete","animations/iwp-packaged/Optics, Geometric/refracted-waves-3.iwp","152","1","12","1","1","4681","0"
-"Exception","animations/iwp-packaged/Optics, Geometric/ray-refraction-4c.iwp","Error: Undefined symbol r in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Optics, Geometric/refraction-in-box-3.iwp","iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Optics, Geometric/ray-refraction-3e.iwp","null"
-"Exception","animations/iwp-packaged/Optics, Geometric/prism-1.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":0},"1":{"x":0,"y":4},"2":{"x":3.9999999999999996,"y":0}}"
-"Exception","animations/iwp-packaged/Optics, Geometric/apparent-depth-template.iwp","Unexpected Inner condition, was type: {"0":{"x":1,"y":1},"1":{"x":-0.4204586314437101,"y":0},"2":{"x":-0.12184596476506482,"y":0}}"
-"Complete","animations/iwp-packaged/Optics, Geometric/refracted-waves-5.iwp","152","1","12","1","1","5285","0"
-"Exception","animations/iwp-packaged/Optics, Geometric/ray-refraction-3f.iwp","null"
-"Complete","animations/iwp-packaged/Optics, Geometric/refracted-waves-4.iwp","152","1","12","1","1","4681","0"
-"Complete","animations/iwp-packaged/Optics, Geometric/least-time-6.iwp","52","1","8","1","1","765","0"
-"Exception","animations/iwp-packaged/Optics, Geometric/apparent-depth-6.iwp","Unexpected Inner condition, was type: {"0":{"x":1,"y":1},"1":{"x":-0.4204586314437101,"y":0},"2":{"x":-0.12184596476506482,"y":0}}"
-"Exception","animations/iwp-packaged/Optics, Physical/2-source-inter.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/Optics, Physical/air-wedge-1.iwp","Unexpected Inner condition, was type: {"0":{"x":975,"y":0},"1":{"x":1000,"y":50},"2":{"x":1025,"y":0}}"
-"Exception","animations/iwp-packaged/Optics, Physical/air-wedge-3.iwp","Unexpected Inner condition, was type: {"0":{"x":975,"y":0},"1":{"x":1000,"y":23.3},"2":{"x":1025,"y":0}}"
-"Exception","animations/iwp-packaged/Optics, Physical/air-wedge-template.iwp","Unexpected Inner condition, was type: {"0":{"x":975,"y":0},"1":{"x":1000,"y":50},"2":{"x":1025,"y":0}}"
-"Exception","animations/iwp-packaged/Optics, Physical/double-slit-1.iwp","null"
-"Exception","animations/iwp-packaged/Optics, Physical/thin-film-2.iwp","Unexpected Inner condition, was type: {"0":{"x":-500,"y":50},"1":{"x":500,"y":50},"2":{"x":500,"y":-50},"3":{"x":-500,"y":-50}}"
-"Exception","animations/iwp-packaged/Optics, Physical/thin-film-1.iwp","Unexpected Inner condition, was type: {"0":{"x":-500,"y":50},"1":{"x":500,"y":50},"2":{"x":500,"y":-50},"3":{"x":-500,"y":-50}}"
-"Complete","animations/iwp-packaged/Oscillations/spring-motion.iwp","1001","1000","32980","1","1","19000","0"
-"Exception","animations/iwp-packaged/Oscillations/damped-SHM-template.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/Oscillations/shm-compare-template.iwp","1001","1","4","1","1","7000","0"
-"Complete","animations/iwp-packaged/Oscillations/shm-synchronize.iwp","152","1","2","1","1","1057","0"
-"Exception","animations/iwp-packaged/Oscillations/vertical-spring-01.iwp","Error: Undefined symbol w in <eval> at line number 718 at column number 12"
-"Complete","animations/iwp-packaged/Oscillations/shm-01.iwp","252","1","2","1","1","1255","0"
-"Complete","animations/iwp-packaged/Oscillations/shm-phase-03.iwp","152","1","4","1","1","1057","0"
-"Exception","animations/iwp-packaged/Oscillations/shm-graph-02.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/Oscillations/pendulum01.iwp","TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Oscillations/shm-circle-analogy-01.iwp","iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12"
-"Exception","animations/iwp-packaged/Oscillations/shm-graph-01.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/Oscillations/shm-xva-plot.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/Oscillations/lissajous-figures.iwp","1001","1","2","1","1","11000","0"
-"Complete","animations/iwp-packaged/Oscillations/damped-1.iwp","502","2","4","1","1","3507","1503"
-"Complete","animations/iwp-packaged/Oscillations/shm-phase-01.iwp","152","1","4","1","1","1057","0"
-"Complete","animations/iwp-packaged/Oscillations/shm-phase-02.iwp","152","1","4","1","1","1057","0"
-"Complete","animations/iwp-packaged/Oscillations/shm-synchronize-02.iwp","1001","1","2","1","1","7000","0"
-"Complete","animations/iwp-packaged/Oscillations/shm-compare-01.iwp","1001","1","2","1","1","7000","0"
-"Complete","animations/iwp-packaged/Oscillations/shm-02.iwp","252","1","2","1","1","1255","0"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_attachedXAccelZero.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_vectorShape.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_time.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_calcDiff.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_random.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_solidReadsOutput.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_checkboxes_dataon.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_wavebox_Sinusoidal.iwp","null"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_inputs.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_outputs.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_checkboxes_2off.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_mathFunctions.iwp","null"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_Wavebox_Doppler.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_euler.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_checkboxes_gridon.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/TEST Developer Test/TEST_hiddenInputs.iwp","1001","0","0","1","1","7000","0"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_constants.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_mathOps.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_shapes.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_graph.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/TEST Developer Test/TEST_eulerCrossPath.iwp","22","1","1","1","1","105","63"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_timeVariables.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_wavebox_1.iwp","null"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_trails.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_checkboxes_twoon.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_rk2.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_verySmall.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/TEST Developer Test/TEST_self.iwp","102","1","2","1","1","505","303"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_inputoutput.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_rk4.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_mathConstants.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_attachedVectors.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_unitSymbols.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/TEST Developer Test/TEST_FloatingText.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/Waves and Sound/beats.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/iwp-packaged/Waves and Sound/plucked-cord.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/Waves and Sound/trav-wave-3.iwp","102","1","23","1","1","4949","0"
-"Exception","animations/iwp-packaged/Waves and Sound/wavedraw.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/iwp-packaged/Waves and Sound/doppler5.iwp","52","1","1","1","1","3417","0"
-"Complete","animations/iwp-packaged/Waves and Sound/doppler4.iwp","52","1","1","1","1","3315","0"
-"Exception","animations/iwp-2015/em-ratio-2f.iwp","animations/iwp-2015/em-ratio-2f.iwp.json (No such file or directory)"
-"Exception","animations/iwp-2015/TEST_rk4.iwp","animations/iwp-2015/TEST_rk4.iwp.json (No such file or directory)"
-"Exception","animations/iwp-2015/spring-motion-5.iwp","animations/iwp-2015/spring-motion-5.iwp.json (No such file or directory)"
-"Complete","animations/summer-physics/velocity06.iwp","52","51","383","1","1","255","102"
-"Exception","animations/summer-physics/collision-explosion-02b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Complete","animations/summer-physics/friction01c.iwp","102","2","6","1","1","2121","1212"
-"Exception","animations/summer-physics/work-01.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Exception","animations/summer-physics/projectile-compare-1.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/summer-physics/pendulum03.iwp","TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/spring_work-03.iwp","Error: Undefined symbol p in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/equilibrium-02.iwp","iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/collision-inelastic-06.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/vector04.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/summer-physics/collision-elastic-2b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/vector02.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/summer-physics/auto-impulse-3.iwp","202","43","55","1","1","6633","0"
-"Exception","animations/summer-physics/nsl-01.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Complete","animations/summer-physics/collision-01.iwp","1001","1","3","1","1","15000","3000"
-"Complete","animations/summer-physics/atwoods-01.iwp","42","40","324","1","1","861","123"
-"Exception","animations/summer-physics/pulse-compare-01.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/summer-physics/pulley-plane-03.iwp","Error: Undefined symbol ten in <eval> at line number 718 at column number 12"
-"Complete","animations/summer-physics/collision-elastic-2d-01.iwp","102","1","3","1","1","1313","0"
-"Complete","animations/summer-physics/velocity02b.iwp","52","1","4","1","1","357","0"
-"Exception","animations/summer-physics/spring-equation-04.iwp","Error: Undefined symbol p in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/spring-motion-4.iwp","Error: Undefined symbol p in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/eforce-06.iwp","null"
-"Exception","animations/summer-physics/040304.iwp","Error: Undefined symbol gunheight0 in <eval> at line number 718 at column number 12"
-"Complete","animations/summer-physics/040302.iwp","1001","1000","1002","1","1","15000","0"
-"Exception","animations/summer-physics/collision-elastic-4a.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/energy-vertspring-01.iwp","Error: Undefined symbol KE in <eval> at line number 718 at column number 12"
-"Complete","animations/summer-physics/shm-phase-02b.iwp","302","1","4","1","1","2107","0"
-"Exception","animations/summer-physics/vector03.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/summer-physics/eforce-05.iwp","1001","0","0","1","1","21000","0"
-"Complete","animations/summer-physics/gravitation-02b.iwp","1001","1","2","1","1","12000","0"
-"Exception","animations/summer-physics/pulley-plane-05.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":-2},"1":{"x":8,"y":-2},"2":{"x":8,"y":3.1547005383792515},"3":{"x":0,"y":7.773502691896257}}"
-"Exception","animations/summer-physics/eforce-09.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Exception","animations/summer-physics/pulley-plane-05a.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":-2},"1":{"x":8,"y":-2},"2":{"x":8,"y":3.1547005383792515},"3":{"x":0,"y":7.773502691896257}}"
-"Exception","animations/summer-physics/spring-circle-analogy-02.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: undefined, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/collision-elastic-3.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Complete","animations/summer-physics/polarnet5.iwp","1001","1","6","1","1","11000","0"
-"Complete","animations/summer-physics/gravitation-01e.iwp","1001","1","12","1","1","18000","1000"
-"Complete","animations/summer-physics/collision-04.iwp","1001","1","2","1","1","19000","7000"
-"Exception","animations/summer-physics/2dforce-01a.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Exception","animations/summer-physics/incplane04.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":0},"1":{"x":10,"y":0},"2":{"x":0,"y":5.773502691896257}}"
-"Exception","animations/summer-physics/040303.iwp","Error: Undefined symbol gunheight0 in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/nsl-02.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Exception","animations/summer-physics/equilibrium-01.iwp","iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12"
-"Complete","animations/summer-physics/auto-impulse-compare.iwp","202","1","14","1","1","7437","0"
-"Complete","animations/summer-physics/velocity04.iwp","202","1","4","1","1","1407","0"
-"Complete","animations/summer-physics/velocity01b.iwp","52","1","4","1","1","357","0"
-"Exception","animations/summer-physics/pulse-compare-02.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/summer-physics/energy-spring-1b.iwp","Error: Undefined symbol p in <eval> at line number 718 at column number 12"
-"Complete","animations/summer-physics/eforce-07.iwp","1001","0","0","1","1","21000","0"
-"Complete","animations/summer-physics/stopblock01f.iwp","177","1","5","1","1","2992","1232"
-"Complete","animations/summer-physics/collision-03.iwp","1001","1","2","1","1","15000","3000"
-"Complete","animations/summer-physics/collision-02.iwp","1001","1","3","1","1","15000","3000"
-"Complete","animations/summer-physics/gravitation-03.iwp","1001","1","4","1","1","14000","2000"
-"Exception","animations/summer-physics/spring_work-04.iwp","Error: Undefined symbol p in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/eforce-08.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Complete","animations/summer-physics/collision-02b.iwp","1001","1","3","1","1","9000","0"
-"Exception","animations/summer-physics/pendulum02b.iwp","TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/pendulum02.iwp","null"
-"Complete","animations/summer-physics/stopblock01c.iwp","252","0","0","1","1","1757","502"
-"Complete","animations/summer-physics/trav-wave-4.iwp","402","400","136802","1","1","65363","0"
-"Complete","animations/summer-physics/projectile-problem-2.iwp","522","1","2","1","21","3507","0"
-"Complete","animations/summer-physics/040301.iwp","1001","1","2","1","1","15000","0"
-"Complete","animations/summer-physics/projectile-problem-3.iwp","202","1","2","1","1","1407","0"
-"Exception","animations/summer-physics/spring-equation-02.iwp","Error: Undefined symbol p in <eval> at line number 718 at column number 12"
-"Complete","animations/summer-physics/friction01b.iwp","102","2","2","1","1","1313","505"
-"Exception","animations/summer-physics/collision-explosion-02.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/projectile-problem-1.iwp","Unexpected Inner condition, was type: {"0":{"x":-5,"y":5},"1":{"x":-10,"y":5},"2":{"x":-10,"y":-10},"3":{"x":-5,"y":-10}}"
-"Complete","animations/summer-physics/proj-vect-00.iwp","102","101","107","1","1","1919","606"
-"Exception","animations/summer-physics/2dforce-01b.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Exception","animations/summer-physics/pulse-compare-03.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/summer-physics/gravitation-01b.iwp","1001","1","4","1","1","14000","0"
-"Exception","animations/summer-physics/spring-equation-03.iwp","Error: Undefined symbol p in <eval> at line number 718 at column number 12"
-"Exception","animations/summer-physics/equilibrium-03b.iwp","null"
-"Exception","animations/summer-physics/nsl-00.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Complete","animations/summer-physics/040305.iwp","1001","999","1999","1","1","15000","0"
-"Exception","animations/summer-physics/pulley-plane-04.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":-3},"1":{"x":8,"y":-3},"2":{"x":8,"y":3},"3":{"x":0,"y":3}}"
-"Complete","animations/ftemo/em-ratio-1d.iwp","202","200","1120","1","1","2613","402"
-"Exception","animations/ftemo/ray-refraction-4e.iwp","null"
-"Exception","animations/ftemo/prism-6b.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":0},"1":{"x":0,"y":4},"2":{"x":3.464101615137755,"y":1.9999999999999998}}"
-"Complete","animations/ftemo/em-ratio-2d.iwp","202","201","2836","1","1","4221","201"
-"Exception","animations/ftemo/ray-refraction-3g.iwp","null"
-"Exception","animations/ftemo/gas-laws-balloon-01.iwp","Unexpected Inner condition, was type: {"0":{"x":0.3,"y":0.3},"1":{"x":-0.3,"y":0.3},"2":{"x":0,"y":0}}"
-"Complete","animations/ftemo/point-interference-03.iwp","1001","1","10","1","907","3478","940"
-"Exception","animations/ftemo/lenzlaw-02b.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/ftemo/ray-refraction-3i.iwp","Error: Undefined symbol r in <eval> at line number 718 at column number 12"
-"Exception","animations/ftemo/prism-1b.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":0},"1":{"x":0,"y":4},"2":{"x":3.9999999999999996,"y":0}}"
-"Complete","animations/ftemo/cp-mfield-02.iwp","1001","834","1620","1","1","9000","3000"
-"Exception","animations/ftemo/gas-laws-piston-v2-03.iwp","TypeError: Unexpected type of argument in function add (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 0) in <eval> at line number 718 at column number 12"
-"Complete","animations/ftemo/em-ratio-1c.iwp","202","188","305","1","1","1809","603"
-"Exception","animations/ftemo/gas-laws-piston-v2-02.iwp","TypeError: Unexpected type of argument in function add (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 0) in <eval> at line number 718 at column number 12"
-"Complete","animations/ftemo/mass-spec.iwp","202","65","115","1","1","1407","603"
-"Exception","animations/ftemo/gas-laws-piston-v2-04.iwp","TypeError: Unexpected type of argument in function add (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 0) in <eval> at line number 718 at column number 12"
-"Complete","animations/ftemo/rainbow-01.iwp","14","1","4","1","1","273","52"
-"Exception","animations/ftemo/gas-laws-bubble-01b.iwp","Error: Undefined symbol r in <eval> at line number 718 at column number 12"
-"Exception","animations/ftemo/ray-refraction-3h.iwp","null"
-"Exception","animations/ftemo/lenzlaw-01.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/ftemo/refracted-waves-6b.iwp","202","1","38","1","1","17889","402"
-"Complete","animations/ftemo/point-interference-04.iwp","152","0","0","1","1","5889","1510"
-"Complete","animations/ftemo/refracted-waves-5.iwp","152","1","12","1","1","8003","0"
-"Complete","animations/ftemo/point-interference-02.iwp","187","0","0","1","1","12462","6510"
-"Complete","animations/ftemo/em-ratio-1b.iwp","202","200","798","1","1","1809","402"
-"Complete","animations/unit-test-2017/TEST_Euler_SelfReference.iwp","102","1","2","1","1","505","303"
-"Complete","animations/unit-test-2017/TEST_euler.iwp","1001","0","0","1","1","5000","3000"
-"Exception","animations/unit-test-2017/2017Jan25 Floating Text.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/unit-test-2017/TEST_text.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/eforce-04.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Complete","animations/winters-ncssm-2009/pendulum_euler.iwp","1001","1000","1002","1","1","5000","1000"
-"Exception","animations/winters-ncssm-2009/beats.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/pitch1-para.iwp","Error: Undefined symbol ar in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/velocity06.iwp","52","51","380","1","1","255","102"
-"Complete","animations/winters-ncssm-2009/rot-kin-03.iwp","402","1","8","1","1","7619","0"
-"Exception","animations/winters-ncssm-2009/dvat-02.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/magforce-05.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/plucked-cord.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/collision-inelastic-2d-02.iwp","Error: Undefined symbol size1 in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/kingraph4.iwp","102","1","2","1","1","505","404"
-"Exception","animations/winters-ncssm-2009/spring_work-02.iwp","Error: Scope contains an illegal symbol, "end" is a reserved keyword in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/leaf.iwp","502","0","0","1","1","2505","1002"
-"Exception","animations/winters-ncssm-2009/vector06.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/emission-01.iwp","Error: Undefined symbol rand in <eval> at line number 27 at column number 47762"
-"Complete","animations/winters-ncssm-2009/velocity03.iwp","202","1","4","1","1","1407","0"
-"Exception","animations/winters-ncssm-2009/refraction-in-box-2.iwp","iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/doppler3.iwp","52","1","1","1","1","3519","0"
-"Complete","animations/winters-ncssm-2009/rot-kin-01.iwp","402","0","0","1","1","5213","0"
-"Complete","animations/winters-ncssm-2009/efield-plot-02d.iwp","1001","1","4","1","1","19000","0"
-"Exception","animations/winters-ncssm-2009/coulombslaw01.iwp","iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/gravitation-01c.iwp","1001","1","8","1","1","14000","0"
-"Exception","animations/winters-ncssm-2009/relative-velocity-02.iwp","TypeError: Unexpected type of argument in function add (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 0) in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/stopblock01.iwp","Error: Undefined symbol tf in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/2-source-inter.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/tan_atan.iwp","Missing Variable or Circular Dependecy Detected: 
+result,path,totalFrames,framesWithDifferences,totalDifferences,framesWithLeftMissing,framesWithRightMissing,totalLeftMissing,totalRightMissing,
+Exception,animations/iwp-packaged/Charged Particle Motion/pitch1-para.iwp,Error: Undefined symbol ar in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/iwp-packaged/Charged Particle Motion/pitch1-para.iwp,Error: Undefined symbol ar in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-1d.iwp,202,200,1120,1,1,2613,402,
+Exception,animations/iwp-packaged/Charged Particle Motion/em-ratio-3.iwp,null,,,,,,,
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-2d.iwp,202,201,2836,1,1,4221,201,
+Complete,animations/iwp-packaged/Charged Particle Motion/cpchall04.iwp,1001,805,805,1,1,5000,0,
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-efield-02.iwp,402,1,4,1,1,3609,1203,
+Exception,animations/iwp-packaged/Charged Particle Motion/em-ratio-2c.iwp,null,,,,,,,
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-mfield-02.iwp,1001,834,1620,1,1,9000,3000,
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-2.iwp,202,201,2836,1,1,4221,201,
+Complete,animations/iwp-packaged/Charged Particle Motion/cpchall01.iwp,1001,805,805,1,1,5000,0,
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-efield.iwp,402,1,4,1,1,4411,1203,
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-1c.iwp,202,188,305,1,1,1809,603,
+Complete,animations/iwp-packaged/Charged Particle Motion/velocity-selector.iwp,402,304,586,1,1,8421,1203,
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-unknown-1.iwp,302,0,0,1,1,2709,903,
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-mfield.iwp,1001,834,1620,1,1,9000,3000,
+Complete,animations/iwp-packaged/Charged Particle Motion/velocity-selector-02.iwp,402,304,586,1,1,3609,1203,
+Complete,animations/iwp-packaged/Charged Particle Motion/cpchall03.iwp,1001,847,847,1,1,5000,0,
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-2b.iwp,202,201,3784,1,1,3015,201,
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-1.iwp,202,201,8824,1,1,4221,402,
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-template.iwp,1001,980,1833,1,1,5000,2000,
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-1b.iwp,202,200,798,1,1,1809,402,
+Complete,animations/iwp-packaged/Charged Particle Motion/cpchall02.iwp,1001,847,847,1,1,5000,0,
+Exception,animations/iwp-packaged/Electrostatics/coulombslaw01.iwp,iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/iwp-packaged/Electrostatics/efield-plot-02.iwp,102,1,4,1,1,1919,0,
+Complete,animations/iwp-packaged/Electrostatics/efield-plot-02b.iwp,22,1,4,1,1,315,0,
+Complete,animations/iwp-packaged/Electrostatics/efield-plot-02c.iwp,1001,1,4,1,1,15000,0,
+Complete,animations/iwp-packaged/Electrostatics/efield-plot-02a.iwp,22,1,2,1,1,189,0,
+Exception,animations/iwp-packaged/Electrostatics/coulombslaw03.iwp,Error: Undefined symbol d2 in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/iwp-packaged/Electrostatics/coulombslaw02.iwp,Error: Undefined symbol d2 in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/iwp-packaged/Electrostatics/inverse-r-squared-test.iwp,12,1,6,1,1,121,0,
+Complete,animations/iwp-packaged/Forces/leaf.iwp,502,0,0,1,1,2505,1002,
+Exception,animations/iwp-packaged/Forces/stopblock01.iwp,Error: Undefined symbol tf in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/iwp-packaged/Forces/fallcompare-template.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Complete,animations/iwp-packaged/Forces/turntable05.iwp,1001,1,2,1,524,5247,0,
+Complete,animations/iwp-packaged/Forces/projectile-drag-lift-2.iwp,1001,997,997,1,1,5000,2000,
+Exception,animations/iwp-packaged/Forces/projectile-drag-2.iwp,"TypeError: Unexpected type of argument in function pow (expected: number or Complex or BigNumber or Fraction or Unit or Array or Matrix, actual: undefined, index: 0) in <eval> at line number 718 at column number 12",,,,,,,
+Complete,animations/iwp-packaged/Forces/hookeslaw03.iwp,502,1,5,1,1,10521,0,
+Exception,animations/iwp-packaged/Forces/fallcompare-simulation.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/iwp-packaged/Forces/incplane04.iwp,edu.ncssm.iwp.exceptions.XMLParserException: Invalid byte 2 of 2-byte UTF-8 sequence.,,,,,,,
+Exception,animations/iwp-packaged/Forces/mass-bppb-3.iwp,Error: Undefined symbol vtc in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/iwp-packaged/Forces/turntable04.iwp,1001,1,3,1,524,7155,0,
+Exception,animations/iwp-packaged/Forces/incplane05.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:0},"1:{""x"":10",y:0},"2:{""x"":0","y:5.773502691896257}}""",,
+Exception,animations/iwp-packaged/Forces/incplane-template.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0.8660254037844387",y:-0.49999999999999994},"1:{""x"":1.3660254037844386",y:0.36602540378443876},"2:{""x"":0.49999999999999994",y:0.8660254037844387},"3:{""x"":0","y:0}}"""
+Complete,animations/iwp-packaged/Forces/bppb6.iwp,1001,1,1,1,1,9000,0,
+Exception,animations/iwp-packaged/Function Reference/TEST_mathFunctions.iwp,null,,,,,,,
+Exception,animations/iwp-packaged/Function Reference/TEST_mathConstants.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4,,,,,,,
+Complete,animations/iwp-packaged/Gravitation/planetary-system-02.iwp,1001,1,8,1,1,13000,0,
+Complete,animations/iwp-packaged/Gravitation/planetary-system-retrograde.iwp,1001,1,6,1,1,11000,0,
+Exception,animations/iwp-packaged/Kinematics 1D/dvat-02.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/Kinematics 1D/velocity03.iwp,202,1,4,1,1,1407,0,
+Exception,animations/iwp-packaged/Kinematics 1D/dvat-01.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/Kinematics 1D/roadrage-bk.iwp,1001,0,0,1,1,7000,2000,
+Complete,animations/iwp-packaged/Kinematics 1D/dvat-08.iwp,102,1,2,1,1,505,0,
+Complete,animations/iwp-packaged/Kinematics 1D/velocity01.iwp,52,1,4,1,1,357,0,
+Complete,animations/iwp-packaged/Kinematics 1D/velocity02b.iwp,52,1,4,1,1,357,0,
+Complete,animations/iwp-packaged/Kinematics 1D/window01.iwp,502,1,2,1,1,7515,0,
+Complete,animations/iwp-packaged/Kinematics 1D/dvat-10.iwp,102,1,2,1,1,505,0,
+Complete,animations/iwp-packaged/Kinematics 1D/dvat-07.iwp,102,1,2,1,1,505,0,
+Complete,animations/iwp-packaged/Kinematics 1D/kingraph1.iwp,252,1,2,1,1,1255,0,
+Complete,animations/iwp-packaged/Kinematics 1D/dvat-11.iwp,102,1,2,1,1,505,0,
+Complete,animations/iwp-packaged/Kinematics 1D/dvat-06.iwp,102,1,2,1,1,505,0,
+Exception,animations/iwp-packaged/Kinematics 1D/dvat-04.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/Kinematics 1D/haretortoise2.iwp,252,1,6,1,1,2259,0,
+Complete,animations/iwp-packaged/Kinematics 1D/haretortoise.iwp,202,1,4,1,1,1407,0,
+Complete,animations/iwp-packaged/Kinematics 1D/kingraph2.iwp,402,1,2,1,1,2005,0,
+Complete,animations/iwp-packaged/Kinematics 1D/dvat-09.iwp,102,1,2,1,1,505,0,
+Complete,animations/iwp-packaged/Kinematics 1D/velocity02.iwp,52,1,4,1,1,357,0,
+Exception,animations/iwp-packaged/Kinematics 1D/dvat-template.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/Kinematics 1D/dvat-05.iwp,102,1,2,1,1,707,0,
+Exception,animations/iwp-packaged/Kinematics 1D/dvat-03.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/Kinematics 1D/acceleration01.iwp,102,1,1,1,1,4343,0,
+Exception,animations/iwp-packaged/Kinematics 2D/projectile-template.iwp,"Unexpected Inner condition, was type: {0"":{""x"":-15",y:102.5},"1:{""x"":0",y:102.5},"2:{""x"":0",y:97.5},"3:{""x"":-15","y:97.5}}"""
+Exception,animations/iwp-packaged/Kinematics 2D/globalcrossing-bk.iwp,iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/iwp-packaged/Kinematics 2D/race-template-2.iwp,202,1,4,1,1,1407,0,
+Exception,animations/iwp-packaged/Kinematics 2D/projectile-template-2.iwp,"Unexpected Inner condition, was type: {0"":{""x"":-15",y:102.5},"1:{""x"":0",y:102.5},"2:{""x"":0",y:97.5},"3:{""x"":-15","y:97.5}}"""
+Complete,animations/iwp-packaged/Kinematics 2D/ballcart02.iwp,202,1,3,1,1,1407,0,
+Exception,animations/iwp-packaged/Kinematics 2D/clock-02.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/Kinematics 2D/vector01.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/Kinematics 2D/ballcart01.iwp,202,1,3,1,1,1407,0,
+Complete,animations/iwp-packaged/Kinematics 2D/dartgun3.iwp,102,1,3,1,1,1313,0,
+Complete,animations/iwp-packaged/Kinematics 2D/ballcart04.iwp,202,1,3,1,1,1407,0,
+Complete,animations/iwp-packaged/Kinematics 2D/pursuit-template.iwp,202,1,2,1,1,1407,0,
+Exception,animations/iwp-packaged/Kinematics 2D/mgr1-2.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/Magnetism/helmholtz-3.iwp,52,1,8,1,26,260,0,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-elastic-4.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/finalke-03.iwp",402,1,12,1,1,11629,0,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-01b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-04a.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-symmetric.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-03a.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-02b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-03b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-elastic-3.iwp",Error: Undefined symbol vcm in <eval> at line number 718 at column number 12,,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-01a.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-02a.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-elastic-2.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-04b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-template.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-05.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,"animations/iwp-packaged/Optics, Geometric/refraction-in-box-2.iwp",iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12,,,,,,,
+Exception,"animations/iwp-packaged/Optics, Geometric/ray-refraction-4e.iwp",null,,,,,,,
+Exception,"animations/iwp-packaged/Optics, Geometric/ray-refraction-3c.iwp",null,,,,,,,
+Exception,"animations/iwp-packaged/Optics, Geometric/ray-refraction-3b.iwp",null,,,,,,,
+Exception,"animations/iwp-packaged/Optics, Geometric/prism-6.iwp","Unexpected Inner condition, was type: {0"":{""x"":0",y:0},"1:{""x"":0",y:4},"2:{""x"":3.464101615137755","y:1.9999999999999998}}""",,
+Exception,"animations/iwp-packaged/Optics, Geometric/prism-3b.iwp","Unexpected Inner condition, was type: {0"":{""x"":0",y:0},"1:{""x"":0",y:4},"2:{""x"":2.309401076758503","y:0}}""",,
+Exception,"animations/iwp-packaged/Optics, Geometric/ray-refraction-4g.iwp",null,,,,,,,
+Exception,"animations/iwp-packaged/Optics, Geometric/ray-refraction-3d.iwp",null,,,,,,,
+Complete,"animations/iwp-packaged/Optics, Geometric/refracted-waves-3.iwp",152,1,12,1,1,4681,0,
+Exception,"animations/iwp-packaged/Optics, Geometric/ray-refraction-4c.iwp",Error: Undefined symbol r in <eval> at line number 718 at column number 12,,,,,,,
+Exception,"animations/iwp-packaged/Optics, Geometric/refraction-in-box-3.iwp",iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12,,,,,,,
+Exception,"animations/iwp-packaged/Optics, Geometric/ray-refraction-3e.iwp",null,,,,,,,
+Exception,"animations/iwp-packaged/Optics, Geometric/prism-1.iwp","Unexpected Inner condition, was type: {0"":{""x"":0",y:0},"1:{""x"":0",y:4},"2:{""x"":3.9999999999999996","y:0}}""",,
+Exception,"animations/iwp-packaged/Optics, Geometric/apparent-depth-template.iwp","Unexpected Inner condition, was type: {0"":{""x"":1",y:1},"1:{""x"":-0.4204586314437101",y:0},"2:{""x"":-0.12184596476506482","y:0}}""",,
+Complete,"animations/iwp-packaged/Optics, Geometric/refracted-waves-5.iwp",152,1,12,1,1,5285,0,
+Exception,"animations/iwp-packaged/Optics, Geometric/ray-refraction-3f.iwp",null,,,,,,,
+Complete,"animations/iwp-packaged/Optics, Geometric/refracted-waves-4.iwp",152,1,12,1,1,4681,0,
+Complete,"animations/iwp-packaged/Optics, Geometric/least-time-6.iwp",52,1,8,1,1,765,0,
+Exception,"animations/iwp-packaged/Optics, Geometric/apparent-depth-6.iwp","Unexpected Inner condition, was type: {0"":{""x"":1",y:1},"1:{""x"":-0.4204586314437101",y:0},"2:{""x"":-0.12184596476506482","y:0}}""",,
+Exception,"animations/iwp-packaged/Optics, Physical/2-source-inter.iwp",iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,"animations/iwp-packaged/Optics, Physical/air-wedge-1.iwp","Unexpected Inner condition, was type: {0"":{""x"":975",y:0},"1:{""x"":1000",y:50},"2:{""x"":1025","y:0}}""",,
+Exception,"animations/iwp-packaged/Optics, Physical/air-wedge-3.iwp","Unexpected Inner condition, was type: {0"":{""x"":975",y:0},"1:{""x"":1000",y:23.3},"2:{""x"":1025","y:0}}""",,
+Exception,"animations/iwp-packaged/Optics, Physical/air-wedge-template.iwp","Unexpected Inner condition, was type: {0"":{""x"":975",y:0},"1:{""x"":1000",y:50},"2:{""x"":1025","y:0}}""",,
+Exception,"animations/iwp-packaged/Optics, Physical/double-slit-1.iwp",null,,,,,,,
+Exception,"animations/iwp-packaged/Optics, Physical/thin-film-2.iwp","Unexpected Inner condition, was type: {0"":{""x"":-500",y:50},"1:{""x"":500",y:50},"2:{""x"":500",y:-50},"3:{""x"":-500","y:-50}}"""
+Exception,"animations/iwp-packaged/Optics, Physical/thin-film-1.iwp","Unexpected Inner condition, was type: {0"":{""x"":-500",y:50},"1:{""x"":500",y:50},"2:{""x"":500",y:-50},"3:{""x"":-500","y:-50}}"""
+Complete,animations/iwp-packaged/Oscillations/spring-motion.iwp,1001,1000,32980,1,1,19000,0,
+Exception,animations/iwp-packaged/Oscillations/damped-SHM-template.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/Oscillations/shm-compare-template.iwp,1001,1,4,1,1,7000,0,
+Complete,animations/iwp-packaged/Oscillations/shm-synchronize.iwp,152,1,2,1,1,1057,0,
+Exception,animations/iwp-packaged/Oscillations/vertical-spring-01.iwp,Error: Undefined symbol w in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/iwp-packaged/Oscillations/shm-01.iwp,252,1,2,1,1,1255,0,
+Complete,animations/iwp-packaged/Oscillations/shm-phase-03.iwp,152,1,4,1,1,1057,0,
+Exception,animations/iwp-packaged/Oscillations/shm-graph-02.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/Oscillations/pendulum01.iwp,"TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/iwp-packaged/Oscillations/shm-circle-analogy-01.iwp,iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/iwp-packaged/Oscillations/shm-graph-01.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/Oscillations/shm-xva-plot.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/Oscillations/lissajous-figures.iwp,1001,1,2,1,1,11000,0,
+Complete,animations/iwp-packaged/Oscillations/damped-1.iwp,502,2,4,1,1,3507,1503,
+Complete,animations/iwp-packaged/Oscillations/shm-phase-01.iwp,152,1,4,1,1,1057,0,
+Complete,animations/iwp-packaged/Oscillations/shm-phase-02.iwp,152,1,4,1,1,1057,0,
+Complete,animations/iwp-packaged/Oscillations/shm-synchronize-02.iwp,1001,1,2,1,1,7000,0,
+Complete,animations/iwp-packaged/Oscillations/shm-compare-01.iwp,1001,1,2,1,1,7000,0,
+Complete,animations/iwp-packaged/Oscillations/shm-02.iwp,252,1,2,1,1,1255,0,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_attachedXAccelZero.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_vectorShape.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_time.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_calcDiff.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_random.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_solidReadsOutput.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_checkboxes_dataon.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_wavebox_Sinusoidal.iwp,null,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_inputs.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_outputs.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_checkboxes_2off.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_mathFunctions.iwp,null,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_Wavebox_Doppler.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_euler.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_checkboxes_gridon.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_hiddenInputs.iwp,1001,0,0,1,1,7000,0,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_constants.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_mathOps.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_shapes.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_graph.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_eulerCrossPath.iwp,22,1,1,1,1,105,63,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_timeVariables.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_wavebox_1.iwp,null,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_trails.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_checkboxes_twoon.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_rk2.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_verySmall.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_self.iwp,102,1,2,1,1,505,303,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_inputoutput.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_rk4.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_mathConstants.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1526 at column number 4,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_attachedVectors.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_unitSymbols.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/TEST Developer Test/TEST_FloatingText.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/Waves and Sound/beats.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/iwp-packaged/Waves and Sound/plucked-cord.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/Waves and Sound/trav-wave-3.iwp,102,1,23,1,1,4949,0,
+Exception,animations/iwp-packaged/Waves and Sound/wavedraw.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/iwp-packaged/Waves and Sound/doppler5.iwp,52,1,1,1,1,3417,0,
+Complete,animations/iwp-packaged/Waves and Sound/doppler4.iwp,52,1,1,1,1,3315,0,
+Exception,animations/iwp-2015/em-ratio-2f.iwp,animations/iwp-2015/em-ratio-2f.iwp.json (No such file or directory),,,,,,,
+Exception,animations/iwp-2015/TEST_rk4.iwp,animations/iwp-2015/TEST_rk4.iwp.json (No such file or directory),,,,,,,
+Exception,animations/iwp-2015/spring-motion-5.iwp,animations/iwp-2015/spring-motion-5.iwp.json (No such file or directory),,,,,,,
+Complete,animations/summer-physics/velocity06.iwp,52,51,383,1,1,255,102,
+Exception,animations/summer-physics/collision-explosion-02b.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Complete,animations/summer-physics/friction01c.iwp,102,2,6,1,1,2121,1212,
+Exception,animations/summer-physics/work-01.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Exception,animations/summer-physics/projectile-compare-1.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/summer-physics/pendulum03.iwp,"TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/summer-physics/spring_work-03.iwp,Error: Undefined symbol p in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/summer-physics/equilibrium-02.iwp,iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/summer-physics/collision-inelastic-06.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/summer-physics/vector04.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/summer-physics/collision-elastic-2b.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/summer-physics/vector02.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/summer-physics/auto-impulse-3.iwp,202,43,55,1,1,6633,0,
+Exception,animations/summer-physics/nsl-01.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Complete,animations/summer-physics/collision-01.iwp,1001,1,3,1,1,15000,3000,
+Complete,animations/summer-physics/atwoods-01.iwp,42,40,324,1,1,861,123,
+Exception,animations/summer-physics/pulse-compare-01.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/summer-physics/pulley-plane-03.iwp,Error: Undefined symbol ten in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/summer-physics/collision-elastic-2d-01.iwp,102,1,3,1,1,1313,0,
+Complete,animations/summer-physics/velocity02b.iwp,52,1,4,1,1,357,0,
+Exception,animations/summer-physics/spring-equation-04.iwp,Error: Undefined symbol p in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/summer-physics/spring-motion-4.iwp,Error: Undefined symbol p in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/summer-physics/eforce-06.iwp,null,,,,,,,
+Exception,animations/summer-physics/040304.iwp,Error: Undefined symbol gunheight0 in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/summer-physics/040302.iwp,1001,1000,1002,1,1,15000,0,
+Exception,animations/summer-physics/collision-elastic-4a.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/summer-physics/energy-vertspring-01.iwp,Error: Undefined symbol KE in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/summer-physics/shm-phase-02b.iwp,302,1,4,1,1,2107,0,
+Exception,animations/summer-physics/vector03.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/summer-physics/eforce-05.iwp,1001,0,0,1,1,21000,0,
+Complete,animations/summer-physics/gravitation-02b.iwp,1001,1,2,1,1,12000,0,
+Exception,animations/summer-physics/pulley-plane-05.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:-2},"1:{""x"":8",y:-2},"2:{""x"":8",y:3.1547005383792515},"3:{""x"":0","y:7.773502691896257}}"""
+Exception,animations/summer-physics/eforce-09.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Exception,animations/summer-physics/pulley-plane-05a.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:-2},"1:{""x"":8",y:-2},"2:{""x"":8",y:3.1547005383792515},"3:{""x"":0","y:7.773502691896257}}"""
+Exception,animations/summer-physics/spring-circle-analogy-02.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: undefined, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/summer-physics/collision-elastic-3.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Complete,animations/summer-physics/polarnet5.iwp,1001,1,6,1,1,11000,0,
+Complete,animations/summer-physics/gravitation-01e.iwp,1001,1,12,1,1,18000,1000,
+Complete,animations/summer-physics/collision-04.iwp,1001,1,2,1,1,19000,7000,
+Exception,animations/summer-physics/2dforce-01a.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Exception,animations/summer-physics/incplane04.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:0},"1:{""x"":10",y:0},"2:{""x"":0","y:5.773502691896257}}""",,
+Exception,animations/summer-physics/040303.iwp,Error: Undefined symbol gunheight0 in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/summer-physics/nsl-02.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Exception,animations/summer-physics/equilibrium-01.iwp,iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/summer-physics/auto-impulse-compare.iwp,202,1,14,1,1,7437,0,
+Complete,animations/summer-physics/velocity04.iwp,202,1,4,1,1,1407,0,
+Complete,animations/summer-physics/velocity01b.iwp,52,1,4,1,1,357,0,
+Exception,animations/summer-physics/pulse-compare-02.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/summer-physics/energy-spring-1b.iwp,Error: Undefined symbol p in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/summer-physics/eforce-07.iwp,1001,0,0,1,1,21000,0,
+Complete,animations/summer-physics/stopblock01f.iwp,177,1,5,1,1,2992,1232,
+Complete,animations/summer-physics/collision-03.iwp,1001,1,2,1,1,15000,3000,
+Complete,animations/summer-physics/collision-02.iwp,1001,1,3,1,1,15000,3000,
+Complete,animations/summer-physics/gravitation-03.iwp,1001,1,4,1,1,14000,2000,
+Exception,animations/summer-physics/spring_work-04.iwp,Error: Undefined symbol p in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/summer-physics/eforce-08.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Complete,animations/summer-physics/collision-02b.iwp,1001,1,3,1,1,9000,0,
+Exception,animations/summer-physics/pendulum02b.iwp,"TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/summer-physics/pendulum02.iwp,null,,,,,,,
+Complete,animations/summer-physics/stopblock01c.iwp,252,0,0,1,1,1757,502,
+Complete,animations/summer-physics/trav-wave-4.iwp,402,400,136802,1,1,65363,0,
+Complete,animations/summer-physics/projectile-problem-2.iwp,522,1,2,1,21,3507,0,
+Complete,animations/summer-physics/040301.iwp,1001,1,2,1,1,15000,0,
+Complete,animations/summer-physics/projectile-problem-3.iwp,202,1,2,1,1,1407,0,
+Exception,animations/summer-physics/spring-equation-02.iwp,Error: Undefined symbol p in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/summer-physics/friction01b.iwp,102,2,2,1,1,1313,505,
+Exception,animations/summer-physics/collision-explosion-02.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/summer-physics/projectile-problem-1.iwp,"Unexpected Inner condition, was type: {0"":{""x"":-5",y:5},"1:{""x"":-10",y:5},"2:{""x"":-10",y:-10},"3:{""x"":-5","y:-10}}"""
+Complete,animations/summer-physics/proj-vect-00.iwp,102,101,107,1,1,1919,606,
+Exception,animations/summer-physics/2dforce-01b.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Exception,animations/summer-physics/pulse-compare-03.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/summer-physics/gravitation-01b.iwp,1001,1,4,1,1,14000,0,
+Exception,animations/summer-physics/spring-equation-03.iwp,Error: Undefined symbol p in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/summer-physics/equilibrium-03b.iwp,null,,,,,,,
+Exception,animations/summer-physics/nsl-00.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Complete,animations/summer-physics/040305.iwp,1001,999,1999,1,1,15000,0,
+Exception,animations/summer-physics/pulley-plane-04.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:-3},"1:{""x"":8",y:-3},"2:{""x"":8",y:3},"3:{""x"":0","y:3}}"""
+Complete,animations/ftemo/em-ratio-1d.iwp,202,200,1120,1,1,2613,402,
+Exception,animations/ftemo/ray-refraction-4e.iwp,null,,,,,,,
+Exception,animations/ftemo/prism-6b.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:0},"1:{""x"":0",y:4},"2:{""x"":3.464101615137755","y:1.9999999999999998}}""",,
+Complete,animations/ftemo/em-ratio-2d.iwp,202,201,2836,1,1,4221,201,
+Exception,animations/ftemo/ray-refraction-3g.iwp,null,,,,,,,
+Exception,animations/ftemo/gas-laws-balloon-01.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0.3",y:0.3},"1:{""x"":-0.3",y:0.3},"2:{""x"":0","y:0}}""",,
+Complete,animations/ftemo/point-interference-03.iwp,1001,1,10,1,907,3478,940,
+Exception,animations/ftemo/lenzlaw-02b.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/ftemo/ray-refraction-3i.iwp,Error: Undefined symbol r in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/ftemo/prism-1b.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:0},"1:{""x"":0",y:4},"2:{""x"":3.9999999999999996","y:0}}""",,
+Complete,animations/ftemo/cp-mfield-02.iwp,1001,834,1620,1,1,9000,3000,
+Exception,animations/ftemo/gas-laws-piston-v2-03.iwp,"TypeError: Unexpected type of argument in function add (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 0) in <eval> at line number 718 at column number 12",,,,,,,
+Complete,animations/ftemo/em-ratio-1c.iwp,202,188,305,1,1,1809,603,
+Exception,animations/ftemo/gas-laws-piston-v2-02.iwp,"TypeError: Unexpected type of argument in function add (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 0) in <eval> at line number 718 at column number 12",,,,,,,
+Complete,animations/ftemo/mass-spec.iwp,202,65,115,1,1,1407,603,
+Exception,animations/ftemo/gas-laws-piston-v2-04.iwp,"TypeError: Unexpected type of argument in function add (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 0) in <eval> at line number 718 at column number 12",,,,,,,
+Complete,animations/ftemo/rainbow-01.iwp,14,1,4,1,1,273,52,
+Exception,animations/ftemo/gas-laws-bubble-01b.iwp,Error: Undefined symbol r in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/ftemo/ray-refraction-3h.iwp,null,,,,,,,
+Exception,animations/ftemo/lenzlaw-01.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/ftemo/refracted-waves-6b.iwp,202,1,38,1,1,17889,402,
+Complete,animations/ftemo/point-interference-04.iwp,152,0,0,1,1,5889,1510,
+Complete,animations/ftemo/refracted-waves-5.iwp,152,1,12,1,1,8003,0,
+Complete,animations/ftemo/point-interference-02.iwp,187,0,0,1,1,12462,6510,
+Complete,animations/ftemo/em-ratio-1b.iwp,202,200,798,1,1,1809,402,
+Complete,animations/unit-test-2017/TEST_Euler_SelfReference.iwp,102,1,2,1,1,505,303,
+Complete,animations/unit-test-2017/TEST_euler.iwp,1001,0,0,1,1,5000,3000,
+Exception,animations/unit-test-2017/2017Jan25 Floating Text.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/unit-test-2017/TEST_text.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/eforce-04.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Complete,animations/winters-ncssm-2009/pendulum_euler.iwp,1001,1000,1002,1,1,5000,1000,
+Exception,animations/winters-ncssm-2009/beats.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/pitch1-para.iwp,Error: Undefined symbol ar in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/winters-ncssm-2009/velocity06.iwp,52,51,380,1,1,255,102,
+Complete,animations/winters-ncssm-2009/rot-kin-03.iwp,402,1,8,1,1,7619,0,
+Exception,animations/winters-ncssm-2009/dvat-02.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/magforce-05.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/plucked-cord.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/collision-inelastic-2d-02.iwp,Error: Undefined symbol size1 in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/winters-ncssm-2009/kingraph4.iwp,102,1,2,1,1,505,404,
+Exception,animations/winters-ncssm-2009/spring_work-02.iwp,"Error: Scope contains an illegal symbol, end"" is a reserved keyword in <eval> at line number 718 at column number 12""",,,,,,,
+Complete,animations/winters-ncssm-2009/leaf.iwp,502,0,0,1,1,2505,1002,
+Exception,animations/winters-ncssm-2009/vector06.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/emission-01.iwp,Error: Undefined symbol rand in <eval> at line number 27 at column number 47762,,,,,,,
+Complete,animations/winters-ncssm-2009/velocity03.iwp,202,1,4,1,1,1407,0,
+Exception,animations/winters-ncssm-2009/refraction-in-box-2.iwp,iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/winters-ncssm-2009/doppler3.iwp,52,1,1,1,1,3519,0,
+Complete,animations/winters-ncssm-2009/rot-kin-01.iwp,402,0,0,1,1,5213,0,
+Complete,animations/winters-ncssm-2009/efield-plot-02d.iwp,1001,1,4,1,1,19000,0,
+Exception,animations/winters-ncssm-2009/coulombslaw01.iwp,iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/winters-ncssm-2009/gravitation-01c.iwp,1001,1,8,1,1,14000,0,
+Exception,animations/winters-ncssm-2009/relative-velocity-02.iwp,"TypeError: Unexpected type of argument in function add (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 0) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/winters-ncssm-2009/stopblock01.iwp,Error: Undefined symbol tf in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/winters-ncssm-2009/2-source-inter.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/tan_atan.iwp,"Missing Variable or Circular Dependecy Detected: 
 tanx requires 'tan.xdisp'
 atanx requires 'atan.xdisp'
 tanatanx requires 'tan.xdisp'
-atantanx requires 'atan.xdisp'"
-"Exception","animations/winters-ncssm-2009/em-ratio.iwp","TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/spring-motion.iwp","1001","1000","32980","1","1","19000","0"
-"Complete","animations/winters-ncssm-2009/em-ratio-1d.iwp","202","200","1120","1","1","2613","402"
-"Complete","animations/winters-ncssm-2009/e-field-cockrell.iwp","102","0","0","1","1","4242","0"
-"Complete","animations/winters-ncssm-2009/torque-disc-01b.iwp","202","1","6","1","1","3819","603"
-"Exception","animations/winters-ncssm-2009/ray-refraction-4e.iwp","null"
-"Complete","animations/winters-ncssm-2009/shm-xv-plot.iwp","1001","1","3","1","1","5000","0"
-"Exception","animations/winters-ncssm-2009/fluid-statics-06b.iwp","Error: Undefined symbol height in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/relative_velocity_01.iwp","202","1","5","1","1","3819","603"
-"Exception","animations/winters-ncssm-2009/pendulum_euler_2_working.iwp","TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/gs-refraction-01.iwp","null"
-"Exception","animations/winters-ncssm-2009/energy-plane-01.iwp","Error: Undefined symbol KE in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/collision-explosion-02b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/total-wave-applet-2.iwp","402","400","131368","1","1","65363","0"
-"Complete","animations/winters-ncssm-2009/gravitation-05.iwp","1001","448","2508","1","190","8110","0"
-"Exception","animations/winters-ncssm-2009/relativity-01.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Exception","animations/winters-ncssm-2009/spring-motion-2-variable-cannon.iwp","Error: Undefined symbol p in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/elastic-collision-1.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/v1_euler_2.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Complete","animations/winters-ncssm-2009/mirror-concave-ray-tracing-01.iwp","1001","0","0","1","1","29000","3000"
-"Exception","animations/winters-ncssm-2009/velocity04b.iwp","Error: Undefined symbol y in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/concept_wedge.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/air-wedge-1.iwp","Unexpected Inner condition, was type: {"0":{"x":975,"y":0},"1":{"x":1000,"y":50},"2":{"x":1025,"y":0}}"
-"Complete","animations/winters-ncssm-2009/trav-wave-2.iwp","502","1","13","1","1","14529","0"
-"Exception","animations/winters-ncssm-2009/orbit2_2.iwp","null"
-"Exception","animations/winters-ncssm-2009/satellites.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/winters-ncssm-2009/energy-fall-01.iwp","Error: Undefined symbol KE in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/rot-kin-02.iwp","402","1","12","1","1","8421","0"
-"Exception","animations/winters-ncssm-2009/magforce-02.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/prism-6b.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":0},"1":{"x":0,"y":4},"2":{"x":3.464101615137755,"y":1.9999999999999998}}"
-"Exception","animations/winters-ncssm-2009/absorption-01.iwp","Error: Undefined symbol flash in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/slot-view-02.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/fallcompare-template.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Complete","animations/winters-ncssm-2009/friction01c.iwp","102","2","6","1","1","2121","1212"
-"Complete","animations/winters-ncssm-2009/lissajous-figures-2.iwp","1001","1","2","1","1","11000","0"
-"Exception","animations/winters-ncssm-2009/line_of_sight.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Complete","animations/winters-ncssm-2009/travwave-jc-01.iwp","1001","999","129703","1","1","85000","0"
-"Exception","animations/winters-ncssm-2009/collision-elastic-4.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/em-ratio-3.iwp","null"
-"Complete","animations/winters-ncssm-2009/fluid-dynamics-torricelli-02.iwp","1001","1","17","1","1","43000","0"
-"Complete","animations/winters-ncssm-2009/cpchall05.iwp","1001","805","805","1","1","5000","0"
-"Complete","animations/winters-ncssm-2009/em-ratio-2d.iwp","202","201","2836","1","1","4221","201"
-"Exception","animations/winters-ncssm-2009/work-01.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Complete","animations/winters-ncssm-2009/intersection_2lines.iwp","102","0","0","1","1","1313","202"
-"Exception","animations/winters-ncssm-2009/eforce01.iwp","null"
-"Exception","animations/winters-ncssm-2009/vertical-spring-02.iwp","Error: Undefined symbol p in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/collision2d-wall-02.iwp","202","1","6","1","1","2211","402"
-"Exception","animations/winters-ncssm-2009/fallfree1_2.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/winters-ncssm-2009/projectile-compare-1.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/winters-ncssm-2009/lens-ray-tracing-01.iwp","1001","0","0","1","1","27000","5000"
-"Complete","animations/winters-ncssm-2009/compton-wave.iwp","1001","992","10698","1","1","19000","0"
-"Complete","animations/winters-ncssm-2009/velocity-from-position.iwp","27","1","8","1","1","286","104"
-"Complete","animations/winters-ncssm-2009/empath5.iwp","1001","978","1868","1","1","5000","2000"
-"Complete","animations/winters-ncssm-2009/finalke-03.iwp","402","1","12","1","1","11629","0"
-"Complete","animations/winters-ncssm-2009/velocity05.iwp","202","1","2","1","1","1005","0"
-"Complete","animations/winters-ncssm-2009/equi-torques-02.iwp","60","1","1","1","1","1357","354"
-"Exception","animations/winters-ncssm-2009/relativity-star-trek-revision.iwp","Error: Undefined symbol rand in <eval> at line number 27 at column number 47762"
-"Exception","animations/winters-ncssm-2009/gas-laws-piston-01.iwp","TypeError: Unexpected type of argument in function add (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 0) in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/hookeslaw03b.iwp","502","1","5","1","1","13527","1503"
-"Exception","animations/winters-ncssm-2009/ray-refraction-3g.iwp","null"
-"Exception","animations/winters-ncssm-2009/satellites3.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/winters-ncssm-2009/pendulum03.iwp","TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/stirling-animation-02b.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/projectile-template.iwp","Unexpected Inner condition, was type: {"0":{"x":-15,"y":102.5},"1":{"x":0,"y":102.5},"2":{"x":0,"y":97.5},"3":{"x":-15,"y":97.5}}"
-"Exception","animations/winters-ncssm-2009/dome_1.iwp","Missing Variable or Circular Dependecy Detected: 
+atantanx requires 'atan.xdisp'",,,,,,,
+Exception,animations/winters-ncssm-2009/em-ratio.iwp,"TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Complete,animations/winters-ncssm-2009/spring-motion.iwp,1001,1000,32980,1,1,19000,0,
+Complete,animations/winters-ncssm-2009/em-ratio-1d.iwp,202,200,1120,1,1,2613,402,
+Complete,animations/winters-ncssm-2009/e-field-cockrell.iwp,102,0,0,1,1,4242,0,
+Complete,animations/winters-ncssm-2009/torque-disc-01b.iwp,202,1,6,1,1,3819,603,
+Exception,animations/winters-ncssm-2009/ray-refraction-4e.iwp,null,,,,,,,
+Complete,animations/winters-ncssm-2009/shm-xv-plot.iwp,1001,1,3,1,1,5000,0,
+Exception,animations/winters-ncssm-2009/fluid-statics-06b.iwp,Error: Undefined symbol height in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/winters-ncssm-2009/relative_velocity_01.iwp,202,1,5,1,1,3819,603,
+Exception,animations/winters-ncssm-2009/pendulum_euler_2_working.iwp,"TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/winters-ncssm-2009/gs-refraction-01.iwp,null,,,,,,,
+Exception,animations/winters-ncssm-2009/energy-plane-01.iwp,Error: Undefined symbol KE in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/winters-ncssm-2009/collision-explosion-02b.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Complete,animations/winters-ncssm-2009/total-wave-applet-2.iwp,402,400,131368,1,1,65363,0,
+Complete,animations/winters-ncssm-2009/gravitation-05.iwp,1001,448,2508,1,190,8110,0,
+Exception,animations/winters-ncssm-2009/relativity-01.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Exception,animations/winters-ncssm-2009/spring-motion-2-variable-cannon.iwp,Error: Undefined symbol p in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/winters-ncssm-2009/elastic-collision-1.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/winters-ncssm-2009/v1_euler_2.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Complete,animations/winters-ncssm-2009/mirror-concave-ray-tracing-01.iwp,1001,0,0,1,1,29000,3000,
+Exception,animations/winters-ncssm-2009/velocity04b.iwp,Error: Undefined symbol y in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/winters-ncssm-2009/concept_wedge.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/air-wedge-1.iwp,"Unexpected Inner condition, was type: {0"":{""x"":975",y:0},"1:{""x"":1000",y:50},"2:{""x"":1025","y:0}}""",,
+Complete,animations/winters-ncssm-2009/trav-wave-2.iwp,502,1,13,1,1,14529,0,
+Exception,animations/winters-ncssm-2009/orbit2_2.iwp,null,,,,,,,
+Exception,animations/winters-ncssm-2009/satellites.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/winters-ncssm-2009/energy-fall-01.iwp,Error: Undefined symbol KE in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/winters-ncssm-2009/rot-kin-02.iwp,402,1,12,1,1,8421,0,
+Exception,animations/winters-ncssm-2009/magforce-02.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/prism-6b.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:0},"1:{""x"":0",y:4},"2:{""x"":3.464101615137755","y:1.9999999999999998}}""",,
+Exception,animations/winters-ncssm-2009/absorption-01.iwp,Error: Undefined symbol flash in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/winters-ncssm-2009/slot-view-02.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/fallcompare-template.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Complete,animations/winters-ncssm-2009/friction01c.iwp,102,2,6,1,1,2121,1212,
+Complete,animations/winters-ncssm-2009/lissajous-figures-2.iwp,1001,1,2,1,1,11000,0,
+Exception,animations/winters-ncssm-2009/line_of_sight.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Complete,animations/winters-ncssm-2009/travwave-jc-01.iwp,1001,999,129703,1,1,85000,0,
+Exception,animations/winters-ncssm-2009/collision-elastic-4.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/winters-ncssm-2009/em-ratio-3.iwp,null,,,,,,,
+Complete,animations/winters-ncssm-2009/fluid-dynamics-torricelli-02.iwp,1001,1,17,1,1,43000,0,
+Complete,animations/winters-ncssm-2009/cpchall05.iwp,1001,805,805,1,1,5000,0,
+Complete,animations/winters-ncssm-2009/em-ratio-2d.iwp,202,201,2836,1,1,4221,201,
+Exception,animations/winters-ncssm-2009/work-01.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Complete,animations/winters-ncssm-2009/intersection_2lines.iwp,102,0,0,1,1,1313,202,
+Exception,animations/winters-ncssm-2009/eforce01.iwp,null,,,,,,,
+Exception,animations/winters-ncssm-2009/vertical-spring-02.iwp,Error: Undefined symbol p in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/winters-ncssm-2009/collision2d-wall-02.iwp,202,1,6,1,1,2211,402,
+Exception,animations/winters-ncssm-2009/fallfree1_2.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/winters-ncssm-2009/projectile-compare-1.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/winters-ncssm-2009/lens-ray-tracing-01.iwp,1001,0,0,1,1,27000,5000,
+Complete,animations/winters-ncssm-2009/compton-wave.iwp,1001,992,10698,1,1,19000,0,
+Complete,animations/winters-ncssm-2009/velocity-from-position.iwp,27,1,8,1,1,286,104,
+Complete,animations/winters-ncssm-2009/empath5.iwp,1001,978,1868,1,1,5000,2000,
+Complete,animations/winters-ncssm-2009/finalke-03.iwp,402,1,12,1,1,11629,0,
+Complete,animations/winters-ncssm-2009/velocity05.iwp,202,1,2,1,1,1005,0,
+Complete,animations/winters-ncssm-2009/equi-torques-02.iwp,60,1,1,1,1,1357,354,
+Exception,animations/winters-ncssm-2009/relativity-star-trek-revision.iwp,Error: Undefined symbol rand in <eval> at line number 27 at column number 47762,,,,,,,
+Exception,animations/winters-ncssm-2009/gas-laws-piston-01.iwp,"TypeError: Unexpected type of argument in function add (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 0) in <eval> at line number 718 at column number 12",,,,,,,
+Complete,animations/winters-ncssm-2009/hookeslaw03b.iwp,502,1,5,1,1,13527,1503,
+Exception,animations/winters-ncssm-2009/ray-refraction-3g.iwp,null,,,,,,,
+Exception,animations/winters-ncssm-2009/satellites3.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/winters-ncssm-2009/pendulum03.iwp,"TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/winters-ncssm-2009/stirling-animation-02b.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/projectile-template.iwp,"Unexpected Inner condition, was type: {0"":{""x"":-15",y:102.5},"1:{""x"":0",y:102.5},"2:{""x"":0",y:97.5},"3:{""x"":-15","y:97.5}}"""
+Exception,animations/winters-ncssm-2009/dome_1.iwp,"Missing Variable or Circular Dependecy Detected: 
 boy2 requires 'radians'
 ar requires 'boy.xvel'
 angle requires 'boy.ydisp'
-boy requires 'angle.value'"
-"Exception","animations/winters-ncssm-2009/vectortest6.iwp","Missing Variable or Circular Dependecy Detected: 
+boy requires 'angle.value'",,,,,,,
+Exception,animations/winters-ncssm-2009/vectortest6.iwp,"Missing Variable or Circular Dependecy Detected: 
 pxb requires 'Blue.xdisp'
 vxb requires 'Blue.xvel'
-axb requires 'Blue.xaccel'"
-"Exception","animations/winters-ncssm-2009/v1_402.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Complete","animations/winters-ncssm-2009/dartgun-quiz.iwp","102","1","3","1","1","1313","0"
-"Exception","animations/winters-ncssm-2009/spring-circle-analogy.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: undefined, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/spring_work-03.iwp","Error: Undefined symbol p in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/slot-view-01b.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/winters-ncssm-2009/turntable05.iwp","1001","1","2","1","524","5247","0"
-"Exception","animations/winters-ncssm-2009/globalcrossing-bk.iwp","iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/step.iwp","1001","1","1","1","1","5000","0"
-"Exception","animations/winters-ncssm-2009/bppb5.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/winters-ncssm-2009/cons_force.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/energy-pulley-01b.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":-2},"1":{"x":8,"y":-2},"2":{"x":8,"y":3.1547005383792515},"3":{"x":0,"y":7.773502691896257}}"
-"Complete","animations/winters-ncssm-2009/equiforce-03.iwp","12","0","0","1","1","110","143"
-"Exception","animations/winters-ncssm-2009/ray-refraction-3c.iwp","null"
-"Exception","animations/winters-ncssm-2009/magforce-06.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/L00-4.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Exception","animations/winters-ncssm-2009/equilibrium-02.iwp","iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/projectile_drag.iwp","Missing Variable or Circular Dependecy Detected: 
+axb requires 'Blue.xaccel'",,,,,,,
+Exception,animations/winters-ncssm-2009/v1_402.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Complete,animations/winters-ncssm-2009/dartgun-quiz.iwp,102,1,3,1,1,1313,0,
+Exception,animations/winters-ncssm-2009/spring-circle-analogy.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: undefined, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/winters-ncssm-2009/spring_work-03.iwp,Error: Undefined symbol p in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/winters-ncssm-2009/slot-view-01b.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/winters-ncssm-2009/turntable05.iwp,1001,1,2,1,524,5247,0,
+Exception,animations/winters-ncssm-2009/globalcrossing-bk.iwp,iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12,,,,,,,
+Complete,animations/winters-ncssm-2009/step.iwp,1001,1,1,1,1,5000,0,
+Exception,animations/winters-ncssm-2009/bppb5.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/winters-ncssm-2009/cons_force.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/energy-pulley-01b.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:-2},"1:{""x"":8",y:-2},"2:{""x"":8",y:3.1547005383792515},"3:{""x"":0","y:7.773502691896257}}"""
+Complete,animations/winters-ncssm-2009/equiforce-03.iwp,12,0,0,1,1,110,143,
+Exception,animations/winters-ncssm-2009/ray-refraction-3c.iwp,null,,,,,,,
+Exception,animations/winters-ncssm-2009/magforce-06.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/L00-4.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Exception,animations/winters-ncssm-2009/equilibrium-02.iwp,iwp6-calc:1260> Compiled vars are not finite in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/winters-ncssm-2009/projectile_drag.iwp,"Missing Variable or Circular Dependecy Detected: 
 dvy requires 'S.yvel'
 dvx requires 'S.xvel'
 S requires 'dvx'
-v requires 'S.xvel'"
-"Exception","animations/winters-ncssm-2009/vertical-spring-analysis-2.iwp","Error: Scope contains an illegal symbol, "end" is a reserved keyword in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/gas-laws-balloon-01.iwp","Unexpected Inner condition, was type: {"0":{"x":0.3,"y":0.3},"1":{"x":-0.3,"y":0.3},"2":{"x":0,"y":0}}"
-"Exception","animations/winters-ncssm-2009/plates1_3.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":4},"1":{"x":0,"y":4.5},"2":{"x":4,"y":4.5},"3":{"x":4,"y":4}}"
-"Complete","animations/winters-ncssm-2009/planetary-system-retrograde-mars.iwp","1001","1","4","1","1","9000","0"
-"Complete","animations/winters-ncssm-2009/point-interference-03.iwp","1001","1","10","1","907","3478","940"
-"Complete","animations/winters-ncssm-2009/fluid-statics-07.iwp","1001","1","1","1","1","15000","1000"
-"Exception","animations/winters-ncssm-2009/magforce-03.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/collision-inelastic-06.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/peffect-04.iwp","Error: Undefined symbol rand in <eval> at line number 27 at column number 47762"
-"Complete","animations/winters-ncssm-2009/cptemplate.iwp","1001","1000","11947","1","1","6000","3000"
-"Exception","animations/winters-ncssm-2009/mirror-plane-ray-tracing-01.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/winters-ncssm-2009/total-wave-applet.iwp","1001","999","149760","1","1","87000","0"
-"Exception","animations/winters-ncssm-2009/pulse-superposition-destructive.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/air-wedge-3.iwp","Unexpected Inner condition, was type: {"0":{"x":975,"y":0},"1":{"x":1000,"y":23.3},"2":{"x":1025,"y":0}}"
-"Exception","animations/winters-ncssm-2009/vector04.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/spring_scale.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Complete","animations/winters-ncssm-2009/rot-kin-04.iwp","402","1","18","1","1","10025","0"
-"Exception","animations/winters-ncssm-2009/bppb3.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/winters-ncssm-2009/bfield_2.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/damped-SHM-template.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/emtube.iwp","null"
-"Exception","animations/winters-ncssm-2009/collision-elastic-2b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/emission-02.iwp","Error: Undefined symbol rand in <eval> at line number 27 at column number 47762"
-"Complete","animations/winters-ncssm-2009/projectiletemplate4.iwp","1001","999","1999","1","1","15000","0"
-"Exception","animations/winters-ncssm-2009/lenzlaw-02b.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Exception","animations/winters-ncssm-2009/dvat-01.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/winters-ncssm-2009/cpchall04.iwp","1001","0","0","1","1","5000","2000"
-"Exception","animations/winters-ncssm-2009/race-template-2.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/winters-ncssm-2009/collision-inelastic-01b.iwp","TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/editedParaCars.iwp","TypeError: Cannot read property "@attributes" from undefined in <eval> at line number 992"
-"Exception","animations/winters-ncssm-2009/right_hand_rule.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/winters-ncssm-2009/doppler3line.iwp","52","1","1","1","1","3621","0"
-"Exception","animations/winters-ncssm-2009/vector02.iwp","iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7"
-"Complete","animations/winters-ncssm-2009/cp-efield-02.iwp","402","1","4","1","1","3609","1203"
-"Exception","animations/winters-ncssm-2009/energy-fall-04.iwp","Error: Undefined symbol KE in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/energy-spring-2.iwp","Error: Undefined symbol p in <eval> at line number 718 at column number 12"
-"Exception","animations/winters-ncssm-2009/thin-film-jc-02.iwp","ReferenceError: "document" is not defined in <eval> at line number 1073"
-"Complete","animations/winters-ncssm-2009/turntable06.iwp","502","1","4","1","1","6513","0"
-"Exception","animations/winters-ncssm-2009/pitch1_eulers.iwp","vec.value (in Q X)"
-"Complete","animations/winters-ncssm-2009/thin-film.iwp","802","791","6224","1","1","12015","0"
-"Complete","animations/winters-ncssm-2009/efield-lines-01.iwp","1001","1000","1000","1","1","9000","2000"
-"Complete","animations/winters-ncssm-2009/fluid-dynamics-variable-pipe-01b.iwp","402","7","196","1","1","18847","1203"
-"Exception","animations/winters-ncssm-2009/pendulum_euler_2.iwp","TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12"
-"Complete","animations/winters-ncssm-2009/relative_velocity_02.iwp","202","1","2","1","1","1809","402"
-"Exception","animations/winters-ncssm-2009/prism-7.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":0},"1":{"x":0,"y":4},"2":{"x":3.464101615137755,"y":1.9999999999999998}}"
-"Complete","animations/winters-ncssm-2009/rose4.iwp","1001","999","5996","1","1","8000","1000"
-"Complete","animations/winters-ncssm-2009/vperp3.iwp","1001","0","0","1","1","5000","2000"
-"Exception","animations/winters-ncssm-2009/projectile-template-2.iwp","Unexpected Inner condition, was type: {"0":{"x":-15,"y":102.5},"1":{"x":0,"y":102.5},"2":{"x":0,"y":97.5},"3":{"x":-15,"y":97.5}}"
-"Exception","animations/winters-ncssm-2009/plates1_4_brian.iwp","Unexpected Inner condition, was type: {"0":{"x":0,"y":4},"1":{"x":0,"y":4.5},"2":{"x":4,"y":4.5},"3":{"x":4,"y":4}}"
-"Complete","animations/winters-ncssm-2009/cockrelljIWPworkservice.iwp","102","1","3","1","1","707","0"
-"Complete","animations/winters-ncssm-2009/auto-impulse-3.iwp","202","43","55","1","1","6633","0"
+v requires 'S.xvel'",,,,,,,
+Exception,animations/winters-ncssm-2009/vertical-spring-analysis-2.iwp,"Error: Scope contains an illegal symbol, end"" is a reserved keyword in <eval> at line number 718 at column number 12""",,,,,,,
+Exception,animations/winters-ncssm-2009/gas-laws-balloon-01.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0.3",y:0.3},"1:{""x"":-0.3",y:0.3},"2:{""x"":0","y:0}}""",,
+Exception,animations/winters-ncssm-2009/plates1_3.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:4},"1:{""x"":0",y:4.5},"2:{""x"":4",y:4.5},"3:{""x"":4","y:4}}"""
+Complete,animations/winters-ncssm-2009/planetary-system-retrograde-mars.iwp,1001,1,4,1,1,9000,0,
+Complete,animations/winters-ncssm-2009/point-interference-03.iwp,1001,1,10,1,907,3478,940,
+Complete,animations/winters-ncssm-2009/fluid-statics-07.iwp,1001,1,1,1,1,15000,1000,
+Exception,animations/winters-ncssm-2009/magforce-03.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/collision-inelastic-06.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/winters-ncssm-2009/peffect-04.iwp,Error: Undefined symbol rand in <eval> at line number 27 at column number 47762,,,,,,,
+Complete,animations/winters-ncssm-2009/cptemplate.iwp,1001,1000,11947,1,1,6000,3000,
+Exception,animations/winters-ncssm-2009/mirror-plane-ray-tracing-01.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/winters-ncssm-2009/total-wave-applet.iwp,1001,999,149760,1,1,87000,0,
+Exception,animations/winters-ncssm-2009/pulse-superposition-destructive.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/air-wedge-3.iwp,"Unexpected Inner condition, was type: {0"":{""x"":975",y:0},"1:{""x"":1000",y:23.3},"2:{""x"":1025","y:0}}""",,
+Exception,animations/winters-ncssm-2009/vector04.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/spring_scale.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Complete,animations/winters-ncssm-2009/rot-kin-04.iwp,402,1,18,1,1,10025,0,
+Exception,animations/winters-ncssm-2009/bppb3.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/winters-ncssm-2009/bfield_2.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/damped-SHM-template.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/emtube.iwp,null,,,,,,,
+Exception,animations/winters-ncssm-2009/collision-elastic-2b.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/winters-ncssm-2009/emission-02.iwp,Error: Undefined symbol rand in <eval> at line number 27 at column number 47762,,,,,,,
+Complete,animations/winters-ncssm-2009/projectiletemplate4.iwp,1001,999,1999,1,1,15000,0,
+Exception,animations/winters-ncssm-2009/lenzlaw-02b.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Exception,animations/winters-ncssm-2009/dvat-01.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/winters-ncssm-2009/cpchall04.iwp,1001,0,0,1,1,5000,2000,
+Exception,animations/winters-ncssm-2009/race-template-2.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/winters-ncssm-2009/collision-inelastic-01b.iwp,"TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: number, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Exception,animations/winters-ncssm-2009/editedParaCars.iwp,"TypeError: Cannot read property @attributes"" from undefined in <eval> at line number 992""",,,,,,,
+Exception,animations/winters-ncssm-2009/right_hand_rule.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/winters-ncssm-2009/doppler3line.iwp,52,1,1,1,1,3621,0,
+Exception,animations/winters-ncssm-2009/vector02.iwp,iwp6:1387> Unable to handle output with typeof: undefined in <eval> at line number 1506 at column number 7,,,,,,,
+Complete,animations/winters-ncssm-2009/cp-efield-02.iwp,402,1,4,1,1,3609,1203,
+Exception,animations/winters-ncssm-2009/energy-fall-04.iwp,Error: Undefined symbol KE in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/winters-ncssm-2009/energy-spring-2.iwp,Error: Undefined symbol p in <eval> at line number 718 at column number 12,,,,,,,
+Exception,animations/winters-ncssm-2009/thin-film-jc-02.iwp,"ReferenceError: document"" is not defined in <eval> at line number 1073""",,,,,,,
+Complete,animations/winters-ncssm-2009/turntable06.iwp,502,1,4,1,1,6513,0,
+Exception,animations/winters-ncssm-2009/pitch1_eulers.iwp,vec.value (in Q X),,,,,,,
+Complete,animations/winters-ncssm-2009/thin-film.iwp,802,791,6224,1,1,12015,0,
+Complete,animations/winters-ncssm-2009/efield-lines-01.iwp,1001,1000,1000,1,1,9000,2000,
+Complete,animations/winters-ncssm-2009/fluid-dynamics-variable-pipe-01b.iwp,402,7,196,1,1,18847,1203,
+Exception,animations/winters-ncssm-2009/pendulum_euler_2.iwp,"TypeError: Unexpected type of argument in function multiplyScalar (expected: number or Complex or BigNumber or Fraction or Unit, actual: undefined, index: 1) in <eval> at line number 718 at column number 12",,,,,,,
+Complete,animations/winters-ncssm-2009/relative_velocity_02.iwp,202,1,2,1,1,1809,402,
+Exception,animations/winters-ncssm-2009/prism-7.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:0},"1:{""x"":0",y:4},"2:{""x"":3.464101615137755","y:1.9999999999999998}}""",,
+Complete,animations/winters-ncssm-2009/rose4.iwp,1001,999,5996,1,1,8000,1000,
+Complete,animations/winters-ncssm-2009/vperp3.iwp,1001,0,0,1,1,5000,2000,
+Exception,animations/winters-ncssm-2009/projectile-template-2.iwp,"Unexpected Inner condition, was type: {0"":{""x"":-15",y:102.5},"1:{""x"":0",y:102.5},"2:{""x"":0",y:97.5},"3:{""x"":-15","y:97.5}}"""
+Exception,animations/winters-ncssm-2009/plates1_4_brian.iwp,"Unexpected Inner condition, was type: {0"":{""x"":0",y:4},"1:{""x"":0",y:4.5},"2:{""x"":4",y:4.5},"3:{""x"":4","y:4}}"""
+Complete,animations/winters-ncssm-2009/cockrelljIWPworkservice.iwp,102,1,3,1,1,707,0,
+Complete,animations/winters-ncssm-2009/auto-impulse-3.iwp,202,43,55,1,1,6633,0,
