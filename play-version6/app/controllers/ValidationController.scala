@@ -5,7 +5,7 @@ import java.io.File
 import javax.inject._
 import models.Iwp6Animation
 import org.mongodb.scala.model.Filters._
-import play.api.Logger
+import play.api.{Configuration, Logger}
 import play.api.libs.json.Json
 import play.api.mvc._
 import services.{IwpDifferenceCalculatorService, IwpMongoClient, IwpVersion4CalculatorService, IwpVersion6CalculatorService}
@@ -20,15 +20,21 @@ import scala.util.{Failure, Success, Try}
  */
 @Singleton
 class ValidationController @Inject()(cc: ControllerComponents,
+                                     configuration: Configuration,
                                     mongo: IwpMongoClient,
                                     iwpVersion4CalculatorService: IwpVersion4CalculatorService,
                                     iwpVersion6CalculatorService: IwpVersion6CalculatorService,
                                     iwpDifferenceCalculatorService: IwpDifferenceCalculatorService) extends AbstractController(cc) {
 
 
+  val animationsPath = configuration.get[String]("iwp.animations.path")
+  val sep = File.separator
+  
   def validateAnimation(collection: String, filename: String, format: Option[String]) = Action { implicit request: Request[AnyContent] =>
 
-    val path = s"animations/${collection}/${filename}"
+
+
+    val path = s"${animationsPath}${sep}${collection}${sep}${filename}"
 
     val diffT = Try {
 
