@@ -248,7 +248,7 @@ function archiveVarsAtStep( step, vars ) {
 
 function calculateInputAtStep(input, step, vars, verbose ) {
 
-    // console.log("iwp6-calc:437> input: " , input, "   index: " , index);
+    console.log("iwp6-calc:251> calculateInputAtStep input: " , input.name,  " ", input, "  step: " , step,  " vars: ", vars );
 
 	// next load in variables for all of the inputs
 	// If we're running in calculator only mode, use default values
@@ -264,7 +264,7 @@ function calculateInputAtStep(input, step, vars, verbose ) {
 /** BUGBUG - TODE Change this over to have no side effects, all vars writing should happen in parent stack */
 function calculateOutputAtStep(output, step, vars, verbose) {
 
-    // console.log("iwp6-calc:267> calculateOutputAtStep:267> vars: " + JSON.stringify(vars));
+    console.log("iwp6-calc:267> calculateOutputAtStep: output: " , output.name , " ", output, "  step: " , step , " vars: " , vars );
 
     var newValue = evaluateCalculator( output.name+".out", output.calculator, step, vars, verbose, output.name ).value;
     vars[output.name] = newValue;
@@ -988,7 +988,8 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
         try {
             return evaluateParametricCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
         } catch ( err ) {
-            console.log("iwp6-calc:980> Exception in evaluateParametricCalculator for " + resultVariable + ": " + err );
+            console.log("iwp6-calc:991> Exception in evaluateParametricCalculator for " + resultVariable + ": " + err );
+            console.log("iwp6-calc:992> Object Detail: Calculator: " , calculator )
             return { value: 0 }
         }
     } else if ( calculator.calcType == "euler-mathjs" ) {
@@ -996,7 +997,7 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
         try {
             return evaluateEulerCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
         } catch ( err ) {
-            console.log("iwp6-calc:980> Exception in evaluateEulerCalculator for " + resultVariable + ": " + err );
+            console.log("iwp6-calc:999> Exception in evaluateEulerCalculator for " + resultVariable + ": " + err );
             return { value: 0 }
         }
 

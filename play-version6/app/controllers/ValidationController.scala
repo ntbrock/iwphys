@@ -29,7 +29,7 @@ class ValidationController @Inject()(cc: ControllerComponents,
 
   val animationsPath = configuration.get[String]("iwp.animations.path")
   val sep = File.separator
-  
+
   def validateAnimation(collection: String, filename: String, format: Option[String]) = Action { implicit request: Request[AnyContent] =>
 
 

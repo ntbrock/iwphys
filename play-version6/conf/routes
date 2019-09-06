@@ -69,6 +69,10 @@ GET    /test/xml/version4/convertCollection/:collection/:subCollection/:filename
 GET    /test/designer/user/sample.json     controllers.DesignerTestController.userSample()
 
 
+# Math.js Equation Tests
+GET    /test/mathjs/stepFunction            controllers.MathJsTestController.stepFunction()
+
+
 
 # Version 4 SBT Conversion testing
 GET     /DProblem                   controllers.DProblemController.index
