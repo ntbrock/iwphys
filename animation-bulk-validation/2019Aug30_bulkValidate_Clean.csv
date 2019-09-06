@@ -1,0 +1,255 @@
+result,path,totalFrames,framesWithDifferences,totalDifferences,framesWithLeftMissing,framesWithRightMissing,totalLeftMissing,totalRightMissing
+Complete,animations/iwp-packaged/Charged Particle Motion/pitch1-para.iwp,1001,1000,18663,1,1,9000,0
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-1d.iwp,202,200,1518,1,1,2613,402
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-2d.iwp,202,201,2992,1,1,4221,201
+Complete,animations/iwp-packaged/Charged Particle Motion/cpchall04.iwp,1001,805,805,1,1,5000,0
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-efield-02.iwp,402,1,4,1,1,3609,1203
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-mfield-02.iwp,1001,834,1620,1,1,9000,3000
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-2.iwp,202,201,2992,1,1,4221,201
+Complete,animations/iwp-packaged/Charged Particle Motion/cpchall01.iwp,1001,805,805,1,1,5000,0
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-efield.iwp,402,1,4,1,1,4411,1203
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-1c.iwp,202,200,704,1,1,1809,603
+Complete,animations/iwp-packaged/Charged Particle Motion/velocity-selector.iwp,402,304,586,1,1,8421,1203
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-unknown-1.iwp,302,0,0,1,1,2709,903
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-mfield.iwp,1001,834,1620,1,1,9000,3000
+Complete,animations/iwp-packaged/Charged Particle Motion/velocity-selector-02.iwp,402,304,586,1,1,3609,1203
+Complete,animations/iwp-packaged/Charged Particle Motion/cpchall03.iwp,1001,847,847,1,1,5000,0
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-2b.iwp,202,201,3784,1,1,3015,201
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-1.iwp,202,201,9244,1,1,4221,402
+Complete,animations/iwp-packaged/Charged Particle Motion/cp-template.iwp,1001,1000,11972,1,1,5000,2000
+Complete,animations/iwp-packaged/Charged Particle Motion/em-ratio-1b.iwp,202,200,1198,1,1,1809,402
+Complete,animations/iwp-packaged/Charged Particle Motion/cpchall02.iwp,1001,847,847,1,1,5000,0
+Complete,animations/iwp-packaged/Electrostatics/coulombslaw01.iwp,1001,1000,2005,1,1,13000,0
+Complete,animations/iwp-packaged/Electrostatics/efield-plot-02a.iwp,22,1,2,1,1,189,0
+Complete,animations/iwp-packaged/Electrostatics/coulombslaw02.iwp,12,11,189,1,1,121,0
+Complete,animations/iwp-packaged/Forces/leaf.iwp,502,501,3001,1,1,2505,1002
+Complete,animations/iwp-packaged/Forces/projectile-drag-lift-2.iwp,1001,997,997,1,1,5000,2000
+Complete,animations/iwp-packaged/Forces/projectile-drag-2.iwp,1001,1000,6172,1,1,6000,2000
+Complete,animations/iwp-packaged/Forces/hookeslaw03.iwp,502,501,7041,1,1,10521,0
+Complete,animations/iwp-packaged/Forces/fallcompare-simulation.iwp,1001,1000,5998,1,1,11000,3000
+Complete,animations/iwp-packaged/Forces/mass-bppb-3.iwp,1001,1000,5998,1,1,15000,0
+Complete,animations/iwp-packaged/Forces/bppb6.iwp,1001,999,1000,1,1,9000,0
+Complete,animations/iwp-packaged/Function Reference/TEST_mathConstants.iwp,1001,0,0,1,1,3000,0
+Complete,animations/iwp-packaged/Gravitation/planetary-system-02.iwp,1001,1,8,1,1,13000,0
+Complete,animations/iwp-packaged/Gravitation/planetary-system-retrograde.iwp,1001,1000,19990,1,1,11000,0
+Complete,animations/iwp-packaged/Kinematics 1D/velocity03.iwp,202,201,205,1,1,1407,0
+Complete,animations/iwp-packaged/Kinematics 1D/roadrage-bk.iwp,1001,0,0,1,1,7000,2000
+Complete,animations/iwp-packaged/Kinematics 1D/velocity01.iwp,52,51,55,1,1,357,0
+Complete,animations/iwp-packaged/Kinematics 1D/velocity02b.iwp,52,51,55,1,1,357,0
+Complete,animations/iwp-packaged/Kinematics 1D/window01.iwp,502,500,2502,1,1,7515,0
+Complete,animations/iwp-packaged/Kinematics 1D/kingraph1.iwp,252,251,1401,1,1,1255,0
+Complete,animations/iwp-packaged/Kinematics 1D/dvat-11.iwp,102,101,561,1,1,505,0
+Complete,animations/iwp-packaged/Kinematics 1D/haretortoise2.iwp,252,251,1258,1,1,2259,0
+Complete,animations/iwp-packaged/Kinematics 1D/haretortoise.iwp,202,201,805,1,1,1407,0
+Complete,animations/iwp-packaged/Kinematics 1D/kingraph2.iwp,402,1,2,1,1,2005,0
+Complete,animations/iwp-packaged/Kinematics 1D/velocity02.iwp,52,51,55,1,1,357,0
+Complete,animations/iwp-packaged/Kinematics 2D/globalcrossing-bk.iwp,222,201,804,1,21,1809,0
+Complete,animations/iwp-packaged/Kinematics 2D/race-template-2.iwp,202,201,805,1,1,1407,0
+Complete,animations/iwp-packaged/Kinematics 2D/clock-02.iwp,102,0,0,1,1,1111,0
+Complete,animations/iwp-packaged/Kinematics 2D/vector01.iwp,102,0,0,1,1,909,0
+Complete,animations/iwp-packaged/Kinematics 2D/dartgun3.iwp,102,1,3,1,1,1313,0
+Complete,animations/iwp-packaged/Kinematics 2D/pursuit-template.iwp,202,201,603,1,1,1407,0
+Complete,animations/iwp-packaged/Kinematics 2D/mgr1-2.iwp,1001,1,3,1,1,9000,0
+Complete,animations/iwp-packaged/Magnetism/helmholtz-3.iwp,52,1,8,1,26,260,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-elastic-4.iwp",1001,101,1820,1,900,707,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/finalke-03.iwp",402,1,12,1,1,11629,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-01b.iwp",1001,101,1596,1,900,707,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-04a.iwp",1001,45,808,1,956,315,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-symmetric.iwp",1001,201,3101,1,800,1407,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-03a.iwp",1001,61,1094,1,940,427,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-02b.iwp",1001,101,1579,1,900,707,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-03b.iwp",1001,101,1734,1,900,707,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-elastic-3.iwp",1001,151,3169,1,850,1359,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-01a.iwp",1001,101,1596,1,900,707,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-02a.iwp",1001,41,617,1,960,287,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-elastic-2.iwp",1001,201,4392,1,800,1809,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-04b.iwp",1001,101,1704,1,900,707,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-template.iwp",1001,101,1579,1,900,707,0
+Complete,"animations/iwp-packaged/Momentum, Collisions, KE/collision-inelastic-05.iwp",1001,101,1702,1,900,707,0
+Complete,"animations/iwp-packaged/Optics, Geometric/refracted-waves-3.iwp",152,1,12,1,1,4681,0
+Complete,"animations/iwp-packaged/Optics, Geometric/refracted-waves-5.iwp",152,1,12,1,1,5285,0
+Complete,"animations/iwp-packaged/Optics, Geometric/refracted-waves-4.iwp",152,1,12,1,1,4681,0
+Complete,"animations/iwp-packaged/Optics, Geometric/least-time-6.iwp",52,1,8,1,1,765,0
+Complete,"animations/iwp-packaged/Optics, Physical/2-source-inter.iwp",82,1,40,1,1,3969,0
+Complete,animations/iwp-packaged/Oscillations/spring-motion.iwp,1001,1,7,1,1,19000,0
+Complete,animations/iwp-packaged/Oscillations/damped-SHM-template.iwp,502,2,2,1,1,2505,1503
+Complete,animations/iwp-packaged/Oscillations/shm-compare-template.iwp,1001,1000,5996,1,1,7000,0
+Complete,animations/iwp-packaged/Oscillations/shm-synchronize.iwp,152,151,304,1,1,1057,0
+Complete,animations/iwp-packaged/Oscillations/vertical-spring-01.iwp,502,501,8506,1,1,10521,0
+Complete,animations/iwp-packaged/Oscillations/shm-01.iwp,252,251,751,1,1,1255,0
+Complete,animations/iwp-packaged/Oscillations/shm-phase-03.iwp,152,151,902,1,1,1057,0
+Complete,animations/iwp-packaged/Oscillations/shm-graph-02.iwp,102,1,2,1,1,505,0
+Complete,animations/iwp-packaged/Oscillations/pendulum01.iwp,502,501,6440,1,1,3507,501
+Complete,animations/iwp-packaged/Oscillations/shm-graph-01.iwp,102,1,4,1,1,707,0
+Complete,animations/iwp-packaged/Oscillations/shm-xva-plot.iwp,252,1,7,1,1,2761,0
+Complete,animations/iwp-packaged/Oscillations/lissajous-figures.iwp,1001,1,2,1,1,11000,0
+Complete,animations/iwp-packaged/Oscillations/damped-1.iwp,502,2,4,1,1,3507,1503
+Complete,animations/iwp-packaged/Oscillations/shm-phase-01.iwp,152,151,902,1,1,1057,0
+Complete,animations/iwp-packaged/Oscillations/shm-phase-02.iwp,152,151,902,1,1,1057,0
+Complete,animations/iwp-packaged/Oscillations/shm-synchronize-02.iwp,1001,1000,2002,1,1,7000,0
+Complete,animations/iwp-packaged/Oscillations/shm-compare-01.iwp,1001,1000,2002,1,1,7000,0
+Complete,animations/iwp-packaged/Oscillations/shm-02.iwp,252,251,751,1,1,1255,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_attachedXAccelZero.iwp,102,1,1,1,1,505,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_vectorShape.iwp,102,0,0,1,1,505,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_time.iwp,1001,0,0,1,1,3000,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_random.iwp,102,101,804,1,1,505,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_solidReadsOutput.iwp,1001,1,1,1,1,7000,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_inputs.iwp,1001,1,2,1,1,5000,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_outputs.iwp,1001,1,2,1,1,5000,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_euler.iwp,1001,0,0,1,1,5000,3000
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_hiddenInputs.iwp,1001,0,0,1,1,7000,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_constants.iwp,102,0,0,1,1,303,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_mathOps.iwp,1001,0,0,1,1,3000,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_graph.iwp,502,1,6,1,1,4509,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_eulerCrossPath.iwp,22,1,1,1,1,105,63
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_timeVariables.iwp,34,33,67,1,1,297,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_trails.iwp,1001,1,2,1,1,5000,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_verySmall.iwp,102,31,62,1,1,505,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_self.iwp,102,1,2,1,1,505,303
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_inputoutput.iwp,1001,0,0,1,1,3000,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_mathConstants.iwp,1001,0,0,1,1,3000,0
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_attachedVectors.iwp,102,1,4,1,1,909,303
+Complete,animations/iwp-packaged/TEST Developer Test/TEST_FloatingText.iwp,102,100,602,1,1,707,101
+Complete,animations/iwp-packaged/Waves and Sound/beats.iwp,202,1,6,1,1,2613,0
+Complete,animations/iwp-packaged/Waves and Sound/plucked-cord.iwp,42,1,12,1,1,1435,0
+Complete,animations/iwp-packaged/Waves and Sound/trav-wave-3.iwp,102,1,23,1,1,4949,0
+Complete,animations/iwp-packaged/Waves and Sound/wavedraw.iwp,502,501,6008,1,1,6513,0
+Complete,animations/iwp-packaged/Waves and Sound/doppler5.iwp,52,1,1,1,1,3417,0
+Complete,animations/iwp-packaged/Waves and Sound/doppler4.iwp,52,1,1,1,1,3315,0
+Complete,animations/iwp-2015/em-ratio-2f.iwp,202,201,3813,1,1,4221,201
+Complete,animations/iwp-2015/spring-motion-5.iwp,502,1,9,1,1,13527,1002
+Complete,animations/summer-physics/velocity06.iwp,52,51,380,1,1,255,102
+Complete,animations/summer-physics/collision-explosion-02b.iwp,1001,200,5218,1,800,4623,0
+Complete,animations/summer-physics/friction01c.iwp,102,2,6,1,1,2121,1212
+Complete,animations/summer-physics/work-01.iwp,1001,63,1240,1,938,819,0
+Complete,animations/summer-physics/projectile-compare-1.iwp,102,1,6,1,1,909,0
+Complete,animations/summer-physics/pendulum03.iwp,1001,1000,12925,1,1,7000,1000
+Complete,animations/summer-physics/spring_work-03.iwp,502,501,3625,1,1,13527,0
+Complete,animations/summer-physics/equilibrium-02.iwp,12,11,236,1,1,231,55
+Complete,animations/summer-physics/collision-inelastic-06.iwp,1001,101,1652,1,900,707,0
+Complete,animations/summer-physics/vector04.iwp,102,0,0,1,1,707,0
+Complete,animations/summer-physics/collision-elastic-2b.iwp,1001,34,775,1,967,306,0
+Complete,animations/summer-physics/vector02.iwp,102,0,0,1,1,2626,808
+Complete,animations/summer-physics/auto-impulse-3.iwp,202,43,55,1,1,6633,0
+Complete,animations/summer-physics/nsl-01.iwp,102,101,101,1,1,1111,404
+Complete,animations/summer-physics/collision-01.iwp,1001,1000,11001,1,1,15000,3000
+Complete,animations/summer-physics/atwoods-01.iwp,42,41,1052,1,1,861,123
+Complete,animations/summer-physics/collision-elastic-2d-01.iwp,102,1,3,1,1,1313,0
+Complete,animations/summer-physics/velocity02b.iwp,52,51,55,1,1,357,0
+Complete,animations/summer-physics/spring-equation-04.iwp,202,201,6415,1,1,4221,0
+Complete,animations/summer-physics/spring-motion-4.iwp,502,1,9,1,1,13527,1002
+Complete,animations/summer-physics/040304.iwp,1001,1000,1002,1,1,15000,0
+Complete,animations/summer-physics/040302.iwp,1001,1000,1002,1,1,15000,0
+Complete,animations/summer-physics/collision-elastic-4a.iwp,1001,101,1820,1,900,707,0
+Complete,animations/summer-physics/energy-vertspring-01.iwp,502,1,16,1,1,35571,7515
+Complete,animations/summer-physics/shm-phase-02b.iwp,302,301,1802,1,1,2107,0
+Complete,animations/summer-physics/vector03.iwp,102,0,0,1,1,909,0
+Complete,animations/summer-physics/eforce-05.iwp,1001,0,0,1,1,21000,0
+Complete,animations/summer-physics/gravitation-02b.iwp,1001,1,2,1,1,12000,0
+Complete,animations/summer-physics/eforce-09.iwp,1001,1000,2006,1,1,25000,0
+Complete,animations/summer-physics/spring-circle-analogy-02.iwp,1001,713,32089,1,288,29233,713
+Complete,animations/summer-physics/collision-elastic-3.iwp,1001,151,3471,1,850,1359,0
+Complete,animations/summer-physics/polarnet5.iwp,1001,1000,23906,1,1,11000,0
+Complete,animations/summer-physics/gravitation-01e.iwp,1001,1,12,1,1,18000,1000
+Complete,animations/summer-physics/collision-04.iwp,1001,1000,10960,1,1,19000,7000
+Complete,animations/summer-physics/2dforce-01a.iwp,202,3,4,1,1,1407,0
+Complete,animations/summer-physics/040303.iwp,1001,1000,1002,1,1,15000,0
+Complete,animations/summer-physics/nsl-02.iwp,102,101,101,1,1,1111,404
+Complete,animations/summer-physics/equilibrium-01.iwp,12,11,110,1,1,165,0
+Complete,animations/summer-physics/auto-impulse-compare.iwp,202,201,5802,1,1,7437,0
+Complete,animations/summer-physics/velocity04.iwp,202,201,205,1,1,1407,0
+Complete,animations/summer-physics/velocity01b.iwp,52,51,55,1,1,357,0
+Complete,animations/summer-physics/energy-spring-1b.iwp,1001,1,16,1,1,47000,4000
+Complete,animations/summer-physics/eforce-07.iwp,1001,0,0,1,1,21000,0
+Complete,animations/summer-physics/stopblock01f.iwp,177,1,5,1,1,2992,1232
+Complete,animations/summer-physics/collision-03.iwp,1001,1000,10966,1,1,15000,3000
+Complete,animations/summer-physics/collision-02.iwp,1001,1000,11001,1,1,15000,3000
+Complete,animations/summer-physics/gravitation-03.iwp,1001,1,4,1,1,14000,2000
+Complete,animations/summer-physics/eforce-08.iwp,1001,1000,2006,1,1,25000,0
+Complete,animations/summer-physics/collision-02b.iwp,1001,1000,11001,1,1,9000,0
+Complete,animations/summer-physics/pendulum02b.iwp,1001,1000,24795,1,1,17000,1000
+Complete,animations/summer-physics/trav-wave-4.iwp,402,400,30402,1,1,65363,0
+Complete,animations/summer-physics/projectile-problem-2.iwp,522,1,2,1,21,3507,0
+Complete,animations/summer-physics/040301.iwp,1001,1,2,1,1,15000,0
+Complete,animations/summer-physics/projectile-problem-3.iwp,202,1,2,1,1,1407,0
+Complete,animations/summer-physics/spring-equation-02.iwp,502,501,16015,1,1,10521,0
+Complete,animations/summer-physics/friction01b.iwp,102,2,2,1,1,1313,505
+Complete,animations/summer-physics/collision-explosion-02.iwp,1001,200,5226,1,800,4623,0
+Complete,animations/summer-physics/proj-vect-00.iwp,102,101,307,1,1,1919,606
+Complete,animations/summer-physics/2dforce-01b.iwp,202,2,3,1,1,1407,0
+Complete,animations/summer-physics/gravitation-01b.iwp,1001,1,4,1,1,14000,0
+Complete,animations/summer-physics/spring-equation-03.iwp,502,501,16015,1,1,10521,0
+Complete,animations/summer-physics/nsl-00.iwp,102,101,202,1,1,1111,303
+Complete,animations/summer-physics/040305.iwp,1001,999,1999,1,1,15000,0
+Complete,animations/ftemo/em-ratio-1d.iwp,202,200,1518,1,1,2613,402
+Complete,animations/ftemo/em-ratio-2d.iwp,202,201,2992,1,1,4221,201
+Complete,animations/ftemo/point-interference-03.iwp,1001,1,10,1,907,3478,940
+Complete,animations/ftemo/lenzlaw-02b.iwp,42,1,3,1,1,615,0
+Complete,animations/ftemo/ray-refraction-3i.iwp,61,60,180,1,1,1140,1020
+Complete,animations/ftemo/cp-mfield-02.iwp,1001,834,1620,1,1,9000,3000
+Complete,animations/ftemo/em-ratio-1c.iwp,202,200,704,1,1,1809,603
+Complete,animations/ftemo/mass-spec.iwp,202,65,115,1,1,1407,603
+Complete,animations/ftemo/rainbow-01.iwp,14,1,4,1,1,273,52
+Complete,animations/ftemo/gas-laws-bubble-01b.iwp,87,86,861,1,1,774,0
+Complete,animations/ftemo/lenzlaw-01.iwp,32,31,35,1,1,527,93
+Complete,animations/ftemo/refracted-waves-6b.iwp,202,1,38,1,1,17889,402
+Complete,animations/ftemo/point-interference-04.iwp,152,0,0,1,1,5889,1510
+Complete,animations/ftemo/refracted-waves-5.iwp,152,1,12,1,1,8003,0
+Complete,animations/ftemo/point-interference-02.iwp,187,0,0,1,1,12462,6510
+Complete,animations/ftemo/em-ratio-1b.iwp,202,200,1198,1,1,1809,402
+Complete,animations/unit-test-2017/TEST_Euler_SelfReference.iwp,102,1,2,1,1,505,303
+Complete,animations/unit-test-2017/TEST_euler.iwp,1001,0,0,1,1,5000,3000
+Complete,animations/winters-ncssm-2009/eforce-04.iwp,1001,1,4,1,1,23000,0
+Complete,animations/winters-ncssm-2009/beats.iwp,202,1,6,1,1,2211,0
+Complete,animations/winters-ncssm-2009/pitch1-para.iwp,1001,1000,18663,1,1,9000,0
+Complete,animations/winters-ncssm-2009/velocity06.iwp,52,51,377,1,1,255,102
+Complete,animations/winters-ncssm-2009/rot-kin-03.iwp,402,401,810,1,1,7619,0
+Complete,animations/winters-ncssm-2009/magforce-05.iwp,102,0,0,1,1,2525,808
+Complete,animations/winters-ncssm-2009/plucked-cord.iwp,42,1,12,1,1,1435,0
+Complete,animations/winters-ncssm-2009/collision-inelastic-2d-02.iwp,202,201,9083,1,1,5829,402
+Complete,animations/winters-ncssm-2009/kingraph4.iwp,102,101,202,1,1,505,404
+Complete,animations/winters-ncssm-2009/spring_work-02.iwp,502,501,17452,1,1,17535,0
+Complete,animations/winters-ncssm-2009/leaf.iwp,502,501,3001,1,1,2505,1002
+Complete,animations/winters-ncssm-2009/vector06.iwp,102,0,0,1,1,1111,404
+Complete,animations/winters-ncssm-2009/velocity03.iwp,202,201,205,1,1,1407,0
+Complete,animations/winters-ncssm-2009/refraction-in-box-2.iwp,42,41,607,1,1,533,0
+Complete,animations/winters-ncssm-2009/doppler3.iwp,52,1,1,1,1,3519,0
+Complete,animations/winters-ncssm-2009/rot-kin-01.iwp,402,0,0,1,1,5213,0
+Complete,animations/winters-ncssm-2009/efield-plot-02d.iwp,1001,1,4,1,1,19000,0
+Complete,animations/winters-ncssm-2009/coulombslaw01.iwp,17,15,35,2,1,195,0
+Complete,animations/winters-ncssm-2009/gravitation-01c.iwp,1001,1,8,1,1,14000,0
+Complete,animations/winters-ncssm-2009/relative-velocity-02.iwp,202,201,1616,1,1,5427,201
+Complete,animations/winters-ncssm-2009/2-source-inter.iwp,82,1,40,1,1,3969,0
+Complete,animations/winters-ncssm-2009/em-ratio.iwp,502,501,20789,1,1,6513,501
+Complete,animations/winters-ncssm-2009/spring-motion.iwp,1001,999,2004,1,1,19000,0
+Complete,animations/winters-ncssm-2009/em-ratio-1d.iwp,202,200,1518,1,1,2613,402
+Complete,animations/winters-ncssm-2009/e-field-cockrell.iwp,102,0,0,1,1,4242,0
+Complete,animations/winters-ncssm-2009/torque-disc-01b.iwp,202,201,7218,1,1,3819,603
+Complete,animations/winters-ncssm-2009/shm-xv-plot.iwp,1001,1000,10989,1,1,5000,0
+Complete,animations/winters-ncssm-2009/fluid-statics-06b.iwp,52,51,724,1,1,867,0
+Complete,animations/winters-ncssm-2009/relative_velocity_01.iwp,202,1,5,1,1,3819,603
+Complete,animations/winters-ncssm-2009/collision-explosion-02b.iwp,1001,200,5218,1,800,4623,0
+Complete,animations/winters-ncssm-2009/total-wave-applet-2.iwp,402,400,29832,1,1,65363,0
+Complete,animations/winters-ncssm-2009/gravitation-05.iwp,1001,448,2508,1,190,8110,0
+Complete,animations/winters-ncssm-2009/relativity-01.iwp,202,201,10456,1,1,9447,1005
+Complete,animations/winters-ncssm-2009/spring-motion-2-variable-cannon.iwp,1001,1000,76009,1,1,23000,3000
+Complete,animations/winters-ncssm-2009/elastic-collision-1.iwp,1001,201,4223,1,800,1809,0
+Complete,animations/winters-ncssm-2009/v1_euler_2.iwp,1001,1000,1999,1,1,5000,2000
+Complete,animations/winters-ncssm-2009/mirror-concave-ray-tracing-01.iwp,1001,1000,12963,1,1,29000,3000
+Complete,animations/winters-ncssm-2009/velocity04b.iwp,202,201,1809,1,1,2211,603
+Complete,animations/winters-ncssm-2009/trav-wave-2.iwp,502,1,13,1,1,14529,0
+Complete,animations/winters-ncssm-2009/satellites.iwp,3,1,8,1,1,26,0
+Complete,animations/winters-ncssm-2009/energy-fall-01.iwp,352,1,4,1,1,6669,2457
+Complete,animations/winters-ncssm-2009/rot-kin-02.iwp,402,1,12,1,1,8421,0
+Complete,animations/winters-ncssm-2009/magforce-02.iwp,102,0,0,1,1,2525,808
+Complete,animations/winters-ncssm-2009/slot-view-02.iwp,1001,1000,1010,1,1,27000,0
+Complete,animations/winters-ncssm-2009/friction01c.iwp,102,2,6,1,1,2121,1212
+Complete,animations/winters-ncssm-2009/lissajous-figures-2.iwp,1001,1,2,1,1,11000,0
+Complete,animations/winters-ncssm-2009/line_of_sight.iwp,1001,1000,4998,1,1,7000,0
+Complete,animations/winters-ncssm-2009/travwave-jc-01.iwp,1001,999,66435,1,1,85000,0
+Complete,animations/winters-ncssm-2009/collision-elastic-4.iwp,1001,101,1820,1,900,707,0
+Complete,animations/winters-ncssm-2009/fluid-dynamics-torricelli-02.iwp,1001,1,17,1,1,43000,0
+Complete,animations/winters-ncssm-2009/cpchall05.iwp,1001,805,805,1,1,5000,0
+Complete,animations/winters-ncssm-2009/em-ratio-2d.iwp,202,201,2992,1,1,4221,201
+Complete,animations/winters-ncssm-2009/work-01.iwp,1001,63,1240,1,938,819,0
+Complete,animations/winters-ncssm-2009/intersection_2lines.iwp,102,0,0,1,1,1313,202
