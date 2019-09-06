@@ -248,7 +248,7 @@ function archiveVarsAtStep( step, vars ) {
 
 function calculateInputAtStep(input, step, vars, verbose ) {
 
-    // console.log("iwp6-calc:437> input: " , input, "   index: " , index);
+    // console.log("iwp6-calc:251> calculateInputAtStep input: " , input.name,  " ", input, "  step: " , step,  " vars: ", vars );
 
 	// next load in variables for all of the inputs
 	// If we're running in calculator only mode, use default values
@@ -264,7 +264,7 @@ function calculateInputAtStep(input, step, vars, verbose ) {
 /** BUGBUG - TODE Change this over to have no side effects, all vars writing should happen in parent stack */
 function calculateOutputAtStep(output, step, vars, verbose) {
 
-    // console.log("iwp6-calc:267> calculateOutputAtStep:267> vars: " + JSON.stringify(vars));
+    // console.log("iwp6-calc:267> calculateOutputAtStep: output: " , output.name , " ", output, "  step: " , step , " vars: " , JSON.stringify(vars) );
 
     var newValue = evaluateCalculator( output.name+".out", output.calculator, step, vars, verbose, output.name ).value;
     vars[output.name] = newValue;
@@ -512,9 +512,6 @@ function calculateVarsAtStep(step) {
     updateTimeDisplay(vars.t);
   }
 
-
-
-
   // Collect user Inputs! These are polled from the DOM every step.
   compiledObjects.forEach( function(object, index) {
 
@@ -529,7 +526,8 @@ function calculateVarsAtStep(step) {
 
     } else if ( object.objectType == 'output') {
 
-        var newValue = calculateOutputAtStep(object, step, vars, false );
+// 2019Sep06 Turned on Verbose
+        var newValue = calculateOutputAtStep(object, step, vars, true );
 
         if ( isNaN(newValue) ) { throw "not a number" };
         if ( !isFinite(newValue) ) { throw "not finite" };
@@ -960,7 +958,7 @@ function migrateLegacyEquation(toMigrate) {
 
 function evaluateCompiledMath( compiled, vars ) {
 
-  var newValue = compiled.eval(vars)
+  var newValue = compiled.evaluate(vars)
   if ( typeof newValue === "number" ) {
     return newValue;
   } else if ( typeof newValue["value"] === "number" ) {
@@ -988,7 +986,9 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
         try {
             return evaluateParametricCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
         } catch ( err ) {
-            console.log("iwp6-calc:980> Exception in evaluateParametricCalculator for " + resultVariable + ": " + err );
+            console.log("iwp6-calc:991> Exception in evaluateParametricCalculator for " + resultVariable + ": " + err );
+            console.log("iwp6-calc:992> Object Detail: Vars: " , vars )
+            console.log("iwp6-calc:993> Object Detail: Calculator: " , calculator )
             return { value: 0 }
         }
     } else if ( calculator.calcType == "euler-mathjs" ) {
@@ -996,7 +996,7 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
         try {
             return evaluateEulerCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
         } catch ( err ) {
-            console.log("iwp6-calc:980> Exception in evaluateEulerCalculator for " + resultVariable + ": " + err );
+            console.log("iwp6-calc:999> Exception in evaluateEulerCalculator for " + resultVariable + ": " + err );
             return { value: 0 }
         }
 
@@ -1015,7 +1015,9 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
 function evaluateParametricCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
 
     try {
-        var result = calculator.compiled.eval(vars);
+
+
+        var result = calculator.compiled.evaluate(vars);
 
         if ( !isFinite(result) ) {
             throw "iwp6-calc:1260> Compiled vars are not finite"
@@ -1050,9 +1052,12 @@ function evaluateParametricCalculator( resultVariable, calculator, calculateStep
     }
     catch ( err ) {
         if ( verbose ) {
-            console.log("iwp6-calc:1292> evaluateParametricCalculator ERROR: " + resultVariable + "> Unable to evaluate calculator: ", err );
-            console.log("iwp6-calc:1293> evaluateParametricCalculator ERROR: " + resultVariable + "> Equation: ", calculator.equation );
-            console.log("iwp6-calc:1294> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars: ", vars);
+            console.log("iwp6-calc:1058> evaluateParametricCalculator ERROR: " + resultVariable + "> Unable to evaluate calculator: ", err );
+            console.log("iwp6-calc:1059> evaluateParametricCalculator ERROR: " + resultVariable + "> Equation: ", calculator.equation );
+            console.log("iwp6-calc:1060> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars: ", vars);
+            console.log("iwp6-calc:1060> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars.STRINGIFY: ", JSON.stringify(vars));
+            console.log("iwp6-calc:1062> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars: t = ", vars.t, "  t1 = " , vars['t1'] );
+
         }
         throw err;
     }
@@ -1110,7 +1115,7 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
         // 2018Mar22 Fix to only apply the acceleration time component to the change in velocity.
 
         // console.log("iwp5:1088> Calculating acceleration via calculator: ", calculator, " at calcStep: " + calculateStep + " for vars: ", vars )
-        acceleration = calculator.accelerationCompiled.eval(vars);
+        acceleration = calculator.accelerationCompiled.evaluate(vars);
 
         if ( !isFinite(acceleration) ) {
             throw "Calculator.accelerationCompiled result is not finite, is: " + acceleration
@@ -1257,6 +1262,11 @@ function parseAnimationToMemory( rawAnimation ) {
 
   // console.log("iwp6-calc:1350> Typeof input: " , typeof rawAnimation.objects.input)
 
+  // 2019Sep06 Reordering of the Animatin Objects based on IWP3 Logic Port.
+
+  console.log("iwp6-calc:1288> Executing animationObject Reordering on CompiledObjects");
+  animation.loop = reorderAnimationObjectsBySymbolicDependency(animation.loop);
+
   animation.loop.forEach( function( object, index ) {
 
     if ( object.objectType == 'input' ) {
@@ -1273,9 +1283,6 @@ function parseAnimationToMemory( rawAnimation ) {
   } );
 
   // Helper Functions that run filters.
-
-
-
 
   // 2019Apr09 store in global singleton
 

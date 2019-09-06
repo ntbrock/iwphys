@@ -1,0 +1,76 @@
+@()
+
+@layouts.testWithJavascripts("MathJsTest: stepFunction", Seq("jquery", "mathjs")) {
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <h1>MathJsTest: stepFunction</h1>
+
+            <h3>Root Issue</h3>
+            <i>Encountered this calculation issue in em-ratio-2.iwp: iwp6-calc:991> Exception in evaluateParametricCalculator for tf.out: TypeError: Unexpected type of argument in function subtract (expected: Array or Matrix, actual: function, index: 1)</i>
+
+
+            <h3>Equation Input</h3>
+            <input id="equation" value="">
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div id="output"></div>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+"use strict";
+
+$(function() {
+    console.log("stepFunction:10> Loaded");
+
+    // iwp-calc6.js 132
+    var varsConstants = {
+         G : -9.8,
+         step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } },
+         toRadians : function(degrees) { return degrees * Math.PI / 180; },
+         toDegrees : function(radians) { return radians * 180 / Math.PI; },
+         sign: function(input) { if ( input < 0 ) { return -1 } else { return 1 } }
+         }
+
+    var vars = {
+        t: 1,
+        t1: 7.546363905912276e-10,
+        to: 3.7731819529561386e-9
+    };
+
+
+    var eqn = "(t-to-t1)*step(t-to-t1)";
+
+    var calc = math.compile( eqn );
+
+    var result = calc.evaluate( Object.assign(vars, varsConstants) );
+
+    console.log("Calculation Result: " , result );
+
+    $("#output").html("Result: " + result);
+    $("#equation").val(eqn);
+
+});
+
+</script>
+
+}
+
+
+
+
+
+
+

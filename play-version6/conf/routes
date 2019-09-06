@@ -10,8 +10,11 @@ GET     /                           controllers.IndexController.index
 
 # Official Version4 Version6 Comparison Route
 # Sampl /validation/unit-test-2017/TEST_euler.iwp
-GET     /validation/:collection/:filename    controllers.ValidationController.validateAnimation(collection: String, filename: String, format : Option[String] ?= None )
-GET     /validation/:collection/:subCollection/:filename    controllers.ValidationController.validateSubAnimation(collection: String, subCollection: String, filename: String, format : Option[String] ?= None )
+GET     /validation/calculation/:collection/:filename    controllers.ValidationController.validateAnimationCalculations(collection: String, filename: String, format : Option[String] ?= None )
+GET     /validation/calculation/:collection/:subCollection/:filename    controllers.ValidationController.validateSubAnimationCalculations(collection: String, subCollection: String, filename: String, format : Option[String] ?= None )
+
+GET     /validation/ordering/:collection/:filename    controllers.ValidationController.validateAnimationOrdering(collection: String, filename: String, format : Option[String] ?= None )
+GET     /validation/ordering/:collection/:subCollection/:filename    controllers.ValidationController.validateSubAnimationOrdering(collection: String, subCollection: String, filename: String, format : Option[String] ?= None )
 
 
 # Official filesystem Browser
@@ -61,12 +64,16 @@ GET     /test/xtract/test1              controllers.XtractTestController.xtractT
 GET     /test/xtract/test2              controllers.XtractTestController.xtractTest2_iwp()
 
 GET     /test/xml/version4/readString    controllers.XmlTestController.version4ReadString()
-GET    /test/xml/version4/readCollection/:collection/:filename    controllers.XmlTestController.version4CollectionRead(collection: String, filename:String)
-GET    /test/xml/version4/readCollection/:collection/:subCollection/:filename    controllers.XmlTestController.version4SubCollectionRead(collection: String, subCollection: String, filename:String)
-GET    /test/xml/version4/convertCollection/:collection/:subCollection/:filename    controllers.XmlTestController.version4SubCollectionConvert(collection: String, subCollection: String, filename:String)
+GET     /test/xml/version4/readCollection/:collection/:filename    controllers.XmlTestController.version4CollectionRead(collection: String, filename:String)
+GET     /test/xml/version4/readCollection/:collection/:subCollection/:filename    controllers.XmlTestController.version4SubCollectionRead(collection: String, subCollection: String, filename:String)
+GET     /test/xml/version4/convertCollection/:collection/:subCollection/:filename    controllers.XmlTestController.version4SubCollectionConvert(collection: String, subCollection: String, filename:String)
 
 # Integration Tests for Designer Users
-GET    /test/designer/user/sample.json     controllers.DesignerTestController.userSample()
+GET     /test/designer/user/sample.json     controllers.DesignerTestController.userSample()
+
+
+# Math.js Equation Tests
+GET     /test/mathjs/stepFunction            controllers.MathJsTestController.stepFunction()
 
 
 

@@ -206,7 +206,7 @@ Running or stepping the animation forward will advance the horizontal position o
 		</solid>
 		<output>
 			<name>r1</name>
-			<text>(R-left)²</text>
+			<text>(R-left)^2</text>
 			<units>m</units>
 			<calculator type="parametric">
 				<value>x^2+y^2</value>
@@ -215,7 +215,7 @@ Running or stepping the animation forward will advance the horizontal position o
 		</output>
 		<output>
 			<name>r2</name>
-			<text>(R-right)²</text>
+			<text>(R-right)^2</text>
 			<units>m</units>
 			<calculator type="parametric">
 				<value>(x2-x)^2+y^2</value>

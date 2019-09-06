@@ -6,7 +6,6 @@
  */
 
 
-
 /**
  * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
  * This is used mostly for the backwards step.
