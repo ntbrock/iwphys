@@ -248,7 +248,7 @@ function archiveVarsAtStep( step, vars ) {
 
 function calculateInputAtStep(input, step, vars, verbose ) {
 
-    console.log("iwp6-calc:251> calculateInputAtStep input: " , input.name,  " ", input, "  step: " , step,  " vars: ", vars );
+    // console.log("iwp6-calc:251> calculateInputAtStep input: " , input.name,  " ", input, "  step: " , step,  " vars: ", vars );
 
 	// next load in variables for all of the inputs
 	// If we're running in calculator only mode, use default values
@@ -264,7 +264,7 @@ function calculateInputAtStep(input, step, vars, verbose ) {
 /** BUGBUG - TODE Change this over to have no side effects, all vars writing should happen in parent stack */
 function calculateOutputAtStep(output, step, vars, verbose) {
 
-    console.log("iwp6-calc:267> calculateOutputAtStep: output: " , output.name , " ", output, "  step: " , step , " vars: " , JSON.stringify(vars) );
+    // console.log("iwp6-calc:267> calculateOutputAtStep: output: " , output.name , " ", output, "  step: " , step , " vars: " , JSON.stringify(vars) );
 
     var newValue = evaluateCalculator( output.name+".out", output.calculator, step, vars, verbose, output.name ).value;
     vars[output.name] = newValue;
