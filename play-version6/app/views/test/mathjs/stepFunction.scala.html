@@ -55,7 +55,7 @@ $(function() {
 
     var calc = math.compile( eqn );
 
-    var result = calc.eval( Object.assign(vars, varsConstants) );
+    var result = calc.evaluate( Object.assign(vars, varsConstants) );
 
     console.log("Calculation Result: " , result );
 

@@ -529,7 +529,8 @@ function calculateVarsAtStep(step) {
 
     } else if ( object.objectType == 'output') {
 
-        var newValue = calculateOutputAtStep(object, step, vars, false );
+// 2019Sep06 Turned on Verbose
+        var newValue = calculateOutputAtStep(object, step, vars, true );
 
         if ( isNaN(newValue) ) { throw "not a number" };
         if ( !isFinite(newValue) ) { throw "not finite" };
@@ -960,7 +961,7 @@ function migrateLegacyEquation(toMigrate) {
 
 function evaluateCompiledMath( compiled, vars ) {
 
-  var newValue = compiled.eval(vars)
+  var newValue = compiled.evaluate(vars)
   if ( typeof newValue === "number" ) {
     return newValue;
   } else if ( typeof newValue["value"] === "number" ) {
@@ -989,7 +990,8 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
             return evaluateParametricCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
         } catch ( err ) {
             console.log("iwp6-calc:991> Exception in evaluateParametricCalculator for " + resultVariable + ": " + err );
-            console.log("iwp6-calc:992> Object Detail: Calculator: " , calculator )
+            console.log("iwp6-calc:992> Object Detail: Vars: " , vars )
+            console.log("iwp6-calc:993> Object Detail: Calculator: " , calculator )
             return { value: 0 }
         }
     } else if ( calculator.calcType == "euler-mathjs" ) {
@@ -1016,7 +1018,9 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
 function evaluateParametricCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
 
     try {
-        var result = calculator.compiled.eval(vars);
+
+
+        var result = calculator.compiled.evaluate(vars);
 
         if ( !isFinite(result) ) {
             throw "iwp6-calc:1260> Compiled vars are not finite"
@@ -1111,7 +1115,7 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
         // 2018Mar22 Fix to only apply the acceleration time component to the change in velocity.
 
         // console.log("iwp5:1088> Calculating acceleration via calculator: ", calculator, " at calcStep: " + calculateStep + " for vars: ", vars )
-        acceleration = calculator.accelerationCompiled.eval(vars);
+        acceleration = calculator.accelerationCompiled.evaluate(vars);
 
         if ( !isFinite(acceleration) ) {
             throw "Calculator.accelerationCompiled result is not finite, is: " + acceleration
