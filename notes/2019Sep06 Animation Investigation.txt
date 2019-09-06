@@ -1,0 +1,118 @@
+2019Sep06 Animation Investigation
+
+Fall out from the reversal - in em-ratio there is a dependency from the FIRST FRAME
+
+em-ratio-2.iwp
+Two outputs, px and py dependent on a value from a solid that is defined later in the order.
+
+
+1254> Done w/ miasma,  getting back into how I shoudl pre-initialize the framnes, reading iwp4 code.
+
+
+DProblem.java
+
+    public synchronized void reorderProblemObjectsBySymbolicDependency ( )
+    	throws UnknownVariableException, CircularDependencyException, InvalidEquationException
+    {
+    	// 
+
+ObjectsForTheEnd
+
+// This is my attempt at an algorithim to solve the requires provides problem.
+// I am going to find the objects that are candidates, and iterate over that list,
+// looking for objects that have had their requirements satisfied, and if they are 
+// satisfied, pull them out of the candidate array, and move them to the end of the
+// objectsForMiddle.
+
+
+Collection requiredSymbols = objectCalc.getRequiredSymbols();
+
+
+Could write a new valdiation test to check the iwp4 order -vs- iwp6 order
+
+Ahhah!  IUt was the overwriite of vars in the console logs that was conofusing me.
+
+I do think I need to implement the reordering call, port to wip6.
+
+Wring a new ordering validator.
+  3HOURS
+
+  {
+"name": "size",
+"text": "Size scale",
+"initialValue": 0.003,
+"units": "",
+"hidden": true,
+"objectType": "input"
+},
+{
+
+
+1412> output reuired + provided
+
+{
+"name": "tf",
+"text": "Time in fields",
+"units": "s",
+"calculator": {
+"calcType": "parametric",
+"value": "(t-to-t1)*step(t-to-t1)"
+},
+"hidden": true,
+"objectType": "output",
+"required": [
+"TODO"
+],
+"provided": []
+},
+
+
+
+= TODO : Solid provided fiields needs to loo into calculator?
+
+= TODO: Remove the time object from teh v4 list
+
+
+
+
+2019Sep06
+
+Andy
+L> Learned HTML to make the help page from scratch.
+N> Finsihing the help page + implementign it into the website next week.  Get a microphone! 
+
+Dr. Bennett
+L> Blocker = Can't get to the iwphys website. 
+N> Pick the 6 for each collection. 
+
+Ben
+L> Looking at iwp6 aanimation + graph javascript, trying to go thru doc to see if we could fix any of the issues. Trying to fix graph labeling issue and also make other colored lines for x.pos, x.vel.
+N> Better idea now, able to make some real changes!
+
+
+Taylor
+L> Support - Sendgrid caught one of api keys,  github hillarity.  Animator: Completed running the back Ported IWPV3 object ordering, written a lot of JS. (In Branch).
+N> Animator - Continue reordering fix! Kick off another bulk valdiation.  move back into design mode -- Alow logged in users to upload new animation jspon -> write it out to the filesystem.
+
+= #1 After - iwp6.iwphys website -> getting an error message. 
+
+= After - Demo the two fixes from last week.
+
+After - Rescehdule
+
+Tue 17th at 4:20PM Eastern -> Calendar invite.
+
+
+
+#2 After - Ben Blocker: Need to learn more javaascript, can helpout!
+
+Do a knoweldge tranfer today!
+
+After - Dev - get our git repos synchronized.
+
+
+
+
+
+
+
