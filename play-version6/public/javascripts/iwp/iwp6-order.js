@@ -7,24 +7,31 @@
  */
 function reorderAnimationObjectsBySymbolicDependencyJsonStringify( unused ) {
 
-	// New routine for calculting object dependency ordering
-
-
-	parsedAnimation.loop.forEach ( function( object, index ) {
-
-	  // console.log("iwp6-order:15> object.calculator: " + object.calculator)
-
-      object.required = animationObjectRequires(object)
-      object.provided = animationObjectProvides(object)
-
-    });
-
 	// Perform reodering
-	parsedAnimation.loop = animationObjectReorder(parsedAnimation.loop);
+	parsedAnimation.loop = reorderAnimationObjectsBySymbolicDependency(parsedAnimation.loop);
 
 
 	return JSON.stringify(parsedAnimation.loop)
 }
+
+
+/**
+ * Actual logic entry point - called from iwp-calc parsing function as well
+ */
+
+function reorderAnimationObjectsBySymbolicDependency(loop) {
+
+	// Mutation Side Effect
+	loop.forEach ( function( object, index ) {
+		object.required = animationObjectRequires(object)
+		object.provided = animationObjectProvides(object)
+    });
+
+	// Perform reodering
+	return animationObjectReorder(loop);
+}
+
+
 
 
 var timeConstants = { "t": true }
@@ -64,7 +71,7 @@ function equationRequires(eqn) {
 
 
 	if ( Object.keys(keep).length > 0 ) {
-		console.log("iwp6-order:43>  Eqn: " + eqn + "   Keep : " + JSON.stringify(Object.keys(keep)));
+		// console.log("iwp6-order:43>  Eqn: " + eqn + "   Keep : " + JSON.stringify(Object.keys(keep)));
 	}
 
 	// Dedupe
@@ -201,7 +208,8 @@ function arrayUnique(arr) {
 
 function animationObjectReorder(loop) {
 
-    var objectsForTheEnd = [];
+	// Not using objects for the End, since we're not trying to catch stray object types here
+    // var objectsForTheEnd = [];
     var objectsForTheMiddle = [];
     var orderingCandidates = [];
 
@@ -223,10 +231,9 @@ function animationObjectReorder(loop) {
 		}
 	});
 
-	console.log("iwp6-order:221> ----------------------------------------------------");
-	console.log("iwp6-order:221> Starting reordering, providedCache: " + JSON.stringify(providedCache));
+	// console.log("iwp6-order:221> ----------------------------------------------------");
+	// console.log("iwp6-order:221> Starting reordering, providedCache: " + JSON.stringify(providedCache));
 
-	var newLoop = [];
 	// Line 467
 	var lastCandidateCount = -1;
 	var loopCount = 0;
@@ -239,6 +246,7 @@ function animationObjectReorder(loop) {
 		var nextOrderingCandidates = [];
 
 		// Line 475
+		/*
 		console.log("iwp6-order:242> Loop=" + loopCount + "  ==============================================");
 
 		console.log("iwp6-order:243> Loop=" + loopCount + "  objectsForTheMiddle.length: " + objectsForTheMiddle.length );
@@ -256,7 +264,7 @@ function animationObjectReorder(loop) {
 		});
 
 		console.log("iwp6-order:242> Loop=" + loopCount + "  ==============================================");
-
+		*/
 
 
 		loopCount++;
@@ -270,7 +278,7 @@ function animationObjectReorder(loop) {
 
 			var selfProvides = arrayToObject(object.provided);
 
-			console.log("iwp6-order:192> OrderingCandidate= " + object.name + "  SelfProvides=" + JSON.stringify(selfProvides));
+			// console.log("iwp6-order:192> OrderingCandidate= " + object.name + "  SelfProvides=" + JSON.stringify(selfProvides));
 
 			// Line 486 - Iterate Each requirement
 			object.required.forEach(function(symbol,index) {
@@ -293,7 +301,7 @@ function animationObjectReorder(loop) {
 					// Line 524
 					missingVariables.push(symbol);
 
-					console.log("iwp6-order:220> MISSING VARIABLE: " + symbol + "   from object: " + object.name);
+					// console.log("iwp6-order:220> MISSING VARIABLE: " + symbol + "   from object: " + object.name);
 				} else {
 
 				}
@@ -311,8 +319,8 @@ function animationObjectReorder(loop) {
 			}
 		});
 
-		console.log("iwp6-order:236> orderingCandidates.length=" + orderingCandidates.length + "  nextOrderingCandidates.length=" + nextOrderingCandidates.length);
-				// Line 539
+		// console.log("iwp6-order:236> orderingCandidates.length=" + orderingCandidates.length + "  nextOrderingCandidates.length=" + nextOrderingCandidates.length);
+		// Line 539
 		orderingCandidates = nextOrderingCandidates
 
 		// Line 541
@@ -324,9 +332,10 @@ function animationObjectReorder(loop) {
 
 	}
 
+	return objectsForTheMiddle;
 
-	return loop;
-	//return newLoop;
+
+	// return loop;
 }
 
 

@@ -96,11 +96,11 @@ class ValidationController @Inject()(cc: ControllerComponents,
 
     // Ok("TODO: Implementing object ordering comparison")
 
-    //val v4 = iwpVersion4CalculatorService.problemObjectOrdering(path)
-    //Ok(s"TODO: v4: ${v4}")
+    val v4 = iwpVersion4CalculatorService.problemObjectOrdering(path)
+    Ok(s"TODO: v4: ${v4}")
 
-    val v6 = iwpVersion6CalculatorService.animateObjectOrdering(collection, filename)
-    Ok(s"TODO: v6: ${v6}")
+    //val v6 = iwpVersion6CalculatorService.animateObjectOrdering(collection, filename)
+    //Ok(s"TODO: v6: ${v6}")
 
 
     /*

@@ -264,7 +264,7 @@ function calculateInputAtStep(input, step, vars, verbose ) {
 /** BUGBUG - TODE Change this over to have no side effects, all vars writing should happen in parent stack */
 function calculateOutputAtStep(output, step, vars, verbose) {
 
-    console.log("iwp6-calc:267> calculateOutputAtStep: output: " , output.name , " ", output, "  step: " , step , " vars: " , vars );
+    console.log("iwp6-calc:267> calculateOutputAtStep: output: " , output.name , " ", output, "  step: " , step , " vars: " , JSON.stringify(vars) );
 
     var newValue = evaluateCalculator( output.name+".out", output.calculator, step, vars, verbose, output.name ).value;
     vars[output.name] = newValue;
@@ -511,9 +511,6 @@ function calculateVarsAtStep(step) {
   if ( typeof updateTimeDisplay === "function" ) {
     updateTimeDisplay(vars.t);
   }
-
-
-
 
   // Collect user Inputs! These are polled from the DOM every step.
   compiledObjects.forEach( function(object, index) {
@@ -1265,6 +1262,11 @@ function parseAnimationToMemory( rawAnimation ) {
 
   // console.log("iwp6-calc:1350> Typeof input: " , typeof rawAnimation.objects.input)
 
+  // 2019Sep06 Reordering of the Animatin Objects based on IWP3 Logic Port.
+
+  console.log("iwp6-calc:1288> Executing animationObject Reordering on CompiledObjects");
+  animation.loop = reorderAnimationObjectsBySymbolicDependency(animation.loop);
+
   animation.loop.forEach( function( object, index ) {
 
     if ( object.objectType == 'input' ) {
@@ -1281,9 +1283,6 @@ function parseAnimationToMemory( rawAnimation ) {
   } );
 
   // Helper Functions that run filters.
-
-
-
 
   // 2019Apr09 store in global singleton
 
