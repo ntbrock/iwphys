@@ -1,4 +1,4 @@
-@(thisCollection: Iwp6Collection, subCollections: Seq[Iwp6Collection], animations: Seq[Iwp6Animation], failureAnimations: Seq[Iwp6AnimationWithFailure])
+@(thisCollection: Iwp6Collection, subCollections: Seq[Iwp6Collection], animations: Seq[Iwp6Animation])
 
 @main(s"Browse Collection: $thisCollection") {
 
@@ -20,29 +20,7 @@
   </div>
 
 
-  @if(failureAnimations.size > 0 ) {
-
-  <div class="row">
-    <div class="col-lg-12">
-
-      <h3 class="iwp-warning">Warning: Some Animations Failed to load:</h3>
-
-      <ul>
-      @failureAnimations.map { fail =>
-
-        <li><strong>@fail.filename</strong> : @fail.message</li>
-
-      }
-      </ul>
-
-    </div>
-  </div>
-
-
-  }
-
-
-  @if(subCollections.size > 0 ) {
+  @if(subCollections.size> 0 ) {
 
     @subCollections.map { subCollection =>
 
@@ -65,7 +43,7 @@
     </div>
 
 
-    @animations.grouped(3).map { threeAnimations =>
+    @animations.sliding(3).map { threeAnimations =>
       <div class="row text-center">
         @threeAnimations.map { animation =>
           @views.html.partial.animationPreview(thisCollection, animation)

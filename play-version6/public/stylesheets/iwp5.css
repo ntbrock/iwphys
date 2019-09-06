@@ -191,8 +191,3 @@ td.iwp-input-value, td.iwp-output-value {
 .iwp-animation-canvas {
 	border: solid #ccc 1px;
 }
-
-
-.iwp-warning {
-	color: orange;
-}
