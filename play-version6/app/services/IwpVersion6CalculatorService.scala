@@ -37,6 +37,8 @@ class IwpVersion6CalculatorService @Inject() ( animationFilesystem: IwpFilesyste
     val iwpReadReader = new FileReader("public/javascripts/iwp/iwp6-read.js")
     val iwpReadEval = engine.eval(iwpReadReader)
 
+    val iwpOrderReader = new FileReader("public/javascripts/iwp/iwp6-order.js")
+    val iwpOrderEval = engine.eval(iwpOrderReader)
 
     val invokable = engine.asInstanceOf[Invocable]
 

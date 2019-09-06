@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9f553d3-1fdb-4854-9490-17b0d19d16f1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-vars.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../animations/iwp-packaged/Charged Particle Motion/em-ratio-2.iwp" beforeDir="false" afterPath="$PROJECT_DIR$/../animations/iwp-packaged/Charged Particle Motion/em-ratio-2.iwp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-order.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/NashornTestController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/NashornTestController.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/ValidationController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/ValidationController.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../play-version6/app/services/IwpVersion4CalculatorService.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/services/IwpVersion4CalculatorService.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../play-version6/app/services/IwpVersion6CalculatorService.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/services/IwpVersion6CalculatorService.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/views/debug.scala.html" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/views/debug.scala.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/conf/routes" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/conf/routes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-calc.js" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-calc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/views/layouts/testWithJavascripts.scala.html" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/views/layouts/testWithJavascripts.scala.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/views/main.scala.html" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/views/main.scala.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-read.js" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-read.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-vars.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Solid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+            <state relative-caret-position="573">
+              <caret line="208" column="31" selection-start-line="208" selection-start-column="31" selection-end-line="208" selection-end-column="31" />
               <folding>
                 <element signature="e#0#9906#0" expanded="true" />
               </folding>
@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Input.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="29" column="24" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="24" />
+            <state relative-caret-position="200">
+              <caret line="108" column="5" lean-forward="true" selection-start-line="108" selection-start-column="5" selection-end-line="108" selection-end-column="5" />
               <folding>
                 <element signature="e#0#3825#0" expanded="true" />
               </folding>
@@ -104,6 +104,9 @@
       <find>problemState</find>
       <find>reorderProblemObjectsBySymbolicDependency</find>
       <find>calculationOrder</find>
+      <find>provides</find>
+      <find>propvidied</find>
+      <find>provided</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -232,7 +235,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567792498813" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567795652790" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -449,22 +452,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Solid.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Input.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+        <state relative-caret-position="200">
+          <caret line="108" column="5" lean-forward="true" selection-start-line="108" selection-start-column="5" selection-end-line="108" selection-end-column="5" />
           <folding>
-            <element signature="e#0#9906#0" expanded="true" />
+            <element signature="e#0#3825#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Input.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Solid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="29" column="24" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="24" />
+        <state relative-caret-position="573">
+          <caret line="208" column="31" selection-start-line="208" selection-start-column="31" selection-end-line="208" selection-end-column="31" />
           <folding>
-            <element signature="e#0#3825#0" expanded="true" />
+            <element signature="e#0#9906#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -116,6 +116,9 @@ class NashornTestController @Inject()(cc: ControllerComponents,
     val iwpReadReader = new FileReader("public/javascripts/iwp/iwp6-read.js")
     val iwpReadEval = engine.eval(iwpReadReader)
 
+    val iwpOrderReader = new FileReader("public/javascripts/iwp/iwp6-order.js")
+    val iwpOrderEval = engine.eval(iwpOrderReader)
+
 
     val invokable = engine.asInstanceOf[Invocable]
 

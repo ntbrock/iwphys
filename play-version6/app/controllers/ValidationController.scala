@@ -103,9 +103,6 @@ class ValidationController @Inject()(cc: ControllerComponents,
     Ok(s"TODO: v6: ${v6}")
 
 
-
-
-
     /*
     val diffT = Try {
 

@@ -149,6 +149,9 @@ class IwpVersion4CalculatorService {
       if ( ! i.isInstanceOf[IWPCalculated] ) {
         None
 
+      } else if ( i.isInstanceOf[DObject_Time] ) {
+        None
+
       } else {
 
         val o = i.asInstanceOf[IWPObject]
@@ -181,6 +184,16 @@ class IwpVersion4CalculatorService {
           objectType = Some("solid")
         }
 
+
+        val required = calculated.getRequiredSymbols
+        val requiredSeq = if ( required != null ) {
+          required.toArray.flatMap { s => if ( s == null ){ None } else { Some(JsString(s.toString)) } }
+        } else {
+          Array[JsString]()
+        }
+
+
+
         Some(JsObject(Map(
           "name" -> JsString(o.getName),
           "text" -> text.map(JsString).getOrElse(JsNull),
@@ -188,7 +201,7 @@ class IwpVersion4CalculatorService {
           "units" -> units.map(JsString).getOrElse(JsNull),
           "hidden" -> hidden.map(JsBoolean).getOrElse(JsNull),
           "objectType" -> objectType.map(JsString).getOrElse(JsNull),
-          "required" -> JsArray(calculated.getProvidedSymbols.toArray.map { s => JsString(s.toString) }),
+          "required" -> JsArray(requiredSeq),
           "provided" -> JsArray(calculated.getProvidedSymbols.toArray.map { s => JsString(s.toString) })
         )))
       }

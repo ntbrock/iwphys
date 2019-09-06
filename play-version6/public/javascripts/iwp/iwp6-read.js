@@ -59,18 +59,4 @@ function playAnimationToEnd( animationString ) {
 
 
 
-/**
- * 2019Sep06 Testing Harness foor Port of object odering
- */
-function reorderAnimationObjectsBySymbolicDependencyJsonStringify( unused ) {
-
-	// Default ordering
-
-
-
-    var ordering = [ { "name" : "not implemented" }];
-	return JSON.stringify(parsedAnimation.loop)
-}
-
-
 true;
