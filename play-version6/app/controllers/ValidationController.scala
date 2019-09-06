@@ -30,8 +30,7 @@ class ValidationController @Inject()(cc: ControllerComponents,
   val animationsPath = configuration.get[String]("iwp.animations.path")
   val sep = File.separator
 
-  def validateAnimation(collection: String, filename: String, format: Option[String]) = Action { implicit request: Request[AnyContent] =>
-
+  def validateAnimationCalculations(collection: String, filename: String, format: Option[String]) = Action { implicit request: Request[AnyContent] =>
 
 
     val path = s"${animationsPath}${sep}${collection}${sep}${filename}"
@@ -78,8 +77,81 @@ class ValidationController @Inject()(cc: ControllerComponents,
   }
 
 
-  def validateSubAnimation(collection: String, subCollection: String, filename: String, format: Option[String]) =
-    validateAnimation(collection + File.separator + subCollection, filename, format )
+  def validateSubAnimationCalculations(collection: String, subCollection: String, filename: String, format: Option[String]) =
+    validateAnimationCalculations(collection + File.separator + subCollection, filename, format )
+
+
+
+  def validateSubAnimationOrdering(collection: String, subCollection: String, filename: String, format: Option[String]) =
+    validateAnimationOrdering(collection + File.separator + subCollection, filename, format )
+
+
+  // 2019Sep06 A new dependency reordering calculator
+
+
+  def validateAnimationOrdering(collection: String, filename: String, format: Option[String]) = Action { implicit request: Request[AnyContent] =>
+
+    val path = s"${animationsPath}${sep}${collection}${sep}${filename}"
+
+
+    // Ok("TODO: Implementing object ordering comparison")
+
+    //val v4 = iwpVersion4CalculatorService.problemObjectOrdering(path)
+    //Ok(s"TODO: v4: ${v4}")
+
+    val v6 = iwpVersion6CalculatorService.animateObjectOrdering(collection, filename)
+    Ok(s"TODO: v6: ${v6}")
+
+
+
+
+
+    /*
+    val diffT = Try {
+
+
+
+      val v4 = iwpVersion4CalculatorService.animateToJsonFrames(path)
+
+      val v6 = iwpVersion6CalculatorService.animateToJsonFrames(collection, filename)
+
+      val diffs = iwpDifferenceCalculatorService.diff(v4, v6)
+
+      val differenceSummary = iwpDifferenceCalculatorService.summarize(path, diffs)
+
+      (diffs, differenceSummary)
+    }
+
+
+    format match {
+      case Some("csv") =>
+
+        diffT match {
+          case Success((diffs, differenceSummary)) =>
+            Ok(differenceSummary.csvHeader.mkString(",")+"\n"+
+              differenceSummary.csvValues.mkString(",")+"\n")
+
+          case Failure(x) =>
+            throw x
+          //
+          // Ok( Seq("\"Exception\"", "\""+path+"\"" , "\""+x.getMessage+"\"").mkString(",")+"\n" )
+
+        }
+
+
+      case None =>
+
+        diffT match {
+          case Success((diffs, differenceSummary)) =>
+            Ok(views.html.validation.compareIwpSteps(path, diffs, differenceSummary))
+
+          case Failure(x) => throw x
+        }
+    }
+
+
+*/
+  }
 
 
 }

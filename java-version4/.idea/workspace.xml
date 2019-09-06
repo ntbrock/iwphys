@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9f553d3-1fdb-4854-9490-17b0d19d16f1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-vars.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../animations/iwp-packaged/Charged Particle Motion/em-ratio-2.iwp" beforeDir="false" afterPath="$PROJECT_DIR$/../animations/iwp-packaged/Charged Particle Motion/em-ratio-2.iwp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/views/layouts/testWithJavascripts.scala.html" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/views/layouts/testWithJavascripts.scala.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/views/main.scala.html" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/views/main.scala.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../play-version6/app/views/test/mathjs/stepFunction.scala.html" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/views/test/mathjs/stepFunction.scala.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/controllers/ValidationController.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/controllers/ValidationController.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/services/IwpVersion4CalculatorService.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/services/IwpVersion4CalculatorService.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/services/IwpVersion6CalculatorService.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/services/IwpVersion6CalculatorService.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/app/views/debug.scala.html" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/app/views/debug.scala.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../play-version6/conf/routes" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/conf/routes" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-calc.js" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-calc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-read.js" beforeDir="false" afterPath="$PROJECT_DIR$/../play-version6/public/javascripts/iwp/iwp6-read.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,111 +22,75 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/util/IWPMagicFile.java">
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Solid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
+            <state relative-caret-position="420">
+              <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+              <folding>
+                <element signature="e#0#9906#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/problemdb/DProblem.java">
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Input.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="582" column="48" selection-start-line="582" selection-start-column="48" selection-end-line="582" selection-end-column="48" />
+            <state relative-caret-position="296">
+              <caret line="29" column="24" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="24" />
               <folding>
-                <element signature="e#0#19518#0" expanded="true" />
+                <element signature="e#0#3825#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Description.java">
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPCalculated.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#2196#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="19" column="30" lean-forward="true" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/graphicsengine/GShape.java">
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPCalculationOrder.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPDesigned.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="271" column="9" selection-start-line="271" selection-start-column="9" selection-end-line="271" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#14719#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="540">
+              <caret line="37" column="34" lean-forward="true" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/math/MCalculator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="618">
-              <caret line="76" selection-start-line="76" selection-end-line="76" />
-              <folding>
-                <element signature="e#0#2466#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPGraphable.java">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/math/MCalculatorXMLHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3">
-              <caret line="38" column="8" lean-forward="true" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPObject.java">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/bin/IWP_Animator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="62" column="25" lean-forward="true" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#2185#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPObjectXmlCreator.java">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/ui/GWindow_Animator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="296" column="61" selection-start-line="296" selection-start-column="20" selection-end-line="296" selection-end-column="61" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPXmlable.java">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/bin/IWP5_Rewriter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/problemdb/DProblemState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-20">
-              <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPAnimated.java">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -135,6 +103,7 @@
       <find>SwingUt</find>
       <find>problemState</find>
       <find>reorderProblemObjectsBySymbolicDependency</find>
+      <find>calculationOrder</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -227,6 +196,15 @@
               <item name="edu" type="462c0819:PsiDirectoryNode" />
               <item name="ncssm" type="462c0819:PsiDirectoryNode" />
               <item name="iwp" type="462c0819:PsiDirectoryNode" />
+              <item name="plugin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="java-version4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java-version4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="edu" type="462c0819:PsiDirectoryNode" />
+              <item name="ncssm" type="462c0819:PsiDirectoryNode" />
+              <item name="iwp" type="462c0819:PsiDirectoryNode" />
               <item name="problemdb" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -254,7 +232,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551731838180" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567792498813" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
@@ -429,6 +407,64 @@
           <caret line="582" column="48" selection-start-line="582" selection-start-column="48" selection-end-line="582" selection-end-column="48" />
           <folding>
             <element signature="e#0#19518#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_OutputXMLHandler.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPDrawable.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPGraphable.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPObject.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPObjectXmlCreator.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPXmlable.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPAnimated.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPDesigned.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="37" column="34" lean-forward="true" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPCalculationOrder.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/plugin/IWPCalculated.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="30" lean-forward="true" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Solid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+          <folding>
+            <element signature="e#0#9906#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/ncssm/iwp/objects/DObject_Input.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="29" column="24" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#3825#0" expanded="true" />
           </folding>
         </state>
       </provider>

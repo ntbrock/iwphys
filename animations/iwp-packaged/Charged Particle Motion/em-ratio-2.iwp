@@ -125,7 +125,8 @@
 			<text>Time in fields</text>
 			<units>s</units>
 			<calculator type="parametric">
-				<value>t-t1</value>
+				<valueProto>t-t1</valueProto>
+				<value>(t-to-t1)*step(t-to-t1)</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>

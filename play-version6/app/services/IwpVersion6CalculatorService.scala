@@ -24,7 +24,8 @@ class IwpVersion6CalculatorService @Inject() ( animationFilesystem: IwpFilesyste
     // val jqFilereader = new FileReader("public/javascripts/jquery-3.2.1.min.js")
     // val jqEval = engine.eval(jqFilereader)
 
-    val mathJsReader = new FileReader("public/javascripts/math.min.js")
+    // Upgrade to new math library
+    val mathJsReader = new FileReader("public/javascripts/mathjs-6.2.1/math.min.js")
     val mathJsEval = engine.eval(mathJsReader)
 
 
@@ -85,6 +86,30 @@ class IwpVersion6CalculatorService @Inject() ( animationFilesystem: IwpFilesyste
     }
   }
 
+
+  def animateObjectOrdering(collection:String, path:String) : JsArray = {
+
+
+    // Load the Javascript file
+    loadFile(collection, path) match {
+
+      case Failure(x) => throw x
+      case Success(iwpAnimation) =>
+
+        val iwpJs = iwpAnimation.toJsonString
+
+
+        val jse = spawnEngine
+
+        //load animation
+        val read = jse.invokeFunction("readAnimationString", iwpJs)
+
+        val order = jse.invokeFunction("reorderAnimationObjectsBySymbolicDependencyJsonStringify", "")
+
+        Json.parse(order.toString).as[JsArray]
+
+    }
+  }
 
 }
 

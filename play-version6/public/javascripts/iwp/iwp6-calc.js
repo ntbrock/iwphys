@@ -1055,9 +1055,12 @@ function evaluateParametricCalculator( resultVariable, calculator, calculateStep
     }
     catch ( err ) {
         if ( verbose ) {
-            console.log("iwp6-calc:1292> evaluateParametricCalculator ERROR: " + resultVariable + "> Unable to evaluate calculator: ", err );
-            console.log("iwp6-calc:1293> evaluateParametricCalculator ERROR: " + resultVariable + "> Equation: ", calculator.equation );
-            console.log("iwp6-calc:1294> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars: ", vars);
+            console.log("iwp6-calc:1058> evaluateParametricCalculator ERROR: " + resultVariable + "> Unable to evaluate calculator: ", err );
+            console.log("iwp6-calc:1059> evaluateParametricCalculator ERROR: " + resultVariable + "> Equation: ", calculator.equation );
+            console.log("iwp6-calc:1060> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars: ", vars);
+            console.log("iwp6-calc:1060> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars.STRINGIFY: ", JSON.stringify(vars));
+            console.log("iwp6-calc:1062> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars: t = ", vars.t, "  t1 = " , vars['t1'] );
+
         }
         throw err;
     }

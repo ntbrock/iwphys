@@ -1,11 +1,11 @@
 package services
 
-import edu.ncssm.iwp.objects.DObject_Time
-import edu.ncssm.iwp.plugin.IWPAnimated
+import edu.ncssm.iwp.objects.{DObject_Input, DObject_Output, DObject_Solid, DObject_Time}
+import edu.ncssm.iwp.plugin.{IWPAnimated, IWPCalculated, IWPObject}
 import edu.ncssm.iwp.problemdb.{DProblemManager, DProblemState}
 import javax.inject.Singleton
 import play.api.Logger
-import play.api.libs.json.{JsArray, JsNumber, JsObject, Json}
+import play.api.libs.json._
 
 import scala.collection.mutable
 
@@ -131,5 +131,73 @@ class IwpVersion4CalculatorService {
 
       JsArray(frames)
     }
+
+
+
+  // 20190Sep06 New Test for ordering calculations
+  def problemObjectOrdering(path: String): JsArray = {
+
+    val p = dpm.loadFile(path)
+
+    val ps = new DProblemState(p)
+
+    // 2018Mar07 - This logic needs to be ported to IWP5
+    p.reorderProblemObjectsBySymbolicDependency()
+
+    val ordered = p.objectsInTickOrder.toArray.flatMap { i =>
+
+      if ( ! i.isInstanceOf[IWPCalculated] ) {
+        None
+
+      } else {
+
+        val o = i.asInstanceOf[IWPObject]
+        val calculated = i.asInstanceOf[IWPCalculated]
+
+        var text : Option[String] = None
+        var initialValue : Option[Double] = None
+        var units : Option[String] = None
+        var hidden : Option[Boolean] = None
+        var objectType : Option[String] = None
+
+
+        if ( i.isInstanceOf[DObject_Input]) {
+          val input = i.asInstanceOf[DObject_Input]
+          objectType = Some("input")
+          text = Some(input.getText)
+          initialValue = Some(input.getInitialValue)
+          units = Some(input.getUnits)
+          hidden = Some(input.isVisible)
+
+        } else if ( i.isInstanceOf[DObject_Output]) {
+          val output = i.asInstanceOf[DObject_Output]
+          objectType = Some("output")
+          text = Some(output.getText)
+          units = Some(output.getUnits)
+          hidden = Some(output.isVisible)
+
+        } else if ( i.isInstanceOf[DObject_Solid]) {
+          val solid = i.asInstanceOf[DObject_Solid]
+          objectType = Some("solid")
+        }
+
+        Some(JsObject(Map(
+          "name" -> JsString(o.getName),
+          "text" -> text.map(JsString).getOrElse(JsNull),
+          "initialValue" -> initialValue.map(d => JsNumber(BigDecimal(d))).getOrElse(JsNull),
+          "units" -> units.map(JsString).getOrElse(JsNull),
+          "hidden" -> hidden.map(JsBoolean).getOrElse(JsNull),
+          "objectType" -> objectType.map(JsString).getOrElse(JsNull),
+          "required" -> JsArray(calculated.getProvidedSymbols.toArray.map { s => JsString(s.toString) }),
+          "provided" -> JsArray(calculated.getProvidedSymbols.toArray.map { s => JsString(s.toString) })
+        )))
+      }
+
+    }
+
+    JsArray(ordered)
+  }
+
+
 
 }
