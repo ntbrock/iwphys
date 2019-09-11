@@ -17,10 +17,11 @@ files.map { |file|
 
   json = "#{file}.json"
 
+  uri = `echo #{file} | sed -e 's/^[.][.]\\/animations\\///g' |  tr -d '\n' `
   # build the URL
   # https://www.iwphys.org/xtoj.php/iwp-packaged/Oscillations/damped-1.iwp
 
-  url = "http://localhost:8470/validation/#{file}?format=csv"
+  url = "http://localhost:8470/validation/calculation/#{uri}?format=csv"
 
   puts "wget -qO- '#{url}'"
 
