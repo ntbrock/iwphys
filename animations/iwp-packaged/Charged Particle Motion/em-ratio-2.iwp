@@ -72,8 +72,8 @@
 			<hidden>1</hidden>
 		</input>
 		<input>
-			<name>d</name>
-			<text>Plate separation d</text>
+			<name>dp</name>
+			<text>Plate separation dp</text>
 			<initialValue>0.057</initialValue>
 			<units>m</units>
 			<hidden>1</hidden>
@@ -107,7 +107,7 @@
 			<hidden>1</hidden>
 		</input>
 		<input>
-			<name>x</name>
+			<name>xa</name>
 			<text>Acceleration distance</text>
 			<initialValue>0.05</initialValue>
 			<units>m</units>
@@ -153,7 +153,7 @@
 			<text>Electric field</text>
 			<units>V/m</units>
 			<calculator type="parametric">
-				<value>s*V2/d</value>
+				<value>s*V2/dp</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
@@ -171,7 +171,7 @@
 			<text>Time to plates</text>
 			<units>s</units>
 			<calculator type="parametric">
-				<value>2*x/vo</value>
+				<value>2*xa/vo</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
@@ -230,7 +230,7 @@
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>d/2+size/4</value>
+					<value>dp/2+size/4</value>
 				</calculator>
 			</ypath>
 		</solid>
@@ -264,7 +264,7 @@
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>-d/2-size/4</value>
+					<value>-dp/2-size/4</value>
 				</calculator>
 			</ypath>
 		</solid>
@@ -342,7 +342,7 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>x*1.02</value>
+						<value>xa*1.02</value>
 					</calculator>
 				</width>
 				<height>
@@ -361,7 +361,7 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-(x/2+xc)</value>
+					<value>-(xa/2+xc)</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -376,7 +376,7 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>x</value>
+						<value>xa</value>
 					</calculator>
 				</width>
 				<height>
@@ -395,7 +395,7 @@
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>-(x/2+xc)</value>
+					<value>-(xa/2+xc)</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -429,9 +429,9 @@
 			</color>
 			<xpath>
 				<calculator type="euler">
-					<displacement>-x-xc</displacement>
+					<displacement>-xa-xc</displacement>
 					<velocity>0</velocity>
-					<acceleration>s*(R*B*P.yvel*step(t-to-t1)+R*(V1/x)*step(to-t))</acceleration>
+					<acceleration>-1*s*(R*B*P.yvel*step(t-to-t1)+R*(V1/xa)*step(to-t))</acceleration>
 				</calculator>
 			</xpath>
 			<ypath>
