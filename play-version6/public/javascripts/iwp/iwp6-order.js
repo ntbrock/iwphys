@@ -36,18 +36,41 @@ function reorderAnimationObjectsBySymbolicDependency(loop) {
 /**
  * Special Variables that should not throw a missingVariable exception */
 var timeConstants = { "t": true, "delta_t": true }
-var functionConstants = { "abs": true,
-    "exp": true,
-    "sin" : true,
-    "cos": true,
-    "tan": true,
+var functionConstants = {
     "PI": true,
-    "acos": true,
-    "asin": true,
     "PI.value" : true,
     "E": true,
-    "toradians": true
-    }
+    // From Version 4 MFunctions.java
+	"sign": true,
+	"exp": true,
+	"toRadians": true,
+	"toradians": true,
+	"toDegrees": true,
+	"todegrees": true,
+	"step": true,
+	"cot": true,
+	"sec": true,
+	"csc": true,
+	"tan": true,
+	"sqrt": true,
+	"sin": true,
+	"cos": true,
+	"ln": true,
+	"atan": true,
+	"asin": true,
+	"acos": true,
+	"abs": true,
+	"modtwo": true,
+	"random": true,
+	"rand": true,
+	"signum": true
+};
+
+//------------------------------------------
+
+
+
+
 
 
 function equationRequires(eqn) {
@@ -261,6 +284,7 @@ function animationObjectReorder(loop) {
 
 		// Line 472
 		var missingVariables = [];
+		var badObjects = [];
 		var nextOrderingCandidates = [];
 
 		// Line 475
@@ -318,7 +342,7 @@ function animationObjectReorder(loop) {
 					allRequirementsSatisfied = false;
 					// Line 524
 					missingVariables.push(symbol);
-
+					badObjects.push(object.name);
 					// console.log("iwp6-order:220> MISSING VARIABLE: " + symbol + "   from object: " + object.name);
 				} else {
 
@@ -343,7 +367,7 @@ function animationObjectReorder(loop) {
 
 		// Line 541
 		if ( lastCandidateCount == orderingCandidates.length ) {
-			throw "Missing Variable or Circular Dependency Detected: missingVariables: " + JSON.stringify(missingVariables);
+			throw "Missing Variable or Circular Dependency Detected: missingVariables: " + JSON.stringify(missingVariables) + " badObjects: " + JSON.stringify(badObjects);
 		} else {
 			lastCandidateCount = orderingCandidates.length
 		}
