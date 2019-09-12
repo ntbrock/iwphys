@@ -12,11 +12,11 @@ case class IwpStepDifferenceSummary(path: String,
                                     var totalRightMissing: Int
                                    ) {
 
-  def csvHeader = Seq("result","viewUrl", "validateUrl", "path","legacyObjectNames", "objectNames", "totalFrames","framesWithDifferences", "totalDifferences",
+  def csvHeader = Seq("result","viewUrl", "validateUrl", "path","legacyObjectNames", "objectCount", "objectNames",  "totalFrames","framesWithDifferences", "totalDifferences",
     "framesWithLeftMissing","framesWithRightMissing","totalLeftMissing","totalRightMissing")
     .map{ value => "\"" + value + "\"" }
 
-  def csvValues = Seq("Complete", viewUrl, diffUrl, path, legacyObjectNames, objectNames.toSeq.sorted.mkString(" "), totalFrames,framesWithDifferences,totalDifferences,
+  def csvValues = Seq("Complete", viewUrl, diffUrl, path, legacyObjectNames, objectNames.size, objectNames.toSeq.sorted.mkString(" "), totalFrames,framesWithDifferences,totalDifferences,
     framesWithLeftMissing,framesWithRightMissing,totalLeftMissing,totalRightMissing)
     .map{ value => "\"" + value + "\"" }
 
