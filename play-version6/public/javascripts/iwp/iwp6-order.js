@@ -39,6 +39,7 @@ var timeConstants = { "t": true }
 var functionConstants = { "abs": true,
     "exp": true,
     "sin" : true,
+    "cos": true,
     "PI": true,
     "PI.value" : true
     }
