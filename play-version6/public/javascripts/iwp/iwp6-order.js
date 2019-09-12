@@ -33,8 +33,11 @@ function reorderAnimationObjectsBySymbolicDependency(loop) {
 
 
 
-
+/**
+ * Special Variables that should not throw a missingVariable exception */
 var timeConstants = { "t": true }
+var functionConstants = { "abs": true }
+
 
 function equationRequires(eqn) {
 
@@ -48,9 +51,13 @@ function equationRequires(eqn) {
 		} else if ( varsConstants[part] != undefined ) {
 			// is it a contstant?
 
-		} else if ( timeConstants[part] != undefined  ) {
+		} else if ( functionConstants[part] != undefined ) {
+			// known match function
 
+		} else if ( timeConstants[part] != undefined  ) {
 			// it's time
+
+
 		} else if ( part[0] == '1' || part[0] == '2' || part[0] == '3' ||
 					part[0] == '4' || part[0] == '5' || part[0] == '6' ||
 					part[0] == '7' || part[0] == '8' || part[0] == '9' ||

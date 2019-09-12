@@ -155,6 +155,7 @@
 
  $(function() {
 
+    try {
    console.log("animation:158> Loaded Page");
 
    var animationJson = @Html(animation.toJsonString);
@@ -170,6 +171,10 @@
 
    // console.log("animation:161> Master Reset Steps Complete!");
 
+    } catch(x) {
+
+       $("#description").html("<span class='iwp-warning'>Error Loading Animation:</span> " + x );
+    }
 
    // 2019Jan25 Enable the screenshot button
    $("#iwp-save-screenshot").click(function(e) {
