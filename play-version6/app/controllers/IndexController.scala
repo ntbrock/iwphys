@@ -39,8 +39,13 @@ class IndexController @Inject()(cc: ControllerComponents,
 
         case Some(popularCollection) =>
 
-          val success = iwpDirectoryBrowserService.findAnimationsWithFailures(popularCollection).filter { a => a.isSuccess }.map { a => a.get }
+          val (success,failures) = iwpDirectoryBrowserService.findAnimationsWithFailures(popularCollection)
+          if ( failures.size > 0 ) {
+            failures.map { f =>
+              Logger.warn(s"Index:45> The popular collection had animation with failure: ${f.filename}: ${f.message}")
 
+            }
+          }
           Ok(views.html.index(Some(popularCollection), success))
 
       }
