@@ -1139,8 +1139,15 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 
 
     if ( calculateStep == 0 ) {
+		// For good measure, recalculate initials just in case other dependencies have changed.
+		calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
+	    calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
+
         calculator.currentVelocity = calculator.initialVelocity;
         calculator.currentDisplacement = calculator.initialDisplacement; // no adjustment
+
+        console.log("iwp6-calc:1143> Recalculating Euler Calc Step 0, calculator: " , calculator);
+		var breaker=1;
 
     } else if ( changeStep > 0 ) {
 
