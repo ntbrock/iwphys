@@ -30,7 +30,7 @@
       <ul>
       @failureAnimations.map { t =>
 
-        <li>@t</li>
+        <li><strong>@t.filename</strong>: @t.throwable.getClass.getName  @t.message</li>
 
       }
       </ul>
