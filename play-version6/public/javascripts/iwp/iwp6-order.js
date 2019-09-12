@@ -36,7 +36,12 @@ function reorderAnimationObjectsBySymbolicDependency(loop) {
 /**
  * Special Variables that should not throw a missingVariable exception */
 var timeConstants = { "t": true }
-var functionConstants = { "abs": true }
+var functionConstants = { "abs": true,
+    "exp": true,
+    "sin" : true,
+    "PI": true,
+    "PI.value" : true
+    }
 
 
 function equationRequires(eqn) {
