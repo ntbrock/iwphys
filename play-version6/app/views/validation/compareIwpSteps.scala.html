@@ -5,6 +5,12 @@
 
 <h3>Summary</h3>
 
+<p>objectCount: @summary.objectNames.size</p>
+
+<p>objectNames: @summary.objectNames.toSeq.sorted.mkString(" ")</p>
+
+<p @if(summary.legacyObjectNames){style="color:red;"}>legacyObjectNames: @summary.legacyObjectNames</p>
+
 <p>totalFrames: @summary.totalFrames</p>
 
 <p>framesWithDifferences: @summary.framesWithDifferences</p>

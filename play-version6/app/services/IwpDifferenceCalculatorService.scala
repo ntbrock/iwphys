@@ -43,6 +43,9 @@ class IwpDifferenceCalculatorService {
 
   def diff ( leftJsa: JsArray, rightJsa: JsArray ) : Seq[IwpStepDifference] = {
 
+      val discoveredObjectNames = mutable.HashMap[String, Boolean]()
+
+
       val maxSteps = Math.max( leftJsa.value.size, rightJsa.value.size )
 
       val diffs = 0.to(maxSteps).map { step =>
@@ -98,10 +101,17 @@ class IwpDifferenceCalculatorService {
                 throw new RuntimeException("Unexpected Logic condition 2")
               }
             }
+
+
+            // Discover object names
+            allKeys.map { key =>
+              discoveredObjectNames.put ( key.split("[.]").head, true )
+            }
           }
         }
 
         IwpStepDifference(step,
+          discoveredObjectNames.keySet.toSet,
           notEqual.toMap,
           equal.toMap,
           leftO.isEmpty,
@@ -116,7 +126,10 @@ class IwpDifferenceCalculatorService {
 
   def summarize( path: String, diffs: Seq[IwpStepDifference] ) : IwpStepDifferenceSummary = {
 
-    val sum = IwpStepDifferenceSummary(path, 0,0,0,0,0,0,0)
+
+    val objectNames = mutable.HashMap[String,Boolean]()
+
+    val sum = IwpStepDifferenceSummary(path, Set[String](), false, 0,0,0,0,0,0,0)
 
     // Loop over the diffs and begin to calculate.
     diffs.map{ diff =>
@@ -139,9 +152,18 @@ class IwpDifferenceCalculatorService {
 
       sum.totalLeftMissing += diff.leftMissing.size
       sum.totalRightMissing += diff.rightMissing.size
+
+      diff.objectNames.map { objectNames.put(_, true) }
     }
 
-    sum
+    val allObjectNames = objectNames.keySet.toSet
+    val legacyObjectNames =
+      allObjectNames.contains("x") ||
+        allObjectNames.contains("d") ||
+        allObjectNames.contains("v") ||
+        allObjectNames.contains("E")
+
+    sum.copy( objectNames = allObjectNames, legacyObjectNames = legacyObjectNames )
 
   }
 

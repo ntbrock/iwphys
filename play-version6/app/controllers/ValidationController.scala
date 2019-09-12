@@ -45,6 +45,8 @@ class ValidationController @Inject()(cc: ControllerComponents,
 
       val differenceSummary = iwpDifferenceCalculatorService.summarize(path, diffs)
 
+
+
       (diffs, differenceSummary)
     }
 

@@ -1,21 +1,34 @@
 package models
 
-case class IwpStepDifferenceSummary( val path: String,
-                                     var totalFrames: Int,
-                                     var framesWithDifferences: Int,
-                                     var totalDifferences: Int,
-                                     var framesWithLeftMissing: Int,
-                                     var framesWithRightMissing: Int,
-                                     var totalLeftMissing: Int,
-                                     var totalRightMissing: Int
+case class IwpStepDifferenceSummary(path: String,
+                                    objectNames: Set[String],
+                                    legacyObjectNames: Boolean,
+                                    var totalFrames: Int,
+                                    var framesWithDifferences: Int,
+                                    var totalDifferences: Int,
+                                    var framesWithLeftMissing: Int,
+                                    var framesWithRightMissing: Int,
+                                    var totalLeftMissing: Int,
+                                    var totalRightMissing: Int
                                    ) {
 
-  def csvHeader = Seq("result","path","totalFrames","framesWithDifferences", "totalDifferences",
+  def csvHeader = Seq("result","viewUrl", "validateUrl", "path","legacyObjectNames", "objectNames", "totalFrames","framesWithDifferences", "totalDifferences",
     "framesWithLeftMissing","framesWithRightMissing","totalLeftMissing","totalRightMissing")
     .map{ value => "\"" + value + "\"" }
 
-  def csvValues = Seq("Complete", path, totalFrames,framesWithDifferences,totalDifferences,
+  def csvValues = Seq("Complete", viewUrl, diffUrl, path, legacyObjectNames, objectNames.toSeq.sorted.mkString(" "), totalFrames,framesWithDifferences,totalDifferences,
     framesWithLeftMissing,framesWithRightMissing,totalLeftMissing,totalRightMissing)
     .map{ value => "\"" + value + "\"" }
+
+
+
+  def viewUrl = {
+    s"https://iwp6.iwphys.org/animation/${path.replaceAllLiterally("../animations/", "")}"
+  }
+
+  def diffUrl = {
+    s"https://iwp6.iwphys.org/validation/calculation/${path.replaceAllLiterally("../animations/", "")}"
+  }
+
 
 }
