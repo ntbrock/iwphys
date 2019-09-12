@@ -761,6 +761,10 @@ function addSolid(solid) {
   // Add points here..?
   if ( compiledSolid.shape.shapeType == "polygon" ) {
     compiledSolid["points"] = []
+
+    if ( ! solid.shape.points ) {
+        console.log("iwp6-calc:766: The solid's polygon shape had no points! solid: ", solid);
+    } else {
     solid.shape.points.point.forEach ( function( i, index ) {
       var point = {
         xpath: {calculator: compileCalculator(i.xpath.calculator),},
@@ -768,6 +772,7 @@ function addSolid(solid) {
       }
     compiledSolid.points.push(point)
     });
+    }
     // console.log("iwp5:834> Compiled polygon: ",compiledSolid)
   }
 
