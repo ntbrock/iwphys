@@ -1,3 +1,5 @@
+@(collection: Option[Iwp6Collection] = None, animation: Option[Iwp6Animation] = None)
+
 <!-- Navigation -->
 <nav class="navbar navbar-minimal navbar-fixed-top" role="navigation">
     <div class="container navbar-light">
@@ -6,7 +8,12 @@
 
             <a class="navbar-brand" href="@controllers.routes.IndexController.index()">Interactive Web Physics 6</a>
 
-            <button id="iwp-save-screenshot" class="btn btn-secondary iwp-save-screenshot" style="float: right;">Save Screenshot</button>
+            <button id="iwp-save-screenshot" class="btn btn-secondary iwp-nav-button iwp-save-screenshot" style="float: right;">Save Screenshot</button>
+
+            @if(collection.isDefined && animation.isDefined) {
+            <a href="@controllers.routes.DesignerController.getDesigner(collection.get.name, animation.get.filename.get)" id="iwp-clone-designer" class="btn btn-secondary iwp-nav-button iwp-clone-designer" style="float: right;">Open Designer</a>
+            }
+
         </div>
 
         <!-- /.navbar-collapse -->
