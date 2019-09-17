@@ -198,7 +198,7 @@ Something to think about:  How does the separation of the balls change as the bl
 		<output>
 			<name>a1</name>
 			<text>a1</text>
-			<units>m²</units>
+			<units>m^2</units>
 			<calculator type="parametric">
 				<value>(d1-t)^2</value>
 			</calculator>
