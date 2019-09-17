@@ -1,8 +1,11 @@
 @()
 
-@main("Designer") {
+@main("Designer", designer = true ) {
 
 @views.html.partial.nav()
+
+<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/iwp/iwp6-designer-demo2018.css")">
+
 
 <section>
     <div id="side-menu">
@@ -72,6 +75,10 @@
 
     </div>
 </section>
+
+
+<script charset="utf-8" type="text/javascript" src="@routes.Assets.versioned("javascripts/iwp/iwp6-designer-demo2018.js")"/></script>
+
 
 @views.html.partial.footer()
 

@@ -4,7 +4,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /debug                           controllers.DebugController.index
+GET     /debug                      controllers.DebugController.index
 GET     /                           controllers.IndexController.index
 
 
@@ -89,4 +89,11 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # GET     /demo                       controllers.DemoController.index
 
 # Designer demo
-GET     /designer                     controllers.DesignerController.index
+GET     /designer/demo2018                       controllers.DesignerController.demo2018
+
+
+# Designer implementation
+GET     /designer/:collection/:filename.json      controllers.DesignerController.getDesigner(collection: String, filename: String)
+
+
+
