@@ -6,8 +6,8 @@
 @views.html.partial.navMinimal()
 
 
-<div class="container iwp-designer-container">
-    <div class="iwp-designer">
+<div class="container iwp-animation-container">
+    <div class="iwp-animation">
 
         <!-- Left Hand Side -->
         <div class="iwp-left-container">
@@ -46,17 +46,12 @@
             <div class="iwp-control-container iwp-tab-control-container">
                 <table class="iwp-tab-controls" class="tab">
                     <tr>
-                        <td id="it" class="bottomBorder" onclick="designerTabOn()" iwp-tab="designerTab">
-                            <i id="inputTableButton" class="fa fa-list fa-2x"></i> <br/>Animate</td>
-                        <td id="gt" class="" onclick="graphTabOn()" iwp-tab="graphTab">
-                            <i id="graphTableButton" class="fa fa-area-chart fa-2x"> </i> <br/>Graph</td>
-                        <td id="oib" class="" onclick="timeTabOn()" iwp-tab="timeTab">
-                            <i id="timeTabButton" class="fa fa-clock-o fa-2x"> </i> <br/>Time</td>
-                        <td id="ws" class=""  onclick="iwindowTabOn()" iwp-tab="iwindowTab">
-                            <i id="windowSettings" class="fa fa-clone fa-2x"> </i> <br/>Axes </td>
+                        <td><span style="font-size: 150%">You are in Designer Mode!</span></td>
                     </tr>
                 </table>
             </div>
+
+
 
             <div class="iwp-tab-container">
 
@@ -65,7 +60,7 @@
 
                     <div id="designerTitle">
                         <h3>@filename</h3>
-                        <br/><div id="description"></div>
+                        <br/><textarea id="description"></textarea></iv>
                     </div>
 
                     <table id="inputTable"></table>
@@ -143,6 +138,9 @@
                 </div>
 
             </div> <!-- end iwp-tab-container -->
+
+
+
         </div> <!-- end iwp-right-container -->
 
     </div> <!-- end iwp-designer -->
