@@ -39,15 +39,15 @@
 
 2.  Based on your rankings, which of the reflected rays, if either, undergo phase reversal on reflection?
 
-3. Determine to the nearest nanometer the wavelength of visible light, if any, that undergoes complete constructive interference for the given film thickness an an angle of incidence of 0°.  Explain your choice.
+3. Determine to the nearest nanometer the wavelength of visible light, if any, that undergoes complete constructive interference for the given film thickness an an angle of incidence of 0 degrees.  Explain your choice.
 
-4. Determine to the nearest nanometer the wavelength of visible light, if any, that undergoes complete destructive interference for the given film thickness and an angle of incidence of 0°.  Explain your choice.</text>
+4. Determine to the nearest nanometer the wavelength of visible light, if any, that undergoes complete destructive interference for the given film thickness and an angle of incidence of 0 degrees.  Explain your choice.</text>
 		</description>
 		<input>
 			<name>a</name>
 			<text>Angle of incident ray</text>
 			<initialValue>10.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 		</input>
 		<input>
 			<name>do</name>
@@ -99,7 +99,7 @@
 			<name>i</name>
 			<text>Inclination</text>
 			<initialValue>0.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>

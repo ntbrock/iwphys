@@ -39,7 +39,7 @@
 			<name>angle</name>
 			<text>Launch angle</text>
 			<initialValue>30.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 		</input>
 		<input>
 			<name>txo</name>

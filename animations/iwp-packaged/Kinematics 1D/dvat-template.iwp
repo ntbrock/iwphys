@@ -53,7 +53,7 @@
 			<name>c</name>
 			<text>Acceleration</text>
 			<initialValue>-5.0</initialValue>
-			<units>m/s²</units>
+			<units>m/s^2</units>
 			<hidden>1</hidden>
 		</input>
 		<solid>

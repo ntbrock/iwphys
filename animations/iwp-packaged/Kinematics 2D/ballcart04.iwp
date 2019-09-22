@@ -140,13 +140,13 @@
 			<name>ag</name>
 			<text>Acceleration due to gravity</text>
 			<initialValue>-9.8</initialValue>
-			<units>m/s²</units>
+			<units>m/s^2</units>
 		</input>
 		<input>
 			<name>ac</name>
 			<text>Acceleration of cart</text>
 			<initialValue>1.0</initialValue>
-			<units>m/s²</units>
+			<units>m/s^2</units>
 		</input>
 	</objects>
 </problem>

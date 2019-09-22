@@ -43,7 +43,7 @@ All distance units are micrometers.</text>
 			<name>a</name>
 			<text>Angle of incidence</text>
 			<initialValue>10.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 		</input>
 		<input>
 			<name>xo</name>

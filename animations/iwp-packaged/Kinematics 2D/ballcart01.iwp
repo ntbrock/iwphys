@@ -139,7 +139,7 @@
 			<name>ag</name>
 			<text>Acceleration due to gravity</text>
 			<initialValue>-9.8</initialValue>
-			<units>m/s²</units>
+			<units>m/s^2</units>
 		</input>
 	</objects>
 </problem>

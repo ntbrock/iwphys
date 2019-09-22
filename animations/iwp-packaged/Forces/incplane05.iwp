@@ -67,7 +67,7 @@ Vectors in black represent the fores acting on the plane. The vector in red is t
 			<name>a</name>
 			<text>Inclination Angle</text>
 			<initialValue>30.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 		</input>
 		<input>
 			<name>run</name>
@@ -496,7 +496,7 @@ Vectors in black represent the fores acting on the plane. The vector in red is t
 		<output>
 			<name>acc</name>
 			<text>Acceleration (mag)</text>
-			<units>m/s²</units>
+			<units>m/s^2</units>
 			<calculator type="parametric">
 				<value>g*(sin(ar)-u*cos(ar))</value>
 			</calculator>
