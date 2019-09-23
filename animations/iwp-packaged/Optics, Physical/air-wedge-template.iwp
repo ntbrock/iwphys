@@ -29,8 +29,8 @@
 			<ymax>1000.0</ymax>
 			<xgrid>100.0</xgrid>
 			<ygrid>100.0</ygrid>
-			<xunit>µm</xunit>
-			<yunit>µm</yunit>
+			<xunit>um</xunit>
+			<yunit>um</yunit>
 		</window>
 		<description>
 			<text>Monochromatic light is incident on an air wedge.  The angle of the wedge may be changed by changing the height of the triangular post.  Playing the animation advances the position of the incident ray in the given increments.  The phase difference is given as an output in multiples of wavelengths.
@@ -49,25 +49,25 @@ All distance units are micrometers.</text>
 			<name>xo</name>
 			<text>Initial X-pos of ray</text>
 			<initialValue>300.0</initialValue>
-			<units>µm</units>
+			<units>um</units>
 		</input>
 		<input>
 			<name>xi</name>
 			<text>Position increment</text>
 			<initialValue>20.0</initialValue>
-			<units>µm</units>
+			<units>um</units>
 		</input>
 		<input>
 			<name>h</name>
 			<text>Height of post</text>
 			<initialValue>50.0</initialValue>
-			<units>µm</units>
+			<units>um</units>
 		</input>
 		<input>
 			<name>w</name>
 			<text>Thickness of plate</text>
 			<initialValue>100.0</initialValue>
-			<units>µm</units>
+			<units>um</units>
 		</input>
 		<input>
 			<name>wl</name>
@@ -235,7 +235,7 @@ All distance units are micrometers.</text>
 		<output>
 			<name>x</name>
 			<text>X-pos of incident ray</text>
-			<units>µm</units>
+			<units>um</units>
 			<calculator type="parametric">
 				<value>xo+xi*t</value>
 			</calculator>
@@ -463,7 +463,7 @@ All distance units are micrometers.</text>
 		<output>
 			<name>d</name>
 			<text>Plate separation</text>
-			<units>µm</units>
+			<units>um</units>
 			<calculator type="parametric">
 				<value>x*tan(i)/cos(i)</value>
 			</calculator>

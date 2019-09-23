@@ -35,7 +35,7 @@
 		<description>
 			<text>The blue and gray areas represent different media.  Incident, reflected, and refracted light rays in the media are shown. In which medium is the speed of light greater?  How do you know?
 
-Run the applet to increase the angle of incidence. What will happen when the angle of refraction reaches 90°?</text>
+Run the applet to increase the angle of incidence. What will happen when the angle of refraction reaches 90 degrees?</text>
 		</description>
 		<input>
 			<name>angle</name>
