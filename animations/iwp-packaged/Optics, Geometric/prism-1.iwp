@@ -41,14 +41,14 @@ For an angle of incidence 15 degrees, use Snell's Law and the geometry of the pr
 			<name>angle</name>
 			<text>Initial angle of incidence</text>
 			<initialValue>30.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
 			<name>ai</name>
 			<text>Angle increment</text>
 			<initialValue>1.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
@@ -69,20 +69,20 @@ For an angle of incidence 15 degrees, use Snell's Law and the geometry of the pr
 			<name>v</name>
 			<text>Vertex angle</text>
 			<initialValue>45.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
 			<name>vi</name>
 			<text>Vertex angle increment</text>
 			<initialValue>0.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<output>
 			<name>va</name>
 			<text>Vertex angle</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>v+vi*t</value>
 			</calculator>
@@ -91,7 +91,7 @@ For an angle of incidence 15 degrees, use Snell's Law and the geometry of the pr
 		<output>
 			<name>i</name>
 			<text>Angle of incidence</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>angle-ai*t</value>
 			</calculator>
@@ -99,7 +99,7 @@ For an angle of incidence 15 degrees, use Snell's Law and the geometry of the pr
 		<output>
 			<name>r</name>
 			<text>Angle of refraction 1</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(sin(toRadians(i))/n))</value>
 			</calculator>
@@ -108,7 +108,7 @@ For an angle of incidence 15 degrees, use Snell's Law and the geometry of the pr
 		<output>
 			<name>i2</name>
 			<text>Angle of incidence 2</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>va-r</value>
 			</calculator>
@@ -117,7 +117,7 @@ For an angle of incidence 15 degrees, use Snell's Law and the geometry of the pr
 		<output>
 			<name>r2</name>
 			<text>Angle of refraction 2</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(sin(toRadians(i2))*n))</value>
 			</calculator>
@@ -135,7 +135,7 @@ For an angle of incidence 15 degrees, use Snell's Law and the geometry of the pr
 		<output>
 			<name>ac</name>
 			<text>Critical angle</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(1/n))</value>
 			</calculator>

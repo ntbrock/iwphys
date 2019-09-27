@@ -29,45 +29,45 @@
 			<ymax>1000.0</ymax>
 			<xgrid>100.0</xgrid>
 			<ygrid>100.0</ygrid>
-			<xunit>µm</xunit>
-			<yunit>µm</yunit>
+			<xunit>um</xunit>
+			<yunit>um</yunit>
 		</window>
 		<description>
 			<text>Monochromatic light is incident on an air wedge.  Play the animation to advance the position of the incident ray by the given increment.  The phase difference is given as an output in units of wavelengths. All distance units are in micrometers (10^-6 m).  
 
 1.  Change the height of the post to 0.  Play the animation while watching the phase difference.  Explain why the phase difference is always half a wavelength.
 
-2.  Now change the height of the post back to 50 µm. Determine the wavelength of the incident light to the nearest nanometer (0.001 µm). In order to precisely position the incident ray, change the angle of incidence to 0°.  Then select an initial position near the one you're looking for and change the position increment to a small value.</text>
+2.  Now change the height of the post back to 50 um. Determine the wavelength of the incident light to the nearest nanometer (0.001 um). In order to precisely position the incident ray, change the angle of incidence to 0 degrees.  Then select an initial position near the one you're looking for and change the position increment to a small value.</text>
 		</description>
 		<input>
 			<name>a</name>
 			<text>Angle of incidence</text>
 			<initialValue>10.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 		</input>
 		<input>
 			<name>xo</name>
 			<text>Initial X-pos of incident ray</text>
 			<initialValue>400.0</initialValue>
-			<units>µm</units>
+			<units>um</units>
 		</input>
 		<input>
 			<name>xi</name>
 			<text>Position increment</text>
 			<initialValue>20.0</initialValue>
-			<units>µm</units>
+			<units>um</units>
 		</input>
 		<input>
 			<name>h</name>
 			<text>Height of post</text>
 			<initialValue>50.0</initialValue>
-			<units>µm</units>
+			<units>um</units>
 		</input>
 		<input>
 			<name>w</name>
 			<text>Thickness of plate</text>
 			<initialValue>100.0</initialValue>
-			<units>µm</units>
+			<units>um</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
@@ -238,7 +238,7 @@
 		<output>
 			<name>x</name>
 			<text>X-pos of incident ray</text>
-			<units>µm</units>
+			<units>um</units>
 			<calculator type="parametric">
 				<value>xo+xi*t</value>
 			</calculator>
@@ -466,7 +466,7 @@
 		<output>
 			<name>d</name>
 			<text>Plate separation</text>
-			<units>µm</units>
+			<units>um</units>
 			<calculator type="parametric">
 				<value>x*tan(i)/cos(i)</value>
 			</calculator>

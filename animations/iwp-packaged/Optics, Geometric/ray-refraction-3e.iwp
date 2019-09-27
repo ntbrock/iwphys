@@ -45,14 +45,14 @@ Suppose wavefronts were added to the rays.  For which two rays would the wavelen
 			<name>angle</name>
 			<text>Starting angle</text>
 			<initialValue>20.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
 			<name>s</name>
 			<text>Angle increment</text>
 			<initialValue>1.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
@@ -65,7 +65,7 @@ Suppose wavefronts were added to the rays.  For which two rays would the wavelen
 		<output>
 			<name>i</name>
 			<text>Angle of incidence</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>angle+s*t</value>
 			</calculator>
@@ -74,7 +74,7 @@ Suppose wavefronts were added to the rays.  For which two rays would the wavelen
 		<output>
 			<name>r</name>
 			<text>Angle of refraction</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(sin(toRadians(i))/n))</value>
 			</calculator>
@@ -83,7 +83,7 @@ Suppose wavefronts were added to the rays.  For which two rays would the wavelen
 		<output>
 			<name>ac</name>
 			<text>Critical angle</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(n))</value>
 			</calculator>

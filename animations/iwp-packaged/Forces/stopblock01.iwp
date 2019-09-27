@@ -52,7 +52,7 @@
 			<name>a</name>
 			<text>Inclination Angle</text>
 			<initialValue>0.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>

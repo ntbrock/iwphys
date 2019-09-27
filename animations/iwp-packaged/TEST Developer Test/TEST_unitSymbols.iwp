@@ -40,14 +40,14 @@
 			<name>Degrees</name>
 			<text>Degrees</text>
 			<initialValue>1</initialValue>
-			<units>°</units>
+			<units>deg</units>
 		</input>
 
 		<input>
 			<name>Power2</name>
 			<text>Power2</text>
 			<initialValue>1</initialValue>
-			<units>²</units>
+			<units>^2</units>
 		</input>
 
 	</objects>

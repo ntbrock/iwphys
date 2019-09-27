@@ -24,7 +24,7 @@
 		<description>
 			<text>Simulation of two objects falling from rest in a gravitational field.  
 They experience air drag proportional to the square of the speed.  
-The vertical acceleration is given by:  a = -g+kv², where k is termed
+The vertical acceleration is given by:  a = -g+kv^2, where k is termed
 the drag factor. The objects may be assigned different drag 
 factors.  The green ball is A; the red ball B.  The vertical separation
 of the balls at any time is provided as one of the outputs.</text>

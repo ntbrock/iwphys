@@ -41,14 +41,14 @@ The indices of refraction of the blue and gray media are given.  The angle of in
 			<name>angle</name>
 			<text>Starting angle</text>
 			<initialValue>30.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
 			<name>s</name>
 			<text>Angle increment</text>
 			<initialValue>1.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
@@ -73,7 +73,7 @@ The indices of refraction of the blue and gray media are given.  The angle of in
 		<output>
 			<name>i</name>
 			<text>Angle of incidence</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>angle+s*t</value>
 			</calculator>
@@ -81,7 +81,7 @@ The indices of refraction of the blue and gray media are given.  The angle of in
 		<output>
 			<name>r</name>
 			<text>Angle of refraction 1</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(sin(toRadians(i))/n))</value>
 			</calculator>
@@ -90,7 +90,7 @@ The indices of refraction of the blue and gray media are given.  The angle of in
 		<output>
 			<name>r2</name>
 			<text>Angle of refraction 2</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(sin(toRadians(r))/m))</value>
 			</calculator>

@@ -35,15 +35,15 @@
 		<description>
 			<text>A ray of light is incident from air on a thin soap film (yellow).  The medium below the film is also air.  Light is reflected from the upper and lower surfaces of the film.  The reflected rays interfere.  (Grid units are 100 nm.) The phase difference between the reflected rays is given in units of wavelengths. Playing the animation will increase the film thickness by the indicated increment.
 
-1.  For the given initial values and an angle of incidence of 0°, verify that that the phase difference is correct.
+1.  For the given initial values and an angle of incidence of 0 degrees, verify that that the phase difference is correct.
 
-2.  Determine to the nearest nanometer the film thickness for which the reflected rays undergo complete destructive interference at an angle of incidence of 0°.</text>
+2.  Determine to the nearest nanometer the film thickness for which the reflected rays undergo complete destructive interference at an angle of incidence of 0 degrees.</text>
 		</description>
 		<input>
 			<name>a</name>
 			<text>Angle of incident ray</text>
 			<initialValue>10.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 		</input>
 		<input>
 			<name>do</name>
@@ -94,7 +94,7 @@
 			<name>i</name>
 			<text>Inclination</text>
 			<initialValue>0.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>

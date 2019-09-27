@@ -51,7 +51,7 @@
 			<name>a</name>
 			<text>Inclination Angle</text>
 			<initialValue>30.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 		</input>
 		<input>
 			<name>run</name>

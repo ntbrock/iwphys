@@ -41,14 +41,14 @@ The angles of refraction for red and violet light coming out of the prism are gi
 			<name>angle</name>
 			<text>Initial angle of incidence</text>
 			<initialValue>60.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
 			<name>ai</name>
 			<text>Angle increment</text>
 			<initialValue>1.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
@@ -76,7 +76,7 @@ The angles of refraction for red and violet light coming out of the prism are gi
 			<name>v</name>
 			<text>Vertex angle</text>
 			<initialValue>60.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<output>
@@ -91,7 +91,7 @@ The angles of refraction for red and violet light coming out of the prism are gi
 		<output>
 			<name>i</name>
 			<text>Angle of incidence</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>angle-ai*t</value>
 			</calculator>
@@ -710,7 +710,7 @@ The angles of refraction for red and violet light coming out of the prism are gi
 		<output>
 			<name>rred</name>
 			<text>Angle of ref. (red)</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(n*sin(var-asin(sin(irad)/n))))</value>
 			</calculator>
@@ -718,7 +718,7 @@ The angles of refraction for red and violet light coming out of the prism are gi
 		<output>
 			<name>rviol</name>
 			<text>Angle of ref. (viol)</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(n6*sin(var-asin(sin(irad)/n6))))</value>
 			</calculator>

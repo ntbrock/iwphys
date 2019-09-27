@@ -47,7 +47,7 @@ Click on the step (>>) button to move the right charge toward the left in increm
 			<name>k</name>
 			<text>k</text>
 			<initialValue>9.0E9</initialValue>
-			<units>Nm²/C²</units>
+			<units>Nm^2/C^2</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
@@ -229,7 +229,7 @@ Click on the step (>>) button to move the right charge toward the left in increm
 		<output>
 			<name>a1</name>
 			<text>a1</text>
-			<units>m²</units>
+			<units>m^2</units>
 			<calculator type="parametric">
 				<value>(d1-t)^2</value>
 			</calculator>

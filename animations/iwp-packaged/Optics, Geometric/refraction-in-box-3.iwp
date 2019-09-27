@@ -39,7 +39,7 @@
 			<name>s</name>
 			<text>Angle increment</text>
 			<initialValue>0.5</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
@@ -52,7 +52,7 @@
 		<output>
 			<name>i</name>
 			<text>Angle of incidence</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>ac+s*t+.0001</value>
 			</calculator>
@@ -60,7 +60,7 @@
 		<output>
 			<name>r</name>
 			<text>Angle of refraction 1</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(sin(toRadians(i))/n))</value>
 			</calculator>
@@ -69,7 +69,7 @@
 		<output>
 			<name>i2</name>
 			<text>Angle of incidence 2</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>90-r</value>
 			</calculator>
@@ -78,7 +78,7 @@
 		<output>
 			<name>r2</name>
 			<text>Angle of refraction 2</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(sin(toRadians(i2))*n))</value>
 			</calculator>
@@ -87,7 +87,7 @@
 		<output>
 			<name>ac</name>
 			<text>Critical angle</text>
-			<units></units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin((n^2-1)^0.5))</value>
 			</calculator>

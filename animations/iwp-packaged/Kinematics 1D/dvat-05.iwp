@@ -101,7 +101,7 @@
 		<output>
 			<name>accel</name>
 			<text>Acceleration</text>
-			<units>m/s²</units>
+			<units>m/s^2</units>
 			<calculator type="parametric">
 				<value>c</value>
 			</calculator>

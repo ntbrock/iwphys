@@ -49,7 +49,7 @@ For easier viewing, the vectors may be scaled to larger or smaller lengths by in
 			<name>k</name>
 			<text>Electrostatic constant</text>
 			<initialValue>9.0E9</initialValue>
-			<units>Nm²/C²</units>
+			<units>Nm^2/C^2</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
@@ -221,7 +221,7 @@ For easier viewing, the vectors may be scaled to larger or smaller lengths by in
 		</solid>
 		<output>
 			<name>r1</name>
-			<text>(R-left)²</text>
+			<text>(R-left)^2</text>
 			<units>m</units>
 			<calculator type="parametric">
 				<value>x^2+y^2</value>
@@ -230,7 +230,7 @@ For easier viewing, the vectors may be scaled to larger or smaller lengths by in
 		</output>
 		<output>
 			<name>r2</name>
-			<text>(R-right)²</text>
+			<text>(R-right)^2</text>
 			<units>m</units>
 			<calculator type="parametric">
 				<value>(x2-x)^2+y^2</value>

@@ -39,14 +39,14 @@
 			<name>angle</name>
 			<text>Starting angle</text>
 			<initialValue>20.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
 			<name>s</name>
 			<text>Angle increment</text>
 			<initialValue>0.5</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
@@ -74,7 +74,7 @@
 		<output>
 			<name>i</name>
 			<text>Angle of incidence</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>angle+s*t</value>
 			</calculator>
@@ -82,7 +82,7 @@
 		<output>
 			<name>r</name>
 			<text>Angle of refraction</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(sin(toRadians(i))/n))</value>
 			</calculator>
@@ -90,7 +90,7 @@
 		<output>
 			<name>ac</name>
 			<text>Critical angle</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(n))</value>
 			</calculator>

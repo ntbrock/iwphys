@@ -41,14 +41,14 @@ Run the animation without changing anything.  Then set the index of refraction t
 			<name>angle</name>
 			<text>Angle of incidence</text>
 			<initialValue>30.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
 			<name>ai</name>
 			<text>Angle increment</text>
 			<initialValue>0.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
@@ -68,19 +68,19 @@ Run the animation without changing anything.  Then set the index of refraction t
 			<name>v</name>
 			<text>Initial vertex angle</text>
 			<initialValue>30.0</initialValue>
-			<units>°</units>
+			<units>deg</units>
 		</input>
 		<input>
 			<name>vi</name>
 			<text>Vertex angle increment</text>
 			<initialValue>1.0</initialValue>
-			<units>°</units>
-			<hidden>1</hidden>
-		</input>
+			<units>deg</units>
+		<hidden>1</hidden>
+	</input>
 		<output>
 			<name>va</name>
 			<text>Vertex angle</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>v+vi*t</value>
 			</calculator>
@@ -97,7 +97,7 @@ Run the animation without changing anything.  Then set the index of refraction t
 		<output>
 			<name>i</name>
 			<text>Angle of incidence</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>angle-ai*t</value>
 			</calculator>
@@ -433,7 +433,7 @@ Run the animation without changing anything.  Then set the index of refraction t
 		<output>
 			<name>r1</name>
 			<text>Angle of refraction 1</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(irad/n))</value>
 			</calculator>
@@ -441,7 +441,7 @@ Run the animation without changing anything.  Then set the index of refraction t
 		<output>
 			<name>r2</name>
 			<text>Angle of refraction 2</text>
-			<units>°</units>
+			<units>deg</units>
 			<calculator type="parametric">
 				<value>toDegrees(asin(n*sin(var-asin(sin(irad)/n))))</value>
 			</calculator>

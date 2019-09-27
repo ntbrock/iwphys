@@ -1,0 +1,280 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>3.0E-7</stop>
+			<change>1.0E-9</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>3.0E-7</xmax>
+			<ymin>-0.04</ymin>
+			<ymax>0.01</ymax>
+			<xgrid>3.0E-8</xgrid>
+			<ygrid>0.0010</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.025</xmin>
+			<xmax>0.025</xmax>
+			<ymin>-0.04</ymin>
+			<ymax>0.01</ymax>
+			<xgrid>0.0050</xgrid>
+			<ygrid>0.0050</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Three different charged particles of equal kinetic energy move under the influence of a uniform magnetic field oriented perpendicular to the screen.   Graphs of vertical position vs. time can be displayed by clicking Show graph.
+
+1.  Taking the red particle to have a unit charge of +1 and a unit mass of 1, what are the charges and masses of the other particles?
+2.  Determine one possible combination of real particles that the three charges could  represent.</text>
+		</description>
+		<input>
+			<name>eq</name>
+			<text>Elementary charge</text>
+			<initialValue>1.6E-19</initialValue>
+			<units>C</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>u</name>
+			<text>Atomic mass unit</text>
+			<initialValue>1.66E-27</initialValue>
+			<units>u</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>B</name>
+			<text>Magnetic field</text>
+			<initialValue>0.5</initialValue>
+			<units>T</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>kev</name>
+			<text>Kinetic Energy</text>
+			<initialValue>1.0</initialValue>
+			<units>keV</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>q1</name>
+			<text>Charge of particle 1</text>
+			<initialValue>1.0</initialValue>
+			<units>e</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m1</name>
+			<text>Mass of particle 1</text>
+			<initialValue>1.0</initialValue>
+			<units>u</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>r1</name>
+			<text>q/m of part 1</text>
+			<units>C/kg</units>
+			<calculator type="parametric">
+				<value>q1*eq/(m1*u)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>v1</name>
+			<text>Velocity of part 1</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>(2*kev*eq*1000/(u*m1))^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>P</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.002</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.002</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>v1</velocity>
+					<acceleration>r1*B*P.yvel</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>0</velocity>
+					<acceleration>-r1*B*P.xvel</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>q2</name>
+			<text>Charge of particle 2</text>
+			<initialValue>2.0</initialValue>
+			<units>e</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m2</name>
+			<text>Mass of particle 2</text>
+			<initialValue>4.0</initialValue>
+			<units>u</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>r2</name>
+			<text>q/m of part 2</text>
+			<units>C/kg</units>
+			<calculator type="parametric">
+				<value>q2*eq/(m2*u)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>v2</name>
+			<text>Velocity of part 2</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>(2*kev*eq*1000/(u*m2))^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>Q</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.002</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.002</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>v2</velocity>
+					<acceleration>r2*B*Q.yvel</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>0</velocity>
+					<acceleration>-r2*B*Q.xvel</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>q3</name>
+			<text>Charge of particle 3</text>
+			<initialValue>1.0</initialValue>
+			<units>e</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>m3</name>
+			<text>Mass of particle 3</text>
+			<initialValue>2.0</initialValue>
+			<units>u</units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>r3</name>
+			<text>q/m of part 3</text>
+			<units>C/kg</units>
+			<calculator type="parametric">
+				<value>q3*eq/(m3*u)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>v3</name>
+			<text>Velocity of part 3</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>(2*kev*eq*1000/(u*m3))^.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>R</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.002</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.002</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>v3</velocity>
+					<acceleration>r3*B*R.yvel</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>0</velocity>
+					<acceleration>-r3*B*R.xvel</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

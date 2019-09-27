@@ -46,7 +46,7 @@
 			<name>alpha</name>
 			<text>Angular acceleration</text>
 			<initialValue>2.0</initialValue>
-			<units>1/s²</units>
+			<units>1/s^2</units>
 			<hidden>1</hidden>
 		</input>
 		<input>
