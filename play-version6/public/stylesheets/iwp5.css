@@ -111,11 +111,23 @@ table {
 }
 
 
+/** Enable the input + output tables to livie happily side by side */
 
-#inputTable {
-	margin-top: 2em;
-	margin-bottom: 1em;
+.iwp-input-output {
+	margin-top: 1rem;
 }
+
+.iwp-tab .iwp-input-output-half-width-table {
+	width: 49%;
+	max-width: 49%;
+	vertical-align: top;
+}
+
+.iwp-tab .iwp-input-output-half-width-table tr {
+	width: auto;
+}
+
+
 
 th, td {
 	padding: 11px;
