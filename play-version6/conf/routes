@@ -90,3 +90,5 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # Designer demo
 GET     /designer                     controllers.DesignerController.index
+
+GET     /help                         controllers.IndexController.help

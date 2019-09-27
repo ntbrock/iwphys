@@ -215,7 +215,7 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 		var hide = "display: none;"
 
 		graphObject.pathsSvg.xPos =
-			g.append('path').attr("iwp-measure", "xPos").attr("style", stroke+(graphObject.pathsVisible.xPos ? '' : hide)).attr("d", graphObject.paths.xPos)
+			g.append('path').attr("iwp-measure", "xPos").attr("style", stroke+(graphObject.pathsVisible.xPos ? '' : hide)).attr("d", graphObject.paths.xPos).style("stroke-dasharray","5,5")
 
 		graphObject.pathsSvg.yPos =
 			g.append('path').attr("iwp-measure", "yPos").attr("style", stroke+(graphObject.pathsVisible.yPos ? '' : hide)).attr("d", graphObject.paths.yPos)
@@ -224,7 +224,7 @@ function graphResetZero(step, vars, solids, graphWindow ) {
 			g.append('path').attr("iwp-measure", "xVel").attr("style", stroke+(graphObject.pathsVisible.xVel ? '' : hide)).attr("d", graphObject.paths.xVel)
 
 		graphObject.pathsSvg.yVel =
-			g.append('path').attr("iwp-measure", "yVel").attr("style", stroke+(graphObject.pathsVisible.yVel ? '' : hide)).attr("d", graphObject.paths.yVel)
+			g.append('path').attr("iwp-measure", "yVel").attr("style", stroke+"stroke-dasharray: 5,5;"+(graphObject.pathsVisible.yVel ? '' : hide)).attr("d", graphObject.paths.yVel)
 
 		graphObject.pathsSvg.xAccel =
 			g.append('path').attr("iwp-measure", "xAccel").attr("style", stroke+(graphObject.pathsVisible.xAccel ? '' : hide)).attr("d", graphObject.paths.xAccel)
