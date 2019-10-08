@@ -324,7 +324,7 @@
 				<calculator type="euler">
 					<displacement>-x-xc</displacement>
 					<velocity>0</velocity>
-					<acceleration>s*(R*B*P.yvel*step(t-to-t1)+R*(V1/x)*step(to-t))</acceleration>
+					<acceleration>-1*s*(R*B*P.yvel*step(t-to-t1)+R*(V1/x)*step(to-t))</acceleration>
 				</calculator>
 			</xpath>
 			<ypath>

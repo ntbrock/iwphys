@@ -66,9 +66,9 @@ function renderProblemFromMemory() {
   $("#iwindow_ymin").val( animationWindow.ymin );
   $("#iwindow_ygrid").val( animationWindow.ygrid );
   $("#iwindow_yunit").html( animationWindow.yunit );
-
-
-  // $("#graphWindow").html( graphWindow );
+  
+  	
+   // $("#graphWindow").html( graphWindow );
   inputTitle = 0;
   outputTitle = 0;
 
@@ -111,7 +111,7 @@ function renderProblemFromMemory() {
   */
   //Moved to addSolidsToCanvas, 8 Aug 2016
   //$("#solids").html( solids.join(" ") );
-
+  
   renderCanvas();
   addSolidsToCanvas(svgSolids);
   addSolidsToCanvas(svgObjects);
@@ -193,10 +193,14 @@ function renderCanvas() {
     g.append( "<path class='gridline' d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" )
   };
 
+
+
   // Blitting / Double buffering approach
   // redraw a single time!
   // http://stackoverflow.com/questions/3642035/jquerys-append-not-working-with-svg-element
   $("#canvasDiv").html($("#canvasDiv").html());
+
+
 };
 
 function queryTimeStepInputDouble() {
@@ -459,6 +463,7 @@ function handleStopClick() {
 //Resets simulation.
 function handleResetClick() {
   renderCanvas();
+  graphSetWindowFromAnimation(graphWindow);	
   updateTimeDisplay(0);
   handleStopClick();
 	var vars0 = masterResetSteps();
