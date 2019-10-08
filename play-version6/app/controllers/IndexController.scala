@@ -52,4 +52,12 @@ class IndexController @Inject()(cc: ControllerComponents,
     }
   }
 
+  def help() = optAuthenticated { implicit request =>
+
+    Future.successful {
+      Ok(views.html.help())
+    }
+  }
+
+
 }

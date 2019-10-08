@@ -72,3 +72,79 @@
     margin-right: 2rem;
     margin-bottom: 2rem;
 }
+
+
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 50px;
+}
+
+/* style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  outline: none;
+}
+
+
+/* on mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: #f1f1f1;
+}
+
+/* main content */
+.iwp-help-main {
+  margin-left: 200px; /* same as the width of the sidenav */
+  font-size: 20px; /* increased text to enable scrolling */
+  padding: 0px 10px 0px 10px;
+}
+
+
+/* add an active class to the active dropdown button */
+.active {
+  background-color: green;
+  color: white;
+}
+
+
+/* dropdown container (hidden by default). optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
+}
+
+.boxed {
+        border: 5px solid lightblue;
+        padding-left: 100px;
+        padding-right: 100px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        margin-top: 8px;
+}
+
+
+
+
+/* optional: style the caret down icon */
+
+/* some media queries for responsiveness */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

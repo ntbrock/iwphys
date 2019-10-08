@@ -1,0 +1,265 @@
+@()
+@main("Animator Guide") {
+
+@views.html.partial.nav()
+
+
+        <div class="sidenav">
+            <a href="#Home"><h3>IWP6 Help</h3></a>
+          <button class="dropdown-btn">Animator <i class="fa fa-caret-down"></i></button>
+          <div class="dropdown-container">
+            <a href="#Animator">Player</a>
+            <a href="#Animator_Animate">Animate</a>
+            <a href="#Animator_Graph">Graph</a>
+            <a href="#Animator_Time">Time</a>
+            <a href="#Animator_Axes">Axes</a>
+          </div>
+
+            <a href="#Website_Navigation">Website Navigation</a>
+            <a href="#Account_Management">Account Management</a>
+            <a href="#System_Support">System and Browser Support</a>
+
+        </div>
+
+
+
+
+        <div class="iwp-help-main">
+
+
+            <a class="anchor" name="Home"></a>
+            <div class="text-center jumbotron">
+                <h1>Interactive Web Physics 6 Animator Guide</h1>
+            </div>
+
+            <div class="boxed" style="border:0px">
+                <div class="boxed">
+                <header align="center">
+                    <h2>Introduction to IWP6</h2>
+                </header>
+
+                <p>
+                Interactive Web Physics 6 (IWP6) features a large database of interactive animations designed for educational demonstrations of fundamental physical concepts.
+                These animations span a wide range of introductory physics subjects, from 1D Kinematics to Electrostatics and Magnetism.
+                In addition to the large public library of animations available in IWP6, IWP6 also features a animation designed tool which allows teachers and students to develop and explore animations of their own design.
+                </p>
+
+
+
+
+                </div>
+            </div>
+
+            <a class="anchor" name="Animator"></a>
+            <header>
+                <h2>Animator Tutorial</h2>
+            </header>
+
+            <div class="boxed" style="border:0px">
+                <p>
+                This tutorial discusses the various aspects of the animation player and how the user can interact with them to change the animation.
+                The IWP6 animation player consists of two central components: on the left, the output display; and on the right, the user input panels.
+                The output display includes an animation of the dependent variables of the problem, which the user can control by adjusting the parameters in the input panels.
+                Each animation contains just one output display panel, but animations can have several possible input panels, which can be toggled by clicking the panel headers at the top of the input panel.
+                Most animations have four input panels: 'Animate, 'Graph', 'Time', 'Axes.'
+                The 'Animate', 'Time', and 'Axes' input panels hold parameters which allow the user to change the behavior of the animation.
+                The 'Graph' tab, on the other hand, is independent of the main animation, but displays additional data which complement the main display.
+                </p>
+
+                <div class="boxed">
+                    <a class="anchor" name="Animator_Player"></a>
+                    <header>
+                        <h3>Output Display - Player</h3>
+                    </header>
+                    <p align="center">
+                        <img class="img-responsive" src="@routes.Assets.versioned("images/help/image1.png")" alt="Output Display">
+                    </p>
+                    <p>
+                    The output display shows the animated graphs of the primary objects of the animation.
+                    The screenshot below shows a snapshot of the animator player for the damped-1.iwp animation.
+                    In the top left, the current time of the animation is indicated next to the clock symbol.
+                    The user can interact with the animation using the time functions at the top right: step back one frame, play, step forward one frame, and reset.
+                    Either the play or forward step buttons will initiate the animation.
+                    The play button will continously progress the animation at a pace proportional to the time step, stopping once the animation once the current time reaches the stop time in the 'Time' tab.
+                    The animation can be paused at any given time by clicking the pause button which replaces the play button when the animation is running.
+                    Clicking on the step backwards button will move the graph display to the previous frame according to the time step given in the 'Time' tab; inversely, clicking on the step forwards button will move the graph display to the next frame by a single time step.
+                    Finally, the reset button will reset the animation to the initial start time, also given in the 'Time' tab.
+                    </p>
+                </div>
+
+                <div class="boxed">
+                    <a class="anchor" name="Animator_Animate"></a>
+                    <header>
+                        <h3>User Input - Animate</h3>
+                    </header>
+                    <p align="center">
+                        <img class="img-responsive" src="@routes.Assets.versioned("images/help/image2.png")" alt="Animate Panel">
+                    </p>
+                    <p>
+                    In the 'Animate' user panel, the title of the animation and a brief summary can be found at the top of the panel, above the Inputs and Outputs sections.
+                    The Inputs section contains the primary parameters of the system, which the user can adjust to influence the main animation.
+                    In damped-1.iwp above, the user can adjust the initial position of the oscilaltion, the mass of the object, the spring constant, and damping coefficient.
+                    For some animations, the Outputs section of the 'Animate' panel also shows instantaneous information about the current state of the animation. damped-1.iwp shows the undamped and damped frequencies of the current state of the animation.
+                    </p>
+                    <p>
+                    When updating the input parameters of the animation, some changes will only take effect once the player has restarted, whereas others will cause the player to update immediately.
+                    Initializers require the player to reset before taking effect, so modifying these parameters will not affect the animation until it has been reset.
+                    For damped-1.iwp, the initial position is an initializer parameter, but the other three parameters are non-initializers.
+                    Changing these parameters will immediately affect the animation and cause a noticeable discontinuity in the behavior of the animation.
+                    In any case, however, the animation will reset if a parameter is modified and then deselected, even if the parameter is not an initializer.
+                    Suppose, for instance, the user changes the mass of the object while the animation is playing: the animation will continue using the new mass until the user clicks away from the mass input box.
+                    </p>
+                </div>
+
+                <div class="boxed">
+                    <a class="anchor" name="Animator_Graph"></a>
+                    <header>
+                        <h3>User Input - Graph</h3>
+                    </header>
+                    <p align="center">
+                        <img class="img-responsive" src="@routes.Assets.versioned("images/help/image3.png")" alt="Graph Panel">
+                    </p>
+                    <p>
+                    If appropriate, some animations may have a 'Graph' panel which displays supplementary visual information in addition to the main display.
+                    Like the main display, the 'Graph' panel updates continuously, and thus serves as its own animation in addition to the main display.
+                    The 'Graph' user panel displays the time evolution of various intermediary outputs between the input parameters and the displayed animation in the left main output.
+                    The user can control exactly which variables are shown in the 'Graph' panel by toggling the variable names at the right of the graph.
+                    When a variable is highlighted, as shown in the animation for planetary-system-retrograde.iwp above, the variable is displayed in the 'Graph' section.
+                    Animations without intermediary variables, like damped-1.iwp, do not have a 'Graph' tab, since all of the information relevant to the animation is already shown in the animation player.
+                    </p>
+                </div>
+
+                <div class="boxed">
+                    <a class="anchor" name="Animator_Time"></a>
+                    <header>
+                        <h3>User Input - Time</h3>
+                    </header>
+                    <p align="center">
+                        <img class="img-responsive" src="@routes.Assets.versioned("images/help/image4.png")" alt="Time Panel">
+                    </p>
+                    <p>
+                    For any animation, the 'Time' panel holds three parameters: the Time Step, the Start Time, and the Stop Time.
+                    These parameters affect how the time functions on the main display&mdash;forward-step, play, backwards-step, and reset&mdash;behave.
+                    The time step of the animation determines both the accuracy of the animation to real life expectations and the speed of the animation.
+                    In the animation above for planetary-system-02.iwp, the large time step causes the animation to show visibly polygonic orbits, instead of the expected circular orbits of a planetary system.
+                    Increasing the time step will also increase the speed of the animation proportionally; e.g. a 2x larger time step will play the animation 2x faster.
+                    </p>
+                    <p>
+                    The start time determines the current time of the animation immediately after a reset, and is usually zero by default.
+                    The stop time, on the other hand, determines when the length of time that the animation will play before stopping.
+                    Importantly, it represents the relative stop time, rather than the absolute stop time.
+                    For instance, an animation with a Start Time of 1 second and a Stop Time of 2 seconds will finish at a Time of 3 seconds, 2 seconds after the Start Time.
+                    Once the current time of the animation reaches the stop time, the animation will automatically pause.
+                    It is impossible to progress the animation past the stop time without increasing the stop time&mdash;pressing the play button will immediately repause the animation, and the forward-step button will do nothing.
+                    </p>
+                    <p>
+                    Note that the 'Time' parameters behave the same way as the 'Animate' parameters in response to modifications.
+                    The Time Step is considered a non-initializer, while the Start and Stop Times are considered initializers, so the Time Step is modifiable during an animation.
+                    Currently, however, this means there is no way to extend an animation past the stop time without restarting the animation, so it is best to overestimate the Stop Time when possible.
+                    </p>
+                </div>
+
+
+                <div class="boxed">
+                    <a class="anchor" name="Animator_Axes"></a>
+                    <header>
+                        <h3>User Input - Axes</h3>
+                    </header>
+                    <p align="center">
+                        <img class="img-responsive" src="@routes.Assets.versioned("images/help/image5.png")" alt="Axes Panel">
+                    </p>
+                    <p>
+                    The 'Axes' panel always holds six parameters which determine the window range and grid spacing of the main display.
+                    These parameters and their respective units are organized into two columns, one for each axis, as shown in the animation above for cp-efield-02.iwp.
+                    For each of the X- and Y-axes, there are three parameters: Min, Max, and Grid.
+                    The Min value determines the lowest value visible on the respective axis in the main display, and inversely for the Max value.
+                    The Grid parameter represents the spacing between grid lines along each axis.
+                    For instance, an X-Grid spacing of .5 will produce vertical lines .5 units apart.
+                    Note that the 'Axes' panel only controls the window appearance for the main display; the 'Graph' panel is, as of right now, static.
+                    Changing the Start and Stop times has no effect on the 'Graph' panel either, even if the 'Graph' shows time-dependent informaiton.
+                    </p>
+                </div>
+
+
+
+
+            </div>
+
+
+
+            <a name="Website_Navigation"></a>
+            <header>
+                <h2>Website Navigation</h2>
+            </header>
+            <div class="boxed" style="border:0px">
+
+
+                <div class="boxed">
+                    <p align="center">
+                        <img class="img-responsive" src="@routes.Assets.versioned("images/help/image6.png")" alt="Home Page">
+                    </p>
+
+                    IWP6 has 7 different collections of animations which are available through the Browse Animations button at the top of the IWP6 homepage.
+                    Most prominently featured on the homepage are the 'iwp-packaged' and 'popular' collections; the other collections can be found only in the 'Browsing Top Collections' page accessible through 'Browse Animations.'
+                    No collections other than 'iwp-packaged' contain their own subcollections, and a collection can hold anywhere from 3 animations (e.g. iwp-2015) to almost a 1000 animations (e.g. winters-ncssm-2009).
+                    <p align="center">
+                        <img class="img-responsive" src="@routes.Assets.versioned("images/help/image7.png")" alt="Collections">
+                    </p>
+
+
+                    The 'iwp-packaged' collection is the most expansive, containing 12 of its own subcollections:
+                    <ul style="height:200px; display:flex; flex-direction: column; flex-wrap: wrap">
+                        <li>Charged Particle Motion</li>
+                        <li>Electrostatics</li>
+                        <li>Forces</li>
+                        <li>Gravitation</li>
+                        <li>Kinematics 1D</li>
+                        <li>Kinematics 2D</li>
+                        <li>Magnetism</li>
+                        <li>Momentum, Collisions, KE</li>
+                        <li>Optics, Geometric</li>
+                        <li>Optics, Physical</li>
+                        <li>Oscillations</li>
+                        <li>Waves and Sound</li>
+                    </ul>
+                    The 'popular' collection features the best showcases of IWP6 animations from any animation in the 'iwp-packaged' collection.
+
+
+                </div>
+            </div>
+
+
+
+            <a name="Account_Management"></a>
+            <header>
+                <h2>Account Management</h2>
+            </header>
+            <div class="boxed" style="border:0px">
+
+
+                <body>
+
+                </body>
+
+
+            </div>
+
+
+
+            <a name="System_Support"></a>
+            <header>
+                <h2>System and Browser Support</h2>
+            </header>
+            <div class="boxed" style="border:0px">
+
+
+
+            </div>
+
+        </div>
+        <script src="@routes.Assets.versioned("javascripts/iwp/iwp6-help.js")" type="text/javascript">
+
+
+@views.html.partial.footer()
+
+}
