@@ -73,37 +73,43 @@ function renderProblemFromMemory() {
   outputTitle = 0;
 
   $.each(htmlInputs, function(index, input) {
-    if ( input.hidden != "1" ) {
+    if ( !input.includes("display:none;")  ) {
       inputTitle = 1;
     }
   })
   $.each(htmlOutputs, function(index, output) {
-    if ( output.hidden != "1" ) {
+    if ( !output.includes("display:none;") ) {
       outputTitle = 1;
-      //console.log("it's visible");
     }
   })
-  if ( inputTitle ) {
-    $("#inputTable").append("<tr><th colspan='2'>Inputs</th></tr>");
-  }
+
   //$("#inputTable").append("<tr><th colspan='2'>Inputs</th></tr>");
   $.each(htmlInputs, function( index, input ) {
     $("#inputTable").append(input);
   })
-  if ( outputTitle ) {
-    $("#outputTable").append("<tr><th colspan='2'>Outputs</th></tr>");
-  }
+
   $.each(htmlOutputs, function( index, output ) {
     $("#outputTable").append(output);
   })
+  $("#inputTable").append("<tr style='height:auto'></tr>")
+  $("#outputTable").append("<tr style='height:auto'></tr>")
 
   // 2018Feb01 - Keep the title + description, just hide all inputs.
   if (!inputTitle) {
     $("#inputTable").css('display','none');
+    $("#outputTable").removeClass("iwp-input-output-half-width-table");
+    $("#outputTable").addClass("iwp-input-output-full-width-table");
   }
-  if ( !outputTitle) {
+  if (!outputTitle) {
     $("#outputTable").css('display','none');
+    $("#inputTable").removeClass("iwp-input-output-half-width-table");
+    $("#inputTable").addClass("iwp-input-output-full-width-table");
   }
+
+  $("#inputTable").css("height", $("#outputTable").css('height'));
+  $("#outputTable").css("height", $("#inputTable").css('height'));
+
+
 
   fitText("#inputTable");
   /* Debugging 07 Oct 2016 Ryan Steed
