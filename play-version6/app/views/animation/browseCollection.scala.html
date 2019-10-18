@@ -9,11 +9,12 @@
 
   <div class="row">
     <div class="col-lg-12">
-      @thisCollection.parent.map { parent =>
-      <h3><a href="@controllers.routes.AnimationFilesystemController.browseCollection(parent.encoded)">Back to Parent Collection @{parent.name}</a></h3>
-      }.getOrElse {
-      <h3><a href="@controllers.routes.AnimationFilesystemController.browseCollections()">Back to Top Collections</a></h3>
-      }
+<!--      @thisCollection.parent.map { parent =>-->
+<!--      <h3><a href="@controllers.routes.AnimationFilesystemController.browseCollection(parent.encoded)">Back to Parent Collection @{parent.name}</a></h3>-->
+<!--      }.getOrElse {-->
+<!--      <h3><a href="@controllers.routes.AnimationFilesystemController.browseCollections()">Back to Top Collections</a></h3>-->
+<!--      }-->
+      <h3><a href="@controllers.routes.IndexController.index()">Home</a></h3>
       <h1>Browsing Animations: @thisCollection.name</h1>
 
     </div>
