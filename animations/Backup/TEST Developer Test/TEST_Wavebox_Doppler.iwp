@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>6/7/07 - Sagar Indurkhya - Basic Wavebox Test Problem
+
+</text>
+		</description>
+		<object class="edu.ncssm.iwp.objects.wavebox.DObject_WaveBox">
+			<name>New_WaveBox</name>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<displayMode>null</displayMode>
+			<minX>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</minX>
+			<maxX>
+				<calculator type="parametric">
+					<value>10</value>
+				</calculator>
+			</maxX>
+			<minY>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</minY>
+			<maxY>
+				<calculator type="parametric">
+					<value>10</value>
+				</calculator>
+			</maxY>
+			<waveGenerator>
+				<X>
+					<calculator type="parametric">
+						<value>0.0</value>
+					</calculator>
+				</X>
+				<Y>
+					<calculator type="parametric">
+						<value>0.0</value>
+					</calculator>
+				</Y>
+				<Width>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</Width>
+				<Height>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</Height>
+				<XVelocity>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</XVelocity>
+				<YVelocity>
+					<calculator type="parametric">
+						<value>0.0</value>
+					</calculator>
+				</YVelocity>
+				<Doppler>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</Doppler>
+				<waveIterations>
+					<calculator type="parametric">
+						<value>150</value>
+					</calculator>
+				</waveIterations>
+				<numWaves>
+					<calculator type="parametric">
+						<value>15</value>
+					</calculator>
+				</numWaves>
+				<Frequency>
+					<calculator type="parametric">
+						<value>1.0</value>
+					</calculator>
+				</Frequency>
+				<Wavelength>
+					<calculator type="parametric">
+						<value>1.0</value>
+					</calculator>
+				</Wavelength>
+				<Period>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</Period>
+				<maxAmplitude>
+					<calculator type="parametric">
+						<value>2.0</value>
+					</calculator>
+				</maxAmplitude>
+				<phaseShift>
+					<calculator type="parametric">
+						<value>0.0</value>
+					</calculator>
+				</phaseShift>
+				<leftToRight>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</leftToRight>
+			</waveGenerator>
+		</object>
+		<object class="edu.ncssm.iwp.objects.wavebox.DObject_WaveBox">
+			<name>New_WaveBox</name>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<displayMode>null</displayMode>
+			<minX>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</minX>
+			<maxX>
+				<calculator type="parametric">
+					<value>10</value>
+				</calculator>
+			</maxX>
+			<minY>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</minY>
+			<maxY>
+				<calculator type="parametric">
+					<value>10</value>
+				</calculator>
+			</maxY>
+			<waveGenerator>
+				<X>
+					<calculator type="parametric">
+						<value>1.0</value>
+					</calculator>
+				</X>
+				<Y>
+					<calculator type="parametric">
+						<value>0.0</value>
+					</calculator>
+				</Y>
+				<Width>
+					<calculator type="parametric">
+						<value>10.0</value>
+					</calculator>
+				</Width>
+				<Height>
+					<calculator type="parametric">
+						<value>10.0</value>
+					</calculator>
+				</Height>
+				<XVelocity>
+					<calculator type="parametric">
+						<value>0.0</value>
+					</calculator>
+				</XVelocity>
+				<YVelocity>
+					<calculator type="parametric">
+						<value>0.0</value>
+					</calculator>
+				</YVelocity>
+				<Doppler>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</Doppler>
+				<waveIterations>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</waveIterations>
+				<numWaves>
+					<calculator type="parametric">
+						<value>1015</value>
+					</calculator>
+				</numWaves>
+				<Frequency>
+					<calculator type="parametric">
+						<value>1.0</value>
+					</calculator>
+				</Frequency>
+				<Wavelength>
+					<calculator type="parametric">
+						<value>1.0</value>
+					</calculator>
+				</Wavelength>
+				<Period>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</Period>
+				<maxAmplitude>
+					<calculator type="parametric">
+						<value>5.0</value>
+					</calculator>
+				</maxAmplitude>
+				<phaseShift>
+					<calculator type="parametric">
+						<value>0.0</value>
+					</calculator>
+				</phaseShift>
+				<leftToRight>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</leftToRight>
+			</waveGenerator>
+		</object>
+	</objects>
+</problem>

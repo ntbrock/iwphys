@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>20.0</stop>
+			<change>0.1</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>20.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>200.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-0.5</xmin>
+			<xmax>12.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>200.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>20.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Two objects move with zero or uniform acceleration in a straight line
+starting from different positions.  
+
+The graph plots position (y) versus time (x).</text>
+		</description>
+		<output>
+			<name>x_carA</name>
+			<text>Position of red</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>CarA.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>v_carA</name>
+			<text>Velocity of red</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>CarA.yvel</value>
+			</calculator>
+		</output>
+		<output>
+			<name>x_carB</name>
+			<text>Position of blue</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>CarB.ypos</value>
+			</calculator>
+		</output>
+		<output>
+			<name>v_carB</name>
+			<text>Velocity of blue</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>CarB.yvel</value>
+			</calculator>
+		</output>
+		<input>
+			<name>vo_carA</name>
+			<text>Initial velocity of red</text>
+			<initialValue>10.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>a_carA</name>
+			<text>Acceleration of red</text>
+			<initialValue>0.0</initialValue>
+			<units>m/ss</units>
+		</input>
+		<input>
+			<name>xo_carA</name>
+			<text>Initial position of red</text>
+			<initialValue>0.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>xo_carB</name>
+			<text>Initial position of blue</text>
+			<initialValue>100.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>vo_carB</name>
+			<text>Initial velocity of blue</text>
+			<initialValue>1.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>a_carB</name>
+			<text>Acceleration of blue</text>
+			<initialValue>0.0</initialValue>
+			<units>m/ss</units>
+		</input>
+		<solid>
+			<name>CarA</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.6</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>xo_carA.value+vo_carA.value*t+0.5*a_carA.value*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>CarB</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.6</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>xo_carB.value+vo_carB.value*t+0.5*a_carB.value*t^2</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

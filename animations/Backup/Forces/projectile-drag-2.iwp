@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.01</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.0</xmin>
+			<xmax>19.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>The green projectile is subject to a v-squared drag force.
+The red projectile is subject to a v drag force.</text>
+		</description>
+		<input>
+			<name>gf</name>
+			<text>Gravitational field</text>
+			<initialValue>-10.0</initialValue>
+			<units>N/kg</units>
+		</input>
+		<input>
+			<name>d</name>
+			<text>Drag constant</text>
+			<initialValue>1.0</initialValue>
+			<units>kg/s</units>
+		</input>
+		<input>
+			<name>vo</name>
+			<text>Initial velocity</text>
+			<initialValue>20.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>m</name>
+			<text>Mass</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>a</name>
+			<text>Launch angle</text>
+			<initialValue>45.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>n</name>
+			<text>Negative</text>
+			<initialValue>-1.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<output>
+			<name>ar</name>
+			<text>Angle in radians</text>
+			<units>rad</units>
+			<calculator type="parametric">
+				<value>toRadians(a)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<solid>
+			<name>G</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="true" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*cos(ar)</velocity>
+					<acceleration>(n*d.value*(G.xvel^2+G.yvel^2)^0.5*G.xvel)/m</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*sin(ar)</velocity>
+					<acceleration>(gf+n.value*d.value*(G.xvel^2+G.yvel^2)^0.5*G.yvel)/m</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>R</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="true" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*cos(ar)</velocity>
+					<acceleration>(n*d.value*R.xvel)/m</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>vo*sin(ar)</velocity>
+					<acceleration>(gf+n.value*d.value*R.yvel)/m</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>vr</name>
+			<text>Speed of Red</text>
+			<units>m/s</units>
+			<calculator type="parametric">
+				<value>(R.xvel^2+R.yvel^2)^0.5</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

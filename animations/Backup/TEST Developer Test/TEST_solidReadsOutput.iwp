@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name>Taylor Brockman</name>
+		<organization>IWP</organization>
+		<email>taylor.brockman@gmail.com</email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.02</change>
+			<fps>15.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10</xmin>
+			<xmax>10</xmax>
+			<ymin>-10</ymin>
+			<ymax>10</ymax>
+			<xgrid>.5</xgrid>
+			<ygrid>.5</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>TEST for a solid reading an output variable for its value.</text>
+		</description>
+
+		<output>
+			<name>outputone</name>
+			<text>Output T</text>
+			<units>sec</units>
+			<calculator type="parametric">
+				<value>t</value>
+			</calculator>
+		</output>
+
+
+		<solid>
+			<name>OutputShaper</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>1+outputone</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1+outputone.value</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1</value>
+				</calculator>
+			</ypath>
+		</solid>
+
+
+
+		<solid>
+			<name>OutputMover</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.7</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>10*cos(outputone.value)</value>
+				</calculator>
+			</ypath>
+		</solid>
+
+
+
+	</objects>
+</problem>

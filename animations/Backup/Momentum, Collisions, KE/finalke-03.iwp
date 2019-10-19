@@ -1,0 +1,542 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.025</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.0</xmin>
+			<xmax>11.0</xmax>
+			<ymin>-6.0</ymin>
+			<ymax>6.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>1. Two dimunitive cars, initially at rest, are subjected at t =0  to an identical and constant force in the +x direction.  How do the kinetic energies (see outputs) of the two cars compare after traveling the same distance?  Does your answer depend on the masses of the cars?  the applied force?  the position of the finish line?
+
+2. How do the kinetic energies of the two cars compare after traveling for the same amount of time?  Does your answer depend on the masses of the cars?  the applied force?</text>
+		</description>
+		<input>
+			<name>vo</name>
+			<text>Initial velocity</text>
+			<initialValue>0.0</initialValue>
+			<units>m/s</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>ma</name>
+			<text>Mass of red</text>
+			<initialValue>2.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>mb</name>
+			<text>Mass of blue</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>F</name>
+			<text>Applied force</text>
+			<initialValue>5.0</initialValue>
+			<units>N</units>
+		</input>
+		<input>
+			<name>xf</name>
+			<text>Finish line</text>
+			<initialValue>10.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>n</name>
+			<text>Direction reverser</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>finish</name>
+			<shape type="line" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>xf</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-5</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>red</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="true" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>n*vo*t+n*(F/ma)*t^2/2+(xf-n*xf)/2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>red_top</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>n*vo*t+n*(F/ma)*t^2/2+(xf-n*xf)/2-.1</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2.25</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>red_window</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.35</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>n*vo*t+n*(F/ma)*t^2/2+(xf-n*xf)/2-.08</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2.35</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>red_wheel</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>n*vo*t+n*(F/ma)*t^2/2+(xf-n*xf)/2-.25</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.75</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>red_wheel_2</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>n*vo*t+n*(F/ma)*t^2/2+(xf-n*xf)/2+.25</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>1.75</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>red_head</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>n*vo*t+n*(F/ma)*t^2/2+(xf-n*xf)/2-.05</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>2.35</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>blue</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.35</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="true" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vo*t+(F/mb)*t^2/2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-2</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>blue_top</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vo*t+(F/mb)*t^2/2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-1.75</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>blue_wheel</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vo*t+(F/mb)*t^2/2-.25</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-2.25</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>blue_wheel_2</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vo*t+(F/mb)*t^2/2+.25</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-2.25</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>blue_window</name>
+			<shape type="rectangle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.35</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vo*t+(F/mb)*t^2/2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-1.65</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>blue_head</name>
+			<shape type="circle" drawTrails="false">
+				<width>
+					<calculator type="parametric">
+						<value>.15</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.25</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vo*t+(F/mb)*t^2/2</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-1.65</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>ka</name>
+			<text>KE of red</text>
+			<units>J</units>
+			<calculator type="parametric">
+				<value>ma*red.xvel^2/2</value>
+			</calculator>
+		</output>
+		<output>
+			<name>kb</name>
+			<text>KE of blue</text>
+			<units>J</units>
+			<calculator type="parametric">
+				<value>mb*blue.xvel^2/2</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ta</name>
+			<text>Finish time of red</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>(-vo+(vo^2+2*(F/ma)*xf)^.5)/(F/ma)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+		<output>
+			<name>tb</name>
+			<text>Finish time of blue</text>
+			<units>s</units>
+			<calculator type="parametric">
+				<value>(-vo+(vo^2+2*(F/mb)*xf)^.5)/(F/mb)</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>2.0</stop>
+			<change>0.01</change>
+			<fps>50.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>2.0</xmax>
+			<ymin>-5.0</ymin>
+			<ymax>5.0</ymax>
+			<xgrid>0.1</xgrid>
+			<ygrid>0.5</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>0.0</xmin>
+			<xmax>2.0</xmax>
+			<ymin>-5.0</ymin>
+			<ymax>5.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>The blue and green waves are superimposed to produce the red wave.  When the frequencies are nearly the same, beats are produced.  Determine the frequencies of the green and blue waves.  Also determine the beat frequency.  Note that the x-axis is a time axis.  In order to spread out the waves for easier viewing, click on the Window tab above and change the value of X Max to something smaller.</text>
+		</description>
+		<input>
+			<name>A</name>
+			<text>Amplitude</text>
+			<initialValue>2.0</initialValue>
+			<units>m</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>f1</name>
+			<text>Frequency 1</text>
+			<initialValue>7.0</initialValue>
+			<units>Hz</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>f2</name>
+			<text>Frequency 2</text>
+			<initialValue>8.0</initialValue>
+			<units>Hz</units>
+			<hidden>1</hidden>
+		</input>
+		<input>
+			<name>p</name>
+			<text>Relative phase</text>
+			<initialValue>0.0</initialValue>
+			<units>rad</units>
+			<hidden>1</hidden>
+		</input>
+		<solid>
+			<name>background</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>4</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>10</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>wave1</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>A*sin(2*PI.value*f1*t)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>wave2</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>204</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>A*sin(2*PI.value*f2*t+p)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>sum</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>A*(sin(2*PI.value*f1*t)+sin(2*PI.value*f2*t+p))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xaxis</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>204</red>
+				<green>204</green>
+				<blue>204</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>
