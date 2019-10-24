@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.02</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-3.0</xmin>
+			<xmax>3.0</xmax>
+			<ymin>-3.0</ymin>
+			<ymax>3.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>0.5</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>Start the applet.  Blue moves in a circle at constant speed.  At t=0, Blue releases a green ball.  Note the path taken by the ball. 
+1. At t=0, suppose Blue throws the ball directly opposite his direction of motion.  We'll call this 0 deg, measuring angles ccw from the +x axis. What must be the speed of the ball, relative to Blue, so that the ball does not move with respect to the grid?
+2. Now Blue's problem (and yours) is to throw the ball with the right speed and angle so the ball intercepts Blue's path when Blue has moved through exactly one-half revolution.
+</text>
+		</description>
+		<input>
+			<name>angle</name>
+			<text>Angle of throw</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>radius</name>
+			<text>Radius of Blue's path</text>
+			<initialValue>2.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>period</name>
+			<text>Period of BLue</text>
+			<initialValue>2.0</initialValue>
+			<units>s</units>
+		</input>
+		<input>
+			<name>speed</name>
+			<text>Speed of throw wrt Blue</text>
+			<initialValue>0.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<solid>
+			<name>Center</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Blue</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.2</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-radius.value*sin(2*PI.value*t/period.value)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-radius.value*cos(2*PI.value*t/period.value)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Ball</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>speed.value*cos(toRadians(angle.value))*t-2*PI.value*radius.value*t/period.value</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-radius.value+speed.value*sin(toRadians(angle.value))*t</value>
+				</calculator>
+			</ypath>
+		</solid>
+	</objects>
+</problem>

@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name>Taylor Brockman</name>
+		<organization>IWP</organization>
+		<email>taylor.brockman@gmail.com</email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.02</change>
+			<fps>15.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.1</xmin>
+			<xmax>1.1</xmax>
+			<ymin>-1.1</ymin>
+			<ymax>1.1</ymax>
+			<xgrid>.1</xgrid>
+			<ygrid>.1</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>TEST Math Operators</text>
+		</description>
+
+
+		<output>
+			<name>plus</name>
+			<text>25+25</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>25+25</value>
+			</calculator>
+		</output>
+
+
+		<output>
+			<name>minus</name>
+			<text>25-25</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>25-25</value>
+			</calculator>
+		</output>
+		
+		
+		<output>
+			<name>multiply</name>
+			<text>25*25</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>25*25</value>
+			</calculator>
+		</output>
+
+
+		<output>
+			<name>divide</name>
+			<text>25/25</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>25/25</value>
+			</calculator>
+		</output>
+		
+		
+		<output>
+			<name>raise</name>
+			<text>25^5</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>25^5</value>
+			</calculator>
+		</output>
+	
+		<output>
+			<name>mod</name>
+			<text>25%4</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>25%4</value>
+			</calculator>
+		</output>
+		
+				
+	</objects>
+</problem>

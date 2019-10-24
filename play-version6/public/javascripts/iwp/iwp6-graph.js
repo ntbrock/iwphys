@@ -119,7 +119,7 @@ function graphSetWindowFromAnimation(graphWindow) {
 				.domain([graphWindow.xmax, graphWindow.xmin])
 				.range([100, -100]);
 	graphYScale = d3.scaleLinear()
-				.domain([graphWindow.ymin, graphWindow.ymax])
+				.domain([graphWindow.ymax, graphWindow.ymin])
 				.range([100, -100]);
 
 	var xTicks = (graphWindow.xmax - graphWindow.xmin) / graphWindow.xgrid
@@ -136,7 +136,6 @@ function graphSetWindowFromAnimation(graphWindow) {
 }
 
 function updateGraph(graphWindow) {
-	console.log("ran");
 	var gr = $("#graph");
 	var graphBoxAttrs = gr[0].getAttribute("viewBox").split(" ");
 	graphBox = { gminX: parseFloat(graphBoxAttrs[0]), gminY: parseFloat(graphBoxAttrs[1]), gmaxX: parseFloat(graphBoxAttrs[2]), gmaxY: parseFloat(graphBoxAttrs[3]) };
@@ -149,9 +148,18 @@ function updateGraph(graphWindow) {
 	  graphWindow[index] = queryUserFormGraphDouble(index);
 	  console.log("Graph window value: " , graphWindow[index]);
 	})
- 	var svg = d3.select('#graph');
-	svg.select("g.parent").selectAll("*").remove();
-	//svg.select(".tick").remove();
+ 	//var svg = d3.select('#graph');
+	gr.empty();
+	/*
+	svg.select(".iwp-graph-grid").remove();
+	svg.select(".iwp-graph-grid").remove();
+	svg.select(".iwp-graph-grid").remove();
+	svg.select(".iwp-graph-grid").remove();
+	svg.select(".iwp-graph-axis").remove();
+	svg.select(".iwp-graph-axis").remove();
+	svg.select(".iwp-graph-axis").remove();
+	svg.select(".iwp-graph-axis").remove();
+	*/
 }
 
 function graphResetZero(step, vars, solids, graphWindow) {
@@ -246,10 +254,7 @@ function graphResetZero(step, vars, solids, graphWindow) {
 		console.log("iwp5graph:115> Reset: name: ", name, "  graphObject: ", graphObject)
 		//var vb = console.log("graphWindow vals", )
 		var g = svg.append("g").classed("iwp-graph-object", true).attr("iwp-solid-name",name)
-		var gr = $("#graph");
-		var graphBoxAttrs = gr[0].getAttribute("viewBox").split(" ");
-		console.log("x-min, y-min, width, height ", graphBoxAttrs[0], graphBoxAttrs[1], graphBoxAttrs[2], graphBoxAttrs[3]);
-	 	
+ 	
 		var stroke = "stroke: rgba("+graphObject.color.red+","+graphObject.color.green+","+graphObject.color.blue+",1);"
 		var hide = "display: none;"
 		graphObject.pathsSvg.xPos =
@@ -259,20 +264,18 @@ function graphResetZero(step, vars, solids, graphWindow) {
 			g.append('path').attr("iwp-measure", "yPos").attr("style", stroke+(graphObject.pathsVisible.yPos ? '' : hide)).attr("d", graphObject.paths.yPos)
 		
 		graphObject.pathsSvg.xVel =
-			g.append('path').attr("iwp-measure", "xVel").attr("style", stroke+(graphObject.pathsVisible.xVel ? '' : hide)).
-			style("stroke-dasharray", ("1, 0.5")).attr("d", graphObject.paths.xVel)		
+			g.append('path').attr("iwp-measure", "xVel").attr("style", stroke+(graphObject.pathsVisible.xVel ? '' : hide)).attr("d", graphObject.paths.xVel)		
 		
 		graphObject.pathsSvg.yVel =
-			g.append('path').attr("iwp-measure", "yVel").attr("style", stroke+(graphObject.pathsVisible.yVel ? '' : hide))
-			.style("stroke-dasharray", ("1, 0.5")).attr("d", graphObject.paths.yVel)
+			g.append('path').attr("iwp-measure", "yVel").attr("style", stroke+(graphObject.pathsVisible.yVel ? '' : hide)).attr("d", graphObject.paths.yVel)
 
 		graphObject.pathsSvg.xAccel =
 			g.append('path').attr("iwp-measure", "xAccel").attr("style", stroke+(graphObject.pathsVisible.xAccel ? '' : hide))
-			.style("stroke-linecap", "round").style("stroke-dasharray", ("1.0, 0.5")).attr("d", graphObject.paths.xAccel)
+			.attr("d", graphObject.paths.xAccel).attr("stroke-linecap", "round")
 
 		graphObject.pathsSvg.yAccel =
 			g.append('path').attr("iwp-measure", "yAccel").attr("style", stroke+(graphObject.pathsVisible.yAccel ? '' : hide))
-			.style("stroke-linecap", "round").style("stroke-dasharray", ("1.0, 0.5")).attr("d", graphObject.paths.yAccel)
+			.attr("d", graphObject.paths.yAccel).attr("stroke-linecap", "round")
 
 	});
 
@@ -291,7 +294,7 @@ function graphResetZero(step, vars, solids, graphWindow) {
 	});
 
 
-	/** Buil the legend */
+	/** Build the legend */
 	$(".iwp-graph-controls").append("<div class='iwp-graph-control-legend'></div>")
 	$.each(iwpGraphObjects,function(name, graphObject) {
 
@@ -389,12 +392,28 @@ function graphStepForward(step, vars) {
 			pathsSvg = graphObject.pathsSvg
 			$.each(graphMeasures, function(i, measure) {
 				var graphThisStep = true
+				console.log("iwp6-graph.js line 394: vars.t, vars.delta_t: ", vars.t, vars.delta_t);
 				if ((measure == 'xVel' || measure == 'yVel') && vars.t < 2*vars.delta_t) {
 					graphThisStep = false
 				}
 				if ((measure == 'xAccel' || measure == 'yAccel') && vars.t < 3*vars.delta_t) {
 					graphThisStep = false
 				}
+
+				//create dashed line effect for velocity values
+				if ((measure == 'xVel' || measure == 'yVel')
+				     && typeof queryTimeStopInputDouble === 'function'
+				     && (Math.round(vars.t*1000/queryTimeStopInputDouble()))%4 != 0) {
+					graphThisStep = false	
+				}
+
+				//create dotted line effect for acceleration values
+				if ((measure == 'xAccel' || measure == 'yAccel')
+				     && typeof queryTimeStopInputDouble === 'function'
+				     && (Math.round(vars.t*1000/queryTimeStopInputDouble()))%3 != 0) {
+					graphThisStep = false	
+				}
+     
 				if (graphThisStep) {
 					var lcMeasure = measure.toLowerCase()
 					paths[measure].moveTo (

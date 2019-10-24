@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>brockman</username>
+		<name>Taylor Brockman</name>
+		<organization>IWP</organization>
+		<email>taylor.brockman@gmail.com</email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>15.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.5</xgrid>
+			<ygrid>1.5</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-16.0</xmin>
+			<xmax>16.0</xmax>
+			<ymin>-16.0</ymin>
+			<ymax>16.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>This is a problem that test the WaveBox Sinusoidal Functionality</text>
+		</description>
+
+		<object class="edu.ncssm.iwp.objects.wavebox.DObject_WaveBox">
+			<name>Test Wave Box</name>
+			<displayMode>Circular</displayMode>
+
+				<var name="minX"><calculator type="parametric"><value>-10</value></calculator></var>
+				<var name="maxX"><calculator type="parametric"><value>5</value></calculator></var>
+				<var name="minY"><calculator type="parametric"><value>-5</value></calculator></var>
+				<var name="maxY"><calculator type="parametric"><value>10</value></calculator></var>
+
+				<waveGenerator>
+				<color>
+					<red>255</red>
+					<green>0</green>
+					<blue>0</blue>
+				</color>
+
+				<var name="x">
+					<calculator type="parametric"><value>5</value></calculator>
+				</var>
+				<var name="y">
+					<calculator type="parametric"><value>10</value></calculator>
+				</var>
+				<var name="frequency">
+					<calculator type="parametric"><value>1</value></calculator>
+				</var>
+				<var name="wavelength">
+					<calculator type="parametric"><value>1</value></calculator>
+				</var>
+				<var name="period">
+					<calculator type="parametric"><value>3.0</value></calculator>
+				</var>
+				<var name="maxAmplitude">
+					<calculator type="parametric"><value>10</value></calculator>
+				</var>
+				<var name="phaseShift">
+					<calculator type="parametric"><value>0</value></calculator>
+				</var>
+				<var name="leftToRight">
+					<calculator type="parametric"><value>0</value></calculator>
+				</var>
+			</waveGenerator>
+
+		</object>
+
+	</objects>
+</problem>

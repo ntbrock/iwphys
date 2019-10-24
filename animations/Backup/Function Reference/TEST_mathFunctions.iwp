@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name>Taylor Brockman</name>
+		<organization>IWP</organization>
+		<email>taylor.brockman@gmail.com</email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.02</change>
+			<fps>15.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-1.1</xmin>
+			<xmax>1.1</xmax>
+			<ymin>-1.1</ymin>
+			<ymax>1.1</ymax>
+			<xgrid>.1</xgrid>
+			<ygrid>.1</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>All Math Functions provided by IWP</text>
+		</description>
+
+
+
+ 
+
+
+		<output>
+			<name>sign_</name>
+			<text>sign(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>sign(t-5)</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>exp_</name>
+			<text>exp(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>exp(t-5)</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>toRadians_</name>
+			<text>toRadians(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>toRadians(t-5)</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>toDegrees_</name>
+			<text>toDegrees(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>toDegrees(t-5)</value>
+			</calculator>
+		</output>
+
+	
+		<output>
+			<name>step_</name>
+			<text>step(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>step(t-5)</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>cot_</name>
+			<text>cot(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>cot(t-5)</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>sec_</name>
+			<text>sec(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>sec(t-5)</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>csc_</name>
+			<text>csc(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>csc(t-5)</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>tan_</name>
+			<text>tan(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>tan(t-5)</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>sqrt_</name>
+			<text>sqrt(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>sqrt(t-5)</value>
+			</calculator>
+		</output>
+		
+		
+		<output>
+			<name>sin_</name>
+			<text>sin(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>sin(t-5)</value>
+			</calculator>
+		</output>
+		
+		
+		<output>
+			<name>cos_</name>
+			<text>cos(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>cos(t-5)</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>ln_</name>
+			<text>ln(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>ln(t-5)</value>
+			</calculator>
+		</output>
+	
+		<output>
+			<name>atan_</name>
+			<text>atan(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>atan(t-5)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>asin_</name>
+			<text>asin(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>asin(t-5)</value>
+			</calculator>
+		</output>
+		<output>
+			<name>acos_</name>
+			<text>acos(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>acos(t-5)</value>
+			</calculator>
+		</output>
+		
+		<output>
+			<name>abs_</name>
+			<text>abs(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>abs(t-5)</value>
+			</calculator>
+		</output>
+		
+		<output>
+			<name>modtwo_</name>
+			<text>modtwo(t-5)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>modtwo(t-5)</value>
+			</calculator>
+		</output>
+		
+		<output>
+			<name>signum_</name>
+			<text>signum(t-5)</text>
+			<calculator type="parametric">
+				<value>signum(t-5)</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>random_</name>
+			<text>random(t-10)</text>
+			<calculator type="parametric">
+				<value>random(t-10)</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

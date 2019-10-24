@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>-1.0</start>
+			<stop>10.0</stop>
+			<change>0.05</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>-1.0</xmin>
+			<xmax>4.0</xmax>
+			<ymin>0.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</window>
+		<description>
+			<text>Global Crossing (TPT 9-04):  Two cars X and Y approach an intersection of two perpendicular roads as shown.  The velocities of the cars are vx and vy.  At the moment when car X reaches the intersection, the separation between the cars is d.  What is the minimum separation between the cars during this motion?  (Note that t = 0 is set for the time at which we are given the positions of the two cars.)  Click on the graph tab for a graph of separation vs. time.</text>
+		</description>
+		<input>
+			<name>vx</name>
+			<text>Velocity of car X</text>
+			<initialValue>4.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>vy</name>
+			<text>Velocity of car Y</text>
+			<initialValue>3.0</initialValue>
+			<units>m/s</units>
+		</input>
+		<input>
+			<name>d</name>
+			<text>Separation at t=0</text>
+			<initialValue>2.0</initialValue>
+			<units>m</units>
+		</input>
+		<solid>
+			<name>carx</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>vx*t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>cary</name>
+			<shape type="rectangle">
+				<width>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.5</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>51</red>
+				<green>51</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>vy*t-d</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Separation</name>
+			<shape type="circle">
+				<width>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>.01</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="true" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>t</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>s</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>s</name>
+			<text>Separation</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>((carx.xpos)^2+(cary.ypos)^2)^0.5</value>
+			</calculator>
+		</output>
+		<output>
+			<name>smin</name>
+			<text>(minimum)</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>d*vx/(vx^2+vy^2)^0.5</value>
+			</calculator>
+			<hidden>1</hidden>
+		</output>
+	</objects>
+</problem>

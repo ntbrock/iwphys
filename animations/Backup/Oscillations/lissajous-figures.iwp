@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>Local</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>5.0</stop>
+			<change>0.0050</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>5.0</xmax>
+			<ymin>-50.0</ymin>
+			<ymax>50.0</ymax>
+			<xgrid>0.5</xgrid>
+			<ygrid>10.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-11.0</xmin>
+			<xmax>11.0</xmax>
+			<ymin>-11.0</ymin>
+			<ymax>11.0</ymax>
+			<xgrid>10.0</xgrid>
+			<ygrid>10.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>An object is subject to independent restoring forces along the x- and y-axes.  It's like being pulled on by springs along both axes simultaneously.  Do the following.
+
+a.  Change one input in order to make the object's path elliptical. In general, what must be true to produce an elliptical path?
+b.  Restore the object to a circular path.  Then change one input to make the object move in a straight, diagonal line with slope = 1 or -1. In general, what must be true to produce a diagonal line?
+c.  Restore the object to a circular path.  Then change one input to make the object move in a figure-8 path. Change the input to a different value in order to obtain a path with 4 closed loops. In general, what conditions are required to obtain a path with and integer number n of closed loops?
+
+The figures that you're generating are called Lissajous figures.  They have value in electronics for precise comparison of frequencies.</text>
+		</description>
+		<input>
+			<name>ax</name>
+			<text>X-Amplitude</text>
+			<initialValue>10.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>ay</name>
+			<text>Y-Amplitude</text>
+			<initialValue>10.0</initialValue>
+			<units>m</units>
+		</input>
+		<input>
+			<name>px</name>
+			<text>X-phase</text>
+			<initialValue>0.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>py</name>
+			<text>Y-phase</text>
+			<initialValue>90.0</initialValue>
+			<units>deg</units>
+		</input>
+		<input>
+			<name>fx</name>
+			<text>X-Frequency</text>
+			<initialValue>2.0</initialValue>
+			<units>Hz</units>
+		</input>
+		<input>
+			<name>fy</name>
+			<text>Y-Frequency</text>
+			<initialValue>2.0</initialValue>
+			<units>Hz</units>
+		</input>
+		<solid>
+			<name>background</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>100</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>100</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>102</green>
+				<blue>102</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>xaxis</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>yaxis</name>
+			<shape type="line" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>20</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>255</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>-10</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>Red</name>
+			<shape type="circle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>ax*cos(2*PI.value*fx*t+toRadians(px))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>ay*cos(2*PI.value*fy*t+toRadians(py))</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<output>
+			<name>fr</name>
+			<text>Frequency ratio (Y/X)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>fy/fx</value>
+			</calculator>
+		</output>
+		<output>
+			<name>ar</name>
+			<text>Amplitude ratio (Y/X)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>ay/ax</value>
+			</calculator>
+		</output>
+		<output>
+			<name>pd</name>
+			<text>Phase difference (Y-X)</text>
+			<units></units>
+			<calculator type="parametric">
+				<value>py-px</value>
+			</calculator>
+		</output>
+	</objects>
+</problem>

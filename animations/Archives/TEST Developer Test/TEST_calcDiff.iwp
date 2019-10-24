@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name>Taylor Brockman</name>
+		<organization>IWP</organization>
+		<email>taylor.brockman@gmail.com</email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.02</change>
+			<fps>15.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-3.5</xmin>
+			<xmax>3.5</xmax>
+			<ymin>-6.0</ymin>
+			<ymax>1.0</ymax>
+			<xgrid>1</xgrid>
+			<ygrid>1</ygrid>
+		</window>
+		<description>
+			<text>Compare the effectiveness of Euler (Red) -vs- RK2 (Green) -vs- RK4 (Blue)</text>
+		</description>
+
+
+		<input>
+			<name>xmult</name>
+			<text>X Mult</text>
+			<initialValue>10</initialValue>
+			<units>m</units>
+		</input>
+
+		<input>
+			<name>timediv</name>
+			<text>Time Div</text>
+			<initialValue>1</initialValue>
+			<units>m</units>
+		</input>
+
+
+		<solid>
+			<name>EulerMover</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>-xmult</velocity>
+					<acceleration>xmult*sin(t/timediv)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+ 					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+
+
+		<output>
+			<name>EulerXDispOutput</name>
+			<text>Euler X Disp</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>EulerMover.xdisp</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>EulerXVelOutput</name>
+			<text>Euler X Vel</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>EulerMover.xvel</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>EulerXAccelOutput</name>
+			<text>Euler X Accel</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>EulerMover.xaccel</value>
+			</calculator>
+		</output>
+
+
+		<solid>
+			<name>RkTwoMover</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>255</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="rk2">
+					<displacement>0</displacement>
+					<velocity>-xmult</velocity>
+					<acceleration>xmult*sin(t/timediv)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+ 					<value>-3</value>
+				</calculator>
+			</ypath>
+		</solid>
+
+
+		<output>
+			<name>RkTwoXDispOutput</name>
+			<text>RkTwo X Disp</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkTwoMover.xdisp</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>RkTwoXVelOutput</name>
+			<text>RkTwo X Vel</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkTwoMover.xvel</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>RkTwoXAccelOutput</name>
+			<text>RkTwo X Accel</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkTwoMover.xaccel</value>
+			</calculator>
+		</output>
+
+
+
+
+
+		<solid>
+			<name>RkFourMover</name>
+			<shape type="circle" drawTrails="false" drawVectors="false">
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="rk4">
+					<displacement>0</displacement>
+					<velocity>-xmult</velocity>
+					<acceleration>xmult*sin(t/timediv)</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+ 					<value>-5</value>
+				</calculator>
+			</ypath>
+		</solid>
+
+
+		<output>
+			<name>RkFourXDispOutput</name>
+			<text>RkFour X Disp</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkFourMover.xdisp</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>RkFourXVelOutput</name>
+			<text>RkFour X Vel</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkFourMover.xvel</value>
+			</calculator>
+		</output>
+
+		<output>
+			<name>RkFourXAccelOutput</name>
+			<text>RkFour X Accel</text>
+			<units>m</units>
+			<calculator type="parametric">
+				<value>RkFourMover.xaccel</value>
+			</calculator>
+		</output>
+
+
+	</objects>
+</problem>

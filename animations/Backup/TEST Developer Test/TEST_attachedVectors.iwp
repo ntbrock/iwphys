@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username>brockman</username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>100.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>This problem tests the attached vector rendering capabilities.
+</text>
+		</description>
+		<solid>
+			<name>ZeroVectors</name>
+			<shape type="circle" drawTrails="false" drawVectors="true">
+				<vectors yAccel="true" Vel="true" xAccel="true" yVel="true" xVel="true" Accel="true"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>VectorVel</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="true">
+				<vectors yAccel="false" Vel="true" xAccel="false" yVel="true" xVel="true" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>8*cos(t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>8*sin(t)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>VectorAccel</name>
+			<shape type="circle" drawTrails="false" drawVectors="true">
+				<vectors yAccel="true" Vel="false" xAccel="true" yVel="false" xVel="false" Accel="true"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>6*cos(t)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>6*sin(t)</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>TextVel</name>
+			<text>Velocity</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>VectorVel.ydisp</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>VectorVel.xdisp+0.5</value>
+				</calculator>
+			</xpath>
+		</object>
+		<object class="edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText">
+			<name>TextAccel</name>
+			<text>Accel</text>
+			<units></units>
+			<value>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</value>
+			<fontSize>12</fontSize>
+			<showValue>false</showValue>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>0</blue>
+			</color>
+			<ypath>
+				<calculator type="parametric">
+					<value>VectorAccel.ydisp</value>
+				</calculator>
+			</ypath>
+			<xpath>
+				<calculator type="parametric">
+					<value>VectorAccel.xdisp+0.5</value>
+				</calculator>
+			</xpath>
+		</object>
+	</objects>
+</problem>

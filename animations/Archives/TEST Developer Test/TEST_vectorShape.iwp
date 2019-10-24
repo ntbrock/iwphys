@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name>Taylor Brockman</name>
+		<organization>IWP</organization>
+		<email>taylor.brockman@gmail.com</email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>15.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.5</xgrid>
+			<ygrid>1.5</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>1.0</xgrid>
+			<ygrid>1.0</ygrid>
+			<xunit>meters</xunit>
+			<yunit>meters</yunit>
+		</window>
+		<description>
+			<text>This is a problem that tests the vector Shape</text>
+		</description>
+
+
+		<solid>
+			<name>Vector</name>
+			<shape type="vector" drawTrails="false">
+				<height>
+					<calculator type="parametric">
+						<value>10*sin(t/2)</value>
+					</calculator>
+				</height>
+				<width>
+					<calculator type="parametric">
+						<value>10*cos(t/2)</value>
+					</calculator>
+				</width>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>100</green>
+				<blue>0</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+
+
+
+
+	</objects>
+</problem>
