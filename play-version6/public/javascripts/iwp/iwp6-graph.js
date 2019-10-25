@@ -112,7 +112,8 @@ function graphInit() {
 function queryUserFormGraphDouble(index) {
   var readValue = $("#graph_" + index).val();
   var doubleValue = parseFloat(readValue);
-  console.log("iwp6-graph.js line 105 ", "#graph_" + index, doubleValue);
+
+  //console.log("iwp6-graph.js line 105 ", "#graph_" + index, doubleValue);
   
   //console.log("queryUserDefinedInput: for input: ", input, " readValue: ", readValue,  "  doubleValue: ", doubleValue );
   // TODO if readValue doesn't make sense, then default back to input.initialValue;
@@ -156,20 +157,12 @@ function updateGraph(graphWindow) {
         //Update graph settings with user form data 
 	$.each(graphWindow, function(index, val) {
 	  graphWindow[index] = queryUserFormGraphDouble(index);
-	  console.log("Graph window value: " , graphWindow[index]);
+	  // console.log("Graph window value: " , graphWindow[index]);
 	})
- 	//var svg = d3.select('#graph');
+
+	// Clear out graph contents.
 	gr.empty();
-	/*
-	svg.select(".iwp-graph-grid").remove();
-	svg.select(".iwp-graph-grid").remove();
-	svg.select(".iwp-graph-grid").remove();
-	svg.select(".iwp-graph-grid").remove();
-	svg.select(".iwp-graph-axis").remove();
-	svg.select(".iwp-graph-axis").remove();
-	svg.select(".iwp-graph-axis").remove();
-	svg.select(".iwp-graph-axis").remove();
-	*/
+
 }
 
 function graphResetZero(step, vars, solids, graphWindow) {
@@ -261,7 +254,7 @@ function graphResetZero(step, vars, solids, graphWindow) {
 
 	$.each(iwpGraphObjects,function(name, graphObject) {
 
-		console.log("iwp5graph:115> Reset: name: ", name, "  graphObject: ", graphObject)
+		// console.log("iwp5graph:115> Reset: name: ", name, "  graphObject: ", graphObject)
 		//var vb = console.log("graphWindow vals", )
 		var g = svg.append("g").classed("iwp-graph-object", true).attr("iwp-solid-name",name)
  	
@@ -308,7 +301,7 @@ function graphResetZero(step, vars, solids, graphWindow) {
 	$(".iwp-graph-controls").append("<div class='iwp-graph-control-legend'></div>")
 	$.each(iwpGraphObjects,function(name, graphObject) {
 
-		console.log("iwp5-graph:153> add buttons for: "+ name + "   visible? " + graphObject.visible)
+		// console.log("iwp5-graph:153> add buttons for: "+ name + "   visible? " + graphObject.visible)
 
 		if ( graphObject.visible ) {
 
@@ -323,7 +316,7 @@ function graphResetZero(step, vars, solids, graphWindow) {
 
 			if ( graphObject.pathsVisible[measure] ) {
 
-				console.log("iwp5-graph:195> This is visible: graphObject: ", graphObject, "measure", measure)
+				// console.log("iwp5-graph:195> This is visible: graphObject: ", graphObject, "measure", measure)
 
 				$(".iwp-graph-control-buttons button[iwp-measure='"+measure+"']").addClass("active")
 
@@ -404,11 +397,9 @@ function graphStepForward(step, vars) {
 			pathsSvg = graphObject.pathsSvg
 			$.each(graphMeasures, function(i, measure) {
 				var graphThisStep = true
-				console.log("iwp6-graph.js line 394: vars.t, vars.delta_t: ", vars.t, vars.delta_t);
+
+				// console.log("iwp6-graph.js line 394: vars.t, vars.delta_t: ", vars.t, vars.delta_t);
 				if ((measure == 'xVel' || measure == 'yVel') && vars.t < 2*vars.delta_t) {
-					graphThisStep = false
-				}
-				if ((measure == 'xAccel' || measure == 'yAccel') && vars.t < 3*vars.delta_t) {
 					graphThisStep = false
 				}
 
