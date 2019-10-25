@@ -135,7 +135,6 @@ function graphSetWindowFromAnimation(graphWindow) {
 
 	var xTicks = (graphWindow.xmax - graphWindow.xmin) / graphWindow.xgrid
 	var yTicks = (graphWindow.ymax - graphWindow.ymin) / graphWindow.ygrid
-	console.log(graphWindow.xgrid)
 	xGrid = d3.axisTop(graphXScale).ticks(xTicks).tickSize(1000);
 	yGrid = d3.axisRight(graphYScale).ticks(yTicks).tickSize(1000);
 	xAxis = d3.axisBottom(graphXScale).ticks(xTicks).tickSize(0);
