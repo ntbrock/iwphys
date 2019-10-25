@@ -25,6 +25,7 @@ GET     /animation/:collection/:filename.json  controllers.AnimationFilesystemCo
 GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
 GET     /animation/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
 
+POST    /animation/preview                      controllers.AnimationFilesystemController.postAnimationPreview()
 
 # Support Legacy Paths from WebAssign
 

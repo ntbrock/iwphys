@@ -86,7 +86,7 @@ class AnimationMongoController @Inject()(cc: ControllerComponents, mongo: IwpMon
         Logger.info(s"AnimationController:49> Received: $jsv")
 
 
-        Iwp6Animation.fromJson(jsv) match {
+        Iwp6Animation.fromJson(Some(filename), jsv) match {
           case Failure(x) =>
             Future.successful(BadRequest(s"Json schema error: ${x}"))
           case Success(iwpAnimation) =>

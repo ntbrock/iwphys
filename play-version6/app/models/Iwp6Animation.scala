@@ -87,7 +87,7 @@ object Iwp6Animation extends BoilerplateIO {
 
       val jsv = Json.parse(jsonContents)
 
-      fromJson(jsv) match {
+      fromJson(Some(file.getName), jsv) match {
         case Success(a) => a
         case Failure(x) => throw x
       }
@@ -100,15 +100,60 @@ object Iwp6Animation extends BoilerplateIO {
     * Slightly Custom Inhertitance router
     */
 
-  def fromJson(jsv: JsValue) : Try[Iwp6Animation] = {
+  def fromJson(filenameO: Option[String] = None, jsv: JsValue) : Try[Iwp6Animation] = {
 
     Try {
 
-      Logger.info(s"Iwp6Animation:107> jsv: ${jsv}")
+      // Logger.info(s"Iwp6Animation:107> jsv: ${jsv}")
+
+      // Json.fromJson[Iwp6Animation](jsv)
 
 
-      throw new RuntimeException("Not Implemented")
+      // WARNING This is really quick and dirty, takes into account no error handling.
 
+      val author = Json.fromJson[Iwp6Author]( ( jsv \ "author" ).as[JsObject] )
+
+      val objects = ( jsv \ "objects" ).as[JsArray].value.map { jso =>
+
+        val objectType = ( jso \ "objectType" ).as[String]
+
+        val lookup = objectType match {
+          case "description" => Json.fromJson[Iwp6Description](jso)
+          case "time" => Json.fromJson[Iwp6Time](jso)
+          case "graphWindow" => Json.fromJson[Iwp6GraphWindow](jso)
+          case "window" => Json.fromJson[Iwp6Window](jso)
+          case "solid" => Json.fromJson[Iwp6Solid](jso)
+          case "input" => Json.fromJson[Iwp6Input](jso)
+          case "output" => Json.fromJson[Iwp6Output](jso)
+          case _ => throw new RuntimeException(s"Unrecognized Object Type: ${objectType}")
+        }
+
+        if ( lookup.isError ) {
+          // Quick Defense
+          throw new RuntimeException(s"Iwp6Animation.fromJson Object Error: ${lookup}")
+        }
+
+        lookup.asOpt
+      }
+
+      if ( author.isError ) {
+        // Quick Defense
+        throw new RuntimeException(s"Iwp6Animation.fromJson Author Error: ${author}")
+      }
+
+
+      // TODO - More verbose and tracceable Json Parsing handlinbg
+
+      val iwpAuthorO = author.asOpt
+      val iwpObjects = objects.flatten
+
+      val iwpAnimation = Iwp6Animation(filenameO, iwpAuthorO.get, iwpObjects)
+
+      Logger.info(s"Iwp6Animation:138> iwpAnimation: ${iwpAnimation}")
+
+      iwpAnimation
+
+      // throw new RuntimeException("Not Implemented - Using a passthru method to client Js")
 
     }
 
