@@ -395,6 +395,8 @@ function graphStepForward(step, vars) {
 		// During each loop, iterate over all the solids that are graphable, and update paths based
 		// on incoming vars at step.
 
+		// 2019Oct25 Updated Acceleration to be a higher frequency pulse.
+
 		$.each(iwpGraphObjects,function(name, graphObject) {
 			// console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
 			// console.log("iwp5graph:308> vars: ", vars)
@@ -418,27 +420,47 @@ function graphStepForward(step, vars) {
 				}
 
 				//create dotted line effect for acceleration values
-				if ((measure == 'xAccel' || measure == 'yAccel')
-				     && typeof queryTimeStopInputDouble === 'function'
-				     && (Math.round(vars.t*1000/queryTimeStopInputDouble()))%3 != 0) {
-					graphThisStep = false	
-				}
-     
-				if (graphThisStep) {
+				if (measure == 'xAccel' || measure == 'yAccel') {
+
+					// Calculate the linear midpoint
 					var lcMeasure = measure.toLowerCase()
-					paths[measure].moveTo (
-						graphXScale(lastStep.t),
-						graphYScale(lastStep[name][lcMeasure])
-					)
+					var midTime = lastStep.t + ( vars.t - lastStep.t ) / 2
+					var midMeasure = lastStep[name][lcMeasure] + ( vars[name][lcMeasure] - lastStep[name][lcMeasure] ) / 2
 
-					paths[measure].lineTo (
-						graphXScale(vars.t),
-						graphYScale(vars[name][lcMeasure])
-					)
+                    paths[measure].moveTo (
+                        graphXScale(lastStep.t),
+                        graphYScale(lastStep[name][lcMeasure])
+                    )
 
-					pathsSvg[measure].attr("d", paths[measure])
-					//console.log("pathsSvg[measure].getTotalLength()", paths[measure].getTotalLength());
+                    paths[measure].lineTo (
+                        graphXScale(midTime),
+                        graphYScale(midMeasure)
+                    )
+
+                    pathsSvg[measure].attr("d", paths[measure])
+
+
+				} else {
+
+					if (graphThisStep) {
+						var lcMeasure = measure.toLowerCase()
+						paths[measure].moveTo (
+							graphXScale(lastStep.t),
+							graphYScale(lastStep[name][lcMeasure])
+						)
+
+						paths[measure].lineTo (
+							graphXScale(vars.t),
+							graphYScale(vars[name][lcMeasure])
+						)
+
+						pathsSvg[measure].attr("d", paths[measure])
+						//console.log("pathsSvg[measure].getTotalLength()", paths[measure].getTotalLength());
+					}
+
 				}
+
+
 			});
 		});
 
