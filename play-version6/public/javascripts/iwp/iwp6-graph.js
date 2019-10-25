@@ -418,15 +418,6 @@ function graphStepForward(step, vars) {
 					var midTime = lastStep.t + ( vars.t - lastStep.t ) / 2
 					var midMeasure = lastStep[name][lcMeasure] + ( vars[name][lcMeasure] - lastStep[name][lcMeasure] ) / 2
 
-<<<<<<< HEAD
-					paths[measure].lineTo (
-						graphXScale(vars.t),
-						graphYScale(vars[name][lcMeasure])
-					)
-					
-					pathsSvg[measure].attr("d", paths[measure]);
-					//console.log("pathsSvg[measure].getTotalLength()", paths[measure].getTotalLength());
-=======
                     paths[measure].moveTo (
                         graphXScale(lastStep.t),
                         graphYScale(lastStep[name][lcMeasure])
@@ -458,7 +449,6 @@ function graphStepForward(step, vars) {
 						//console.log("pathsSvg[measure].getTotalLength()", paths[measure].getTotalLength());
 					}
 
->>>>>>> 5eec999e606b4f896c44a83cb30109fe73999a64
 				}
 
 
