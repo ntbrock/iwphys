@@ -1,10 +1,11 @@
 @(popularCollection: Iwp6Collection, popularAnimations: Seq[Iwp6Animation])
 
-<div class="row text-center">
 
-@popularAnimations.map { animation =>
-    @views.html.partial.animationPreview(popularCollection, animation)
+
+@popularAnimations.grouped(3).map { threeAnimations =>
+    <div class="row text-center" style="margin-bottom: 2rem;">
+    @threeAnimations.map { animation =>
+        @views.html.partial.animationPreview(popularCollection, animation)
+    }
+    </div>
 }
-
-</div>
-
