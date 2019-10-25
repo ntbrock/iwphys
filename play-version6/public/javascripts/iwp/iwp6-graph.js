@@ -406,7 +406,7 @@ function graphStepForward(step, vars) {
 				     && (Math.round(vars.t*1000/queryTimeStopInputDouble()))%4 != 0) {
 					graphThisStep = false	
 				}
-
+					
 				//create dotted line effect for acceleration values
 				if ((measure == 'xAccel' || measure == 'yAccel')
 				     && typeof queryTimeStopInputDouble === 'function'
@@ -425,8 +425,8 @@ function graphStepForward(step, vars) {
 						graphXScale(vars.t),
 						graphYScale(vars[name][lcMeasure])
 					)
-
-					pathsSvg[measure].attr("d", paths[measure])
+					
+					pathsSvg[measure].attr("d", paths[measure]);
 					//console.log("pathsSvg[measure].getTotalLength()", paths[measure].getTotalLength());
 				}
 			});
