@@ -59,7 +59,7 @@ function graphInit() {
 	
 	var svg = d3.select('#graph');
 
-        console.log("iwp6-graph:58> graphInit, xGrid: " , xGrid,  "  svg: " , svg );
+
 
 	// Step 1 Build Grid And Axes
 	// console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
@@ -73,9 +73,19 @@ function graphInit() {
 		xAxis(svg.append("g").classed("iwp-graph-axis",true));
 		svg.append("text").attr("x", 60).attr("y", 15).classed("iwp-graph-axis-label", "true").text("Time (s)");
 	}
-	if ( yAxis != null ) {
-		yAxis(svg.append("g").classed("iwp-graph-axis",true).attr("transform", "translate("+ graphXScale(0) +", 0)"));
+
+	// 2019Oct25 - Render the Yaxis on the left side of the graph, always
+	var yAxisCoordinate = 0;
+	if ( graphWindow && graphWindow.xmin ) {
+		yAxisCoordinate = graphWindow.xmin;
 	}
+    // console.log("iwp6-graph:62> graphInit - Alignment of the YAxis: graphXScale(0) : " , graphXScale(0),  "  graphXScale(yAxisCoordinate) : " , graphXScale(yAxisCoordinate),   "  yAxisCoordinate: " , yAxisCoordinate , " graphWindow: " , graphWindow ) ;
+
+
+	if ( yAxis != null ) {
+		yAxis(svg.append("g").classed("iwp-graph-axis",true).attr("transform", "translate("+ graphXScale(yAxisCoordinate) +", 0)"));
+	}
+
 
         /* 	
 	visualPath1 = svg.append('path')
