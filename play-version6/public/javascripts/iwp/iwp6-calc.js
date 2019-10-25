@@ -623,7 +623,6 @@ function setWindow(inWindow) {
 }
 
  function initializeGraphVars(inGraphWindow) {
-	console.log("ran2");
 	graphWindow = inGraphWindow;
 	$("#graph_xmin").val( graphWindow.xmin );
 	console.log("xmin", $("#graph_xmin").val());
@@ -1275,8 +1274,8 @@ function parseAnimationToMemory( rawAnimation ) {
 
   // GraphWindow
 
-  console.log("iwp6-calc:1238> Setting GraphWindow: " , animation.graphWindow)
-  console.log("Initializing Graph Vars"); 
+  // console.log("iwp6-calc:1238> Setting GraphWindow: " , animation.graphWindow)
+  // console.log("Initializing Graph Vars");
   initializeGraphVars(animation.graphWindow);
   setGraphWindow(animation.graphWindow);
 
@@ -1289,8 +1288,7 @@ function parseAnimationToMemory( rawAnimation ) {
   // console.log("iwp6-calc:1350> Typeof input: " , typeof rawAnimation.objects.input)
 
   // 2019Sep06 Reordering of the Animatin Objects based on IWP3 Logic Port.
-
-  console.log("iwp6-calc:1288> Executing animationObject Reordering on CompiledObjects");
+  //console.log("iwp6-calc:1288> Executing animationObject Reordering on CompiledObjects");
   animation.loop = reorderAnimationObjectsBySymbolicDependency(animation.loop);
 
   animation.loop.forEach( function( object, index ) {
