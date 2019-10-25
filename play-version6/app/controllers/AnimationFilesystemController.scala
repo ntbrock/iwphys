@@ -3,7 +3,7 @@ package controllers
 import java.net.URLDecoder
 
 import javax.inject._
-import models.Iwp6Animation
+import models.{Iwp6Animation, Iwp6FilesystemCollection, Iwp6PreviewCollection}
 import org.mongodb.scala.model.Filters._
 import play.api.Logger
 import play.api.libs.json.Json
@@ -119,6 +119,46 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
     }
   }
 
+  /**
+    * 2019Oct25 JSON post to Animation preview, the first designer hookin
+    * @return
+    */
+
+  def postAnimationPreview() = Action { implicit request =>
+
+    val collection = Iwp6PreviewCollection()
+
+    request.body.asFormUrlEncoded match {
+      case None => BadRequest("Missing formUrlEncoded")
+
+      case Some(form) =>
+
+        form.get("animationJson") match {
+          case None => BadRequest("Form Missing animationJson key")
+          case Some(animationJsonSeq) =>
+
+
+            form.get("animationFilename") match {
+
+              case None => BadRequest("Form Missing animationFilename key")
+              case Some(animationFilenameSeq) =>
+
+                val animationJson = animationJsonSeq.mkString("")
+                val animationFilename = animationFilenameSeq.mkString("")
+
+                Iwp6Animation.fromJson( Some(animationFilename), Json.parse(animationJson)) match {
+
+                  case Failure(x) => BadRequest("Unable to parse Animation Json")
+                  case Success(animation) =>
+
+                    // Ok(s"animationJson: Iwp6Animation: ${animation}")
+                    Ok(views.html.animation.animation(collection, animationFilename, animation))
+                }
+            }
+
+        }
+    }
+  }
 
 
 }
