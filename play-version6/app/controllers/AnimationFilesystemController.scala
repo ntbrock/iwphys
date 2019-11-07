@@ -148,7 +148,9 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
                 Iwp6Animation.fromJson( Some(animationFilename), Json.parse(animationJson)) match {
 
-                  case Failure(x) => BadRequest("Unable to parse Animation Json")
+                  case Failure(x) =>
+                    Logger.error(s"AnimationFileystemController:152> Unable to parse Animation Json: ${x}", x)
+                    BadRequest(s"Unable to parse Animation Json: ${x}")
                   case Success(animation) =>
 
                     // Ok(s"animationJson: Iwp6Animation: ${animation}")
