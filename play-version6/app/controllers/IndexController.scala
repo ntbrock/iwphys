@@ -52,10 +52,15 @@ class IndexController @Inject()(cc: ControllerComponents,
     }
   }
 
-  def help() = optAuthenticated { implicit request =>
+  def help(subpage: String = "") = optAuthenticated { implicit request =>
 
     Future.successful {
-      Ok(views.html.help())
+      if (subpage == "") {
+        Ok(views.html.help(""))
+      } else {
+        Ok(views.html.help(subpage))
+      }
+      
     }
   }
 

@@ -91,7 +91,9 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # Designer demo
 
 
-GET     /help                         controllers.IndexController.help
+GET     /help                         		   controllers.IndexController.help(subpage: String = "")
+GET     /help/:subpage                         controllers.IndexController.help(subpage: String)
+
 
 GET     /designer/demo2018                       controllers.DesignerController.demo2018
 

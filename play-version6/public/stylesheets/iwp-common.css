@@ -80,9 +80,9 @@
   width: 200px;
   position: fixed;
   z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
+  /*top: 0;*/
+  /*left: 0;*/
+  /*background-color: #111;*/
   overflow-x: hidden;
   padding-top: 50px;
 }
@@ -92,7 +92,7 @@
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 18px;
-  color: #818181;
+  color: gray;
   display: block;
   border: none;
   background: none;
@@ -104,7 +104,7 @@
 
 /* on mouse-over */
 .sidenav a:hover, .dropdown-btn:hover {
-  color: #f1f1f1;
+  color: black;
 }
 
 /* main content */
@@ -117,15 +117,16 @@
 
 /* add an active class to the active dropdown button */
 .active {
-  background-color: green;
-  color: white;
+  background-color: lightblue;
+  /*color: gray
+  ;*/
 }
 
 
 /* dropdown container (hidden by default). optional: add a lighter background color and some left padding to change the design of the dropdown content */
 .dropdown-container {
   display: none;
-  background-color: #262626;
+  /*background-color: #262626;*/
   padding-left: 8px;
 }
 
@@ -139,7 +140,12 @@
 }
 
 
-
+a.anchor {
+    display: block;
+    position: relative;
+    top: -50px;
+    visibility: hidden;
+}
 
 /* optional: style the caret down icon */
 
