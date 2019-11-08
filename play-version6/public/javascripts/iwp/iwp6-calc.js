@@ -83,6 +83,7 @@ function varsAtStepJson(step) {
 
 
 
+
 var varsAtStep = [];
 var currentStep = 0;
 var changeStep = 0; 	// -1 = backwards, 0 = stopped, 1 = forwards.
@@ -621,14 +622,22 @@ function setWindow(inWindow) {
   animationWindow = inWindow;
 }
 
-
+ function initializeGraphVars(inGraphWindow) {
+	graphWindow = inGraphWindow;
+	$("#graph_xmin").val( graphWindow.xmin );
+	$("#graph_xmax").val( graphWindow.xmax );
+  	$("#graph_xgrid").val( graphWindow.xgrid );
+  	$("#graph_ymax").val( graphWindow.ymax );
+  	$("#graph_ymin").val( graphWindow.ymin );
+  	$("#graph_ygrid").val( graphWindow.ygrid );
+  }
+  
 // "GraphWindow": { "xmin": "0.0", "xmax": "5.0", "ymin": "-50.0", "ymax": "50.0", "xgrid": "0.5", "ygrid": "10.0"
 function setGraphWindow(inGraphWindow) {
   // console.log("iwp5:553> graphWindow :", inGraphWindow);
   // Global
   graphWindow = inGraphWindow;
-
-  // Hook into new iwp5-graph to redraw axes.
+ // Hook into new iwp5-graph to redraw axes.
   if ( typeof graphSetWindowFromAnimation === "function" ) {
     graphSetWindowFromAnimation(graphWindow);
   } else {
@@ -1262,8 +1271,9 @@ function parseAnimationToMemory( rawAnimation ) {
 
   // GraphWindow
 
-  console.log("iwp6-calc:1238> Setting GraphWindow: " , animation.graphWindow)
-
+  // console.log("iwp6-calc:1238> Setting GraphWindow: " , animation.graphWindow)
+  // console.log("Initializing Graph Vars");
+  initializeGraphVars(animation.graphWindow);
   setGraphWindow(animation.graphWindow);
 
 
@@ -1275,8 +1285,7 @@ function parseAnimationToMemory( rawAnimation ) {
   // console.log("iwp6-calc:1350> Typeof input: " , typeof rawAnimation.objects.input)
 
   // 2019Sep06 Reordering of the Animatin Objects based on IWP3 Logic Port.
-
-  console.log("iwp6-calc:1288> Executing animationObject Reordering on CompiledObjects");
+  //console.log("iwp6-calc:1288> Executing animationObject Reordering on CompiledObjects");
   animation.loop = reorderAnimationObjectsBySymbolicDependency(animation.loop);
 
   animation.loop.forEach( function( object, index ) {
@@ -1409,5 +1418,60 @@ function yHeight(size) {
   var proportion = cDomain/yDomain;
   return size*proportion;
 };
+
+
+
+//graphBox
+
+var graphBox = { gminX: -100, gminY: -100, gmaxX: 200, gmaxY: 200 };
+function ygraph(y) {
+  var yDomain = graphWindow.ymax - graphWindow.ymin;
+  var sum = graphWindow.ymax / yDomain;
+  var yProportion = - y / yDomain;
+  var yCorrected = yProportion + sum;
+  var gDomain = graphBox.gmaxY - graphBox.gminY;
+  var gProportion = yCorrected * gDomain;
+  return gProportion;
+};
+
+function xgraph(x) {
+  var xDomain = graphWindow.xmax - graphWindow.xmin;
+  var sum = - graphWindow.xmin / xDomain;
+  var xProportion = x / xDomain;
+  var xCorrected = xProportion + sum;
+  var gDomain = graphBox.gmaxX - graphBox.gminX;
+  var gProportion = xCorrected * gDomain;
+  return gProportion;
+};
+function xgraphGridlines(x) {
+  var xDomain = graphWindow.xmax - graphWindow.xmin;
+  var xProportion = x / xDomain;
+  var xCorrected = xProportion + 0.5;
+  var gDomain = graphBox.gmaxX - graphBox.gminX;
+  var gProportion = xCorrected * gDomain;
+  return gProportion;
+};
+function ygraphGridlines(y) {
+  var yDomain = graphWindow.ymax - graphWindow.ymin;
+  var yProportion = y / yDomain;
+  var yCorrected = yProportion + 0.5;
+  var gDomain = graphBox.gmaxY - graphBox.gminY;
+  var gProportion = yCorrected * gDomain;
+  return gProportion;
+};
+function gxWidth(size) {
+  var xDomain = graphWindow.xmax - graphWindow.xmin;
+  var gDomain = graphBox.gmaxX - graphBox.gminX;
+  var proportion = gDomain/xDomain;
+  return size*proportion;
+};
+
+function gyHeight(size) {
+  var yDomain = graphWindow.ymax - graphWindow.ymin;
+  var gDomain = graphBox.gmaxY - graphBox.gminY;
+  var proportion = gDomain/yDomain;
+  return size*proportion;
+};
+
 
 true;

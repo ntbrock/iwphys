@@ -15,6 +15,14 @@ trait Iwp6Collection {
 }
 
 
+case class Iwp6PreviewCollection() extends Iwp6Collection {
+
+  def name = "preview"
+  def parent = None
+  def encoded = "preview"
+}
+
+
 /**
   * Note that the Filesystem Collections always use / as their separator, like WWW Uri's
   * Windows specific backslashes are replaced in at a lower service level.

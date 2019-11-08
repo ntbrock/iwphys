@@ -111,6 +111,22 @@ Do a knoweldge tranfer today!
 After - Dev - get our git repos synchronized.
 
 
+commit 3b5d4282bca71f452b50c7e67193659032e7e126
+Author: brockman <brockman@a2877cdd-62a4-4431-bd8b-17bb77e85981>
+Date:   Thu Dec 25 21:14:48 2008 +0000
+
+    Initial copy from the CVS repository. 2008-Dec-25 brockman taylor.brockman@gmail.com
+
+commit 34e96aa3cb01286751b2950e53d01593da750ba7
+Author: brockman <brockman@a2877cdd-62a4-4431-bd8b-17bb77e85981>
+Date:   Thu Dec 25 20:41:23 2008 +0000
+
+    Switching code over to SVN, modernize!
+
+
+
+
+
 
 
 

@@ -1,0 +1,51 @@
+# https://www.playframework.com/documentation/latest/Configuration
+
+# 2019Aug19 New Setting that works in Linux + Windows
+iwp.animations.path = "../animations"
+
+iwp.env = "master"
+
+
+// Prod
+// iwp.publicBaseUrl = "https://iwp6.iwphys.org"
+iwp.publicBaseUrl = "http://localhost:8470"
+
+email {
+  smtp {
+    enabled = true
+    host = "smtp.sendgrid.com"
+    port = 465
+    sender = "Interface Web Physics <noreply@iwphys.org>"
+    user = "apikey"
+<<<<<<< HEAD
+    pass = "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"
+=======
+    pass = "xxxxxxxxxxx"
+>>>>>>> 67084f37899200cbd03b32c4d7294481947a3294
+  }
+}
+
+jwt {
+  // Issued 2019Aug30
+<<<<<<< HEAD
+  secretKey = "_EaGgrB7eLNTEYt?1JFsB<F:HVTUa?8Djbs4dKueyzsZf0bauDlFE1`]u=<QcbMt"
+=======
+  secretKey = "xxxxxxxxxxxx"
+>>>>>>> 67084f37899200cbd03b32c4d7294481947a3294
+}
+
+
+# Bare Development mongo
+#iwp.mongodb.url = "mongodb://localhost/iwp6-master"
+
+# Cloud deployment
+iwp.mongodb.url = "mongodb://iwp6-play:2018NovAjWvaxdV65WnZCP@localhost/iwp6-master"
+
+play.filters.enabled += "play.filters.gzip.GzipFilter"
+
+# Play 2.6 Packages a few default filters we'll need to integrate later
+play.filters.disabled+=play.filters.hosts.AllowedHostsFilter
+play.filters.disabled+=play.filters.headers.SecurityHeadersFilter
+play.filters.disabled+=play.filters.csrf.CSRFFilter
+
+

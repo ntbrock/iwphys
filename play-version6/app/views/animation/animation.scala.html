@@ -1,6 +1,6 @@
 @(collection: Iwp6Collection, filename: String, animation: Iwp6Animation)
 
-@main("Animation") {
+@main( filename + " - IWP6 Animation") {
 
   @views.html.partial.navMinimal( Some(collection), Some(animation) )
 
@@ -82,7 +82,7 @@
 
         <!-- 2018 Graph Table now contains an SVG canvas for the graph -->
         <div id="graphTab" class="iwp-tab"> <!-- For easier debugging, starting w/ graph tab on -->
-          <svg id="graph" class="iwp-graph" viewBox="-100 -100 200 200">
+          <svg id="graph" class="iwp-graph" viewBox="-100 -100 200 200" preserveAspectRatio="xMinYMin meet">
 
             <div id="graphControls" class="iwp-graph-controls"></div> <!-- Written by iwp5-graph.js -->
 
@@ -118,6 +118,36 @@
               <td style="width: 100%;"><div id="iwindow_yunit"></td>
             </tr>
           </table>
+	     <br>
+	     <br>
+         <table class="trim">
+            <tr><th colspan="3">Grid Axes Scale</th></tr>
+            <tr>
+              <td style="width:33%"></td>
+              <td style="width:33%">X</td>
+              <td style="width:33%">Y</td>
+            <tr>
+              <td>Min:</td>
+              <td><input id="graph_xmin" type="text"></td>
+              <td><input id="graph_ymin" type="text"></td>
+            </tr>
+            <tr>
+              <td>Max:</td>
+              <td><input id="graph_xmax" type="text"></td>
+              <td><input id="graph_ymax" type="text"></td>
+            </tr>
+            <tr class="bottomBorder">
+              <td>Grid:</td>
+              <td><input id="graph_xgrid" type="text"></td>
+              <td><input id="graph_ygrid" type="text"></td>
+            </tr>
+            <tr>
+              <td>Unit:</td>
+              <td style="width: 100%;">seconds</td>
+              <td style="width: 100%;"></td>
+            </tr>
+          </table>
+
         </div>
 
 

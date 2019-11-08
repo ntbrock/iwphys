@@ -304,8 +304,15 @@ For easier viewing, the vectors may be scaled to larger or smaller lengths by in
 				<blue>51</blue>
 			</color>
 			<xpath>
+<<<<<<< HEAD:animations/iwp-packaged/Charged Particle Motion/em-ratio-2b.iwp
+				<calculator type="euler">
+					<displacement>-x-xc</displacement>
+					<velocity>0</velocity>
+					<acceleration>-1*s*(R*B*P.yvel*step(t-to-t1)+R*(V1/x)*step(to-t))</acceleration>
+=======
 				<calculator type="parametric">
 					<value>x</value>
+>>>>>>> e987ffb50ec169aca6b451f49eab83a0b8bd0315:animations/Backup/Electrostatics/efield-plot-02c.iwp
 				</calculator>
 			</xpath>
 			<ypath>
