@@ -92,7 +92,7 @@ Also sketch the velocity vs. time graph for the objects.
 						<value>dp</value>
 					</calculator>
 				</height>
-				<graphOptions graphVisible="false">
+				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
 			</shape>
@@ -126,7 +126,7 @@ Also sketch the velocity vs. time graph for the objects.
 						<value>dq</value>
 					</calculator>
 				</height>
-				<graphOptions graphVisible="false">
+				<graphOptions graphVisible="true">
 					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
 			</shape>

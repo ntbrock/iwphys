@@ -99,6 +99,10 @@
 						<value>20</value>
 					</calculator>
 				</height>
+				 <graphOptions graphVisible="false">
+                                        <initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+                                </graphOptions>
+
 			</shape>
 			<color>
 				<red>0</red>
@@ -161,6 +165,10 @@
 						<value>20</value>
 					</calculator>
 				</height>
+				 <graphOptions graphVisible="false">
+                                        <initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+                                </graphOptions>
+
 			</shape>
 			<color>
 				<red>0</red>
