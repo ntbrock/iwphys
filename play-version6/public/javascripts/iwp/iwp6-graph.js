@@ -129,8 +129,9 @@ function graphSetWindowFromAnimation(graphWindow) {
     	graphXScale = d3.scaleLinear()
 				.domain([graphWindow.xmax, graphWindow.xmin])
 				.range([100, -100]);
+				// 2019Nov12 Fix to reverse Graph Y axis
 	graphYScale = d3.scaleLinear()
-				.domain([graphWindow.ymax, graphWindow.ymin])
+				.domain([graphWindow.ymin, graphWindow.ymax])
 				.range([100, -100]);
 
 	var xTicks = (graphWindow.xmax - graphWindow.xmin) / graphWindow.xgrid
