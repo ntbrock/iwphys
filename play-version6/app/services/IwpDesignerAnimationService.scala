@@ -37,12 +37,12 @@ class IwpDesignerAnimationService(mongoClient: IwpMongoClient)(implicit ec: Exec
             Some(true)
           }
 
-        case Some(animation) =>
+        case Some(existingAnimation) =>
           // update
           Logger.info("IwpDesignerAnimationService:39> ReplaceOneing")
 
           mongoClient.designerAnimationCollection().replaceOne(
-            Document("username" -> animation.username, "filename" -> animation.filename),
+            Document("username" -> existingAnimation.username, "filename" -> existingAnimation.filename),
             animation.copy( updatedOn = Some(ZonedDateTime.now))).toFuture().map { s =>
 
             Logger.info(s"IwpDesignerAnimationService:34> ReplaceOne Completed: ${s}")
