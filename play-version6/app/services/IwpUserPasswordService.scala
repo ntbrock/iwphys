@@ -1,6 +1,9 @@
 package services
 
+import java.util.UUID
+
 import models.{Iwp6AuthenticationLog, Iwp6DesignerUser}
+import org.mongodb.scala.bson.BsonDocument
 import org.mongodb.scala.bson.collection.immutable.Document
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -12,6 +15,12 @@ class IwpUserPasswordService(mongoClient: IwpMongoClient)(implicit ec: Execution
     mongoClient.designerUserCollection.find(
       Document("username" -> username, "password" -> password )).headOption()
   }
+
+
+  def findByToken(token: UUID): Future[Option[Iwp6DesignerUser]] = {
+    mongoClient.designerUserCollection.find( Document("token" -> token.toString )).headOption()
+  }
+
 
 
   def logAuthentication(log: Iwp6AuthenticationLog): Future[Option[Boolean]] = {

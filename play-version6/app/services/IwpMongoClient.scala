@@ -9,6 +9,8 @@ import play.api.Configuration
 import ch.rasc.bsoncodec.math.BigDecimalStringCodec
 import ch.rasc.bsoncodec.time.{LocalDateDateCodec, LocalDateTimeDateCodec, ZonedDateTimeStringCodec}
 import models._
+import org.bson.UuidRepresentation
+import org.bson.codecs.UuidCodec
 import org.mongodb.scala._
 import play.api.Configuration
 import org.mongodb.scala.bson.codecs.Macros._
@@ -43,11 +45,14 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
 
   // http://www.jannikarndt.de/blog/2017/08/writing_case_classes_to_mongodb_in_scala/
   // https://github.com/ralscha/bsoncodec
+  // https://mongodb.github.io/mongo-scala-driver/2.6/reference/crud/
   private val javaCodecs = CodecRegistries.fromCodecs(
     new LocalDateTimeDateCodec(),
     new LocalDateDateCodec(),
     new ZonedDateTimeStringCodec(),
-    new BigDecimalStringCodec())
+    new BigDecimalStringCodec(),
+    new UuidCodec(UuidRepresentation.STANDARD)
+  )
 
   // Enable each app to register its own codecs
   private var applicationCodecs =

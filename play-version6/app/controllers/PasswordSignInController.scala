@@ -55,7 +55,7 @@ class PasswordSignInController @Inject()(implicit ec: ExecutionContext,
                 val username = usernameSeq.mkString("")
                 val password = passwordSeq.mkString("")
 
-                
+
                 services.userPassword.findByUsernamePassword(username, password) flatMap { userO =>
 
                   val log = Iwp6AuthenticationLog(username,
@@ -77,7 +77,11 @@ class PasswordSignInController @Inject()(implicit ec: ExecutionContext,
 
                       case Some(user) =>
 
-                        Ok("TODO Post Form: username: " + username + "   password: " + password + "  user: " + user)
+                        // Single Location to write auth session values
+                        Ok(views.html.signin.signInPasswordSuccess(user))
+                          .addingToSession("token" -> user.token.toString,
+                            "authenticatedOn" -> LocalDateTime.now().toString)
+
                     }
                   }
                 }
@@ -91,7 +95,7 @@ class PasswordSignInController @Inject()(implicit ec: ExecutionContext,
   def signInPasswordInitialize() = Action.async { implicit request: Request[AnyContent] =>
     // Ensure that the basic user exists.
 
-    val initialUser = Iwp6DesignerUser( token = UUID.randomUUID(),
+    val initialUser = Iwp6DesignerUser( token = UUID.randomUUID().toString,
       email = "taylor.brockman@gmail.com",
       displayName = "Taylor Brockman",
       username = "brockman",

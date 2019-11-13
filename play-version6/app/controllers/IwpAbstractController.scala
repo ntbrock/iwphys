@@ -43,23 +43,38 @@ abstract class IwpAbstractController(cc: ControllerComponents,
     authenticatedT(parse.anyContent)(f)
 
 
-  private[controllers] def retrieveUserFromSession()(implicit request: Request[Any]) : Option[(Iwp6DesignerUser, Option[JwtClaim])] = {
+  private[controllers] def retrieveUserFromSession()(implicit request: Request[Any]) : Future[Option[(Iwp6DesignerUser, Option[JwtClaim])]] = {
 
+    // New First Look by token and database lookup
+    request.session.get("token") match {
 
-    request.session.get("sign-in-email") match {
+      case None => Future.successful(None)
 
-      case None =>
-        None
-
-      case Some(email) =>
-
-        val claimO = request.session.get("sign-in-token") flatMap { token =>
-
-          services.email.decodeJwtClaim(token).toOption
+      case Some(token) =>
+        services.userPassword.findByToken( UUID.fromString(token) ).map { userO =>
+          userO.map { user => (user, None) }
         }
-
-        Some(Iwp6DesignerUser(UUID.randomUUID(), email, email), claimO)
     }
+
+    // Disabled Email + Jwt signin for launch. KISS
+      /*
+      .orElse {
+
+      request.session.get("sign-in-email") match {
+
+        case None =>
+          Future.successful(None)
+
+        case Some(email) =>
+
+          val claimO = request.session.get("sign-in-token") flatMap { token =>
+
+            services.email.decodeJwtClaim(token).toOption
+          }
+
+          Future.successful(Some(Iwp6DesignerUser(UUID.randomUUID(), email, email, email), claimO))
+      }
+    }*/
   }
 
 
@@ -77,37 +92,51 @@ abstract class IwpAbstractController(cc: ControllerComponents,
                                             (f: IwpAuthenticatedRequest[T] => Future[Result]) = Action.async(bparser) { implicit request =>
 
 
-    retrieveUserFromSession match {
-      case None =>
-        Future.successful(BadRequest("Not Authorized"))
+    retrieveUserFromSession.flatMap { userO =>
 
-      case Some(tuple) =>
+      userO match {
+        case None =>
+          Future.successful(BadRequest("Not Authorized"))
 
-        val (user,claimO) = tuple
+        case Some(tuple) =>
 
-        val authRequest = IwpAuthenticatedRequest[T](request, user, claimO)
-        f(authRequest)
+          val (user, claimO) = tuple
+
+          val authRequest = IwpAuthenticatedRequest[T](request, user, claimO)
+          f(authRequest)
+      }
+
     }
-
   }
 
 
+  /**
+    * New situation where retrieve User is a Future.
+    * @param bparser
+    * @param f
+    * @tparam T
+    * @return
+    */
 
   protected def optAuthenticatedT[T](bparser: BodyParser[T])
                                     (f: (IwpOptAuthenticatedRequest[T]) => Future[Result]) = Action.async(bparser) { implicit request =>
 
-    val authRequest = retrieveUserFromSession match {
-      case None =>
+    retrieveUserFromSession.flatMap { userO =>
 
-        IwpOptAuthenticatedRequest[T](request, None, None)
+      val authRequest = userO match {
+        case None =>
 
-      case Some(tuple) =>
-        val (user, claimO) = tuple
+          IwpOptAuthenticatedRequest[T](request, None, None)
 
-        IwpOptAuthenticatedRequest[T](request, Some(user), claimO)
+        case Some(tuple) =>
+          val (user, claimO) = tuple
+
+          IwpOptAuthenticatedRequest[T](request, Some(user), claimO)
+      }
+
+      f(authRequest)
+
     }
-
-    f(authRequest)
   }
 
 }

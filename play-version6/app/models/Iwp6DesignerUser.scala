@@ -3,7 +3,7 @@ package models
 import java.time.ZonedDateTime
 import java.util.UUID
 
-case class Iwp6DesignerUser ( token: UUID,
+case class Iwp6DesignerUser ( token: String, // mongo compat
                               email: String,
                               displayName: String,
                               username: String,
@@ -14,6 +14,8 @@ case class Iwp6DesignerUser ( token: UUID,
                               userAvatarUrl: Option[String] = None,
                               createdOn: ZonedDateTime = ZonedDateTime.now,
                               signInToken: Option[String] = None,
-                              lastSignedInOn: Option[ZonedDateTime] = None )
+                              lastSignedInOn: Option[ZonedDateTime] = None ) {
+  def tokenUuid: UUID = UUID.fromString(token)
+}
 
 
