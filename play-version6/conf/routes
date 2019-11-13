@@ -50,6 +50,9 @@ GET     /sign-in/email-token            controllers.EmailSignInController.signIn
 GET     /user/profile                   controllers.UserProfileController.userProfile()
 GET     /sign-out                       controllers.UserProfileController.signOut()
 
+# Returning User Login and Registration
+GET     /sign-in                        controllers.PasswordSignInController.signInPasswordForm()
+POST    /sign-in/password               controllers.PasswordSignInController.signInPasswordPost()
 
 
 # Integration tests for Nashorn Javascript Excution
@@ -72,10 +75,8 @@ GET     /test/xml/version4/convertCollection/:collection/:subCollection/:filenam
 # Integration Tests for Designer Users
 GET     /test/designer/user/sample.json     controllers.DesignerTestController.userSample()
 
-
 # Math.js Equation Tests
 GET     /test/mathjs/stepFunction            controllers.MathJsTestController.stepFunction()
-
 
 
 # Version 4 SBT Conversion testing
@@ -101,6 +102,4 @@ GET     /designer/demo2018                       controllers.DesignerController.
 
 # Designer implementation
 GET     /designer/:collection/:filename.json      controllers.DesignerController.getDesigner(collection: String, filename: String)
-
-
 

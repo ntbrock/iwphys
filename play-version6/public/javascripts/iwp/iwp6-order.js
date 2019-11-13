@@ -128,8 +128,11 @@ function calculatorRequires(calc) {
 
 	} else if ( calc.calcType == "MCalculator_Euler") {
 
+		// displacement
 		var d = equationRequires(calc.displacement);
+		// velocity
 		var v = equationRequires(calc.velocity);
+		// acceleration
 		var a = equationRequires(calc.acceleration);
 
 		//console.log("iwp6-order:82> MCalculator_Euler: d: " + d);
