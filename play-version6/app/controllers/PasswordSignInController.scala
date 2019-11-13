@@ -111,8 +111,23 @@ class PasswordSignInController @Inject()(implicit ec: ExecutionContext,
     services.userPassword.createDesignerUser(initialUser).map { createdO =>
       Ok(s"createDesignerUser: ${createdO} initialUser: ${initialUser}")
     }
-
-
   }
+
+
+  // For security, error messages session based.
+  def signInPasswordInitializeUsername(username: String) = Action.async { implicit request: Request[AnyContent] =>
+    // Ensure that the basic user exists.
+
+    val initialUser = Iwp6DesignerUser( token = UUID.randomUUID().toString,
+      email = "taylor.brockman@gmail.com",
+      displayName = "IWP NCSAAPT",
+      username = username,
+      password = Some("Peebles") )
+
+    services.userPassword.createDesignerUser(initialUser).map { createdO =>
+      Ok(s"createDesignerUser: ${createdO} initialUser: ${initialUser}")
+    }
+  }
+
 
 }

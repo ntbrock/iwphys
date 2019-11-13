@@ -56,6 +56,7 @@ GET     /sign-out                       controllers.UserProfileController.signOu
 GET     /sign-in                        controllers.PasswordSignInController.signInPasswordForm()
 POST    /sign-in/password               controllers.PasswordSignInController.signInPasswordPost()
 GET     /sign-in/protected/initialize   controllers.PasswordSignInController.signInPasswordInitialize()
+GET     /sign-in/protected/initialize/username/:username   controllers.PasswordSignInController.signInPasswordInitializeUsername(username: String)
 
 # Integration tests for Nashorn Javascript Excution
 GET     /test/nashorn/test1            controllers.NashornTestController.nashornTest1_eval()
