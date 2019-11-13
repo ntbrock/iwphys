@@ -2,14 +2,13 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 import play.api.mvc.ControllerComponents
-import services.{IwpEmailService, IwpFilesystemBrowserService}
+import services.{IwpEmailService, IwpFilesystemBrowserService, IwpServices}
 
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class UserProfileController @Inject()(cc: ControllerComponents,
-                                iwpDirectoryBrowserService: IwpFilesystemBrowserService,
-                                iwpEmailService: IwpEmailService)(implicit ec: ExecutionContext) extends IwpBaseController(cc, iwpEmailService) {
+                                      services: IwpServices)(implicit ec: ExecutionContext) extends IwpBaseController(cc, services) {
 
 
   def userProfile() = authenticated { request =>

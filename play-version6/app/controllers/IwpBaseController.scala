@@ -1,5 +1,7 @@
 package controllers
 
+import java.util.UUID
+
 import models.{Iwp6DesignerUser, IwpAuthenticatedRequest, IwpOptAuthenticatedRequest}
 import play.api.mvc._
 
@@ -7,7 +9,7 @@ import scala.concurrent.{ExecutionContext, Future}
 import org.slf4j.LoggerFactory
 import pdi.jwt.JwtClaim
 import play.api.Logger
-import services.IwpEmailService
+import services.{IwpEmailService, IwpServices}
 
 import scala.util.{Failure, Success}
 
@@ -19,7 +21,7 @@ import scala.util.{Failure, Success}
   */
 
 abstract class IwpBaseController(cc: ControllerComponents,
-                                 iwpEmailSignInService: IwpEmailService)
+                                 services: IwpServices)
                                  (private implicit val baseExecutionContext: ExecutionContext)
   extends AbstractController(cc) {
 
@@ -52,10 +54,11 @@ abstract class IwpBaseController(cc: ControllerComponents,
       case Some(email) =>
 
         val claimO = request.session.get("sign-in-token") flatMap { token =>
-          iwpEmailSignInService.decodeJwtClaim(token).toOption
+
+          services.email.decodeJwtClaim(token).toOption
         }
 
-        Some(Iwp6DesignerUser(email, email), claimO)
+        Some(Iwp6DesignerUser(UUID.randomUUID(), email, email), claimO)
     }
   }
 

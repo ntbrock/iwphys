@@ -4,11 +4,12 @@ import java.net.URLDecoder
 
 import javax.inject._
 import models.{Iwp6Animation, Iwp6PreviewCollection}
-import play.api.Logger
+import play.api.{Configuration, Logger}
 import play.api.libs.json.Json
 import play.api.mvc._
-import services.IwpFilesystemBrowserService
+import services.{IwpFilesystemBrowserService, IwpServices}
 
+import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
 
 /**
@@ -16,8 +17,10 @@ import scala.util.{Failure, Success}
  * application's home page.
  */
 @Singleton
-class PasswordSignInController @Inject()(cc: ControllerComponents,
-                                         iwpDirectoryBrowserService: IwpFilesystemBrowserService ) extends AbstractController(cc) {
+class PasswordSignInController @Inject()(implicit ec: ExecutionContext,
+                                         c: Configuration,
+                                         cc: ControllerComponents,
+                                         services: IwpServices ) extends IwpBaseController(cc, services) {
 
 
   def signInPasswordForm() = Action { implicit request: Request[AnyContent] =>
