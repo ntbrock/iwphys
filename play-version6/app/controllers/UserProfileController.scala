@@ -14,8 +14,7 @@ class UserProfileController @Inject()(cc: ControllerComponents,
   def userProfile() = authenticated { request =>
 
     Future {
-      Ok(s"Hello ${request.user}")
-
+      Ok(views.html.userProfile.userProfile(request.user))
     }
   }
 
