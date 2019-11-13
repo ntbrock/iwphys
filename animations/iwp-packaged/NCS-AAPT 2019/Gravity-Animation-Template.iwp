@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>100.0</stop>
+			<change>0.001</change>
+			<fps>25.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>A blue object orbits a large, fixed mass at the origin. The power of the gravitational force on each of the orbiting objects can be adjusted according to a number of parameters: the mass of each object; the gravitational constant G. In reality, the gravitational force is exactly inversely proportional to the square of the distance between the orbiting object and the origin. This animation replicates this force, but we might also be interested in the behavior of gravity at different powers. Using the designer, edit this animation to allow the user to input a gravitational power which changes the behavior of gravity. In order to compare this generalized gravitational scheme to reality, include two oribiting objects, each with inputtable parameters.</text>
+		</description>
+		<solid>
+			<name>A</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>B</name>
+			<shape type="rectangle" drawTrails="true" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>102</red>
+				<green>204</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="euler">
+					<displacement>5</displacement>
+					<velocity>0</velocity>
+					<acceleration>-G*ma*mb*B.xpos / (B.xpos^2 + B.ypos^2)^1.5</acceleration>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="euler">
+					<displacement>0</displacement>
+					<velocity>5</velocity>
+					<acceleration>-G*ma*mb*B.ypos / (B.xpos^2 + B.ypos^2)^1.5</acceleration>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>G</name>
+			<text>Gravitational Constant</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>ma</name>
+			<text>ma</text>
+			<initialValue>200.0</initialValue>
+			<units></units>
+		</input>
+		<input>
+			<name>mb</name>
+			<text>mb</text>
+			<initialValue>1.0</initialValue>
+			<units></units>
+		</input>
+	</objects>
+</problem>
