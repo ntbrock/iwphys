@@ -132,12 +132,12 @@ function masterResetSteps() {
 // Likely the are are other physical constants that we'll need to load as well.
 varsConstants = {
  G : -9.8,
+ pi : Math.PI,
  step: function(x) { if ( x > 0 ) { return 1 } else { return 0 } },
  toRadians : function(degrees) { return degrees * Math.PI / 180; },
  toDegrees : function(radians) { return radians * 180 / Math.PI; },
  sign: function(input) { if ( input < 0 ) { return -1 } else { return 1 } }
  }
-
 
 // Global Number Formatting routine.
 function printDecimal( incomingNumber, incomingPlaces ) {
@@ -492,6 +492,7 @@ function calculateVarsAtStep(step) {
   // vars should be a map of string to double, including the mathematical / physical constants.
   var vars = { step: step }
   deepExtend(vars, varsConstants);
+
 
   // optional UI
   startTime = null;
