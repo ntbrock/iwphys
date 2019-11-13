@@ -10,6 +10,13 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class IwpUserPasswordService(mongoClient: IwpMongoClient)(implicit ec: ExecutionContext) {
 
+  def findByUsername(username: String): Future[Option[Iwp6DesignerUser]] = {
+    mongoClient.designerUserCollection.find(
+      Document("username" -> username )).headOption().map { h =>
+      h.map { _.copy(password=None)}
+    }
+  }
+
 
   def findByUsernamePassword(username: String, password: String): Future[Option[Iwp6DesignerUser]] = {
     mongoClient.designerUserCollection.find(

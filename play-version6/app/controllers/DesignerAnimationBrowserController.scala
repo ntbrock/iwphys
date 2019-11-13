@@ -1,15 +1,14 @@
 package controllers
 
 import javax.inject._
-import models.Iwp6Animation
+import models.{Iwp6Animation, Iwp6MongoCollection, Iwp6UserCollection}
 import play.api.mvc._
-import services.IwpMongoClient
+import services.{IwpMongoClient, IwpServices}
 import org.mongodb.scala.model.Filters._
 import play.api.Logger
 import play.api.libs.json.Json
 
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
 
 /**
@@ -17,21 +16,87 @@ import scala.util.{Failure, Success}
  * application's home page.
  */
 @Singleton
-class AnimationMongoController @Inject()(cc: ControllerComponents, mongo: IwpMongoClient) extends AbstractController(cc) {
+class DesignerAnimationBrowserController @Inject()(cc: ControllerComponents,
+                                                   services: IwpServices) (implicit ec: ExecutionContext)
+  extends IwpAbstractController(cc, services) {
 
 
-  def browseCollection(collection: String) = Action.async { implicit request: Request[AnyContent] =>
+  def browseUsername(username: String) = Action.async { implicit request: Request[AnyContent] =>
 
+
+    services.userPassword.findByUsername(username) flatMap { userO =>
+
+      userO match {
+
+        case None => Future.successful(NotFound(s"No Such Username: ${username}"))
+
+        case Some(user) =>
+
+          services.designerAnimation.findByUsername(user.username).map { designerAnimations =>
+
+            // Parse Animations, could be compute intensive
+
+            val animations = designerAnimations.flatMap { da =>
+              val jsv = Json.parse(da.animationJson)
+              Iwp6Animation.fromJson( Some(da.filename), jsv ).toOption
+            }
+
+            // TODO show failed animations that don't parse, like the fileystem browser
+
+
+            Ok(views.html.designerAnimation.browseUsername(user, animations))
+          }
+      }
+    }
+  }
+
+
+  def getUserAnimation(username: String, filename: String)  = Action.async { implicit request: Request[AnyContent] =>
+
+
+    services.designerAnimation.findByUsernameFilename(username, filename) map { animationO =>
+
+      animationO match {
+        case None =>
+          NotFound(s"No Animation found for username: ${username}  with filename: ${filename}")
+
+        case Some(animation) =>
+
+          // Convert.
+          val jsv = Json.parse(animation.animationJson)
+          Iwp6Animation.fromJson(Some(animation.filename), jsv) match {
+            case Failure(x) =>
+              Logger.error("DesignerAnimationBrowser:69> ")
+              NotFound(s"Animation found but failure parsing Json: ${x}")
+
+            case Success(a) =>
+              Ok(views.html.animation.animation(Iwp6UserCollection(username), filename, a))
+          }
+
+
+      }
+    }
+
+  }
+
+}
+
+
+
+
+/*
     mongo.animationCollection(collection).find().toFuture() map { animations =>
 
       Ok("TODO Refactor Mongo Browser")
 
       // Ok(views.html.animation.browseCollection(collection, Seq.empty,  animations))  // mongo has no subfolders
     }
+*/
 
-  }
 
 
+
+  /*
   def getAnimation(collection: String, filename: String) = Action.async { implicit request: Request[AnyContent] =>
 
     mongo.animationCollection(collection).find(equal("filename", filename)).toFuture() map { animations =>
@@ -105,7 +170,4 @@ class AnimationMongoController @Inject()(cc: ControllerComponents, mongo: IwpMon
 
 
   }
-
-
-
-}
+*/

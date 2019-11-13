@@ -1,0 +1,56 @@
+@(user: Iwp6DesignerUser, animations: Seq[Iwp6Animation])
+
+@main(s"Browse Username: $user.username") {
+
+  @views.html.partial.nav()
+
+<!-- Page Content -->
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h3><a href="@controllers.routes.IndexController.index()">Home</a></h3>
+      <h1>Browsing Animations By User: @user.username</h1>
+    </div>
+  </div>
+
+
+  @if(animations.size > 0 ) {
+
+    <div>
+      <h3>@animations.size Animations</h3><br>
+    </div>
+
+
+    @animations.grouped(3).map { threeAnimations =>
+      <div class="row text-center">
+        @threeAnimations.map { animation =>
+
+        <div class="col-md-3">
+
+          <div class="caption">
+
+            <a target="_anim" href="@controllers.routes.DesignerAnimationBrowserController.getUserAnimation(user.username, animation.filename.get)" class="btn btn-success btn-wide">Animate</a>
+
+            <h3><a target="_anim" href="@controllers.routes.DesignerAnimationBrowserController.getUserAnimation(user.username, animation.filename.get)">@animation.filename.get</a></h3>
+
+            <p>
+              @animation.description.map(_.text)
+            </p>
+
+          </div>
+
+        </div>
+        }
+      </div>
+    }
+
+  }
+  </div>
+
+</div>
+
+  @views.html.partial.footer()
+
+}
+

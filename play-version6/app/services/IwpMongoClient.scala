@@ -111,6 +111,7 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
     Seq("winters-ncssm-2009", "iwp-packaged")
   }
 
+  // DEPRECATED
   def animationCollection(collectionName: String) : MongoCollection[Iwp6Animation] = {
     environmentCollection("iwp6", collectionName)
   }

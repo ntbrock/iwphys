@@ -84,3 +84,14 @@ case class Iwp6MongoCollection (collectionName: String) {
 
   def parent = None
 }
+
+
+case class Iwp6UserCollection (username: String) extends Iwp6Collection {
+
+  def name = username
+
+  def encoded = username
+
+  def parent = None
+}
+

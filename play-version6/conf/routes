@@ -36,10 +36,12 @@ GET     /5/animate.php/:collection/:subcollection/:filename  controllers.Animati
 
 
 # First Rudimentary Database Browser
-GET     /animation-db/:collection         controllers.AnimationMongoController.browseCollection(collection: String)
-GET     /animation-db/:collection/:filename.json    controllers.AnimationMongoController.getAnimationJson(collection: String, filename:String)
-GET     /animation-db/:collection/:filename     controllers.AnimationMongoController.getAnimation(collection: String, filename:String)
-POST    /animation-db/:collection/:filename     controllers.AnimationMongoController.postAnimation(collection: String, filename:String)
+GET     /username/:username                          controllers.DesignerAnimationBrowserController.browseUsername(username: String)
+GET     /username/:username/animation/:filename      controllers.DesignerAnimationBrowserController.getUserAnimation(username: String, filename: String)
+
+# GET     /animation-db/:collection/:filename.json    controllers.AnimationMongoController.getAnimationJson(collection: String, filename:String)
+# GET     /animation-db/:collection/:filename     controllers.AnimationMongoController.getAnimation(collection: String, filename:String)
+# POST    /animation-db/:collection/:filename     controllers.AnimationMongoController.postAnimation(collection: String, filename:String)
 
 # Designer User Sign In
 
