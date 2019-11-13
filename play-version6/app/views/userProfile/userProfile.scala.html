@@ -68,17 +68,29 @@
 
 
             <table>
+                <thead>
+
+                    <tr>
+                        <td>Animate</td>
+                        <td>Design</td>
+                        <td>Filename</td>
+                        <td>Created</td>
+                    </tr>
+                </thead>
                     <tbody>
                 @animations.map { animation =>
 
                     <tr>
                         <td>
+                            <a class="btn btn-success" href="@controllers.routes.DesignerAnimationBrowserController.getUserAnimation(animation.username, animation.filename)">Animate</a>
+                        </td>
+
+                        <td>
                             <a class="btn btn-primary" href="@controllers.routes.DesignerController.launchDesigner(Some(animation.filename))">Edit In Designer</a>
                         </td>
                         <td>@animation.filename</td>
-                        <td>@animation.username</td>
+
                         <td>@animation.createdOn</td>
-                        <td>@animation.updatedOn</td>
                     </tr>
                 }
 
