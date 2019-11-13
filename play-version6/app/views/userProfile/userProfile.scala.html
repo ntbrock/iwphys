@@ -2,7 +2,7 @@
 
 @main(s"IWP User Profile") {
 
-@views.html.partial.nav()
+@views.html.partial.nav(Some(user))
 
 
 <!-- Page Content -->
@@ -36,8 +36,9 @@
 
             </form>
 
-            <br><br>
             <a class="btn btn-danger" href="@controllers.routes.UserProfileController.signOut()">Sign Out</a>
+            <br>
+            <br>
 
 
         </div>
@@ -48,8 +49,15 @@
         <div class="col-md-12">
             <h1>IWP Designer</h1>
 
-            <a class="btn btn-lg btn-primary" href="@controllers.routes.DesignerController.launchDesigner(None)">Launch Designer, New Empty Animation</a>
-            <br><br>
+            <div style="font-size: 150%;">
+                Your Public URL is <a class="" href="@controllers.routes.DesignerAnimationBrowserController.browseUsername(user.username)">https://www.iwphys.org@controllers.routes.DesignerAnimationBrowserController.browseUsername(user.username)</a>
+            </div>
+
+            <br/>
+            <br/>
+
+            <a class="btn btn-primary" href="@controllers.routes.DesignerController.launchDesigner(None)">Launch Designer, New Empty Animation</a>
+
 
             @if(animations.isEmpty) {
 
@@ -57,7 +65,9 @@
 
                 <h3>Your User Animations</h3>
 
-                <table>
+
+
+            <table>
                     <tbody>
                 @animations.map { animation =>
 
@@ -73,6 +83,8 @@
                 }
 
             }
+                    </tbody>
+            </table>
 
 
         </div>

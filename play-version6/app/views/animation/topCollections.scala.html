@@ -1,8 +1,8 @@
-@(topCollections: Seq[Iwp6Collection])
+@(userO: Option[Iwp6DesignerUser], topCollections: Seq[Iwp6Collection])
 
 @main(s"Top Collections") {
 
-@views.html.partial.nav()
+@views.html.partial.nav(userO)
 
 <!-- Page Content -->
 <div class="container">
@@ -30,5 +30,4 @@
 
   @views.html.partial.footer()
 
-  }
-
+}

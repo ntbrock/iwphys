@@ -1,7 +1,7 @@
-@(subpage: String)
+@(userO: Option[Iwp6DesignerUser], subpage: String)
 @main("Animator Guide") {
 
-@views.html.partial.nav()
+@views.html.partial.nav(userO)
     <div class="container">
         <div class="sidenav">
             <a href="@controllers.routes.IndexController.help("Intro")"><h3>IWP6 Help</h3></a>

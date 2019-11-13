@@ -1,9 +1,9 @@
-@(popularCollectionO: Option[Iwp6Collection], popularAnimations: Seq[Iwp6Animation])(implicit userO: Option[Iwp6DesignerUser])
+@(userO: Option[Iwp6DesignerUser], popularCollectionO: Option[Iwp6Collection], popularAnimations: Seq[Iwp6Animation])
 
 
 @main("Interactive Web Physics 6") {
 
-@views.html.partial.nav()
+@views.html.partial.nav(userO)
 
     <!-- Page Content -->
     <div class="container">

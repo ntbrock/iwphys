@@ -1,8 +1,8 @@
-@(user: Iwp6DesignerUser, animations: Seq[Iwp6Animation])
+@(userO: Option[Iwp6DesignerUser], browsingUser: Iwp6DesignerUser, animations: Seq[Iwp6Animation])
 
-@main(s"Browse Username: $user.username") {
+@main(s"Browse Username: $browsingUser.username") {
 
-  @views.html.partial.nav()
+  @views.html.partial.nav(userO)
 
 <!-- Page Content -->
 <div class="container">
@@ -10,7 +10,16 @@
   <div class="row">
     <div class="col-lg-12">
       <h3><a href="@controllers.routes.IndexController.index()">Home</a></h3>
-      <h1>Browsing Animations By User: @user.username</h1>
+      <h1>Browsing Animations By User: @browsingUser.displayName (@browsingUser.username)</h1>
+
+      @browsingUser.locationName.map { s => Location: @s <br/> }
+
+      @browsingUser.schoolName.map { s => School: @s <br/> }
+
+      @browsingUser.personalBiography.map { s => Personal Biography: @s <br/> }
+
+      @browsingUser.userAvatarUrl.map { s => userAvatarUrl: @s <br/> }
+
     </div>
   </div>
 
@@ -30,9 +39,9 @@
 
           <div class="caption">
 
-            <a target="_anim" href="@controllers.routes.DesignerAnimationBrowserController.getUserAnimation(user.username, animation.filename.get)" class="btn btn-success btn-wide">Animate</a>
+            <a target="_anim" href="@controllers.routes.DesignerAnimationBrowserController.getUserAnimation(browsingUser.username, animation.filename.get)" class="btn btn-success btn-wide">Animate</a>
 
-            <h3><a target="_anim" href="@controllers.routes.DesignerAnimationBrowserController.getUserAnimation(user.username, animation.filename.get)">@animation.filename.get</a></h3>
+            <h3><a target="_anim" href="@controllers.routes.DesignerAnimationBrowserController.getUserAnimation(browsingUser.username, animation.filename.get)">@animation.filename.get</a></h3>
 
             <p>
               @animation.description.map(_.text)

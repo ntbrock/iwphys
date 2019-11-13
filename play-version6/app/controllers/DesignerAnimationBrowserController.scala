@@ -21,7 +21,7 @@ class DesignerAnimationBrowserController @Inject()(cc: ControllerComponents,
   extends IwpAbstractController(cc, services) {
 
 
-  def browseUsername(username: String) = Action.async { implicit request: Request[AnyContent] =>
+  def browseUsername(username: String) = optAuthenticated { request =>
 
 
     services.userPassword.findByUsername(username) flatMap { userO =>
@@ -44,7 +44,7 @@ class DesignerAnimationBrowserController @Inject()(cc: ControllerComponents,
             // TODO show failed animations that don't parse, like the fileystem browser
 
 
-            Ok(views.html.designerAnimation.browseUsername(user, animations))
+            Ok(views.html.designerAnimation.browseUsername(request.user, user, animations))
           }
       }
     }

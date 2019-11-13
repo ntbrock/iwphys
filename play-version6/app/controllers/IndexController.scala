@@ -25,16 +25,13 @@ class IndexController @Inject()(cc: ControllerComponents,
   def index() = optAuthenticated { implicit request =>
 
 
-    Future.successful {
-
-
-      implicit val userO = request.user
+    Future {
 
       val popularName = "popular"
 
       services.directoryBrowser.getCollection(popularName) match {
 
-        case None => Ok(views.html.index(None, Seq()))
+        case None => Ok(views.html.index(request.user, None, Seq()))
 
         case Some(popularCollection) =>
 
@@ -45,7 +42,7 @@ class IndexController @Inject()(cc: ControllerComponents,
 
             }
           }
-          Ok(views.html.index(Some(popularCollection), success))
+          Ok(views.html.index(request.user, Some(popularCollection), success))
 
       }
     }
@@ -53,11 +50,11 @@ class IndexController @Inject()(cc: ControllerComponents,
 
   def help(subpage: String = "") = optAuthenticated { implicit request =>
 
-    Future.successful {
+    Future {
       if (subpage == "") {
-        Ok(views.html.help(""))
+        Ok(views.html.help(request.user, ""))
       } else {
-        Ok(views.html.help(subpage))
+        Ok(views.html.help(request.user, subpage))
       }
       
     }

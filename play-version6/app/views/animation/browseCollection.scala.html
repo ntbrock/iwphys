@@ -1,8 +1,8 @@
-@(thisCollection: Iwp6Collection, subCollections: Seq[Iwp6Collection], animations: Seq[Iwp6Animation], failureAnimations: Seq[Iwp6AnimationWithFailure])
+@(userO: Option[Iwp6DesignerUser], thisCollection: Iwp6Collection, subCollections: Seq[Iwp6Collection], animations: Seq[Iwp6Animation], failureAnimations: Seq[Iwp6AnimationWithFailure])
 
 @main(s"Browse Collection: $thisCollection") {
 
-  @views.html.partial.nav()
+  @views.html.partial.nav(userO)
 
 <!-- Page Content -->
 <div class="container">

@@ -8,7 +8,7 @@ import org.mongodb.scala.model.Filters._
 import play.api.Logger
 import play.api.libs.json.Json
 import play.api.mvc._
-import services.{IwpFilesystemBrowserService, IwpMongoClient}
+import services.{IwpFilesystemBrowserService, IwpMongoClient, IwpServices}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -20,36 +20,39 @@ import scala.util.{Failure, Success}
  */
 @Singleton
 class AnimationFilesystemController @Inject()(cc: ControllerComponents,
-                                              iwpDirectoryBrowserService: IwpFilesystemBrowserService ) extends AbstractController(cc) {
+                                              services: IwpServices) extends IwpAbstractController(cc, services) {
 
 
 
 
-  def browseCollections() = Action { implicit request: Request[AnyContent] =>
+  def browseCollections() = optAuthenticated { request =>
 
-    val topCollections = iwpDirectoryBrowserService.topCollections()
+    Future {
+      val topCollections = services.directoryBrowser.topCollections()
 
-    Ok(views.html.animation.topCollections(topCollections))
-
+      Ok(views.html.animation.topCollections(request.user, topCollections))
+    }
   }
 
 
 
-  def browseCollection(collectionEncoded: String) = Action { implicit request: Request[AnyContent] =>
+  def browseCollection(collectionEncoded: String) = optAuthenticated { request =>
 
-    val collectionName = URLDecoder.decode(collectionEncoded, "UTF-8")
+    Future {
+      val collectionName = URLDecoder.decode(collectionEncoded, "UTF-8")
 
-    // Logger.info(s"AnimationFilesystemController:26> collectionName: ${collectionName}")
+      // Logger.info(s"AnimationFilesystemController:26> collectionName: ${collectionName}")
 
-    iwpDirectoryBrowserService.getCollection(collectionEncoded) match {
+      services.directoryBrowser.getCollection(collectionEncoded) match {
 
-      case None => NotFound(s"No Such Collection Found:45 ${collectionEncoded}")
+        case None => NotFound(s"No Such Collection Found:45 ${collectionEncoded}")
 
-      case Some(collection) =>
-        val dirs = iwpDirectoryBrowserService.findCollections(collection)
-        val (success, failures) = iwpDirectoryBrowserService.findAnimationsWithFailures(collection)
+        case Some(collection) =>
+          val dirs = services.directoryBrowser.findCollections(collection)
+          val (success, failures) = services.directoryBrowser.findAnimationsWithFailures(collection)
 
-        Ok(views.html.animation.browseCollection(collection, dirs, success, failures))
+          Ok(views.html.animation.browseCollection(request.user, collection, dirs, success, failures))
+      }
     }
 
   }
@@ -57,13 +60,13 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
   def getAnimation(collectionEncoded: String, filename: String) = Action { implicit request: Request[AnyContent] =>
 
-    iwpDirectoryBrowserService.getCollection(collectionEncoded) match {
+    services.directoryBrowser.getCollection(collectionEncoded) match {
 
       case None => NotFound(s"No Such Collection Found:61 ${collectionEncoded}")
 
       case Some(collection) => {
 
-        iwpDirectoryBrowserService.getAnimation(collection, filename) match {
+        services.directoryBrowser.getAnimation(collection, filename) match {
           case Failure(x) =>
             Logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
 
@@ -80,13 +83,13 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
     val collectionEncoded = collection + "/" + subCollection
 
-    iwpDirectoryBrowserService.getCollection(collectionEncoded) match {
+    services.directoryBrowser.getCollection(collectionEncoded) match {
 
       case None => NotFound(s"No Such Collection Found:61 ${collectionEncoded}")
 
       case Some(collection) => {
 
-        iwpDirectoryBrowserService.getAnimation(collection, filename) match {
+        services.directoryBrowser.getAnimation(collection, filename) match {
           case Failure(x) =>
             Logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
 
@@ -102,13 +105,13 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
   def getAnimationJson(collectionEncoded: String, filename: String) = Action { implicit request: Request[AnyContent] =>
 
-    iwpDirectoryBrowserService.getCollection(collectionEncoded) match {
+    services.directoryBrowser.getCollection(collectionEncoded) match {
 
       case None => NotFound(s"No Such Collection Found: ${collectionEncoded}")
 
       case Some(collection) => {
 
-        iwpDirectoryBrowserService.getAnimation(collection, filename) match {
+        services.directoryBrowser.getAnimation(collection, filename) match {
           case Failure(x) =>
             Logger.error(s"AnimationFilesystemController:88> Failure: ${x}")
 

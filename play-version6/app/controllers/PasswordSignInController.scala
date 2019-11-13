@@ -27,13 +27,20 @@ class PasswordSignInController @Inject()(implicit ec: ExecutionContext,
 
 
   // For security, error messages session based.
-  def signInPasswordForm() = Action { implicit request: Request[AnyContent] =>
+  def signInPasswordForm() = optAuthenticated { request =>
 
-    val errorMessage = request.session.get("errorMessage")
+    Future {
+      val errorMessage = request.session.get("errorMessage")
 
-    // TODO, if authenticated, redirect
+      // if authenticated, redirect
+      request.user match {
+        case None => Ok(views.html.signin.signInPasswordForm(errorMessage)).withNewSession
 
-    Ok(views.html.signin.signInPasswordForm(errorMessage)).withNewSession
+        case Some(user) =>
+          Redirect(controllers.routes.UserProfileController.userProfile())
+      }
+
+    }
 
   }
 
