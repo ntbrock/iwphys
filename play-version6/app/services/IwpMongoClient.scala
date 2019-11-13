@@ -67,7 +67,9 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
       classOf[Iwp6Description],
       classOf[Iwp6GraphWindow],
       classOf[Iwp6Author],
-      classOf[Iwp6Animation]
+      classOf[Iwp6Animation],
+      classOf[Iwp6DesignerUser],
+      classOf[Iwp6AuthenticationLog]
     )
 
   def registerApplicationCodecs(applicationRegistry: CodecRegistry): Unit = {
@@ -101,6 +103,14 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
 
   def animationCollection(collectionName: String) : MongoCollection[Iwp6Animation] = {
     environmentCollection("iwp6", collectionName)
+  }
+
+  def designerUserCollection() : MongoCollection[Iwp6DesignerUser] = {
+    environmentCollection("iwp6", "designerUser")
+  }
+
+  def authenticationLogCollection() : MongoCollection[Iwp6AuthenticationLog] = {
+    environmentCollection("iwp6", "authenticationLog")
   }
 
 }
