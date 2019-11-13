@@ -16,10 +16,13 @@ class IwpServices @Inject()(configuration: Configuration,
 
   implicit val ec = system.dispatcher
 
+
+  def mongoClient : IwpMongoClient = new IwpMongoClient(configuration)
+
   def email : IwpEmailService = new IwpEmailService(configuration)
 
   def directoryBrowser: IwpFilesystemBrowserService = new IwpFilesystemBrowserService(configuration)
 
-  def user : IwpUserPasswordService = new IwpUserPasswordService()
+  def user : IwpUserPasswordService = new IwpUserPasswordService(mongoClient)
 
 }

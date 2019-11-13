@@ -20,9 +20,9 @@ import scala.util.{Failure, Success}
   * @param baseExecutionContext
   */
 
-abstract class IwpBaseController(cc: ControllerComponents,
-                                 services: IwpServices)
-                                 (private implicit val baseExecutionContext: ExecutionContext)
+abstract class IwpAbstractController(cc: ControllerComponents,
+                                     services: IwpServices)
+                                    (private implicit val baseExecutionContext: ExecutionContext)
   extends AbstractController(cc) {
 
   val logger = new Logger(LoggerFactory.getLogger(this.getClass))

@@ -8,7 +8,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
 class UserProfileController @Inject()(cc: ControllerComponents,
-                                      services: IwpServices)(implicit ec: ExecutionContext) extends IwpBaseController(cc, services) {
+                                      services: IwpServices)(implicit ec: ExecutionContext) extends IwpAbstractController(cc, services) {
 
 
   def userProfile() = authenticated { request =>

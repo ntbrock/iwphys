@@ -20,7 +20,7 @@ import scala.util.{Failure, Success}
 class PasswordSignInController @Inject()(implicit ec: ExecutionContext,
                                          c: Configuration,
                                          cc: ControllerComponents,
-                                         services: IwpServices ) extends IwpBaseController(cc, services) {
+                                         services: IwpServices ) extends IwpAbstractController(cc, services) {
 
 
   def signInPasswordForm() = Action { implicit request: Request[AnyContent] =>

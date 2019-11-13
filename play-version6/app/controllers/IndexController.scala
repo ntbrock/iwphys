@@ -13,7 +13,7 @@ import scala.concurrent.{ExecutionContext, Future}
  */
 @Singleton
 class IndexController @Inject()(cc: ControllerComponents,
-                                services: IwpServices)(implicit ec: ExecutionContext) extends IwpBaseController(cc, services) {
+                                services: IwpServices)(implicit ec: ExecutionContext) extends IwpAbstractController(cc, services) {
 
   /**
    * Create an Action to render an HTML page.

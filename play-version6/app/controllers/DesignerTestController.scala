@@ -1,6 +1,7 @@
 package controllers
 
 import java.time.ZonedDateTime
+import java.util.UUID
 
 import edu.ncssm.iwp.plugin.IWPObject
 import edu.ncssm.iwp.problemdb.DProblemXMLParser
@@ -22,7 +23,8 @@ class DesignerTestController @Inject()(cc: ControllerComponents,
 
   def userSample() = Action { implicit request =>
 
-    val taylor = Iwp6DesignerUser( email = "taylor.brockman@gmail.com",
+    val taylor = Iwp6DesignerUser( token = UUID.fromString("1141a76f-827d-4d2c-aa26-502a7aa40919"),
+      email = "taylor.brockman@gmail.com",
       displayName = "Taylor Brockman",
       locationName = Some("Charleston, SC"),
       schoolName = Some("NCSSM"),
