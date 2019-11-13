@@ -13,8 +13,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class IwpDesignerAnimationService(mongoClient: IwpMongoClient)(implicit ec: ExecutionContext) {
 
 
-
-  def findByUsername(username: String, filename: String): Future[Seq[Iwp6DesignerAnimation]] = {
+  def findByUsername(username: String): Future[Seq[Iwp6DesignerAnimation]] = {
     mongoClient.designerAnimationCollection.find(Document("username" -> username)).toFuture()
   }
 

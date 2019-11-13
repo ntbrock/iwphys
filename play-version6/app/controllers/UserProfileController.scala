@@ -13,12 +13,17 @@ class UserProfileController @Inject()(cc: ControllerComponents,
 
   def userProfile() = authenticated { request =>
 
-    Future {
 
-      implicit val userO = Some(request.user)
+    implicit val userO = Some(request.user)
 
-      Ok(views.html.userProfile.userProfile(request.user))
+    // List Designer animations for this user
+
+    services.designerAnimation.findByUsername(request.user.username).map { animations =>
+
+      Ok(views.html.userProfile.userProfile(request.user, animations))
+
     }
+
   }
 
   def signOut() = Action {

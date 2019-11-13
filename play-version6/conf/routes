@@ -90,7 +90,7 @@ GET     /help/:subpage                         controllers.IndexController.help(
 
 
 # Designer implementation to redirect to React app
-GET     /designer/launch                          controllers.DesignerController.launchDesigner()
+GET     /designer/launch                          controllers.DesignerController.launchDesigner(filename: Option[String] ?= None )
 GET     /designer/:collection/:filename.json      controllers.DesignerController.getDesigner(collection: String, filename: String)
 
 GET     /designer/demo2018                       controllers.DesignerController.demo2018

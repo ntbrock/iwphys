@@ -1,4 +1,4 @@
-@(user: Iwp6DesignerUser)(implicit userO: Option[Iwp6DesignerUser] = None)
+@(user: Iwp6DesignerUser, animations: Seq[Iwp6DesignerAnimation])(implicit userO: Option[Iwp6DesignerUser] = None)
 
 @main(s"IWP User Profile") {
 
@@ -36,12 +36,43 @@
 
             </form>
 
-            <a class="btn btn-lg btn-primary" href="@controllers.routes.DesignerController.launchDesigner">Launch Designer</a>
-            <br><br>
-
-
             <br><br>
             <a class="btn btn-danger" href="@controllers.routes.UserProfileController.signOut()">Sign Out</a>
+
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <h1>IWP Designer</h1>
+
+            <a class="btn btn-lg btn-primary" href="@controllers.routes.DesignerController.launchDesigner(None)">Launch Designer, New Empty Animation</a>
+            <br><br>
+
+            @if(animations.isEmpty) {
+
+            } else {
+
+                <h3>Your User Animations</h3>
+
+                <table>
+                    <tbody>
+                @animations.map { animation =>
+
+                    <tr>
+                        <td>
+                            <a class="btn btn-primary" href="@controllers.routes.DesignerController.launchDesigner(Some(animation.filename))">Edit In Designer</a>
+                        </td>
+                        <td>@animation.filename</td>
+                        <td>@animation.username</td>
+                        <td>@animation.createdOn</td>
+                        <td>@animation.updatedOn</td>
+                    </tr>
+                }
+
+            }
 
 
         </div>

@@ -20,12 +20,19 @@ class DesignerController @Inject()(c: Configuration,
 
 
 
-  def launchDesigner = authenticated { request =>
+  def launchDesigner(filename: Option[String] ) = authenticated { request =>
 
     Future {
       val designerBaseUrl = c.get[String]("iwp.designerBaseUrl")
       // Spawn designer via redirect, passing the auth token
-      Redirect(designerBaseUrl + s"?token=${request.user.token}")
+
+      filename match {
+        case None =>
+          Redirect(designerBaseUrl + s"?token=${request.user.token}")
+        case Some(f) =>
+          Redirect(designerBaseUrl + s"?token=${request.user.token}&filename=${java.net.URLEncoder.encode(f, "UTF-8")}")
+      }
+
     }
   }
 
