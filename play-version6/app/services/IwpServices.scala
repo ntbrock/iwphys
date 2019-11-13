@@ -24,4 +24,6 @@ class IwpServices @Inject()(configuration: Configuration,
 
   def userPassword : IwpUserPasswordService = new IwpUserPasswordService(mongoClient)
 
+  def designerAnimation : IwpDesignerAnimationService = new IwpDesignerAnimationService(mongoClient)
+
 }

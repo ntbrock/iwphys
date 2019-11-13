@@ -57,6 +57,7 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
   // Enable each app to register its own codecs
   private var applicationCodecs =
     fromProviders(
+      /*
       classOf[Iwp6Calculator],
       classOf[Iwp6InitiallyOn],
       classOf[Iwp6GraphOptions],
@@ -74,8 +75,11 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
       classOf[Iwp6GraphWindow],
       classOf[Iwp6Author],
       classOf[Iwp6Animation],
+      */
       classOf[Iwp6DesignerUser],
-      classOf[Iwp6AuthenticationLog]
+      classOf[Iwp6AuthenticationLog],
+      classOf[Iwp6DesignerAnimation],
+
     )
 
   def registerApplicationCodecs(applicationRegistry: CodecRegistry): Unit = {
@@ -118,5 +122,10 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
   def authenticationLogCollection() : MongoCollection[Iwp6AuthenticationLog] = {
     environmentCollection("iwp6", "authenticationLog")
   }
+
+  def designerAnimationCollection() : MongoCollection[Iwp6DesignerAnimation] = {
+    environmentCollection("iwp6", "designerAnimation")
+  }
+
 
 }
