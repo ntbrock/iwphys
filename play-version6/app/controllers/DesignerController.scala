@@ -72,6 +72,29 @@ class DesignerController @Inject()(c: Configuration,
   }
 
 
+
+  def jsonGet(filename: String) = authenticated { request =>
+
+    services.designerAnimation.findByUsernameFilename(request.user.username, filename) map { animationO =>
+
+      animationO match {
+
+        case Some(designerAnimation) =>
+
+          Ok( designerAnimation.animationJson ).as("application/json")
+
+        case None =>
+          NotFound( Json.obj("success" -> false,
+            "message" -> "Animation not found",
+            "username" -> request.user.username,
+            "filename" -> filename ) )
+
+      }
+    }
+  }
+
+
+
   /*
       Future {
         Logger.info(s"DesignerController:33> SavePost: filename: ${filename}  body.json: ${request.body.asJson}")

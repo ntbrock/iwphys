@@ -97,6 +97,7 @@ GET     /designer/:collection/:filename.json      controllers.DesignerController
 
 GET     /designer/demo2018                       controllers.DesignerController.demo2018
 POST    /designer/api1/save/:filename                controllers.DesignerController.savePost(filename: String)
+GET     /designer/api1/json/:filename                controllers.DesignerController.jsonGet(filename: String)
 
 
 # Map static resources from the /public folder to the /assets URL path

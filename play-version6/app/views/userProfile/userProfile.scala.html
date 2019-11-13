@@ -82,11 +82,11 @@
 
                     <tr>
                         <td>
-                            <a class="btn btn-success" href="@controllers.routes.DesignerAnimationBrowserController.getUserAnimation(animation.username, animation.filename)">Animate</a>
+                            <a class="btn btn-success" target="_animate" href="@controllers.routes.DesignerAnimationBrowserController.getUserAnimation(animation.username, animation.filename)">Animate</a>
                         </td>
 
                         <td>
-                            <a class="btn btn-primary" href="@controllers.routes.DesignerController.launchDesigner(Some(animation.filename))">Edit In Designer</a>
+                            <a class="btn btn-primary" target="_design" href="@controllers.routes.DesignerController.launchDesigner(Some(animation.filename))">Edit In Designer</a>
                         </td>
                         <td>@animation.filename</td>
 
