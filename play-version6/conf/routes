@@ -84,22 +84,18 @@ GET     /DProblem                   controllers.DProblemController.index
 GET     /DProblem/:path             controllers.DProblemController.view(path: String)
 
 
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
-
-# Demo IWP homepage
-# GET     /demo                       controllers.DemoController.index
-
-# Designer demo
-
-
+# Online Help Content
 GET     /help                         		   controllers.IndexController.help(subpage: String = "")
 GET     /help/:subpage                         controllers.IndexController.help(subpage: String)
 
 
+# Designer implementation to redirect to React app
+GET     /designer/launch                          controllers.DesignerController.launchDesigner()
+GET     /designer/:collection/:filename.json      controllers.DesignerController.getDesigner(collection: String, filename: String)
+
 GET     /designer/demo2018                       controllers.DesignerController.demo2018
 
 
-# Designer implementation
-GET     /designer/:collection/:filename.json      controllers.DesignerController.getDesigner(collection: String, filename: String)
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 

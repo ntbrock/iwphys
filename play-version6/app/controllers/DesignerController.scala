@@ -3,16 +3,30 @@ package controllers
 import javax.inject._
 import play.api._
 import play.api.mvc._
-import services.IwpFilesystemBrowserService
+import services.{IwpFilesystemBrowserService, IwpServices}
 
+import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
 
 /**
  * This controller is a demo for drag-and-drop using Dragula.
  */
 @Singleton
-class DesignerController @Inject()(cc: ControllerComponents,
-                                iwpDirectoryBrowserService: IwpFilesystemBrowserService) extends AbstractController(cc) {
+class DesignerController @Inject()(c: Configuration,
+                                   cc: ControllerComponents,
+                                   services: IwpServices)(implicit ec: ExecutionContext) extends IwpAbstractController(cc, services) {
+
+
+
+  def launchDesigner = authenticated { request =>
+
+    Future {
+      val designerBaseUrl = c.get[String]("iwp.designerBaseUrl")
+      // Spawn designer via redirect, passing the auth token
+      Redirect(designerBaseUrl + s"?token=${request.user.token}")
+    }
+  }
+
 
   /**
    * Create an Action to render an HTML page.
@@ -25,7 +39,7 @@ class DesignerController @Inject()(cc: ControllerComponents,
 
     val popularName = "popular"
 
-    iwpDirectoryBrowserService.getCollection(popularName) match {
+    services.directoryBrowser.getCollection(popularName) match {
 
       case None => Ok(views.html.designer.demo2018())
 
@@ -35,16 +49,15 @@ class DesignerController @Inject()(cc: ControllerComponents,
   }
 
 
-
   def getDesigner(collectionEncoded: String, filename: String) = Action { implicit request: Request[AnyContent] =>
 
-    iwpDirectoryBrowserService.getCollection(collectionEncoded) match {
+    services.directoryBrowser.getCollection(collectionEncoded) match {
 
       case None => NotFound(s"No Such Collection Found:61 ${collectionEncoded}")
 
       case Some(collection) => {
 
-        iwpDirectoryBrowserService.getAnimation(collection, filename) match {
+        services.directoryBrowser.getAnimation(collection, filename) match {
           case Failure(x) =>
             Logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
 
