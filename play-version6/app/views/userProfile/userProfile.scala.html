@@ -50,13 +50,13 @@
             <h1>IWP Designer</h1>
 
             <div style="font-size: 150%;">
-                Your Public URL is <a class="" href="@controllers.routes.DesignerAnimationBrowserController.browseUsername(user.username)">https://www.iwphys.org@controllers.routes.DesignerAnimationBrowserController.browseUsername(user.username)</a>
+                Your Public URL is <a class="" target="_public" href="@controllers.routes.DesignerAnimationBrowserController.browseUsername(user.username)">https://www.iwphys.org@controllers.routes.DesignerAnimationBrowserController.browseUsername(user.username)</a>
             </div>
 
             <br/>
             <br/>
 
-            <a class="btn btn-primary" href="@controllers.routes.DesignerController.launchDesigner(None)">Launch Designer, New Empty Animation</a>
+            <a class="btn btn-primary" target="_designer" href="@controllers.routes.DesignerController.launchDesigner(None)">Launch Designer, New Empty Animation</a>
 
 
             @if(animations.isEmpty) {
