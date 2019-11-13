@@ -21,4 +21,21 @@ class IwpUserPasswordService(mongoClient: IwpMongoClient)(implicit ec: Execution
     }
   }
 
+  def createDesignerUser(user: Iwp6DesignerUser) : Future[Option[Boolean]] = {
+
+    // Prevent duplicate usernames
+    mongoClient.designerUserCollection.find( Document("username" -> user.username ) ).headOption().flatMap { userO =>
+
+      userO match {
+        case Some(user) => throw new RuntimeException("Duplicate username found, preventing creation.")
+        case None =>
+
+          mongoClient.designerUserCollection().insertOne(user).toFuture().map { completed =>
+            Some(true)
+          }
+      }
+    }
+  }
+
+
 }

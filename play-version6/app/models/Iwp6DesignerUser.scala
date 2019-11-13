@@ -6,6 +6,8 @@ import java.util.UUID
 case class Iwp6DesignerUser ( token: UUID,
                               email: String,
                               displayName: String,
+                              username: String,
+                              password: Option[String] = None,
                               locationName: Option[String] = None,
                               schoolName: Option[String] = None,
                               personalBiography: Option[String] = None,

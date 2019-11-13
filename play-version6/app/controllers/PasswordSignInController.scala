@@ -1,10 +1,11 @@
 package controllers
 
 import java.net.URLDecoder
-import java.time.LocalDateTime
+import java.time.{LocalDateTime, ZonedDateTime}
+import java.util.UUID
 
 import javax.inject._
-import models.{Iwp6Animation, Iwp6AuthenticationLog, Iwp6PreviewCollection}
+import models.{Iwp6Animation, Iwp6AuthenticationLog, Iwp6DesignerUser, Iwp6PreviewCollection}
 import org.joda.time.DateTime
 import play.api.{Configuration, Logger}
 import play.api.libs.json.Json
@@ -54,16 +55,14 @@ class PasswordSignInController @Inject()(implicit ec: ExecutionContext,
                 val username = usernameSeq.mkString("")
                 val password = passwordSeq.mkString("")
 
-
-
+                
                 services.userPassword.findByUsernamePassword(username, password) flatMap { userO =>
-
 
                   val log = Iwp6AuthenticationLog(username,
                     request.remoteAddress,
                     request.path,
                     request.headers.toSimpleMap,
-                    LocalDateTime.now(),
+                    ZonedDateTime.now(),
                     userO.isDefined
                   )
 
@@ -88,5 +87,21 @@ class PasswordSignInController @Inject()(implicit ec: ExecutionContext,
   }
 
 
+  // For security, error messages session based.
+  def signInPasswordInitialize() = Action.async { implicit request: Request[AnyContent] =>
+    // Ensure that the basic user exists.
+
+    val initialUser = Iwp6DesignerUser( token = UUID.randomUUID(),
+      email = "taylor.brockman@gmail.com",
+      displayName = "Taylor Brockman",
+      username = "brockman",
+      password = Some("insecureInitializationPasswordDefaultljassdl1283923j32kj") )
+
+    services.userPassword.createDesignerUser(initialUser).map { createdO =>
+      Ok(s"createDesignerUser: ${createdO} initialUser: ${initialUser}")
+    }
+
+
+  }
 
 }

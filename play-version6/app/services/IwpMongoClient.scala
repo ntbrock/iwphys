@@ -7,7 +7,7 @@ import org.mongodb.scala.MongoClient
 import org.mongodb.scala.bson.codecs.DEFAULT_CODEC_REGISTRY
 import play.api.Configuration
 import ch.rasc.bsoncodec.math.BigDecimalStringCodec
-import ch.rasc.bsoncodec.time.{LocalDateDateCodec, LocalDateTimeDateCodec}
+import ch.rasc.bsoncodec.time.{LocalDateDateCodec, LocalDateTimeDateCodec, ZonedDateTimeStringCodec}
 import models._
 import org.mongodb.scala._
 import play.api.Configuration
@@ -46,6 +46,7 @@ class IwpMongoClient  @Inject() (configuration: Configuration) {
   private val javaCodecs = CodecRegistries.fromCodecs(
     new LocalDateTimeDateCodec(),
     new LocalDateDateCodec(),
+    new ZonedDateTimeStringCodec(),
     new BigDecimalStringCodec())
 
   // Enable each app to register its own codecs
