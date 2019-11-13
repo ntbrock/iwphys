@@ -42,7 +42,7 @@
 
                 @if(userO.isDefined) {
                 <li>
-                    <a href="@controllers.routes.UserProfileController.userProfile()"><i class="fa fa-user"></i> @userO.get.email</a>
+                    <a href="@controllers.routes.UserProfileController.userProfile()"><i class="fa fa-user"></i> @userO.get.username</a>
                 </li>
                 } else {
                 <li>
