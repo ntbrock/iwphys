@@ -48,34 +48,46 @@ abstract class IwpAbstractController(cc: ControllerComponents,
     // New First Look by token and database lookup
     request.session.get("token") match {
 
-      case None => Future.successful(None)
-
       case Some(token) =>
-        services.userPassword.findByToken( UUID.fromString(token) ).map { userO =>
+        services.userPassword.findByToken(UUID.fromString(token)).map { userO =>
           userO.map { user => (user, None) }
         }
+
+      case None =>
+
+        // Second, Look by request X-Token
+        request.headers.get("X-Token") match {
+
+          case Some(token) =>
+            services.userPassword.findByToken(UUID.fromString(token)).map { userO =>
+              userO.map { user => (user, None) }
+            }
+
+          case None => Future.successful(None)
+        }
     }
-
-    // Disabled Email + Jwt signin for launch. KISS
-      /*
-      .orElse {
-
-      request.session.get("sign-in-email") match {
-
-        case None =>
-          Future.successful(None)
-
-        case Some(email) =>
-
-          val claimO = request.session.get("sign-in-token") flatMap { token =>
-
-            services.email.decodeJwtClaim(token).toOption
-          }
-
-          Future.successful(Some(Iwp6DesignerUser(UUID.randomUUID(), email, email, email), claimO))
-      }
-    }*/
   }
+
+
+  // Disabled Email + Jwt signin for launch. KISS
+    /*
+    .orElse {
+
+    request.session.get("sign-in-email") match {
+
+      case None =>
+        Future.successful(None)
+
+      case Some(email) =>
+
+        val claimO = request.session.get("sign-in-token") flatMap { token =>
+
+          services.email.decodeJwtClaim(token).toOption
+        }
+
+        Future.successful(Some(Iwp6DesignerUser(UUID.randomUUID(), email, email, email), claimO))
+    }
+  }*/
 
 
 

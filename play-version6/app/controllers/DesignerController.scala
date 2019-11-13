@@ -2,6 +2,7 @@ package controllers
 
 import javax.inject._
 import play.api._
+import play.api.libs.json.{JsBoolean, JsObject}
 import play.api.mvc._
 import services.{IwpFilesystemBrowserService, IwpServices}
 
@@ -26,6 +27,16 @@ class DesignerController @Inject()(c: Configuration,
       Redirect(designerBaseUrl + s"?token=${request.user.token}")
     }
   }
+
+
+  def savePost(filename: String) = authenticated { request =>
+
+    Future {
+      Logger.info(s"DesignerController:33> SavePost: filename: ${filename}  body.json: ${request.body.asJson}")
+      Ok( new JsObject(Map("success"-> JsBoolean(true))) )
+    }
+  }
+
 
 
   /**
