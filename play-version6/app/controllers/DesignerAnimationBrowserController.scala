@@ -51,7 +51,7 @@ class DesignerAnimationBrowserController @Inject()(cc: ControllerComponents,
   }
 
 
-  def getUserAnimation(username: String, filename: String)  = Action.async { implicit request: Request[AnyContent] =>
+  def getUserAnimation(username: String, filename: String)  = optAuthenticated { request =>
 
 
     services.designerAnimation.findByUsernameFilename(username, filename) map { animationO =>
@@ -70,7 +70,9 @@ class DesignerAnimationBrowserController @Inject()(cc: ControllerComponents,
               NotFound(s"Animation found but failure parsing Json: ${x}")
 
             case Success(a) =>
-              Ok(views.html.animation.animation(Iwp6UserCollection(username), filename, a))
+
+              // TODO Enable users cloning each other's animations.
+              Ok(views.html.animation.animation(request.user, Iwp6UserCollection(username), filename, a, false ))
           }
 
 

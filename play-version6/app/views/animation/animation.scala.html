@@ -1,8 +1,8 @@
-@(collection: Iwp6Collection, filename: String, animation: Iwp6Animation)
+@(userO: Option[Iwp6DesignerUser], collection: Iwp6Collection, filename: String, animation: Iwp6Animation, preview: Boolean = false, designerUrl: Option[String] = None )
 
 @main( filename + " - IWP6 Animation") {
 
-  @views.html.partial.navMinimal( Some(collection), Some(animation) )
+  @views.html.partial.navMinimal( userO, Some(collection), Some(animation), preview, designerUrl )
 
 
 <div class="container iwp-animation-container">

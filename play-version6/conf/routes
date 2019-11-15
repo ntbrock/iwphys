@@ -23,6 +23,7 @@ GET     /collections                           controllers.AnimationFilesystemCo
 GET     /collection/*collection                controllers.AnimationFilesystemController.browseCollection(collection: String)
 GET     /animation/:collection/:filename.json  controllers.AnimationFilesystemController.getAnimationJson(collection: String, filename: String)
 GET     /animation/:collection/:filename       controllers.AnimationFilesystemController.getAnimation(collection: String, filename: String)
+GET     /animation/:collection/:subcollection/:filename.json  controllers.AnimationFilesystemController.getSubAnimationJson(collection: String, subcollection: String, filename: String)
 GET     /animation/:collection/:subcollection/:filename  controllers.AnimationFilesystemController.getSubAnimation(collection: String, subcollection: String, filename: String)
 
 POST    /animation/preview                      controllers.AnimationFilesystemController.postAnimationPreview()
@@ -93,12 +94,9 @@ GET     /help/:subpage                         controllers.IndexController.help(
 
 
 # Designer implementation to redirect to React app
-GET     /designer/launch                          controllers.DesignerController.launchDesigner(filename: Option[String] ?= None )
-GET     /designer/:collection/:filename.json      controllers.DesignerController.getDesigner(collection: String, filename: String)
-
-GET     /designer/demo2018                       controllers.DesignerController.demo2018
-POST    /designer/api1/save/:filename                controllers.DesignerController.savePost(filename: String)
-GET     /designer/api1/json/:filename                controllers.DesignerController.jsonGet(filename: String)
+GET     /designer/launch                        controllers.DesignerController.launchDesigner(filename: Option[String] ?= None )
+POST    /designer/api1/save/:filename           controllers.DesignerController.savePost(filename: String)
+GET     /designer/api1/json/:filename           controllers.DesignerController.jsonGet(filename: String)
 
 
 # Map static resources from the /public folder to the /assets URL path

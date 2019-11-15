@@ -1,4 +1,4 @@
-@(collection: Option[Iwp6Collection] = None, animation: Option[Iwp6Animation] = None)
+@(userO: Option[Iwp6DesignerUser], collection: Option[Iwp6Collection] = None, animation: Option[Iwp6Animation] = None, preview : Boolean = false,  designerUrl: Option[String] = None )
 
 <!-- Navigation -->
 <nav class="navbar navbar-minimal navbar-fixed-top" style="background-color: #FFFFFF;" role="navigation">
@@ -11,8 +11,14 @@
             <a class="btn btn-secondary iwp-nav-button iwp-help-button" href="@controllers.routes.IndexController.help("")" style="float:right;">Animator Guide</a>
             <button id="iwp-save-screenshot" class="btn btn-secondary iwp-nav-button iwp-save-screenshot" style="float: right;">Save Screenshot</button>
 
-            @if(collection.isDefined && animation.isDefined) {
-            <a href="@controllers.routes.DesignerController.getDesigner(collection.get.name, animation.get.filename.get)" id="iwp-clone-designer" class="btn btn-secondary iwp-nav-button iwp-clone-designer" style="float: right;">Open Designer</a>
+
+            @if(preview) {
+                <span style="float: right; margin-top: 1rem;" class="btn btn-primary">Designer Preview Mode</span>
+            } else {
+                @* Mututally exclusive preview -vs- clone *@
+                @designerUrl.map { url =>
+                    <a href="@{url}" target="_designerClone" id="iwp-clone-designer" class="btn btn-secondary iwp-nav-button iwp-clone-designer" style="float: right;">Clone in Designer</a>
+                }
             }
 
         </div>
