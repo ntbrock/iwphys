@@ -59,7 +59,7 @@ public class DObject_Time implements IWPXmlable, IWPObject, IWPCalculated, IWPAn
     
     public static final String OBJECT_NAME = "Time";
 
-    public static final BigDecimal MAX_FPS = new BigDecimal(25);
+    public static final BigDecimal MAX_FPS = new BigDecimal(100);
     
     
     //VARIABLES
