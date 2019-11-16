@@ -12,7 +12,7 @@
 			<start>0.0</start>
 			<stop>100.0</stop>
 			<change>0.001</change>
-			<fps>25.0</fps>
+			<fps>100.0</fps>
 		</time>
 		<GraphWindow>
 			<xmin>0.0</xmin>
@@ -35,7 +35,7 @@
 			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
-			<text>A red and a blue object orbits a large, fixed mass at the origin. The power of the gravitational force on each of the orbiting objects can be adjusted according to a number of parameters: the mass of each object; the gravitational constant G; and a 'power' parameter which changes the behavior of the gravitational force formula. The force on an object is inversely proportional to the distance between it and the origin to the power of the 'power' parameter. The real physical 'power' parameter is exactly 2. Observe the behavior of an orbit at different 'power' paramter thresholds: at 'power'=2, and at 'power'=1. What happens when the power parameter changes across these points?</text>
+			<text>A red and a blue object orbits a large, fixed mass at the origin. The power of the gravitational force on each of the orbiting objects can be adjusted according to a number of parameters: the mass of each object; the gravitational constant G; and a 'power' parameter which changes the behavior of the gravitational force formula. The force on an object is inversely proportional to the distance between it and the origin to the power of the 'power' parameter. The real physical 'power' parameter is exactly 2. Observe the behavior of an orbit at different 'power' parameter thresholds: at 'power'=2, and at 'power'=1. What happens when the power parameter changes across these points?</text>
 		</description>
 		<solid>
 			<name>A</name>

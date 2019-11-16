@@ -9,6 +9,7 @@
             <a href="#Quick-Start"><small>1.2 Quick Start</small></a>
             <button class="dropdown-btn">2. Animator <i class="fa fa-caret-down"></i></button>
             <div class="dropdown-container">
+                <a href="@controllers.routes.IndexController.help("Animator")">2. Animator</a>
                 <a href="@controllers.routes.IndexController.help("Animator")#Animator_Player"><small>2.1. Player</small></a>
                 <a href="@controllers.routes.IndexController.help("Animator")#Animator_Animate"><small>2.2. Animate</small></a>
                 <a href="@controllers.routes.IndexController.help("Animator")#Animator_Graph"><small>2.3. Graph</small></a>
@@ -17,6 +18,7 @@
             </div>
             <button class="dropdown-btn">3. Designer <i class="fa fa-caret-down"></i></button>
             <div class="dropdown-container">
+                <a href="@controllers.routes.IndexController.help("Designer")">3. Designer</a>
                 <a href="@controllers.routes.IndexController.help("Designer")#Designer_Save-Changes"><small>3.1. Save Changes</small></a>
                 <a href="@controllers.routes.IndexController.help("Designer")#Designer_Settings"><small>3.2. Settings</small></a>
                 <a href="@controllers.routes.IndexController.help("Designer")#Designer_Inputs"><small>3.3. Inputs</small></a>
@@ -75,7 +77,7 @@
                 </p>
                 <table>
                     <tr>
-                        <td><img class="img-responsive" style="height:400px" src="@routes.Assets.versioned("images/help/IWP6-Homepage-link-crp.png")"></td>
+                        <td><img class="img-responsive" style="height:400px" src="@routes.Assets.versioned("images/help/IWP6-homepage-link-crp.png")"></td>
                         <td><img class="img-responsive" style="height:400px" src="@routes.Assets.versioned("images/help/Thumbnail-sample-edit.png")"></td>
                         <td align="right"><img class="img-responsive" style="height:400px" src="@routes.Assets.versioned("images/help/Animator_Player-edit.png")"></td>
                     </tr>
@@ -214,7 +216,7 @@
                     <a class="anchor" name="Animator_Axes"></a>
                     <h3>2.5. Axes</h3>
                     <p align="center">
-                        <img class="img-responsive" src="@routes.Assets.versioned("images/help/image5.png")" alt="Axes Panel">
+                        <img class="img-responsive" src="@routes.Assets.versioned("images/help/image5.PNG")" alt="Axes Panel">
                     </p>
                     <p>
                     The 'Axes' tab contains two axes scales: the 'Animation Axes Scale' and the 'Grid Axes Scale.' The 'Animation' scale controls the window of the main animation in the '<a href="@controllers.routes.IndexController.help("Animator")#Animator_Player">Player</a>' tab and the 'Grid' scale controls the window of the graph in the '<a href="@controllers.routes.IndexController.help("Animator")#Animator_Graph">Graph</a>' tab. Each scale includes:
@@ -236,12 +238,39 @@
                 <a class="anchor" name="Designer"></a>
                 <h2>3. Designer</h2>
                 <p>
+                    The IWP6 designer is a fully functional interface which enables users to edit and create animations. It features six sections:
+                    <ul>
+                        <li>Save Changes</li>
+                        <li>Animation Settings</li>
+                        <li>Inputs</li>
+                        <li>Outputs</li>
+                        <li>Solids</li>
+                        <li>Json Differences</li>
+                    </ul>
+                    The designer is built with user-friendliness in mind, allowing users without significant coding experience design animations on their own.
                     
+                </p>
+                <a class="anchor" name="Designer_Quick-Start"></a>
+                <h2>3. Quick Start</h2>
+                
+                <a class="anchor" name="Designer_Launching-the-Designer"></a>
+                <h2>3. Launching the Designer</h2>
+                <p>
+                    Users can keep track of their own animations through an account collection. You can edit existing, public animations in the packaged collections by navigating to an animation and clicking 'Clone in Designer' in the top right. Alternatively, you can create animations from scratch by signing in to an account with the 'Sign In' button at the top right of the main page. Once you are signed in, you can click on your profile (also at the top right) to view your:
+                    <ul>
+                        <li>Username</li>
+                        <li>Display Name</li>
+                        <li>Email Address</li>
+                        <li>Public Collection URL</li>
+                    </ul>
+                    Here, you can launch a new animation by clicking the blue 'Launch Designer' button at the bottom of the page.
+                    <!-- add images of navigation to clone in designer and new animation -->
                 </p>
 
                 <a class="anchor" name="Designer_Save-Changes"></a>
                 <h3>3.1. Save Changes</h3>
                 <p>
+                    Sorry, but these section are still under development!
                     
                 </p>
 
@@ -281,11 +310,11 @@
                 <a class="anchor" name="Website_Navigation"></a>
                 <h2>4. Website Navigation</h2>
                 <p align="center">
-                    <img class="img-responsive" style="width:80%;" src="@routes.Assets.versioned("images/help/image6.png")" alt="Home Page">
+                    <img class="img-responsive" style="width:80%;" src="@routes.Assets.versioned("images/help/iwp6-homepage.png")" alt="Home Page">
                 </p>
                 <!-- IWP6 has 7 different collections of animations which are available through the Browse Animations button at the top of the IWP6 homepage. Most prominently featured on the homepage are the 'iwp-packaged' and 'popular' collections; the other collections can be found only in the 'Browsing Top Collections' page accessible through 'Browse Animations.' No collections other than 'iwp-packaged' contain their own subcollections, and a collection can hold anywhere from 3 animations (e.g. iwp-2015) to almost a 1000 animations (e.g. winters-ncssm-2009).
                 <p align="center">
-                    <img class="img-responsive" src="@routes.Assets.versioned("images/help/image7.png")" alt="Collections">
+                    <img class="img-responsive" src="@routes.Assets.versioned("images/help/image7.PNG")" alt="Collections">
                 </p> -->
                 The home page includes 7 collections:
                 <ul>
@@ -304,6 +333,7 @@
             <div class="iwp-help-Support">
                 <a class="anchor" name="System_Support"></a>
                 <h2>5. System and Browser Support</h2>
+                Sorry, but this section is still under development!
             </div>
 }
         </div>
