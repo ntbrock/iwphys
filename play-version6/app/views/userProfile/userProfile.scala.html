@@ -17,20 +17,29 @@
             <form class="iwpSigninForm">
 
             <div>
-                <label for="username">Username</label>
+                <label for="username" style="width: 120px;">Username</label>
+                <span id="username">@user.username</span>
+                <!--
                 <input id="username" type="text" name="username" value="@user.username" disabled>
+                -->
             </div>
             <br>
 
             <div>
-                <label for="displayName">Display Name</label>
+                <label for="displayName" style="width: 120px;">Display Name</label>
+                <span id="displayName">@user.displayName</span>
+                <!--
                 <input id="displayName" type="text" name="displayName" value="@user.displayName" disabled>
+                -->
             </div>
             <br>
 
             <div>
-                <label for="email">Email Address</label>
+                <label for="email" style="width: 120px;">Email Address</label>
+                <span id="email">@user.email</span>
+                <!--
                 <input id="email" type="text" name="email" value="@user.email" disabled>
+                -->
             </div>
             <br>
 
@@ -56,7 +65,7 @@
             <br/>
             <br/>
 
-            <a class="btn btn-primary" target="_designer" href="@controllers.routes.DesignerController.launchDesigner(None)">Launch Designer, New Empty Animation</a>
+            <a class="btn btn-primary btn-lg" target="_designer" href="@controllers.routes.DesignerController.launchDesigner(None)">Launch Designer, New Empty Animation</a>
 
 
             @if(animations.isEmpty) {
