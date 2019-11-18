@@ -5,6 +5,7 @@ import java.util.UUID
 import models.{Iwp6AuthenticationLog, Iwp6DesignerUser}
 import org.mongodb.scala.bson.BsonDocument
 import org.mongodb.scala.bson.collection.immutable.Document
+import org.mongodb.scala.model.Filters._
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -18,9 +19,16 @@ class IwpUserPasswordService(mongoClient: IwpMongoClient)(implicit ec: Execution
   }
 
 
-  def findByUsernamePassword(username: String, password: String): Future[Option[Iwp6DesignerUser]] = {
-    mongoClient.designerUserCollection.find(
+  def findByUsernamePassword(login: String, password: String): Future[Option[Iwp6DesignerUser]] = {
+/*    mongoClient.designerUserCollection.find(
       Document("username" -> username, "password" -> password )).headOption()
+*/
+    // New method that considers Username or Email
+    mongoClient.designerUserCollection.find(
+      and( equal("password", password ),
+        or( equal("username", login), equal("email", login) ) )
+    ).headOption()
+
   }
 
 
