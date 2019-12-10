@@ -1,0 +1,591 @@
+@(userO: Option[Iwp6DesignerUser], page: String, subpage: String)
+@main("IWP6 Help") {
+
+@views.html.partial.nav(userO)
+<body class="iwp-numbered">
+    <div class="container article">
+        <div class="sidenav toc-sidenav iwp-toc-container">
+            <a class="iwp-help-link Main"><h3>IWP6 Help</h3></a>
+        </div>
+
+        <div class="iwp-help-main">
+            
+            
+            
+            
+            
+            <div class="iwp-help-All iwp-help- iwp-help-Main iwp-help-Introduction iwp-numbered-h1">
+            
+                <!-- <a class="anchor" name="Home"></a> -->
+                <h1 class="iwp-numbered hidden-but-accessible">Main</h1>
+                <h1>Interactive Web Physics 6 Animator Guide</h1>
+                
+                
+                
+                <h3>Table of Contents</h3>
+                <div class="iwp-toc-container toc-in-text"></div>
+
+                <div class="iwp-numbered-h2">
+                    <!-- <a class="anchor" name="Main_Introduction-to-IWP6"></a> -->
+                    <h2 class="iwp-numbered">Introduction to IWP6</h2>
+                    <p>
+                        Interactive Web Physics 6 (IWP6) features a large database of interactive animations designed for educational demonstrations of fundamental physical concepts. These animations span a wide range of introductory physics subjects, from kinematics to electrostatics. In addition to the large public library of animations available in IWP6, IWP6 also features a animation designed tool which enables teachers and students to develop and explore animations of their own design.
+                    </p>
+                    <figure class="iwp-fig">
+                        <img class="iwp-img" src="@routes.Assets.versioned("images/help/iwp-home.PNG")">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+
+                <div class="iwp-numbered-h2">
+                    <!-- <a class="anchor" name="Main_Quick-Start"></a> -->
+                    <h2 class="iwp-numbered">Quick Start</h2>
+                    <p>
+                        To begin viewing animations, navigate to the homepage by clicking on 'Interactive Web Physics' in the top left corner of any IWP6 page. The homepage includes 7 collections in the 'Packaged Animation Collections' section and features the best of IWP6 in the 'Popular Animations section.' Each animation includes a thumbnail, title, and a brief description. To view an animation, simply click on the animation thumbnail, or the green 'Animate' button, or the blue title link. Press <i class="fa fa-play"></i> to begin the animation!
+                    </p>
+                    <table>
+                        <tr>
+                            <td><img style="height:400px" src="@routes.Assets.versioned("images/help/IWP6-homepage-link-crp.png")"></td>
+                            <td><img style="height:400px" src="@routes.Assets.versioned("images/help/Thumbnail-sample-edit.png")"></td>
+                            <td align="right"><img style="height:400px" src="@routes.Assets.versioned("images/help/Animator_Player-edit.png")"></td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <div class="iwp-help-All iwp-help-Animator iwp-numbered-h1">
+            
+                <!-- <a class="anchor" name="Animator"></a> -->
+                <h1 class="iwp-numbered">Animator</h1>
+                
+                <div class="iwp-numbered-h2">
+                    <!-- <a class="anchor" name="Animator_Overview"></a> -->
+                    <h2 class="iwp-numbered">Overview</h2>
+                    <p>
+                    This tutorial discusses the various aspects of the animation player and how the user can interact with them to change the animation. The IWP6 animation player consists of two central components:
+                    <ul>
+                        <li>Output panel (left)</li>
+                        <li>Input panel (right)</li> 
+                    </ul>
+                    The 'Output' panel features the primary animation, which the user can modify by adjusting the parameters in the input panels. The 'Output' panel includes just one tab, the <a class="iwp-help-link Animator_Player">player</a>. The 'Input' panel includes four tabs, which can be toggled by clicking the panel headers at the top of the input panel:
+                    <ul>
+                        <li><a class="iwp-help-link Animator_Animate">Animate</a></li>
+                        <li><a class="iwp-help-link Animator_Graph">Graph</a></li>
+                        <li><a class="iwp-help-link Animator_Time">Time</a></li>
+                        <li><a class="iwp-help-link Animator_Axes">Axes</a></li>
+                    </ul>
+                    The '<a class="iwp-help-link Animator_Animate">Animate</a>', '<a class="iwp-help-link Animator_Time">Time</a>', and '<a class="iwp-help-link Animator_Axes">Axes</a>' input panels hold parameters which allow the user to change the behavior of the animation. The 'Graph' tab, on the other hand, is independent of the main animation, but displays additional data which complement the main display.
+                    </p>
+                </div>
+                
+                <div class="iwp-numbered-h2">
+                    <!-- <a class="anchor" name="Animator_Player"></a> -->
+                    <h2 class="iwp-numbered">Player</h3>
+                    <figure class="iwp-fig">
+                        <img class="iwp-img" style="width:40%" src="@routes.Assets.versioned("images/help/image1.png")" alt="Output Display">
+                    </figure>
+                    <p>
+                    The output display shows the animated graphs of the primary objects of the animation. The screenshot below shows a snapshot of the animator player for the damped-1.iwp animation. In the top left, the current time of the animation is indicated next to the clock symbol (<i class="fa fa-clock-o"></i>). The user can interact with the animation using the time functions at the top right:
+                    <ul>
+                        <li><i class="fa fa-step-backward"></i>: Step back one frame</li>
+                        <li><i class="fa fa-play"></i>: Play</li>
+                        <li><i class="fa fa-step-forward"></i>: Step forward one frame</li>
+                        <li><i class="fa fa-repeat"></i>: Reset</li>
+                    </ul>
+                    The behavior of these buttons is determined by the time parameters in the '<a class="iwp-help-link Animator_Time">Time</a>' tab. For instance, <i class="fa fa-play"></i> will continously progress the animation at a pace proportional to the 'Time Step,' stopping once the animation once the current time reaches the 'Stop Time.' <i class="fa fa-step-backward"></i> / <i class="fa fa-step-forward"></i> will change the animation by a single time step, and <i class="fa fa-repeat"></i> will set the time of the animation back to the 'Start Time.'
+                    </p>
+
+                    
+                </div>
+
+                <div class="iwp-numbered-h2">
+                    <!-- <a class="anchor" name="Animator_Animate"></a> -->
+                    <h2 class="iwp-numbered">Animate</h2>
+                    <figure class="iwp-fig">
+                        <img class="iwp-img" src="@routes.Assets.versioned("images/help/image2.png")" alt="Animate Panel">
+                    </figure>
+                    <p>
+                    The 'Animate' user panel has four components:
+                    <ul>
+                        <li>Title</li>
+                        <li>Description</li>
+                        <li>Inputs</li>
+                        <li>Outputs</li>
+                    </ul>
+                        The 'Inputs' section contains visible constant parameters of the animation, which the user can adjust to influence the main animation. In damped-1.iwp above, the user can adjust the 'initial position' of the oscillation, the 'mass of the object,' the 'spring constant,' and 'damping coefficient.' The 'Outputs' section shows selected information about the current state of the animation. damped-1.iwp, for instance, shows the undamped and damped frequencies of the current state of the animation. Some animations do not have inputs (or outputs), in which case the 'Input' (or 'Output') section will be absent. 
+                    </p>
+                    <p>
+                        User-accessible parameters (from the 'Input' section, '<a class="iwp-help-link Animator_Axes">Axes</a>' tab, and '<a class="iwp-help-link Animator_Time">Time</a>' tab) fall into two categories:
+                        <ul>
+                            <li><b>Initializers</b>: Take effect only once the player has restarted</li>
+                            <li><b>Non-initializers</b>: Take effect immediately, but reset the player when deselected</li>
+                        </ul>
+                        Initializers include:
+                        <ul>
+                            <li>All '<a class="iwp-help-link Animator_Axes">Axes</a>' settings</li>
+                            <li>'Start Time' and 'Stop Time' in '<a class="iwp-help-link Animator_Time">Time</a>'</li>
+                        </ul>
+                        Non-initializers include:
+                        <ul>
+                            <li>'Time Step' in '<a class="iwp-help-link Animator_Time">Time</a>'</li>
+                            <li>All 'Inputs'</li>
+                        </ul>
+                        <b>Note: Deselecting any parameter will cause the animation to reset.</b> Suppose, for instance, the user changes the mass of the object in damped-1.iwp while the animation is playing: the animation will continue using the new mass until the user clicks away from the mass input box. 
+                    </p>
+                    <p>
+                        When updating the input parameters of the animation, some changes will only take effect once the player has restarted, whereas others will cause the player to update immediately. Initializers require the player to reset before taking effect, so modifying these parameters will not affect the animation until it has been reset. For damped-1.iwp, 'Initial Position' is an initializer parameter, but the other three parameters are non-initializers. Changing these parameters will immediately affect the animation and cause a noticeable discontinuity in the behavior of the animation. 
+                    </p>
+    
+                </div>
+
+
+                <div class="iwp-numbered-h2">
+                    <!-- <a class="anchor" name="Animator_Graph"></a> -->
+                    <h2 class="iwp-numbered">Graph</h2> 
+                    <figure class="iwp-fig">
+                        <img class="iwp-img" src="@routes.Assets.versioned("images/help/image3.png")" alt="Graph Panel">
+                    </figure>
+                    <p>
+                    If appropriate, some animations may have a 'Graph' panel which displays supplementary visual information in addition to the main display. Like the '<a class="iwp-help-link Animator_Player">Player</a>' tab, the 'Graph' panel updates continuously, showing graphs of certain variables vs time. These variables may include:
+                    <ul>
+                        <li>xPos</li>
+                        <li>yPos</li>
+                        <li>xVel</li>
+                        <li>yVel</li>
+                        <li>xAccel</li>
+                        <li>yAccel</li>
+                    </ul>
+                    The user may toggle these variables by clicking on their labels to the right of the graph. As shown in the animation for planetary-system-retrograde.iwp above, when the variable is highlighted, it appears in the 'Graph' section.
+                    </p>
+    
+                </div>
+
+
+                <div class="iwp-numbered-h2">
+                    <!-- <a class="anchor" name="Animator_Time"></a> -->
+                    <h2 class="iwp-numbered">Time</h2>
+                    <figure class="iwp-fig">
+                        <img class="iwp-img" src="@routes.Assets.versioned("images/help/image4.png")" alt="Time Panel">
+                    </figure>
+                    <p>
+                        The 'Time' tab holds three parameters:
+                        <ul>
+                            <li>Time Step: time difference between frames</li>
+                            <li>Start Time: time of animation upon reset</li>
+                            <li>Stop Time: length of animation</li>
+                        </ul>
+                        These parameters affect how the time functions on the main display (<i class="fa fa-step-backward"></i> <i class="fa fa-play"></i> <i class="fa fa-step-forward"></i> <i class="fa fa-repeat"></i>) behave (see '<a class="iwp-help-link Animator_Player">Player</a>'). The time step of the animation determines the accuracy of the animation and the speed of the animation. In the animation above for planetary-system-02.iwp, the large time step causes the animation to show visibly polygonic orbits, instead of the expected circular orbits of a planetary system. Increasing the time step will also increase the speed of the animation proportionally; e.g. a 2x larger time step will play the animation 2x faster.
+                    </p>
+                    <p>
+                        <b>Note:</b> Typically, the 'Time Step' is only used to control the speed of an animation. For Euler's method animations, however, <b>the 'Time Step' also determines the accuracy of the animation.</b>
+                    </p>
+                    <p>
+                        The 'Start Time' determines the current time of the animation immediately after a reset, and is usually zero by default. The 'Stop Time', on the other hand, determines when the length of time that the animation will play before stopping. In other words, the 'Stop Time' represents the relative stop time, rather than the absolute stop time. 
+                    </p>
+                    <p>
+                        For instance, an animation with a 'Start Time' of 1 second and a 'Stop Time' of 2 seconds will finish at a Time of 3 seconds, 2 seconds after the 'Start Time'. Once the current time of the animation reaches the 'Stop Time', the animation will automatically pause. It is impossible to progress the animation past the 'Stop Time' without increasing the 'Stop Time'. <i class="fa fa-play"></i> will immediately repause the animation, and <i class="fa fa-step-forward"></i> will do nothing.
+                    </p>
+    
+               </div> 
+
+
+
+                <div class="iwp-numbered-h2">
+                    <!-- <a class="anchor" name="Animator_Axes"></a> -->
+                    <h2 class="iwp-numbered">Axes</h2>
+                    <figure class="iwp-fig">
+                        <img class="iwp-img" src="@routes.Assets.versioned("images/help/image5.PNG")" alt="Axes Panel">
+                    </figure>
+                    <p>
+                        The 'Axes' tab contains two axes scales: the 'Animation Axes Scale' and the 'Grid Axes Scale.' The 'Animation' scale controls the window of the main animation in the '<a class="iwp-help-link Animator_Player">Player</a>' tab and the 'Grid' scale controls the window of the graph in the '<a class="iwp-help-link Animator_Graph">Graph</a>' tab. Each scale includes:
+                        <ul>
+                            <li>X Min</li>
+                            <li>X Max</li>
+                            <li>X Grid: Horizontal between gridlines</li>
+                            <li>Y Min</li>
+                            <li>Y Max</li>
+                            <li>Y Grid: Vertical between gridlines</li>
+                        </ul>
+                        X and Y values are separated into two columns, as shown in the animation above for cp-efield-02.iwp. For each of the X- and Y-axes, there are three parameters: Min, Max, and Grid. The Min value determines the lowest value visible on the respective axis in the main display, and similarly for the Max value. The Grid parameter represents the spacing between grid lines along each axis. For instance, an X-Grid spacing of .02 will produce vertical lines .02 units apart. 
+                    </p>
+    
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <div class="iwp-help-All iwp-help-Designer iwp-numbered-h1">
+            
+                <!-- <a class="anchor" name="Designer"></a> -->
+                <!-- <a class="anchor" name="Designer_Overview"></a> -->
+                <h1 class="iwp-numbered">Designer</h1>
+                
+                <div class="iwp-numbered-h2">
+                    <h2 class="iwp-numbered">Overview</h2>
+                    <figure class="iwp-fig">
+                        <img class="iwp-img" src="@routes.Assets.versioned("images/help/iwp-designer.png")" alt="Designer">
+                    </figure>
+                    <p>
+                        The IWP6 designer is a fully functional interface which enables users to edit and create animations. Users with registered accounts can edit any public animation in the iwp-packaged collection through cloning it into the Designer. Unregistered users can access a similar version of the Designer through the 'Designer Preview' option. The Designer features six sections:
+                        <ul>
+                            <li><a class="iwp-help-link Designer_Features_Save-Changes">Save Changes</a></li>
+                            <li><a class="iwp-help-link Designer_Features_Settings">Animation Settings</a></li>
+                            <li><a class="iwp-help-link Designer_Features_Inputs">Inputs</a></li>
+                            <li><a class="iwp-help-link Designer_Features_Outputs">Outputs</a></li>
+                            <li><a class="iwp-help-link Designer_Features_Solids">Solids</a></li>
+                            <li><a class="iwp-help-link Designer_Features_Json-Differences">Json Differences</a></li>
+                        </ul>
+                        These features are built with user-friendliness in mind, allowing users without significant coding experience design animations on their own. With the use of the math.js library, the step function, and other calculators, it is possible to replicate more complicated physical phenomena. By implementing these functions cleverly, we can create animations like those below.
+                    </p>
+                    <figure role="group" class="iwp-fig">
+                        <figure class="iwp-fig-pair">
+                            <img class="iwp-img img-double" src="@routes.Assets.versioned("images/help/hookeslaw03.iwp.png")">
+                            <figcaption><a href="@controllers.routes.AnimationFilesystemController.getAnimation("iwp-packaged/Forces", "hookeslaw03.iwp")">hookeslaw03.iwp</a> Screenshot</figcaption>
+                        </figure>
+                        <figure class="iwp-fig-pair">
+                            <img class="iwp-img img-double" src="@routes.Assets.versioned("images/help/Part_3_Gravity_-_The_Solution.iwp.json.png")">
+                            <figcaption><a href="@controllers.routes.AnimationFilesystemController.getAnimation("Archives/Gravitation", "Gravity-Animation-Solution.iwp")">Gravity-Animation-Solution.iwp</a> Screenshot</figcaption>
+                        </figure>
+                    </figure>
+                </div>
+                
+                
+                <div class=iwp-numbered-h2>
+                    <!-- <a class="anchor" name="Designer_Features"></a> -->
+                    <h2 class="iwp-numbered">Features</h2>
+                    
+                    
+                    
+
+
+                    <div class="iwp-numbered-h3">
+                        <!-- <a class="anchor" name="Designer_Features_Save-Changes"></a> -->
+                        <h3 class="iwp-numbered">Save Changes</h3>
+                        <p>
+                            The 'Save Changes' section allows you to overview your edits in the Designer before committing them. The 'Animation Filename' shows what your animation will be saved as in your collection. If you already have an animation by the same name, it will be overwritten when you save, so be careful. By clicking the blue 'Save # Changes' button, you will commit any recent edits to the packaged version online. This will replace the existing packaged animation with one identical to the 'Animation Preview,' found in the top left corner of the Designer.
+                            <figure class="iwp-fig">
+                                <img class="iwp-img" src="@routes.Assets.versioned("images/help/designer-save-2.png")">
+                                <figcaption>The 'Save Changes' tab of the Designer. Changes have been made to the animation settings, inputs, outputs, and solids.</figcaption>
+                            </figure>
+                            The 'Unsaved Change Log' section shows what changes you have made since your last save. They are ordered with the most recent edits first, and provide information on the editor, event, and specific changes made. If you are unhappy with your recent edits, you can reset the animation to the last save by reloading the page.
+                        </p>
+                        <p>
+                            <b>Note: Your edits will not save if you close the tab.</b>
+                        </p>
+                        
+                        
+                    </div>
+
+
+                    <div class="iwp-numbered-h3">
+                        <!-- <a class="anchor" name="Designer_Features_Settings"></a> -->
+                        <h3 class="iwp-numbered">Settings</h3>
+                        <p>
+                            
+                        </p>
+                        <figure class="iwp-fig">
+                            <img class="iwp-img" src="@routes.Assets.versioned("images/help/designer-settings.PNG")">
+                            <figcaption>The 'Animation Settings' tab.</figcaption>
+                        </figure>
+                    </div>
+
+
+                    <div class="iwp-numbered-h3">
+                        <!-- <a class="anchor" name="Designer_Features_Inputs"></a> -->
+                        <h3 class="iwp-numbered">Inputs</h3>
+                        <p>
+                            
+                        </p>
+                        <figure class="iwp-fig">
+                            <img class="iwp-img" src="@routes.Assets.versioned("images/help/designer-inputs.PNG")">
+                            <figcaption>The 'Inputs' tab. Several inputs have already been generated in this animation.</figcaption>
+                        </figure>
+                    </div>
+
+
+                    <div class="iwp-numbered-h3">
+                        <!-- <a class="anchor" name="Designer_Features_Outputs"></a> -->
+                        <h3 class="iwp-numbered">Outputs</h3>
+                        <p>
+                            
+                        </p>
+                        <figure class="iwp-fig">
+                            <img class="iwp-img" src="@routes.Assets.versioned("images/help/designer-outputs.PNG")">
+                            <figcaption>The 'Outputs' tab. This tab very similar to the 'Inputs' tab, but the outputs are defined via calculators instead.</figcaption>
+                        </figure>
+                    </div>
+
+
+                    <div class="iwp-numbered-h3">
+                        <!-- <a class="anchor" name="Designer_Features_Solids"></a> -->
+                        <h3 class="iwp-numbered">Solids</h3>
+                        <p>
+                            
+                        </p>
+                        
+                        <figure class="iwp-fig">
+                            <img class="iwp-img" src="@routes.Assets.versioned("images/help/designer-solids.PNG")">
+                            <figcaption>The 'Solids' tab.</figcaption>
+                        </figure>
+                        
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Features_Solids_Object-Attributes"></a> -->
+                            <h4 class="iwp-numbered">Object Attributes</h4>
+                            
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Features_Solids_The-Step-Function"></a> -->
+                            <h4 class="iwp-numbered">The Step Function</h4>
+                            
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Features_Solids_Function-Reference"></a> -->
+                            <h4 class="iwp-numbered">Function Reference</h4>
+                            
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Features_Solids_The-Parametric-Calculator"></a> -->
+                            <h4 class="iwp-numbered">The Parametric Calculator</h4>
+                            
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Features_Solids_The-Euler-Calculator"></a> -->
+                            <h4 class="iwp-numbered">The Euler Calculator</h4>
+                            
+                            
+                        </div>
+                        
+                        
+                    </div>
+
+
+                    <div class="iwp-numbered-h3">
+                        <!-- <a class="anchor" name="Designer_Features_Json-Differences"></a> -->
+                        <h3 class="iwp-numbered">Json Differences</h3>
+                        <p>
+                            
+                        </p>
+                        <figure class="iwp-fig">
+                            <img class="iwp-img" src="@routes.Assets.versioned("images/help/designer-json-differences.PNG")">
+                            <figcaption>The 'Json Differences' tab. The 'Json Viewer' provides a view into the animation which is closer to its raw code, while the 'Json Differences' tab shows how the Json properties of the animation have changed.</figcaption>
+                        </figure>
+
+                    </div>
+
+                </div> 
+                
+                
+                <div class="iwp-numbered-h2">
+                    <!-- <a class="anchor" name="Designer_Walkthroughs"></a> -->
+                    <h2 class="iwp-numbered">Walkthroughs</h2>
+                    In this section, we provide tutorials for navigating the Designer, creating basic animations, and using the various features of the designer and its libraries. Following our brief introduction on getting into the Designer, we provide tutorials on three different animations:
+                    <ul>
+                        <a class="iwp-help-link Designer_Walkthroughs_Projectile">Creating a simple animation</a>
+                        <a class="iwp-help-link Designer_Walkthroughs_Elastic-Collision">Animating a collision with the step function</a>
+                        <a class="iwp-help-link Designer_Walkthroughs_Two-Body-System">Simulating a two-body system</a>
+                    </ul>
+                    
+                    
+                    
+                    <div class="iwp-numbered-h3">
+                        <!-- <a class="anchor" name="Designer_Walkthroughs_Using-the-Designer"></a> -->
+                        <h3 class="iwp-numbered">Using the Designer</h3>
+                        <p>
+                            Users can keep track of their own animations through an account collection. If you already have an account, you can sign in by clicking 'Sign In' at the top right of the homepage:
+                            <figure class="iwp-fig">
+                                <img class="iwp-img" src="@routes.Assets.versioned("images/help/sign-in.png")">
+                                <figcaption>The sign in page.</figcaption>
+                            </figure>
+                                If you do not have an account, you can email <b>taylor.brockman@@gmail.com</b> with the subject: "IWP User Request" to request one. You can edit existing, public animations in the packaged collections by navigating to an animation and clicking 'Clone in Designer' in the top right. Alternatively, you can create animations from scratch by signing in to an account with the 'Sign In' button at the top right of the main page. Once you are signed in, you can click on your profile (also at the top right) to view your:
+                            <ul>
+                                <li>Username</li>
+                                <li>Display Name</li>
+                                <li>Email Address</li>
+                                <li>Public Collection URL</li>
+                            </ul>
+                            <figure class="iwp-fig">
+                                <img class="iwp-img" src="@routes.Assets.versioned("images/help/iwp-account.png")">
+                                <figcaption>A registered IWP6 Designer account.</figcaption>
+                            </figure>
+                            
+                            You can launch a new animation by clicking the blue 'Launch Designer' button at the bottom of the page, and you can access your existing animations in the 'Your User Animations' section or through your 'Public Collection URL.' When you launch the designer, a welcome page will appear with a quick navigation summary. A new animation by default will begin with 0 inputs, outputs, and solids, whereas in existing animations you will be able to see counts for each kind of object in the left scroller.
+                            
+                            <figure class="iwp-fig">
+                                <img class="iwp-img" src="@routes.Assets.versioned("images/help/iwp-designer-clone.png")">
+                                <figcaption>An animation cloned in the Designer.</figcaption>
+                            </figure>
+                            
+                            <!-- add images of navigation to clone in designer and new animation -->
+                        </p>
+                    </div>
+                    
+                    <div class="iwp-numbered-h3">
+                        <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile"></a> -->
+                        <h3 class="iwp-numbered">Projectile</h3>
+                        
+                        
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Setting-Up-Inputs"></a> -->
+                            <h4 class="iwp-numbered">Setting Up Inputs</h4>
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Creating-Solids"></a> -->
+                            <h4 class="iwp-numbered">Creating Solids</h4>
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Setting-Up-Outputs"></a> -->
+                            <h4 class="iwp-numbered">Setting Up Outputs</h4>
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Configuring-Animation-Settings"></a> -->
+                            <h4 class="iwp-numbered">Configuring Animation Settings</h4>
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Previewing-the-Animaton"></a> -->
+                            <h4 class="iwp-numbered">Previewing the Animation</h4>
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Saving"></a> -->
+                            <h4 class="iwp-numbered">Saving</h4>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="iwp-numbered-h3">
+                        <!-- <a class="anchor" name="Designer_Walkthroughs_Elastic-Collision"></a> -->
+                        <h3 class="iwp-numbered">Elastic Collision</h3>
+                        
+                        
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Elastic-Collision_Setting-Up"></a> -->
+                            <h4 class="iwp-numbered">Setting Up</h4>
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Elastic-Collision_Using-the-Step-Function"></a> -->
+                            <h4 class="iwp-numbered">Using the Step Function</h4>
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Elastic-Collision_COM-with-Object-Variables"></a> -->
+                            <h4 class="iwp-numbered">COM with Object Variables</h4>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="iwp-numbered-h3">
+                        <!-- <a class="anchor" name="Designer_Walkthroughs_Two-Body-System"></a> -->
+                        <h3 class="iwp-numbered">Two-Body System</h3>
+                        
+                        
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Two-Body-System_The-Euler-Calculator"></a> -->
+                            <h4 class="iwp-numbered">The Euler Calculator</h4>
+                            
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Two-Body-System_Managing-Time-Step"></a> -->
+                            <h4 class="iwp-numbered">Managing Time Step</h4>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="iwp-numbered-h3">
+                        <!-- <a class="anchor" name="Designer_Walkthroughs_Advanced-Designs"></a> -->
+                        <h3 class="iwp-numbered">Advanced Designs</h3>
+                        
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Advanced-Designs_Intermediary-Variables"></a> -->
+                            <h4 class="iwp-numbered">Intermediary Variables</h4>
+                        </div>
+                        <div class="iwp-numbered-h4">
+                            <!-- <a class="anchor" name="Designer_Walkthroughs_Advanced-Designs_Emulating-Conditionals"></a> -->
+                            <h4 class="iwp-numbered">Emulating Conditionals</h4>
+                        </div>
+                        
+                    </div>
+                    
+                    
+                </div>
+                
+            </div>
+            
+            
+            
+            
+            
+            <div class="iwp-help-All iwp-help-Website-Navigation iwp-numbered-h1">
+
+                <!-- <a class="anchor" name="Website-Navigation"></a> -->
+                <h1 class="iwp-numbered">Website Navigation</h1>
+                <figure class="iwp-fig">
+                    <img class="iwp-img" class="iwp-img" src="@routes.Assets.versioned("images/help/iwp6-homepage.png")" alt="Home Page">
+                </figure>
+                <!-- IWP6 has 7 different collections of animations which are available through the Browse Animations button at the top of the IWP6 homepage. Most prominently featured on the homepage are the 'iwp-packaged' and 'popular' collections; the other collections can be found only in the 'Browsing Top Collections' page accessible through 'Browse Animations.' No collections other than 'iwp-packaged' contain their own subcollections, and a collection can hold anywhere from 3 animations (e.g. iwp-2015) to almost a 1000 animations (e.g. winters-ncssm-2009).
+                <figure class="iwp-fig">
+                    <img class="img-responsive" src="@routes.Assets.versioned("images/help/image7.PNG")" alt="Collections">
+                </figure> -->
+                <p>
+                    The home page includes 7 collections:
+                    <ul>
+                        <li>Charged Particle Motion</li>
+                        <li>Electrostatics</li>
+                        <li>Forces</li>
+                        <li>Kinematics</li>
+                        <li>Momentum, Collisions, KE</li>
+                        <li>Optics</li>
+                        <li>Oscillations</li>
+                    </ul>
+                    The 'Popular Animations' section features the best showcases of IWP6 animations from each collection.
+                </p>
+            </div>
+            
+            
+            
+            
+            
+            
+            <div class="iwp-help-All iwp-help-System-and-Browser-Support iwp-numbered-h1">
+                
+                
+                <!-- <a class="anchor" name="System-and-Browser-Support"></a> -->
+                <h1 class="iwp-numbered">System and Browser Support</h1>
+                Sorry, but this section is still under development!
+                
+
+            </div>
+            
+            
+            
+            
+            
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    var subpage = "@subpage";
+</script>
+<script src="@routes.Assets.versioned("javascripts/iwp/iwp6-help.js")" type="text/javascript">x</script>
+
+@views.html.partial.footer()
+
+}

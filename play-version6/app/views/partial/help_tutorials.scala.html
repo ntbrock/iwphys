@@ -1,0 +1,308 @@
+@(userO: Option[Iwp6DesignerUser], subpage: String)
+
+<div class="iwp-numbered Main iwp-help-page- hidden-h">
+
+    <!-- <a class="anchor" name="Home"></a> -->
+    <!-- <h1 class="iwp-numbered hidden-but-accessible">Main</h1> -->
+    <h1 class="iwp-help">Interactive Web Physics 6 Tutorials</h1>
+    
+    
+    
+    <h3>Table of Contents</h3>
+    <div class="iwp-toc-container toc-in-text"></div>
+
+    <div class="iwp-numbered Introduction-to-IWP6">
+        <!-- <a class="anchor" name="Main_Introduction-to-IWP6"></a> -->
+        <!-- <h2 class="iwp-numbered">Introduction to IWP6</h2> -->
+        <p>
+            Interactive Web Physics 6 (IWP6) features a large database of interactive animations designed for educational demonstrations of fundamental physical concepts. These animations span a wide range of introductory physics subjects, from kinematics to electrostatics. In addition to the large public library of animations available in IWP6, IWP6 also features a animation designed tool which enables teachers and students to develop and explore animations of their own design.
+        </p>
+        <figure class="iwp-fig">
+            <img class="iwp-img" src="@routes.Assets.versioned("images/help/iwp-home.PNG")">
+            <figcaption>The IWP6 home page (NCS-AAPT Workshop version).</figcaption>
+        </figure>
+    </div>
+
+    <div class="iwp-numbered Quick-Start">
+        <!-- <a class="anchor" name="Main_Quick-Start"></a> -->
+        <!-- <h2 class="iwp-numbered">Quick Start</h2> -->
+        <p>
+            To begin viewing animations, navigate to the homepage by clicking on 'Interactive Web Physics' in the top left corner of any IWP6 page. The homepage includes 7 collections in the 'Packaged Animation Collections' section and features the best of IWP6 in the 'Popular Animations section.' Each animation includes a thumbnail, title, and a brief description. To view an animation, simply click on the animation thumbnail, or the green 'Animate' button, or the blue title link. Press <i class="fa fa-play"></i> to begin the animation!
+        </p>
+        <figure class="iwp-fig">
+            <table>
+                <tr>
+                    <td><img style="height:400px" src="@routes.Assets.versioned("images/help/IWP6-homepage-link-crp.png")"></td>
+                    <td><img style="height:400px" src="@routes.Assets.versioned("images/help/Thumbnail-sample-edit.png")"></td>
+                    <td align="right"><img style="height:400px" src="@routes.Assets.versioned("images/help/Animator_Player-edit.png")"></td>
+                </tr>
+            </table>
+            <figcaption>Navigating to an animation. You can choose any animation on the homepage to begin.</figcaption>
+        </figure>
+
+    </div>
+</div>
+
+
+
+
+
+<div class="iwp-numbered Animator">
+
+    <!-- <a class="anchor" name="Animator"></a> -->
+    <!-- <h1 class="iwp-numbered">Animator</h1> -->
+    
+    <div class="iwp-numbered Overview">
+        <!-- <a class="anchor" name="Animator_Overview"></a> -->
+        <!-- <h2 class="iwp-numbered">Overview</h2> -->
+        <p>
+        This tutorial discusses the various aspects of the animation player and how the user can interact with them to change the animation. The IWP6 animation player consists of two central components:
+        <ul>
+            <li>Output panel (left)</li>
+            <li>Input panel (right)</li> 
+        </ul>
+        The 'Output' panel features the primary animation, which the user can modify by adjusting the parameters in the input panels. The 'Output' panel includes just one tab, the <a class="iwp-help-link Documentation_Animator_Player">player</a>. The 'Input' panel includes four tabs, which can be toggled by clicking the panel headers at the top of the input panel:
+        <ul>
+            <li><a class="iwp-help-link Documentation_Animator_Animate">Animate</a></li>
+            <li><a class="iwp-help-link Documentation_Animator_Graph">Graph</a></li>
+            <li><a class="iwp-help-link Documentation_Animator_Time">Time</a></li>
+            <li><a class="iwp-help-link Documentation_Animator_Axes">Axes</a></li>
+        </ul>
+        The '<a class="iwp-help-link Documentation_Animator_Animate">Animate</a>', '<a class="iwp-help-link Documentation_Animator_Time">Time</a>', and '<a class="iwp-help-link Documentation_Animator_Axes">Axes</a>' input panels hold parameters which allow the user to change the behavior of the animation. The 'Graph' tab, on the other hand, is independent of the main animation, but displays additional data which complement the main display.
+        </p>
+    </div>
+    
+</div>
+
+
+
+
+
+<div class="iwp-numbered Designer">
+
+    <!-- <a class="anchor" name="Designer"></a> -->
+    <!-- <a class="anchor" name="Designer_Overview"></a> -->
+    <!-- <h1 class="iwp-numbered">Designer</h1> -->
+    
+    <div class="iwp-numbered Overview">
+        <!-- <h2 class="iwp-numbered">Overview</h2> -->
+        <figure class="iwp-fig">
+            <img class="iwp-img" src="@routes.Assets.versioned("images/help/iwp-designer.png")" alt="Designer">
+            <figcaption>The welcome page of the IWP6 Designer.</figcaption>
+        </figure>
+        <p>
+            The IWP6 designer is a fully functional interface which enables users to edit and create animations. Users with registered accounts can edit any public animation in the iwp-packaged collection through cloning it into the Designer. Unregistered users can access a similar version of the Designer through the 'Designer Preview' option. The Designer features six sections:
+            <ul>
+                <li><a class="iwp-help-link Documentation_Designer_Features_Save-Changes">Save Changes</a></li>
+                <li><a class="iwp-help-link Documentation_Designer_Features_Settings">Animation Settings</a></li>
+                <li><a class="iwp-help-link Documentation_Designer_Features_Inputs">Inputs</a></li>
+                <li><a class="iwp-help-link Documentation_Designer_Features_Outputs">Outputs</a></li>
+                <li><a class="iwp-help-link Documentation_Designer_Features_Solids">Solids</a></li>
+                <li><a class="iwp-help-link Documentation_Designer_Features_Json-Differences">Json Differences</a></li>
+            </ul>
+            These features are built with user-friendliness in mind, allowing users without significant coding experience design animations on their own. With the use of the math.js library, the step function, and other calculators, it is possible to replicate more complicated physical phenomena. By implementing these functions cleverly, we can create animations like those below.
+        </p>
+        <figure role="group" class="iwp-fig">
+            <figure class="iwp-fig-pair">
+                <img class="iwp-img img-double" src="@routes.Assets.versioned("images/help/hookeslaw03.iwp.png")">
+                <figcaption><a href="@controllers.routes.AnimationFilesystemController.getAnimation("iwp-packaged/Forces", "hookeslaw03.iwp")">hookeslaw03.iwp</a> Screenshot.</figcaption>
+            </figure>
+            <figure class="iwp-fig-pair">
+                <img class="iwp-img img-double" src="@routes.Assets.versioned("images/help/Part_3_Gravity_-_The_Solution.iwp.json.png")">
+                <figcaption><a href="@controllers.routes.AnimationFilesystemController.getAnimation("Archives/Gravitation", "Gravity-Animation-Solution.iwp")">Gravity-Animation-Solution.iwp</a> Screenshot.</figcaption>
+            </figure>
+        </figure>
+    </div>
+    
+    
+    
+    
+    <div class="iwp-numbered Walkthroughs">
+        <!-- <a class="anchor" name="Designer_Walkthroughs"></a> -->
+        <!-- <h2 class="iwp-numbered">Walkthroughs</h2> -->
+        In this section, we provide tutorials for navigating the Designer, creating basic animations, and using the various features of the designer and its libraries. Following our brief introduction on getting into the Designer, we provide tutorials on three different animations:
+        <ul>
+            <li><a class="iwp-help-link Tutorials_Designer_Walkthroughs_Projectile">Creating a simple animation</a></li>
+            <li><a class="iwp-help-link Tutorials_Designer_Walkthroughs_Elastic-Collision">Animating a collision with the step function</a></li>
+            <li><a class="iwp-help-link Tutorials_Designer_Walkthroughs_Two--Body-System">Simulating a two-body system</a></li>
+        </ul>
+        
+        
+        
+        <div class="iwp-numbered Using-the-Designer">
+            <!-- <a class="anchor" name="Designer_Walkthroughs_Using-the-Designer"></a> -->
+            <!-- <h3 class="iwp-numbered">Using the Designer</h3> -->
+            <p>
+                Users can keep track of their own animations through an account collection. If you already have an account, you can sign in by clicking 'Sign In' at the top right of the homepage:
+                <figure class="iwp-fig">
+                    <img class="iwp-img" src="@routes.Assets.versioned("images/help/sign-in.png")">
+                    <figcaption>The sign in page.</figcaption>
+                </figure>
+                    If you do not have an account, you can email <b>taylor.brockman@@gmail.com</b> with the subject: "IWP User Request" to request one. You can edit existing, public animations in the packaged collections by navigating to an animation and clicking 'Clone in Designer' in the top right. Alternatively, you can create animations from scratch by signing in to an account with the 'Sign In' button at the top right of the main page. Once you are signed in, you can click on your profile (also at the top right) to view your:
+                <ul>
+                    <li>Username</li>
+                    <li>Display Name</li>
+                    <li>Email Address</li>
+                    <li>Public Collection URL</li>
+                </ul>
+                <figure class="iwp-fig">
+                    <img class="iwp-img" src="@routes.Assets.versioned("images/help/iwp-account.png")">
+                    <figcaption>A registered IWP6 Designer account.</figcaption>
+                </figure>
+                
+                You can launch a new animation by clicking the blue 'Launch Designer' button at the bottom of the page, and you can access your existing animations in the 'Your User Animations' section or through your 'Public Collection URL.' When you launch the designer, a welcome page will appear with a quick navigation summary. A new animation by default will begin with 0 inputs, outputs, and solids, whereas in existing animations you will be able to see counts for each kind of object in the left scroller.
+                
+                <figure class="iwp-fig">
+                    <img class="iwp-img" src="@routes.Assets.versioned("images/help/iwp-designer-clone.png")">
+                    <figcaption>An animation cloned in the Designer.</figcaption>
+                </figure>
+                
+                <!-- add images of navigation to clone in designer and new animation -->
+            </p>
+        </div>
+        
+        <div class="iwp-numbered Projectile">
+            <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile"></a> -->
+            <!-- <h3 class="iwp-numbered">Projectile</h3> -->
+            
+            
+            <div class="iwp-numbered Setting-Up-Inputs">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Setting-Up-Inputs"></a> -->
+                <!-- <h4 class="iwp-numbered">Setting Up Inputs</h4> -->
+                
+            </div>
+            <div class="iwp-numbered Creating-Solids">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Creating-Solids"></a> -->
+                <!-- <h4 class="iwp-numbered">Creating Solids</h4> -->
+                
+            </div>
+            <div class="iwp-numbered Setting-Up-Outputs">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Setting-Up-Outputs"></a> -->
+                <!-- <h4 class="iwp-numbered">Setting Up Outputs</h4> -->
+                
+            </div>
+            <div class="iwp-numbered Animation-Settings">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Configuring-Animation-Settings"></a> -->
+                <!-- <h4 class="iwp-numbered">Configuring Animation Settings</h4> -->
+                
+            </div>
+            <div class="iwp-numbered Previewing-the-Animation">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Previewing-the-Animaton"></a> -->
+                <!-- <h4 class="iwp-numbered">Previewing the Animation</h4> -->
+                
+            </div>
+            <div class="iwp-numbered Saving">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Projectile_Saving"></a> -->
+                <!-- <h4 class="iwp-numbered">Saving</h4> -->
+                
+            </div>
+            
+        </div>
+        
+        <div class="iwp-numbered Elastic-Collision">
+            <!-- <a class="anchor" name="Designer_Walkthroughs_Elastic-Collision"></a> -->
+            <!-- <h3 class="iwp-numbered">Elastic Collision</h3> -->
+            
+            
+            <div class="iwp-numbered Setting-Up">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Elastic-Collision_Setting-Up"></a> -->
+                <!-- <h4 class="iwp-numbered">Setting Up</h4> -->
+                
+            </div>
+            <div class="iwp-numbered Using-the-Step-Function">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Elastic-Collision_Using-the-Step-Function"></a> -->
+                <!-- <h4 class="iwp-numbered">Using the Step Function</h4> -->
+                
+            </div>
+            <div class="iwp-numbered COM-with-Object-Variables">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Elastic-Collision_COM-with-Object-Variables"></a> -->
+                <!-- <h4 class="iwp-numbered">COM with Object Variables</h4> -->
+                
+            </div>
+            
+        </div>
+        
+        <div class="iwp-numbered Two--Body-System">
+            <!-- <a class="anchor" name="Designer_Walkthroughs_Two-Body-System"></a> -->
+            <!-- <h3 class="iwp-numbered">Two-Body System</h3> -->
+            
+            
+            <div class="iwp-numbered The-Euler-Calculator">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Two-Body-System_The-Euler-Calculator"></a> -->
+                <!-- <h4 class="iwp-numbered">The Euler Calculator</h4> -->
+                
+            </div>
+            <div class="iwp-numbered Managing-Time-Step">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Two-Body-System_Managing-Time-Step"></a> -->
+                <!-- <h4 class="iwp-numbered">Managing Time Step</h4> -->
+                
+            </div>
+            
+        </div>
+        
+        <div class="iwp-numbered Advanced-Designs">
+            <!-- <a class="anchor" name="Designer_Walkthroughs_Advanced-Designs"></a> -->
+            <!-- <h3 class="iwp-numbered">Advanced Designs</h3> -->
+            
+            <div class="iwp-numbered Intermediary-Variables">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Advanced-Designs_Intermediary-Variables"></a> -->
+                <!-- <h4 class="iwp-numbered">Intermediary Variables</h4> -->
+            </div>
+            <div class="iwp-numbered Emulating-Conditionals">
+                <!-- <a class="anchor" name="Designer_Walkthroughs_Advanced-Designs_Emulating-Conditionals"></a> -->
+                <!-- <h4 class="iwp-numbered">Emulating Conditionals</h4> -->
+            </div>
+            
+        </div>
+        
+        
+    </div>
+    
+</div>
+
+
+
+
+
+<div class="iwp-numbered Website-Navigation">
+
+    <!-- <a class="anchor" name="Website-Navigation"></a> -->
+    <!-- <h1 class="iwp-numbered">Website Navigation</h1> -->
+    <figure class="iwp-fig">
+        <img class="iwp-img" class="iwp-img" src="@routes.Assets.versioned("images/help/iwp6-homepage.png")" alt="Home Page">
+        <figcaption>The IWP6 homepage.</figcaption>
+    </figure>
+    <!-- IWP6 has 7 different collections of animations which are available through the Browse Animations button at the top of the IWP6 homepage. Most prominently featured on the homepage are the 'iwp-packaged' and 'popular' collections; the other collections can be found only in the 'Browsing Top Collections' page accessible through 'Browse Animations.' No collections other than 'iwp-packaged' contain their own subcollections, and a collection can hold anywhere from 3 animations (e.g. iwp-2015) to almost a 1000 animations (e.g. winters-ncssm-2009).
+    <figure class="iwp-fig">
+        <img class="img-responsive" src="@routes.Assets.versioned("images/help/image7.PNG")" alt="Collections">
+    </figure> -->
+    <p>
+        The home page includes 7 collections:
+        <ul>
+            <li>Charged Particle Motion</li>
+            <li>Electrostatics</li>
+            <li>Forces</li>
+            <li>Kinematics</li>
+            <li>Momentum, Collisions, KE</li>
+            <li>Optics</li>
+            <li>Oscillations</li>
+        </ul>
+        The 'Popular Animations' section features the best showcases of IWP6 animations from each collection.
+    </p>
+</div>
+
+
+
+
+
+
+<div class="iwp-numbered System-and-Browser-support">
+    
+    
+    <!-- <a class="anchor" name="System-and-Browser-Support"></a> -->
+    <!-- <h1 class="iwp-numbered">System and Browser Support</h1> -->
+    Sorry, but this section is still under development!
+    
+
+</div>
+

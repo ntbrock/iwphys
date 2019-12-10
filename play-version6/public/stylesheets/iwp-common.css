@@ -75,23 +75,28 @@
 
 
 
+
+
+
+
+
 .sidenav {
   height: 100%;
-  width: 200px;
+  width: 300px;
   position: fixed;
   z-index: 1;
   /*top: 0;*/
   /*left: 0;*/
   /*background-color: #111;*/
   overflow-x: hidden;
-  padding-top: 50px;
+  padding-bottom: 5em;
 }
 
 /* style the sidenav links and the dropdown button */
 .sidenav a, .dropdown-btn {
-  padding: 6px 8px 6px 16px;
+  padding: 0px 8px 0px 16px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
   color: gray;
   display: block;
   border: none;
@@ -100,6 +105,72 @@
   text-align: left;
   outline: none;
 }
+.sidenav p, {
+  padding: 0px 8px 0px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  color: black;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  outline: none;
+}
+
+.iwp-help-pretoc {
+  padding-bottom: 16px;
+}
+
+.sidenav .iwp-pretoc-btn, .sidenav .iwp-pretoc-btn a {
+  padding: 0px 0px 0px 0px;
+  text-decoration: none;
+  font-size: 16px;
+  color: gray;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: center;
+  outline: none;
+}
+
+
+
+div.iwp-hfill {
+  clear: both;
+}
+
+div.iwp-prdd > * {
+  display: block;
+}
+div.iwp-prdd .iwp-numbered { /*i.e. the div (d) before (pr) each div_main (prd)*/
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+div.iwp-prdd .iwp-numbered > * {
+  display: inline-block;
+}
+div.iwp-prdh-dwh { /*i.e. the div with (w) the header in the h before each div_main*/
+  margin-right: auto;
+}
+div.iwp-prdd .iwp-prdh-dwab * {
+  display: block;
+  font-size: 12px;
+  font-weight: normal;
+  margin: auto;
+}
+div.iwp-prdd .iwp-prdh-dwab button {
+  text-decoration: none;
+  color: black;
+  border: none;
+  background: none;
+  outline: none;
+}
+div.iwp-prdd .iwp-prdh-dwab .iwp-prdb-showall {
+  margin-bottom: 5px;
+}
 
 
 /* on mouse-over */
@@ -107,16 +178,18 @@
   color: black;
 }
 
+
 /* main content */
 .iwp-help-main {
-  margin-left: 200px; /* same as the width of the sidenav */
-  font-size: 20px; /* increased text to enable scrolling */
+  margin-left: 300px; /* same as the width of the sidenav */
+  font-size: 16px; /* increased text to enable scrolling */
   padding: 0px 10px 0px 10px;
+  display: none;
 }
 
 
 /* add an active class to the active dropdown button */
-.active {
+.sidenav .active {
   background-color: lightblue;
   /*color: gray
   ;*/
@@ -125,19 +198,11 @@
 
 /* dropdown container (hidden by default). optional: add a lighter background color and some left padding to change the design of the dropdown content */
 .dropdown-container {
-  display: none;
+  display: block;
   /*background-color: #262626;*/
   padding-left: 8px;
 }
 
-.boxed {
-        border: 5px solid lightblue;
-        padding-left: 100px;
-        padding-right: 100px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        margin-top: 8px;
-}
 
 
 a.anchor {
@@ -154,3 +219,150 @@ a.anchor {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+
+/* numbering headings */
+
+.hidden-but-accessible {
+  position: absolute;
+  left: -9999px;
+  max-height: 0px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+body.iwp-numbered {
+  counter-reset: H1;
+}
+h1.iwp-help, h1.iwp-numbered {
+  text-align: center;
+  font-weight: bold;
+}
+h2.iwp-help, h2.iwp-numbered {
+  font-weight: bold;
+}
+h3.iwp-help, h3.iwp-numbered {
+  font-weight: bold;
+}
+
+h1.iwp-numbered:before {
+  content: counter(H1) ". ";  /* Print the H1 number */
+}
+h2.iwp-numbered:before {
+  content: counter(H1) "." counter(H2) " ";
+}
+h3.iwp-numbered:before {
+  content: counter(H1) "." counter(H2) "." counter(H3) " ";
+}
+h4.iwp-numbered:before {
+  content: counter(H1) "." counter(H2) "." counter(H3) "." counter(H4) " ";
+}
+h1.iwp-numbered:before, h2.iwp-numbered:before, h3.iwp-numbered:before, h4.iwp-numbered:before {
+  white-space: pre-wrap;
+}
+
+div.iwp-numbered-h1 {
+  counter-increment: H1;  /* Add 1 to next H1 */
+  counter-reset: H2;
+}
+div.iwp-numbered-h2 {
+  counter-increment: H2;
+  counter-reset: H3;
+}
+div.iwp-numbered-h3 {
+  counter-increment:H3;
+  counter-reset: H4;
+}
+div.iwp-numbered-h4 {
+  counter-increment:H4;
+}
+
+a.iwp-toc-h1:before, button.iwp-toc-h1:before {
+  content: counter(Htoc1) ". ";   /* Print the H1 number */
+  counter-increment: Htoc1;   /* Add 1 to next H1 */
+}
+a.iwp-toc-h2:before, button.iwp-toc-h2:before {
+  content: counter(Htoc1) "." counter(Htoc2) " ";
+  counter-increment: Htoc2;
+}
+a.iwp-toc-h3:before, button.iwp-toc-h3:before {
+  content: counter(Htoc1) "." counter(Htoc2) "." counter(Htoc3) " ";
+  counter-increment:Htoc3;
+}
+a.iwp-toc-h4:before, button.iwp-toc-h4:before {
+  content: counter(Htoc1) "." counter(Htoc2) "." counter(Htoc3) "." counter(Htoc4) " ";
+  counter-increment:Htoc4;
+}
+
+.iwp-numbered.no-number:before {
+  content: none;
+}
+a.iwp-toc-h1-no-number:before {
+  content:"";
+  counter-increment: Htoc1;   /* Add 1 to next H1 */
+}
+
+div.iwp-toc-container, ul.iwp-toc-container {
+  counter-reset: Htoc1 Htoc2 Htoc3;
+  line-height: 1.25;
+}
+div.iwp-toc-h1, ul.iwp-toc-h1 {
+  counter-reset: Htoc2;
+}
+div.iwp-toc-h2, ul.iwp-toc-h2 {
+  counter-reset: Htoc3;
+}
+div.iwp-toc-h3, ul.iwp-toc-h3 {
+  counter-reset: Htoc4;
+}
+
+
+
+img.iwp-img {
+  width:80%;
+}
+img.iwp-img.img-double {
+  width:80%;
+}
+img.iwp-img.img-full {
+  width:80%;
+}
+figure.iwp-fig {
+  text-align:center;
+  padding-bottom:2em;
+}
+figure.iwp-fig-pair {
+  width: 49%;
+  display: inline-block;
+}
+.iwp-fig figcaption {
+  padding-top: .5em;
+}
+
+
+div.iwp-paired {
+  width: 50%;
+  display: inline-block;
+}
+div.iwp-paired-container {
+  border: 1px solid;
+  border-top: 0px;
+}
+div.iwp-paired-container.iwp-pretoc-top {
+  border: 1px solid;
+}
+
+.iwp-help-hr-1 {
+  border-top: 3px solid #369;
+}
+.iwp-help-hr-2 {
+  border-top: 3px solid #5af;
+}
+.iwp-help-hr-3 {
+  border-top: 2px solid #000;
+}
+.iwp-help-hr-4 {
+  border-top: 1px solid #aaa;
+}
+
+

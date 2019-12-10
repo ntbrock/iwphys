@@ -89,9 +89,12 @@ GET     /DProblem/:path             controllers.DProblemController.view(path: St
 
 
 # Online Help Content
-GET     /help                         		   controllers.IndexController.help(subpage: String = "")
-GET     /help/:subpage                         controllers.IndexController.help(subpage: String)
 
+GET     /help/:page/                        controllers.IndexController.help(page: String, subpage: String = "")
+GET     /help/:page/:subpage 				controllers.IndexController.help(page: String, subpage: String)
+GET     /help/*subpage 							controllers.IndexController.help(page: String = "", subpage: String)
+GET     /help/								controllers.IndexController.help(page: String = "", subpage: String = "")
+GET     /help								controllers.IndexController.help(page: String = "", subpage: String = "")
 
 # Designer implementation to redirect to React app
 GET     /designer/launch                        controllers.DesignerController.launchDesigner(filename: Option[String] ?= None )
@@ -101,4 +104,3 @@ GET     /designer/api1/json/:filename           controllers.DesignerController.j
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
-

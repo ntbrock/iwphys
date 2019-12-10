@@ -88,7 +88,8 @@ table {
 	overflow: visible;
 	vertical-align: top;
 	display: inline-block;
-	height: 400px;
+	/*height: 400px;*/
+	padding-bottom: 50px;
 	width: 100%;
 }
 

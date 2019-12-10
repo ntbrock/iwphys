@@ -47,16 +47,17 @@ class IndexController @Inject()(cc: ControllerComponents,
       }
     }
   }
-
-  def help(subpage: String = "") = optAuthenticated { implicit request =>
-
+  
+  
+  
+  def help(page: String, subpage: String) = optAuthenticated { implicit request =>
+    
     Future {
-      if (subpage == "") {
-        Ok(views.html.help(request.user, ""))
+      if (page == "") {
+        Redirect("/help/Tutorials/")
       } else {
-        Ok(views.html.help(request.user, subpage))
+        Ok(views.html.help(request.user, page, subpage))
       }
-      
     }
   }
 
