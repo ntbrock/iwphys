@@ -27,33 +27,32 @@
 			<xmax>11.0</xmax>
 			<ymin>-50.0</ymin>
 			<ymax>50.0</ymax>
-			<xgrid>1.0</xgrid>
-			<ygrid>10.0</ygrid>
+			<xgrid>0.5</xgrid>
+			<ygrid>5.0</ygrid>
 			<xunit>s</xunit>
 			<yunit>meters</yunit>
 		</window>
 		<description>
-			<text>A position vs. time graph of a uniformly-accelerating object is shown. The blue line is always tangent to the path of the object.  Determine the acceleration of the object by doing the following:  
-1.   Visually read coordinates from the graph to use in determining the slope of the line at times of 0, 2, 4, 6, 8, and 10 s.  Record your values in a table.
-2.  Plot a graph of of velocity vs. time and draw the best straight line through the data points.
-3.  Find the slope of the velocity vs. time graph.</text>
+			<text>A position vs. time graph of a uniformly-accelerating object is shown. The blue line is always tangent to the path of the object.  Determine the acceleration of the object by first finding the velocities at two instants of time. (Note that for this problem the graph display has been disabled.)</text>
 		</description>
 		<input>
 			<name>a</name>
 			<text>Initial position</text>
-			<initialValue>-15.0</initialValue>
+			<initialValue>-10.0</initialValue>
 			<units>     m</units>
+			<hidden>1</hidden>
 		</input>
 		<input>
 			<name>b</name>
 			<text>Initial velocity</text>
-			<initialValue>20.0</initialValue>
+			<initialValue>22.0</initialValue>
 			<units>  m/s</units>
+			<hidden>1</hidden>
 		</input>
 		<input>
 			<name>c</name>
 			<text>Acceleration</text>
-			<initialValue>-3.2</initialValue>
+			<initialValue>-4.8</initialValue>
 			<units>m/ss</units>
 			<hidden>1</hidden>
 		</input>

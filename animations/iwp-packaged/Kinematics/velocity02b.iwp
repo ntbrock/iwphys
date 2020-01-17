@@ -12,7 +12,7 @@
 			<start>0.0</start>
 			<stop>5.0</stop>
 			<change>0.1</change>
-			<fps>20.0</fps>
+			<fps>25.0</fps>
 		</time>
 		<GraphWindow>
 			<xmin>0.0</xmin>
@@ -25,32 +25,32 @@
 		<window>
 			<xmin>-0.5</xmin>
 			<xmax>5.5</xmax>
-			<ymin>-25.0</ymin>
-			<ymax>25.0</ymax>
+			<ymin>-50.0</ymin>
+			<ymax>50.0</ymax>
 			<xgrid>0.5</xgrid>
-			<ygrid>5.0</ygrid>
+			<ygrid>10.0</ygrid>
 			<xunit>s</xunit>
 			<yunit>meters</yunit>
 		</window>
 		<description>
-			<text>Play the animation to show a position vs. time graph of a uniformly-accelerating object. The blue line remains tangent to the path of the object. Therefore, the slope of the blue line is the instantaneous velocity of the object. Its value is given above the play buttons. Predict how graphs of velocity vs. time and acceleration vs. time will appear. Then click on Show Graph to display a velocity vs. time graph of the motion. Click on yAccel in the Graph window to show the acceleration vs. time graph also.</text>
+			<text>The situation is similar to the last problem but with different initial values.   Change the inputs in order to model the motion of an object thrown vertically from the ground (initial position of 0 m) at 25 m/s. (What should you input for the acceleration?). Type in  values of initial position, initial velocity, and  acceleration and run the animation.  Remember to click Reset whenever you change an input.  Click Show graph to show velocity vs. time and acceleration vs. time graphs.</text>
 		</description>
 		<input>
 			<name>a</name>
 			<text>Initial position</text>
-			<initialValue>5.0</initialValue>
+			<initialValue>-10.0</initialValue>
 			<units>     m</units>
 		</input>
 		<input>
 			<name>b</name>
 			<text>Initial velocity</text>
-			<initialValue>0.0</initialValue>
+			<initialValue>-10.0</initialValue>
 			<units>  m/s</units>
 		</input>
 		<input>
 			<name>c</name>
 			<text>Acceleration</text>
-			<initialValue>2.0</initialValue>
+			<initialValue>5.0</initialValue>
 			<units>m/ss</units>
 		</input>
 		<output>
@@ -80,11 +80,11 @@
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>1</value>
+						<value>2</value>
 					</calculator>
 				</height>
 				<graphOptions graphVisible="true">
-					<initiallyOn yAccel="false" yVel="true" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+					<initiallyOn yAccel="true" yVel="true" xAccel="false" xVel="false" yPos="false" xPos="false"/>
 				</graphOptions>
 			</shape>
 			<color>
