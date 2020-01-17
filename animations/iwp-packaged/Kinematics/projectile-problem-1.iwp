@@ -196,7 +196,7 @@
 			<text>Acc 4</text>
 			<units>m/s/s</units>
 			<calculator type="parametric">
-				<value>-25*vx*step(t-tc)*step(tc-t+2*deltaTime)*step(4.5-mode)*step(mode-3.5)</value>
+				<value>-25*vx*step(t-tc)*step(tc-t+2*delta_t)*step(4.5-mode)*step(mode-3.5)</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>

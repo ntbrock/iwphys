@@ -236,7 +236,7 @@
 			</xpath>
 			<ypath>
 				<calculator type="parametric">
-					<value>gunheight.value0</value>
+					<value>gunheight.value</value>
 				</calculator>
 			</ypath>
 		</solid>
