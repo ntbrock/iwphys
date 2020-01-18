@@ -3,10 +3,9 @@ export APT_VERSION=6.0
 ##-----------------------------------------------------------------------
 # Configuration Block
 
-export DEB_NAME=iwphys-idship-visual-delivery-play
+export DEB_NAME=iwphys-play
 
-#export GFY_FLAVOR="sbt assembly"
-export GFY_FLAVOR="activator dist"
+export GFY_FLAVOR="sbt dist"
 
 # export APT_SSH_HOST=apt@apt.identityship.com
 

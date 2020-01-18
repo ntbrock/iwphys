@@ -1,11 +1,12 @@
-name := """iwp6-play"""
+version := "6.0.20200118-SNAPSHOT"
+
+name := """iwphys-play"""
 organization := "edu.ncssm.iwp"
 
-version := "6.0.2-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.12.3"
+scalaVersion := "2.12.10"
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
