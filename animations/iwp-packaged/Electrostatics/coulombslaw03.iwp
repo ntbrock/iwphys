@@ -33,9 +33,9 @@
 			<yunit>meters</yunit>
 		</window>
 		<description>
-			<text>A red ball is connected to a spring which is fixed at the left side of the screen. The ball is initially at the unstretched/uncompressed position of the spring, x = 0. A blue ball, soon to appear, has the same charge as the red ball.  
+			<text>A red ball with charge 5.0E-8 is connected to a spring which is fixed at the left side of the screen. The ball is initially at the unstretched/uncompressed position of the spring, x = 0. A blue ball soon to appear on the right-hand side has the same charge as the red ball.  
 
-In order to bring the blue ball into the picture, click the step button (>>) once.  You'll see the blue ball attached to a horizontal insulating handle.The red ball is forced away from its initial position and compresses the spring due to electrostatic force of the blue ball. Click the step button once again to move the blue ball to the left. The spring compresses more.
+				Click the right step button (>>) once. You'll see the blue ball attached to a horizontal insulating handle. The red ball is forced away from its initial position and compresses the spring due to electrostatic force of the blue ball. Click the step button once to move the blue ball to the left. The spring compresses more.
 
 The X-coordinates of the balls are given as outputs. These enable one to determine the separation of the balls as well as the displacement of the red ball from equillibrium. Both of these are related to the electrostatic force that either ball exerts on the other.
 
@@ -90,7 +90,7 @@ Something to think about:  How does the separation of the balls change as the bl
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>.2*step(t)</value>
+						<value>.2</value>
 					</calculator>
 				</width>
 				<height>
@@ -143,7 +143,7 @@ Something to think about:  How does the separation of the balls change as the bl
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>(d1-t)*step(t)</value>
+					<value>(d1-t) </value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -177,7 +177,7 @@ Something to think about:  How does the separation of the balls change as the bl
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>d2</value>
+					<value>step(t)*d2</value>
 				</calculator>
 			</xpath>
 			<ypath>
@@ -288,7 +288,7 @@ Something to think about:  How does the separation of the balls change as the bl
 			<text>Spring pitch</text>
 			<units>m</units>
 			<calculator type="parametric">
-				<value>(d2+0.1)/6</value>
+				<value>(step(t)*d2+0.1)/6</value>
 			</calculator>
 			<hidden>1</hidden>
 		</output>
