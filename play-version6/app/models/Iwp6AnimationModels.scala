@@ -120,7 +120,14 @@ case class Iwp6InitiallyOn (xPos : Boolean = false,
 case class Iwp6GraphOptions ( graphVisible: Boolean,
                               initiallyOn: Iwp6InitiallyOn )
 
+
+case class Iwp6Point ( index: Int,
+                       xpath: Iwp6Path,
+                       ypath: Iwp6Path )
+
+
 case class Iwp6Shape (shapeType: String,
+                      points: Seq[Iwp6Point],
                       vectors: Option[Iwp6Vectors],
                       width: Iwp6Length,
                       height: Iwp6Length,
@@ -129,6 +136,46 @@ case class Iwp6Shape (shapeType: String,
                       drawTrails: Boolean = false,
                       drawVectors: Boolean = false )
 
+/*
+	<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>C.xpos</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+ */
 
 
 case class Iwp6Color ( red: Int,

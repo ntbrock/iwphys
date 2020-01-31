@@ -2,6 +2,7 @@ package models
 
 import java.io.File
 
+import edu.ncssm.iwp.graphicsengine.GShape_Polygon
 import edu.ncssm.iwp.math.{MCalculator, MCalculator_Diff, MCalculator_Parametric}
 import edu.ncssm.iwp.objects._
 import edu.ncssm.iwp.problemdb.{DProblem, DProblemXMLParser}
@@ -45,6 +46,7 @@ object Iwp6Animation extends BoilerplateIO {
   implicit val jsfIwp6Time = Json.format[Iwp6Time]
   implicit val jsfIwp6Window = Json.format[Iwp6Window]
   implicit val jsfIwp6Color = Json.format[Iwp6Color]
+  implicit val jsfIwp6ShapePoint = Json.format[Iwp6Point]
   implicit val jsfIwp6Shape = Json.format[Iwp6Shape]
   implicit val jsfIwp6Solid = Json.format[Iwp6Solid]
   implicit val jsfIwp6Output = Json.format[Iwp6Output]
@@ -212,6 +214,8 @@ object Iwp6Animation extends BoilerplateIO {
 
     val xmlString = readFileCompletely(xmlFile)
 
+    // Logger.info(s"Iwp6Animation:215> xmlFile: ${xmlFile}     xmlString: ${xmlString}")
+
     Try {
 
       val problem = DProblemXMLParser.load(xmlString)
@@ -294,11 +298,38 @@ object Iwp6Animation extends BoilerplateIO {
 
         } else if ( ar.isInstanceOf[DObject_Solid]) {
           val s = ar.asInstanceOf[DObject_Solid]
+
+          // 2020Jan31 Add support for mapping points
+          val points : Seq[Iwp6Point] = if ( s.shape.isInstanceOf[GShape_Polygon] ) {
+            val p = s.shape.asInstanceOf[GShape_Polygon]
+
+            Logger.info("Iwp6Animation:303> Found a polygon! : x " + p.getXPointCalcs + "  y : "+ p.getYPointCalcs )
+
+            p.getXPointCalcs.toArray.toSeq.zipWithIndex.map { case(xP, i) =>
+              // Get the parallel array Y point with the same x index
+              val yP = p.getYPointCalcs.elementAt(i)
+
+              val xCalc = convertCalc(xP.asInstanceOf[MCalculator])
+              val yCalc = convertCalc(yP.asInstanceOf[MCalculator])
+              Logger.info(s"Iwp6Animation:311> xCalc: ${xCalc}  xP: ${xP.getClass.getName}  i: ${i}")
+
+              Iwp6Point ( i,
+                Iwp6Path(xCalc),
+                Iwp6Path(yCalc) )
+            }.toSeq
+
+          } else {
+            Seq.empty
+          }
+
+
+
           Some(Iwp6Solid(
             name = s.name,
 
             shape = Iwp6Shape(
               s.shape.getType.toLowerCase,
+              points,
               Some(Iwp6Vectors(
                 xVel = s.shape.getVectorSelector.xVelSelected(),
                 yVel = s.shape.getVectorSelector.yVelSelected(),
