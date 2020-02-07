@@ -35,7 +35,8 @@
 			<drawGridNumbers>true</drawGridNumbers>
 		</window>
 		<description>
-			<text>The view is looking down on an air hockey table. A puck initially moving at constant velocity receives a momentary push in the +y direction at x = -2 as shown in each of the animations (selectable by numbers 1 to 4). Which animation correctly shows the motion of the puck after it is pushed?</text>
+			<text>A satellite moves at constant velocity when, at x = -2, its thrusters are suddenly engaged, producing a constant force perpendicular to its original motion. Which animation correctly depicts the satellite's motion after the thrusters are first engaged?
+</text>
 		</description>
 		<input>
 			<name>mode</name>
@@ -46,7 +47,7 @@
 		<input>
 			<name>physlet</name>
 			<text>Physlet</text>
-			<initialValue>1.0</initialValue>
+			<initialValue>0.0</initialValue>
 			<units>0, 1</units>
 			<hidden>1</hidden>
 		</input>

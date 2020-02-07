@@ -455,7 +455,7 @@ Caution: Unphysical results (such as the block passing through the wall) may be 
 			</color>
 			<xpath>
 				<calculator type="parametric">
-					<value>1</value>
+					<value>(xo+vo*t)*step(tc-t)-step(t-tc+1-step((t-tc)^2))*step(tse-t)*(motion.xpos+0.5*h)+step(t-tse)*(-1*vo*(t-tse)-0.5*h)</value>
 				</calculator>
 			</xpath>
 			<ypath>
