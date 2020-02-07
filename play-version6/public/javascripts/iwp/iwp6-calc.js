@@ -786,7 +786,7 @@ function resetSolidCalculators(solid) {
 }
 
 
-function addSolid(solid) {
+function compileSolid(solid) {
   //console.log("solid: ", solid );
 	// 2020Jan31 Debug
 	if ( solid.shape.shapeType == "polygon") {
@@ -862,33 +862,36 @@ function addSolid(solid) {
   }
 
 
-  compiledObjects.push(compiledSolid);
 
+  return compiledSolid;
+  
+}
 
+function illustrateSolid(solid) {
   //HTML
-  if (compiledSolid.shape.shapeType == "circle") {
+  if (solid.shape.shapeType == "circle") {
     //console.log("it's a circle");
     svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(solid.shape.width.calculator.value)+ " ry=" +yHeight(solid.shape.height.calculator.value)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
-  else if (compiledSolid.shape.shapeType == "rectangle") {
+  else if (solid.shape.shapeType == "rectangle") {
     //console.log("it's a rectangle");
     svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
-  else if (compiledSolid.shape.shapeType == "line") {
+  else if (solid.shape.shapeType == "line") {
     //console.log("it's a line")
     svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
-  else if (compiledSolid.shape.shapeType == "vector") {
+  else if (solid.shape.shapeType == "vector") {
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
   }
-  else if (compiledSolid.shape.shapeType == "polygon") {
+  else if (solid.shape.shapeType == "polygon") {
     //console.log("it's a polygon:", solid.name);
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");
   }
-  else if (compiledSolid.shape.shapeType == "Bitmap"||compiledSolid.shape.shapeType == "bitmap") {
-    //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+compiledSolid.fileUri+"'><title>"+solid.name+"</title></image>");
+  else if (solid.shape.shapeType == "Bitmap"||solid.shape.shapeType == "bitmap") {
+    //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+solid.fileUri+"'><title>"+solid.name+"</title></image>");
 
-	console.log("iwp6-calc:848> Bitmap support, shape.file= " , compiledSolid.shape )
+	console.log("iwp6-calc:848> Bitmap support, shape.file= " , solid.shape )
 
     // 2018Mar01 Brockman - Refactoring the bitmap code here.
     // https://stackoverflow.com/questions/10261731/can-not-add-image-inside-svg-via-jquery-image-tag-becomes-img
@@ -897,7 +900,7 @@ function addSolid(solid) {
 
     var img = document.createElementNS('http://www.w3.org/2000/svg','image');
     img.setAttributeNS(null,'id',id)
-    img.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets'+compiledSolid.shape.file.image);
+    img.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets'+solid.shape.file.image);
     img.setAttributeNS(null, 'visibility', 'visible');
 
     svgSolids.push(img);
@@ -907,7 +910,7 @@ function addSolid(solid) {
 
   else {
 
-    console.log("iwp5:821> ERROR: Unrecognized Solid Shape Type: ", compiledSolid.shape.shapeType)
+    console.log("iwp5:821> ERROR: Unrecognized Solid Shape Type: ", solid.shape.shapeType)
     return;
   };
 
@@ -1389,6 +1392,7 @@ function parseAnimationToMemory( rawAnimation ) {
 
   // 2019Sep06 Reordering of the Animatin Objects based on IWP3 Logic Port.
   //console.log("iwp6-calc:1288> Executing animationObject Reordering on CompiledObjects");
+  var originalLoopOrder = animation.loop;
   animation.loop = reorderAnimationObjectsBySymbolicDependency(animation.loop);
 
   animation.loop.forEach( function( object, index ) {
@@ -1398,7 +1402,7 @@ function parseAnimationToMemory( rawAnimation ) {
     } else if ( object.objectType == 'output' ) {
         addOutput(object);
     } else if ( object.objectType == 'solid' ) {
-        addSolid(object);
+        compiledObjects.push(compileSolid(object));
     } else if ( object.objectType == 'floatingText' ) {
         addFloatingText(object);
     } else if ( object.objectType == 'object' ) {
@@ -1409,7 +1413,11 @@ function parseAnimationToMemory( rawAnimation ) {
   } );
 
   // Helper Functions that run filters.
-
+originalLoopOrder.forEach( function(object, index) {
+  if (object.objectType == 'solid') {
+    illustrateSolid(compileSolid(object));
+  }
+} );
   // 2019Apr09 store in global singleton
 
   parsedAnimation = animation;
