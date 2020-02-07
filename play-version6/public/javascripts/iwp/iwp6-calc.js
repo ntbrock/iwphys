@@ -380,13 +380,29 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
     if ( solid.shape.shapeType == "polygon" ) {
 
-      // console.log("iwp5:277> Recalculating Polygon: " + solid.name + " has Error? " + solid.calculationError );
-
+      console.log("iwp5:277> Recalculating Polygon: " + solid.name + " has Error? " + solid.calculationError );
       calc["points"] = []
       solid.points.forEach( function( i, index ) {
+
+      console.log("iwp6-calc:387> Recalculating Polygon["+i+"]: X: " + i.xpath  + " Y: " + i.ypath, "  vars: " + JSON.stringify(vars) );
+
+		var x = 0;
+		var y = 0;
+
+		try {
+			x = evaluateCalculator(solid.name+".xpt", i.xpath.calculator, step, vars, verbose, solid.name ).value;
+		} catch(err) {
+			console.log("iwp6-calc:394> Recalculating Polygon["+i+"]: ERROR : X: " + i.xpath  + "  vars: " + JSON.stringify(vars) , err);
+		}
+
+		try {
+			y = evaluateCalculator(solid.name+".ypt", i.ypath.calculator, step, vars, verbose, solid.name ).value;
+		} catch(err) {
+			console.log("iwp6-calc:401> Recalculating Polygon["+i+"]: ERROR : Y: " + i.xpath  + "  vars: " + JSON.stringify(vars), err );
+		}
         point = {
-          x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, step, vars, verbose, solid.name ).value,
-          y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, step, vars, verbose, solid.name ).value
+                  x: x,
+                  y: y
         };
         calc.points.push(point);
       });
@@ -730,9 +746,10 @@ function resetSolidCalculators(solid) {
 
 function addSolid(solid) {
   //console.log("solid: ", solid );
-
-  // console.log("iwp6-calc:992> addSolid: ", JSON.stringify(solid));
-
+	// 2020Jan31 Debug
+	if ( solid.shape.shapeType == "polygon") {
+        console.log("iwp6-calc:734> addSolid: ", JSON.stringify(solid));
+	}
   // In Memory - PreParse Equations with math.js
 
   var compiledSolid = {
@@ -745,6 +762,8 @@ function addSolid(solid) {
   	},
   	shape: {
   		shapeType: solid.shape.shapeType,
+  		points: solid.shape.points, // 2020Jan31 Re-plumbing V4 features
+  		file: solid.shape.file, // 2020Jan31 Re-plumbing V4 features
   		drawTrails: solid.shape.drawTrails,
   		drawVectors: solid.shape.drawVectors,
   		graphOptions:
@@ -775,7 +794,10 @@ function addSolid(solid) {
     if ( ! solid.shape.points ) {
         console.log("iwp6-calc:766: The solid's polygon shape had no points! solid: ", solid);
     } else {
-    solid.shape.points.point.forEach ( function( i, index ) {
+        // 2020Jan31 - Mapped to new structure w/o intermediate point
+	    solid.shape.points.forEach ( function( i, index ) {
+
+
       var point = {
         xpath: {calculator: compileCalculator(i.xpath.calculator),},
         ypath: {calculator: compileCalculator(i.ypath.calculator),},
@@ -821,8 +843,10 @@ function addSolid(solid) {
     //console.log("it's a polygon:", solid.name);
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");
   }
-  else if (compiledSolid.shape.shapeType == "Bitmap") {
+  else if (compiledSolid.shape.shapeType == "Bitmap"||compiledSolid.shape.shapeType == "bitmap") {
     //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+compiledSolid.fileUri+"'><title>"+solid.name+"</title></image>");
+
+	console.log("iwp6-calc:848> Bitmap support, shape.file= " , compiledSolid.shape )
 
     // 2018Mar01 Brockman - Refactoring the bitmap code here.
     // https://stackoverflow.com/questions/10261731/can-not-add-image-inside-svg-via-jquery-image-tag-becomes-img
@@ -831,7 +855,7 @@ function addSolid(solid) {
 
     var img = document.createElementNS('http://www.w3.org/2000/svg','image');
     img.setAttributeNS(null,'id',id)
-    img.setAttributeNS('http://www.w3.org/1999/xlink','href',compiledSolid.fileUri);
+    img.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets'+compiledSolid.shape.file.image);
     img.setAttributeNS(null, 'visibility', 'visible');
 
     svgSolids.push(img);
@@ -1031,7 +1055,6 @@ function evaluateParametricCalculator( resultVariable, calculator, calculateStep
 
     try {
 
-
         var result = calculator.compiled.evaluate(vars);
 
         if ( !isFinite(result) ) {
@@ -1217,7 +1240,7 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 function parseAnimationToMemory( rawAnimation ) {
 
 
-    console.log("iwp6-calc:1186> Parsing rawAnimation: ", rawAnimation);
+    console.log("iwp6-calc:1222> parseAnimationToMemory Parsing rawAnimation: ", rawAnimation);
 
     var animation = { loop: [] };
 
@@ -1236,6 +1259,11 @@ function parseAnimationToMemory( rawAnimation ) {
             animation.description = object;
 
         } else if ( object.objectType == "input" || object.objectType == "output" || object.objectType == "solid"  || object.objectType == "object" ) {
+
+			if ( object.objectType == "solid") {
+                console.log("iwp6-calc:1242> parseAnimationToMemory object: " , object);
+			}
+
             animation.loop.push(object);
 
         } else {
