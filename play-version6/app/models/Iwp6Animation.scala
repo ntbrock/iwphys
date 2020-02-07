@@ -130,6 +130,7 @@ object Iwp6Animation extends BoilerplateIO {
           case "solid" => Json.fromJson[Iwp6Solid](jso)
           case "input" => Json.fromJson[Iwp6Input](jso)
           case "output" => Json.fromJson[Iwp6Output](jso)
+          case "floatingText" => Json.fromJson[Iwp6FloatingText](jso)
           case _ => throw new RuntimeException(s"Unrecognized Object Type: ${objectType}")
         }
 
