@@ -56,6 +56,18 @@ case class Iwp6Window ( xmin: Double,
 }
 
 
+/** 2020Feb07 Found int he archives!  */
+case class Iwp6FloatingText ( name: String,
+                              text: String,
+                              units: Option[String],
+                              value: Iwp6Calculator,
+                              fontSize: Option[Int],
+                              showValue: Boolean,
+                              color: Iwp6Color,
+                              xpath: Iwp6Path,
+                              ypath: Iwp6Path,
+                              objectType: String = "floatingText") extends Iwp6Object
+
 
 case class Iwp6Solid ( name: String,
                        shape: Iwp6Shape,

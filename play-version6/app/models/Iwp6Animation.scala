@@ -5,6 +5,7 @@ import java.io.File
 import edu.ncssm.iwp.graphicsengine.{GShape_Bitmap, GShape_Polygon}
 import edu.ncssm.iwp.math.{MCalculator, MCalculator_Diff, MCalculator_Parametric}
 import edu.ncssm.iwp.objects._
+import edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText
 import edu.ncssm.iwp.problemdb.{DProblem, DProblemXMLParser}
 import models.Iwp6Animation.fromXmlFile
 import play.api.Logger
@@ -49,6 +50,7 @@ object Iwp6Animation extends BoilerplateIO {
   implicit val jsfIwp6ShapeFile = Json.format[Iwp6ShapeFile]
   implicit val jsfIwp6ShapePoint = Json.format[Iwp6ShapePoint]
   implicit val jsfIwp6Shape = Json.format[Iwp6Shape]
+  implicit val jsfIwp6FloatingText = Json.format[Iwp6FloatingText]
   implicit val jsfIwp6Solid = Json.format[Iwp6Solid]
   implicit val jsfIwp6Output = Json.format[Iwp6Output]
   implicit val jsfIwp6Input = Json.format[Iwp6Input]
@@ -375,9 +377,27 @@ object Iwp6Animation extends BoilerplateIO {
             ypath = Iwp6Path( convertCalc(s.getCalcY ))
           ))
 
-        } else {
-          //         val po = ar.asInstanceOf[Iwp6Object]
 
+        } else if ( ar.isInstanceOf[DObject_FloatingText]) {
+
+          val ft = ar.asInstanceOf[DObject_FloatingText]
+
+          Some(Iwp6FloatingText(name = ft.getName,
+            text = ft.getText,
+            units = Some(ft.getUnits),
+            value = convertCalc(ft.getValue),
+            fontSize = Some(ft.getFontSize),
+            showValue = ft.getShowValue,
+            color = Iwp6Color(
+              red = ft.getFontColor.getRed,
+              green = ft.getFontColor.getGreen,
+              blue = ft.getFontColor.getBlue
+            ),
+            xpath = Iwp6Path(convertCalc(ft.getXpath)),
+            ypath = Iwp6Path(convertCalc(ft.getYpath))
+          ))
+
+        } else {
 
           Logger.error(s"Iwp6Animation:214> Unrecognized IwpV4 Dobject class: ${ar.getClass.getName }")
           None
@@ -490,6 +510,9 @@ case class Iwp6Animation(filename: Option[String],
 
       } else if ( o.isInstanceOf[Iwp6Output] ) {
         Json.toJson(o.asInstanceOf[Iwp6Output])
+
+      } else if ( o.isInstanceOf[Iwp6FloatingText] ) {
+        Json.toJson(o.asInstanceOf[Iwp6FloatingText])
 
       } else {
         throw new RuntimeException(s"Iwp6Animation:249> Unresolvable object type: ${o.getClass.getName}")
