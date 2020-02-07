@@ -2,7 +2,7 @@ package models
 
 import java.io.File
 
-import edu.ncssm.iwp.graphicsengine.GShape_Polygon
+import edu.ncssm.iwp.graphicsengine.{GShape_Bitmap, GShape_Polygon}
 import edu.ncssm.iwp.math.{MCalculator, MCalculator_Diff, MCalculator_Parametric}
 import edu.ncssm.iwp.objects._
 import edu.ncssm.iwp.problemdb.{DProblem, DProblemXMLParser}
@@ -46,7 +46,8 @@ object Iwp6Animation extends BoilerplateIO {
   implicit val jsfIwp6Time = Json.format[Iwp6Time]
   implicit val jsfIwp6Window = Json.format[Iwp6Window]
   implicit val jsfIwp6Color = Json.format[Iwp6Color]
-  implicit val jsfIwp6ShapePoint = Json.format[Iwp6Point]
+  implicit val jsfIwp6ShapeFile = Json.format[Iwp6ShapeFile]
+  implicit val jsfIwp6ShapePoint = Json.format[Iwp6ShapePoint]
   implicit val jsfIwp6Shape = Json.format[Iwp6Shape]
   implicit val jsfIwp6Solid = Json.format[Iwp6Solid]
   implicit val jsfIwp6Output = Json.format[Iwp6Output]
@@ -300,7 +301,7 @@ object Iwp6Animation extends BoilerplateIO {
           val s = ar.asInstanceOf[DObject_Solid]
 
           // 2020Jan31 Add support for mapping points
-          val points : Seq[Iwp6Point] = if ( s.shape.isInstanceOf[GShape_Polygon] ) {
+          val points : Seq[Iwp6ShapePoint] = if ( s.shape.isInstanceOf[GShape_Polygon] ) {
             val p = s.shape.asInstanceOf[GShape_Polygon]
 
             Logger.info("Iwp6Animation:303> Found a polygon! : x " + p.getXPointCalcs + "  y : "+ p.getYPointCalcs )
@@ -313,7 +314,7 @@ object Iwp6Animation extends BoilerplateIO {
               val yCalc = convertCalc(yP.asInstanceOf[MCalculator])
               Logger.info(s"Iwp6Animation:311> xCalc: ${xCalc}  xP: ${xP.getClass.getName}  i: ${i}")
 
-              Iwp6Point ( i,
+              Iwp6ShapePoint ( i,
                 Iwp6Path(xCalc),
                 Iwp6Path(yCalc) )
             }.toSeq
@@ -323,13 +324,21 @@ object Iwp6Animation extends BoilerplateIO {
           }
 
 
+          // 2020Jan31 Add Support for mapping Bitmaps
+          val shapeFileO = if ( s.shape.isInstanceOf[GShape_Bitmap] ) {
+            val b = s.shape.asInstanceOf[GShape_Bitmap]
+            // Logger.info(s"Iwp6Animation:329> GShape_Bitmap: File ${b.getFile}")
+            Some(Iwp6ShapeFile(b.getFile))
+          } else {
+            None
+          }
 
           Some(Iwp6Solid(
             name = s.name,
-
             shape = Iwp6Shape(
               s.shape.getType.toLowerCase,
               points,
+              shapeFileO,
               Some(Iwp6Vectors(
                 xVel = s.shape.getVectorSelector.xVelSelected(),
                 yVel = s.shape.getVectorSelector.yVelSelected(),
@@ -340,6 +349,7 @@ object Iwp6Animation extends BoilerplateIO {
               )),
               Iwp6Length( convertCalc(s.shape.getWidthCalculator ) ),
               Iwp6Length( convertCalc(s.shape.getHeightCalculator ) ),
+              Iwp6Length( convertCalc(s.shape.getAngleCalculator ) ),
               Some(Iwp6GraphOptions(
                 s.shape.getIsGraphable,
                 Iwp6InitiallyOn(

@@ -121,16 +121,20 @@ case class Iwp6GraphOptions ( graphVisible: Boolean,
                               initiallyOn: Iwp6InitiallyOn )
 
 
-case class Iwp6Point ( index: Int,
+case class Iwp6ShapePoint ( index: Int,
                        xpath: Iwp6Path,
                        ypath: Iwp6Path )
 
+// 2020Jan31 Bitmap mapping support
+case class Iwp6ShapeFile ( image: String )
 
 case class Iwp6Shape (shapeType: String,
-                      points: Seq[Iwp6Point],
+                      points: Seq[Iwp6ShapePoint],
+                      file: Option[Iwp6ShapeFile],
                       vectors: Option[Iwp6Vectors],
                       width: Iwp6Length,
                       height: Iwp6Length,
+                      angle: Iwp6Length,
                       graphOptions: Option[Iwp6GraphOptions],
                       isGraphable : Boolean = false,
                       drawTrails: Boolean = false,
