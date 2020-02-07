@@ -203,12 +203,12 @@
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>1*step(t-tc+deltaTime*4)</value>
+						<value>1*step(t-tc+delta_t*4)</value>
 					</calculator>
 				</width>
 				<height>
 					<calculator type="parametric">
-						<value>1*step(1-step(physlet)*step(t-tc-deltaTime*4)+0)</value>
+						<value>1*step(1-step(physlet)*step(t-tc-delta_t*4)+0)</value>
 					</calculator>
 				</height>
 				<angle>
