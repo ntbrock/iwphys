@@ -56,6 +56,18 @@ case class Iwp6Window ( xmin: Double,
 }
 
 
+/** 2020Feb07 Found int he archives!  */
+case class Iwp6FloatingText ( name: String,
+                              text: String,
+                              units: Option[String],
+                              value: Iwp6Calculator,
+                              fontSize: Option[Int],
+                              showValue: Boolean,
+                              color: Iwp6Color,
+                              xpath: Iwp6Path,
+                              ypath: Iwp6Path,
+                              objectType: String = "floatingText") extends Iwp6Object
+
 
 case class Iwp6Solid ( name: String,
                        shape: Iwp6Shape,
@@ -120,15 +132,66 @@ case class Iwp6InitiallyOn (xPos : Boolean = false,
 case class Iwp6GraphOptions ( graphVisible: Boolean,
                               initiallyOn: Iwp6InitiallyOn )
 
+
+case class Iwp6ShapePoint ( index: Int,
+                       xpath: Iwp6Path,
+                       ypath: Iwp6Path )
+
+// 2020Jan31 Bitmap mapping support
+case class Iwp6ShapeFile ( image: String )
+
 case class Iwp6Shape (shapeType: String,
+                      points: Seq[Iwp6ShapePoint],
+                      file: Option[Iwp6ShapeFile],
                       vectors: Option[Iwp6Vectors],
                       width: Iwp6Length,
                       height: Iwp6Length,
+                      angle: Iwp6Length,
                       graphOptions: Option[Iwp6GraphOptions],
                       isGraphable : Boolean = false,
                       drawTrails: Boolean = false,
                       drawVectors: Boolean = false )
 
+/*
+	<shape type="polygon" drawTrails="false" drawVectors="false">
+				<points>
+					<point index="0">
+						<xpath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+					<point index="1">
+						<xpath>
+							<calculator type="parametric">
+								<value>C.xpos</value>
+							</calculator>
+						</xpath>
+						<ypath>
+							<calculator type="parametric">
+								<value>0</value>
+							</calculator>
+						</ypath>
+					</point>
+				</points>
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>0+0+0</value>
+					</calculator>
+				</height>
+ */
 
 
 case class Iwp6Color ( red: Int,
