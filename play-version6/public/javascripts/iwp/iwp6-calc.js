@@ -705,15 +705,17 @@ function setGraphWindow(inGraphWindow) {
 
 }
 
-function addInput(input) {
+function compileInput(input) {
   input.objectType = 'input'
 
 
   // console.log("iwp6-calc:807> pushingInput: ", JSON.stringify(input) );
 
-  compiledObjects.push( input );
+  return input;
   // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"}
   // 07 Oct 2016 Honoring hidden flag
+}
+function illustrateInput(input) {
   var style = "";
   if ( input.hidden == "1" ) {
     style = "display:none;"
@@ -724,9 +726,11 @@ function addInput(input) {
   if ( typeof input.units ==="string" ) { unitLabel = input.units; }
 
   htmlInputs.push("<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td class='iwp-input-label'>"+ input.text +"</td><td class='iwp-input-value'><input style='width:60px;' id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + unitLabel + "</td></tr>")
+  
 }
 
-function addOutput(output) {
+
+function compileOutput(output) {
   //console.log("addOutput ", output );
 
   var compiledOutput = {
@@ -738,7 +742,10 @@ function addOutput(output) {
     hidden: output.hidden //Hidden flag still needed - be careful about cutting off attributes here.
   }
 
-  compiledObjects.push( compiledOutput );
+  return compiledOutput;
+}
+
+function illustrateOutput(output) {
   // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { attributesProperty: { "type": "parametric" }, "value": "Red.xaccel" } }
   var style = ""
   if ( output.hidden == "1" ) {
@@ -748,6 +755,7 @@ function addOutput(output) {
   if ( typeof output.units === "string" ) { unitLabelOutput = output.units; }
 
   htmlOutputs.push( "<tr style='" + style +"vertical-align:top;' id='output_" + output.name + "' class='iwp-output-row'><td class='iwp-output-label'>"+ output.text +"</td><td class='iwp-output-value'><input id='" + output.name + "' type='text' value='-999' disabled style='width:80px;'> " + unitLabelOutput + "</td></tr>");
+  
 }
 
 /**
@@ -1398,9 +1406,9 @@ function parseAnimationToMemory( rawAnimation ) {
   animation.loop.forEach( function( object, index ) {
 
     if ( object.objectType == 'input' ) {
-        addInput(object);
+        compiledObjects.push(compileInput(object));
     } else if ( object.objectType == 'output' ) {
-        addOutput(object);
+        compiledObjects.push(compileOutput(object));
     } else if ( object.objectType == 'solid' ) {
         compiledObjects.push(compileSolid(object));
     } else if ( object.objectType == 'floatingText' ) {
@@ -1414,9 +1422,19 @@ function parseAnimationToMemory( rawAnimation ) {
 
   // Helper Functions that run filters.
 originalLoopOrder.forEach( function(object, index) {
-  if (object.objectType == 'solid') {
-    illustrateSolid(compileSolid(object));
-  }
+  if ( object.objectType == 'input' ) {
+        illustrateInput(compileInput(object));
+    } else if ( object.objectType == 'output' ) {
+        illustrateOutput(compileOutput(object));
+    } else if ( object.objectType == 'solid' ) {
+        illustrateSolid(compileSolid(object));
+    } else if ( object.objectType == 'floatingText' ) {
+        // addFloatingText(object);
+    } else if ( object.objectType == 'object' ) {
+        // addObject(rawAnimation.objects.object);
+    } else {
+      throw "Animation parseAnimationToMemory unrecognized Object Type: " + object.objectType;
+    }
 } );
   // 2019Apr09 store in global singleton
 
