@@ -172,7 +172,8 @@ object Iwp6Animation extends BoilerplateIO {
     if ( mc.isInstanceOf[MCalculator_Diff] ) { convertCalcDiff(mc.asInstanceOf[MCalculator_Diff]) }
     else if ( mc.isInstanceOf[MCalculator_Parametric] ) { convertCalcParam(mc.asInstanceOf[MCalculator_Parametric]) }
     else {
-      throw new RuntimeException(s"Iwp6AnimationConverter:90> Unsupported MCalculator: ${mc.getClass.getName}")
+      Logger.error(s"Iwp6AnimationConverter:175> Unsupported MCalculator: ${mc}")
+      throw new RuntimeException(s"Iwp6AnimationConverter:175> Unsupported MCalculator: ${mc}")
     }
   }
 
@@ -336,6 +337,16 @@ object Iwp6Animation extends BoilerplateIO {
             None
           }
 
+          // 2020Feb07 Defense against no angle calc
+          val angleCalcO = if ( s.shape.getAngleCalculator == null ) {
+            None
+          } else {
+            Some(Iwp6Length( convertCalc(s.shape.getAngleCalculator ) ))
+          }
+
+
+
+
           Some(Iwp6Solid(
             name = s.name,
             shape = Iwp6Shape(
@@ -352,7 +363,7 @@ object Iwp6Animation extends BoilerplateIO {
               )),
               Iwp6Length( convertCalc(s.shape.getWidthCalculator ) ),
               Iwp6Length( convertCalc(s.shape.getHeightCalculator ) ),
-              Iwp6Length( convertCalc(s.shape.getAngleCalculator ) ),
+              angleCalcO,
               Some(Iwp6GraphOptions(
                 s.shape.getIsGraphable,
                 Iwp6InitiallyOn(

@@ -75,6 +75,7 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
           services.directoryBrowser.getAnimation(collection, filename) match {
             case Failure(x) =>
               Logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
+              x.printStackTrace();
 
               NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
             case Success(s) =>
