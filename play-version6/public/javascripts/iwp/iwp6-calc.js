@@ -280,6 +280,32 @@ function calculateOutputAtStep(output, step, vars, verbose) {
 }
 
 
+function calculateFloatingTextAtStep(floatingText, step, vars, verbose) {
+
+    console.log("iwp6-calc:285> calculateFloatingTextAtStep: floatingText: " , floatingText.name , " ", floatingText, "  step: " , step , " vars: " , JSON.stringify(vars) );
+
+    var newValue = evaluateCalculator( floatingText.name+".value", floatingText.value.calculator, step, vars, verbose, floatingText.name ).value;
+    vars[floatingText.name] = newValue;
+
+
+    var xComplex = evaluateCalculator( floatingText.name+".x", floatingText.xpath.calculator, step, vars, verbose, floatingText.name )
+    vars[floatingText.x] = xComplex.x;
+
+    var yComplex = evaluateCalculator( floatingText.name+".y", floatingText.ypath.calculator, step, vars, verbose, floatingText.name )
+    vars[floatingText.y] = yComplex.y;
+
+    if ( typeof updateTextSvgPathAndShape === "function" ) {
+        var pathAndShape = { x: xComplex.x, y: yComplex.y, value: newValue }
+	    console.log("iwp6-calc:291> TODO Animate the floating text! New value: " , newValue,  " path and shape: ", pathAndShape);
+
+        updateTextSvgPathAndShape(floatingText, pathAndShape);
+    }
+
+    return newValue;
+}
+
+
+
 /**
  * 2018Dec14 Note! This is now pass by value, manipulating vars does no good,
  * The caller is responsible for assigning back to vars
@@ -380,13 +406,29 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 
     if ( solid.shape.shapeType == "polygon" ) {
 
-      // console.log("iwp5:277> Recalculating Polygon: " + solid.name + " has Error? " + solid.calculationError );
-
+      console.log("iwp5:277> Recalculating Polygon: " + solid.name + " has Error? " + solid.calculationError );
       calc["points"] = []
       solid.points.forEach( function( i, index ) {
+
+      console.log("iwp6-calc:387> Recalculating Polygon["+i+"]: X: " + i.xpath  + " Y: " + i.ypath, "  vars: " + JSON.stringify(vars) );
+
+		var x = 0;
+		var y = 0;
+
+		try {
+			x = evaluateCalculator(solid.name+".xpt", i.xpath.calculator, step, vars, verbose, solid.name ).value;
+		} catch(err) {
+			console.log("iwp6-calc:394> Recalculating Polygon["+i+"]: ERROR : X: " + i.xpath  + "  vars: " + JSON.stringify(vars) , err);
+		}
+
+		try {
+			y = evaluateCalculator(solid.name+".ypt", i.ypath.calculator, step, vars, verbose, solid.name ).value;
+		} catch(err) {
+			console.log("iwp6-calc:401> Recalculating Polygon["+i+"]: ERROR : Y: " + i.xpath  + "  vars: " + JSON.stringify(vars), err );
+		}
         point = {
-          x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, step, vars, verbose, solid.name ).value,
-          y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, step, vars, verbose, solid.name ).value
+                  x: x,
+                  y: y
         };
         calc["points"].push(point);
       });
@@ -556,13 +598,29 @@ function calculateVarsAtStep(step) {
 
         // console.log("iwp6-calc:588> calculateSolidAtStep: " + object.name + "  newValue: " + newValue );
 
+    } else if ( object.objectType == 'floatingText' ) {
+
+
+		var floatingText = object;
+
+        if ( floatingText.xpath.calculator.calcType == "euler-mathjs" ) {
+            initializeEulerCalculator(floatingText, step, vars, "x", solid.xpath.calculator)
+        }
+
+        if ( floatingText.ypath.calculator.calcType == "euler-mathjs" ) {
+            initializeEulerCalculator(floatingText, step, vars, "y", solid.ypath.calculator)
+        }
+//BOOK
+		var newValue = calculateFloatingTextAtStep(floatingText, step, vars, true );
+        vars[floatingText.name] = newValue;
+
+
     } else if ( object.objectType == 'object') {
 
-        // TODO Animate the Text
-        console.log("iwp5:594> TODO Animate the text: object.name: " + object.name, object )
+        throw "iwp6-calc:580> Unrecognized Object type: " + object.objectType;
 
     } else {
-        throw "iwp6-calc:599> Unrecognized Object type: " + object.objectType;
+        throw "iwp6-calc:583> Unrecognized Object type: " + object.objectType;
     }
 
   });
@@ -647,15 +705,17 @@ function setGraphWindow(inGraphWindow) {
 
 }
 
-function addInput(input) {
+function compileInput(input) {
   input.objectType = 'input'
 
 
   // console.log("iwp6-calc:807> pushingInput: ", JSON.stringify(input) );
 
-  compiledObjects.push( input );
+  return input;
   // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"}
   // 07 Oct 2016 Honoring hidden flag
+}
+function illustrateInput(input) {
   var style = "";
   if ( input.hidden == "1" ) {
     style = "display:none;"
@@ -666,9 +726,11 @@ function addInput(input) {
   if ( typeof input.units ==="string" ) { unitLabel = input.units; }
 
   htmlInputs.push("<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td class='iwp-input-label'>"+ input.text +"</td><td class='iwp-input-value'><input style='width:60px;' id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + unitLabel + "</td></tr>")
+  
 }
 
-function addOutput(output) {
+
+function compileOutput(output) {
   //console.log("addOutput ", output );
 
   var compiledOutput = {
@@ -680,7 +742,10 @@ function addOutput(output) {
     hidden: output.hidden //Hidden flag still needed - be careful about cutting off attributes here.
   }
 
-  compiledObjects.push( compiledOutput );
+  return compiledOutput;
+}
+
+function illustrateOutput(output) {
   // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { attributesProperty: { "type": "parametric" }, "value": "Red.xaccel" } }
   var style = ""
   if ( output.hidden == "1" ) {
@@ -690,6 +755,7 @@ function addOutput(output) {
   if ( typeof output.units === "string" ) { unitLabelOutput = output.units; }
 
   htmlOutputs.push( "<tr style='" + style +"vertical-align:top;' id='output_" + output.name + "' class='iwp-output-row'><td class='iwp-output-label'>"+ output.text +"</td><td class='iwp-output-value'><input id='" + output.name + "' type='text' value='-999' disabled style='width:80px;'> " + unitLabelOutput + "</td></tr>");
+  
 }
 
 /**
@@ -728,11 +794,12 @@ function resetSolidCalculators(solid) {
 }
 
 
-function addSolid(solid) {
+function compileSolid(solid) {
   //console.log("solid: ", solid );
-
-  // console.log("iwp6-calc:992> addSolid: ", JSON.stringify(solid));
-
+	// 2020Jan31 Debug
+	if ( solid.shape.shapeType == "polygon") {
+        console.log("iwp6-calc:734> addSolid: ", JSON.stringify(solid));
+	}
   // In Memory - PreParse Equations with math.js
 
   var compiledSolid = {
@@ -745,6 +812,8 @@ function addSolid(solid) {
   	},
   	shape: {
   		shapeType: solid.shape.shapeType,
+  		points: solid.shape.points, // 2020Jan31 Re-plumbing V4 features
+  		file: solid.shape.file, // 2020Jan31 Re-plumbing V4 features
   		drawTrails: solid.shape.drawTrails,
   		drawVectors: solid.shape.drawVectors,
   		graphOptions:
@@ -775,7 +844,10 @@ function addSolid(solid) {
     if ( ! solid.shape.points ) {
         console.log("iwp6-calc:766: The solid's polygon shape had no points! solid: ", solid);
     } else {
-    solid.shape.points.point.forEach ( function( i, index ) {
+        // 2020Jan31 - Mapped to new structure w/o intermediate point
+	    solid.shape.points.forEach ( function( i, index ) {
+
+
       var point = {
         xpath: {calculator: compileCalculator(i.xpath.calculator),},
         ypath: {calculator: compileCalculator(i.ypath.calculator),},
@@ -798,31 +870,36 @@ function addSolid(solid) {
   }
 
 
-  compiledObjects.push(compiledSolid);
 
+  return compiledSolid;
+  
+}
 
+function illustrateSolid(solid) {
   //HTML
-  if (compiledSolid.shape.shapeType == "circle") {
+  if (solid.shape.shapeType == "circle") {
     //console.log("it's a circle");
     svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(solid.shape.width.calculator.value)+ " ry=" +yHeight(solid.shape.height.calculator.value)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
-  else if (compiledSolid.shape.shapeType == "rectangle") {
+  else if (solid.shape.shapeType == "rectangle") {
     //console.log("it's a rectangle");
     svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
-  else if (compiledSolid.shape.shapeType == "line") {
+  else if (solid.shape.shapeType == "line") {
     //console.log("it's a line")
     svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
-  else if (compiledSolid.shape.shapeType == "vector") {
+  else if (solid.shape.shapeType == "vector") {
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
   }
-  else if (compiledSolid.shape.shapeType == "polygon") {
+  else if (solid.shape.shapeType == "polygon") {
     //console.log("it's a polygon:", solid.name);
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");
   }
-  else if (compiledSolid.shape.shapeType == "Bitmap") {
-    //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+compiledSolid.fileUri+"'><title>"+solid.name+"</title></image>");
+  else if (solid.shape.shapeType == "Bitmap"||solid.shape.shapeType == "bitmap") {
+    //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+solid.fileUri+"'><title>"+solid.name+"</title></image>");
+
+	console.log("iwp6-calc:848> Bitmap support, shape.file= " , solid.shape )
 
     // 2018Mar01 Brockman - Refactoring the bitmap code here.
     // https://stackoverflow.com/questions/10261731/can-not-add-image-inside-svg-via-jquery-image-tag-becomes-img
@@ -831,7 +908,7 @@ function addSolid(solid) {
 
     var img = document.createElementNS('http://www.w3.org/2000/svg','image');
     img.setAttributeNS(null,'id',id)
-    img.setAttributeNS('http://www.w3.org/1999/xlink','href',compiledSolid.fileUri);
+    img.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets'+solid.shape.file.image);
     img.setAttributeNS(null, 'visibility', 'visible');
 
     svgSolids.push(img);
@@ -841,7 +918,7 @@ function addSolid(solid) {
 
   else {
 
-    console.log("iwp5:821> ERROR: Unrecognized Solid Shape Type: ", compiledSolid.shape.shapeType)
+    console.log("iwp5:821> ERROR: Unrecognized Solid Shape Type: ", solid.shape.shapeType)
     return;
   };
 
@@ -851,6 +928,50 @@ function addSolid(solid) {
   }
 }
 
+
+// 2020Feb07 Added formal support for floating text
+function addFloatingText(object) {
+
+	console.log("addFloatingText:882> object: " , object);
+
+	var compiledObject = {
+		objectType: 'floatingText',
+		name: object.name,
+		shape: {
+			shapeType: object.class,
+			height: 1,
+			width: 1
+		},
+		text: object.text,
+		units: object.units,
+		value: {
+			calculator: compileCalculator(object.value)
+		},
+		fontSize: object.fontSize,
+		showValue: ( object.showValue === true || false ),
+		color: {
+			red: parseFloat(object.color.red),
+			green: parseFloat(object.color.green),
+			blue: parseFloat(object.color.blue),
+		},
+		xpath: {
+			calculator : compileCalculator(object.xpath.calculator)
+		},
+		ypath: {
+			calculator : compileCalculator(object.ypath.calculator)
+		}
+	}
+	compiledObjects.push( compiledObject );
+
+
+	// console.log("iwp5:933> FloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
+	/// Initilization fix - the calclulators hven't been run yet, so we just place the text on page at 0,0 and it's moveed with first redraw.
+	var x = 0; // xCanvas(object.xpath.calculator.value)
+	var y = 0; // yCanvas(object.ypath.calculator.value)
+
+	svgObjects.push( "<text id='text_" +object.name+ "' x='" + x + "' y='"+ y +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
+
+};
 
 
 function addObject(object) {
@@ -883,20 +1004,8 @@ function addObject(object) {
       calculator : compileCalculator(object.ypath.calculator)
     }
   }
-  objects.push( compiledObject );
+  compiledObjects.push( compiledObject );
 
-
-  if (object.class == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
-
-    // console.log("iwp5:933> FloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
-    /// Initilization fix - the calclulators hven't been run yet, so we just place the text on page at 0,0 and it's moveed with first redraw.
-    var x = 0; // xCanvas(object.xpath.calculator.value)
-    var y = 0; // yCanvas(object.ypath.calculator.value)
-
-    svgObjects.push( "<text id='text_" +object.name+ "' x='" + x + "' y='"+ y +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
-
-    texts.push( compiledObject );
-  }
 
 };
 //-----------------------------------------------------------------------
@@ -904,7 +1013,7 @@ function addObject(object) {
 
 function compileCalculator(iwpCalculator) {
 
-    // console.log("iwp6-calc:1161> Attempting to compile calculator: " + JSON.stringify(iwpCalculator));
+    console.log("iwp6-calc:1161> Attempting to compile calculator: " + JSON.stringify(iwpCalculator));
 
     var incomingType = iwpCalculator.calcType
 
@@ -1030,7 +1139,6 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
 function evaluateParametricCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
 
     try {
-
 
         var result = calculator.compiled.evaluate(vars);
 
@@ -1217,7 +1325,7 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 function parseAnimationToMemory( rawAnimation ) {
 
 
-    console.log("iwp6-calc:1186> Parsing rawAnimation: ", rawAnimation);
+    console.log("iwp6-calc:1222> parseAnimationToMemory Parsing rawAnimation: ", rawAnimation);
 
     var animation = { loop: [] };
 
@@ -1235,11 +1343,16 @@ function parseAnimationToMemory( rawAnimation ) {
         } else if ( object.objectType == "description" ) {
             animation.description = object;
 
-        } else if ( object.objectType == "input" || object.objectType == "output" || object.objectType == "solid"  || object.objectType == "object" ) {
+        } else if ( object.objectType == "input" ||
+	        object.objectType == "output" ||
+	        object.objectType == "solid"  ||
+	        object.objectType == "floatingText" ||
+	        object.objectType == "object" ) {
+
             animation.loop.push(object);
 
         } else {
-            throw "Animation parseAnimationToMemory unrecognized Object Type: " + object.objectType;
+            throw "Calculation parseAnimationToMemory unrecognized Object Type: " + object.objectType;
         }
 
      });
@@ -1287,16 +1400,19 @@ function parseAnimationToMemory( rawAnimation ) {
 
   // 2019Sep06 Reordering of the Animatin Objects based on IWP3 Logic Port.
   //console.log("iwp6-calc:1288> Executing animationObject Reordering on CompiledObjects");
+  var originalLoopOrder = animation.loop;
   animation.loop = reorderAnimationObjectsBySymbolicDependency(animation.loop);
 
   animation.loop.forEach( function( object, index ) {
 
     if ( object.objectType == 'input' ) {
-        addInput(object);
+        compiledObjects.push(compileInput(object));
     } else if ( object.objectType == 'output' ) {
-        addOutput(object);
+        compiledObjects.push(compileOutput(object));
     } else if ( object.objectType == 'solid' ) {
-        addSolid(object);
+        compiledObjects.push(compileSolid(object));
+    } else if ( object.objectType == 'floatingText' ) {
+        addFloatingText(object);
     } else if ( object.objectType == 'object' ) {
         addObject(rawAnimation.objects.object);
     } else {
@@ -1305,7 +1421,21 @@ function parseAnimationToMemory( rawAnimation ) {
   } );
 
   // Helper Functions that run filters.
-
+originalLoopOrder.forEach( function(object, index) {
+  if ( object.objectType == 'input' ) {
+        illustrateInput(compileInput(object));
+    } else if ( object.objectType == 'output' ) {
+        illustrateOutput(compileOutput(object));
+    } else if ( object.objectType == 'solid' ) {
+        illustrateSolid(compileSolid(object));
+    } else if ( object.objectType == 'floatingText' ) {
+        // addFloatingText(object);
+    } else if ( object.objectType == 'object' ) {
+        // addObject(rawAnimation.objects.object);
+    } else {
+      throw "Animation parseAnimationToMemory unrecognized Object Type: " + object.objectType;
+    }
+} );
   // 2019Apr09 store in global singleton
 
   parsedAnimation = animation;

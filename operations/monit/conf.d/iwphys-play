@@ -1,0 +1,7 @@
+check process java with pidfile /opt/iwphys-play/RUNNING_PID
+group magicnumber
+start program = "/etc/init.d/iwphys-play force-reload"
+stop program = "/etc/init.d/iwphys-play stop"
+if failed host localhost port 8470
+protocol http then restart
+if 5 restarts within 5 cycles then timeout

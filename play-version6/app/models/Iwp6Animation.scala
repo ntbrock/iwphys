@@ -2,8 +2,10 @@ package models
 
 import java.io.File
 
+import edu.ncssm.iwp.graphicsengine.{GShape_Bitmap, GShape_Polygon}
 import edu.ncssm.iwp.math.{MCalculator, MCalculator_Diff, MCalculator_Parametric}
 import edu.ncssm.iwp.objects._
+import edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText
 import edu.ncssm.iwp.problemdb.{DProblem, DProblemXMLParser}
 import models.Iwp6Animation.fromXmlFile
 import play.api.Logger
@@ -45,7 +47,10 @@ object Iwp6Animation extends BoilerplateIO {
   implicit val jsfIwp6Time = Json.format[Iwp6Time]
   implicit val jsfIwp6Window = Json.format[Iwp6Window]
   implicit val jsfIwp6Color = Json.format[Iwp6Color]
+  implicit val jsfIwp6ShapeFile = Json.format[Iwp6ShapeFile]
+  implicit val jsfIwp6ShapePoint = Json.format[Iwp6ShapePoint]
   implicit val jsfIwp6Shape = Json.format[Iwp6Shape]
+  implicit val jsfIwp6FloatingText = Json.format[Iwp6FloatingText]
   implicit val jsfIwp6Solid = Json.format[Iwp6Solid]
   implicit val jsfIwp6Output = Json.format[Iwp6Output]
   implicit val jsfIwp6Input = Json.format[Iwp6Input]
@@ -125,6 +130,7 @@ object Iwp6Animation extends BoilerplateIO {
           case "solid" => Json.fromJson[Iwp6Solid](jso)
           case "input" => Json.fromJson[Iwp6Input](jso)
           case "output" => Json.fromJson[Iwp6Output](jso)
+          case "floatingText" => Json.fromJson[Iwp6FloatingText](jso)
           case _ => throw new RuntimeException(s"Unrecognized Object Type: ${objectType}")
         }
 
@@ -166,7 +172,8 @@ object Iwp6Animation extends BoilerplateIO {
     if ( mc.isInstanceOf[MCalculator_Diff] ) { convertCalcDiff(mc.asInstanceOf[MCalculator_Diff]) }
     else if ( mc.isInstanceOf[MCalculator_Parametric] ) { convertCalcParam(mc.asInstanceOf[MCalculator_Parametric]) }
     else {
-      throw new RuntimeException(s"Iwp6AnimationConverter:90> Unsupported MCalculator: ${mc.getClass.getName}")
+      Logger.error(s"Iwp6AnimationConverter:175> Unsupported MCalculator: ${mc}")
+      throw new RuntimeException(s"Iwp6AnimationConverter:175> Unsupported MCalculator: ${mc}")
     }
   }
 
@@ -211,6 +218,8 @@ object Iwp6Animation extends BoilerplateIO {
   def fromXmlFile(xmlFile: File) : Try[Iwp6Animation] = {
 
     val xmlString = readFileCompletely(xmlFile)
+
+    // Logger.info(s"Iwp6Animation:215> xmlFile: ${xmlFile}     xmlString: ${xmlString}")
 
     Try {
 
@@ -294,11 +303,56 @@ object Iwp6Animation extends BoilerplateIO {
 
         } else if ( ar.isInstanceOf[DObject_Solid]) {
           val s = ar.asInstanceOf[DObject_Solid]
+
+          // 2020Jan31 Add support for mapping points
+          val points : Seq[Iwp6ShapePoint] = if ( s.shape.isInstanceOf[GShape_Polygon] ) {
+            val p = s.shape.asInstanceOf[GShape_Polygon]
+
+            Logger.info("Iwp6Animation:303> Found a polygon! : x " + p.getXPointCalcs + "  y : "+ p.getYPointCalcs )
+
+            p.getXPointCalcs.toArray.toSeq.zipWithIndex.map { case(xP, i) =>
+              // Get the parallel array Y point with the same x index
+              val yP = p.getYPointCalcs.elementAt(i)
+
+              val xCalc = convertCalc(xP.asInstanceOf[MCalculator])
+              val yCalc = convertCalc(yP.asInstanceOf[MCalculator])
+              Logger.info(s"Iwp6Animation:311> xCalc: ${xCalc}  xP: ${xP.getClass.getName}  i: ${i}")
+
+              Iwp6ShapePoint ( i,
+                Iwp6Path(xCalc),
+                Iwp6Path(yCalc) )
+            }.toSeq
+
+          } else {
+            Seq.empty
+          }
+
+
+          // 2020Jan31 Add Support for mapping Bitmaps
+          val shapeFileO = if ( s.shape.isInstanceOf[GShape_Bitmap] ) {
+            val b = s.shape.asInstanceOf[GShape_Bitmap]
+            // Logger.info(s"Iwp6Animation:329> GShape_Bitmap: File ${b.getFile}")
+            Some(Iwp6ShapeFile(b.getFile))
+          } else {
+            None
+          }
+
+          // 2020Feb07 Defense against no angle calc
+          val angleCalcO = if ( s.shape.getAngleCalculator == null ) {
+            None
+          } else {
+            Some(Iwp6Length( convertCalc(s.shape.getAngleCalculator ) ))
+          }
+
+
+
+
           Some(Iwp6Solid(
             name = s.name,
-
             shape = Iwp6Shape(
               s.shape.getType.toLowerCase,
+              points,
+              shapeFileO,
               Some(Iwp6Vectors(
                 xVel = s.shape.getVectorSelector.xVelSelected(),
                 yVel = s.shape.getVectorSelector.yVelSelected(),
@@ -309,6 +363,7 @@ object Iwp6Animation extends BoilerplateIO {
               )),
               Iwp6Length( convertCalc(s.shape.getWidthCalculator ) ),
               Iwp6Length( convertCalc(s.shape.getHeightCalculator ) ),
+              angleCalcO,
               Some(Iwp6GraphOptions(
                 s.shape.getIsGraphable,
                 Iwp6InitiallyOn(
@@ -334,9 +389,27 @@ object Iwp6Animation extends BoilerplateIO {
             ypath = Iwp6Path( convertCalc(s.getCalcY ))
           ))
 
-        } else {
-          //         val po = ar.asInstanceOf[Iwp6Object]
 
+        } else if ( ar.isInstanceOf[DObject_FloatingText]) {
+
+          val ft = ar.asInstanceOf[DObject_FloatingText]
+
+          Some(Iwp6FloatingText(name = ft.getName,
+            text = ft.getText,
+            units = Some(ft.getUnits),
+            value = convertCalc(ft.getValue),
+            fontSize = Some(ft.getFontSize),
+            showValue = ft.getShowValue,
+            color = Iwp6Color(
+              red = ft.getFontColor.getRed,
+              green = ft.getFontColor.getGreen,
+              blue = ft.getFontColor.getBlue
+            ),
+            xpath = Iwp6Path(convertCalc(ft.getXpath)),
+            ypath = Iwp6Path(convertCalc(ft.getYpath))
+          ))
+
+        } else {
 
           Logger.error(s"Iwp6Animation:214> Unrecognized IwpV4 Dobject class: ${ar.getClass.getName }")
           None
@@ -449,6 +522,9 @@ case class Iwp6Animation(filename: Option[String],
 
       } else if ( o.isInstanceOf[Iwp6Output] ) {
         Json.toJson(o.asInstanceOf[Iwp6Output])
+
+      } else if ( o.isInstanceOf[Iwp6FloatingText] ) {
+        Json.toJson(o.asInstanceOf[Iwp6FloatingText])
 
       } else {
         throw new RuntimeException(s"Iwp6Animation:249> Unresolvable object type: ${o.getClass.getName}")
