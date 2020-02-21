@@ -3,7 +3,7 @@ package controllers
 import java.io.File
 
 import javax.inject._
-import models.{Iwp6Animation, IwpObjectOrderingDiff, IwpOrderingRequiresProvides}
+import models.{Iwp6Animation, IwpObjectNameDiff, IwpObjectOrderingDiff, IwpOrderingRequiresProvides}
 import org.mongodb.scala.model.Filters._
 import play.api.{Configuration, Logger}
 import play.api.libs.json.{JsObject, Json}
@@ -102,25 +102,29 @@ class ValidationController @Inject()(cc: ControllerComponents,
 
     val v6array = iwpVersion6CalculatorService.animateObjectOrdering(collection, filename)
 
-    val v4ordering = v4array.value.map { jsv =>
+    val v4ordering = v4array.value.zipWithIndex.map { case(jsv,i) =>
       val jso = jsv.asInstanceOf[JsObject]
-      IwpOrderingRequiresProvides( name = (jso \ "name").as[String],
-        provides = (jso \ "provided").asOpt[Seq[String]].getOrElse(Seq.empty),
-        requires = (jso \ "required").asOpt[Seq[String]].getOrElse(Seq.empty),
+      IwpOrderingRequiresProvides(
+        order = i,
+        name = (jso \ "name").as[String],
+        provides = (jso \ "provided").asOpt[Seq[String]].getOrElse(Seq.empty).sorted.distinct,
+        requires = (jso \ "required").asOpt[Seq[String]].getOrElse(Seq.empty).sorted.distinct,
         jso = jso
       )
     }
 
-    val v6ordering = v6array.value.map { jsv =>
+    val v6ordering = v6array.value.zipWithIndex.map { case(jsv,i) =>
       val jso = jsv.asInstanceOf[JsObject]
-      IwpOrderingRequiresProvides( name = (jso \ "name").as[String],
-        provides = (jso \ "provided").asOpt[Seq[String]].getOrElse(Seq.empty),
-        requires = (jso \ "required").asOpt[Seq[String]].getOrElse(Seq.empty),
+      IwpOrderingRequiresProvides(
+        order = i,
+        name = (jso \ "name").as[String],
+        provides = (jso \ "provided").asOpt[Seq[String]].getOrElse(Seq.empty).sorted.distinct,
+        requires = (jso \ "required").asOpt[Seq[String]].getOrElse(Seq.empty).sorted.distinct,
         jso = jso
       )
     }
 
-    // Compile the case class
+    // Compile the case class by numerical difference
 
     val diffOrdering = v4ordering.zipWithIndex.map { case (v4order, i) =>
       val v6order = v6ordering(i)
@@ -134,7 +138,23 @@ class ValidationController @Inject()(cc: ControllerComponents,
       )
     }
 
-    Ok(views.html.validation.compareIwpOrdering(path, diffOrdering) )
+    // Compile the case class by object difference
+
+    val diffNames = v4ordering.sortBy(_.name).map { v4order =>
+
+      val v6order = v6ordering.find{_.name.equals(v4order.name)}.get
+
+      IwpObjectNameDiff(v4order.name,
+        v4order,
+        v6order,
+        v4order.order == v6order.order,
+        v4order.requires.equals(v6order.requires),
+        v4order.provides.equals(v6order.provides)
+      )
+    }
+
+
+    Ok(views.html.validation.compareIwpOrdering(path, diffOrdering, diffNames) )
 
   }
 

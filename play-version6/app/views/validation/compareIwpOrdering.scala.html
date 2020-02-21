@@ -1,4 +1,4 @@
-@(path: String, orderingDiff: Seq[IwpObjectOrderingDiff] )
+@(path: String, orderingDiff: Seq[IwpObjectOrderingDiff], nameDiff: Seq[IwpObjectNameDiff]  )
 
 <h2>compareIwpOrdering</h2>
 
@@ -8,7 +8,42 @@
 
 <p>orderingCount: @orderingDiff.size</p>
 
-<h3>Detail</h3>
+<hr/>
+
+
+<h3>Differences by Name</h3>
+
+<table style="border-width: 1px; border-color: #666;">
+
+    <tr>
+        <th>Name</th>
+        <th>V4 Order</th>
+        <th>V6 Order</th>
+        <th>V4 Required</th>
+        <th>V6 Required</th>
+        <th>V4 Provided</th>
+        <th>V6 Provided</th>
+    </tr>
+
+    @nameDiff.zipWithIndex.map { case(diff,i) =>
+
+    <tr>
+        <td>@diff.name</td>
+        <td @if(!diff.orderEqual){style="background-color:#ffa;"}>@diff.v4.order</td>
+        <td @if(!diff.orderEqual){style="background-color:#ffa;"}>@diff.v6.order</td>
+        <td @if(!diff.providesEqual){style="background-color:#ffa;"}>@diff.v4.provides.mkString(", ")</td>
+        <td @if(!diff.providesEqual){style="background-color:#ffa;"}>@diff.v6.provides.mkString(", ")</td>
+        <td @if(!diff.requiresEqual){style="background-color:#ffa;"}>@diff.v4.requires.mkString(", ")</td>
+        <td @if(!diff.requiresEqual){style="background-color:#ffa;"}>@diff.v6.requires.mkString(", ")</td>
+    </tr>
+
+    }
+
+</table>
+
+<hr/>
+
+<h3>Differences by Order</h3>
 
 <table style="border-width: 1px; border-color: #666;">
 
