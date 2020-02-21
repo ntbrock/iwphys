@@ -6,7 +6,7 @@ import javax.inject._
 import models.Iwp6Animation
 import org.mongodb.scala.model.Filters._
 import play.api.{Configuration, Logger}
-import play.api.libs.json.Json
+import play.api.libs.json.{JsObject, Json}
 import play.api.mvc._
 import services.{IwpDifferenceCalculatorService, IwpMongoClient, IwpVersion4CalculatorService, IwpVersion6CalculatorService}
 
@@ -99,10 +99,24 @@ class ValidationController @Inject()(cc: ControllerComponents,
     // Ok("TODO: Implementing object ordering comparison")
 
     val v4 = iwpVersion4CalculatorService.problemObjectOrdering(path)
-    Ok(s"TODO: v4: ${v4}")
 
-    //val v6 = iwpVersion6CalculatorService.animateObjectOrdering(collection, filename)
-    //Ok(s"TODO: v6: ${v6}")
+    val v6 = iwpVersion6CalculatorService.animateObjectOrdering(collection, filename)
+
+
+    val v4objects = v4.value.map { jsv =>
+      jsv.asInstanceOf[JsObject]
+    }
+
+    val v6objects = v6.value.map { jsv =>
+      jsv.asInstanceOf[JsObject]
+    }
+
+    val maxObjectCount = if ( v4.value.size > v6.value.size ) { v4.value.size } else { v6.value.size }
+
+    Ok(views.html.validation.compareIwpOrdering(path, v4objects, v6objects, maxObjectCount))
+
+  }
+
 
 
     /*
@@ -150,7 +164,5 @@ class ValidationController @Inject()(cc: ControllerComponents,
 
 
 */
-  }
-
 
 }

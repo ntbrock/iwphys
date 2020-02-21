@@ -1,0 +1,45 @@
+@import play.api.libs.json.{JsArray, JsNumber, JsObject}
+
+@(path: String, v4: Seq[JsObject], v6: Seq[JsObject], maxObjectCount: Int )
+
+<h2>compareIwpOrdering</h2>
+
+<h3>Summary</h3>
+
+<p>path: @path</p>
+
+<p>v4.size: @{v4.size}</p>
+
+<p>v6.size: @{v6.size}</p>
+
+<p>maxObjectCount: @maxObjectCount</p>
+
+<h3>Detail</h3>
+
+<table style="border-width: 1px; border-color: #666;">
+
+    <tr>
+        <th>Index</th>
+        <th>V4 Name</th>
+        <th>V4 Provided</th>
+        <th>V6 Object</th>
+        <th>V6 Provided</th>
+    </tr>
+
+    @v4.zipWithIndex.map { case(v4object,i) =>
+
+        @defining(v6(i)) { v6object =>
+
+            <tr>
+                <td>@i</td>
+                <td>@{ v4object \\ "name" }</td>
+                <td>@{ v4object \\ "provided" }</td>
+                <td>@{ v6object \\ "name" }</td>
+                <td>@{ v6object \\ "provided" }</td>
+
+            </tr>
+
+        }
+    }
+
+</table>
