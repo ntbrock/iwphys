@@ -1,4 +1,4 @@
-version := "6.0.20200118-SNAPSHOT"
+version := "6.1.20200221-SNAPSHOT"
 
 name := """iwphys-play"""
 organization := "edu.ncssm.iwp"

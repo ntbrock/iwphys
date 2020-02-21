@@ -1,6 +1,6 @@
 # gfy3 configuration
 
-export APT_VERSION=6.0
+export APT_VERSION=6.1
 
 export DEB_NAME=iwphys-play
 
