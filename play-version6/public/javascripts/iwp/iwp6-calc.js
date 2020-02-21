@@ -647,12 +647,16 @@ function setWindow(inWindow) {
 
  function initializeGraphVars(inGraphWindow) {
 	graphWindow = inGraphWindow;
-	$("#graph_xmin").val( graphWindow.xmin );
-	$("#graph_xmax").val( graphWindow.xmax );
-  	$("#graph_xgrid").val( graphWindow.xgrid );
-  	$("#graph_ymax").val( graphWindow.ymax );
-  	$("#graph_ymin").val( graphWindow.ymin );
-  	$("#graph_ygrid").val( graphWindow.ygrid );
+
+	// 2020Feb21 Safety Check for Nashorn mode where Jquery doesn't exisst
+	if ( typeof $ === "function" ) {
+		$("#graph_xmin").val( graphWindow.xmin );
+		$("#graph_xmax").val( graphWindow.xmax );
+	    $("#graph_xgrid").val( graphWindow.xgrid );
+	    $("#graph_ymax").val( graphWindow.ymax );
+	    $("#graph_ymin").val( graphWindow.ymin );
+	    $("#graph_ygrid").val( graphWindow.ygrid );
+  	}
   }
   
 // "GraphWindow": { "xmin": "0.0", "xmax": "5.0", "ymin": "-50.0", "ymax": "50.0", "xgrid": "0.5", "ygrid": "10.0"
