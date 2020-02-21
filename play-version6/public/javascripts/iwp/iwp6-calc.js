@@ -3,6 +3,7 @@
  * Ryan Steed, Taylor Brockman 2016 - Version 5.0 Initial Port to HTML + SVG
  * Matthew Mims, Taylor Brockman 2018  - Version 5.1 Added Graphing and D3
  * Albert Gong, Nial Mullane, Taylor Brockman 2019 - Version 6.0 Migrated into Play Framework
+ * Andy Wang, Benjamin Wu, Taylor Brockmanm 2020 - Version 6.1 Modern Designer and extensive testing
  */
 
 
@@ -530,8 +531,6 @@ function calculateVarsAtStep(step) {
   // Collect user Inputs! These are polled from the DOM every step.
   compiledObjects.forEach( function(object, index) {
 
-    // console.log("iwp6-calc:514> CalculationLoop for Object: " + JSON.stringify(object) );
-
     if ( object.objectType == 'input' ) {
 
        var newValue = calculateInputAtStep(object, step, vars, false );
@@ -541,15 +540,12 @@ function calculateVarsAtStep(step) {
 
     } else if ( object.objectType == 'output') {
 
-// 2019Sep06 Turned on Verbose
         var newValue = calculateOutputAtStep(object, step, vars, true );
 
         if ( isNaN(newValue) ) { throw "not a number" };
         if ( !isFinite(newValue) ) { throw "not finite" };
 
         vars[object.name] = newValue;
-
-        // console.log("iwp6-calc:536> Output name: " + object.name + "  newValue: "+ newValue );
 
     } else if ( object.objectType == 'solid') {
 
@@ -1154,7 +1150,7 @@ function evaluateParametricCalculator( resultVariable, calculator, calculateStep
     }
     catch ( err ) {
         if ( verbose ) {
-            console.log("iwp6-calc:1058> evaluateParametricCalculator ERROR: " + resultVariable + "> Unable to evaluate calculator: ", err );
+            console.log("iwp6-calc:1058> evaluateParametricCalculator ERROR: " + resultVariable + "> Exception evaluating calculator: ", err );
             console.log("iwp6-calc:1059> evaluateParametricCalculator ERROR: " + resultVariable + "> Equation: ", calculator.equation );
             console.log("iwp6-calc:1060> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars: ", vars);
             console.log("iwp6-calc:1060> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars.STRINGIFY: ", JSON.stringify(vars));
