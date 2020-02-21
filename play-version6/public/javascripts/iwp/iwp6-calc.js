@@ -282,26 +282,26 @@ function calculateOutputAtStep(output, step, vars, verbose) {
 
 function calculateFloatingTextAtStep(floatingText, step, vars, verbose) {
 
-    console.log("iwp6-calc:285> calculateFloatingTextAtStep: floatingText: " , floatingText.name , " ", floatingText, "  step: " , step , " vars: " , JSON.stringify(vars) );
+    // console.log("iwp6-calc:285> calculateFloatingTextAtStep: floatingText: " , floatingText.name , " ", floatingText, "  step: " , step , " vars: " , JSON.stringify(vars) );
 
-    var newValue = evaluateCalculator( floatingText.name+".value", floatingText.value.calculator, step, vars, verbose, floatingText.name ).value;
-    vars[floatingText.name] = newValue;
-
+    var newValueComplex = evaluateCalculator( floatingText.name+".value", floatingText.value.calculator, step, vars, verbose, floatingText.name );
+    vars[floatingText.name] = newValueComplex.value;
 
     var xComplex = evaluateCalculator( floatingText.name+".x", floatingText.xpath.calculator, step, vars, verbose, floatingText.name )
-    vars[floatingText.x] = xComplex.x;
+    vars[floatingText.x] = xComplex.value;
 
     var yComplex = evaluateCalculator( floatingText.name+".y", floatingText.ypath.calculator, step, vars, verbose, floatingText.name )
-    vars[floatingText.y] = yComplex.y;
+    vars[floatingText.y] = yComplex.value;
+
+	// console.log("iwp6-calc:296> calculateFloatingTextAtStep, xComplex: " , xComplex,  "  yComplex: " , yComplex );
 
     if ( typeof updateTextSvgPathAndShape === "function" ) {
-        var pathAndShape = { x: xComplex.x, y: yComplex.y, value: newValue }
-	    console.log("iwp6-calc:291> TODO Animate the floating text! New value: " , newValue,  " path and shape: ", pathAndShape);
-
+        var pathAndShape = { x: xComplex.value, y: yComplex.value, value: newValueComplex.value }
+	    // console.log("iwp6-calc:300> Animate the floating text! New value: " , newValueComplex,  " path and shape: ", pathAndShape);
         updateTextSvgPathAndShape(floatingText, pathAndShape);
     }
 
-    return newValue;
+    return newValueComplex.value;
 }
 
 
@@ -1013,7 +1013,7 @@ function addObject(object) {
 
 function compileCalculator(iwpCalculator) {
 
-    console.log("iwp6-calc:1161> Attempting to compile calculator: " + JSON.stringify(iwpCalculator));
+    // console.log("iwp6-calc:1161> Attempting to compile calculator: " + JSON.stringify(iwpCalculator));
 
     var incomingType = iwpCalculator.calcType
 
@@ -1324,14 +1324,11 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 
 function parseAnimationToMemory( rawAnimation ) {
 
-
     console.log("iwp6-calc:1222> parseAnimationToMemory Parsing rawAnimation: ", rawAnimation);
 
     var animation = { loop: [] };
 
-    // 2019Mar13
-
-     rawAnimation.objects.forEach( function( object, index ) {
+    rawAnimation.objects.forEach( function( object, index ) {
         // console.log("iwp6-calc:1451> parseAnimationToMemory> Iterator: " + JSON.stringify(object) );
 
         if ( object.objectType == "time" ) {

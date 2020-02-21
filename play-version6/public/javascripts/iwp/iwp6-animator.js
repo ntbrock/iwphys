@@ -402,12 +402,12 @@ for line
 
 function updateTextSvgPathAndShape(text, pathAndShape) {
 
-//BOOK
   var svgText = $("#text_" + text.name);
 
-  if (text.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
+  // 2020Feb21 - Changed Structure of Floatingtext to a new object type with no shape.
+  if (text.objectType == "floatingText" ||  text.shape.type == "edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText") {
 
-    console.log("iwp5:1698> Floating Text Calculation: name: ", text.name, "  pathAndShape: ", pathAndShape );
+    // console.log("iwp5:1698> Floating Text Calculation: name: ", text.name, "  pathAndShape: ", pathAndShape );
 
     var safeText = text.text
     if ( text.text == null || text.text instanceof Object ) { safeText = ""; }
@@ -427,8 +427,7 @@ function updateTextSvgPathAndShape(text, pathAndShape) {
     var x = xCanvas(pathAndShape.x)
     var y = yCanvas(pathAndShape.y)
 
-    console.log("iwp5:1638> Floating Text Animation, x: " + x +  " y: " + y + " moving svgText: " , svgText)
-
+    // console.log("iwp5:1638> Floating Text Animation, x: " + x +  " y: " + y + " moving svgText: " , svgText)
     svgText.attr("x",x).attr("y",y).html(newLabel)
 
   }
