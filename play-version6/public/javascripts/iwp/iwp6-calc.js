@@ -843,7 +843,16 @@ function compileSolid(solid) {
   
 }
 
+/**
+ * 2020Feb21 - Illustrate Functions build out the SVG elements, typically with
+ * placeholder widths, heights that are updated on the first repaint.
+ * Colors and other styling properties work well here.
+ */
 function illustrateSolid(solid) {
+
+  var xOrigin = xCanvas(0);
+  var yOrigin = yCanvas(0);
+
   //HTML
   if (solid.shape.shapeType == "circle") {
     //console.log("it's a circle");
@@ -854,8 +863,9 @@ function illustrateSolid(solid) {
     svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
   else if (solid.shape.shapeType == "line") {
-    //console.log("it's a line")
-    svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
+    // console.log("iwp6-calc:858> It's a line, solid.shape: " , solid.shape);
+	// Initialization Fix, put into the origin
+    svgSolids.push("<line id='solid_" +solid.name+ "' x1='"+xOrigin+"' x2='"+xOrigin+"' y1='"+yOrigin+"' y2='"+yOrigin+"' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
   else if (solid.shape.shapeType == "vector") {
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
@@ -935,14 +945,10 @@ function compileFloatingText(object) {
 
 function illustrateFloatingText(object) {
 
-	console.log("iwp6-calc:939> IllustrateFloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
-
-	console.log("iwp6-calc:939> IllustrateFloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
-	/// Initilization fix - the calclulators hven't been run yet, so we just place the text on page at 0,0 and it's moveed with first redraw.
-	var x = 0; // xCanvas(object.xpath.calculator.value)
-	var y = 0; // yCanvas(object.ypath.calculator.value)
-
-	svgObjects.push( "<text id='text_" +object.name+ "' x='" + x + "' y='"+ y +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
+	// Calculators haven't been calcualted yet, so we just place the text on origin at 0,0 and it's moved with first redraw.
+	var xOrigin = xCanvas(0);
+	var yOrigin = yCanvas(0);
+	svgObjects.push( "<text id='text_" +object.name+ "' x='" + xOrigin + "' y='"+ yOrigin +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
 
 };
 
