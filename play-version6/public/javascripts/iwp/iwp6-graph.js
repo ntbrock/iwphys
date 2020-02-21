@@ -136,6 +136,7 @@ function graphSetWindowFromAnimation(graphWindow) {
 
 	var xTicks = (graphWindow.xmax - graphWindow.xmin) / graphWindow.xgrid
 	var yTicks = (graphWindow.ymax - graphWindow.ymin) / graphWindow.ygrid
+	console.log("iwp6-graph:140> yTicks: ", yTicks);
 	xGrid = d3.axisTop(graphXScale).ticks(xTicks).tickSize(1000);
 	yGrid = d3.axisRight(graphYScale).ticks(yTicks).tickSize(1000);
 	xAxis = d3.axisBottom(graphXScale).ticks(xTicks).tickSize(0);
@@ -372,7 +373,7 @@ function graphMeasureClick(button) {
 /**
  * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
  */
-function graphStepForward(step, vars) {
+function graphStepForward(step, vars, graphWindow) {
 
 	var svg = d3.select('#graph');
 	var lastStep = varsAtStep[step-1]
@@ -399,25 +400,54 @@ function graphStepForward(step, vars) {
 				var graphThisStep = true
 
 				// console.log("iwp6-graph.js line 394: vars.t, vars.delta_t: ", vars.t, vars.delta_t);
-				if ((measure == 'xVel' || measure == 'yVel') && vars.t < 2*vars.delta_t) {
+				if ((measure == 'xVel' || measure == 'yVel' || measure == 'xAccel' || measure == 'yAccel') && vars.t < 4*vars.delta_t) {
 					graphThisStep = false
 				}
-
+			
 				//create dashed line effect for velocity values
-				if ((measure == 'xVel' || measure == 'yVel')
-				     && typeof queryTimeStopInputDouble === 'function'
-				     && (Math.round(vars.t*1000/queryTimeStopInputDouble()))%4 != 0) {
-					graphThisStep = false	
+				if ((measure == 'xVel' || measure == 'yVel') && graphThisStep)  {
+					var spacing = 
+					var lcMeasure = measure.toLowerCase()
+					var oneThirdTime = lastStep.t + (vars.t - lastStep.t) / 3
+					var oneThirdMeasure = lastStep[name][lcMeasure] + (vars[name][lcMeasure] - lastStep[name][lcMeasure] ) / 3
+              				paths[measure].moveTo (
+                        			graphXScale(lastStep.t),
+                    			        graphYScale(lastStep[name][lcMeasure])
+		                        )
+					
+
+					//draw first part
+					paths[measure].lineTo(
+						graphXScale(oneThirdTime),
+						graphYScale(oneThirdMeasure)
+					)
+					//create gap
+					oneThirdTime += (vars.t - lastStep.t) / 3
+					oneThirdMeasure += (vars[name][lcMeasure] - lastStep[name][lcMeasure]) / 3
+					paths[measure].moveTo(
+						graphXScale(oneThirdTime),
+						graphYScale(oneThirdMeasure)
+					)
+					oneThirdTime += (vars.t - lastStep.t) / 3
+					oneThirdMeasure += (vars[name][lcMeasure] - lastStep[name][lcMeasure]) / 3
+					
+					//draw second part
+					paths[measure].lineTo(
+						graphXScale(oneThirdTime),
+						graphYScale(oneThirdMeasure)
+					)
+					pathsSvg[measure].attr("d", paths[measure])
+
 				}
 					
 				//create dotted line effect for acceleration values
-				if (measure == 'xAccel' || measure == 'yAccel') {
-
+				else if (measure == 'xAccel' || measure == 'yAccel') {
+				
 					// Calculate the linear midpoint
 					var lcMeasure = measure.toLowerCase()
 					var midTime = lastStep.t + ( vars.t - lastStep.t ) / 2
 					var midMeasure = lastStep[name][lcMeasure] + ( vars[name][lcMeasure] - lastStep[name][lcMeasure] ) / 2
-
+				
                     paths[measure].moveTo (
                         graphXScale(lastStep.t),
                         graphYScale(lastStep[name][lcMeasure])
@@ -449,8 +479,8 @@ function graphStepForward(step, vars) {
 						//console.log("pathsSvg[measure].getTotalLength()", paths[measure].getTotalLength());
 					}
 
-				}
-
+				     } 	
+				
 
 			});
 		});

@@ -290,17 +290,6 @@ function updateSolidSvgPathAndShape(solid, pathAndShape) {
     .attr("y1", yCanvas(pathAndShape.y))
     .attr("y2", yCanvas(pathAndShape.y + pathAndShape.height));
   }
-  else if (shapeType == "polygon") {
-
-    // console.log("iwp5:1581> Redrawing Polygon: " + solid.name + " has Error? " + solid.calculationError );
-    var points = pathAndShape.points
-    pointsAttr = ""
-    $.each( pathAndShape.points, function( index, i ) {
-      pointsAttr += xCanvas(points[index].x+pathAndShape.x)+","+yCanvas(points[index].y+pathAndShape.y)+" "
-      // console.log("iwp5:1579> Polygon i: " + i + " points: " , pointsAttr)
-    });
-    svgSolid.attr("points", pointsAttr)
-  }
   else if (shapeType == "vector") {
 
 
@@ -330,7 +319,17 @@ function updateSolidSvgPathAndShape(solid, pathAndShape) {
 
     svgSolid.attr("points",point1+point2+arrow1+point2+arrow2)
   }
+  else if (shapeType == "polygon") {
 
+    // console.log("iwp5:1581> Redrawing Polygon: " + solid.name + " has Error? " + solid.calculationError );
+    var points = pathAndShape.points
+    pointsAttr = "0, 0 100, 0 100,100 0, 100"
+    $.each( pathAndShape.points, function( index, i ) {
+      pointsAttr += xCanvas(points[index].x+pathAndShape.x)+","+yCanvas(points[index].y+pathAndShape.y)+" "
+      console.log("animator.js:329> Polygon i: " + i + " points: " , pointsAttr)
+    });
+    svgSolid.attr("points", pointsAttr)
+  }
   else if (shapeType == "Bitmap" || shapeType == "bitmap") {
 
     console.log("iwp5:1720> Bitmap type! solid: " , solid,  "  pathAndShape: " , pathAndShape )

@@ -388,7 +388,7 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
           x: evaluateCalculator(solid.name+".xpt", i.xpath.calculator, step, vars, verbose, solid.name ).value,
           y: evaluateCalculator(solid.name+".ypt", i.ypath.calculator, step, vars, verbose, solid.name ).value
         };
-        calc.points.push(point);
+        calc["points"].push(point);
       });
 
 
