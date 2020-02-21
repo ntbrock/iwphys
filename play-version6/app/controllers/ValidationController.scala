@@ -3,7 +3,7 @@ package controllers
 import java.io.File
 
 import javax.inject._
-import models.Iwp6Animation
+import models.{Iwp6Animation, IwpObjectOrderingDiff, IwpOrderingRequiresProvides}
 import org.mongodb.scala.model.Filters._
 import play.api.{Configuration, Logger}
 import play.api.libs.json.{JsObject, Json}
@@ -98,22 +98,43 @@ class ValidationController @Inject()(cc: ControllerComponents,
 
     // Ok("TODO: Implementing object ordering comparison")
 
-    val v4 = iwpVersion4CalculatorService.problemObjectOrdering(path)
+    val v4array = iwpVersion4CalculatorService.problemObjectOrdering(path)
 
-    val v6 = iwpVersion6CalculatorService.animateObjectOrdering(collection, filename)
+    val v6array = iwpVersion6CalculatorService.animateObjectOrdering(collection, filename)
 
-
-    val v4objects = v4.value.map { jsv =>
-      jsv.asInstanceOf[JsObject]
+    val v4ordering = v4array.value.map { jsv =>
+      val jso = jsv.asInstanceOf[JsObject]
+      IwpOrderingRequiresProvides( name = (jso \ "name").as[String],
+        provides = (jso \ "provided").asOpt[Seq[String]].getOrElse(Seq.empty),
+        requires = (jso \ "required").asOpt[Seq[String]].getOrElse(Seq.empty),
+        jso = jso
+      )
     }
 
-    val v6objects = v6.value.map { jsv =>
-      jsv.asInstanceOf[JsObject]
+    val v6ordering = v6array.value.map { jsv =>
+      val jso = jsv.asInstanceOf[JsObject]
+      IwpOrderingRequiresProvides( name = (jso \ "name").as[String],
+        provides = (jso \ "provided").asOpt[Seq[String]].getOrElse(Seq.empty),
+        requires = (jso \ "required").asOpt[Seq[String]].getOrElse(Seq.empty),
+        jso = jso
+      )
     }
 
-    val maxObjectCount = if ( v4.value.size > v6.value.size ) { v4.value.size } else { v6.value.size }
+    // Compile the case class
 
-    Ok(views.html.validation.compareIwpOrdering(path, v4objects, v6objects, maxObjectCount))
+    val diffOrdering = v4ordering.zipWithIndex.map { case (v4order, i) =>
+      val v6order = v6ordering(i)
+
+      IwpObjectOrderingDiff(i,
+        v4order,
+        v6order,
+        v4order.name.equals(v6order.name),
+        v4order.requires.equals(v6order.requires),
+        v4order.provides.equals(v6order.provides)
+      )
+    }
+
+    Ok(views.html.validation.compareIwpOrdering(path, diffOrdering) )
 
   }
 
