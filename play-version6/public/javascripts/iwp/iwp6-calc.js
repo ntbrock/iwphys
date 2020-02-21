@@ -170,7 +170,8 @@ function stepBackwardAndPause() {
  */
 function handleStep() {
 
-	// console.log("iwp6-calc:167> HandleStep: current: " , currentStep, "  change: ", changeStep );
+	// console.log("iwp6-calc:173> HandleStep: current: " , currentStep, "  change: ", changeStep );
+
 	// apply the time change.
 	var newStep = currentStep + changeStep;
 
@@ -218,7 +219,7 @@ function handleStep() {
 
         } else {
             // UI rendering is handled by the calculate as a side effect
-              vars = calculateVarsAtStep(newStep);
+            vars = calculateVarsAtStep(newStep);
             archiveVarsAtStep( newStep, vars );
         }
 
@@ -280,28 +281,29 @@ function calculateOutputAtStep(output, step, vars, verbose) {
 }
 
 
+/**
+ * 2020Feb21 - Floating text now stored in vars as an object
+ */
 function calculateFloatingTextAtStep(floatingText, step, vars, verbose) {
 
     // console.log("iwp6-calc:285> calculateFloatingTextAtStep: floatingText: " , floatingText.name , " ", floatingText, "  step: " , step , " vars: " , JSON.stringify(vars) );
-
     var newValueComplex = evaluateCalculator( floatingText.name+".value", floatingText.value.calculator, step, vars, verbose, floatingText.name );
-    vars[floatingText.name] = newValueComplex.value;
+    var xComplex = evaluateCalculator( floatingText.name+".x", floatingText.xpath.calculator, step, vars, verbose, floatingText.name );
+    var yComplex = evaluateCalculator( floatingText.name+".y", floatingText.ypath.calculator, step, vars, verbose, floatingText.name );
 
-    var xComplex = evaluateCalculator( floatingText.name+".x", floatingText.xpath.calculator, step, vars, verbose, floatingText.name )
-    vars[floatingText.x] = xComplex.value;
-
-    var yComplex = evaluateCalculator( floatingText.name+".y", floatingText.ypath.calculator, step, vars, verbose, floatingText.name )
-    vars[floatingText.y] = yComplex.value;
+	var ft = {
+		value: newValueComplex.value,
+		x: xComplex.value,
+		y: yComplex.value
+	};
 
 	// console.log("iwp6-calc:296> calculateFloatingTextAtStep, xComplex: " , xComplex,  "  yComplex: " , yComplex );
-
-    if ( typeof updateTextSvgPathAndShape === "function" ) {
-        var pathAndShape = { x: xComplex.value, y: yComplex.value, value: newValueComplex.value }
+    if ( typeof updateFloatingTextSvgPathAndShape === "function" ) {
 	    // console.log("iwp6-calc:300> Animate the floating text! New value: " , newValueComplex,  " path and shape: ", pathAndShape);
-        updateTextSvgPathAndShape(floatingText, pathAndShape);
+        updateFloatingTextSvgPathAndShape(floatingText, ft );
     }
 
-    return newValueComplex.value;
+    return ft;
 }
 
 
@@ -479,41 +481,10 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 }
 
 
-
-
-function calculateTextAtStep(text, step, vars, verbose) {
-
-  // console.log("iwp5:327> calculateTextAtStep: " + text.name, text )
-
-  var xComplex = evaluateCalculator( text.name+".x", text.xpath.calculator, step, vars, verbose, text.name )
-  var x = xComplex.value
-
-  var yComplex = evaluateCalculator( text.name+".y", text.ypath.calculator, step, vars, verbose, text.name )
-  var y = yComplex.value
-
-  var vComplex = evaluateCalculator( text.name+".value", text.value.calculator, step, vars, verbose, text.name )
-  var v = vComplex.value
-
-
-
-  // Dont' need to write texts back to variables.
-  // vars[solid.name] = calc
-
-  if ( typeof updateTextSvgPathAndShape === "function" ) {
-    updateTextSvgPathAndShape(text, {x: x, y: y, value: v})
-  }
-}
-
-
-
 // RENDERING steps:
 //  updateTimeDisplay(vars.t);
 //  updateUserFormOutputDouble(output, newValue);
 //  updateSolidSvgPathAndShape(solid, calc)
-
-
-
-
 var CONFIG_throw_solid_calculation_exceptions = false;
 
 
@@ -600,7 +571,6 @@ function calculateVarsAtStep(step) {
 
     } else if ( object.objectType == 'floatingText' ) {
 
-
 		var floatingText = object;
 
         if ( floatingText.xpath.calculator.calcType == "euler-mathjs" ) {
@@ -610,17 +580,15 @@ function calculateVarsAtStep(step) {
         if ( floatingText.ypath.calculator.calcType == "euler-mathjs" ) {
             initializeEulerCalculator(floatingText, step, vars, "y", solid.ypath.calculator)
         }
-//BOOK
-		var newValue = calculateFloatingTextAtStep(floatingText, step, vars, true );
-        vars[floatingText.name] = newValue;
 
+		vars[floatingText.name] = calculateFloatingTextAtStep(floatingText, step, vars, true );
 
     } else if ( object.objectType == 'object') {
 
-        throw "iwp6-calc:580> Unrecognized Object type: " + object.objectType;
+        throw "iwp6-calc:592> Unrecognized Object type: " + object.objectType;
 
     } else {
-        throw "iwp6-calc:583> Unrecognized Object type: " + object.objectType;
+        throw "iwp6-calc:595> Unrecognized Object type: " + object.objectType;
     }
 
   });
@@ -930,11 +898,11 @@ function illustrateSolid(solid) {
 
 
 // 2020Feb07 Added formal support for floating text
-function addFloatingText(object) {
+function compileFloatingText(object) {
 
-	console.log("addFloatingText:882> object: " , object);
+	// console.log("compileFloatingText:904> object: " , object);
 
-	var compiledObject = {
+	return {
 		objectType: 'floatingText',
 		name: object.name,
 		shape: {
@@ -961,10 +929,15 @@ function addFloatingText(object) {
 			calculator : compileCalculator(object.ypath.calculator)
 		}
 	}
-	compiledObjects.push( compiledObject );
+
+}
 
 
-	// console.log("iwp5:933> FloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
+function illustrateFloatingText(object) {
+
+	console.log("iwp6-calc:939> IllustrateFloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
+
+	console.log("iwp6-calc:939> IllustrateFloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
 	/// Initilization fix - the calclulators hven't been run yet, so we just place the text on page at 0,0 and it's moveed with first redraw.
 	var x = 0; // xCanvas(object.xpath.calculator.value)
 	var y = 0; // yCanvas(object.ypath.calculator.value)
@@ -1409,9 +1382,11 @@ function parseAnimationToMemory( rawAnimation ) {
     } else if ( object.objectType == 'solid' ) {
         compiledObjects.push(compileSolid(object));
     } else if ( object.objectType == 'floatingText' ) {
-        addFloatingText(object);
+        compiledObjects.push(compileFloatingText(object));
+/* 2020Feb21 Dropping Generic Object Support
     } else if ( object.objectType == 'object' ) {
         addObject(rawAnimation.objects.object);
+*/
     } else {
       throw "Animation parseAnimationToMemory unrecognized Object Type: " + object.objectType;
     }
@@ -1426,15 +1401,17 @@ originalLoopOrder.forEach( function(object, index) {
     } else if ( object.objectType == 'solid' ) {
         illustrateSolid(compileSolid(object));
     } else if ( object.objectType == 'floatingText' ) {
-        // addFloatingText(object);
+        illustrateFloatingText(compileFloatingText(object));
+/* 2020Feb21 Dropping Generic Object Support
     } else if ( object.objectType == 'object' ) {
         // addObject(rawAnimation.objects.object);
+*/
     } else {
       throw "Animation parseAnimationToMemory unrecognized Object Type: " + object.objectType;
     }
 } );
-  // 2019Apr09 store in global singleton
 
+  // 2019Apr09 store in global singleton
   parsedAnimation = animation;
   decorateAnimationFunctions();
 
@@ -1457,6 +1434,9 @@ function decorateAnimationFunctions() {
       return out;
   };
 
+/**
+ 2020Feb21 Disabled Generic Objects*/
+/*
   parsedAnimation.objects = function() {
       var out = [];
       parsedAnimation.loop.forEach( function( object, index ) {
@@ -1464,7 +1444,7 @@ function decorateAnimationFunctions() {
       });
       return out;
   };
-
+*/
 
   parsedAnimation.inputs = function() {
       var out = [];
@@ -1482,6 +1462,13 @@ function decorateAnimationFunctions() {
       return out;
   };
 
+  parsedAnimation.floatingTexts = function() {
+      var out = [];
+      parsedAnimation.loop.forEach( function( object, index ) {
+          if ( object.objectType == 'floatingText' ) { out.push(object); }
+      });
+      return out;
+  };
 
   return parsedAnimation;
 

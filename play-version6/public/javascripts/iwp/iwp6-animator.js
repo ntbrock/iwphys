@@ -16,22 +16,31 @@ function repaintStep(step) {
     throw "No previous calculations available at step: " + step;
   } else {
 
-    updateTimeDisplay(vars.t);
+   updateTimeDisplay(vars.t);
+
+/*
+   console.log("iwp6-animator:21> repaintStep("+step+"), parsedAnimation: " , parsedAnimation);
+
+   console.log("iwp6-animator:21> repaintStep("+step+"), outputs: " , parsedAnimation.outputs());
+
+   console.log("iwp6-animator:21> repaintStep("+step+"), solids: " , parsedAnimation.solids() );
+
+   console.log("iwp6-animator:21> repaintStep("+step+"), floatingTexts: " , parsedAnimation.floatingTexts() );
+
+   console.log("iwp6-animator:21> repaintStep("+step+"), vars: " , vars );
+*/
+
 
    parsedAnimation.outputs().forEach( function( output, index ) {
       updateUserFormOutputDouble(output, vars[output.name]);
    });
 
-   // le.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, solids: ", solids );
-
    parsedAnimation.solids().forEach( function( solid, index ) {
       updateSolidSvgPathAndShape(solid, vars[solid.name])
    });
 
-   // console.log("iwp5:347> Invoking updateSolidSvgPathAndShape from repaintStep, objects: ", objects );
-
-   parsedAnimation.objects().forEach( function( object, index ) {
-      updateSolidSvgPathAndShape(object, vars[object.name])
+   parsedAnimation.floatingTexts().forEach( function( floatingText, index ) {
+      updateFloatingTextSvgPathAndShape(floatingText, vars[floatingText.name]);
    });
 
 
@@ -399,8 +408,9 @@ for line
 		lineData -> linear interpolation*/
 }
 
+// 2020Feb21 Refactor
 
-function updateTextSvgPathAndShape(text, pathAndShape) {
+function updateFloatingTextSvgPathAndShape(text, pathAndShape) {
 
   var svgText = $("#text_" + text.name);
 
@@ -430,6 +440,8 @@ function updateTextSvgPathAndShape(text, pathAndShape) {
     // console.log("iwp5:1638> Floating Text Animation, x: " + x +  " y: " + y + " moving svgText: " , svgText)
     svgText.attr("x",x).attr("y",y).html(newLabel)
 
+  } else {
+    console.log("iwp6-animator:434> updateFloatingTextSvgPathAndShape: Warning, text was not objectType='floatingText': " , text);
   }
 
 }
