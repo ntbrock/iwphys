@@ -195,8 +195,35 @@ function animationObjectRequires(object) {
 		//console.log("iwp6-order:94> Solid " + object.name + "  all : " + JSON.stringify(all) );
 
 		return all;
+
+	} else if ( object.objectType == "floatingText" ) {
+
+		// 2020Feb21 Fix for Floating text path dependencies
+
+		var value = [];
+		var xpath = [];
+		var ypath = [];
+
+		if ( object.value ) {
+			console.log("iwp6-order:208> object.value: " , object.value);
+			value = calculatorRequires(object.value);
+		}
+
+		if ( object.xpath && object.xpath.calculator ) {
+			xpath = calculatorRequires( object.xpath.calculator );
+		}
+
+		if ( object.ypath && object.ypath.calculator ) {
+			ypath = calculatorRequires( object.ypath.calculator );
+		}
+
+		var all = arrayUnique(value.concat(xpath.concat (ypath)));
+		console.log("iwp6-order:221> FloatingText " + object.name + "  all : " + JSON.stringify(all) );
+		return all;
+
 	} else {
-		return []
+
+		throw "animationObjectRequires unsupported object: " + object.objectType;
 	}
 
 }
@@ -226,10 +253,18 @@ function animationObjectProvides(object) {
 			name+".yaccel"
 		];
 
-	} else {
-		return []
-	}
+	} else if ( object.objectType == "floatingText" ) {
 
+		return [
+			name,
+			name+".value",
+			name+".x",
+			name+".y"
+		];
+
+    } else {
+        throw "animationObjectProvides unsupported object: " + object.objectType;
+    }
 
 }
 
