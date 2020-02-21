@@ -205,7 +205,7 @@ function animationObjectRequires(object) {
 		var ypath = [];
 
 		if ( object.value ) {
-			console.log("iwp6-order:208> object.value: " , object.value);
+			// console.log("iwp6-order:208> object.value: " , object.value);
 			value = calculatorRequires(object.value);
 		}
 
@@ -218,7 +218,7 @@ function animationObjectRequires(object) {
 		}
 
 		var all = arrayUnique(value.concat(xpath.concat (ypath)));
-		console.log("iwp6-order:221> FloatingText " + object.name + "  all : " + JSON.stringify(all) );
+		// console.log("iwp6-order:221> FloatingText " + object.name + "  all : " + JSON.stringify(all) );
 		return all;
 
 	} else {

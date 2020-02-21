@@ -16,6 +16,7 @@
 <table style="border-width: 1px; border-color: #666;">
 
     <tr>
+        <th>Type</th>
         <th>Name</th>
         <th>V4 Order</th>
         <th>V6 Order</th>
@@ -28,6 +29,8 @@
     @nameDiff.zipWithIndex.map { case(diff,i) =>
 
     <tr>
+        <td>@diff.v6.objectType</td>
+
         <td>@diff.name</td>
         <td @if(!diff.orderEqual){style="background-color:#ffa;"}>@diff.v4.order</td>
         <td @if(!diff.orderEqual){style="background-color:#ffa;"}>@diff.v6.order</td>

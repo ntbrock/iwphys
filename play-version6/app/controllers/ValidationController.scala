@@ -91,6 +91,14 @@ class ValidationController @Inject()(cc: ControllerComponents,
   // 2019Sep06 A new dependency reordering calculator
 
 
+  val version4nonSensicalRequires = Seq("t")
+
+  private def filterProvidedVariables( seq: Option[Seq[String]] ) : Seq[String] = {
+    seq.getOrElse(Seq.empty).sorted.distinct.filter { s => ! version4nonSensicalRequires.contains(s) }
+  }
+
+
+
   def validateAnimationOrdering(collection: String, filename: String, format: Option[String]) = Action { implicit request: Request[AnyContent] =>
 
     val path = s"${animationsPath}${sep}${collection}${sep}${filename}"
@@ -107,8 +115,9 @@ class ValidationController @Inject()(cc: ControllerComponents,
       IwpOrderingRequiresProvides(
         order = i,
         name = (jso \ "name").as[String],
-        provides = (jso \ "provided").asOpt[Seq[String]].getOrElse(Seq.empty).sorted.distinct,
-        requires = (jso \ "required").asOpt[Seq[String]].getOrElse(Seq.empty).sorted.distinct,
+        objectType = (jso \ "objectType").asOpt[String],
+        provides = filterProvidedVariables( (jso \ "provided").asOpt[Seq[String]] ),
+        requires = filterProvidedVariables( (jso \ "required").asOpt[Seq[String]] ),
         jso = jso
       )
     }
@@ -118,8 +127,9 @@ class ValidationController @Inject()(cc: ControllerComponents,
       IwpOrderingRequiresProvides(
         order = i,
         name = (jso \ "name").as[String],
-        provides = (jso \ "provided").asOpt[Seq[String]].getOrElse(Seq.empty).sorted.distinct,
-        requires = (jso \ "required").asOpt[Seq[String]].getOrElse(Seq.empty).sorted.distinct,
+        objectType = (jso \ "objectType").asOpt[String],
+        provides = filterProvidedVariables( (jso \ "provided").asOpt[Seq[String]] ),
+        requires = filterProvidedVariables( (jso \ "required").asOpt[Seq[String]] ),
         jso = jso
       )
     }

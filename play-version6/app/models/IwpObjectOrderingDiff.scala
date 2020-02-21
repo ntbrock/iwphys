@@ -5,6 +5,7 @@ import play.api.libs.json.JsObject
 
 case class IwpOrderingRequiresProvides(order: Int,
                                        name: String,
+                                       objectType: Option[String],
                                        requires: Seq[String],
                                        provides: Seq[String],
                                        jso: JsObject )
