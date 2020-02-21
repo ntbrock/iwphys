@@ -77,9 +77,10 @@ function equationRequires(eqn) {
 
 	var parts = eqn.split(/[-+*\/ ()^]/);
 	// TODO filter out usual suspects, functions, etc.
+	// console.log("iwp6-order:80>  Eqn: " + eqn + "   parts : " + parts);
 
 	var keep = new Object();
-
+	
 	parts.forEach( function(part,index) {
 		if ( part == "" ) {
 		} else if ( varsConstants[part] != undefined ) {
@@ -112,7 +113,9 @@ function equationRequires(eqn) {
 
 
 	if ( Object.keys(keep).length > 0 ) {
-		// console.log("iwp6-order:43>  Eqn: " + eqn + "   Keep : " + JSON.stringify(Object.keys(keep)));
+		// console.log("iwp6-order:115>  Eqn: " + eqn + "   Keep : " + JSON.stringify(Object.keys(keep)));
+	} else {
+		// console.log("iwp6-order:117>  Eqn: " + eqn + "   Keep : Eqn: no requirements!");
 	}
 
 	// Dedupe
@@ -122,7 +125,6 @@ function equationRequires(eqn) {
 
 
 function calculatorRequires(calc) {
-
 	if ( calc.calcType == "parametric" ) {
 		return equationRequires(calc.value)
 
@@ -151,14 +153,13 @@ function calculatorRequires(calc) {
 
 // What symbols do I requrie?
 function animationObjectRequires(object) {
-
+	// console.log("iwp6-order.js 153: calculatorRequires> object.name:" + object.name);
 
 	if ( object.objectType == "input" ) {
 		return []
 
 	} else if ( object.objectType == "output" ) {
-        return calculatorRequires(object.calculator)
-
+        return calculatorRequires(object.calculator);
 	} else if ( object.objectType == "solid" ) {
 
 
@@ -166,16 +167,25 @@ function animationObjectRequires(object) {
 		var height = [];
 		var xpath = [];
 		var ypath = [];
+		var points = [];
 
 		if ( object.shape && object.shape.width && object.shape.width.calculator ) {
 			width = calculatorRequires( object.shape.width.calculator );
 			//console.log("iwp6-order:101> object.shape.width.calculator: " + JSON.stringify(object.shape.width.calculator) + " width: " + JSON.stringify(width));
 		}
-		if ( object.shape && object.shape.width && object.shape.height.calculator ) {
+		if ( object.shape && object.shape.height && object.shape.height.calculator ) {
             height = calculatorRequires( object.shape.height.calculator );
 			//console.log("iwp6-order:106> object.shape.height.calculator: " + JSON.stringify(object.shape.height.calculator) + " height: " + JSON.stringify(height));
         }
-
+        if (object.shape.shapeType == "polygon") {
+        	// console.log("polygon acquired!", object.shape);
+        	object.shape.points.forEach( function(p,i) {
+        			// console.log("point found:",p);
+        			points = points.concat(calculatorRequires(p.xpath.calculator));
+        			points = points.concat(calculatorRequires(p.ypath.calculator));
+        		}
+        	)
+        }
         if ( object.xpath && object.xpath.calculator ) {
             xpath = calculatorRequires( object.xpath.calculator );
 			//console.log("iwp6-order:111> object.xpath.calculator: " + JSON.stringify(object.xpath.calculator) + " xpath: " + JSON.stringify(xpath));
@@ -190,7 +200,7 @@ function animationObjectRequires(object) {
 		//console.log("iwp6-order:94> Solid " + object.name + "  xpath: " + xpath);
 		//console.log("iwp6-order:94> Solid " + object.name + "  ypath: " + ypath);
 
-		var all = arrayUnique(width.concat( height.concat (xpath.concat (ypath))));
+		var all = arrayUnique(points.concat(width.concat( height.concat (xpath.concat (ypath)))));
 
 		//console.log("iwp6-order:94> Solid " + object.name + "  all : " + JSON.stringify(all) );
 
