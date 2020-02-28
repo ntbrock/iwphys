@@ -1196,12 +1196,14 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 
         if ( typeof vars[ objectName ] !== "object" ) { vars[objectName] = {} }
         vars[ objectName ][ "ypos" ] = calculator.currentDisplacement
+        vars[ objectName ][ "ydisp" ] = calculator.currentDisplacement
         vars[ objectName ][ "yvel" ] = calculator.currentVelocity
 
     } else if ( resultVariable.endsWith(".x") ) {
 
         if ( typeof vars[ objectName ] !== "object" ) { vars[objectName] = {} }
         vars[ objectName ][ "xpos" ] = calculator.currentDisplacement
+        vars[ objectName ][ "xdisp" ] = calculator.currentDisplacement
         vars[ objectName ][ "xvel" ] = calculator.currentVelocity
 
     } else {
