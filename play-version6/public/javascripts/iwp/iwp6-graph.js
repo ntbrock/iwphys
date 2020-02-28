@@ -396,8 +396,8 @@ function graphStepForward(step, vars, s, graphWindow) {
 		$.each(iwpGraphObjects[s],function(name, graphObject) {
 			// console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
 			// console.log("iwp5graph:308> vars: ", vars)
-			paths = graphObject.paths
-			pathsSvg = graphObject.pathsSvg
+			var paths = graphObject.paths
+			var pathsSvg = graphObject.pathsSvg
 			$.each(graphMeasures, function(i, measure) {
 				var graphThisStep = false
 
@@ -510,7 +510,7 @@ function graphStepForward(step, vars, s, graphWindow) {
 function graphStepBackward(step, vars, s) {
 	var svg = d3.select('#' + s + '-graph');
 
-	//console.log("iwp5-graph:256> graphStepBackward: ", step)
+	// console.log("iwp5-graph:513> graphStepBackward: ", step)
 
 	$.each(iwpGraphObjects[s],function(name, graphObject) {
 
@@ -519,7 +519,7 @@ function graphStepBackward(step, vars, s) {
 
 		$.each(graphMeasures, function(i, measure) {
 
-			//console.log("iwp5-graph.graphStepBackward:270> paths[" + measure + "] = ", paths[measure])
+			// console.log("iwp5-graph.graphStepBackward:522> paths[" + measure + "] = ", paths[measure])
 
 
 			// Rebuild the memory path from the beginning of time.
@@ -543,6 +543,7 @@ function graphStepBackward(step, vars, s) {
 				} else {
 					var graphThisStep = false
 
+
 					// console.log("iwp6-graph.js line 394: vars.t, vars.delta_t: ", vars.t, vars.delta_t);
 					if(s=='pos' && (measure == 'xPos' || measure == 'yPos')) {
 						graphThisStep = true
@@ -556,6 +557,9 @@ function graphStepBackward(step, vars, s) {
 					if ((measure == 'xVel' || measure == 'yVel' || measure == 'xAccel' || measure == 'yAccel') && vars.t < 2*vars.delta_t) {
 						graphThisStep = false
 					}
+
+					// console.log("iwp6-graph:546> s: " , s,  "  measure: " , measure, "   graphThisStep: " , graphThisStep);
+
 
 					if (graphThisStep) {
 						// Move to a real point in time.
@@ -576,13 +580,13 @@ function graphStepBackward(step, vars, s) {
 
 
 			// Repaint screen w/ new reconstructed path
-			// console.log("iwp5-graph:313> Replacing d on : ", graphObject.pathsSvg[measure] )
-			if(pathsSvg[measure] != null) {
-							pathsSvg[measure].attr("d", paths[measure])
-						}
-						else {
-							console.log("iwp6-graph.js:576> No Paths exist for measure ", measure);
-						}
+			// console.log("iwp5-graph:583> Replacing d on : ", graphObject.pathsSvg[measure] )
+			if(graphObject.pathsSvg[measure] != null) {
+				graphObject.pathsSvg[measure].attr("d", graphObject.paths[measure])
+			}
+			else {
+				console.log("iwp6-graph.js:588> No Paths exist for measure ", measure);
+			}
 				
 		});
 	});
