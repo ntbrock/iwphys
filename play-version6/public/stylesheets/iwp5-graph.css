@@ -9,7 +9,7 @@
 
 .iwp-graph {
 	width: 500px;
-	height: 500px;
+	height: 166px;
 	border: solid #ccc 1px;
 }
 
@@ -54,6 +54,7 @@
 .iwp-graph-controls {
 	float: right;
 	width: 90px;
+	padding-top: 200px;
 	margin-left: 4px;
 }
 

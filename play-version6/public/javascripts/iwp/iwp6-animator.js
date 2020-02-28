@@ -468,11 +468,16 @@ function handleStopClick() {
 //Resets simulation.
 function handleResetClick() {
   renderCanvas();
-  graphSetWindowFromAnimation(graphWindow);	
+  graphSetWindowFromAnimation("pos", graphWindow);	
+  graphSetWindowFromAnimation("vel", graphWindow);
+  graphSetWindowFromAnimation("accel", graphWindow);
   updateTimeDisplay(0);
   handleStopClick();
 	var vars0 = masterResetSteps();
-  graphResetZero(0, vars = vars0, solids = parsedAnimation.solids(), graphWindow );
+  graphResetZero(0, vars = vars0, solids = parsedAnimation.solids(), "pos", graphWindow );
+  graphResetZero(0, vars = vars0, solids = parsedAnimation.solids(), "vel", graphWindow );
+  graphResetZero(0, vars = vars0, solids = parsedAnimation.solids(), "accel", graphWindow );
+
 	//document.getElementById(buttonIds.startStop).setAttribute("class", "Start");
 	document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleStartClick()");
 }

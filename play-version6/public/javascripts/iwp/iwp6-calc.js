@@ -53,6 +53,9 @@ var time = {};
 var description = "";
 var animationWindow = {};
 var graphWindow = {};
+graphWindow["pos"] = {};
+graphWindow["vel"] = {};
+graphWindow["accel"] = {};
 
 // IWP6 - Objects are now in a master loop, not separated by type.
 var compiledObjects = [];
@@ -106,7 +109,10 @@ function masterResetSteps() {
 
   // 2018Feb01 Graphing Reset hookin
   if ( typeof graphResetZero === "function" ) {
-    graphResetZero(0, vars = vars0, solids = parsedAnimation.solids() );
+    graphResetZero(0, vars = vars0, solids = parsedAnimation.solids(), "pos");
+    graphResetZero(0, vars = vars0, solids = parsedAnimation.solids(), "vel");
+    graphResetZero(0, vars = vars0, solids = parsedAnimation.solids(), "accel");
+
   }
 
   archiveVarsAtStep( currentStep, vars0 ); // Boot up the environment
@@ -225,11 +231,18 @@ function handleStep() {
         // iwp5.1 - Adding Hook into the graph capabilties
         if ( changeStep > 0 ) {
             if ( typeof graphStepForward === "function" ) {
-                graphStepForward(newStep, vars);
+                graphStepForward(newStep, vars, "pos");
+	        graphStepForward(newStep, vars, "vel");
+	        graphStepForward(newStep, vars, "accel");
+
             }
         } else if ( changeStep < 0 ) {
             if ( typeof graphStepBackward === "function" ) {
-                graphStepBackward(newStep, vars);
+              graphStepBackward(newStep, vars, "pos");
+	      graphStepBackward(newStep, vars, "vel");
+	      graphStepBackward(newStep, vars, "accel");
+
+
             }
         }
     }
@@ -681,24 +694,29 @@ function setWindow(inWindow) {
   animationWindow = inWindow;
 }
 
- function initializeGraphVars(inGraphWindow) {
-	graphWindow = inGraphWindow;
-	$("#graph_xmin").val( graphWindow.xmin );
-	$("#graph_xmax").val( graphWindow.xmax );
-  	$("#graph_xgrid").val( graphWindow.xgrid );
-  	$("#graph_ymax").val( graphWindow.ymax );
-  	$("#graph_ymin").val( graphWindow.ymin );
-  	$("#graph_ygrid").val( graphWindow.ygrid );
+ function initializeGraphVars(s, inGraphWindow) {
+	graphWindow[s] = inGraphWindow;
+	$("#" + s + "graph_xmin").val( graphWindow[s].xmin );
+	$("#" + s + "graph_xmax").val( graphWindow[s].xmax );
+  	$("#" + s + "graph_xgrid").val( graphWindow[s].xgrid );
+  	$("#" + s + "graph_ymax").val( graphWindow[s].ymax );
+  	$("#" + s + "graph_ymin").val( graphWindow[s].ymin );
+  	$("#" + s + "graph_ygrid").val( graphWindow[s].ygrid );
   }
   
 // "GraphWindow": { "xmin": "0.0", "xmax": "5.0", "ymin": "-50.0", "ymax": "50.0", "xgrid": "0.5", "ygrid": "10.0"
 function setGraphWindow(inGraphWindow) {
   // console.log("iwp5:553> graphWindow :", inGraphWindow);
   // Global
-  graphWindow = inGraphWindow;
+  graphWindow["pos"] = inGraphWindow;
+  graphWindow["vel"] = inGraphWindow;
+  graphWindow["accel"] = inGraphWindow;
  // Hook into new iwp5-graph to redraw axes.
   if ( typeof graphSetWindowFromAnimation === "function" ) {
-    graphSetWindowFromAnimation(graphWindow);
+   graphSetWindowFromAnimation("pos", graphWindow);
+   graphSetWindowFromAnimation("vel", graphWindow);
+   graphSetWindowFromAnimation("accel", graphWindow);
+
   } else {
     console.log("iwp6-calc:637> Did not detect the Graphing Library available, graphZetWindowFromAnimation: ", typeof graphSetWindowFromAnimation );
   }
@@ -1337,8 +1355,8 @@ function parseAnimationToMemory( rawAnimation ) {
         if ( object.objectType == "time" ) {
             animation.time = object;
         } else if ( object.objectType == "graphWindow" ) {
-            animation.graphWindow = object;
-        } else if ( object.objectType == "window" ) {
+	    animation.graphWindow = object;
+	}  else if ( object.objectType == "window" ) {
             animation.window = object;
         } else if ( object.objectType == "description" ) {
             animation.description = object;
@@ -1387,7 +1405,9 @@ function parseAnimationToMemory( rawAnimation ) {
 
   // console.log("iwp6-calc:1238> Setting GraphWindow: " , animation.graphWindow)
   // console.log("Initializing Graph Vars");
-  initializeGraphVars(animation.graphWindow);
+  initializeGraphVars("pos", animation.graphWindow);
+  initializeGraphVars("vel", animation.graphWindow);
+  initializeGraphVars("accel", animation.graphWindow);
   setGraphWindow(animation.graphWindow);
 
 
@@ -1553,7 +1573,7 @@ function yHeight(size) {
 
 
 //graphBox
-
+/*
 var graphBox = { gminX: -100, gminY: -100, gmaxX: 200, gmaxY: 200 };
 function ygraph(y) {
   var yDomain = graphWindow.ymax - graphWindow.ymin;
@@ -1604,5 +1624,5 @@ function gyHeight(size) {
   return size*proportion;
 };
 
-
+*/
 true;

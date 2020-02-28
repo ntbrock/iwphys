@@ -6,12 +6,17 @@
  */
 
 $(function() {
-	graphInit();
+	graphInit("pos");
+	graphInit("vel");
+	graphInit("accel");
 })
 
 // Global container, re-populated on initialization with every object, the plotting series
 // are then derived from here as well
 var iwpGraphObjects = {}
+iwpGraphObjects["pos"] = {}
+iwpGraphObjects["vel"] = {}
+iwpGraphObjects["accel"] = {}
 
 var graphMeasures = ['xPos', 'yPos', 'xVel', 'yVel', 'xAccel', 'yAccel']
 
@@ -55,29 +60,27 @@ var yAxis = null
 
 
 
-function graphInit() {
+function graphInit(s) {
+	console.log("iwp6-graph59> ", s);
+	var svg = d3.select('#' + s + '-graph');
 	
-	var svg = d3.select('#graph');
-
-
-
 	// Step 1 Build Grid And Axes
 	// console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
 	if ( xGrid != null ) {
-		xGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(0, 100)"));
+		xGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(0, 300)"));
 	}
 	if ( yGrid != null ) {
-		yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100, 0)"));
+		yGrid(svg.append("g").classed("iwp-graph-grid", true).attr("transform", "translate(-100,0)"));
 	}
 	if ( xAxis != null ) {
 		xAxis(svg.append("g").classed("iwp-graph-axis",true));
-		svg.append("text").attr("x", 60).attr("y", 15).classed("iwp-graph-axis-label", "true").text("Time (s)");
+		svg.append("text").attr("x", 390).attr("y", 15).attr("style", "font-size : 12;").classed("iwp-graph-axis-label", "true").text("Time (s)");
 	}
 
 	// 2019Oct25 - Render the Yaxis on the left side of the graph, always
 	var yAxisCoordinate = 0;
-	if ( graphWindow && graphWindow.xmin ) {
-		yAxisCoordinate = graphWindow.xmin;
+	if ( graphWindow[s] && graphWindow[s].xmin ) {
+		yAxisCoordinate = graphWindow[s].xmin;
 	}
     // console.log("iwp6-graph:62> graphInit - Alignment of the YAxis: graphXScale(0) : " , graphXScale(0),  "  graphXScale(yAxisCoordinate) : " , graphXScale(yAxisCoordinate),   "  yAxisCoordinate: " , yAxisCoordinate , " graphWindow: " , graphWindow ) ;
 
@@ -109,8 +112,8 @@ function graphInit() {
 }
 
 
-function queryUserFormGraphDouble(index) {
-  var readValue = $("#graph_" + index).val();
+function queryUserFormGraphDouble(s, index) {
+  var readValue = $("#" + s + "graph_" + index).val();
   var doubleValue = parseFloat(readValue);
 
   //console.log("iwp6-graph.js line 105 ", "#graph_" + index, doubleValue);
@@ -122,42 +125,42 @@ function queryUserFormGraphDouble(index) {
 }
 
 
-function graphSetWindowFromAnimation(graphWindow) {
-        updateGraph(graphWindow);
+function graphSetWindowFromAnimation(s, graphWindow) {
+        updateGraph(s, graphWindow);
 	//graphWindow.xmax = 1.0;
 	
     	graphXScale = d3.scaleLinear()
-				.domain([graphWindow.xmax, graphWindow.xmin])
-				.range([100, -100]);
+				.domain([graphWindow[s].xmax, graphWindow[s].xmin])
+				.range([500, -100]);
 				// 2019Nov12 Fix to reverse Graph Y axis
 	graphYScale = d3.scaleLinear()
-				.domain([graphWindow.ymin, graphWindow.ymax])
+				.domain([graphWindow[s].ymin, graphWindow[s].ymax])
 				.range([100, -100]);
 
-	var xTicks = (graphWindow.xmax - graphWindow.xmin) / graphWindow.xgrid
-	var yTicks = (graphWindow.ymax - graphWindow.ymin) / graphWindow.ygrid
+	var xTicks = (graphWindow[s].xmax - graphWindow[s].xmin) / graphWindow[s].xgrid
+	var yTicks = (graphWindow[s].ymax - graphWindow[s].ymin) / graphWindow[s].ygrid
 	console.log("iwp6-graph:140> yTicks: ", yTicks);
 	xGrid = d3.axisTop(graphXScale).ticks(xTicks).tickSize(1000);
 	yGrid = d3.axisRight(graphYScale).ticks(yTicks).tickSize(1000);
 	xAxis = d3.axisBottom(graphXScale).ticks(xTicks).tickSize(0);
 	yAxis = d3.axisRight(graphYScale).ticks(yTicks).tickSize(0);
 
-	graphInit();
+	graphInit(s);
         //$("#graphTab").html($("#graphTab").html());
        
 }
 
-function updateGraph(graphWindow) {
-	var gr = $("#graph");
-	var graphBoxAttrs = gr[0].getAttribute("viewBox").split(" ");
-	graphBox = { gminX: parseFloat(graphBoxAttrs[0]), gminY: parseFloat(graphBoxAttrs[1]), gmaxX: parseFloat(graphBoxAttrs[2]), gmaxY: parseFloat(graphBoxAttrs[3]) };
+function updateGraph(s, graphWindow) {
+	var gr = $("#" + s + "-graph");
+	//var graphBoxAttrs = gr[0].getAttribute("viewBox").split(" ");
+	//graphBox = { gminX: parseFloat(graphBoxAttrs[0]), gminY: parseFloat(graphBoxAttrs[1]), gmaxX: parseFloat(graphBoxAttrs[2]), gmaxY: parseFloat(graphBoxAttrs[3]) };
   //	console.log("graph min/max x/y vals: ", graphBoxAttrs[0], graphBoxAttrs[1], graphBoxAttrs[2], graphBoxAttrs[3]);
 	
     	//console.log("iwp6-graph:98> graphSetWindow: " , graphWindow )
 	//console.log("Graph window value: " , graphWindow[index]);
         //Update graph settings with user form data 
-	$.each(graphWindow, function(index, val) {
-	  graphWindow[index] = queryUserFormGraphDouble(index);
+	$.each(graphWindow[s], function(index, val) {
+	  graphWindow[s][index] = queryUserFormGraphDouble(s, index);
 	  // console.log("Graph window value: " , graphWindow[index]);
 	})
 
@@ -166,8 +169,8 @@ function updateGraph(graphWindow) {
 
 }
 
-function graphResetZero(step, vars, solids, graphWindow) {
-    	var svg = d3.select('#graph');
+function graphResetZero(step, vars, solids, s, graphWindow) {
+    	var svg = d3.select('#' + s + '-graph');
 	// console.log("step: ", step);
 	// console.log("iwp-graph:101> graphResetZero, vars: ", vars)
 	// console.log("iwp-graph:102> graphResetZero, solids: ", solids)
@@ -177,7 +180,7 @@ function graphResetZero(step, vars, solids, graphWindow) {
 	for (var i = 0; i < parsedAnimation.solids().length; i++) {
 		if (solids[i].shape.graphOptions.graphVisible) {
 			graphAny = true;
-            break;
+            		break;
 		}
 	}
 	// console.log("iwp-graph:138>", graphAny);
@@ -190,13 +193,8 @@ function graphResetZero(step, vars, solids, graphWindow) {
 	$.each(parsedAnimation.solids(),function(index, solid) {
 
 
-		// console.log("iwp-graph:69> graphResetZero, solid: ", solid)
-
-
 		var graphOptions = solid.shape.graphOptions
-		// console.log("iwp-graph:69> graphResetZero, solid graphOptions: ", graphOptions)
-
-
+	
 		var visible = graphOptions.graphVisible == true
 
 		// 2018Oct19 Ported a piece of IWP4 logic
@@ -216,10 +214,12 @@ function graphResetZero(step, vars, solids, graphWindow) {
 
 
 		if ( visible ) {
-
-		iwpGraphObjects[solid.name] = { solid: solid,
+			//console.log("iwp-graph:216> graphResetZero, solid: ", solid);
+			//console.log("iwp-graph:217> graphResetZero, solid graphOptions: ", graphOptions)
+						
+			iwpGraphObjects[s][solid.name] = { solid: solid, 
 			graphOptions: graphOptions,
-			color: solid.color,
+			color: solid.color, 
 			visible: true,
 			paths: {
 				xPos: d3.path(),
@@ -253,26 +253,29 @@ function graphResetZero(step, vars, solids, graphWindow) {
 	// Step 3 Add each graph path to the svg and associate stroke color.
 	// Hang onto the svg Memory refernces for good luck.
 
-	$.each(iwpGraphObjects,function(name, graphObject) {
+	$.each(iwpGraphObjects[s],function(name, graphObject) {
 
-		// console.log("iwp5graph:115> Reset: name: ", name, "  graphObject: ", graphObject)
+		//console.log("iwp5graph:256> Reset: name: ", name, "  graphObject: ", graphObject)
 		//var vb = console.log("graphWindow vals", )
 		var g = svg.append("g").classed("iwp-graph-object", true).attr("iwp-solid-name",name)
  	
 		var stroke = "stroke: rgba("+graphObject.color.red+","+graphObject.color.green+","+graphObject.color.blue+",1);"
 		var hide = "display: none;"
+		if(s == 'pos') {
 		graphObject.pathsSvg.xPos =
 			g.append('path').attr("iwp-measure", "xPos").attr("style", stroke+(graphObject.pathsVisible.xPos ? '' : hide)).attr("d", graphObject.paths.xPos)
 	
 		graphObject.pathsSvg.yPos =
 			g.append('path').attr("iwp-measure", "yPos").attr("style", stroke+(graphObject.pathsVisible.yPos ? '' : hide)).attr("d", graphObject.paths.yPos)
-		
+		}
+		if(s == 'vel') {
 		graphObject.pathsSvg.xVel =
 			g.append('path').attr("iwp-measure", "xVel").attr("style", stroke+(graphObject.pathsVisible.xVel ? '' : hide)).attr("d", graphObject.paths.xVel)		
 		
 		graphObject.pathsSvg.yVel =
 			g.append('path').attr("iwp-measure", "yVel").attr("style", stroke+(graphObject.pathsVisible.yVel ? '' : hide)).attr("d", graphObject.paths.yVel)
-
+		}
+		if(s == 'accel') {
 		graphObject.pathsSvg.xAccel =
 			g.append('path').attr("iwp-measure", "xAccel").attr("style", stroke+(graphObject.pathsVisible.xAccel ? '' : hide))
 			.attr("d", graphObject.paths.xAccel).attr("stroke-linecap", "round")
@@ -280,7 +283,7 @@ function graphResetZero(step, vars, solids, graphWindow) {
 		graphObject.pathsSvg.yAccel =
 			g.append('path').attr("iwp-measure", "yAccel").attr("style", stroke+(graphObject.pathsVisible.yAccel ? '' : hide))
 			.attr("d", graphObject.paths.yAccel).attr("stroke-linecap", "round")
-
+		}
 	});
 
 
@@ -300,12 +303,12 @@ function graphResetZero(step, vars, solids, graphWindow) {
 
 	/** Build the legend */
 	$(".iwp-graph-controls").append("<div class='iwp-graph-control-legend'></div>")
-	$.each(iwpGraphObjects,function(name, graphObject) {
+	$.each(iwpGraphObjects[s],function(name, graphObject) {
 
 		// console.log("iwp5-graph:153> add buttons for: "+ name + "   visible? " + graphObject.visible)
 
 		if ( graphObject.visible ) {
-
+			console.log("iwp6-graph:309> graphObject visible:", name);
 			$(".iwp-graph-control-legend").append("<div iwp-solid-name="+name+"><span class='iwp-graph-legend-square'></span> &nbsp; <label>" +name+"</label></div>")
 			// Add the color style
 			$("div[iwp-solid-name='"+name+"'] .iwp-graph-legend-square").css("background-color", rgbColor(graphObject.color));
@@ -327,8 +330,7 @@ function graphResetZero(step, vars, solids, graphWindow) {
 
 	});
 	$(".iwp-graph-controls").append("</div>")
-
-
+	//graphSetWindowFromAnimation(s, graphWindow);
 	// console.log("iwp5graph:94> Initialized all Graph Objects: ", iwpGraphObjects)
 
 }
@@ -373,9 +375,9 @@ function graphMeasureClick(button) {
 /**
  * Performs no calculations, but repaints every thing (time, outputs, solids) onto screen from memory at current step.
  */
-function graphStepForward(step, vars, graphWindow) {
+function graphStepForward(step, vars, s, graphWindow) {
 
-	var svg = d3.select('#graph');
+	var svg = d3.select('#' + s + '-graph');
 	var lastStep = varsAtStep[step-1]
 
 	//var vars = varsAtStep[step];
@@ -391,19 +393,29 @@ function graphStepForward(step, vars, graphWindow) {
 
 		// 2019Oct25 Updated Acceleration to be a higher frequency pulse.
 
-		$.each(iwpGraphObjects,function(name, graphObject) {
+		$.each(iwpGraphObjects[s],function(name, graphObject) {
 			// console.log("iwp5graph:176> GraphStep: name: ", name, "  graphObject: ", graphObject)
 			// console.log("iwp5graph:308> vars: ", vars)
 			paths = graphObject.paths
 			pathsSvg = graphObject.pathsSvg
 			$.each(graphMeasures, function(i, measure) {
-				var graphThisStep = true
+				var graphThisStep = false
 
 				// console.log("iwp6-graph.js line 394: vars.t, vars.delta_t: ", vars.t, vars.delta_t);
-				if ((measure == 'xVel' || measure == 'yVel' || measure == 'xAccel' || measure == 'yAccel') && vars.t < 4*vars.delta_t) {
+				if(s=='pos' && (measure == 'xPos' || measure == 'yPos')) {
+					graphThisStep = true
+				}
+				if(s=='vel' && (measure == 'xVel' || measure == 'yVel')) {
+					graphThisStep = true
+				}
+				if(s=='accel' && (measure == 'xAccel' || measure == 'yAccel')) {
+					graphThisStep = true
+				}
+				if ((measure == 'xVel' || measure == 'yVel' || measure == 'xAccel' || measure == 'yAccel') && vars.t < 2*vars.delta_t) {
 					graphThisStep = false
 				}
-			
+		
+		/*	
 				//create dashed line effect for velocity values
 				if ((measure == 'xVel' || measure == 'yVel') && graphThisStep)  {
 					var spacing = 
@@ -462,7 +474,7 @@ function graphStepForward(step, vars, graphWindow) {
 
 
 				} else {
-
+*/
 					if (graphThisStep) {
 						var lcMeasure = measure.toLowerCase()
 						paths[measure].moveTo (
@@ -475,11 +487,16 @@ function graphStepForward(step, vars, graphWindow) {
 							graphYScale(vars[name][lcMeasure])
 						)
 
-						pathsSvg[measure].attr("d", paths[measure])
+						if(pathsSvg[measure] != null) {
+							pathsSvg[measure].attr("d", paths[measure])
+						}
+						else {
+							console.log("iwp6-graph.js:495> No Paths exist for measure ", measure);
+						}
 						//console.log("pathsSvg[measure].getTotalLength()", paths[measure].getTotalLength());
 					}
 
-				     } 	
+				      	
 				
 
 			});
@@ -490,11 +507,12 @@ function graphStepForward(step, vars, graphWindow) {
 
 
 
-function graphStepBackward(step, vars) {
+function graphStepBackward(step, vars, s) {
+	var svg = d3.select('#' + s + '-graph');
 
 	//console.log("iwp5-graph:256> graphStepBackward: ", step)
 
-	$.each(iwpGraphObjects,function(name, graphObject) {
+	$.each(iwpGraphObjects[s],function(name, graphObject) {
 
 		// paths = graphObject.paths
 		// pathsSvg = graphObject.pathsSvg
@@ -523,13 +541,22 @@ function graphStepBackward(step, vars) {
 					)
 
 				} else {
-					var graphThisStep = true
-					if ((measure == 'xVel' || measure == 'yVel') && vars.t < 2*vars.delta_t) {
+					var graphThisStep = false
+
+					// console.log("iwp6-graph.js line 394: vars.t, vars.delta_t: ", vars.t, vars.delta_t);
+					if(s=='pos' && (measure == 'xPos' || measure == 'yPos')) {
+						graphThisStep = true
+					}
+					if(s=='vel' && (measure == 'xVel' || measure == 'yVel')) {
+						graphThisStep = true
+					}
+					if(s=='accel' && (measure == 'xAccel' || measure == 'yAccel')) {
+						graphThisStep = true
+					}
+					if ((measure == 'xVel' || measure == 'yVel' || measure == 'xAccel' || measure == 'yAccel') && vars.t < 2*vars.delta_t) {
 						graphThisStep = false
 					}
-					if ((measure == 'xAccel' || measure == 'yAccel') && vars.t < 3*vars.delta_t) {
-						graphThisStep = false
-					}
+
 					if (graphThisStep) {
 						// Move to a real point in time.
 						graphObject.paths[measure].moveTo (
@@ -550,7 +577,13 @@ function graphStepBackward(step, vars) {
 
 			// Repaint screen w/ new reconstructed path
 			// console.log("iwp5-graph:313> Replacing d on : ", graphObject.pathsSvg[measure] )
-			graphObject.pathsSvg[measure].attr("d", graphObject.paths[measure])
+			if(pathsSvg[measure] != null) {
+							pathsSvg[measure].attr("d", paths[measure])
+						}
+						else {
+							console.log("iwp6-graph.js:576> No Paths exist for measure ", measure);
+						}
+				
 		});
 	});
 
