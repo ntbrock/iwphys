@@ -38,7 +38,7 @@
 			<text>A pendulum is set up on the surface of Planet X. The bob is released from rest and oscillates in a vertical plane. What is the acceleration due to gravity on the surface of Planet X?</text>
 		</description>
 		<input>
-			<name>d</name>
+			<name>dlen</name>
 			<text>Length</text>
 			<initialValue>7.0</initialValue>
 			<units>m</units>
@@ -95,16 +95,16 @@
 			</color>
 			<xpath>
 				<calculator type="euler">
-					<displacement>-d.value*sin(toRadians(a))</displacement>
+					<displacement>-dlen.value*sin(toRadians(a))</displacement>
 					<velocity>0</velocity>
-					<acceleration>g.value*bob.xdisp*bob.ydisp/d.value^2-(bob.xvel^2+bob.yvel^2)*bob.xdisp/d.value^2</acceleration>
+					<acceleration>g.value*bob.xdisp*bob.ydisp/dlen.value^2-(bob.xvel^2+bob.yvel^2)*bob.xdisp/dlen.value^2</acceleration>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="euler">
-					<displacement>-d.value*cos(toRadians(a))</displacement>
+					<displacement>-dlen.value*cos(toRadians(a))</displacement>
 					<velocity>0</velocity>
-					<acceleration>-g.value*(bob.xdisp/d.value)^2-(bob.xvel^2+bob.yvel^2)*bob.ydisp/d.value^2</acceleration>
+					<acceleration>-g.value*(bob.xdisp/dlen.value)^2-(bob.xvel^2+bob.yvel^2)*bob.ydisp/dlen.value^2</acceleration>
 				</calculator>
 			</ypath>
 		</solid>

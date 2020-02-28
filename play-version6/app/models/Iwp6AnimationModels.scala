@@ -141,7 +141,7 @@ case class Iwp6ShapePoint ( index: Int,
 case class Iwp6ShapeFile ( image: String )
 
 case class Iwp6Shape (shapeType: String,
-                      points: Seq[Iwp6ShapePoint],
+                      points: Option[Seq[Iwp6ShapePoint]],
                       file: Option[Iwp6ShapeFile],
                       vectors: Option[Iwp6Vectors],
                       width: Iwp6Length,

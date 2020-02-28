@@ -351,7 +351,7 @@ object Iwp6Animation extends BoilerplateIO {
             name = s.name,
             shape = Iwp6Shape(
               s.shape.getType.toLowerCase,
-              points,
+              Some(points),
               shapeFileO,
               Some(Iwp6Vectors(
                 xVel = s.shape.getVectorSelector.xVelSelected(),

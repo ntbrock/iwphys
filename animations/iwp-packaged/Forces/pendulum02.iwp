@@ -38,7 +38,7 @@
 			<text>A pendulum is released from rest and oscillates in a vertical plane.  For which positions (A, B, C) is the tangential acceleration 0? maximum? centripetal acceleration 0? maximum?</text>
 		</description>
 		<input>
-			<name>d</name>
+			<name>dlen</name>
 			<text>Length</text>
 			<initialValue>7.0</initialValue>
 			<units>m</units>
@@ -134,16 +134,16 @@
 			</color>
 			<xpath>
 				<calculator type="euler">
-					<displacement>-d*sin(toRadians(a))</displacement>
+					<displacement>-dlen*sin(toRadians(a))</displacement>
 					<velocity>0</velocity>
-					<acceleration>g*bob.xdisp*bob.ydisp/d^2-(bob.xvel^2+bob.yvel^2)*bob.xdisp/d^2</acceleration>
+					<acceleration>g*bob.xdisp*bob.ydisp/dlen^2-(bob.xvel^2+bob.yvel^2)*bob.xdisp/dlen^2</acceleration>
 				</calculator>
 			</xpath>
 			<ypath>
 				<calculator type="euler">
-					<displacement>-d*cos(toRadians(a))</displacement>
+					<displacement>-dlen*cos(toRadians(a))</displacement>
 					<velocity>0</velocity>
-					<acceleration>-g*(bob.xdisp/d)^2-(bob.xvel^2+bob.yvel^2)*bob.ydisp/d^2</acceleration>
+					<acceleration>-g*(bob.xdisp/dlen)^2-(bob.xvel^2+bob.yvel^2)*bob.ydisp/dlen^2</acceleration>
 				</calculator>
 			</ypath>
 		</solid>

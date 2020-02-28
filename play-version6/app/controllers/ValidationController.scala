@@ -3,10 +3,10 @@ package controllers
 import java.io.File
 
 import javax.inject._
-import models.Iwp6Animation
+import models.{Iwp6Animation, IwpObjectNameDiff, IwpObjectOrderingDiff, IwpOrderingRequiresProvides}
 import org.mongodb.scala.model.Filters._
 import play.api.{Configuration, Logger}
-import play.api.libs.json.Json
+import play.api.libs.json.{JsObject, Json}
 import play.api.mvc._
 import services.{IwpDifferenceCalculatorService, IwpMongoClient, IwpVersion4CalculatorService, IwpVersion6CalculatorService}
 
@@ -91,6 +91,14 @@ class ValidationController @Inject()(cc: ControllerComponents,
   // 2019Sep06 A new dependency reordering calculator
 
 
+  val version4nonSensicalRequires = Seq("t")
+
+  private def filterProvidedVariables( seq: Option[Seq[String]] ) : Seq[String] = {
+    seq.getOrElse(Seq.empty).sorted.distinct.filter { s => ! version4nonSensicalRequires.contains(s) }
+  }
+
+
+
   def validateAnimationOrdering(collection: String, filename: String, format: Option[String]) = Action { implicit request: Request[AnyContent] =>
 
     val path = s"${animationsPath}${sep}${collection}${sep}${filename}"
@@ -98,11 +106,68 @@ class ValidationController @Inject()(cc: ControllerComponents,
 
     // Ok("TODO: Implementing object ordering comparison")
 
-    val v4 = iwpVersion4CalculatorService.problemObjectOrdering(path)
-    Ok(s"TODO: v4: ${v4}")
+    val v4array = iwpVersion4CalculatorService.problemObjectOrdering(path)
 
-    //val v6 = iwpVersion6CalculatorService.animateObjectOrdering(collection, filename)
-    //Ok(s"TODO: v6: ${v6}")
+    val v6array = iwpVersion6CalculatorService.animateObjectOrdering(collection, filename)
+
+    val v4ordering = v4array.value.zipWithIndex.map { case(jsv,i) =>
+      val jso = jsv.asInstanceOf[JsObject]
+      IwpOrderingRequiresProvides(
+        order = i,
+        name = (jso \ "name").as[String],
+        objectType = (jso \ "objectType").asOpt[String],
+        provides = filterProvidedVariables( (jso \ "provided").asOpt[Seq[String]] ),
+        requires = filterProvidedVariables( (jso \ "required").asOpt[Seq[String]] ),
+        jso = jso
+      )
+    }
+
+    val v6ordering = v6array.value.zipWithIndex.map { case(jsv,i) =>
+      val jso = jsv.asInstanceOf[JsObject]
+      IwpOrderingRequiresProvides(
+        order = i,
+        name = (jso \ "name").as[String],
+        objectType = (jso \ "objectType").asOpt[String],
+        provides = filterProvidedVariables( (jso \ "provided").asOpt[Seq[String]] ),
+        requires = filterProvidedVariables( (jso \ "required").asOpt[Seq[String]] ),
+        jso = jso
+      )
+    }
+
+    // Compile the case class by numerical difference
+
+    val diffOrdering = v4ordering.zipWithIndex.map { case (v4order, i) =>
+      val v6order = v6ordering(i)
+
+      IwpObjectOrderingDiff(i,
+        v4order,
+        v6order,
+        v4order.name.equals(v6order.name),
+        v4order.requires.equals(v6order.requires),
+        v4order.provides.equals(v6order.provides)
+      )
+    }
+
+    // Compile the case class by object difference
+
+    val diffNames = v4ordering.sortBy(_.name).map { v4order =>
+
+      val v6order = v6ordering.find{_.name.equals(v4order.name)}.get
+
+      IwpObjectNameDiff(v4order.name,
+        v4order,
+        v6order,
+        v4order.order == v6order.order,
+        v4order.requires.equals(v6order.requires),
+        v4order.provides.equals(v6order.provides)
+      )
+    }
+
+
+    Ok(views.html.validation.compareIwpOrdering(path, diffOrdering, diffNames) )
+
+  }
+
 
 
     /*
@@ -150,7 +215,5 @@ class ValidationController @Inject()(cc: ControllerComponents,
 
 
 */
-  }
-
 
 }

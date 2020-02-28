@@ -3,6 +3,7 @@
  * Ryan Steed, Taylor Brockman 2016 - Version 5.0 Initial Port to HTML + SVG
  * Matthew Mims, Taylor Brockman 2018  - Version 5.1 Added Graphing and D3
  * Albert Gong, Nial Mullane, Taylor Brockman 2019 - Version 6.0 Migrated into Play Framework
+ * Andy Wang, Benjamin Wu, Taylor Brockmanm 2020 - Version 6.1 Modern Designer and extensive testing
  */
 
 
@@ -176,7 +177,8 @@ function stepBackwardAndPause() {
  */
 function handleStep() {
 
-	// console.log("iwp6-calc:167> HandleStep: current: " , currentStep, "  change: ", changeStep );
+	// console.log("iwp6-calc:173> HandleStep: current: " , currentStep, "  change: ", changeStep );
+
 	// apply the time change.
 	var newStep = currentStep + changeStep;
 
@@ -224,7 +226,7 @@ function handleStep() {
 
         } else {
             // UI rendering is handled by the calculate as a side effect
-              vars = calculateVarsAtStep(newStep);
+            vars = calculateVarsAtStep(newStep);
             archiveVarsAtStep( newStep, vars );
         }
 
@@ -293,28 +295,29 @@ function calculateOutputAtStep(output, step, vars, verbose) {
 }
 
 
+/**
+ * 2020Feb21 - Floating text now stored in vars as an object
+ */
 function calculateFloatingTextAtStep(floatingText, step, vars, verbose) {
 
-    console.log("iwp6-calc:285> calculateFloatingTextAtStep: floatingText: " , floatingText.name , " ", floatingText, "  step: " , step , " vars: " , JSON.stringify(vars) );
+    // console.log("iwp6-calc:285> calculateFloatingTextAtStep: floatingText: " , floatingText.name , " ", floatingText, "  step: " , step , " vars: " , JSON.stringify(vars) );
+    var newValueComplex = evaluateCalculator( floatingText.name+".value", floatingText.value.calculator, step, vars, verbose, floatingText.name );
+    var xComplex = evaluateCalculator( floatingText.name+".x", floatingText.xpath.calculator, step, vars, verbose, floatingText.name );
+    var yComplex = evaluateCalculator( floatingText.name+".y", floatingText.ypath.calculator, step, vars, verbose, floatingText.name );
 
-    var newValue = evaluateCalculator( floatingText.name+".value", floatingText.value.calculator, step, vars, verbose, floatingText.name ).value;
-    vars[floatingText.name] = newValue;
+	var ft = {
+		value: newValueComplex.value,
+		x: xComplex.value,
+		y: yComplex.value
+	};
 
-
-    var xComplex = evaluateCalculator( floatingText.name+".x", floatingText.xpath.calculator, step, vars, verbose, floatingText.name )
-    vars[floatingText.x] = xComplex.x;
-
-    var yComplex = evaluateCalculator( floatingText.name+".y", floatingText.ypath.calculator, step, vars, verbose, floatingText.name )
-    vars[floatingText.y] = yComplex.y;
-
-    if ( typeof updateTextSvgPathAndShape === "function" ) {
-        var pathAndShape = { x: xComplex.x, y: yComplex.y, value: newValue }
-	    console.log("iwp6-calc:291> TODO Animate the floating text! New value: " , newValue,  " path and shape: ", pathAndShape);
-
-        updateTextSvgPathAndShape(floatingText, pathAndShape);
+	// console.log("iwp6-calc:296> calculateFloatingTextAtStep, xComplex: " , xComplex,  "  yComplex: " , yComplex );
+    if ( typeof updateFloatingTextSvgPathAndShape === "function" ) {
+	    // console.log("iwp6-calc:300> Animate the floating text! New value: " , newValueComplex,  " path and shape: ", pathAndShape);
+        updateFloatingTextSvgPathAndShape(floatingText, ft );
     }
 
-    return newValue;
+    return ft;
 }
 
 
@@ -492,41 +495,10 @@ function calculateSolidAtStep(solid, step, vars, verbose) {
 }
 
 
-
-
-function calculateTextAtStep(text, step, vars, verbose) {
-
-  // console.log("iwp5:327> calculateTextAtStep: " + text.name, text )
-
-  var xComplex = evaluateCalculator( text.name+".x", text.xpath.calculator, step, vars, verbose, text.name )
-  var x = xComplex.value
-
-  var yComplex = evaluateCalculator( text.name+".y", text.ypath.calculator, step, vars, verbose, text.name )
-  var y = yComplex.value
-
-  var vComplex = evaluateCalculator( text.name+".value", text.value.calculator, step, vars, verbose, text.name )
-  var v = vComplex.value
-
-
-
-  // Dont' need to write texts back to variables.
-  // vars[solid.name] = calc
-
-  if ( typeof updateTextSvgPathAndShape === "function" ) {
-    updateTextSvgPathAndShape(text, {x: x, y: y, value: v})
-  }
-}
-
-
-
 // RENDERING steps:
 //  updateTimeDisplay(vars.t);
 //  updateUserFormOutputDouble(output, newValue);
 //  updateSolidSvgPathAndShape(solid, calc)
-
-
-
-
 var CONFIG_throw_solid_calculation_exceptions = false;
 
 
@@ -572,8 +544,6 @@ function calculateVarsAtStep(step) {
   // Collect user Inputs! These are polled from the DOM every step.
   compiledObjects.forEach( function(object, index) {
 
-    // console.log("iwp6-calc:514> CalculationLoop for Object: " + JSON.stringify(object) );
-
     if ( object.objectType == 'input' ) {
 
        var newValue = calculateInputAtStep(object, step, vars, false );
@@ -583,15 +553,12 @@ function calculateVarsAtStep(step) {
 
     } else if ( object.objectType == 'output') {
 
-// 2019Sep06 Turned on Verbose
         var newValue = calculateOutputAtStep(object, step, vars, true );
 
         if ( isNaN(newValue) ) { throw "not a number" };
         if ( !isFinite(newValue) ) { throw "not finite" };
 
         vars[object.name] = newValue;
-
-        // console.log("iwp6-calc:536> Output name: " + object.name + "  newValue: "+ newValue );
 
     } else if ( object.objectType == 'solid') {
 
@@ -613,7 +580,6 @@ function calculateVarsAtStep(step) {
 
     } else if ( object.objectType == 'floatingText' ) {
 
-
 		var floatingText = object;
 
         if ( floatingText.xpath.calculator.calcType == "euler-mathjs" ) {
@@ -623,17 +589,15 @@ function calculateVarsAtStep(step) {
         if ( floatingText.ypath.calculator.calcType == "euler-mathjs" ) {
             initializeEulerCalculator(floatingText, step, vars, "y", solid.ypath.calculator)
         }
-//BOOK
-		var newValue = calculateFloatingTextAtStep(floatingText, step, vars, true );
-        vars[floatingText.name] = newValue;
 
+		vars[floatingText.name] = calculateFloatingTextAtStep(floatingText, step, vars, true );
 
     } else if ( object.objectType == 'object') {
 
-        throw "iwp6-calc:580> Unrecognized Object type: " + object.objectType;
+        throw "iwp6-calc:592> Unrecognized Object type: " + object.objectType;
 
     } else {
-        throw "iwp6-calc:583> Unrecognized Object type: " + object.objectType;
+        throw "iwp6-calc:595> Unrecognized Object type: " + object.objectType;
     }
 
   });
@@ -696,13 +660,17 @@ function setWindow(inWindow) {
 
  function initializeGraphVars(s, inGraphWindow) {
 	graphWindow[s] = inGraphWindow;
-	$("#" + s + "graph_xmin").val( graphWindow[s].xmin );
-	$("#" + s + "graph_xmax").val( graphWindow[s].xmax );
-  	$("#" + s + "graph_xgrid").val( graphWindow[s].xgrid );
-  	$("#" + s + "graph_ymax").val( graphWindow[s].ymax );
-  	$("#" + s + "graph_ymin").val( graphWindow[s].ymin );
-  	$("#" + s + "graph_ygrid").val( graphWindow[s].ygrid );
-  }
+	// 2020Feb21 Safety Check for Nashorn mode where Jquery doesn't exisst
+	if ( typeof $ === "function" ) {
+		 
+		$("#" + s + "graph_xmin").val( graphWindow[s].xmin );
+		$("#" + s + "graph_xmax").val( graphWindow[s].xmax );
+		$("#" + s + "graph_xgrid").val( graphWindow[s].xgrid );
+		$("#" + s + "graph_ymax").val( graphWindow[s].ymax );
+		$("#" + s + "graph_ymin").val( graphWindow[s].ymin );
+		$("#" + s + "graph_ygrid").val( graphWindow[s].ygrid );
+	}
+ }
   
 // "GraphWindow": { "xmin": "0.0", "xmax": "5.0", "ymin": "-50.0", "ymax": "50.0", "xgrid": "0.5", "ygrid": "10.0"
 function setGraphWindow(inGraphWindow) {
@@ -893,19 +861,30 @@ function compileSolid(solid) {
   
 }
 
+/**
+ * 2020Feb21 - Illustrate Functions build out the SVG elements, typically with
+ * placeholder widths, heights that are updated on the first repaint.
+ * Colors and other styling properties work well here.
+ */
 function illustrateSolid(solid) {
+
+  var xOrigin = xCanvas(0);
+  var yOrigin = yCanvas(0);
+
   //HTML
   if (solid.shape.shapeType == "circle") {
-    //console.log("it's a circle");
-    svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(solid.shape.width.calculator.value)+ " ry=" +yHeight(solid.shape.height.calculator.value)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
+    // console.log("iwp6-calc:858> it's a circle: ", solid.shape.width );
+    // Initialization Fix, put to the origin, this is updated later
+    svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(0)+ " ry=" +yHeight(0)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
   else if (solid.shape.shapeType == "rectangle") {
     //console.log("it's a rectangle");
     svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
   else if (solid.shape.shapeType == "line") {
-    //console.log("it's a line")
-    svgSolids.push("<line id='solid_" +solid.name+ "' x1='' x2='' y1='' y2='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
+    // console.log("iwp6-calc:858> It's a line, solid.shape: " , solid.shape);
+	// Initialization Fix, put into the origin
+    svgSolids.push("<line id='solid_" +solid.name+ "' x1='"+xOrigin+"' x2='"+xOrigin+"' y1='"+yOrigin+"' y2='"+yOrigin+"' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
   else if (solid.shape.shapeType == "vector") {
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
@@ -948,11 +927,11 @@ function illustrateSolid(solid) {
 
 
 // 2020Feb07 Added formal support for floating text
-function addFloatingText(object) {
+function compileFloatingText(object) {
 
-	console.log("addFloatingText:882> object: " , object);
+	// console.log("compileFloatingText:904> object: " , object);
 
-	var compiledObject = {
+	return {
 		objectType: 'floatingText',
 		name: object.name,
 		shape: {
@@ -979,15 +958,16 @@ function addFloatingText(object) {
 			calculator : compileCalculator(object.ypath.calculator)
 		}
 	}
-	compiledObjects.push( compiledObject );
+
+}
 
 
-	// console.log("iwp5:933> FloatingText setting x,y: " + object.xpath.calculator.value + ", " + object.ypath.calculator.value + " for object: " , object )
-	/// Initilization fix - the calclulators hven't been run yet, so we just place the text on page at 0,0 and it's moveed with first redraw.
-	var x = 0; // xCanvas(object.xpath.calculator.value)
-	var y = 0; // yCanvas(object.ypath.calculator.value)
+function illustrateFloatingText(object) {
 
-	svgObjects.push( "<text id='text_" +object.name+ "' x='" + x + "' y='"+ y +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
+	// Calculators haven't been calcualted yet, so we just place the text on origin at 0,0 and it's moved with first redraw.
+	var xOrigin = xCanvas(0);
+	var yOrigin = yCanvas(0);
+	svgObjects.push( "<text id='text_" +object.name+ "' x='" + xOrigin + "' y='"+ yOrigin +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
 
 };
 
@@ -1031,7 +1011,7 @@ function addObject(object) {
 
 function compileCalculator(iwpCalculator) {
 
-    console.log("iwp6-calc:1161> Attempting to compile calculator: " + JSON.stringify(iwpCalculator));
+    // console.log("iwp6-calc:1161> Attempting to compile calculator: " + JSON.stringify(iwpCalculator));
 
     var incomingType = iwpCalculator.calcType
 
@@ -1193,7 +1173,7 @@ function evaluateParametricCalculator( resultVariable, calculator, calculateStep
     }
     catch ( err ) {
         if ( verbose ) {
-            console.log("iwp6-calc:1058> evaluateParametricCalculator ERROR: " + resultVariable + "> Unable to evaluate calculator: ", err );
+            console.log("iwp6-calc:1058> evaluateParametricCalculator ERROR: " + resultVariable + "> Exception evaluating calculator: ", err );
             console.log("iwp6-calc:1059> evaluateParametricCalculator ERROR: " + resultVariable + "> Equation: ", calculator.equation );
             console.log("iwp6-calc:1060> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars: ", vars);
             console.log("iwp6-calc:1060> evaluateParametricCalculator ERROR: " + resultVariable + "> Vars.STRINGIFY: ", JSON.stringify(vars));
@@ -1235,12 +1215,14 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 
         if ( typeof vars[ objectName ] !== "object" ) { vars[objectName] = {} }
         vars[ objectName ][ "ypos" ] = calculator.currentDisplacement
+        vars[ objectName ][ "ydisp" ] = calculator.currentDisplacement
         vars[ objectName ][ "yvel" ] = calculator.currentVelocity
 
     } else if ( resultVariable.endsWith(".x") ) {
 
         if ( typeof vars[ objectName ] !== "object" ) { vars[objectName] = {} }
         vars[ objectName ][ "xpos" ] = calculator.currentDisplacement
+        vars[ objectName ][ "xdisp" ] = calculator.currentDisplacement
         vars[ objectName ][ "xvel" ] = calculator.currentVelocity
 
     } else {
@@ -1342,14 +1324,11 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 
 function parseAnimationToMemory( rawAnimation ) {
 
-
     console.log("iwp6-calc:1222> parseAnimationToMemory Parsing rawAnimation: ", rawAnimation);
 
     var animation = { loop: [] };
 
-    // 2019Mar13
-
-     rawAnimation.objects.forEach( function( object, index ) {
+    rawAnimation.objects.forEach( function( object, index ) {
         // console.log("iwp6-calc:1451> parseAnimationToMemory> Iterator: " + JSON.stringify(object) );
 
         if ( object.objectType == "time" ) {
@@ -1432,9 +1411,11 @@ function parseAnimationToMemory( rawAnimation ) {
     } else if ( object.objectType == 'solid' ) {
         compiledObjects.push(compileSolid(object));
     } else if ( object.objectType == 'floatingText' ) {
-        addFloatingText(object);
+        compiledObjects.push(compileFloatingText(object));
+/* 2020Feb21 Dropping Generic Object Support
     } else if ( object.objectType == 'object' ) {
         addObject(rawAnimation.objects.object);
+*/
     } else {
       throw "Animation parseAnimationToMemory unrecognized Object Type: " + object.objectType;
     }
@@ -1449,15 +1430,17 @@ originalLoopOrder.forEach( function(object, index) {
     } else if ( object.objectType == 'solid' ) {
         illustrateSolid(compileSolid(object));
     } else if ( object.objectType == 'floatingText' ) {
-        // addFloatingText(object);
+        illustrateFloatingText(compileFloatingText(object));
+/* 2020Feb21 Dropping Generic Object Support
     } else if ( object.objectType == 'object' ) {
         // addObject(rawAnimation.objects.object);
+*/
     } else {
       throw "Animation parseAnimationToMemory unrecognized Object Type: " + object.objectType;
     }
 } );
-  // 2019Apr09 store in global singleton
 
+  // 2019Apr09 store in global singleton
   parsedAnimation = animation;
   decorateAnimationFunctions();
 
@@ -1480,6 +1463,9 @@ function decorateAnimationFunctions() {
       return out;
   };
 
+/**
+ 2020Feb21 Disabled Generic Objects*/
+/*
   parsedAnimation.objects = function() {
       var out = [];
       parsedAnimation.loop.forEach( function( object, index ) {
@@ -1487,7 +1473,7 @@ function decorateAnimationFunctions() {
       });
       return out;
   };
-
+*/
 
   parsedAnimation.inputs = function() {
       var out = [];
@@ -1505,6 +1491,13 @@ function decorateAnimationFunctions() {
       return out;
   };
 
+  parsedAnimation.floatingTexts = function() {
+      var out = [];
+      parsedAnimation.loop.forEach( function( object, index ) {
+          if ( object.objectType == 'floatingText' ) { out.push(object); }
+      });
+      return out;
+  };
 
   return parsedAnimation;
 
