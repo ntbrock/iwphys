@@ -855,8 +855,9 @@ function illustrateSolid(solid) {
 
   //HTML
   if (solid.shape.shapeType == "circle") {
-    //console.log("it's a circle");
-    svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(solid.shape.width.calculator.value)+ " ry=" +yHeight(solid.shape.height.calculator.value)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
+    // console.log("iwp6-calc:858> it's a circle: ", solid.shape.width );
+    // Initialization Fix, put to the origin, this is updated later
+    svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(0)+ " ry=" +yHeight(0)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
   else if (solid.shape.shapeType == "rectangle") {
     //console.log("it's a rectangle");
