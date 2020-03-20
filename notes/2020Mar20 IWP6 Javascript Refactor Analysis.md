@@ -5,12 +5,46 @@
 2020Mar20 Brockman
 
 
-Andy Wang, Ben Wu, and Taylor Brockman are considering adding RK4 calculator support to IWP6.  This document is an analysis of the existing javascript code base (for animation, note that the new react.js is a separate project ).
+Andy Wang, Ben Wu, and Taylor Brockman are considering adding RK4 calculator support to IWP6.  This document is an analysis of the existing javascript code base for animation, (note that the new react.js is a separate project ) and a recommendation on next steps.
+
+We would implement RK4 as cleanly as possible in the 'new' style' with unit test coverage, then begin to refactor neighboring components out to their new proper location.
 
 
-An important entry point between play and the javascript layer is iwp6-calc.js function parseAnimationToMemory : 1325.  A first step of a refactor would be to bubble this entry point out to 
+## Refactor Concepts
+
+As each component is refactored, it should have a set of corresponding tests written as a companion. We will start with RK4 and build a great example that future contributors may choose to emulate.
+
+Our refactor may take the form of a totally new standalone javascript top-level module, as imagined in master in animatorjs-version7, a javascript/yarn based build that's using Jest for unit testing.
+
+### Unit Test Reading
+
+https://blog.bitsrc.io/top-javascript-testing-frameworks-in-demand-for-2019-90c76e7777e9
+
+https://github.com/facebook/jest
+
+### Compiled Javascript Sub-module
+
+Concepting this in animatorjs-version7/
+
+If fully implemented, this would 'compile' the javascript to a static web location that would then be referenced by the play web pages.  The Web UI would become seperate from the javascript evaluator. 
+
+
+### OO Class design
+
+Object Types: solid, input, output, time, etc.  Each of these could be placed into an object specific source file.  Each object source file would have an implemetnation for the standard lifecycle of the object: compile, evaluate, illustrate, test, etc.
+
+Would our new library be includable from the designer?
+
+What steps would be necessary for develoeprs to implement new object types?
+
+User Interface should to remain as isolated as possible from the backend calculation loop, so that we can evaluate and test animations server-side with node.js or nashorn.
+
+Isolated features, such as Graphing, or Save As Png should be isolated into their own files.
+
 
 ## Entry Point
+
+An important entry point between play and the javascript layer is iwp6-calc.js function parseAnimationToMemory : 1325.  A first step of a refactor would be to bubble this entry point out to something like iwp6-main.js.
 
 When a user views an animation, the handoff from the Play layer to Javascript is in play-version6/app/views/animation/animation.scala
 
@@ -27,9 +61,9 @@ masterResetSteps(); // iwp6-calc.js:95
 
 ## Euler Calculator Call Stack
 
-It would be revealing to print out the full stack trace for how the Euler's Calculators get evaluated today.
+It is revealing to analyze the full stack trace for how the Euler's Calculators get evaluated today.
 
-Compile
+### Compile
 
 ```
 iwp6-calc.js:1012 compileCalculator
@@ -37,7 +71,7 @@ iwp6-calc.js:1012 compileCalculator
 	mathjs
 ```
 
-Initialization
+### Initialization
 ```
 
 calc:512 calculateVarsAtStep(step)
@@ -47,7 +81,7 @@ calc:609 initializeEulerCalculator(solid, step, vars, axis, calculator)
 
 ```
 
-Evaluation 
+### Evaluation (Each step of the Animation)
 
 ```
 iwp6-animator:455 handleStartClick()
@@ -70,22 +104,26 @@ iwp6-calc:1190 evaluateEulerCalculator( resultVariable, calculator, calculateSte
 
 ## RK4 Proposal
 
-New JS File called:   iwp6-calculator-rk4.js
+New JS File called:   iwp6-calculator-rk4.js  or  version7/app/calculator/rk4.js
 
-Refactor Euler's out to iwp6-calculator-euler.js
+Refactor Euler's out to iwp6-calculator-euler.js  or  version7/app/calculator/euler.js
 
-Refactor the compileCalculator and main calculator loop to iwp6-calculator.js
+What are the common traits/functions that each calculator must have?  Do we relocate the designer hints / schema requirements here?
 
-Revisit if method signature is ok, can this be independently tested?
+Refactor the compileCalculator and main calculator loop to iwp6-calculator.js or version7/app/calculator/calculator.js
+
+Revisit if method signature is ok, can this be independently tested?  A good next step would be to build a clean room re-impementation of 
 
 ( resultVariable, calculator, calculateStep, vars, verbose, objectName )
 
 Write standalone, NO user interface unit tests test-calculator-rk4.js
 
-Invoke the rk4 tests from play / nashhorn?  Better Js testing framework?
+Invoke the rk4 tests from play / nashhorn? (Heavy) Better Js testing framework? Yes = Jest
 
 
-## General Proposal
+## General Refactor Proposal
+
+Strongly consider going to animatorsj-version7/, new .js project with pre-compiling, minification, and unit testing!
 
 ### Objectification
 
@@ -97,6 +135,11 @@ Each object type would have functions:
 	
 	illustrateSvg
 
+	schema
+	
+	designerProperties
+	
+	unitTests
 
 
 ### Parsing 
