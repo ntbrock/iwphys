@@ -349,7 +349,7 @@ function updateSolidSvgPathAndShape(solid, pathAndShape) {
 		var xTran2 = -xWidth(pathAndShape.width*2)/2
 		var yTran2 = -yHeight(pathAndShape.height*2)/2
 
-    var domId = "#solid_"+solid.name.toLowerCase();
+    var domId = "#solid_"+solid.name; //3-20-20 removed .toLowerCase()
     var solidSvg = $(domId);
 
     // console.log("iwp5:1423> Bitmap type,  id: ", domId, " xTran: ", xTran, " yTran: ", yTran, "  Angle: ", pathAndShape.angle, "  solidSvg: ", solidSvg);
