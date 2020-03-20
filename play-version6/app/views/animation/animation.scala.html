@@ -83,12 +83,13 @@
         <!-- 2018 Graph Table now contains an SVG canvas for the graph -->
         <div id="graphTab" class="iwp-tab"> <!-- For easier debugging, starting w/ graph tab on -->
 		<div id="graphControls" class="iwp-graph-controls"></div> <!-- Written by iwp5-graph.js -->
-		<body><center><b>Position vs. Time</b></center></body>
-		<div><svg id="pos-graph" class="iwp-graph" viewBox="-100 -100 200 200" preserveAspectRatio="xMinYMin meet"></div>
-		<body><center><b>Velocity vs. Time</b></center></body>
-		<div><svg id="vel-graph" class="iwp-graph" viewBox="-100 -100 200 200" preserveAspectRatio="xMinYMin meet"></div>
-		<body><center><b>Acceleration vs. Time</b></center></body>
-		<div><svg id="accel-graph" class="iwp-graph" viewBox="-100 -100 200 200" preserveAspectRatio="xMinYMin meet"></div>
+
+		<div><svg id="pos-graph" class="iwp-graph" viewBox="-100 -100 200 200" 
+		          preserveAspectRatio="xMinYMin meet"></div>
+		<div><svg id="vel-graph" class="iwp-graph" viewBox="-100 -100 200 200"
+			  preserveAspectRatio="xMinYMin meet"></div>
+		<div><svg id="accel-graph" class="iwp-graph" viewBox="-100 -100 200 200" 
+		          preserveAspectRatio="xMinYMin meet"></div>
 	             
 	</div>
 	 
@@ -123,27 +124,28 @@
             </tr>
           </table>
 	     <br>
+	     <center><b> Graph Axes Scales </b></center>
 	     <br>
-         <table class="trim">
-            <tr><th colspan="3">Position Graph Axes Scale</th></tr>
+	<table class="trim" style="display: inline-block; width:33%; float:left">
+            <tr><th colspan="3">Position</th></tr>
             <tr>
               <td style="width:33%"></td>
               <td style="width:33%">X</td>
               <td style="width:33%">Y</td>
             <tr>
               <td>Min:</td>
-              <td><input id="posgraph_xmin" type="text"></td>
-              <td><input id="posgraph_ymin" type="text"></td>
+              <td><input id="posgraph_xmin" size = "2.5px" type="text"></td>
+              <td><input id="posgraph_ymin" size = "2.5px" type="text"></td>
             </tr>
             <tr>
               <td>Max:</td>
-              <td><input id="posgraph_xmax" type="text"></td>
-              <td><input id="posgraph_ymax" type="text"></td>
+              <td><input id="posgraph_xmax" size = "2.5px" type="text"></td>
+              <td><input id="posgraph_ymax" size = "2.5px" type="text"></td>
             </tr>
             <tr class="bottomBorder">
               <td>Grid:</td>
-              <td><input id="posgraph_xgrid" type="text"></td>
-              <td><input id="posgraph_ygrid" type="text"></td>
+              <td><input id="posgraph_xgrid" size = "2.5px" type="text"></td>
+              <td><input id="posgraph_ygrid" size = "2.5px" type="text"></td>
             </tr>
             <tr>
               <td>Unit:</td>
@@ -151,60 +153,62 @@
               <td style="width: 100%;"></td>
             </tr>
           </table>
-	  <table class="trim">
-            <tr><th colspan="3">Velocity Graph Axes Scale</th></tr>
+	  <table class="trim" style="display: inline-block; width:33%; float:left">
+            <tr><th colspan="3">Velocity</th></tr>
             <tr>
               <td style="width:33%"></td>
               <td style="width:33%">X</td>
               <td style="width:33%">Y</td>
             <tr>
               <td>Min:</td>
-              <td><input id="velgraph_xmin" type="text"></td>
-              <td><input id="velgraph_ymin" type="text"></td>
+              <td><input id="velgraph_xmin" size = "2.5px" type="text"></td>
+              <td><input id="velgraph_ymin" size = "2.5px" type="text"></td>
             </tr>
             <tr>
               <td>Max:</td>
-              <td><input id="velgraph_xmax" type="text"></td>
-              <td><input id="velgraph_ymax" type="text"></td>
+              <td><input id="velgraph_xmax" size = "2.5px" type="text"></td>
+              <td><input id="velgraph_ymax" size = "2.5px" type="text"></td>
             </tr>
             <tr class="bottomBorder">
               <td>Grid:</td>
-              <td><input id="velgraph_xgrid" type="text"></td>
-              <td><input id="velgraph_ygrid" type="text"></td>
+              <td><input id="velgraph_xgrid" size = "2.5px" type="text"></td>
+              <td><input id="velgraph_ygrid" size = "2.5px" type="text"></td>
             </tr>
-            <tr>
+	    <tr>
               <td>Unit:</td>
               <td style="width: 100%;">seconds</td>
               <td style="width: 100%;"></td>
             </tr>
+
           </table>
-	  <table class="trim">
-            <tr><th colspan="3">Acceleration Graph Axes Scale</th></tr>
+	  <table class="trim" style="display: inline-block; width: 33%; float:left">
+            <tr><th colspan="3">Acceleration</th></tr>
             <tr>
               <td style="width:33%"></td>
               <td style="width:33%">X</td>
               <td style="width:33%">Y</td>
             <tr>
               <td>Min:</td>
-              <td><input id="accelgraph_xmin" type="text"></td>
-              <td><input id="accelgraph_ymin" type="text"></td>
+              <td><input id="accelgraph_xmin" size = "2.5px" type="text"></td>
+              <td><input id="accelgraph_ymin" size = "2.5px" type="text"></td>
             </tr>
             <tr>
               <td>Max:</td>
-              <td><input id="accelgraph_xmax" type="text"></td>
-              <td><input id="accelgraph_ymax" type="text"></td>
+              <td><input id="accelgraph_xmax" size = "2.5px" type="text"></td>
+              <td><input id="accelgraph_ymax" size = "2.5px" type="text"></td>
             </tr>
             <tr class="bottomBorder">
               <td>Grid:</td>
-              <td><input id="accelgraph_xgrid" type="text"></td>
-              <td><input id="accelgraph_ygrid" type="text"></td>
+              <td><input id="accelgraph_xgrid" size = "2.5px" type="text"></td>
+              <td><input id="accelgraph_ygrid" size = "2.5px" type="text"></td>
             </tr>
-            <tr>
-              <td>Unit:</td>
+	     <tr>
+              <td>Unit: </td>
               <td style="width: 100%;">seconds</td>
               <td style="width: 100%;"></td>
             </tr>
-          </table>
+
+            </table>
 
 
  

@@ -63,7 +63,24 @@ var yAxis = null
 function graphInit(s) {
 	console.log("iwp6-graph59> ", s);
 	var svg = d3.select('#' + s + '-graph');
-	
+
+	// Step 0 Add Graph Titles
+	if(svg != null) {
+		var title = "";
+		var xShift = 150;
+		if(s == "pos") {
+			title = "Position vs. Time";
+		}
+		else if(s == "vel") {
+			title = "Velocity vs. Time";
+		}
+		else if(s ==  "accel") {
+			title = "Acceleration vs. Time";
+			xShift = 140;
+		}
+		svg.append("text").attr("x", xShift).attr("y", -85).attr("style", "font-size : 15;").text(title);
+	}
+
 	// Step 1 Build Grid And Axes
 	// console.log("iwp5-graph.js:38> Building Grid + Axes for svg: " , svg);
 	if ( xGrid != null ) {
@@ -74,7 +91,7 @@ function graphInit(s) {
 	}
 	if ( xAxis != null ) {
 		xAxis(svg.append("g").classed("iwp-graph-axis",true));
-		svg.append("text").attr("x", 390).attr("y", 15).attr("style", "font-size : 12;").classed("iwp-graph-axis-label", "true").text("Time (s)");
+		svg.append("text").attr("x", 390).attr("y", 20).attr("style", "font-size : 12;").classed("iwp-graph-axis-label", "true").text("Time (s)");
 	}
 
 	// 2019Oct25 - Render the Yaxis on the left side of the graph, always
@@ -89,6 +106,7 @@ function graphInit(s) {
 		yAxis(svg.append("g").classed("iwp-graph-axis",true).attr("transform", "translate("+ graphXScale(yAxisCoordinate) +", 0)"));
 	}
 
+	
 
         /* 	
 	visualPath1 = svg.append('path')

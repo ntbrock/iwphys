@@ -30,17 +30,17 @@
 
 .iwp-graph-axis text {
 	fill: rgb(150,150,150);
-	font-size: 6px;
+	font-size: 8px;
 }
 
 .iwp-graph-axis-label {
 	fill: rgb(150,150,150);
-	font-size: 6px;e
+	font-size: 6px;
 }
 
 .iwp-graph-grid line {
 	stroke: lightgrey;
-	stroke-width: 0.3;
+	stroke-width: 0.4;
 }
 
 /** This hides a dark black bar at the edge of display */
@@ -54,7 +54,8 @@
 .iwp-graph-controls {
 	float: right;
 	width: 90px;
-	padding-top: 200px;
+	padding-top: 10px;
+	padding-bottom: 200px;
 	margin-left: 4px;
 }
 
