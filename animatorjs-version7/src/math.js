@@ -1,4 +1,4 @@
-require('mathjs');
+const { evaluate } = require('mathjs');
 
 /*
 import {
@@ -6,8 +6,10 @@ import {
 } from 'mathjs'
 */
 
-function math_sum(a,b) { 
-  return a+b;
+
+function math_sum(a,b) {
+	return evaluate(a+'+'+b);
 }
+
 module.exports = math_sum;
 
