@@ -832,14 +832,12 @@ function compileSolid(solid) {
     } else {
         // 2020Jan31 - Mapped to new structure w/o intermediate point
 	    solid.shape.points.forEach ( function( i, index ) {
-
-
-      var point = {
-        xpath: {calculator: compileCalculator(i.xpath.calculator),},
-        ypath: {calculator: compileCalculator(i.ypath.calculator),},
-      }
-    compiledSolid.points.push(point)
-    });
+        var point = {
+          xpath: {calculator: compileCalculator(i.xpath.calculator),},
+          ypath: {calculator: compileCalculator(i.ypath.calculator),},
+        }
+        compiledSolid.points.push(point)
+      });
     }
     // console.log("iwp5:834> Compiled polygon: ",compiledSolid)
   }

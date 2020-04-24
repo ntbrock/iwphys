@@ -332,7 +332,7 @@ function updateSolidSvgPathAndShape(solid, pathAndShape) {
 
     // console.log("iwp5:1581> Redrawing Polygon: " + solid.name + " has Error? " + solid.calculationError );
     var points = pathAndShape.points
-    pointsAttr = "0, 0 100, 0 100,100 0, 100"
+    pointsAttr = ""
     $.each( pathAndShape.points, function( index, i ) {
       pointsAttr += xCanvas(points[index].x+pathAndShape.x)+","+yCanvas(points[index].y+pathAndShape.y)+" "
       console.log("animator.js:329> Polygon i: " + i + " points: " , pointsAttr)
