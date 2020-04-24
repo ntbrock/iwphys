@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<problem>
+	<author>
+		<username></username>
+		<name></name>
+		<organization></organization>
+		<email></email>
+	</author>
+	<objects>
+		<time>
+			<start>0.0</start>
+			<stop>10.0</stop>
+			<change>0.1</change>
+			<fps>10.0</fps>
+		</time>
+		<GraphWindow>
+			<xmin>0.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+		</GraphWindow>
+		<window>
+			<xmin>-10.0</xmin>
+			<xmax>10.0</xmax>
+			<ymin>-10.0</ymin>
+			<ymax>10.0</ymax>
+			<xgrid>2.0</xgrid>
+			<ygrid>2.0</ygrid>
+			<xunit>m</xunit>
+			<yunit>m</yunit>
+			<showAllDataAvailable>false</showAllDataAvailable>
+			<drawGridNumbers>true</drawGridNumbers>
+		</window>
+		<description>
+			<text>Elastic collision between a moving blue box and a red box initially at rest.</text>
+		</description>
+		<solid>
+			<name>blue_box</name>
+			<shape type="rectangle" drawTrails="true" drawVectors="true">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="true" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="true">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="true"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>0</red>
+				<green>0</green>
+				<blue>255</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>step(4.1-t)*(t-5.0) + step(t-4.0)*(t*(bm-rm)/(bm+rm)-4.1*(bm-rm)/(bm+rm)-0.9)</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<solid>
+			<name>red_box</name>
+			<shape type="rectangle" drawTrails="false" drawVectors="false">
+				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
+				<width>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</width>
+				<height>
+					<calculator type="parametric">
+						<value>1</value>
+					</calculator>
+				</height>
+				<angle>
+					<calculator type="parametric">
+						<value>0</value>
+					</calculator>
+				</angle>
+				<graphOptions graphVisible="false">
+					<initiallyOn yAccel="false" yVel="false" xAccel="false" xVel="false" yPos="false" xPos="false"/>
+				</graphOptions>
+			</shape>
+			<color>
+				<red>255</red>
+				<green>51</green>
+				<blue>51</blue>
+			</color>
+			<xpath>
+				<calculator type="parametric">
+					<value>step(t-4.0)*(t*2*bm/(bm+rm)-8.2*bm/(bm+rm))</value>
+				</calculator>
+			</xpath>
+			<ypath>
+				<calculator type="parametric">
+					<value>0</value>
+				</calculator>
+			</ypath>
+		</solid>
+		<input>
+			<name>bm</name>
+			<text>mass of blue box</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+		<input>
+			<name>rm</name>
+			<text>mass of red box</text>
+			<initialValue>1.0</initialValue>
+			<units>kg</units>
+		</input>
+	</objects>
+</problem>
