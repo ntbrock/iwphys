@@ -1,12 +1,24 @@
 {
+  "name": "iwp-animatorjs-version7",
+  "version": "7.0.0",
+  "description": "Interactive Web Physics Animator Javascript",
+  "author": "Taylor Brockman",
+  "license": "MIT",
+  "main": "src/main.js",
   "devDependencies": {
-    "jest": "^25.1.0"
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.0",
+    "@babel/polyfill": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "mocha": "^8.1.0"
   },
   "scripts": {
     "test": "mocha",
     "start": "node src/main.js"
   },
   "dependencies": {
-    "mathjs": "^6.6.1"
+    "lodash": "^4.17.20",
+    "lodash-es": "^4.17.15",
+    "mathjs": "^7.1.0"
   }
 }
