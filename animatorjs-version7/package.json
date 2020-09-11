@@ -3,7 +3,8 @@
     "jest": "^25.1.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "mocha",
+    "start": "node src/main.js"
   },
   "dependencies": {
     "mathjs": "^6.6.1"
