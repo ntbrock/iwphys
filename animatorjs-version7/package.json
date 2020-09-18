@@ -12,6 +12,7 @@
     "@babel/preset-env": "^7.11.0",
     "domhandler": "^3.0.0",
     "htmlparser2": "^4.1.0",
+    "jquery": "^3.5.1",
     "jsdom": "^16.4.0",
     "mocha": "^8.1.0"
   },
