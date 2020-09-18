@@ -27,10 +27,12 @@ describe('animationOrder', function () {
 
             loop = animationOrder.reorderAnimationObjectsBySymbolicDependency( loop );
 
-            console.log("Loop: " , _.map(loop, l =>  l.name + " : " + l.objectType  ) );
+            // console.log("Loop: " , _.map(loop, (l,i) => "" + i + " = "+  l.name + " : " + l.objectType  ) );
 
-            // assert.equal([1, 2, 3].indexOf(4), -1);
-
+            assert.strictEqual(loop[0].name, "redBox")
+            assert.strictEqual(loop[1].name, "blueBox")
+            assert.strictEqual(loop[2].name, "newOutput")
+            assert.strictEqual(loop[3].name, "newInput")
         });
 
     });
