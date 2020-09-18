@@ -1,5 +1,6 @@
 // https://mochajs.org/
 let animationOrder = require('../../src/iwp7/animation-order');
+
 let assert = require('assert');
 let _ = require('lodash');
 
@@ -14,6 +15,8 @@ describe('animationOrder', function () {
 
             let loop = animationOrder.findOrderableObjects(animation.objects);
             assert.strictEqual(loop.length, 0);
+
+            let breaker1618=true
         });
 
 
