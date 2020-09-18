@@ -25,6 +25,13 @@ describe('Html', function () {
 
                     const h1s = document.querySelector("nav").innerHTML;
 
+                    const timeTab = document.getElementById("timeTab");
+                        // Synonum for $("#
+
+                    // Great research area - could we bring jquery module into node?
+
+                    // How would I ask the dom if a certain elements is visble on the page or not?
+                    // How do you do: timeTab.isVisible??
 
                     let breaker1700=true
 
