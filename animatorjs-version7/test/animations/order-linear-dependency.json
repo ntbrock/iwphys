@@ -1,0 +1,188 @@
+{
+  "author": {
+    "email": "",
+    "name": "",
+    "organization": "",
+    "username": "anonymous"
+  },
+  "objects": [
+    {
+      "objectType": "output",
+      "name": "outputRedBoxY",
+      "text": "outputRedBoxY",
+      "units": "",
+      "calculator": {
+        "calcType": "parametric",
+        "value": "redBox.ydisp"
+      },
+      "hidden": false
+    },
+    {
+      "objectType": "solid",
+      "name": "redBox",
+      "shape": {
+        "shapeType": "rectangle",
+        "vectors": {
+          "xVel": false,
+          "yVel": false,
+          "xAccel": false,
+          "yAccel": false,
+          "Vel": false,
+          "Accel": false
+        },
+        "width": {
+          "calculator": {
+            "calcType": "parametric",
+            "value": "1"
+          }
+        },
+        "height": {
+          "calculator": {
+            "calcType": "parametric",
+            "value": "1"
+          }
+        },
+        "graphOptions": {
+          "graphVisible": true,
+          "initiallyOn": {
+            "xPos": true,
+            "xVel": false,
+            "xAccel": false,
+            "yPos": true,
+            "yVel": false,
+            "yAccel": false
+          }
+        },
+        "isGraphable": true,
+        "drawTrails": false,
+        "drawVectors": false
+      },
+      "color": {
+        "red": 247,
+        "green": 15,
+        "blue": 15,
+        "alpha": 1
+      },
+      "xpath": {
+        "calculator": {
+          "calcType": "parametric",
+          "value": "0"
+        }
+      },
+      "ypath": {
+        "calculator": {
+          "calcType": "parametric",
+          "value": "t"
+        }
+      }
+    },
+    {
+      "objectType": "solid",
+      "name": "blueBox",
+      "shape": {
+        "shapeType": "rectangle",
+        "vectors": {
+          "xVel": false,
+          "yVel": false,
+          "xAccel": false,
+          "yAccel": false,
+          "Vel": false,
+          "Accel": false
+        },
+        "width": {
+          "calculator": {
+            "calcType": "parametric",
+            "value": "1"
+          }
+        },
+        "height": {
+          "calculator": {
+            "calcType": "parametric",
+            "value": "1"
+          }
+        },
+        "graphOptions": {
+          "graphVisible": true,
+          "initiallyOn": {
+            "xPos": true,
+            "xVel": false,
+            "xAccel": false,
+            "yPos": true,
+            "yVel": false,
+            "yAccel": false
+          }
+        },
+        "isGraphable": true,
+        "drawTrails": false,
+        "drawVectors": false
+      },
+      "color": {
+        "red": 51,
+        "green": 51,
+        "blue": 51
+      },
+      "xpath": {
+        "calculator": {
+          "calcType": "parametric",
+          "value": "t"
+        }
+      },
+      "ypath": {
+        "calculator": {
+          "calcType": "parametric",
+          "value": "0"
+        }
+      }
+    },
+    {
+      "objectType": "output",
+      "name": "outputRedBoxX",
+      "text": "outputRedBoxX",
+      "units": "sec",
+      "calculator": {
+        "calcType": "parametric",
+        "value": "redBox.xdisp"
+      },
+      "hidden": false
+    },
+    {
+      "objectType": "input",
+      "name": "newInput",
+      "hidden": false,
+      "initialValue": 100,
+      "text": "Test",
+      "units": "m"
+    },
+    {
+      "start": 0,
+      "stop": 100,
+      "change": 0.1,
+      "fps": 20,
+      "objectType": "time"
+    },
+    {
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": -5,
+      "ymax": 5,
+      "xgrid": 2,
+      "ygrid": 2,
+      "objectType": "graphWindow"
+    },
+    {
+      "xmin": -10,
+      "xmax": 10,
+      "ymin": -10,
+      "ymax": 10,
+      "xgrid": 2,
+      "ygrid": 2,
+      "xunit": "meters",
+      "yunit": "meters",
+      "objectType": "window"
+    },
+    {
+      "text": "Default Description\nDescribe your scenario, instructions, or what your visitors should learn from this animation.",
+      "objectType": "description"
+    }
+  ]
+}
