@@ -625,6 +625,5 @@ function animationObjectReorder(loop) {
 
  **/
 
-modules.export.reorderAnimationObjectsBySymbolicDependency = reorderAnimationObjectsBySymbolicDependency
-
+module.exports.reorderAnimationObjectsBySymbolicDependency = reorderAnimationObjectsBySymbolicDependency
 

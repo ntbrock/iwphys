@@ -1,10 +1,14 @@
 // https://mochajs.org/
-var assert = require('assert');
+let animationOrder = require('../../src/iwp7/animation-order');
+let assert = require('assert');
 
-describe('Array', function () {
-    describe('#indexOf()', function () {
-        it('should return -1 when the value is not present', function () {
+describe('animationOrder', function () {
+    describe('should', function () {
+        it('should re-order a animation with zero objects', function () {
+            console.log("running animation test...")
+
             assert.equal([1, 2, 3].indexOf(4), -1);
+
         });
     });
 });
