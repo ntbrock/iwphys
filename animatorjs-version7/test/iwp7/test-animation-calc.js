@@ -8,7 +8,10 @@ describe('Animation', function () {
     describe('Calculator', function () {
         it('Jonathan Needs to find a function to test!', function () {
 
+            animationCalc.evaluateCalculator( 'test', {}, 0, {}, true, "test'")
+
             assert.strictEqual( true, false );
+
 
         });
     });
