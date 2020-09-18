@@ -1,5 +1,8 @@
 'use strict';
 
+let _ = require('lodash');
+let varsConstants = require('./animation-constants')
+
 /**
  * Interactive Web Physics 7
  * 2020Sep18 Brockman
@@ -10,6 +13,29 @@
  * 2019Sep06 Testing Harness for Port of object odering
  */
 
+
+/**
+ * Return an array of objects that can be filtered with this module
+ * 2020Sep18 Brockman
+ * @param loop
+ * @returns {*}
+ */
+
+function findOrderableObjects( objects ) {
+
+    return _.filter( objects, function(o) {
+        return (
+            o.objectType !== "time" &&
+            o.objectType !== "graphWindow" &&
+            o.objectType !== "window" &&
+            o.objectType !== "description"
+        )
+    } )
+}
+
+
+//-------------------------------------------------------------------------------------
+// Version 6 code
 
 function reorderAnimationObjectsBySymbolicDependencyJsonStringify( unused ) {
 
@@ -625,5 +651,8 @@ function animationObjectReorder(loop) {
 
  **/
 
+
+
+module.exports.findOrderableObjects = findOrderableObjects
 module.exports.reorderAnimationObjectsBySymbolicDependency = reorderAnimationObjectsBySymbolicDependency
 

@@ -5,24 +5,34 @@ let _ = require('lodash');
 
 describe('animationOrder', function () {
     describe('should', function () {
-        it('should re-order a animation with zero objects', function () {
+        it('should filter an animation with zero objects', function () {
             console.log("running animation test...")
 
-            let empty = require('../animations/empty.json')
+            let animation = require('../animations/empty.json')
+            assert.strictEqual(animation.objects.length, 4);
 
-            assert.strictEqual(empty.objects.length, 4);
+            let loop = animationOrder.findOrderableObjects(animation.objects);
+            assert.strictEqual(loop.length, 0);
+        });
 
-            let loop = _.filter( empty.objects, function(o) {
-                return o.objectType !== "time" && o.objectType !== "graphWindow" && o.objectType !== "window" && o.objectType !== "description"
-            } );
 
-            let result = animationOrder.reorderAnimationObjectsBySymbolicDependency( loop );
+        it('should filter an animation with two objects', function () {
+            console.log("running animation test...")
 
-            console.log("Result: " , result);
+            let animation = require('../animations/two-boxes.json')
+            assert.strictEqual(animation.objects.length, 8);
+
+            let loop = animationOrder.findOrderableObjects(animation.objects);
+            assert.strictEqual(loop.length, 4);
+
+            loop = animationOrder.reorderAnimationObjectsBySymbolicDependency( loop );
+
+            console.log("Loop: " , _.map(loop, l =>  l.name + " : " + l.objectType  ) );
 
             // assert.equal([1, 2, 3].indexOf(4), -1);
 
         });
+
     });
 });
 
