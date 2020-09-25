@@ -1,3 +1,19 @@
+"use strict";
+
+const deepExtend = require('./deepExtend');
+const animationCalc = require('./animation-calc');
+
+/**
+ * Interactive Web Physics 7
+ * 2020Sep18 Brockman
+ *
+ * Dynamic Animation Ordering, ported from iwp6-order.js
+
+ * 2019Sep06 New Functions for Object Reordering, port from IWP4.5
+ * 2019Sep06 Testing Harness for Port of object odering
+ */
+
+let animationOrder = require('./animation-order');
 
 
 //-----------------------------------------------------------------------
@@ -34,19 +50,6 @@ function compileInput(input) {
     // {name: "ar", text: "Amplitude", initialValue: "9.0", units: "m"}
     // 07 Oct 2016 Honoring hidden flag
 }
-function illustrateInput(input) {
-    var style = "";
-    if ( input.hidden == "1" ) {
-        style = "display:none;"
-    }
-
-    // 2018Mar01 Fix for empty unit labels
-    var unitLabel = "";
-    if ( typeof input.units ==="string" ) { unitLabel = input.units; }
-
-    htmlInputs.push("<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td class='iwp-input-label'>"+ input.text +"</td><td class='iwp-input-value'><input style='width:60px;' id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + unitLabel + "</td></tr>")
-
-}
 
 
 function compileOutput(output) {
@@ -57,24 +60,11 @@ function compileOutput(output) {
         name: output.name,
         text: output.text,
         units: output.units,
-        calculator: compileCalculator(output.calculator),
+        calculator: animationCalc.compileCalculator(output.calculator),
         hidden: output.hidden //Hidden flag still needed - be careful about cutting off attributes here.
     }
 
     return compiledOutput;
-}
-
-function illustrateOutput(output) {
-    // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { attributesProperty: { "type": "parametric" }, "value": "Red.xaccel" } }
-    var style = ""
-    if ( output.hidden == "1" ) {
-        style = "display:none;'"
-    }
-    var unitLabelOutput = "";
-    if ( typeof output.units === "string" ) { unitLabelOutput = output.units; }
-
-    htmlOutputs.push( "<tr style='" + style +"vertical-align:top;' id='output_" + output.name + "' class='iwp-output-row'><td class='iwp-output-label'>"+ output.text +"</td><td class='iwp-output-value'><input id='" + output.name + "' type='text' value='-999' disabled style='width:80px;'> " + unitLabelOutput + "</td></tr>");
-
 }
 
 /**
@@ -139,17 +129,17 @@ function compileSolid(solid) {
                 deepExtend( solid.shape.graphOptions,
                     { initiallyOn: solid.shape.graphOptions.initiallyOn } ),
             width: {
-                calculator: compileCalculator(solid.shape.width.calculator)
+                calculator: animationCalc.compileCalculator(solid.shape.width.calculator)
             },
             height: {
-                calculator: compileCalculator(solid.shape.height.calculator)
+                calculator: animationCalc.compileCalculator(solid.shape.height.calculator)
             }
         },
         xpath: {
-            calculator : compileCalculator(solid.xpath.calculator)
+            calculator : animationCalc.compileCalculator(solid.xpath.calculator)
         },
         ypath: {
-            calculator : compileCalculator(solid.ypath.calculator)
+            calculator : animationCalc.compileCalculator(solid.ypath.calculator)
         }
     };
 
@@ -166,8 +156,8 @@ function compileSolid(solid) {
             // 2020Jan31 - Mapped to new structure w/o intermediate point
             solid.shape.points.forEach ( function( i, index ) {
                 var point = {
-                    xpath: {calculator: compileCalculator(i.xpath.calculator),},
-                    ypath: {calculator: compileCalculator(i.ypath.calculator),},
+                    xpath: {calculator: animationCalc.compileCalculator(i.xpath.calculator),},
+                    ypath: {calculator: animationCalc.compileCalculator(i.ypath.calculator),},
                 }
                 compiledSolid.points.push(point)
             });
@@ -183,77 +173,13 @@ function compileSolid(solid) {
 
     // 2019Jan18 Promoted Angle processing to a more common location
     if ( typeof solid.shape.angle !== "undefined" ) {
-        compiledSolid.shape.angle = {calculator: compileCalculator(solid.shape.angle.calculator)}
+        compiledSolid.shape.angle = {calculator: animationCalc.compileCalculator(solid.shape.angle.calculator)}
     }
 
 
 
     return compiledSolid;
 
-}
-
-/**
- * 2020Feb21 - Illustrate Functions build out the SVG elements, typically with
- * placeholder widths, heights that are updated on the first repaint.
- * Colors and other styling properties work well here.
- */
-function illustrateSolid(solid) {
-
-    var xOrigin = xCanvas(0);
-    var yOrigin = yCanvas(0);
-
-    //HTML
-    if (solid.shape.shapeType == "circle") {
-        // console.log("iwp6-calc:858> it's a circle: ", solid.shape.width );
-        // Initialization Fix, put to the origin, this is updated later
-        svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(0)+ " ry=" +yHeight(0)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
-    }
-    else if (solid.shape.shapeType == "rectangle") {
-        //console.log("it's a rectangle");
-        svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
-    }
-    else if (solid.shape.shapeType == "line") {
-        // console.log("iwp6-calc:858> It's a line, solid.shape: " , solid.shape);
-        // Initialization Fix, put into the origin
-        svgSolids.push("<line id='solid_" +solid.name+ "' x1='"+xOrigin+"' x2='"+xOrigin+"' y1='"+yOrigin+"' y2='"+yOrigin+"' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
-    }
-    else if (solid.shape.shapeType == "vector") {
-        svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
-    }
-    else if (solid.shape.shapeType == "polygon") {
-        //console.log("it's a polygon:", solid.name);
-        svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");
-    }
-    else if (solid.shape.shapeType == "Bitmap"||solid.shape.shapeType == "bitmap") {
-        //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+solid.fileUri+"'><title>"+solid.name+"</title></image>");
-
-        console.log("iwp6-calc:848> Bitmap support, shape.file= " , solid.shape )
-
-        // 2018Mar01 Brockman - Refactoring the bitmap code here.
-        // https://stackoverflow.com/questions/10261731/can-not-add-image-inside-svg-via-jquery-image-tag-becomes-img
-
-        var id = "solid_"+solid.name;
-
-        var img = document.createElementNS('http://www.w3.org/2000/svg','image');
-        img.setAttributeNS(null,'id',id)
-        img.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets'+solid.shape.file.image);
-        img.setAttributeNS(null, 'visibility', 'visible');
-
-        svgSolids.push(img);
-    }
-
-
-
-    else {
-
-        console.log("iwp5:821> ERROR: Unrecognized Solid Shape Type: ", solid.shape.shapeType)
-        return;
-    };
-
-    /** 2019Apr30 Initial Trail is very empty, but filled in with each animation step in iwp6-animator.js */
-    if (solid.shape.drawTrails == true ) {
-        svgSolids.push("<polyline id='solid_" +solid.name+ "_trail' points='0,0 0,0' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='1' fill='none'></polyline>");
-    }
 }
 
 
@@ -273,7 +199,7 @@ function compileFloatingText(object) {
         text: object.text,
         units: object.units,
         value: {
-            calculator: compileCalculator(object.value)
+            calculator: animationCalc.compileCalculator(object.value)
         },
         fontSize: object.fontSize,
         showValue: ( object.showValue === true || false ),
@@ -283,24 +209,14 @@ function compileFloatingText(object) {
             blue: parseFloat(object.color.blue),
         },
         xpath: {
-            calculator : compileCalculator(object.xpath.calculator)
+            calculator : animationCalc.compileCalculator(object.xpath.calculator)
         },
         ypath: {
-            calculator : compileCalculator(object.ypath.calculator)
+            calculator : animationCalc.compileCalculator(object.ypath.calculator)
         }
     }
 
 }
-
-
-function illustrateFloatingText(object) {
-
-    // Calculators haven't been calcualted yet, so we just place the text on origin at 0,0 and it's moved with first redraw.
-    var xOrigin = xCanvas(0);
-    var yOrigin = yCanvas(0);
-    svgObjects.push( "<text id='text_" +object.name+ "' x='" + xOrigin + "' y='"+ yOrigin +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
-
-};
 
 
 function addObject(object) {
@@ -323,20 +239,20 @@ function addObject(object) {
         units: object.units,
         showValue: ( object.showValue === true || false ),
         value: {
-            calculator: compileCalculator(object.value.calculator)
+            calculator: animationCalc.compileCalculator(object.value.calculator)
         },
         fontSize: object.fontSize,
         xpath: {
-            calculator : compileCalculator(object.xpath.calculator)
+            calculator : animationCalc.compileCalculator(object.xpath.calculator)
         },
         ypath: {
-            calculator : compileCalculator(object.ypath.calculator)
+            calculator : animationCalc.compileCalculator(object.ypath.calculator)
         }
     }
     compiledObjects.push( compiledObject );
 
 
-};
+}
 
 
 //-----------------------------------------------------------------------
@@ -414,9 +330,9 @@ function setGraphWindow(inGraphWindow) {
 
 function parseAnimationToMemory( rawAnimation ) {
 
-    console.log("iwp6-calc:1222> parseAnimationToMemory Parsing rawAnimation: ", rawAnimation);
+    // console.log("iwp6-calc:1222> parseAnimationToMemory Parsing rawAnimation: ", rawAnimation);
 
-    var animation = { loop: [] };
+    let animation = { loop: [] };
 
     rawAnimation.objects.forEach( function( object, index ) {
         // console.log("iwp6-calc:1451> parseAnimationToMemory> Iterator: " + JSON.stringify(object) );
@@ -490,7 +406,7 @@ function parseAnimationToMemory( rawAnimation ) {
     // 2019Sep06 Reordering of the Animatin Objects based on IWP3 Logic Port.
     //console.log("iwp6-calc:1288> Executing animationObject Reordering on CompiledObjects");
     var originalLoopOrder = animation.loop;
-    animation.loop = reorderAnimationObjectsBySymbolicDependency(animation.loop);
+    animation.loop = animationOrder.reorderAnimationObjectsBySymbolicDependency(animation.loop);
 
     animation.loop.forEach( function( object, index ) {
 
@@ -511,24 +427,6 @@ function parseAnimationToMemory( rawAnimation ) {
         }
     } );
 
-    // Helper Functions that run filters.
-    originalLoopOrder.forEach( function(object, index) {
-        if ( object.objectType == 'input' ) {
-            illustrateInput(compileInput(object));
-        } else if ( object.objectType == 'output' ) {
-            illustrateOutput(compileOutput(object));
-        } else if ( object.objectType == 'solid' ) {
-            illustrateSolid(compileSolid(object));
-        } else if ( object.objectType == 'floatingText' ) {
-            illustrateFloatingText(compileFloatingText(object));
-            /* 2020Feb21 Dropping Generic Object Support
-                } else if ( object.objectType == 'object' ) {
-                    // addObject(rawAnimation.objects.object);
-            */
-        } else {
-            throw "Animation parseAnimationToMemory unrecognized Object Type: " + object.objectType;
-        }
-    } );
 
     // 2019Apr09 store in global singleton
     parsedAnimation = animation;
@@ -592,3 +490,7 @@ function decorateAnimationFunctions() {
     return parsedAnimation;
 
 }
+
+module.exports =  {
+    parseAnimationToMemory: parseAnimationToMemory
+};

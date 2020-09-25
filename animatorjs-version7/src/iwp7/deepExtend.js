@@ -1,8 +1,9 @@
+"use strict";
 
 // -----------------------------------------------
 // Sugar from http://youmightnotneedjquery.com/
 
-module.exports = function(out) {
+const deepExtend = function(out) {
     out = out || {};
 
     for (var i = 1; i < arguments.length; i++) {
@@ -22,4 +23,6 @@ module.exports = function(out) {
     }
 
     return out;
-};
+}
+
+module.exports = deepExtend;

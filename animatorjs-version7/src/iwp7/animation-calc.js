@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Interactive Web Physics 6 - Pure Javascript implementation of calculators and loaders
  * Ryan Steed, Taylor Brockman 2016 - Version 5.0 Initial Port to HTML + SVG
@@ -5,6 +6,10 @@
  * Albert Gong, Nial Mullane, Taylor Brockman 2019 - Version 6.0 Migrated into Play Framework
  * Andy Wang, Benjamin Wu, Taylor Brockmanm 2020 - Version 6.1 Modern Designer and extensive testing
  */
+
+// Version 7
+const varsConstants = require("./animation-constants");
+const math = require("mathjs");
 
 
 // ------------------------------------------------
@@ -37,8 +42,6 @@ if ( typeof console === "undefined" ) {  // Prevent console redefinition
 // Converts from degrees to radians. this makes the 'toRadians(..)' function available in the Calculator space.
 // Likely the are are other physical constants that we'll need to load as well.
 
-// Version 7
-const varsConstants = require("./animation-constants");
 
 
 function calculateInputAtStep(input, step, vars, verbose ) {
@@ -711,4 +714,9 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 };
 
 
-module.exports.evaluateCalculator = evaluateCalculator;
+module.exports = {
+    evaluateCalculator: evaluateCalculator,
+    compileCalculator: compileCalculator
+};
+
+

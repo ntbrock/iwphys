@@ -1,7 +1,7 @@
 'use strict';
 
 let _ = require('lodash');
-let varsConstants = require('./animation-constants')
+let varsConstants = require('./animation-constants');
 
 /**
  * Interactive Web Physics 7
