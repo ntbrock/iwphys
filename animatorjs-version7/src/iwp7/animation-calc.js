@@ -413,9 +413,12 @@ function initializeEulerCalculator(solid, step, vars, axis, calculator) {
 //-----------------------------------------------------------------------
 // Calculation Section
 
+//TODO - More descriptive name for this argument - remember it json that we're expecting!
 function compileCalculator(iwpCalculator) {
 
     // console.log("iwp6-calc:1161> Attempting to compile calculator: " + JSON.stringify(iwpCalculator));
+
+    const breaker421=true
 
     var incomingType = iwpCalculator.calcType
 
