@@ -31,6 +31,11 @@ describe('Animation', function () {
             assert.strictEqual(animation.time.stop, 100);
             assert.strictEqual(animation.loop.length, 4);
 
+            // Step forward once!
+
+            stepForwardAndPause()
+
+            let breaker39=true;
         });
 
     });

@@ -1,5 +1,7 @@
 
 
+const animationCalc = require("./animation-calc");
+
 // What is a step? An interation that is a multiple of t delta.   Current T =   T0 + step * Tdelta
 // Set of the variables in their state at that point.
 // The inputs are replicated into each of the steps.
@@ -38,7 +40,7 @@ function masterResetSteps() {
     });
 
 
-    var vars0 = calculateVarsAtStep(0);
+    var vars0 = animationCalc.calculateVarsAtStep(0);
 
     // 2018Feb01 Graphing Reset hookin
     if ( typeof graphResetZero === "function" ) {
@@ -65,15 +67,15 @@ function setStepDirection(newDirection) {
     changeStep = +newDirection;
 }
 
-function stepForwardAndPause() {
+function stepForwardAndPause(animation) {
     setStepDirection(1);
-    handleStep();
+    handleStep(animation);
     setStepDirection(0);
 }
 
-function stepBackwardAndPause() {
+function stepBackwardAndPause(animation) {
     setStepDirection(-1);
-    handleStep();
+    handleStep(animation);
     setStepDirection(0);
 }
 
@@ -84,12 +86,12 @@ function stepBackwardAndPause() {
 /**
  * Major function - called every time the animation time changes
  */
-function handleStep() {
+function handleStep(animation) {
 
     // console.log("iwp6-calc:173> HandleStep: current: " , currentStep, "  change: ", changeStep );
 
     // apply the time change.
-    var newStep = currentStep + changeStep;
+    let newStep = currentStep + changeStep;
 
     // handle time horizons
     if ( newStep < 0 ) {
@@ -110,7 +112,7 @@ function handleStep() {
         }
     } else {
         // Headless mode
-        if (newStep > ( Math.round( +time.stop / +time.change ))) {
+        if (newStep > ( Math.round( +animation.time.stop / +animation.time.change ))) {
             if ( typeof handleStopClick === 'function' ) {
                 handleStopClick();
             }
@@ -135,7 +137,7 @@ function handleStep() {
 
         } else {
             // UI rendering is handled by the calculate as a side effect
-            vars = calculateVarsAtStep(newStep);
+            vars = animationCalc.calculateVarsAtStep(newStep);
             archiveVarsAtStep( newStep, vars );
         }
 
@@ -170,3 +172,12 @@ function archiveVarsAtStep( step, vars ) {
     deepExtend(varsAtStep[step], vars)
 }
 
+module.exports = {
+    varsAtStepJson : varsAtStepJson,
+    masterResetSteps : masterResetSteps,
+    setStepDirection : setStepDirection,
+    stepForwardAndPause : stepForwardAndPause,
+    stepBackwardAndPause : stepBackwardAndPause,
+    handleStep : handleStep, // Major function - called every time the animation time changes
+    archiveVarsAtStep : archiveVarsAtStep
+}

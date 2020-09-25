@@ -291,10 +291,10 @@ var CONFIG_throw_solid_calculation_exceptions = false;
  * 2019Apr09 Restructured logic to go by object sequence for IWP6
  */
 
-function calculateVarsAtStep(step) {
+function calculateVarsAtStep(animation, step) {
 
     // D-Fence
-    if ( compiledObjects == null || compiledObjects.length <= 0 ) {
+    if ( animation.compiledObjects == null || animation.compiledObjects.length <= 0 ) {
         throw "calculateVarsAtStep("+step+") Empty compiledObjects array, has animation been initialized?"
     }
 
@@ -716,7 +716,8 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, var
 
 module.exports = {
     evaluateCalculator: evaluateCalculator,
-    compileCalculator: compileCalculator
+    compileCalculator: compileCalculator,
+    calculateVarsAtStep: calculateVarsAtStep
 };
 
 
