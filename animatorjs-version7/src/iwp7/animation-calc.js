@@ -504,7 +504,7 @@ var CONFIG_throw_acceleration_calculation_exceptions = true;
 /** 2018Mar22 Bugfix, use the argument 'calculateStep' instead of reaching out to global */
 // ResultVariable is solidname.x or solidName.y
 
-function evaluateCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
+function evaluateCalculator( resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName ) {
 
     if ( calculator == null ) {
         console.log("iwp6-calc:970> Null Calculator for: ", resultVariable)
@@ -513,7 +513,7 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
     else if ( calculator.calcType == "mathjs" )   {
 
         try {
-            return evaluateParametricCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
+            return evaluateParametricCalculator(resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName);
         } catch ( err ) {
             console.log("iwp6-calc:991> Exception in evaluateParametricCalculator for " + resultVariable + ": " + err );
             console.log("iwp6-calc:992> Object Detail: Vars: " , vars )
@@ -523,7 +523,7 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
     } else if ( calculator.calcType == "euler-mathjs" ) {
 
         try {
-            return evaluateEulerCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
+            return evaluateEulerCalculator(resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName);
         } catch ( err ) {
             console.log("iwp6-calc:999> Exception in evaluateEulerCalculator for " + resultVariable + ": " + err );
             return { value: 0 }
@@ -539,9 +539,11 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
 
 /**
  * 2019Jan08 For Readability, broke apart Parameteric -vs- Euler implementations
+ *
+ * TODO - resultVariable + objectName are only used for debug, consider moving to end of arg list, not used.
  */
 
-function evaluateParametricCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
+function evaluateParametricCalculator( resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName ) {
 
     try {
 
@@ -594,7 +596,7 @@ function evaluateParametricCalculator( resultVariable, calculator, calculateStep
 
 
 
-function evaluateEulerCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
+function evaluateEulerCalculator( resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName ) {
 
     try {
 
