@@ -47,6 +47,7 @@ function yCanvasGridlines(y) {
 */
 
 // BOOK
+let animationWindow; // For now, make it available in side this one module
 function setAnimationWindow(aw) {
     animationWindow = aw;
 }
@@ -152,7 +153,7 @@ function illustrateAnimation(animation) {
 
 }
 
-function illustrateInput(input) {
+function illustrateInput($, window, input) {
     var style = "";
     if ( input.hidden == "1" ) {
         style = "display:none;"
@@ -162,7 +163,11 @@ function illustrateInput(input) {
     var unitLabel = "";
     if ( typeof input.units ==="string" ) { unitLabel = input.units; }
 
-    htmlInputs.push("<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td class='iwp-input-label'>"+ input.text +"</td><td class='iwp-input-value'><input style='width:60px;' id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + unitLabel + "</td></tr>")
+    const html =
+        "<tr id='input_" + input.name + "' style='" + style + "' class='iwp-input-row'><td class='iwp-input-label'>"+ input.text +"</td><td class='iwp-input-value'><input style='width:60px;' id='" + input.name + "' type='text' value='" + input.initialValue + "'> " + unitLabel + "</td></tr>"
+
+    // Now write directly into the dom!
+    $("#inputTable").append(html);
 
 }
 
@@ -260,6 +265,7 @@ function illustrateSolid(solid) {
 
 module.exports.xWidth = xWidth;
 module.exports.setAnimationWindow = setAnimationWindow;
+module.exports.illustrateInput = illustrateInput;
 
 true;
 
