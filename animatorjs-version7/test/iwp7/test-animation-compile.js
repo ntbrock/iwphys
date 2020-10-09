@@ -31,7 +31,7 @@ describe('Animation', function () {
             assert.strictEqual(animation.time.start, 0);
             assert.strictEqual(animation.time.stop, 100);
             assert.strictEqual(animation.loop.length, 4);
-            
+
 
         });
 

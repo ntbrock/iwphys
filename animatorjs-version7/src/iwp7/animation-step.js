@@ -1,6 +1,6 @@
-
-
 const animationCalc = require("./animation-calc");
+const deepExtend = require('./deepExtend');
+
 
 // What is a step? An interation that is a multiple of t delta.   Current T =   T0 + step * Tdelta
 // Set of the variables in their state at that point.
@@ -10,47 +10,42 @@ const animationCalc = require("./animation-calc");
 
 
 // IWP6 - Nashorn accessibility with some javascript function overloading.
-function varsAtStepJson(step) {
+function varsAtStepJson(animation, step) {
     if ( ( typeof step === "string" && step != "" ) ||
         ( typeof step === "number" && step >= 0 ) ) {
-        return JSON.stringify(varsAtStep[+step]);
+        return JSON.stringify(animation.varsAtStep[+step]);
     } else {
-        return JSON.stringify(varsAtStep);
+        return JSON.stringify(animation.varsAtStep);
     }
 }
 
 
-
-
-var varsAtStep = [];
-var currentStep = 0;
-var changeStep = 0; 	// -1 = backwards, 0 = stopped, 1 = forwards.
-
-function masterResetSteps() {
-    currentStep = 0;
-    changeStep = 0;
-    varsAtStep = [];
-
+function resetSteps(animation) {
+    animation.step.currentStep = 0;
+    animation.step.changeStep = 0;
+    animation.step.varsAtStep = [];
 
     // We also need to clear out previous parameteric displacements used for instant velecioty calculations.
-    compiledObjects.forEach(function ( object, index) {
-        if(object.objectType=='solid') {
+    animation.loop.forEach(function ( object, index) {
+        if(object.objectType === 'solid') {
             resetSolidCalculators(object);
         }
     });
 
-
-    var vars0 = animationCalc.calculateVarsAtStep(0);
+    const vars0 = animationCalc.calculateVarsAtStep(animation, 0);
 
     // 2018Feb01 Graphing Reset hookin
+    // 2020Oct09 TODO How to reconnect graphing?
+    /*
     if ( typeof graphResetZero === "function" ) {
         graphResetZero(0, vars = vars0, solids = parsedAnimation.solids(), "pos");
         graphResetZero(0, vars = vars0, solids = parsedAnimation.solids(), "vel");
         graphResetZero(0, vars = vars0, solids = parsedAnimation.solids(), "accel");
 
     }
+*/
 
-    archiveVarsAtStep( currentStep, vars0 ); // Boot up the environment
+    archiveVarsAtStep( animation, animation.step.currentStep, vars0 ); // Boot up the environment
 
     return vars0;
 }
@@ -63,20 +58,20 @@ function printDecimal( incomingNumber, incomingPlaces ) {
     return parseFloat(Math.round(incomingNumber * Math.pow(10,incomingPlaces)) / Math.pow(10,incomingPlaces)).toFixed(incomingPlaces);
 }
 
-function setStepDirection(newDirection) {
-    changeStep = +newDirection;
+function setStepDirection(animation, newDirection) {
+    animation.step.changeStep = +newDirection;
 }
 
 function stepForwardAndPause(animation) {
-    setStepDirection(1);
+    setStepDirection(animation,1);
     handleStep(animation);
-    setStepDirection(0);
+    setStepDirection(animation,0);
 }
 
 function stepBackwardAndPause(animation) {
-    setStepDirection(-1);
+    setStepDirection(animation,-1);
     handleStep(animation);
-    setStepDirection(0);
+    setStepDirection(animation,0);
 }
 
 
@@ -91,15 +86,16 @@ function handleStep(animation) {
     // console.log("iwp6-calc:173> HandleStep: current: " , currentStep, "  change: ", changeStep );
 
     // apply the time change.
-    let newStep = currentStep + changeStep;
+    let newStep = animation.step.currentStep + animation.step.changeStep;
 
     // handle time horizons
     if ( newStep < 0 ) {
-        changeStep = 0;
+        animation.step.changeStep = 0;
         newStep = 0;
     }
 
     // If we are beyond stop time don't do tanything.
+    /*
     if ( typeof queryTimeStopInputDouble === 'function' && typeof queryTimeStepInputDouble === 'function' ) {
         // Animation Mode
         if (newStep > ( Math.round( queryTimeStopInputDouble() / queryTimeStepInputDouble()))) {
@@ -119,29 +115,33 @@ function handleStep(animation) {
             //console.log("iwp6-calc:191> Animated end of time on step: " + newStep )
             return -1;
         }
-    }
+    }*/
 
     //console.log("handleStep:61> newStep: " + newStep)
 
-    if ( newStep != currentStep ) {
+    if ( newStep !== animation.step.currentStep ) {
 
         // Back button poerformance - Let's look at the historical array of variables, if we have it, reload
         // to avoid doing a recalcaultion
 
-        var vars = varsAtStep[newStep];
+        let vars = animation.varsAtStep[newStep];
         if ( vars != undefined ) {
             //console.log("[iwp5.js:118] Step " + newStep + " already exist, reloading for history.")
+            /*
+            // TODO - Hook into repaint at a higher level
             if ( typeof repaintStep === "function") {
                 repaintStep(newStep);
             }
+*/
 
         } else {
             // UI rendering is handled by the calculate as a side effect
-            vars = animationCalc.calculateVarsAtStep(newStep);
-            archiveVarsAtStep( newStep, vars );
+            vars = animationCalc.calculateVarsAtStep(animation, newStep);
+            archiveVarsAtStep( animation, newStep, vars );
         }
 
         // iwp5.1 - Adding Hook into the graph capabilties
+/*
         if ( changeStep > 0 ) {
             if ( typeof graphStepForward === "function" ) {
                 graphStepForward(newStep, vars, "pos");
@@ -158,18 +158,19 @@ function handleStep(animation) {
 
             }
         }
+
+*/
     }
 
-    currentStep = newStep;
+    animation.step.currentStep = newStep;
 
     return newStep;
 }
 
 
-function archiveVarsAtStep( step, vars ) {
+function archiveVarsAtStep( animation, step, vars ) {
     // console.log("Archving vars at step: " + step );
-    varsAtStep[step] = {};
-    deepExtend(varsAtStep[step], vars)
+    animation.varsAtStep[step] = deepExtend(animation.varsAtStep[step], vars);
 }
 
 
@@ -214,10 +215,11 @@ function resetSolidCalculators(solid) {
 
 module.exports = {
     varsAtStepJson : varsAtStepJson,
-    masterResetSteps : masterResetSteps,
+    resetSteps : resetSteps,
     setStepDirection : setStepDirection,
     stepForwardAndPause : stepForwardAndPause,
     stepBackwardAndPause : stepBackwardAndPause,
     handleStep : handleStep, // Major function - called every time the animation time changes
     archiveVarsAtStep : archiveVarsAtStep
-}
+};
+

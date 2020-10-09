@@ -222,7 +222,7 @@ function compileGraphWindow(graphWindowJson) {
 
 function compileAnimationFromJson( animationJson ) {
 
-    let animation = { loop: [] };
+    let animation = { loop: [], step: {}, varsAtStep: [] };
 
     let preCompileLoop = [];
 

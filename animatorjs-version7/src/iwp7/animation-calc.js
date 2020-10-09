@@ -10,7 +10,7 @@
 // Version 7
 const varsConstants = require("./animation-constants");
 const math = require("mathjs");
-
+const deepExtend = require('./deepExtend');
 
 // ------------------------------------------------
 // Sugar from https://www.n-k.de/riding-the-nashorn/
@@ -295,57 +295,45 @@ function calculateVarsAtStep(animation, step) {
 
     const breaker296=true
     // D-Fence
-    if ( animation.compiledObjects == null || animation.compiledObjects.length <= 0 ) {
-        throw "calculateVarsAtStep("+step+") Empty compiledObjects array, has animation been initialized?"
+    if ( ! animation.compiled ) {
+        throw "calculateVarsAtStep(" + step + ") Animation is not compiled"
+    }
+    if ( ! Array.isArray(animation.loop) ) {
+        throw "calculateVarsAtStep(" + step + ") Animation.loop is not an Array"
     }
 
     // vars should be a map of string to double, including the mathematical / physical constants.
-    var vars = { step: step }
-    deepExtend(vars, varsConstants);
+    let vars = deepExtend({ step: step }, varsConstants);
 
-
-    // optional UI
-    startTime = null;
-    if ( typeof queryTimeStartInputDouble === "function" ) {
-        startTime = queryTimeStartInputDouble()
-    } else {
-        startTime = time.start
-    }
 
     // Everything begins with time, populate t.
-    vars.t = startTime + step * time.change;
-    vars.tDelta = time.change
+    vars.t = animation.time.start + step * animation.time.change;
+    vars.tDelta = animation.time.change
     vars.delta_t = vars.tDelta
     vars.tDel = vars.tDelta
-    vars.deltaTime = time.change
+    vars.deltaTime = animation.time.change
 
-
-    if ( typeof updateTimeDisplay === "function" ) {
-        updateTimeDisplay(vars.t);
-    }
 
     // Collect user Inputs! These are polled from the DOM every step.
-    compiledObjects.forEach( function(object, index) {
+    animation.loop.forEach( function(object, index) {
 
-        if ( object.objectType == 'input' ) {
+        if ( object.objectType === 'input' ) {
 
-            var newValue = calculateInputAtStep(object, step, vars, false );
-            vars[object.name] = newValue;
-
+            vars[object.name] = calculateInputAtStep(object, step, vars, false );
             // console.log("iwp6-calc:521> Input name: " + object.name + "  newValue: "+ newValue );
 
-        } else if ( object.objectType == 'output') {
+        } else if ( object.objectType === 'output') {
 
-            var newValue = calculateOutputAtStep(object, step, vars, true );
+            const newValue = calculateOutputAtStep(object, step, vars, true );
 
             if ( isNaN(newValue) ) { throw "not a number" };
             if ( !isFinite(newValue) ) { throw "not finite" };
 
             vars[object.name] = newValue;
 
-        } else if ( object.objectType == 'solid') {
+        } else if ( object.objectType === 'solid') {
 
-            var solid = object;
+            const solid = object; // alias
 
             // Initialize Euler's each loop if necessary
             if ( solid.xpath.calculator.calcType == "euler-mathjs" ) {
@@ -356,14 +344,13 @@ function calculateVarsAtStep(animation, step) {
                 initializeEulerCalculator(solid, step, vars, "y", solid.ypath.calculator)
             }
 
-            var newValue = calculateSolidAtStep(object, step, vars, true );
-            vars[solid.name] = newValue;
+            vars[solid.name] = calculateSolidAtStep(object, step, vars, true );
 
             // console.log("iwp6-calc:588> calculateSolidAtStep: " + object.name + "  newValue: " + newValue );
 
         } else if ( object.objectType == 'floatingText' ) {
 
-            var floatingText = object;
+            const floatingText = object;
 
             if ( floatingText.xpath.calculator.calcType == "euler-mathjs" ) {
                 initializeEulerCalculator(floatingText, step, vars, "x", solid.xpath.calculator)
@@ -374,6 +361,7 @@ function calculateVarsAtStep(animation, step) {
             }
 
             vars[floatingText.name] = calculateFloatingTextAtStep(floatingText, step, vars, true );
+
 
         } else if ( object.objectType == 'object') {
 
@@ -421,7 +409,7 @@ function compileCalculator(iwpCalculator) {
 
     const breaker421=true
 
-    var incomingType = iwpCalculator.calcType
+    const incomingType = iwpCalculator.calcType
 
     if ( incomingType == "parametric" ) {
 
