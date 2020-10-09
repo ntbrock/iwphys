@@ -33,7 +33,7 @@ describe('Animation', function () {
                 };
 
             const calculatorCompiled = animationCalc.compileCalculator(calculatorJson);
-            const calculatorResult = animationCalc.evaluateCalculator( 'test', calculatorCompiled, 0, { a: 5 }, true, "test")
+            const calculatorResult = animationCalc.evaluateCalculator( 'test', calculatorCompiled, 0, 1, { a: 5 }, true, "test")
 
             const breaker38=true
 
@@ -57,23 +57,32 @@ describe('Animation', function () {
 
             const calculatorCompiled = animationCalc.compileCalculator(calculatorJson);
 
+            const resultVariable = 'ball.x'
+            const objectName = 'ball'
+
+
+            const vars = { delta_t : 0.1 }
+
             const calculatorResults = []
-            calculatorResults[0] = animationCalc.evaluateCalculator( 'test', calculatorCompiled, 0, 1, { }, true, "test")
+            calculatorResults[0] = animationCalc.evaluateCalculator( resultVariable, calculatorCompiled, 0, 1, vars, true, objectName)
             const breaker62=true
 
             // Next time: Jonathan start here: Why on step 1 did we receive NaN?
 
-            calculatorResults[1] = animationCalc.evaluateCalculator( 'test', calculatorCompiled, 1, 1, { }, true, "test")
+            calculatorResults[1] = animationCalc.evaluateCalculator( resultVariable, calculatorCompiled, 1, 1, vars, true, objectName)
             const breaker65=true
 
-            calculatorResults[2] = animationCalc.evaluateCalculator( 'test', calculatorCompiled, 2, 1, { }, true, "test")
+            calculatorResults[2] = animationCalc.evaluateCalculator( resultVariable, calculatorCompiled, 2, 1, vars, true, objectName)
             const breaker68=true
 
-            calculatorResults[3] = animationCalc.evaluateCalculator( 'test', calculatorCompiled, 3, 1,{ }, true, "test")
+            calculatorResults[3] = animationCalc.evaluateCalculator( resultVariable, calculatorCompiled, 3, 1,vars, true, objectName)
             const breaker71=true
 
-            assert.strictEqual( calculatorResult.value, 5 );
-
+            assert.strictEqual( calculatorResults[3].step, 3 );
+            assert.strictEqual( calculatorResults[3].value, 0.39 );
+            assert.strictEqual( calculatorResults[3].displacement, 0.39 );
+            assert.strictEqual( calculatorResults[3].velocity, 1.5 );
+            assert.strictEqual( calculatorResults[3].acceleration, 2 );
 
         });
 

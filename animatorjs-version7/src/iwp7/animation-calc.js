@@ -496,31 +496,31 @@ var CONFIG_throw_acceleration_calculation_exceptions = true;
 function evaluateCalculator( resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName ) {
 
     if ( calculator == null ) {
-        console.log("iwp6-calc:970> Null Calculator for: ", resultVariable)
+        console.log("animation-calc:499> Null Calculator for: ", resultVariable)
         return { value: 0 }
     }
-    else if ( calculator.calcType == "mathjs" )   {
+    else if ( calculator.calcType === "mathjs" )   {
 
         try {
             return evaluateParametricCalculator(resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName);
         } catch ( err ) {
-            console.log("iwp6-calc:991> Exception in evaluateParametricCalculator for " + resultVariable + ": " + err );
-            console.log("iwp6-calc:992> Object Detail: Vars: " , vars )
-            console.log("iwp6-calc:993> Object Detail: Calculator: " , calculator )
+            console.log("animation-calc:507> Exception in evaluateParametricCalculator for " + resultVariable + ": " + err );
+            console.log("animation-calc:508> Object Detail: Vars: " , vars )
+            console.log("animation-calc:509> Object Detail: Calculator: " , calculator )
             return { value: 0 }
         }
-    } else if ( calculator.calcType == "euler-mathjs" ) {
+    } else if ( calculator.calcType === "euler-mathjs" ) {
 
         try {
             return evaluateEulerCalculator(resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName);
         } catch ( err ) {
-            console.log("iwp6-calc:999> Exception in evaluateEulerCalculator for " + resultVariable + ": " + err );
+            console.log("animation-calc:517> Exception in evaluateEulerCalculator for " + resultVariable + ": " + err );
             return { value: 0 }
         }
 
     }
     else {
-        throw "iwp6-calc:1264> Unsupported calculator type : " + JSON.stringify(calculator)
+        throw "animation-calc:523> Unsupported calculator type : " + JSON.stringify(calculator)
     }
 }
 
@@ -536,7 +536,7 @@ function evaluateParametricCalculator( resultVariable, calculator, calculateStep
 
     try {
 
-        var result = calculator.compiled.evaluate(vars);
+        const result = calculator.compiled.evaluate(vars);
 
         if ( !isFinite(result) ) {
             throw "iwp6-calc:1260> Compiled vars are not finite"
@@ -600,8 +600,13 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, cha
         // Today, in IWP5, our return structure out of thi sufnction is a single double value.
 
 
-        var dt = vars["delta_t"]
-        var acceleration = null;
+        const dt = vars["delta_t"]
+
+        if ( ! dt ) {
+            throw "No variable 'delta_t' at step: " + calculateStep + " in vars: " + JSON.stringify(vars);
+        }
+
+        let acceleration = null;
 
         // 2019Jan08 Taylor Addressing the Euler self-references, as exemplified in iwp-packaged / Oscillations / damped-1.iwp
         // console.log("iwp6-calc:1317> acceleration resultVariable: ", resultVariable );
@@ -696,7 +701,7 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, cha
             value: calculator.currentDisplacement,
             displacement: calculator.currentDisplacement,
             velocity: calculator.currentVelocity,
-            acceleration: acceleration }
+            acceleration: acceleration };
 
         // return displacement.value;
     } catch ( err ) {
@@ -705,7 +710,7 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, cha
         }
         throw err;
     }
-};
+}
 
 
 module.exports = {
