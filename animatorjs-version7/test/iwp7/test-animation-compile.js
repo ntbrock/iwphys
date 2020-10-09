@@ -2,7 +2,7 @@
 let assert = require('assert');
 let _ = require('lodash');
 
-let animationParser = require('../../src/iwp7/animation-parsing')
+let animationCompiler = require('../../src/iwp7/animation-compile')
 
 describe('Animation', function () {
     describe('Parsing', function () {
@@ -11,7 +11,7 @@ describe('Animation', function () {
             let json = require('../animations/empty.json')
             assert.strictEqual(json.objects.length, 4);
 
-            let animation = animationParser.parseAnimationToMemory(json);
+            let animation = animationCompiler.compileAnimationFromJson(json);
 
             assert.strictEqual(animation.time.start, 0);
             assert.strictEqual(animation.time.stop, 100);
@@ -24,18 +24,15 @@ describe('Animation', function () {
             let json = require('../animations/simple-two-boxes.json');
             assert.strictEqual(json.objects.length, 8);
 
-            let animation = animationParser.parseAnimationToMemory(json);
+            let animation = animationCompiler.compileAnimationFromJson(json);
 
             let breaker29=true
+
             assert.strictEqual(animation.time.start, 0);
             assert.strictEqual(animation.time.stop, 100);
             assert.strictEqual(animation.loop.length, 4);
+            
 
-            // Step forward once!
-
-            stepForwardAndPause()
-
-            let breaker39=true;
         });
 
     });

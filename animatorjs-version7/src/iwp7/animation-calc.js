@@ -293,6 +293,7 @@ var CONFIG_throw_solid_calculation_exceptions = false;
 
 function calculateVarsAtStep(animation, step) {
 
+    const breaker296=true
     // D-Fence
     if ( animation.compiledObjects == null || animation.compiledObjects.length <= 0 ) {
         throw "calculateVarsAtStep("+step+") Empty compiledObjects array, has animation been initialized?"

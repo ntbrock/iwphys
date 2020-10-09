@@ -263,6 +263,25 @@ function illustrateSolid(solid) {
 
 
 
+// Taylor Migrated this out of Animation Parsing
+function renderGraphWindowRanges(animation) {
+
+    const graphWindow = animation.graphWindow
+
+    if ( typeof $ === "function" ) {
+
+        $("#" + s + "graph_xmin").val( graphWindow[s].xmin );
+        $("#" + s + "graph_xmax").val( graphWindow[s].xmax );
+        $("#" + s + "graph_xgrid").val( graphWindow[s].xgrid );
+        $("#" + s + "graph_ymax").val( graphWindow[s].ymax );
+        $("#" + s + "graph_ymin").val( graphWindow[s].ymin );
+        $("#" + s + "graph_ygrid").val( graphWindow[s].ygrid );
+    }
+}
+
+
+
+
 module.exports.xWidth = xWidth;
 module.exports.setAnimationWindow = setAnimationWindow;
 module.exports.illustrateInput = illustrateInput;

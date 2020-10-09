@@ -172,6 +172,46 @@ function archiveVarsAtStep( step, vars ) {
     deepExtend(varsAtStep[step], vars)
 }
 
+
+
+/**
+ * 2016-Nov-09 - Reset the instantanous velcity calculations on reset
+ * 2018Mar23 - Erase all internal state, including intialVelocities inside Euler.
+ */
+function resetSolidCalculators(solid) {
+
+    // console.log("iwp5:753> resetSolidCalculators: " , solid )
+
+    if ( solid.xpath && solid.xpath.calculator ) {
+        solid.xpath.calculator.latestValue = undefined;
+        solid.xpath.calculator.currentVelocity = undefined;
+        solid.xpath.calculator.initialVelocity = undefined;
+        solid.xpath.calculator.currentDisplacement = undefined;
+        solid.xpath.calculator.initialDisplacement = undefined;
+    }
+    if ( solid.ypath && solid.ypath.calculator ) {
+        solid.ypath.calculator.latestValue = undefined;
+        solid.ypath.calculator.currentVelocity = undefined;
+        solid.ypath.calculator.initialVelocity = undefined;
+        solid.ypath.calculator.currentDisplacement = undefined;
+        solid.ypath.calculator.initialDisplacement = undefined;
+    }
+
+    /** IWP5 is not yet using velocity on height + width calcs */
+    /*
+    if ( solid.xpath && solid.xpath.calculator ) {
+        solid.width.calculator.latestValue = null;
+    }
+    if ( solid.ypath && solid.ypath.calculator ) {
+        solid.height.calculator.latestValue = null;
+    }
+    */
+    // BUGBUG - Not concerned about polypath reset yet.
+}
+
+
+
+
 module.exports = {
     varsAtStepJson : varsAtStepJson,
     masterResetSteps : masterResetSteps,
