@@ -1,0 +1,226 @@
+/** 2016-Aug-28 IWP5 - Migration of animation CSS into public WWW theme */
+/* 2018Jan18 Brockman - Major Refactor to modern styles */
+
+
+table {
+	height: auto;
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #eee;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05) ;
+	min-height: 65px;
+}
+
+
+
+.iwp-animation-container {
+	width: 100%;
+	min-width: 1150px;
+}
+
+.iwp-animation {
+	font-size:   16px;
+	font-family: "PT Serif", serif;
+	color:       #333;
+	position:    relative;
+	width:       1150px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/** Major layout into left and right halfs of the screen */
+
+.iwp-left-container {
+	width: 500px;
+
+	display: inline-block;
+	height: 90vh;
+	vertical-align: top;
+	margin: 5px;
+	margin-right: 25px;
+}
+
+.iwp-right-container {
+	width: 600px;
+
+	display: inline-block;
+	height: 90vh;
+	vertical-align: top;
+	margin: 5px;
+}
+
+
+.iwp-control-container {
+	width: 100%;
+	min-height: 70px;
+	margin-bottom: 5px;
+	display: inline-block;
+}
+
+
+.iwp-time-control-container {
+}
+
+.iwp-tab-control-container {
+}
+
+
+.iwp-tab-controls {
+	font-size: 9pt;
+	visibility: visible;
+	clear: right;
+	overflow: auto;
+	width: 100%;
+}
+
+/** Controls the tab button widths */
+.iwp-tab-controls td {
+	padding-left: 55px;
+	padding-right: 55px;
+}
+
+/* #gt {
+	color: red;
+} */
+
+.iwp-tab-container {
+	overflow: visible;
+	vertical-align: top;
+	display: inline-block;
+	/*height: 400px;*/
+	padding-bottom: 50px;
+	width: 100%;
+}
+
+.iwp-tab {
+	display: none; /** Start off invisible, then get turned on via Jquery */
+	table-layout: fixed;
+}
+
+.iwp-tab3column {
+	display: none; /** Start off invisible, then get turned on via Jquery */
+	table-layout: fixed;
+}
+
+.iwp-tab table tr {
+	width: 550px;
+	/*display: table;*/
+}
+.iwp-tab table td {
+	width: 50%;
+}
+
+
+/** Enable the input + output tables to livie happily side by side */
+
+.iwp-input-output {
+	margin-top: 1rem;
+}
+
+.iwp-tab .iwp-input-output-half-width-table {
+	width: 49%;
+	max-width: 49%;
+	vertical-align: top;
+	float: left;
+}
+.iwp-input-output-half-width-table tr {
+    height: 30px;
+}
+
+.iwp-input-half {
+    margin-right: 1%;
+}
+.iwp-output-half {
+    margin-left: 1%;
+}
+.iwp-tab .iwp-input-output-full-width-table {
+    width: 100%;
+	vertical-align: top;
+}
+
+
+
+
+th, td {
+	padding: 5px;
+	text-align:     center ;
+	vertical-align: middle ;
+}
+
+td.iwp-input-label, td.iwp-output-label {
+	text-align:right;
+	vertical-align:middle;
+	white-space:nowrap;
+}
+
+
+td.iwp-input-value, td.iwp-output-value {
+	text-align:left;
+	vertical-align:middle;
+}
+
+
+.bottomBorder {
+	position:      relative;
+	text-align:    center;
+	border-bottom: 1px black solid;
+}
+.rightBorder {
+	position:      relative;
+	text-align:    center;
+	border-right: 1px black solid;
+}
+.italic {
+	font-style: italic;
+}
+#time {
+	width: 200px;
+	height: 48px;
+	font-size: 20px;
+}
+#startStopButton {
+	width: 66px;
+}
+.border {
+	border-radius: 10px;
+    border: 2px solid #336699;
+    padding: 20px;
+}
+#buttonControls {
+	width: 270px;
+	padding-bottom: 0px	;
+	padding-top: 0px ;
+	padding-left: 20px;
+}
+#buttonControls div {
+	height: 30px;
+	width: 50px;
+	padding-bottom: 0px;
+	padding-top: 5px;
+	display: inline-block;
+}
+#buttonControls i {
+	vertical-align: middle;
+}
+
+
+/**
+ * 2018 Animations
+ */
+
+.iwp-animation-canvas-container {
+	display: inline-block;
+	width: 500px;
+	z-index: -1;
+
+}
+
+.iwp-animation-canvas {
+	border: solid #ccc 1px;
+}
+
+
+.iwp-warning {
+	color: orange;
+}
+

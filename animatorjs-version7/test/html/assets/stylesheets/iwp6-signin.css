@@ -1,0 +1,18 @@
+
+
+.iwpSigninForm label {
+    font-size: 1.5rem;
+}
+
+.iwpSigninForm input[type=text] {
+    font-size: 1.5rem;
+    width: 50%;
+    padding: 1rem;
+}
+
+.iwpSigninForm input[type=password] {
+    font-size: 1.5rem;
+    width: 50%;
+    padding: 1rem;
+}
+
