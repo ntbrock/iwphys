@@ -43,6 +43,33 @@ describe('Animation', function () {
         });
 
 
+        it('Parametric Result advances as a function of time', function () {
+
+            const calculatorJson =
+                {
+                    "calcType": "parametric",
+                    "value": "t*2"
+                };
+
+            const calculatorCompiled = animationCalc.compileCalculator(calculatorJson);
+
+            let calculatorResult = [];
+
+            let t = 0;
+
+            calculatorResult[t] = animationCalc.evaluateCalculator( 'test', calculatorCompiled, 0, 1, { t: t }, true, "test")
+            assert.strictEqual( calculatorResult[t].value, 0 );
+
+            t = t + 1;
+            calculatorResult[t] = animationCalc.evaluateCalculator( 'test', calculatorCompiled, 0, 1, { t: t }, true, "test")
+            assert.strictEqual( calculatorResult[t].value, 2 );
+
+
+        });
+
+
+
+
         it('Euler Variable', function () {
 
             const calculatorJson =
