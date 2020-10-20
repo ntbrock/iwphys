@@ -172,7 +172,7 @@ function illustrateInput($, window, input) {
 }
 
 
-function illustrateOutput(output) {
+function illustrateOutput($, window, output) {
     // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { attributesProperty: { "type": "parametric" }, "value": "Red.xaccel" } }
     var style = ""
     if ( output.hidden == "1" ) {
@@ -181,7 +181,8 @@ function illustrateOutput(output) {
     var unitLabelOutput = "";
     if ( typeof output.units === "string" ) { unitLabelOutput = output.units; }
 
-    htmlOutputs.push( "<tr style='" + style +"vertical-align:top;' id='output_" + output.name + "' class='iwp-output-row'><td class='iwp-output-label'>"+ output.text +"</td><td class='iwp-output-value'><input id='" + output.name + "' type='text' value='-999' disabled style='width:80px;'> " + unitLabelOutput + "</td></tr>");
+    const html = "<tr style='" + style +"vertical-align:top;' id='output_" + output.name + "' class='iwp-output-row'><td class='iwp-output-label'>"+ output.text +"</td><td class='iwp-output-value'><input id='" + output.name + "' type='text' value='-999' disabled style='width:80px;'> " + unitLabelOutput + "</td></tr>";
+    $("#outputTable").append(html);
 
 }
 
@@ -285,6 +286,8 @@ function renderGraphWindowRanges(animation) {
 module.exports.xWidth = xWidth;
 module.exports.setAnimationWindow = setAnimationWindow;
 module.exports.illustrateInput = illustrateInput;
+module.exports.illustrateOutput = illustrateOutput;
+module.exports.illustrateSolid = illustrateSolid;
 
 true;
 
