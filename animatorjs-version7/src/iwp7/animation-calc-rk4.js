@@ -57,7 +57,7 @@ function evaluateRK4Calculator( resultVariable, calculator, calculateStep, chang
 			vars[ objectName ][ "xvel" ] = calculator.currentVelocity
 
 		} else {
-			console.log(__filename + ":60> Unknown resultVariable endsWith: " , resultVariable );
+			console.log(__filename + ":60> Warning, Unknown resultVariable endsWith: " , resultVariable );
 		}
 		// console.log("animation-calc:636> acceleration AFTER vars: ", vars );
 
@@ -122,6 +122,7 @@ function evaluateRK4Calculator( resultVariable, calculator, calculateStep, chang
 		}
 
 
+		const breaker125=true
 		// console.log("iwp5:1152> evaluateCalculator calculateStep: "+ calculateStep + "  changeStep: " + changeStep + " calculator.currentVelocity: " + calculator.currentVelocity + " calculator.currentDisplacement: " + calculator.currentDisplacement )
 		//Return only value if just an output?
 

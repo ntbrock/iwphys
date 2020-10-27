@@ -518,13 +518,13 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, changeSt
 
     } else if ( calculator.calcType === "rk4-mathjs" ) {
 
-            try {
-                return calcRk4.evaluateRK4Calculator(resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName);
-            } catch ( err ) {
-                console.log("animation-calc:538> Exception in evaluateRK4Calculator for " + resultVariable + ": " + err );
-                console.log(err);
-                return { value: 0 }
-            }
+        try {
+            return calcRk4.evaluateRK4Calculator(resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName);
+        } catch ( err ) {
+            console.log("animation-calc:538> Exception in evaluateRK4Calculator for " + resultVariable + ": " + err );
+            console.log(err);
+            return { value: 0 }
+        }
 
     }
     else {
