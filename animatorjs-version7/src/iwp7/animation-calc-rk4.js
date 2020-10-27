@@ -10,7 +10,9 @@
  * @returns {{acceleration: null, step: *, displacement: number, velocity: number, value: number}}
  */
 
-const calc = require("./animation-calc")
+const calcMathJs = require('./animation-calc-mathjs')
+
+const CONFIG_throw_acceleration_calculation_exceptions = true;
 
 
 
@@ -27,8 +29,6 @@ function evaluateRK4Calculator( resultVariable, calculator, calculateStep, chang
 		// so that they could he historically archived in the variable step array.
 		//  IIRC, IWPv4, these were available as xdisp, xvel, xaccell on solids, for example.
 		// Today, in IWP5, our return structure out of thi sufnction is a single double value.
-
-
 
 		if ( ! dt ) {
 			throw Error("No variable 'delta_t' at step: " + calculateStep + " in vars: " + JSON.stringify(vars));
@@ -57,7 +57,7 @@ function evaluateRK4Calculator( resultVariable, calculator, calculateStep, chang
 			vars[ objectName ][ "xvel" ] = calculator.currentVelocity
 
 		} else {
-			console.log("animation-calc:634> Unknown resultVariable endsWith: " , resultVariable );
+			console.log(__filename + ":60> Unknown resultVariable endsWith: " , resultVariable );
 		}
 		// console.log("animation-calc:636> acceleration AFTER vars: ", vars );
 
@@ -89,8 +89,8 @@ function evaluateRK4Calculator( resultVariable, calculator, calculateStep, chang
 
 		if ( calculateStep === 0 ) {
 			// For good measure, recalculate initials just in case other dependencies have changed.
-			calculator.initialDisplacement = calc.evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
-			calculator.initialVelocity = calc.evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
+			calculator.initialDisplacement = calcMathJs.evaluate(calculator.initialDisplacementCompiled, vars)
+			calculator.initialVelocity = calcMathJs.evaluate(calculator.initialVelocityCompiled, vars)
 
 			calculator.currentVelocity = calculator.initialVelocity;
 			calculator.currentDisplacement = calculator.initialDisplacement; // no adjustment

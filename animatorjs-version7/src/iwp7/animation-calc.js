@@ -17,11 +17,10 @@
 
 // Version 7
 const varsConstants = require("./animation-constants");
-const math = require("mathjs");
 const deepExtend = require('./deepExtend');
 
-const rk4 = require('../../src/iwp7/animation-calc-rk4');
-
+const calcRk4 = require('./animation-calc-rk4');
+const calcMathJs = require('./animation-calc-mathjs')
 
 // ------------------------------------------------
 // Sugar from https://www.n-k.de/riding-the-nashorn/
@@ -387,11 +386,11 @@ function initializeEulerCalculator(solid, step, vars, axis, calculator) {
 
     // Initialization -- If currentDisplacement or currentVelocity is empty!
     if (step === 0 || calculator.currentDisplacement == null) {
-        calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
+        calculator.initialDisplacement = calcMathJs.evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
         calculator.currentDisplacement = calculator.initialDisplacement
     }
     if (step === 0 || calculator.currentVelocity == null) {
-        calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
+        calculator.initialVelocity = calcMathJs.evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
         calculator.currentVelocity = calculator.initialVelocity;
     }
     if ( typeof vars[solid.name] === "undefined" ) {
@@ -425,11 +424,11 @@ function compileCalculator(iwpCalculator) {
         </calculator>
         */
 
-        var e = migrateLegacyEquation(iwpCalculator.value);
+        const e = migrateLegacyEquation(iwpCalculator.value);
 
-        var c = {
+        const c = {
             calcType: "mathjs",
-            compiled: math.compile( e ),
+            compiled: calcMathJs.compileMath(e),
             equation: e
         }
 
@@ -460,9 +459,9 @@ function compileCalculator(iwpCalculator) {
 
         const c =  {
             calcType: compileType,
-            initialDisplacementCompiled: math.compile( d ),
-            initialVelocityCompiled: math.compile( v ),
-            accelerationCompiled: math.compile( a ),
+            initialDisplacementCompiled: calcMathJs.compile( d ),
+            initialVelocityCompiled: calcMathJs.compile( v ),
+            accelerationCompiled: calcMathJs.compile( a ),
             equation: {
                 acceleration : a,
                 velocity : v,
@@ -483,23 +482,6 @@ function compileCalculator(iwpCalculator) {
 
 function migrateLegacyEquation(toMigrate) {
     return toMigrate.replace(/[.]value/g,"")
-}
-
-/**
- * 2016-Sep-23 - Sometimes single variable equations will evalate as object.value, not a numeric
- * Remind Taylor about this if you have questions.
- */
-
-function evaluateCompiledMath( compiled, vars ) {
-
-    var newValue = compiled.evaluate(vars)
-    if ( typeof newValue === "number" ) {
-        return newValue;
-    } else if ( typeof newValue["value"] === "number" ) {
-        return newValue.value;
-    } else {
-        throw "animation-calc:487> Unable to process compiled, not numeric and doesn't have value property: " + newValue
-    }
 }
 
 // Config flag for develoeprs to enable debugging of euler acceleration calculations - have fun!
@@ -537,7 +519,7 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, changeSt
     } else if ( calculator.calcType === "rk4-mathjs" ) {
 
             try {
-                return rk4.evaluateRK4Calculator(resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName);
+                return calcRk4.evaluateRK4Calculator(resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName);
             } catch ( err ) {
                 console.log("animation-calc:538> Exception in evaluateRK4Calculator for " + resultVariable + ": " + err );
                 console.log(err);
@@ -685,8 +667,8 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, cha
 
         if ( calculateStep === 0 ) {
             // For good measure, recalculate initials just in case other dependencies have changed.
-            calculator.initialDisplacement = evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
-            calculator.initialVelocity = evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
+            calculator.initialDisplacement = calcMathJs.evaluateCompiledMath(calculator.initialDisplacementCompiled, vars)
+            calculator.initialVelocity = calcMathJs.evaluateCompiledMath(calculator.initialVelocityCompiled, vars)
 
             calculator.currentVelocity = calculator.initialVelocity;
             calculator.currentDisplacement = calculator.initialDisplacement; // no adjustment
@@ -741,8 +723,5 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, cha
 module.exports = {
     evaluateCalculator: evaluateCalculator,
     compileCalculator: compileCalculator,
-    calculateVarsAtStep: calculateVarsAtStep,
-    evaluateCompiledMath: evaluateCompiledMath
+    calculateVarsAtStep: calculateVarsAtStep
 };
-
-
