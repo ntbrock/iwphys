@@ -14,10 +14,14 @@
 //  updateSolidSvgPathAndShape(solid, calc)
 
 
+
 // Version 7
 const varsConstants = require("./animation-constants");
 const math = require("mathjs");
 const deepExtend = require('./deepExtend');
+
+const rk4 = require('../../src/iwp7/animation-calc-rk4');
+
 
 // ------------------------------------------------
 // Sugar from https://www.n-k.de/riding-the-nashorn/
@@ -525,10 +529,20 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, changeSt
 
         try {
             return evaluateEulerCalculator(resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName);
-        } catch ( err ) {
-            console.log("animation-calc:517> Exception in evaluateEulerCalculator for " + resultVariable + ": " + err );
-            return { value: 0 }
+        } catch (err) {
+            console.log("animation-calc:517> Exception in evaluateEulerCalculator for " + resultVariable + ": " + err);
+            return {value: 0}
         }
+
+    } else if ( calculator.calcType === "rk4-mathjs" ) {
+
+            try {
+                return rk4.evaluateRK4Calculator(resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName);
+            } catch ( err ) {
+                console.log("animation-calc:538> Exception in evaluateRK4Calculator for " + resultVariable + ": " + err );
+                console.log(err);
+                return { value: 0 }
+            }
 
     }
     else {
@@ -602,8 +616,6 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, cha
     try {
 
         // 2019-Jan-08 Euler Self-referential, fixes for damped-1.iwp to prevent exceptions with new iwp6 javascript.
-
-
 
         // 2016-Sep-23 For Euler V5, store the cache of current displacement and velocity IN calculator.
         // An enhancement would be to expose these values out as complex return ttypes of this function,
@@ -725,10 +737,12 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, cha
 }
 
 
+
 module.exports = {
     evaluateCalculator: evaluateCalculator,
     compileCalculator: compileCalculator,
-    calculateVarsAtStep: calculateVarsAtStep
+    calculateVarsAtStep: calculateVarsAtStep,
+    evaluateCompiledMath: evaluateCompiledMath
 };
 
 

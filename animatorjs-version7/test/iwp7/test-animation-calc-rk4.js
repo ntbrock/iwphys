@@ -4,6 +4,7 @@ let _ = require('lodash');
 
 let animationCalc = require('../../src/iwp7/animation-calc')
 
+
 describe('Animation', function () {
     describe('Calculator', function () {
         it('Runge Kutta 4', function () {
@@ -26,7 +27,16 @@ describe('Animation', function () {
             assert.strictEqual( calculatorCompiled.equation.velocity, "0" );
             assert.strictEqual( calculatorCompiled.equation.displacement, "-10" );
 
-            const calculatorResult = animationCalc.evaluateCalculator( 'test', calculatorCompiled, 0, { t: 0 }, true, "test")
+            const vars = { dt : 0.1, delta_t : 0.1, t: 0 }
+
+            const calculatorResult =
+                animationCalc.evaluateCalculator( 'test',
+                    calculatorCompiled,
+                    0,
+                    1,
+                    vars,
+                    true,
+                    "test");
 
             /*
             const breaker17=true
