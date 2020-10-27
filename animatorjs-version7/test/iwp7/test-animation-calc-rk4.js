@@ -18,6 +18,14 @@ describe('Animation', function () {
 
 
             const calculatorCompiled = animationCalc.compileCalculator(calculatorJson);
+
+            // Check the compile results first
+
+            assert.strictEqual( calculatorCompiled.calcType, "rk4-mathjs" );
+            assert.strictEqual( calculatorCompiled.equation.acceleration, "5" );
+            assert.strictEqual( calculatorCompiled.equation.velocity, "0" );
+            assert.strictEqual( calculatorCompiled.equation.displacement, "-10" );
+
             const calculatorResult = animationCalc.evaluateCalculator( 'test', calculatorCompiled, 0, { t: 0 }, true, "test")
 
             /*

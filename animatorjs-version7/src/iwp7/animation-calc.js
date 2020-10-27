@@ -433,21 +433,29 @@ function compileCalculator(iwpCalculator) {
         return c;
 
 
-    } else if ( incomingType === "euler" || incomingType === "MCalculator_Euler") {
+    } else if ( incomingType === "euler" || incomingType === "MCalculator_Euler" ||
+                incomingType === "rk4" || incomingType === "MCalculator_RK4") {
+
+        let compileType = "euler-mathjs";
+        if ( incomingType === "rk4" || incomingType === "MCalculator_RK4" ) {
+            compileType = "rk4-mathjs";
+        }
+
         /*
-        <calculator type="euler">
-          <displacement>initxdisp</displacement>
-          <velocity>initxvel</velocity>
-          <acceleration>-5*t</acceleration>
-        </calculator>
+        {
+            "calcType" : "MCalculator_RK4",
+            "displacement" : "-10",
+            "velocity" : "0",
+            "acceleration" : "5"
+        }
         */
 
-        var a = migrateLegacyEquation(iwpCalculator.acceleration);
-        var v = migrateLegacyEquation(iwpCalculator.velocity);
-        var d = migrateLegacyEquation(iwpCalculator.displacement);
+        const a = migrateLegacyEquation(iwpCalculator.acceleration);
+        const v = migrateLegacyEquation(iwpCalculator.velocity);
+        const d = migrateLegacyEquation(iwpCalculator.displacement);
 
-        var c =  {
-            calcType: "euler-mathjs",
+        const c =  {
+            calcType: compileType,
             initialDisplacementCompiled: math.compile( d ),
             initialVelocityCompiled: math.compile( v ),
             accelerationCompiled: math.compile( a ),
@@ -458,8 +466,6 @@ function compileCalculator(iwpCalculator) {
             }
         }
         return c;
-
-
     }
     else {
 
