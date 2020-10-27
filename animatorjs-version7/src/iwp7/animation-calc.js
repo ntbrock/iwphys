@@ -298,10 +298,10 @@ function calculateVarsAtStep(animation, step) {
     const breaker296=true
     // D-Fence
     if ( ! animation.compiled ) {
-        throw "calculateVarsAtStep(" + step + ") Animation is not compiled"
+        throw Error("calculateVarsAtStep(" + step + ") Animation is not compiled");
     }
     if ( ! Array.isArray(animation.loop) ) {
-        throw "calculateVarsAtStep(" + step + ") Animation.loop is not an Array"
+        throw Error("calculateVarsAtStep(" + step + ") Animation.loop is not an Array");
     }
 
     // vars should be a map of string to double, including the mathematical / physical constants.
@@ -328,8 +328,8 @@ function calculateVarsAtStep(animation, step) {
 
             const newValue = calculateOutputAtStep(object, step, vars, true );
 
-            if ( isNaN(newValue) ) { throw "not a number" }
-            if ( !isFinite(newValue) ) { throw "not finite" }
+            if ( isNaN(newValue) ) { throw Error("not a number"); }
+            if ( !isFinite(newValue) ) { throw Error("not finite"); }
 
             vars[object.name] = newValue;
 
@@ -367,10 +367,10 @@ function calculateVarsAtStep(animation, step) {
 
         } else if ( object.objectType === 'object') {
 
-            throw "animation-calc:370> Unrecognized Object type: " + object.objectType;
+            throw Error("animation-calc:370> Unrecognized Object type: " + object.objectType);
 
         } else {
-            throw "animation-calc:373> Unrecognized Object type: " + object.objectType;
+            throw Error("animation-calc:373> Unrecognized Object type: " + object.objectType);
         }
 
     });
@@ -462,8 +462,12 @@ function compileCalculator(iwpCalculator) {
 
     }
     else {
-        console.log("DEBUG ERROR: Only parametric and Euler supported in the August 2016 version, unable to handle: ", incomingType);
-        return {calcType:"unsupported", "incomingType": incomingType, "iwpCalculator": iwpCalculator };
+
+        // 2020Oct27 New failure on Compile sets
+        console.log("ERROR: Only parametric and Euler supported in the August 2016 version, unable to handle: ", incomingType);
+        throw Error("animation-calc:467> Compile Unsupported calculator type : " + incomingType);
+
+        // return {calcType:"unsupported", "incomingType": incomingType, "iwpCalculator": iwpCalculator };
     }
 }
 
@@ -522,7 +526,7 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, changeSt
 
     }
     else {
-        throw "animation-calc:523> Unsupported calculator type : " + JSON.stringify(calculator)
+        throw Error("animation-calc:523> Unsupported calculator type : " + JSON.stringify(calculator));
     }
 }
 
@@ -541,7 +545,7 @@ function evaluateParametricCalculator( resultVariable, calculator, calculateStep
         const result = calculator.compiled.evaluate(vars);
 
         if ( !isFinite(result) ) {
-            throw "animation-calc:544> Compiled vars are not finite"
+            throw Error("animation-calc:544> Compiled vars are not finite");
         }
 
         if ( calculator.latestValue === undefined ) {
@@ -605,7 +609,7 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, cha
         const dt = vars["delta_t"]
 
         if ( ! dt ) {
-            throw "No variable 'delta_t' at step: " + calculateStep + " in vars: " + JSON.stringify(vars);
+            throw Error("No variable 'delta_t' at step: " + calculateStep + " in vars: " + JSON.stringify(vars));
         }
 
         let acceleration = null;
@@ -646,10 +650,10 @@ function evaluateEulerCalculator( resultVariable, calculator, calculateStep, cha
             acceleration = calculator.accelerationCompiled.evaluate(vars);
 
             if ( !isFinite(acceleration) ) {
-                throw "Calculator.accelerationCompiled result is not finite, is: " + acceleration
+                throw Error("Calculator.accelerationCompiled result is not finite, is: " + acceleration);
             }
             if ( isNaN(acceleration) ) {
-                throw "Calculator.accelerationCompiled result is NaN"
+                throw Error("Calculator.accelerationCompiled result is NaN");
             }
 
         } catch ( err ) {
