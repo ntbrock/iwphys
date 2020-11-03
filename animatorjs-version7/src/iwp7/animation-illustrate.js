@@ -187,13 +187,12 @@ function illustrateOutput($, window, output) {
 }
 
 
-function illustrateFloatingText(object) {
+function illustrateFloatingText($,object) {
 
     // Calculators haven't been calcualted yet, so we just place the text on origin at 0,0 and it's moved with first redraw.
     var xOrigin = xCanvas(0);
     var yOrigin = yCanvas(0);
-    svgObjects.push( "<text id='text_" +object.name+ "' x='" + xOrigin + "' y='"+ yOrigin +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
-
+    $("#canvas").append( "<text id='text_" +object.name+ "' x='" + xOrigin + "' y='"+ yOrigin +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
 };
 
 
@@ -203,32 +202,37 @@ function illustrateFloatingText(object) {
  * placeholder widths, heights that are updated on the first repaint.
  * Colors and other styling properties work well here.
  */
-function illustrateSolid(solid) {
+function illustrateSolid($,solid) {
 
     var xOrigin = xCanvas(0);
     var yOrigin = yCanvas(0);
 
+    // $("svg#canvas.iwp-animation-canvas")     save html to var, then link.append(html)
+
     //HTML
-    if (solid.shape.shapeType == "circle") {
+    if (solid.shape.shapeType == "circle") {            //Searched up what svgSolids.push did, basically added solid to array that was then appended to $("#canvas")
         // console.log("iwp6-calc:858> it's a circle: ", solid.shape.width );
         // Initialization Fix, put to the origin, this is updated later
-        svgSolids.push( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(0)+ " ry=" +yHeight(0)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
+        $("#canvas").append( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(0)+ " ry=" +yHeight(0)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
+        $("#canvasDiv").html($("#canvasDiv").html());
+        const help = $("svg#canvas")
+        const breaker = true;
     }
     else if (solid.shape.shapeType == "rectangle") {
         //console.log("it's a rectangle");
-        svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
+        $("#canvas").append( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
     }
     else if (solid.shape.shapeType == "line") {
         // console.log("iwp6-calc:858> It's a line, solid.shape: " , solid.shape);
         // Initialization Fix, put into the origin
-        svgSolids.push("<line id='solid_" +solid.name+ "' x1='"+xOrigin+"' x2='"+xOrigin+"' y1='"+yOrigin+"' y2='"+yOrigin+"' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
+        $("#canvas").append("<line id='solid_" +solid.name+ "' x1='"+xOrigin+"' x2='"+xOrigin+"' y1='"+yOrigin+"' y2='"+yOrigin+"' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
     }
     else if (solid.shape.shapeType == "vector") {
-        svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
+        $("#canvas").append("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
     }
     else if (solid.shape.shapeType == "polygon") {
         //console.log("it's a polygon:", solid.name);
-        svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");
+        $("#canvas").append("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");
     }
     else if (solid.shape.shapeType == "Bitmap"||solid.shape.shapeType == "bitmap") {
         //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+solid.fileUri+"'><title>"+solid.name+"</title></image>");
@@ -245,7 +249,7 @@ function illustrateSolid(solid) {
         img.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets'+solid.shape.file.image);
         img.setAttributeNS(null, 'visibility', 'visible');
 
-        svgSolids.push(img);
+        $("#canvas").append(img);
     }
 
 
@@ -258,7 +262,7 @@ function illustrateSolid(solid) {
 
     /** 2019Apr30 Initial Trail is very empty, but filled in with each animation step in iwp6-animator.js */
     if (solid.shape.drawTrails == true ) {
-        svgSolids.push("<polyline id='solid_" +solid.name+ "_trail' points='0,0 0,0' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='1' fill='none'></polyline>");
+        $("#canvas").append("<polyline id='solid_" +solid.name+ "_trail' points='0,0 0,0' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='1' fill='none'></polyline>");
     }
 }
 
@@ -288,6 +292,7 @@ module.exports.setAnimationWindow = setAnimationWindow;
 module.exports.illustrateInput = illustrateInput;
 module.exports.illustrateOutput = illustrateOutput;
 module.exports.illustrateSolid = illustrateSolid;
+module.exports.illustrateFloatingText = illustrateFloatingText;
 
 true;
 
