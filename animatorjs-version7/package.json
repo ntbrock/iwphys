@@ -15,7 +15,7 @@
     "jquery": "^3.5.1",
     "jsdom": "^16.4.0",
     "mocha": "^8.1.0",
-    "sinon": "^TBWH"
+    "sinon": "^9.2.1"
   },
   "scripts": {
     "test": "mocha --recursive",
