@@ -1,7 +1,7 @@
 
 let assert = require('assert');
 let _ = require('lodash');
-// const sinon  = require('sinon'); Want to add module to track error
+const sinon  = require('sinon');
 
 const fs = require('fs');
 const jsdom = require("jsdom");
@@ -207,7 +207,6 @@ describe('Animation', function () {
             assert.strictEqual(fontAfter, "27");
             assert.strictEqual(colorAfter, 'fill:rgb(100,10,10)')
         })
-        /*
         it('Tests computer reacts as expected to unknown shape for illustrateSolid', function () {
             const rawHtml = fs.readFileSync("./test/html/empty-animation.html",
                 'utf8')
@@ -247,11 +246,12 @@ describe('Animation', function () {
             };
             animationIllustrate.illustrateSolid($,solidJson);
 
-            assert(spy.calledWith("ERROR: Unrecognized Solid Shape Type:  unknownShape"));
+            const breaker = true;
+
+            assert(spy.calledWith("iwp5:821> ERROR: Unrecognized Solid Shape Type: ", "unknownShape"));
 
             spy.restore;            //  Ensures function is restored; Probably not needed, but wanted to be safe
         });
-         */
         it('Ensures a path is created if solid.shape.drawTrails = true', function () {
             const rawHtml = fs.readFileSync("./test/html/empty-animation.html",
                 'utf8')
@@ -297,14 +297,18 @@ describe('Animation', function () {
 
             const helperHtml = $("#canvas").html();
             const lineAfter = $("#canvas polyline");
-            const linecolorAfter = lineAfter.attr('style');
+            const linecolorAfter = lineAfter.attr('stroke');
 
             const break118 = true;
 
-            assert.strictEqual(linecolorAfter, "fill:rgb(10,100,100)");
+            assert.strictEqual(linecolorAfter, "rgb(10,100,100)");
         });
     });
 });
 
-
-
+/* Questions:
+ - Would like to add new modules (see above)
+ - Issues w/ polyline
+ - Functions missed?
+ - What next? ... Gridlines?
+*/

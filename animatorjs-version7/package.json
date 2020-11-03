@@ -14,7 +14,8 @@
     "htmlparser2": "^4.1.0",
     "jquery": "^3.5.1",
     "jsdom": "^16.4.0",
-    "mocha": "^8.1.0"
+    "mocha": "^8.1.0",
+    "sinon": "^9.2.1"
   },
   "scripts": {
     "test": "mocha --recursive",
