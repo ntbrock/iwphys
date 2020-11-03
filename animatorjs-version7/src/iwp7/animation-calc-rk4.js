@@ -21,20 +21,47 @@ function evaluateRK4Calculator( resultVariable, calculator, calculateStep, chang
 	const dt = vars["delta_t"];
 
 	try {
-
-		// 2019-Jan-08 Euler Self-referential, fixes for damped-1.iwp to prevent exceptions with new iwp6 javascript.
-
-		// 2016-Sep-23 For Euler V5, store the cache of current displacement and velocity IN calculator.
-		// An enhancement would be to expose these values out as complex return ttypes of this function,
-		// so that they could he historically archived in the variable step array.
-		//  IIRC, IWPv4, these were available as xdisp, xvel, xaccell on solids, for example.
-		// Today, in IWP5, our return structure out of thi sufnction is a single double value.
-
 		if ( ! dt ) {
 			throw Error("No variable 'delta_t' at step: " + calculateStep + " in vars: " + JSON.stringify(vars));
 		}
 
 		let acceleration = null;
+
+		/* Version 4 implementation:
+		// From: ./edu/ncssm/iwp/math/MCalculator_RK4.java
+
+		void calculatePointAfterZero ( MDataHistory vars, int atTick )
+		throws UnknownVariableException, InvalidEquationException,
+			UnknownTickException
+		{
+			int nTick = atTick;
+			double dt = vars.getDeltaTime();
+
+			double t = ((Double)vT.elementAt(nTick - 1)).doubleValue();
+			double x = ((Double)vX.elementAt(nTick - 1)).doubleValue();
+			double v = ((Double)vV.elementAt(nTick - 1)).doubleValue();
+
+			double kx0, kx1, kx2, kx3;
+			double kv0, kv1, kv2, kv3;
+
+			kx0 = dt * (v );
+			kv0 = dt * calculateAccel(t, x, v,vars);
+			kx1 = dt * (v + kv0 / 2);
+			kv1 = dt * calculateAccel(t + dt / 2, x + kx0 / 2, v + kv0 / 2,vars);
+			kx2 = dt * (v + kv1 / 2);
+			kv2 = dt * calculateAccel(t + dt / 2, x + kx1 / 2, v + kv1 / 2,vars);
+			kx3 = dt * (v + kv2);
+			kv3 = dt * calculateAccel(t + dt, x + kx2, v + kv2,vars);
+
+			x += ((kx0) + (2 * kx1) + (2 * kx2) + (kx3)) / 6;
+			double a = ((kv0) + (2 * kv1) + (2 * kv2) + (kv3)) / 6;
+			v += a;
+			t += dt;
+
+			super.storePoint(nTick,t,x,v,a);
+		}
+		*/
+
 
 		// 2019Jan08 Taylor Addressing the Euler self-references, as exemplified in iwp-packaged / Oscillations / damped-1.iwp
 		// console.log("animation-calc:614> acceleration resultVariable: ", resultVariable );
@@ -99,6 +126,8 @@ function evaluateRK4Calculator( resultVariable, calculator, calculateStep, chang
 			//var breaker=1;
 
 		} else if ( changeStep > 0 ) {
+
+				// Expect the RK4 implemetnation needs to happen here!
 
 			if ( acceleration != null ) {
 				// Positive direction calcuation
