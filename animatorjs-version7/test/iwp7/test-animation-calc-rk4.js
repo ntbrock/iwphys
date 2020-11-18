@@ -42,10 +42,9 @@ describe('Animation', function () {
 
             // Build a simple animation loop and check each result line!
             let stepDirection = 1 // Forward!
-            const vars = { delta_t : 0.1 }
+            const vars = { delta_t : 0.02, t: 0 };
 
             for ( let step = 0; step < expected.length; step++ ) {
-
 
                 // Step Iteration 1
                 calculatorResult[step] =
