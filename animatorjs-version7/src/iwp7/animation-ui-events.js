@@ -1,4 +1,7 @@
+
 let animationIllustrate = require('animation-illustrate');
+let animationPlayer = require('animation-player')
+
 let $ = require('jquery');
 
 
