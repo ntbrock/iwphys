@@ -1,6 +1,25 @@
 let animationIllustrate = require('animation-illustrate');
 let $ = require('jquery');
 
+
+function bindAllClickHandlers( window ) {
+
+    // replacement for <div onclick="handleBackClick()" id="backButton">
+    // Player Controls
+    $("#backButton").on("click", handleBackClick() );
+    $("#startStopButton").on("click", handleStartClick() );
+    $("#forwardButton").on("click", handleForwardClick() );
+    $("#resetButton").on("click", handleResetClick() );
+
+    // Tabbed Interface Controls
+    $("#animationTabButton").on("click", animationTabOn() );
+    $("#graphTabButton").on("click", graphTabOn() );
+    $("#timeTabButton").on("click", timeTabOn() );
+    $("#windowTabButton").on("click", windowTabOn() );
+
+}
+
+
 var buttonIds  = { startStop: "startStopButton", back: "backButton", forward: "forwardButton", reset: "resetButton" }
 var stepTrigger;
 
@@ -44,23 +63,27 @@ function handleBackClick() {
     stepBackwardAndPause();
     document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleGoClick()");
     $("#startStopIcon").attr("class", "fa fa-play fa-lg");
-};
+}
 
 function handleForwardClick() {
     clearInterval(stepTrigger);
     stepForwardAndPause();
     document.getElementById(buttonIds.startStop).setAttribute("onclick", "handleGoClick()");
     $("#startStopIcon").attr("class", "fa fa-play fa-lg");
-};
+}
 
 function handleInputChange() {
     $("*").change( function () {
         handleResetClick();
     });
-};
+}
 
 function handleStartClick() {
     handleGoClick();
-};
+}
 
 
+
+module.exports = {
+    bindAllClickHandlers : bindAllClickHandlers
+}

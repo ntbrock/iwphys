@@ -1,0 +1,310 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>empty - IWP7 Animation</title>
+
+    <!-- Static stylesheet + javascript assets for testing in: iwphys/animatorjs-version7/test/html/assets -->
+    <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" media="screen" href="assets/stylesheets/bootstrap-3.3.7.min.css">
+
+    <link rel="stylesheet" media="screen" href="assets/stylesheets/font-awesome.css">
+
+
+    <link rel="stylesheet" media="screen" href="assets/stylesheets/iwp5.css">
+    <link rel="stylesheet" media="screen" href="assets/stylesheets/iwp-common.css">
+    <link rel="stylesheet" media="screen" href="assets/stylesheets/iwp5-graph.css">
+    <link rel="stylesheet" media="screen" href="assets/stylesheets/iwp6-signin.css">
+
+    <script src="assets/javascripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+
+
+
+
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-minimal navbar-fixed-top" style="background-color: #FFFFFF;" role="navigation">
+    <div class="container navbar-light">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="/">Interactive Web Physics 6</a>
+
+            <a class="btn btn-secondary iwp-nav-button iwp-help-button" href="/help/Tutorials/" style="float:right;">Animator Guide</a>
+            <button id="iwp-save-screenshot" class="btn btn-secondary iwp-nav-button iwp-save-screenshot" style="float: right;">Save Screenshot</button>
+
+
+
+
+
+
+
+        </div>
+
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+
+</nav>
+
+<br>
+<br>
+<br>
+
+
+<div class="container iwp-animation-container">
+    <div class="iwp-animation">
+
+        <!-- Left Hand Side -->
+        <div class="iwp-left-container">
+
+            <!-- Time controls -->
+            <div class="iwp-control-container iwp-time-control-container">
+                <table class="iwp-time-controls">
+                    <tr>
+                        <td id="time">
+                            <span><i class="fa fa-clock-o"></i></span>
+                            <span id="itime">--</span>
+                        </td>
+                        <td id="buttonControls">
+                            <div id="backButton"><i class="fa fa-step-backward fa-lg"></i></div>
+                            <div id="startStopButton"><i id="startStopIcon" class="fa fa-play fa-lg"></i></div>
+                            <div id="forwardButton"><i class="fa fa-step-forward fa-lg"></i></div>
+                            <div id="resetButton"><i class="fa fa-repeat fa-lg"></i></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Canvas -->
+            <div id="canvasDiv" class="iwp-animation-canvas-container">
+                <svg id="canvas" class="iwp-animation-canvas" viewbox="0 0 1000 1000" preserveAspectRatio="xMinYMin meet" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                    <g id="gridlines"></g>
+                </svg>
+            </div>
+
+        </div>
+
+        <!-- Right Hand Side -->
+        <div class="iwp-right-container">
+
+            <!-- Tab Controls -->
+            <div class="iwp-control-container iwp-tab-control-container">
+                <table class="iwp-tab-controls" class="tab">
+                    <tr>
+                        <td id="animationTabButton" class="bottomBorder" iwp-tab="animationTab">
+                            <i id="inputTableIcon" class="fa fa-list fa-2x"></i> <br/>Animate</td>
+                        <td id="graphTabButton" class="" iwp-tab="graphTab">
+                            <i id="graphTabIcon" class="fa fa-area-chart fa-2x"> </i> <br/>Graph</td>
+                        <td id="timeTabButton" class="" iwp-tab="timeTab">
+                            <i id="timeTabIcon" class="fa fa-clock-o fa-2x"> </i> <br/>Time</td>
+                        <td id="windowTabButton" class="" iwp-tab="iwindowTab">
+                            <i id="windowTabIcon" class="fa fa-clone fa-2x"> </i> <br/>Axes </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="iwp-tab-container">
+
+                <!-- 2018 Animation Table now contains description and some re-imagined inputs -->
+                <div class="iwp-tab" id="animationTab"  style="display:inline;">
+
+                    <div id="animationTitle">
+                        <h3>empty</h3>
+                        <br/><div id="description"></div>
+                    </div>
+
+                    <div class="iwp-input-output">
+                        <table class="iwp-input-output-half-width-table iwp-input-half" id="inputTable">
+                            <tr><th colspan='2' style='vertical-align:top; height:10px;'>Inputs</th></tr>
+                        </table>
+                        <table class="iwp-input-output-half-width-table iwp-output-half" id="outputTable">
+                            <tr><th colspan='2' style='vertical-align:top; height:10px;'>Outputs</th></tr>
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 2018 Graph Table now contains an SVG canvas for the graph -->
+                <div id="graphTab" class="iwp-tab"> <!-- For easier debugging, starting w/ graph tab on -->
+                    <div id="graphControls" class="iwp-graph-controls"></div> <!-- Written by iwp5-graph.js -->
+
+                    <div><svg id="pos-graph" class="iwp-graph" viewBox="-100 -100 200 200"
+                              preserveAspectRatio="xMinYMin meet"></div>
+                    <div><svg id="vel-graph" class="iwp-graph" viewBox="-100 -100 200 200"
+                              preserveAspectRatio="xMinYMin meet"></div>
+                    <div><svg id="accel-graph" class="iwp-graph" viewBox="-100 -100 200 200"
+                              preserveAspectRatio="xMinYMin meet"></div>
+
+                </div>
+
+
+                <!-- Window Settings -->
+                <div id="iwindowTab" class="iwp-tab3column">
+                    <table class="trim">
+                        <tr><th colspan="3">Animation Axes Scale</th></tr>
+                        <tr>
+                            <td style="width:33%"></td>
+                            <td style="width:33%">X</td>
+                            <td style="width:33%">Y</td>
+                        <tr>
+                            <td>Min:</td>
+                            <td><input id="iwindow_xmin" type="text"></td>
+                            <td><input id="iwindow_ymin" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>Max:</td>
+                            <td><input id="iwindow_xmax" type="text"></td>
+                            <td><input id="iwindow_ymax" type="text"></td>
+                        </tr>
+                        <tr class="bottomBorder">
+                            <td>Grid:</td>
+                            <td><input id="iwindow_xgrid" type="text"></td>
+                            <td><input id="iwindow_ygrid" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>Unit:</td>
+                            <td style="width: 100%;"><div id="iwindow_xunit"></td>
+                            <td style="width: 100%;"><div id="iwindow_yunit"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <center><b> Graph Axes Scales </b></center>
+                    <br>
+                    <table class="trim" style="display: inline-block; width:33%; float:left">
+                        <tr><th colspan="3">Position</th></tr>
+                        <tr>
+                            <td style="width:33%"></td>
+                            <td style="width:33%">X</td>
+                            <td style="width:33%">Y</td>
+                        <tr>
+                            <td>Min:</td>
+                            <td><input id="posgraph_xmin" size = "2.5px" type="text"></td>
+                            <td><input id="posgraph_ymin" size = "2.5px" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>Max:</td>
+                            <td><input id="posgraph_xmax" size = "2.5px" type="text"></td>
+                            <td><input id="posgraph_ymax" size = "2.5px" type="text"></td>
+                        </tr>
+                        <tr class="bottomBorder">
+                            <td>Grid:</td>
+                            <td><input id="posgraph_xgrid" size = "2.5px" type="text"></td>
+                            <td><input id="posgraph_ygrid" size = "2.5px" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>Unit:</td>
+                            <td style="width: 100%;">seconds</td>
+                            <td style="width: 100%;"></td>
+                        </tr>
+                    </table>
+                    <table class="trim" style="display: inline-block; width:33%; float:left">
+                        <tr><th colspan="3">Velocity</th></tr>
+                        <tr>
+                            <td style="width:33%"></td>
+                            <td style="width:33%">X</td>
+                            <td style="width:33%">Y</td>
+                        <tr>
+                            <td>Min:</td>
+                            <td><input id="velgraph_xmin" size = "2.5px" type="text"></td>
+                            <td><input id="velgraph_ymin" size = "2.5px" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>Max:</td>
+                            <td><input id="velgraph_xmax" size = "2.5px" type="text"></td>
+                            <td><input id="velgraph_ymax" size = "2.5px" type="text"></td>
+                        </tr>
+                        <tr class="bottomBorder">
+                            <td>Grid:</td>
+                            <td><input id="velgraph_xgrid" size = "2.5px" type="text"></td>
+                            <td><input id="velgraph_ygrid" size = "2.5px" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>Unit:</td>
+                            <td style="width: 100%;">seconds</td>
+                            <td style="width: 100%;"></td>
+                        </tr>
+
+                    </table>
+                    <table class="trim" style="display: inline-block; width: 33%; float:left">
+                        <tr><th colspan="3">Acceleration</th></tr>
+                        <tr>
+                            <td style="width:33%"></td>
+                            <td style="width:33%">X</td>
+                            <td style="width:33%">Y</td>
+                        <tr>
+                            <td>Min:</td>
+                            <td><input id="accelgraph_xmin" size = "2.5px" type="text"></td>
+                            <td><input id="accelgraph_ymin" size = "2.5px" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>Max:</td>
+                            <td><input id="accelgraph_xmax" size = "2.5px" type="text"></td>
+                            <td><input id="accelgraph_ymax" size = "2.5px" type="text"></td>
+                        </tr>
+                        <tr class="bottomBorder">
+                            <td>Grid:</td>
+                            <td><input id="accelgraph_xgrid" size = "2.5px" type="text"></td>
+                            <td><input id="accelgraph_ygrid" size = "2.5px" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>Unit: </td>
+                            <td style="width: 100%;">seconds</td>
+                            <td style="width: 100%;"></td>
+                        </tr>
+
+                    </table>
+
+
+
+                </div>
+
+
+
+                <!-- Time Controls -->
+                <div id="timeTab" class="iwp-tab">
+                    <table class="trim">
+                        <tr>
+                            <th colspan="2">Animation Time Scale</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Time Step</span>
+                            </td>
+                            <td>
+                                <span><input id="itime_change" type="text" value="--"/> seconds</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Start Time</td>
+                            <td><span><input id="itime_start" type="text" value="--"/> seconds</span></td>
+                        </tr>
+                        <tr>
+                            <td>Stop Time</td>
+                            <td><span><input id="itime_stop" type="text" value="--"/> seconds</span></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div> <!-- end iwp-tab-container -->
+        </div> <!-- end iwp-right-container -->
+
+    </div> <!-- end iwp-animation -->
+</div> <!-- end iwp-animation-container -->
+
+<!-- For Unit Testing, Removed all the v6 startup code -->
+
+</body>
+</html>
+
+
