@@ -55,6 +55,8 @@ describe('Animation', function () {
                         vars,
                         true);
 
+                let thisResult = calculatorResult[step];
+
                 assert.strictEqual( calculatorResult[step].step, step );
                 assert.strictEqual( calculatorResult[step].value, expected[step].displacement );
                 assert.strictEqual( calculatorResult[step].displacement, expected[step].displacement );

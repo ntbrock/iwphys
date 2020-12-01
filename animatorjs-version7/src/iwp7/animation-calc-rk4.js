@@ -103,10 +103,10 @@ function evaluateRK4Calculator( resultVariable, calculator, calculateStep, chang
 
 
 			// x += ((kx0) + (2 * kx1) + (2 * kx2) + (kx3)) / 6;
-			const xNew = ((kx0) + (2 * kx1) + (2 * kx2) + (kx3)) / 6;
+			const xNew = xPrev + ((kx0) + (2 * kx1) + (2 * kx2) + (kx3)) / 6;
 
 			// double a = ((kv0) + (2 * kv1) + (2 * kv2) + (kv3)) / 6;
-			const aNew =  ((kv0) + (2 * kv1) + (2 * kv2) + (kv3)) / 6;
+			const aNew = ((kv0) + (2 * kv1) + (2 * kv2) + (kv3)) / 6;
 
 			const vNew = vPrev + aNew;
 
@@ -117,6 +117,8 @@ function evaluateRK4Calculator( resultVariable, calculator, calculateStep, chang
 
 		// Get the latest stored.
 		const latestPoints = calculator.historicalPoints[calculateStep];
+
+
 
 		return { step: calculateStep,
 			value: latestPoints.x,
