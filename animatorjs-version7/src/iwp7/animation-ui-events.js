@@ -1,3 +1,14 @@
+/**
+ * TB
+ * TODO Implement the API for the Animation Player, so that all the functions below resolve,m like handleStep() and setStepDirection()
+ *
+ * KB
+ * TODO Find + bring in the fitText() function
+ *
+ * KB+TB
+ * Research how we spawn the node module from the HTML Dom
+ *
+ */
 
 let animationIllustrate = require('animation-illustrate');
 let animationPlayer = require('animation-player')
@@ -133,6 +144,7 @@ function timeTabOn() {
     graphTabOff();
     fitText("#timeTab");
 };
+
 function timeTabOff() {
     $("#timeTab").hide();
     $("#oib").attr("class", "");
