@@ -4,6 +4,21 @@ let _ = require('lodash');
 
 let animationCalc = require('../../src/iwp7/animation-calc')
 
+/**
+ * Return true if a is equal to b within a pct tolerance, example = 0.01
+ * @param a
+ * @param b
+ * @param pct
+ */
+
+function equalWithinPercentError(a, b, pct = 0.0000001 ) {
+    let diff = ( a - b )
+    let error = Math.abs ( diff / ((a+b) / 2) );
+    let breaker17=true
+
+    return error <= pct
+}
+
 
 describe('Animation', function () {
     describe('Calculator', function () {
@@ -69,6 +84,18 @@ describe('Animation', function () {
 
         });
 
+    });
+
+    it('Equal Numerical Percent', function () {
+
+        let testA = equalWithinPercentError( 1, 1, 0.1 )
+        let testB = equalWithinPercentError( 1, 1, 0 )
+        let testC = equalWithinPercentError( 0.1, 0.09999999999999999, 0.05 )
+        let testD = equalWithinPercentError( 0.1, 0.09999999999999999 )
+
+        let breaker89=true
+
+        assert.strictEqual(true, true)
     });
 });
 
