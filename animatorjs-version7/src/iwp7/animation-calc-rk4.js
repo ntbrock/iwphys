@@ -11,58 +11,126 @@
  */
 
 const calcMathJs = require('./animation-calc-mathjs')
+const deepExtend = require('./deepExtend')
 
 const CONFIG_throw_acceleration_calculation_exceptions = true;
 
 
+function calculateAccel(mathJsCompiled, x, v, vars )  {
+
+	// WARNING: These will overwrite each frame's data. I could jsut turn these off and
+	// use Object.xvel, which would be much better.
+	// vars.setAtCurrentTick( ACCEL_EQN_VAR_D, x);
+	// vars.setAtCurrentTick( ACCEL_EQN_VAR_X, x);
+	//vars.setAtCurrentTick( ACCEL_EQN_VAR_V, v);
+
+	const varsOverride = deepExtend( { d: x, x: x, v: v}, vars);
+	return mathJsCompiled.evaluate(varsOverride);
+
+}
 
 function evaluateRK4Calculator( resultVariable, calculator, calculateStep, changeStep, vars, verbose, objectName ) {
 
 	const dt = vars["delta_t"];
+	const t = vars["t"];
 
 	try {
-		if ( ! dt ) {
+		if ( t === undefined ) {
+			throw Error("No variable 't' at step: " + calculateStep + " in vars: " + JSON.stringify(vars));
+		}
+		if ( dt === undefined ) {
 			throw Error("No variable 'delta_t' at step: " + calculateStep + " in vars: " + JSON.stringify(vars));
 		}
 
 		let acceleration = null;
 
-		/* Version 4 implementation:
-		// From: ./edu/ncssm/iwp/math/MCalculator_RK4.java
+		//if( curTick == 0 ) {
+		if ( calculateStep === 0 ) {
 
-		void calculatePointAfterZero ( MDataHistory vars, int atTick )
-		throws UnknownVariableException, InvalidEquationException,
-			UnknownTickException
-		{
-			int nTick = atTick;
-			double dt = vars.getDeltaTime();
+			// double x0 = initDispEqn.calculate(vars);
+			const x0 = calculator.initialDisplacementCompiled.evaluate(vars);
 
-			double t = ((Double)vT.elementAt(nTick - 1)).doubleValue();
-			double x = ((Double)vX.elementAt(nTick - 1)).doubleValue();
-			double v = ((Double)vV.elementAt(nTick - 1)).doubleValue();
+			//double v0 = initVelEqn.calculate(vars);
+			const v0 = calculator.initialVelocityCompiled.evaluate(vars);
 
-			double kx0, kx1, kx2, kx3;
-			double kv0, kv1, kv2, kv3;
+			const a0 = calculator.accelerationCompiled.evaluate(vars);
 
-			kx0 = dt * (v );
-			kv0 = dt * calculateAccel(t, x, v,vars);
-			kx1 = dt * (v + kv0 / 2);
-			kv1 = dt * calculateAccel(t + dt / 2, x + kx0 / 2, v + kv0 / 2,vars);
-			kx2 = dt * (v + kv1 / 2);
-			kv2 = dt * calculateAccel(t + dt / 2, x + kx1 / 2, v + kv1 / 2,vars);
-			kx3 = dt * (v + kv2);
-			kv3 = dt * calculateAccel(t + dt, x + kx2, v + kv2,vars);
+			const breaker41=true
+				// initial acceleration calculation. The same for all Diff calculators.
+			//	storePoint( curTick, vars.getCurrentTime(),
+			//		x0, v0, calculateAccel(vars.getCurrentTime(), x0, v0, vars) );
 
-			x += ((kx0) + (2 * kx1) + (2 * kx2) + (kx3)) / 6;
-			double a = ((kv0) + (2 * kv1) + (2 * kv2) + (kv3)) / 6;
-			v += a;
-			t += dt;
+			const pointsToStore = { x : x0, v : v0, a: a0, t : vars.t }
+			calculator.historicalPoints[calculateStep] = pointsToStore;
 
-			super.storePoint(nTick,t,x,v,a);
+
+		} else {
+			// void calculatePointAfterZero
+
+			// double dt = vars.getDeltaTime();
+
+			// Get previous values
+			const previous = calculator.historicalPoints[calculateStep-1];
+			if ( previous === undefined ) {
+				throw Error("No previous values defined at calculateStep: " + calculateStep );
+			}
+
+			// double t = ((Double)vT.elementAt(nTick - 1)).doubleValue();
+			const tPrev = previous.t
+
+			// double x = ((Double)vX.elementAt(nTick - 1)).doubleValue();
+			const xPrev = previous.x
+
+			// double v = ((Double)vV.elementAt(nTick - 1)).doubleValue();
+			const vPrev = previous.v
+
+
+			const rk4Vars = deepExtend( { v: vPrev, x: xPrev }, vars );
+
+			// double kx0, kx1, kx2, kx3;
+			// double kv0, kv1, kv2, kv3;
+
+			const kx0 = dt * ( vPrev );
+			const kv0 = dt * calculateAccel(calculator.accelerationCompiled, xPrev, vPrev, vars)
+			const kx1 = dt * (vPrev + kv0 / 2);
+			const kv1 = dt * calculateAccel(calculator.accelerationCompiled, xPrev + kx0 / 2, vPrev + kv0 / 2, vars);
+			const kx2 = dt * (vPrev + kv1 / 2);
+			const kv2 = dt * calculateAccel(calculator.accelerationCompiled, xPrev + kx1 / 2, vPrev + kv1 / 2, vars);
+			const kx3 = dt * (vPrev + kv2);
+			const kv3 = dt * calculateAccel(calculator.accelerationCompiled, xPrev + kx2, vPrev + kv2,vars);
+
+			const breaker80=true
+
+
+			// x += ((kx0) + (2 * kx1) + (2 * kx2) + (kx3)) / 6;
+			const xNew = xPrev + ((kx0) + (2 * kx1) + (2 * kx2) + (kx3)) / 6;
+
+			// double a = ((kv0) + (2 * kv1) + (2 * kv2) + (kv3)) / 6;
+			const aNew = ((kv0) + (2 * kv1) + (2 * kv2) + (kv3)) / 6;
+
+			const vNew = vPrev + aNew;
+
+			// super.storePoint(nTick,t,x,v,a);
+			const pointsToStore = { x : xNew, v : vNew, a: aNew, t : vars.t }
+			calculator.historicalPoints[calculateStep] = pointsToStore;
 		}
-		*/
+
+		// Get the latest stored.
+		const latestPoints = calculator.historicalPoints[calculateStep];
 
 
+
+		return { step: calculateStep,
+			value: latestPoints.x,
+			displacement: latestPoints.x,
+			velocity: latestPoints.v,
+			acceleration: latestPoints.a };
+
+
+		//------------------------------------------------
+
+
+		/*
 		// 2019Jan08 Taylor Addressing the Euler self-references, as exemplified in iwp-packaged / Oscillations / damped-1.iwp
 		// console.log("animation-calc:614> acceleration resultVariable: ", resultVariable );
 		// console.log("animation-calc:615> acceleration calculator: ", calculator );
@@ -154,12 +222,7 @@ function evaluateRK4Calculator( resultVariable, calculator, calculateStep, chang
 		const breaker125=true
 		// console.log("iwp5:1152> evaluateCalculator calculateStep: "+ calculateStep + "  changeStep: " + changeStep + " calculator.currentVelocity: " + calculator.currentVelocity + " calculator.currentDisplacement: " + calculator.currentDisplacement )
 		//Return only value if just an output?
-
-		return { step: calculateStep,
-			value: calculator.currentDisplacement,
-			displacement: calculator.currentDisplacement,
-			velocity: calculator.currentVelocity,
-			acceleration: acceleration };
+*/
 
 		// return displacement.value;
 	} catch ( err ) {

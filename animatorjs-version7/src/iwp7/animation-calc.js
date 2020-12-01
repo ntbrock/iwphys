@@ -466,7 +466,8 @@ function compileCalculator(iwpCalculator) {
                 acceleration : a,
                 velocity : v,
                 displacement : d
-            }
+            },
+            historicalPoints: []
         }
         return c;
     }
