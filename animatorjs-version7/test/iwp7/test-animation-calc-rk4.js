@@ -1,3 +1,9 @@
+/**
+ * TODO - Build an RK4 Reverse Test
+ *
+ * Upcoming Next - Integration into new version 7 player 
+ * @type {assert | ((value: any, message?: (string | Error)) => void) | ((value: any, message?: (string | Error)) => asserts value)}
+ */
 
 let assert = require('assert');
 let _ = require('lodash');
@@ -8,6 +14,8 @@ let animationCalc = require('../../src/iwp7/animation-calc')
  * Return true if a is equal to b within a pct tolerance, example = 0.01
  *
  * TODO - Refactor this function in a common location to be used by other tests.
+ *
+ *
  *
  * @param a
  * @param b
