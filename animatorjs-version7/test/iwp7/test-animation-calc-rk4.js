@@ -6,17 +6,34 @@ let animationCalc = require('../../src/iwp7/animation-calc')
 
 /**
  * Return true if a is equal to b within a pct tolerance, example = 0.01
+ *
+ * TODO - Refactor this function in a common location to be used by other tests.
+ *
  * @param a
  * @param b
  * @param pct
  */
 
 function equalWithinPercentError(a, b, pct = 0.0000001 ) {
-    let diff = ( a - b )
-    let error = Math.abs ( diff / ((a+b) / 2) );
-    let breaker17=true
 
-    return error <= pct
+    // zero case
+    if ( a == 0 && b == 0 ) { return true; }
+    // inverse case
+    else if ( a == -b ) {
+        console.log(`test-animation-calc-rk4:23> Return false for special case of a == -b  ( ${a} == - ${b} )`)
+        return false;
+    }
+    else {
+        let diff = ( a - b )
+        let error = Math.abs ( diff / ((a+b) / 2) );
+
+        let equalWithin = error <= pct
+        if (!equalWithin) {
+            let breaker17 = true
+        }
+
+        return equalWithin;
+    }
 }
 
 
@@ -50,7 +67,10 @@ describe('Animation', function () {
                 { displacement : -9.996, velocity: 0.2, acceleration: 0.1 },
                 { displacement : -9.991, velocity: 0.3, acceleration: 0.1 },
                 { displacement : -9.984, velocity: 0.4, acceleration: 0.1 },
-                { displacement : -9.997, velocity: 0.5, acceleration: 0.1 }
+                { displacement : -9.975, velocity: 0.5, acceleration: 0.1 },
+                { displacement : -9.964, velocity: 0.6, acceleration: 0.1 }, // IWP4 Says -9.965, Rounding?
+                { displacement : -9.951, velocity: 0.7, acceleration: 0.1 },
+                { displacement : -9.936, velocity: 0.8, acceleration: 0.1 }
             ];
 
             const calculatorResult = [];
@@ -72,11 +92,11 @@ describe('Animation', function () {
 
                 let thisResult = calculatorResult[step];
 
-                assert.strictEqual( calculatorResult[step].step, step );
-                assert.strictEqual( calculatorResult[step].value, expected[step].displacement );
-                assert.strictEqual( calculatorResult[step].displacement, expected[step].displacement );
-                assert.strictEqual( calculatorResult[step].velocity, expected[step].velocity );
-                assert.strictEqual( calculatorResult[step].acceleration, expected[step].acceleration );
+                assert.strictEqual( equalWithinPercentError(calculatorResult[step].step, step ), true);
+                assert.strictEqual( equalWithinPercentError(calculatorResult[step].value, expected[step].displacement), true );
+                assert.strictEqual( equalWithinPercentError(calculatorResult[step].displacement, expected[step].displacement), true );
+                assert.strictEqual( equalWithinPercentError(calculatorResult[step].velocity, expected[step].velocity), true );
+                assert.strictEqual( equalWithinPercentError(calculatorResult[step].acceleration, expected[step].acceleration), true );
 
                 console.log("test-animation-calc-rk4: Step["+step+"] is equal");
             }
