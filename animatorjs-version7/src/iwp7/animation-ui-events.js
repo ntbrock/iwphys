@@ -1,10 +1,6 @@
 let animationIllustrate = require('animation-illustrate');
 let $ = require('jquery');
 
-function handleStartClick() {
-    handleGoClick();
-};
-
 var buttonIds  = { startStop: "startStopButton", back: "backButton", forward: "forwardButton", reset: "resetButton" }
 var stepTrigger;
 
@@ -61,5 +57,10 @@ function handleInputChange() {
     $("*").change( function () {
         handleResetClick();
     });
-}
+};
+
+function handleStartClick() {
+    handleGoClick();
+};
+
 
