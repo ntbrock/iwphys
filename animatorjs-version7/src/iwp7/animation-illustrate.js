@@ -1,4 +1,34 @@
 "use strict";
+// Tasking:
+// TODO: Replace all dom selector string rrefs with values form teh selectors object
+
+
+
+
+//-------------------------------------------------------------
+// Binding - These are all the Id's available in the site/HTML
+const selectors = {
+    canvas: "#canvas",
+    canvasDiv: "#canvasDiv",
+    gridlines: "#gridlines",
+    iwpSaveScreenshot: "#iwp-save-screenshot",
+    time: "#time",
+    backButton: "#backButton",
+    startStopButton: "#startStopButton",
+    forwardButton: "#forwardButton",
+    resetButton: "#resetButton"
+}
+
+
+//--------------------------------------------------------------------------------
+// SVG!
+// Blitting / Double buffering approach
+// redraw a single time!
+// http://stackoverflow.com/questions/3642035/jquerys-append-not-working-with-svg-element
+function redrawSvgDom($) {
+    $(selectors.canvasDiv).html($(selectors.canvasDiv).html());
+}
+
 
 //--------------------------------------------------------------------------------
 // SVG ViewBox Scaling
@@ -42,6 +72,53 @@ function yCanvasGridlines(y) {
     var cProportion = yCorrected * cDomain;
     return cProportion;
 };
+
+
+
+
+function illustrateCanvasGridlines($) {
+
+    const c = $(selectors.canvas)
+    const g = $(selectors.gridlines)
+
+
+    // Parse viewbox attributes from canvas to override defaults.
+    const canvasBoxAttrs = c[0].getAttribute("viewBox").split(" ");
+    canvasBox = { minX: parseFloat(canvasBoxAttrs[0]), minY: parseFloat(canvasBoxAttrs[1]), maxX: parseFloat(canvasBoxAttrs[2]), maxY: parseFloat(canvasBoxAttrs[3]) };
+    // To Render the window is that we start at the Xmin, and draw full vertial lines,
+    // increment by xgrid,
+    // stopping at xmax
+    // Add X gridlines -- TODO CONVERT TO A FOR LOOP
+
+    //Update window settings with user form data
+    // TODO - Need to query the UI for window ranges
+    /*$.each(animationWindow, function(index, val) {
+        animationWindow[index] = queryUserFormWindowDouble(index);
+    })
+    $(".gridline").remove();
+    */
+
+    const xGridlines = (animationWindow.xmax - animationWindow.xmin)/animationWindow.xgrid;
+    for ( let interval = 1; interval < xGridlines; interval ++ ) {
+        const xGridPosition = (interval - xGridlines/2)*animationWindow.xgrid;
+        //console.log("whatItShouldBe: "+xCanvas(xGridPosition*animationWindow.xgrid)+", coordinates: "+coordinates);
+        g.append( "<path class='gridline' d='M " + xCanvasGridlines(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" )
+        g.append( "<path class='gridline' d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" )
+    }
+
+    // Add Y gridlines
+    const yGridlines = (animationWindow.ymax - animationWindow.ymin)/animationWindow.ygrid;
+    for ( let interval = 1; interval <= yGridlines-1; interval ++ ) {
+        const yGridPosition = (interval - yGridlines/2)*animationWindow.ygrid;
+        g.append( "<path class='gridline' d='M 0 " + yCanvasGridlines(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" )
+        g.append( "<path class='gridline' d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" )
+    }
+
+    redrawSvgDom($);
+}
+
+
+
 /* the proportional entry point in from window.xmin -> window.xmax needs to be interpolated into the
 // propotional exit point between viewbox.minX -> viewbox.maxX
 */
@@ -214,7 +291,7 @@ function illustrateSolid($,solid) {
         // console.log("iwp6-calc:858> it's a circle: ", solid.shape.width );
         // Initialization Fix, put to the origin, this is updated later
         $("#canvas").append( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(0)+ " ry=" +yHeight(0)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
-        $("#canvasDiv").html($("#canvasDiv").html());
+        redrawSvgDom($);
         const help = $("svg#canvas")
         const breaker = true;
     }
@@ -287,12 +364,12 @@ function renderGraphWindowRanges(animation) {
 
 
 
-module.exports.xWidth = xWidth;
-module.exports.setAnimationWindow = setAnimationWindow;
-module.exports.illustrateInput = illustrateInput;
-module.exports.illustrateOutput = illustrateOutput;
-module.exports.illustrateSolid = illustrateSolid;
-module.exports.illustrateFloatingText = illustrateFloatingText;
-
-true;
-
+module.exports = {
+    xWidth : xWidth,
+    setAnimationWindow : setAnimationWindow,
+    illustrateInput : illustrateInput,
+    illustrateOutput : illustrateOutput,
+    illustrateSolid : illustrateSolid,
+    illustrateFloatingText : illustrateFloatingText,
+    illustrateCanvasGridlines: illustrateCanvasGridlines
+}
