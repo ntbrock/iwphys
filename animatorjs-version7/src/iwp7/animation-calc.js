@@ -428,7 +428,7 @@ function compileCalculator(iwpCalculator) {
 
         const c = {
             calcType: "mathjs",
-            compiled: calcMathJs.compileMath(e),
+            compiled: calcMathJs.compile(e),
             equation: e
         }
 

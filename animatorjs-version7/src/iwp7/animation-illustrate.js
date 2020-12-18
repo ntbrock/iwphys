@@ -230,7 +230,7 @@ function illustrateAnimation(animation) {
 
 }
 
-function illustrateInput($, window, input) {
+function illustrateInput($, input) {
     var style = "";
     if ( input.hidden == "1" ) {
         style = "display:none;"
@@ -249,7 +249,7 @@ function illustrateInput($, window, input) {
 }
 
 
-function illustrateOutput($, window, output) {
+function illustrateOutput($, output) {
     // { "name": "axr", "text": "Acceleration", "units": "m/ss", "calculator": { attributesProperty: { "type": "parametric" }, "value": "Red.xaccel" } }
     var style = ""
     if ( output.hidden == "1" ) {
@@ -362,6 +362,29 @@ function renderGraphWindowRanges(animation) {
 }
 
 
+function illustrateAnimation($, animation ) {
+
+    setAnimationWindow( animation.window )
+    illustrateCanvasGridlines($);
+
+    // TODO : Illustrate Animation Name
+
+    animation.loop.forEach(function(obj) {
+        if ( obj === undefined || obj.objectType === undefined ) {
+            throw Error("Illustrate: undefined object or objectType in parent animation: " + animation );
+
+        } else if ( obj.objectType === "solid" ) {
+            illustrateSolid($, obj);
+        } else if ( obj.objectType === "input") {
+            illustrateInput($, obj);
+        } else if ( obj.objectType === "output") {
+            illustrateOutput($, obj);
+        } else {
+            throw Error("Illustrate: unknown object type to illustrate: " + obj.objectType)
+        }
+        console.log("animation-illustrator:374> To Draw : " , obj );
+    });
+}
 
 
 module.exports = {
@@ -371,5 +394,6 @@ module.exports = {
     illustrateOutput : illustrateOutput,
     illustrateSolid : illustrateSolid,
     illustrateFloatingText : illustrateFloatingText,
-    illustrateCanvasGridlines: illustrateCanvasGridlines
+    illustrateCanvasGridlines: illustrateCanvasGridlines,
+    illustrateAnimation: illustrateAnimation
 }
