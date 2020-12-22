@@ -1,6 +1,6 @@
 "use strict";
 // Tasking:
-// TODO: Replace all dom selector string rrefs with values form teh selectors object
+// TODO: Replace all dom selector string rrefs with values form teh selectors object (#canvas is done!)
 // BUGBUG - For now, animationWindow is a global in this module, TODO would be refactor to pass by argument
 
 
@@ -77,12 +77,12 @@ function yCanvasGridlines(y) {
 // Example of migrating away from the Global object, passing window as parameter.
 function illustrateCanvasGridlines($, window ) {
 
-    const c = $(selectors.canvas)
-    const g = $(selectors.gridlines)
+    const canvas = $(selectors.canvas)
+    const gridLines = $(selectors.gridlines)
 
 
     // Parse viewbox attributes from canvas to override defaults.
-    const canvasBoxAttrs = c[0].getAttribute("viewBox").split(" ");
+    const canvasBoxAttrs = canvas[0].getAttribute("viewBox").split(" ");
     canvasBox = { minX: parseFloat(canvasBoxAttrs[0]), minY: parseFloat(canvasBoxAttrs[1]), maxX: parseFloat(canvasBoxAttrs[2]), maxY: parseFloat(canvasBoxAttrs[3]) };
     // To Render the window is that we start at the Xmin, and draw full vertial lines,
     // increment by xgrid,
@@ -101,16 +101,16 @@ function illustrateCanvasGridlines($, window ) {
     for ( let interval = 1; interval < xGridlines; interval ++ ) {
         const xGridPosition = (interval - xGridlines/2)*window.xgrid;
         //console.log("whatItShouldBe: "+xCanvas(xGridPosition*window.xgrid)+", coordinates: "+coordinates);
-        g.append( "<path class='gridline' d='M " + xCanvasGridlines(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" )
-        g.append( "<path class='gridline' d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" )
+        gridLines.append( "<path class='gridline' d='M " + xCanvasGridlines(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" )
+        gridLines.append( "<path class='gridline' d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" )
     }
 
     // Add Y gridlines
     const yGridlines = (window.ymax - window.ymin)/window.ygrid;
     for ( let interval = 1; interval <= yGridlines-1; interval ++ ) {
         const yGridPosition = (interval - yGridlines/2)*window.ygrid;
-        g.append( "<path class='gridline' d='M 0 " + yCanvasGridlines(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" )
-        g.append( "<path class='gridline' d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" )
+        gridLines.append( "<path class='gridline' d='M 0 " + yCanvasGridlines(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" )
+        gridLines.append( "<path class='gridline' d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" )
     }
 
     redrawSvgDom($);
@@ -264,11 +264,13 @@ function illustrateOutput($, output) {
 
 
 function illustrateFloatingText($,object) {
+    const canvas = $(selectors.canvas)
 
     // Calculators haven't been calcualted yet, so we just place the text on origin at 0,0 and it's moved with first redraw.
-    var xOrigin = xCanvas(0);
-    var yOrigin = yCanvas(0);
-    $("#canvas").append( "<text id='text_" +object.name+ "' x='" + xOrigin + "' y='"+ yOrigin +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
+    let xOrigin = xCanvas(0);
+    let yOrigin = yCanvas(0);
+
+    canvas.append( "<text id='text_" +object.name+ "' x='" + xOrigin + "' y='"+ yOrigin +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
 };
 
 
@@ -278,39 +280,39 @@ function illustrateFloatingText($,object) {
  * placeholder widths, heights that are updated on the first repaint.
  * Colors and other styling properties work well here.
  */
-function illustrateSolid($,solid) {
+function illustrateSolid($, solid) {
 
-    var xOrigin = xCanvas(0);
-    var yOrigin = yCanvas(0);
+    const canvas = $(selectors.canvas)
+
+    let xOrigin = xCanvas(0);
+    let yOrigin = yCanvas(0);
 
     // $("svg#canvas.iwp-animation-canvas")     save html to var, then link.append(html)
 
     //HTML
-    if (solid.shape.shapeType == "circle") {            //Searched up what svgSolids.push did, basically added solid to array that was then appended to $("#canvas")
+    if (solid.shape.shapeType === "circle") {            //Searched up what svgSolids.push did, basically added solid to array that was then appended to $("#canvas")
         // console.log("iwp6-calc:858> it's a circle: ", solid.shape.width );
         // Initialization Fix, put to the origin, this is updated later
-        $("#canvas").append( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(0)+ " ry=" +yHeight(0)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
+        canvas.append( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(0)+ " ry=" +yHeight(0)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
         redrawSvgDom($);
-        const help = $("svg#canvas")
-        const breaker = true;
     }
-    else if (solid.shape.shapeType == "rectangle") {
+    else if (solid.shape.shapeType === "rectangle") {
         //console.log("it's a rectangle");
-        $("#canvas").append( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
+        canvas.append( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
     }
-    else if (solid.shape.shapeType == "line") {
+    else if (solid.shape.shapeType === "line") {
         // console.log("iwp6-calc:858> It's a line, solid.shape: " , solid.shape);
         // Initialization Fix, put into the origin
-        $("#canvas").append("<line id='solid_" +solid.name+ "' x1='"+xOrigin+"' x2='"+xOrigin+"' y1='"+yOrigin+"' y2='"+yOrigin+"' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
+        canvas.append("<line id='solid_" +solid.name+ "' x1='"+xOrigin+"' x2='"+xOrigin+"' y1='"+yOrigin+"' y2='"+yOrigin+"' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
     }
-    else if (solid.shape.shapeType == "vector") {
-        $("#canvas").append("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
+    else if (solid.shape.shapeType === "vector") {
+        canvas.append("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
     }
-    else if (solid.shape.shapeType == "polygon") {
+    else if (solid.shape.shapeType === "polygon") {
         //console.log("it's a polygon:", solid.name);
-        $("#canvas").append("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");
+        canvas.append("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='rgb("+solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+")'>");
     }
-    else if (solid.shape.shapeType == "Bitmap"||solid.shape.shapeType == "bitmap") {
+    else if (solid.shape.shapeType === "Bitmap"||solid.shape.shapeType === "bitmap") {
         //svgSolids.push("<image  x='0' y='0' width='' height='' src='"+solid.fileUri+"'><title>"+solid.name+"</title></image>");
 
         console.log("iwp6-calc:848> Bitmap support, shape.file= " , solid.shape )
@@ -318,14 +320,14 @@ function illustrateSolid($,solid) {
         // 2018Mar01 Brockman - Refactoring the bitmap code here.
         // https://stackoverflow.com/questions/10261731/can-not-add-image-inside-svg-via-jquery-image-tag-becomes-img
 
-        var id = "solid_"+solid.name;
+        let id = "solid_"+solid.name;
 
-        var img = document.createElementNS('http://www.w3.org/2000/svg','image');
+        let img = document.createElementNS('http://www.w3.org/2000/svg','image');
         img.setAttributeNS(null,'id',id)
         img.setAttributeNS('http://www.w3.org/1999/xlink','href','/assets'+solid.shape.file.image);
         img.setAttributeNS(null, 'visibility', 'visible');
 
-        $("#canvas").append(img);
+        canvas.append(img);
     }
 
 
@@ -334,11 +336,11 @@ function illustrateSolid($,solid) {
 
         console.log("iwp5:821> ERROR: Unrecognized Solid Shape Type: ", solid.shape.shapeType)
         return;
-    };
+    }
 
     /** 2019Apr30 Initial Trail is very empty, but filled in with each animation step in iwp6-animator.js */
-    if (solid.shape.drawTrails == true ) {
-        $("#canvas").append("<polyline id='solid_" +solid.name+ "_trail' points='0,0 0,0' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='1' fill='none'></polyline>");
+    if (solid.shape.drawTrails === true ) {
+        canvas.append("<polyline id='solid_" +solid.name+ "_trail' points='0,0 0,0' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='1' fill='none'></polyline>");
     }
 }
 
