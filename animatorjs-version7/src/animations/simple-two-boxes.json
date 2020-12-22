@@ -106,9 +106,9 @@
         "drawVectors": false
       },
       "color": {
-        "red": 51,
-        "green": 51,
-        "blue": 51
+        "red": 0,
+        "green": 0,
+        "blue": 255
       },
       "xpath": {
         "calculator": {

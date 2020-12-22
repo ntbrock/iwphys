@@ -112,8 +112,6 @@ function illustrateCanvasGridlines($, window ) {
         gridLines.append( "<path class='gridline' d='M 0 " + yCanvasGridlines(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" )
         gridLines.append( "<path class='gridline' d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" )
     }
-
-    redrawSvgDom($);
 }
 
 
@@ -270,7 +268,7 @@ function illustrateFloatingText($,object) {
     let xOrigin = xCanvas(0);
     let yOrigin = yCanvas(0);
 
-    canvas.append( "<text id='text_" +object.name+ "' x='" + xOrigin + "' y='"+ yOrigin +"' font-size='"+(parseFloat(object.fontSize)+15)+"'style='fill:rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
+    canvas.append( "<text id='text_" +object.name+ "' x='" + xOrigin + "' y='"+ yOrigin +"' font-size='"+(parseFloat(object.fontSize)+15)+"' fill='rgb(" +object.color.red+ "," +object.color.green+ "," +object.color.blue+ ")'>"+object.text+"</text>" );
 };
 
 
@@ -293,12 +291,12 @@ function illustrateSolid($, solid) {
     if (solid.shape.shapeType === "circle") {            //Searched up what svgSolids.push did, basically added solid to array that was then appended to $("#canvas")
         // console.log("iwp6-calc:858> it's a circle: ", solid.shape.width );
         // Initialization Fix, put to the origin, this is updated later
-        canvas.append( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(0)+ " ry=" +yHeight(0)+ " style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
+        canvas.append( "<ellipse id='solid_" +solid.name+ "' cx='500' cy='500' rx=" +xWidth(0)+ " ry=" +yHeight(0)+ " fill='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
         redrawSvgDom($);
     }
     else if (solid.shape.shapeType === "rectangle") {
         //console.log("it's a rectangle");
-        canvas.append( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
+        canvas.append( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' fill='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
     }
     else if (solid.shape.shapeType === "line") {
         // console.log("iwp6-calc:858> It's a line, solid.shape: " , solid.shape);
@@ -385,6 +383,9 @@ function illustrateAnimation($, animation ) {
         }
         console.log("animation-illustrator:374> To Draw : " , obj );
     });
+
+    // Finally, redraw the DOM only one time at end.
+    redrawSvgDom($);
 }
 
 
