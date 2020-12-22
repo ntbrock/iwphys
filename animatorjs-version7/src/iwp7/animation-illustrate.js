@@ -1,8 +1,7 @@
 "use strict";
 // Tasking:
 // TODO: Replace all dom selector string rrefs with values form teh selectors object
-
-
+// BUGBUG - For now, animationWindow is a global in this module, TODO would be refactor to pass by argument
 
 
 //-------------------------------------------------------------
@@ -75,8 +74,8 @@ function yCanvasGridlines(y) {
 
 
 
-
-function illustrateCanvasGridlines($) {
+// Example of migrating away from the Global object, passing window as parameter.
+function illustrateCanvasGridlines($, window ) {
 
     const c = $(selectors.canvas)
     const g = $(selectors.gridlines)
@@ -92,24 +91,24 @@ function illustrateCanvasGridlines($) {
 
     //Update window settings with user form data
     // TODO - Need to query the UI for window ranges
-    /*$.each(animationWindow, function(index, val) {
-        animationWindow[index] = queryUserFormWindowDouble(index);
+    /*$.each(window, function(index, val) {
+        window[index] = queryUserFormWindowDouble(index);
     })
     $(".gridline").remove();
     */
 
-    const xGridlines = (animationWindow.xmax - animationWindow.xmin)/animationWindow.xgrid;
+    const xGridlines = (window.xmax - window.xmin)/window.xgrid;
     for ( let interval = 1; interval < xGridlines; interval ++ ) {
-        const xGridPosition = (interval - xGridlines/2)*animationWindow.xgrid;
-        //console.log("whatItShouldBe: "+xCanvas(xGridPosition*animationWindow.xgrid)+", coordinates: "+coordinates);
+        const xGridPosition = (interval - xGridlines/2)*window.xgrid;
+        //console.log("whatItShouldBe: "+xCanvas(xGridPosition*window.xgrid)+", coordinates: "+coordinates);
         g.append( "<path class='gridline' d='M " + xCanvasGridlines(xGridPosition) + " 0 V 1000' stroke='lightgray' fill='transparent'/>" )
         g.append( "<path class='gridline' d='M " + xCanvas(0) + " 0 V 1000' stroke='black' fill='transparent'/>" )
     }
 
     // Add Y gridlines
-    const yGridlines = (animationWindow.ymax - animationWindow.ymin)/animationWindow.ygrid;
+    const yGridlines = (window.ymax - window.ymin)/window.ygrid;
     for ( let interval = 1; interval <= yGridlines-1; interval ++ ) {
-        const yGridPosition = (interval - yGridlines/2)*animationWindow.ygrid;
+        const yGridPosition = (interval - yGridlines/2)*window.ygrid;
         g.append( "<path class='gridline' d='M 0 " + yCanvasGridlines(yGridPosition) + " H 1000' stroke='lightgray' fill='transparent'/>" )
         g.append( "<path class='gridline' d='M 0 " + yCanvas(0) + " H 1000' stroke='black' fill='transparent'/>" )
     }
@@ -123,7 +122,7 @@ function illustrateCanvasGridlines($) {
 // propotional exit point between viewbox.minX -> viewbox.maxX
 */
 
-// BOOK
+// BUGBUG - For now, animationWindow is a global in this module, TODO would be refactor to pass by argument
 let animationWindow; // For now, make it available in side this one module
 function setAnimationWindow(aw) {
     animationWindow = aw;
@@ -365,7 +364,7 @@ function renderGraphWindowRanges(animation) {
 function illustrateAnimation($, animation ) {
 
     setAnimationWindow( animation.window )
-    illustrateCanvasGridlines($);
+    illustrateCanvasGridlines($, animation.window );
 
     // TODO : Illustrate Animation Name
 
