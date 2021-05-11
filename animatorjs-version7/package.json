@@ -23,7 +23,7 @@
     "start": "node src/main.js"
   },
   "dependencies": {
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "lodash-es": "^4.17.15",
     "mathjs": "^7.1.0",
     "moment": "^2.29.1"
