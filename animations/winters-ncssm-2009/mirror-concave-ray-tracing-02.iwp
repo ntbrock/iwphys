@@ -426,7 +426,7 @@ In order to see a grid, enter 0 for Background.</text>
 				<vectors yAccel="false" Vel="false" xAccel="false" yVel="false" xVel="false" Accel="false"/>
 				<width>
 					<calculator type="parametric">
-						<value>p*3f*step(t-delta_t)*check</value>
+						<value>p*3*step(t-delta_t)*check</value>
 					</calculator>
 				</width>
 				<height>
