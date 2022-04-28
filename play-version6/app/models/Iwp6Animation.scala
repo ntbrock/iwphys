@@ -1,14 +1,13 @@
 package models
 
 import java.io.File
-
 import edu.ncssm.iwp.graphicsengine.{GShape_Bitmap, GShape_Polygon}
 import edu.ncssm.iwp.math.{MCalculator, MCalculator_Diff, MCalculator_Parametric}
 import edu.ncssm.iwp.objects._
 import edu.ncssm.iwp.objects.floatingtext.DObject_FloatingText
 import edu.ncssm.iwp.problemdb.{DProblem, DProblemXMLParser}
 import models.Iwp6Animation.fromXmlFile
-import play.api.Logger
+import play.api.{Logger, Logging}
 import play.api.libs.json._
 import services.BoilerplateIO
 
@@ -36,7 +35,7 @@ case class Iwp6Animation(filename: Option[String],
   * Use this centralized parser!
   */
 
-object Iwp6Animation extends BoilerplateIO {
+object Iwp6Animation extends BoilerplateIO with Logging {
 
   implicit val jsfIwp6Calculator = Json.format[Iwp6Calculator]
   implicit val jsfIwp6InitiallyOn = Json.format[Iwp6InitiallyOn]
@@ -109,7 +108,7 @@ object Iwp6Animation extends BoilerplateIO {
 
     Try {
 
-      // Logger.info(s"Iwp6Animation:107> jsv: ${jsv}")
+      // logger.info(s"Iwp6Animation:107> jsv: ${jsv}")
 
       // Json.fromJson[Iwp6Animation](jsv)
 
@@ -155,7 +154,7 @@ object Iwp6Animation extends BoilerplateIO {
 
       val iwpAnimation = Iwp6Animation(filenameO, iwpAuthorO.get, iwpObjects)
 
-      Logger.info(s"Iwp6Animation:138> iwpAnimation: ${iwpAnimation}")
+      logger.info(s"Iwp6Animation:138> iwpAnimation: ${iwpAnimation}")
 
       iwpAnimation
 
@@ -172,7 +171,7 @@ object Iwp6Animation extends BoilerplateIO {
     if ( mc.isInstanceOf[MCalculator_Diff] ) { convertCalcDiff(mc.asInstanceOf[MCalculator_Diff]) }
     else if ( mc.isInstanceOf[MCalculator_Parametric] ) { convertCalcParam(mc.asInstanceOf[MCalculator_Parametric]) }
     else {
-      Logger.error(s"Iwp6AnimationConverter:175> Unsupported MCalculator: ${mc}")
+      logger.error(s"Iwp6AnimationConverter:175> Unsupported MCalculator: ${mc}")
       throw new RuntimeException(s"Iwp6AnimationConverter:175> Unsupported MCalculator: ${mc}")
     }
   }
@@ -219,7 +218,7 @@ object Iwp6Animation extends BoilerplateIO {
 
     val xmlString = readFileCompletely(xmlFile)
 
-    // Logger.info(s"Iwp6Animation:215> xmlFile: ${xmlFile}     xmlString: ${xmlString}")
+    // logger.info(s"Iwp6Animation:215> xmlFile: ${xmlFile}     xmlString: ${xmlString}")
 
     Try {
 
@@ -308,7 +307,7 @@ object Iwp6Animation extends BoilerplateIO {
           val points : Seq[Iwp6ShapePoint] = if ( s.shape.isInstanceOf[GShape_Polygon] ) {
             val p = s.shape.asInstanceOf[GShape_Polygon]
 
-            Logger.info("Iwp6Animation:303> Found a polygon! : x " + p.getXPointCalcs + "  y : "+ p.getYPointCalcs )
+            logger.info("Iwp6Animation:303> Found a polygon! : x " + p.getXPointCalcs + "  y : "+ p.getYPointCalcs )
 
             p.getXPointCalcs.toArray.toSeq.zipWithIndex.map { case(xP, i) =>
               // Get the parallel array Y point with the same x index
@@ -316,7 +315,7 @@ object Iwp6Animation extends BoilerplateIO {
 
               val xCalc = convertCalc(xP.asInstanceOf[MCalculator])
               val yCalc = convertCalc(yP.asInstanceOf[MCalculator])
-              Logger.info(s"Iwp6Animation:311> xCalc: ${xCalc}  xP: ${xP.getClass.getName}  i: ${i}")
+              logger.info(s"Iwp6Animation:311> xCalc: ${xCalc}  xP: ${xP.getClass.getName}  i: ${i}")
 
               Iwp6ShapePoint ( i,
                 Iwp6Path(xCalc),
@@ -331,7 +330,7 @@ object Iwp6Animation extends BoilerplateIO {
           // 2020Jan31 Add Support for mapping Bitmaps
           val shapeFileO = if ( s.shape.isInstanceOf[GShape_Bitmap] ) {
             val b = s.shape.asInstanceOf[GShape_Bitmap]
-            // Logger.info(s"Iwp6Animation:329> GShape_Bitmap: File ${b.getFile}")
+            // logger.info(s"Iwp6Animation:329> GShape_Bitmap: File ${b.getFile}")
             Some(Iwp6ShapeFile(b.getFile))
           } else {
             None
@@ -411,7 +410,7 @@ object Iwp6Animation extends BoilerplateIO {
 
         } else {
 
-          Logger.error(s"Iwp6Animation:214> Unrecognized IwpV4 Dobject class: ${ar.getClass.getName }")
+          logger.error(s"Iwp6Animation:214> Unrecognized IwpV4 Dobject class: ${ar.getClass.getName }")
           None
         }
 
@@ -487,7 +486,7 @@ case class Iwp6Animation(filename: Option[String],
   obj match {
 
     case e: JsError =>
-      Logger.warn(s"IwpDirectoryBrowserService:56> Iwp Json Parse Error: ${file.getName} \n\n ${e})")
+      logger.warn(s"IwpDirectoryBrowserService:56> Iwp Json Parse Error: ${file.getName} \n\n ${e})")
       throw new RuntimeException(s"Iwp Json Parse Error: ${file.getName}]\n${e})")
 
     case s: JsSuccess[Iwp6Animation] =>

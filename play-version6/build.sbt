@@ -1,4 +1,4 @@
-version := "6.1.20200223-SNAPSHOT"
+version := "6.1.20220428-SNAPSHOT"
 
 name := """iwphys-play"""
 organization := "edu.ncssm.iwp"
@@ -6,7 +6,8 @@ organization := "edu.ncssm.iwp"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.12.10"
+// Up to 2.12.15 for M1 Silicon jna fix 
+scalaVersion := "2.12.15"
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test

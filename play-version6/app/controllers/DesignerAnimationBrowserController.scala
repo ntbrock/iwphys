@@ -5,7 +5,7 @@ import models.{Iwp6Animation, Iwp6MongoCollection, Iwp6UserCollection}
 import play.api.mvc._
 import services.{IwpMongoClient, IwpServices}
 import org.mongodb.scala.model.Filters._
-import play.api.Logger
+import play.api.{Logger, Logging}
 import play.api.libs.json.Json
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -18,7 +18,7 @@ import scala.util.{Failure, Success}
 @Singleton
 class DesignerAnimationBrowserController @Inject()(cc: ControllerComponents,
                                                    services: IwpServices) (implicit ec: ExecutionContext)
-  extends IwpAbstractController(cc, services) {
+  extends IwpAbstractController(cc, services)  {
 
 
   def browseUsername(username: String) = optAuthenticated { request =>
@@ -66,7 +66,7 @@ class DesignerAnimationBrowserController @Inject()(cc: ControllerComponents,
           val jsv = Json.parse(animation.animationJson)
           Iwp6Animation.fromJson(Some(animation.filename), jsv) match {
             case Failure(x) =>
-              Logger.error("DesignerAnimationBrowser:69> ")
+              logger.error("DesignerAnimationBrowser:69> ")
               NotFound(s"Animation found but failure parsing Json: ${x}")
 
             case Success(a) =>

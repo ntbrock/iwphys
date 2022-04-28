@@ -1,10 +1,8 @@
 package controllers
 
 
-import java.util.UUID
-
 import javax.inject.{Inject, Singleton}
-import play.api.Logger
+import play.api.{Logging}
 import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, Request}
 import services.{IwpEmailService, IwpFilesystemBrowserService}
 
@@ -20,7 +18,7 @@ case class EmailSignInRequest ( email: String )
 
 @Singleton
 class EmailSignInController @Inject()(cc: ControllerComponents,
-                                      iwpEmailService: IwpEmailService ) extends AbstractController(cc) {
+                                      iwpEmailService: IwpEmailService ) extends AbstractController(cc) with Logging {
 
 
   val emailSignInRequestForm = Form(
@@ -64,14 +62,14 @@ class EmailSignInController @Inject()(cc: ControllerComponents,
 
     iwpEmailService.decodeJwtClaimJson(token) match {
       case Failure(x) =>
-        Logger.error(s"Unable to decode email sign-in Token: ${x}", x)
+        logger.error(s"Unable to decode email sign-in Token: ${x}", x)
         BadRequest(views.html.signin.signInEmailFailure(x.getMessage))
 
       case Success(jsObject) =>
 
         val email = (jsObject \ "email").as[String]
 
-        Logger.info(s"Success with Sign In Email: ${email}  Token: ${jsObject}")
+        logger.info(s"Success with Sign In Email: ${email}  Token: ${jsObject}")
 
         // Look up email from token
         Ok( views.html.signin.signInEmailSuccess(email) ).withNewSession.addingToSession(

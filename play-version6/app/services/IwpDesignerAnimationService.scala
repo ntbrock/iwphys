@@ -2,15 +2,14 @@ package services
 
 import java.time.ZonedDateTime
 import java.util.UUID
-
 import models.{Iwp6AuthenticationLog, Iwp6DesignerAnimation, Iwp6DesignerUser}
 import org.mongodb.scala.bson.BsonDocument
 import org.mongodb.scala.bson.collection.immutable.Document
-import play.api.Logger
+import play.api.{Logger, Logging}
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class IwpDesignerAnimationService(mongoClient: IwpMongoClient)(implicit ec: ExecutionContext) {
+class IwpDesignerAnimationService(mongoClient: IwpMongoClient)(implicit ec: ExecutionContext) extends Logging {
 
 
   def findByUsername(username: String): Future[Seq[Iwp6DesignerAnimation]] = {
@@ -31,21 +30,21 @@ class IwpDesignerAnimationService(mongoClient: IwpMongoClient)(implicit ec: Exec
       animationO match {
         case None =>
           // insert
-          Logger.info("IwpDesignerAnimationService:34> Inserting")
+          logger.info("IwpDesignerAnimationService:34> Inserting")
           mongoClient.designerAnimationCollection().insertOne(animation).toFuture().map { s =>
-            Logger.info(s"IwpDesignerAnimationService:34> Insert Completed: ${s}")
+            logger.info(s"IwpDesignerAnimationService:34> Insert Completed: ${s}")
             Some(true)
           }
 
         case Some(existingAnimation) =>
           // update
-          Logger.info("IwpDesignerAnimationService:39> ReplaceOneing")
+          logger.info("IwpDesignerAnimationService:39> ReplaceOneing")
 
           mongoClient.designerAnimationCollection().replaceOne(
             Document("username" -> existingAnimation.username, "filename" -> existingAnimation.filename),
             animation.copy( updatedOn = Some(ZonedDateTime.now))).toFuture().map { s =>
 
-            Logger.info(s"IwpDesignerAnimationService:34> ReplaceOne Completed: ${s}")
+            logger.info(s"IwpDesignerAnimationService:34> ReplaceOne Completed: ${s}")
             Some(true)
 
           }

@@ -38,7 +38,7 @@ class IndexController @Inject()(cc: ControllerComponents,
           val (success,failures) = services.directoryBrowser.findAnimationsWithFailures(popularCollection)
           if ( failures.size > 0 ) {
             failures.map { f =>
-              Logger.warn(s"Index:45> The popular collection had animation with failure: ${f.filename}: ${f.message}")
+              logger.warn(s"Index:45> The popular collection had animation with failure: ${f.filename}: ${f.message}")
 
             }
           }

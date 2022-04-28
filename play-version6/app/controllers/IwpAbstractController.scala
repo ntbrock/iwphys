@@ -1,14 +1,13 @@
 package controllers
 
 import java.util.UUID
-
 import models.{Iwp6DesignerUser, IwpAuthenticatedRequest, IwpOptAuthenticatedRequest}
 import play.api.mvc._
 
 import scala.concurrent.{ExecutionContext, Future}
 import org.slf4j.LoggerFactory
 import pdi.jwt.JwtClaim
-import play.api.Logger
+import play.api.{Logger, Logging}
 import services.{IwpEmailService, IwpServices}
 
 import scala.util.{Failure, Success}
@@ -23,16 +22,12 @@ import scala.util.{Failure, Success}
 abstract class IwpAbstractController(cc: ControllerComponents,
                                      services: IwpServices)
                                     (private implicit val baseExecutionContext: ExecutionContext)
-  extends AbstractController(cc) {
-
-  val logger = new Logger(LoggerFactory.getLogger(this.getClass))
-
-
+  extends AbstractController(cc) with Logging {
 
 
   private[controllers] def anonymous(f: Request[AnyContent] => Future[Result]) = Action.async { implicit request =>
 
-    Logger.info("IwpBaseController:27> Anonymous")
+    logger.info("IwpBaseController:27> Anonymous")
     f(request)
   }
 

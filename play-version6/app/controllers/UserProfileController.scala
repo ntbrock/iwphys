@@ -27,7 +27,7 @@ class UserProfileController @Inject()(cc: ControllerComponents,
   }
 
   def signOut() = Action {
-    Redirect(routes.IndexController.index()).withNewSession
+    Redirect(routes.IndexController.index).withNewSession
   }
 
 }

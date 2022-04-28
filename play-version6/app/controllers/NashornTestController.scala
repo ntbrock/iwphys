@@ -1,11 +1,10 @@
 package controllers
 
 import java.io.{File, FileReader}
-
 import javax.inject._
 import models.Iwp6Animation
 import org.mongodb.scala.model.Filters._
-import play.api.Logger
+import play.api.{Logger, Logging}
 import play.api.libs.json.{JsArray, Json}
 import play.api.mvc._
 import services.{IwpDifferenceCalculatorService, IwpMongoClient, IwpVersion4CalculatorService, IwpVersion6CalculatorService}
@@ -24,7 +23,7 @@ class NashornTestController @Inject()(cc: ControllerComponents,
                                       iwpVersion4CalculatorService: IwpVersion4CalculatorService,
                                       iwpVersion6CalculatorService: IwpVersion6CalculatorService,
                                       iwpDifferenceCalculatorService: IwpDifferenceCalculatorService
-                                     ) extends AbstractController(cc) {
+                                     ) extends AbstractController(cc) with Logging {
 
 
 
@@ -55,7 +54,7 @@ class NashornTestController @Inject()(cc: ControllerComponents,
 
     val invokable = engine.asInstanceOf[Invocable]
 
-    Logger.info(s"NashornTestController:51> invokable: ${invokable}")
+    logger.info(s"NashornTestController:51> invokable: ${invokable}")
     val r = invokable.invokeFunction("nashhornTest2js", "argument")
 
     Ok(s"Nashorn Test 2: result: ${eval},  function call to nashhornTest2js: ${r} ")
@@ -82,7 +81,7 @@ class NashornTestController @Inject()(cc: ControllerComponents,
 
     val invokable = engine.asInstanceOf[Invocable]
 
-    Logger.info(s"NashornTestController:51> invokable: ${invokable}")
+    logger.info(s"NashornTestController:51> invokable: ${invokable}")
 
     val r = invokable.invokeFunction("sqrt", "5")
 
@@ -128,7 +127,7 @@ class NashornTestController @Inject()(cc: ControllerComponents,
 
     val unitTestAnimation = NashhornTestControllerSampleAnimations.springMotionFlatObjectSequence
 
-    Logger.info(s"NashornTestController:128> invokable: ${invokable}")
+    logger.info(s"NashornTestController:128> invokable: ${invokable}")
     val r = invokable.invokeFunction("readAnimationString", unitTestAnimation )
 
     Ok(s"Nashorn Test 4: calcEval: ${iwpCalcEval},  readEval: ${iwpReadEval}  function call to readAnimationObject: ${r} ")
@@ -167,7 +166,7 @@ class NashornTestController @Inject()(cc: ControllerComponents,
     val unitTestAnimation = NashhornTestControllerSampleAnimations.springMotionFlatObjectSequence
 
 
-    Logger.info(s"NashornTestController:51> invokable: ${invokable}")
+    logger.info(s"NashornTestController:51> invokable: ${invokable}")
 
     //load animation
     val read = invokable.invokeFunction("readAnimationString", unitTestAnimation )

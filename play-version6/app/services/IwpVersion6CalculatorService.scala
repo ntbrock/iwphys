@@ -1,19 +1,19 @@
 package services
 
 import java.io.{File, FileReader}
-
 import controllers.AnimationFilesystemController
+
 import javax.inject.{Inject, Singleton}
 import javax.script.{Invocable, ScriptEngineManager}
 import models.{Iwp6Animation, Iwp6FilesystemCollection}
-import play.api.Logger
+import play.api.{Logger, Logging}
 import play.api.libs.json.{JsArray, Json}
 
 import scala.io.Source
 import scala.util.{Failure, Success}
 
 @Singleton
-class IwpVersion6CalculatorService @Inject() ( animationFilesystem: IwpFilesystemBrowserService ) {
+class IwpVersion6CalculatorService @Inject() ( animationFilesystem: IwpFilesystemBrowserService ) extends Logging {
 
 
   def spawnEngine : Invocable = {
@@ -51,7 +51,7 @@ class IwpVersion6CalculatorService @Inject() ( animationFilesystem: IwpFilesyste
 
     val root = animationFilesystem.animationDirectory
 
-    Logger.info(s"IwpVersion6CalculatorService:54> loadFile: collection: ${collection}  filename: ${filename}")
+    logger.info(s"IwpVersion6CalculatorService:54> loadFile: collection: ${collection}  filename: ${filename}")
 
     val breaker = 1
     animationFilesystem.getAnimation(Iwp6FilesystemCollection( new File(root + File.separator + collection), root), filename)

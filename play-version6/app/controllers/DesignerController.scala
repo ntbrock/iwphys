@@ -60,7 +60,7 @@ class DesignerController @Inject()(c: Configuration,
 
            services.designerAnimation.upsert( designerAnimation ).map { res =>
 
-             Logger.info(s"DesignerController:56> Stored Animation: username: ${designerAnimation.username}  filename: ${designerAnimation.filename}  res: ${res}")
+             logger.info(s"DesignerController:56> Stored Animation: username: ${designerAnimation.username}  filename: ${designerAnimation.filename}  res: ${res}")
              Ok( Json.obj("success" -> true,
                "message" -> "Store Animation",
                "username" -> designerAnimation.username,

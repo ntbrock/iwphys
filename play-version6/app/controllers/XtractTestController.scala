@@ -1,15 +1,13 @@
 package controllers
 
 import java.io.FileReader
-
 import com.lucidchart.open.xtract.XmlReader
+
 import javax.inject._
 import javax.script.{Invocable, ScriptEngineManager}
-import play.api.Logger
+import play.api.{Logger, Logging}
 import play.api.mvc._
 import services.{IwpDifferenceCalculatorService, IwpMongoClient, IwpVersion4CalculatorService, IwpVersion6CalculatorService}
-
-
 import com.lucidchart.open.xtract.{XmlReader, __}
 import com.lucidchart.open.xtract.XmlReader._
 import cats.syntax.all._
@@ -93,7 +91,7 @@ case class IwpAnimationTest( author: IwpAuthorTest,
 
 
 @Singleton
-class XtractTestController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class XtractTestController @Inject()(cc: ControllerComponents) extends AbstractController(cc) with Logging {
 
 
 
@@ -120,7 +118,7 @@ class XtractTestController @Inject()(cc: ControllerComponents) extends AbstractC
 
       node.child.map { child =>
 
-        Logger.info(s"XtractTestController:120> ${child}  label: ${child.label}")
+        logger.info(s"XtractTestController:120> ${child}  label: ${child.label}")
 
       }
     }

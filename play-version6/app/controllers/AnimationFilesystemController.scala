@@ -2,11 +2,10 @@ package controllers
 
 import java.net.URLDecoder
 import java.util.UUID
-
 import javax.inject._
 import models.{Iwp6Animation, Iwp6FilesystemCollection, Iwp6PreviewCollection}
 import org.mongodb.scala.model.Filters._
-import play.api.{Configuration, Logger}
+import play.api.{Configuration, Logging}
 import play.api.libs.json.Json
 import play.api.mvc._
 import services.{IwpFilesystemBrowserService, IwpMongoClient, IwpServices}
@@ -74,7 +73,7 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
           services.directoryBrowser.getAnimation(collection, filename) match {
             case Failure(x) =>
-              Logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
+              logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
               x.printStackTrace();
 
               NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
@@ -108,7 +107,7 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
           services.directoryBrowser.getAnimation(collection, filename) match {
             case Failure(x) =>
-              Logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
+              logger.error(s"AnimationFilesystemController:38> Failure: ${x}")
 
               NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
             case Success(s) =>
@@ -140,7 +139,7 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
         services.directoryBrowser.getAnimation(collection, filename) match {
           case Failure(x) =>
-            Logger.error(s"AnimationFilesystemController:88> Failure: ${x}")
+            logger.error(s"AnimationFilesystemController:88> Failure: ${x}")
 
             NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
           case Success(s) => Ok(Json.prettyPrint(Iwp6Animation.toJson(s)))
@@ -162,7 +161,7 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
 
         services.directoryBrowser.getAnimation(collection, filename) match {
           case Failure(x) =>
-            Logger.error(s"AnimationFilesystemController:88> Failure: ${x}")
+            logger.error(s"AnimationFilesystemController:88> Failure: ${x}")
 
             NotFound(s"No valid animation: ${collection}/${filename}, Error: ${x}")
           case Success(s) => Ok(Json.prettyPrint(Iwp6Animation.toJson(s)))
@@ -202,7 +201,7 @@ class AnimationFilesystemController @Inject()(cc: ControllerComponents,
                   Iwp6Animation.fromJson(Some(animationFilename), Json.parse(animationJson)) match {
 
                     case Failure(x) =>
-                      Logger.error(s"AnimationFileystemController:152> Unable to parse Animation Json: ${x}", x)
+                      logger.error(s"AnimationFileystemController:152> Unable to parse Animation Json: ${x}", x)
                       BadRequest(s"Unable to parse Animation Json: ${x}")
                     case Success(animation) =>
 
