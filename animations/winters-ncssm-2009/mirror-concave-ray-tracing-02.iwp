@@ -600,7 +600,7 @@ In order to see a grid, enter 0 for Background.</text>
 				</graphOptions>
 			</shape>
 			<color>
-				<red>51</red>
+				<red>255</red>
 				<green>255</green>
 				<blue>255</blue>
 			</color>
