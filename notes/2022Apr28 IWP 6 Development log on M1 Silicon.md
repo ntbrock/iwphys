@@ -181,3 +181,13 @@ f = 8
 
 f would be 1??
 
+## Final Email Report
+
+Good morning, progress report!  I published a change to this animation file that corrects the red vector and removes the short turquoise line segment left of the mirror.
+ 
+I tested this by altering the focal length and everything seemed to look correct.  Please let me know if I can make any more changes!
+ 
+The root cause was a very old bug in V4 that has now been fixed in V6, so I updated Loren’s 2009 animation to remove the workaround 😊
+ 
+URL: https://www.iwphys.org/5/animate.php/winters-ncssm-2009/mirror-concave-ray-tracing-02.iwp
+
