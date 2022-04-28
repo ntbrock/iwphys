@@ -880,11 +880,12 @@ function illustrateSolid(solid) {
     svgSolids.push( "<rect id='solid_" +solid.name+ "' width='" +30+ "' height='" +30+ "' style='fill:rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")'> " );
   }
   else if (solid.shape.shapeType == "line") {
-    // console.log("iwp6-calc:858> It's a line, solid.shape: " , solid.shape);
+    // console.log("iwp6-calc:883> " + solid.name + " is a line, solid.shape: " , solid.shape);
 	// Initialization Fix, put into the origin
     svgSolids.push("<line id='solid_" +solid.name+ "' x1='"+xOrigin+"' x2='"+xOrigin+"' y1='"+yOrigin+"' y2='"+yOrigin+"' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2'>");
   }
   else if (solid.shape.shapeType == "vector") {
+    // console.log("iwp6-calc:888> " + solid.name + " is a vector, solid.shape: " , solid.shape);
     svgSolids.push("<polyline id='solid_" +solid.name+ "' points='' stroke='rgb(" +solid.color.red+ "," +solid.color.green+ "," +solid.color.blue+ ")' stroke-width='2' fill='none'>");
   }
   else if (solid.shape.shapeType == "polygon") {
@@ -1097,6 +1098,13 @@ var CONFIG_throw_acceleration_calculation_exceptions = true;
 
 function evaluateCalculator( resultVariable, calculator, calculateStep, vars, verbose, objectName ) {
 
+    // 2022Apr28 Special Debugging for animation/winters-ncssm-2009/mirror-concave-ray-tracing-02.iwp
+    /*
+    if ( resultVariable === "ray_1b.w"||  resultVariable === "ray_1a.w") {
+        console.log("iwp6-calc:1104> " + resultVariable + ": ", calculator, vars );
+    }
+    */
+
     if ( calculator == null ) {
         console.log("iwp6-calc:970> Null Calculator for: ", resultVariable)
         return { value: 0 }
@@ -1104,7 +1112,17 @@ function evaluateCalculator( resultVariable, calculator, calculateStep, vars, ve
     else if ( calculator.calcType == "mathjs" )   {
 
         try {
-            return evaluateParametricCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
+
+            var evalResult = evaluateParametricCalculator(resultVariable, calculator, calculateStep, vars, verbose, objectName);
+            // 2022Apr28 Special Debugging for animation/winters-ncssm-2009/mirror-concave-ray-tracing-02.iwp
+            /*
+            if ( resultVariable === "ray_1b.w" || resultVariable === "ray_1a.w" ) {
+                console.log("iwp6-calc:1119> " + resultVariable + ": evalResult: ", evalResult );
+                // return -12;
+            }
+            */
+            return evalResult;
+
         } catch ( err ) {
             console.log("iwp6-calc:991> Exception in evaluateParametricCalculator for " + resultVariable + ": " + err );
             console.log("iwp6-calc:992> Object Detail: Vars: " , vars )

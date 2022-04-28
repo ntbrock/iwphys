@@ -290,14 +290,22 @@ function updateSolidSvgPathAndShape(solid, pathAndShape) {
     .attr("x", xCanvas(pathAndShape.x - pathAndShape.width / 2))
     .attr("y", yCanvas(pathAndShape.y + pathAndShape.height / 2));
  }
-  else if (shapeType == "line") {
+ else if (shapeType == "line") {
+
+    var x1 = xCanvas(pathAndShape.x)
+    var x2 = xCanvas(pathAndShape.x + pathAndShape.width)
+    var y1 = yCanvas(pathAndShape.y)
+    var y2 = yCanvas(pathAndShape.y + pathAndShape.height)
+
+    // console.log("iwp6-animator:295> Line draw for : " + solid.name + " x1: " + x1 + " x2: " + x2 + " y1: " + y1 + " y2: " + y2)
+
     // DEBUGGING RYAN STEED 21 SEP 2016
     /*console.log("y1: ", yCanvas(pathAndShape.y));
     console.log("y2: ", pathAndShape.y + pathAndShape.height);*/
-    svgSolid.attr("x1", xCanvas(pathAndShape.x))
-    .attr("x2", xCanvas(pathAndShape.x + pathAndShape.width))
-    .attr("y1", yCanvas(pathAndShape.y))
-    .attr("y2", yCanvas(pathAndShape.y + pathAndShape.height));
+    svgSolid.attr("x1", x1)
+    .attr("x2", x2)
+    .attr("y1", y1)
+    .attr("y2", y2);
   }
   else if (shapeType == "vector") {
 
@@ -308,7 +316,17 @@ function updateSolidSvgPathAndShape(solid, pathAndShape) {
     var y1 = yCanvas(pathAndShape.y)
     var y2 = yCanvas(pathAndShape.y + pathAndShape.height)
 
-    // console.log("iwp5:1570> Vector draw for : " + solid.name + " x1: " + x1 + " x2: " + x2 + " y1: " + y1 + " y2: " + y2)
+    // 2022Apr28 Debugging animation/winters-ncssm-2009/mirror-concave-ray-tracing-02.iwp
+    /*
+    if ( solid.name === "ray_1b") {
+        console.log("iwp6-animator:335> Vector draw for : " + solid.name + " pathAndShape.x: ", pathAndShape.x );
+        console.log("iwp6-animator:335> Vector draw for : " + solid.name + " pathAndShape.y: ", pathAndShape.y );
+        console.log("iwp6-animator:335> Vector draw for : " + solid.name + " pathAndShape.width: ", pathAndShape.width );
+        console.log("iwp6-animator:335> Vector draw for : " + solid.name + " pathAndShape.height: ", pathAndShape.height );
+    }
+    */
+
+    // console.log("iwp6-animator:319> Vector draw for : " + solid.name + " x1: " + x1 + " x2: " + x2 + " y1: " + y1 + " y2: " + y2)
 
     var point1 = "" + x1 + "," + y1 + " "
     var point2 = "" + x2 + "," + y2 + " "
@@ -324,7 +342,17 @@ function updateSolidSvgPathAndShape(solid, pathAndShape) {
     var arrow1 = "" + (x2 + 30 * ax) + "," + (y2 + 30 * ay) + " "
     var arrow2 = "" + (x2 + 30 * bx) + "," + (y2 + 30 * by) + " "
 
-    //console.log("iwp:1617> Polyline: " + solid.name + " setting points to: ", (point1+point2+arrow1+point2+arrow2) )
+    // 2022Apr28 Debugging animation/winters-ncssm-2009/mirror-concave-ray-tracing-02.iwp
+    /*
+    if ( solid.name === "ray_1b") {
+        console.log("iwp6-animator:335> Vector draw for : " + solid.name + " setting points to: ", (point1+point2+arrow1+point2+arrow2) )
+        console.log("iwp6-animator:335> Vector draw for : " + solid.name + " ; point1: ", point1 );
+        console.log("iwp6-animator:335> Vector draw for : " + solid.name + " ; point2: ", point2 );
+        console.log("iwp6-animator:335> Vector draw for : " + solid.name + " ; arrow1: ", arrow1 );
+        console.log("iwp6-animator:335> Vector draw for : " + solid.name + " ; arrow2: ", arrow2 );
+
+    }
+    */
 
     svgSolid.attr("points",point1+point2+arrow1+point2+arrow2)
   }

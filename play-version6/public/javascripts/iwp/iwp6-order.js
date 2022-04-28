@@ -618,7 +618,9 @@ function animationObjectReorder(loop) {
     }
 
 **/
-
-modules.export.reorderAnimationObjectsBySymbolicDependency = reorderAnimationObjectsBySymbolicDependency
+if ( typeof(modules) !== "undefined" ) {
+    // 2022Apr28 Nashorn testing
+    modules.export.reorderAnimationObjectsBySymbolicDependency = reorderAnimationObjectsBySymbolicDependency
+}
 true;
 
