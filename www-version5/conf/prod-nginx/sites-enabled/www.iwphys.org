@@ -1,82 +1,80 @@
 # 2015-Apr-05 Brockman Migration from bluehost to digital ocean
-# http://wiki.nginx.org/PHPFcgiExample
+# 2019-Jan-25 Brockman Setup of new production play service
+# 2023May25 Brockman - Correction of http redirect loop
+# 2023Nov17 Brockman - Correction of Listener to enable certbox renewal
+
 # Ensure that all access is https
 server {
        listen         80 default_server;
+
+       # Certbot renewal
+       # server_name    www.iwphys.org iwphys.org;
+
        server_name    www.iwphys.org;
+
        return         301 https://$server_name$request_uri;
 }
-
 
 # HTTPS server
 
 server {
-	listen 443;
-	server_name www.iwphys.org;
+        listen 443;
+        server_name www.iwphys.org iwphys.org;
 
-	# -----------------------------------------------
-
-	root /usr/share/nginx/www.iwphys.org;
-	index index.php index.html index.htm;
+        # -----------------------------------------------
+        root /usr/share/nginx/www.iwphys.org_version6;
+        index index.html index.htm;
 
 	ssl on;
-	# Updated 2018-Mar-01 With Refreshed namecheap cert
-        ssl_certificate /etc/ssl/iwphys-org-namecheap-2018Mar/www.iwphys.org-2018Mar_CertWithBundle.crt;
-        ssl_certificate_key /etc/ssl/iwphys-org-namecheap-2018Mar/www.iwphys.org-2018Mar.key;
+        # Updated 2021Dec01 with Refreshed namecheap cert
+    ssl_certificate /etc/letsencrypt/live/iwphys.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/iwphys.org/privkey.pem; # managed by Certbot
 
-	ssl_session_timeout 5m;
+        ssl_session_timeout 5m;
 
-	ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
-	ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
-	ssl_prefer_server_ciphers on;
+	# 2023Jan03 Brockman
+        # ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+        ssl_protocols SSLv3 TLSv1.2;
 
+        ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+        ssl_prefer_server_ciphers on;
 
-	# -----------------------------------------------
+	# All Acces is back to play daemon
+	location / {
+                proxy_pass       http://localhost:8470;
+                proxy_set_header Host      $host;
+                proxy_set_header X-Real-IP $remote_addr;
+        }
+
 
 	# 2017-Feb-28 Webassign legacy URL Support
-	location ~ /pps/webInterface.php/Users/winters@ncssm.edu/(.*) { 
- 	    return 301 http://$server_name/5/animate.php/winters-ncssm-2009/$1;
-	}
-
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
-		# Uncomment to enable naxsi on this location
-		# include /etc/nginx/naxsi.rules
-	}
-
-
-	# Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests
-	#location /RequestDenied {
-	#	proxy_pass http://127.0.0.1:8080;    
-	#}
-
-	#error_page 404 /404.html;
-
-	# redirect server error pages to the static page /50x.html
-	#
-	#error_page 500 502 503 504 /50x.html;
-	#location = /50x.html {
-	#	root /usr/share/nginx/html;
-	#}
-
-	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-	#
-
-        location ~ [^/]\.php(/|$) {
-
-                fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-                if (!-f $document_root$fastcgi_script_name) {
-                        return 404;
-                }
-		
-		# new  -- also need to enable php_pathinfo in /etc/nginx/fastcgi_params !! important
-                include fastcgi_params;
-		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-                fastcgi_index index.php;
-		fastcgi_pass unix:/var/run/php5-fpm.sock;
+        location ~ /pps/webInterface.php/Users/winters@ncssm.edu/(.*) {
+            return 301 http://$server_name/5/animate.php/winters-ncssm-2009/$1;
         }
+
+	# 2019-Oct-09 Designer Preview react npm deploy
+	location /designer-preview {
+		root   /var/www/iwp6.iwphys.org;
+		index	index.html;
+	}
+
+ 	# 2018Mar15 Enable Gzip compression
+        gzip on;
+        gzip_types text/plain application/xml;
+
 
 }
 
+server {
+       listen         80 ;
+    server_name iwphys.org; # managed by Certbot
+       return         301 https://$server_name$request_uri;
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/iwphys.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/iwphys.org/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
